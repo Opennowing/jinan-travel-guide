@@ -307,6 +307,18 @@
   <section class="section section-alt" id="journal-section" aria-label="我的游记">
   </section>
 
+  <!-- ═══ 我的收藏 ═══ -->
+  <section class="section" aria-label="我的收藏">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">FAVORITES</div>
+        <h2>♥ 我的收藏</h2>
+        <p>收藏的景点和美食</p>
+      </div>
+      <div id="myFavList"></div>
+    </div>
+  </section>
+
   </main>
 
   <footer class="footer" role="contentinfo">
@@ -329,11 +341,22 @@
     import { initAll, stars } from '/src/components/shared.js';
     import { initPWA } from '/src/components/pwa.js';
     import { initSocialFeatures } from '/src/components/social.js';
+    import { TripPlanner, Favorites, AccessibilityTools, OfflineManager } from '/src/components/interactive.js';
     initPWA();
     initAll();
     initSocialFeatures();
 
+    // ── Interactive: Trip Planner + A11y ──
+    const a11y = new AccessibilityTools();
+    const toolbarEl = document.createElement('div');
+    toolbarEl.innerHTML = a11y.renderToolbar();
+    document.body.appendChild(toolbarEl);
+    a11y.bindToolbar();
+    const offline = new OfflineManager();
+    offline.cacheEssentials();
+
     let spotsData = [], foodData = [];
+    let planner = null;
 
     async function loadData() {
       const [spotsRes, foodRes] = await Promise.all([
@@ -342,6 +365,10 @@
       spotsData = await spotsRes.json();
       const foodJson = await foodRes.json();
       foodData = foodJson.foods || foodJson;
+
+      // Initialize TripPlanner
+      planner = new TripPlanner(spotsData, foodData);
+
       renderRoute('1day');
       renderSeason('spring');
       renderMyTrip();
@@ -840,7 +867,20 @@
       renderSeason(btn.dataset.season);
     });
 
-    loadData();
+    loadData().then(() => {
+      // Render favorites panel after data is loaded
+      const favs = new Favorites();
+      const favPanel = document.getElementById('myFavList');
+      if (favPanel) {
+        favPanel.innerHTML = favs.renderPanel(spotsData, foodData);
+        favPanel.querySelectorAll('.fav-remove-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            favs.toggle(btn.dataset.id);
+            favPanel.innerHTML = favs.renderPanel(spotsData, foodData);
+          });
+        });
+      }
+    });
 
     // ── Smart Itinerary Planner ──
     const prefCatMap = {

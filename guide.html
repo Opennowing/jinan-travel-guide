@@ -561,6 +561,16 @@
   <script type="module">
     import { initAll } from '/src/components/shared.js';
     import { initPWA } from '/src/components/pwa.js';
+    import { BudgetCalculator, WeatherWidget, AccessibilityTools, OfflineManager } from '/src/components/interactive.js';
+
+    // ── Interactive: A11y + Offline ──
+    const a11y = new AccessibilityTools();
+    const toolbarEl = document.createElement('div');
+    toolbarEl.innerHTML = a11y.renderToolbar();
+    document.body.appendChild(toolbarEl);
+    a11y.bindToolbar();
+    const offline = new OfflineManager();
+    offline.cacheEssentials();
 
     // Image fallback: generate colorful SVG by name
     window.imgFallback = function(name) {
@@ -837,6 +847,19 @@
         document.getElementById('weatherCards').innerHTML = '<p style="font-size:.8rem;color:var(--text3);grid-column:1/-1;text-align:center">天气数据加载中，可刷新页面重试</p>';
       }
     }
+    // Enhance weather with travel advice
+    const weatherWidget = new WeatherWidget();
+    weatherWidget.fetchWeather().then(weather => {
+      if (weather) {
+        const advice = weatherWidget.getTravelAdvice(weather);
+        const tipEl = document.getElementById('weatherTip');
+        if (tipEl && advice) {
+          tipEl.textContent = advice;
+          tipEl.style.display = 'flex';
+        }
+      }
+    });
+
     loadWeather();
 
     // ── FAQ accordion ──

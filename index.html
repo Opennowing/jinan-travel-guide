@@ -435,10 +435,22 @@
     import { initAll, stars } from '/src/components/shared.js';
     import { initPWA, initA2HS } from '/src/components/pwa.js';
     import { initSocialFeatures } from '/src/components/social.js';
+    import { SmartSearch, Favorites, AccessibilityTools, WeatherWidget, OfflineManager } from '/src/components/interactive.js';
     initAll();
     initPWA();
     initSocialFeatures();
     initA2HS();
+
+    // ── Interactive Features ──
+    const favs = new Favorites();
+    favs._updateBadge();
+    const a11y = new AccessibilityTools();
+    const toolbarEl = document.createElement('div');
+    toolbarEl.innerHTML = a11y.renderToolbar();
+    document.body.appendChild(toolbarEl);
+    a11y.bindToolbar();
+    const offline = new OfflineManager();
+    offline.cacheEssentials();
 
     const nav = document.querySelector('.top-nav');
     window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 10); }, {passive:true});
@@ -614,15 +626,14 @@
       } catch(e) { console.error('加载美食失败:', e); }
     }
 
-    // ── Weather ──
+    // ── Weather (Enhanced) ──
     async function loadWeather() {
-      try {
-        const res = await fetch('https://wttr.in/Jinan?format=%t|%C&lang=zh', { headers: { 'User-Agent': 'curl/8.0' } });
-        const text = await res.text();
-        if (text.includes('<!DOCTYPE') || text.includes('<html')) throw new Error('HTML');
-        const [temp, desc] = text.trim().split('|');
-        document.getElementById('heroWeather').textContent = `🌤️ 济南 ${temp} ${desc || ''}`;
-      } catch(e) {
+      const weatherWidget = new WeatherWidget();
+      const weather = await weatherWidget.fetchWeather();
+      if (weather) {
+        const icon = weatherWidget.getWeatherIcon(weather.code);
+        document.getElementById('heroWeather').textContent = `${icon} 济南 ${weather.temp}°C ${weather.desc}`;
+      } else {
         document.getElementById('heroWeather').textContent = '🌤️ 济南 四季分明，春秋宜人';
       }
     }

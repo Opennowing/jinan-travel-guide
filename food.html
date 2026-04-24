@@ -466,6 +466,18 @@
 
   <script type="module">
     import { initAll, stars } from '/src/components/shared.js';
+    import { Favorites, SmartSearch, AccessibilityTools, OfflineManager } from '/src/components/interactive.js';
+
+    // ── Interactive: Favorites + A11y ──
+    const favs = new Favorites();
+    favs._updateBadge();
+    const a11y = new AccessibilityTools();
+    const toolbarEl = document.createElement('div');
+    toolbarEl.innerHTML = a11y.renderToolbar();
+    document.body.appendChild(toolbarEl);
+    a11y.bindToolbar();
+    const offline = new OfflineManager();
+    offline.cacheEssentials();
     import { initPWA } from '/src/components/pwa.js';
 
     // Image fallback: generate colorful SVG by name
@@ -922,8 +934,10 @@
       }
 
       grid.innerHTML = filtered.map(food => {
-        return '<div class="food-card rv">' +
+        const isFav = favs.isFavorite(food.id);
+        return '<div class="food-card rv" style="position:relative">' +
           '<img class="food-card-img" src="' + food.img + '" alt="' + food.name + '" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
+          '<button class="fav-btn ' + (isFav ? 'active' : '') + '" data-id="' + food.id + '" aria-label="' + (isFav ? '取消收藏' : '收藏') + '" onclick="event.stopPropagation();window._toggleFoodFav(\'' + food.id + '\',this)">' + (isFav ? '♥' : '♡') + '</button>' +
           '<div class="food-card-body">' +
             '<div class="food-card-name">' +
               food.name +
@@ -1080,6 +1094,30 @@
       };
       document.head.appendChild(leafletScript);
     }
+
+    // ── Food Favorites toggle ──
+    window._toggleFoodFav = function(id, btn) {
+      const isFav = favs.toggle(id);
+      btn.classList.toggle('active', isFav);
+      btn.innerHTML = isFav ? '♥' : '♡';
+      btn.setAttribute('aria-label', isFav ? '取消收藏' : '收藏');
+    };
+
+    // ── Smart Search for food page ──
+    (async function initFoodSearch() {
+      try {
+        const spotsRes = await fetch('/src/data/spots.json');
+        const spots = await spotsRes.json();
+        const search = new SmartSearch(spots, allFoods);
+        const q = new URLSearchParams(window.location.search).get('q');
+        if (q) {
+          searchQuery = q;
+          const searchInput = document.getElementById('foodSearch');
+          if (searchInput) searchInput.value = q;
+          renderFoods();
+        }
+      } catch(e) { /* ignore */ }
+    })();
 
     // ── Init ──
     loadFoods();

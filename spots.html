@@ -285,10 +285,24 @@
     <a href="guide.html"><span class="icon">📖</span>指南</a>
   </nav>
   <div class="toast" id="toast"></div>
+  <div id="comparePanel"></div>
 
   <script type="module">
     import { initAll, stars, openModal, closeModal } from '/src/components/shared.js';
     import { initPWA } from '/src/components/pwa.js';
+    import { Favorites, CompareTool, SmartSearch, AccessibilityTools, OfflineManager } from '/src/components/interactive.js';
+
+    // ── Interactive: Favorites + Compare + A11y ──
+    const favs = new Favorites();
+    const compare = new CompareTool();
+    favs._updateBadge();
+    const a11y = new AccessibilityTools();
+    const toolbarEl = document.createElement('div');
+    toolbarEl.innerHTML = a11y.renderToolbar();
+    document.body.appendChild(toolbarEl);
+    a11y.bindToolbar();
+    const offline = new OfflineManager();
+    offline.cacheEssentials();
 
     // Image fallback: generate colorful SVG by name
     window.imgFallback = function(name) {
@@ -373,6 +387,8 @@
 
       grid.innerHTML = list.map(s => {
         const inIt = itineraries.includes(s.id);
+        const isFav = favs.isFavorite(s.id);
+        const inCompare = compare.has(s.id);
         const priceHtml = s.price === 0 ? '<span class="free-tag">免费</span>' : `¥${s.price}`;
         return `
           <article class="card rv" data-id="${s.id}">
@@ -380,6 +396,8 @@
               <img src="${s.img}" alt="${s.name}" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.parentElement.classList.add("img-loaded")" class="img-loaded">
               <span class="spot-badge badge ${s.badge}">${badgeLabels[s.badge] || s.badge}</span>
               <span class="spot-price">${priceHtml}</span>
+              <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${s.id}" aria-label="${isFav ? '取消收藏' : '收藏'}" onclick="event.stopPropagation();window._toggleFav('${s.id}',this)">${isFav ? '♥' : '♡'}</button>
+              <button class="compare-btn ${inCompare ? 'active' : ''}" data-id="${s.id}" aria-label="${inCompare ? '取消对比' : '加入对比'}" onclick="event.stopPropagation();window._toggleCompare('${s.id}',this)">${inCompare ? '✓' : '⚖️'}</button>
             </div>
             <div class="card-body">
               <h3>${s.name} <span class="card-stars">${stars(s.rating)}</span></h3>
@@ -429,6 +447,39 @@
           if (s) openQuickView(s);
         });
       });
+    }
+
+    // ── Favorites & Compare toggles ──
+    window._toggleFav = function(id, btn) {
+      const isFav = favs.toggle(id);
+      btn.classList.toggle('active', isFav);
+      btn.innerHTML = isFav ? '♥' : '♡';
+      btn.setAttribute('aria-label', isFav ? '取消收藏' : '收藏');
+    };
+    window._toggleCompare = function(id, btn) {
+      const spot = allSpots.find(s => s.id === id);
+      if (!spot) return;
+      if (compare.has(id)) {
+        compare.remove(id);
+        btn.classList.remove('active');
+        btn.innerHTML = '⚖️';
+        btn.setAttribute('aria-label', '加入对比');
+      } else {
+        compare.add(spot);
+        btn.classList.add('active');
+        btn.innerHTML = '✓';
+        btn.setAttribute('aria-label', '取消对比');
+      }
+      updateComparePanel();
+    };
+    function updateComparePanel() {
+      const container = document.getElementById('comparePanel');
+      if (!container) return;
+      container.innerHTML = compare.renderPanel();
+      if (compare.count() > 0) {
+        container.querySelector('.compare-panel')?.classList.add('open');
+        compare.bindPanel(container);
+      }
     }
 
     function addToTrip(id) {

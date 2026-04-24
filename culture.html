@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>济南文化·故事 — 千年泉城，齐鲁风骨</title>
+<meta name="description" content="济南文化深度探索：龙山文化发源地、李清照辛弃疾故里、百年老商埠、泉水民俗。了解泉城的前世今生。">
+<link rel="stylesheet" href="/src/styles/main.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+<style>
+/* ─── Timeline ─── */
+.timeline{position:relative;padding:40px 0}
+.timeline::before{content:'';position:absolute;left:24px;top:0;bottom:0;width:3px;background:var(--border2)}
+.tl-item{position:relative;padding-left:72px;margin-bottom:48px;opacity:0;transform:translateY(20px);transition:all .6s var(--ease)}
+.tl-item.revealed{opacity:1;transform:translateY(0)}
+.tl-dot{position:absolute;left:14px;top:6px;width:22px;height:22px;border-radius:50%;background:var(--accent);border:4px solid var(--bg);z-index:1;display:flex;align-items:center;justify-content:center;font-size:.65rem}
+.tl-year{font:900 1.4rem/1 var(--serif);color:var(--accent);margin-bottom:4px}
+.tl-title{font:700 1.05rem/1.4 var(--serif);margin-bottom:6px}
+.tl-desc{font-size:.88rem;color:var(--text2);line-height:1.7}
+
+/* ─── Culture Cards ─── */
+.culture-card{background:var(--card-bg);border-radius:var(--radius-lg);padding:28px 24px;border:1px solid var(--border);transition:all .3s}
+.culture-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.culture-icon{font-size:2.4rem;margin-bottom:12px}
+.culture-card h3{font:700 1.1rem/1.3 var(--serif);margin-bottom:8px}
+.culture-card p{font-size:.88rem;color:var(--text2);line-height:1.7}
+.culture-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+
+/* ─── People Cards ─── */
+.people-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.people-card{background:var(--card-bg);border-radius:var(--radius-lg);padding:28px;border:1px solid var(--border);display:flex;gap:20px}
+.people-avatar{width:72px;height:72px;border-radius:50%;background:var(--accent2);display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0}
+.people-info h3{font:700 1rem/1.3 var(--serif);margin-bottom:4px}
+.people-info .period{font-size:.75rem;color:var(--accent);font-weight:600;margin-bottom:8px}
+.people-info p{font-size:.85rem;color:var(--text2);line-height:1.6}
+
+/* ─── Festival Cards ─── */
+.festival-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
+.festival-card{background:var(--card-bg);border-radius:var(--radius);padding:20px;border:1px solid var(--border);position:relative;overflow:hidden}
+.festival-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent)}
+.festival-month{font:900 1.5rem/1 var(--serif);color:var(--accent);margin-bottom:8px}
+.festival-name{font:700 .95rem/1.4 var(--serif);margin-bottom:6px}
+.festival-desc{font-size:.82rem;color:var(--text2);line-height:1.6}
+
+/* ─── Quote ─── */
+.quote-block{background:var(--bg2);border-left:4px solid var(--accent);padding:28px 32px;border-radius:0 var(--radius) var(--radius) 0;margin:40px 0}
+.quote-block p{font-family:var(--serif);font-size:1.1rem;line-height:1.8;color:var(--text);font-style:italic}
+.quote-block .author{margin-top:12px;font-size:.85rem;color:var(--text3);font-style:normal}
+
+@media(max-width:768px){
+  .timeline::before{left:16px}
+  .tl-item{padding-left:52px}
+  .tl-dot{left:6px}
+  .people-card{flex-direction:column;align-items:center;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<div class="scroll-progress"></div>
+
+<!-- ─── NAV ─── -->
+<nav class="top-nav">
+  <a href="index.html" class="logo">泉城<span>攻略</span></a>
+  <div class="nav-links" id="navLinks">
+    <a href="index.html">首页</a>
+    <a href="spots.html">景点</a>
+    <a href="food.html">美食</a>
+    <a href="itinerary.html">行程</a>
+    <a href="guide.html">指南</a>
+    <a href="culture.html" class="active">文化</a>
+  </div>
+  <div style="display:flex;gap:8px;align-items:center">
+    <button class="dark-toggle" aria-label="切换深色模式">🌙</button>
+    <button class="burger" id="burgerBtn" aria-label="菜单"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<div class="page-hero">
+  <h1>📚 文化 · 故事</h1>
+  <p>千年泉城，齐鲁风骨。从龙山文化到近代开埠，从诗词歌赋到泉水人家。</p>
+</div>
+
+<!-- ─── TIMELINE ─── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">历史长河</div>
+      <h2>济南四千年</h2>
+      <p>一座城市的前世今生</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item rv">
+        <div class="tl-dot">🏺</div>
+        <div class="tl-year">4000年前</div>
+        <div class="tl-title">龙山文化发源地</div>
+        <div class="tl-desc">济南章丘龙山镇发现的龙山文化遗址，是中华文明的重要源头之一。蛋壳黑陶杯——薄如蛋壳、黑如漆、亮如镜，代表了4000年前制陶工艺的巅峰。山东省博物馆镇馆之宝。</div>
+      </div>
+      <div class="tl-item rv">
+        <div class="tl-dot">⚔️</div>
+        <div class="tl-year">春秋战国</div>
+        <div class="tl-title">齐国要地，齐鲁交汇</div>
+        <div class="tl-desc">济南地处齐、鲁两国交界，兼收齐国的开放进取与鲁国的礼乐教化。这段历史奠定了济南"尚武崇文"的城市性格。至今济南人仍以"齐鲁大地"自称。</div>
+      </div>
+      <div class="tl-item rv">
+        <div class="tl-dot">🙏</div>
+        <div class="tl-year">隋开皇年间</div>
+        <div class="tl-title">千佛山佛像开凿</div>
+        <div class="tl-desc">隋代高僧在历山（千佛山）崖壁上镌刻佛像千余尊，"千佛山"由此得名。兴国禅寺始建于唐代，至今香火不断。山上的隋代石刻佛像是济南最古老的宗教遗迹之一。</div>
+      </div>
+      <div class="tl-item rv">
+        <div class="tl-dot">📝</div>
+        <div class="tl-year">宋代</div>
+        <div class="tl-title">李清照、辛弃疾故里</div>
+        <div class="tl-desc">济南同时诞生了婉约派词宗李清照和豪放派词宗辛弃疾——"济南二安"（李清照号易安居士，辛弃疾字幼安）。趵突泉畔的李清照纪念堂、大明湖畔的辛弃疾纪念祠至今可访。一个城市出了两位词坛巨匠，中国文学史上绝无仅有。</div>
+      </div>
+      <div class="tl-item rv">
+        <div class="tl-dot">🏗️</div>
+        <div class="tl-year">1904年</div>
+        <div class="tl-title">自开商埠，近代转型</div>
+        <div class="tl-desc">济南是近代中国第一个自开商埠的城市（非租界）。胶济铁路通车后，德国、日本商人涌入经三路一带，留下了大量德式、日式建筑。这段历史造就了济南独特的"老商埠"文化——既有传统泉水人家的从容，又有近代开放的包容。</div>
+      </div>
+      <div class="tl-item rv">
+        <div class="tl-dot">🏙️</div>
+        <div class="tl-year">现代</div>
+        <div class="tl-title">省会城市，泉水之都</div>
+        <div class="tl-desc">济南是山东省省会，拥有72名泉（实际更多），是中国唯一以泉水闻名的特大城市。趵突泉、大明湖、千佛山三大名胜每年吸引数千万游客。2023年趵突泉持续喷涌20年，创下近代最长纪录。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SPRING CULTURE ─── -->
+<section class="section" style="background:var(--bg2)">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">泉水文化</div>
+      <h2>泉与城，不可分割</h2>
+      <p>泉水是济南的血液，也是济南人的生活方式</p>
+    </div>
+    <div class="culture-grid">
+      <div class="culture-card rv">
+        <div class="culture-icon">💧</div>
+        <h3>泉水直饮文化</h3>
+        <p>黑虎泉、琵琶泉等设有专门取水点，水质经检测达标，市民常年在此打水泡茶。清晨6-7点，能看到老济南人提着水桶排队打水的场景。这是独属于泉城的市井生活。</p>
+      </div>
+      <div class="culture-card rv">
+        <div class="culture-icon">🚣</div>
+        <h3>护城河游船</h3>
+        <p>全长6.9公里的护城河是全国唯一由泉水汇流而成的护城河。乘船从黑虎泉出发，途经趵突泉、五龙潭、大明湖，一路泉水相伴。夜游船¥75/人，灯光映水，极为浪漫。</p>
+      </div>
+      <div class="culture-card rv">
+        <div class="culture-icon">🏊</div>
+        <h3>泉水浴场</h3>
+        <p>五龙潭公园内有天然泉水浴场，夏天济南人在此消暑。泉水常年恒温18°C，夏天清凉刺骨，冬天温暖如春。本地人叫"泡泉水"，是一种独特的社交方式。</p>
+      </div>
+      <div class="culture-card rv">
+        <div class="culture-icon">🫖</div>
+        <h3>泉水泡茶</h3>
+        <p>济南人讲究用泉水泡茶。趵突泉、黑虎泉的泉水水质清冽甘甜，泡出的茶香气更浓。老舍在《济南的冬天》里写道："设若单单是有阳光，那也算不了出奇。请闭上眼睛想……"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── NON-HERITAGE ─── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">非遗民俗</div>
+      <h2>传承千年的手艺</h2>
+      <p>活在当下的古老技艺</p>
+    </div>
+    <div class="culture-grid">
+      <div class="culture-card rv">
+        <div class="culture-icon">🧵</div>
+        <h3>鲁绣</h3>
+        <p>中国"八大名绣"之一，历史可追溯至春秋战国。鲁绣以丝线、绒线绣制，针法豪放、色彩浓烈，题材多为花鸟人物。山东省博物馆藏有大量鲁绣精品。</p>
+      </div>
+      <div class="culture-card rv">
+        <div class="culture-icon">🎭</div>
+        <h3>济南皮影戏</h3>
+        <p>起源于清代，用驴皮雕刻人物，配以唱腔和锣鼓。济南皮影以"一人一台戏"著称——一个艺人同时操纵皮影、演唱、配音。大观园和芙蓉街偶有演出。</p>
+      </div>
+      <div class="culture-card rv">
+        <div class="culture-icon">🍜</div>
+        <h3>济南面塑</h3>
+        <p>用面团捏制人物、动物、花鸟的民间艺术。济南面塑始于汉代，至今有2000多年历史。非遗传承人能在核桃大小的面团上捏出栩栩如生的人物。</p>
+      </div>
+      <div class="culture-card rv">
+        <div class="culture-icon">🍳</div>
+        <h3>章丘铁锅</h3>
+        <p>章丘铁锅因《舌尖上的中国》走红。需经36000次手工锻打，锅面光滑如镜，不粘锅、省油。正宗章丘铁锅在章丘区相公庄镇可参观制作过程并购买。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAMOUS PEOPLE ─── -->
+<section class="section" style="background:var(--bg2)">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">名人与济南</div>
+      <h2>他们笔下的泉城</h2>
+      <p>从诗词到散文，济南从未缺席</p>
+    </div>
+    <div class="people-grid">
+      <div class="people-card rv">
+        <div class="people-avatar">🌸</div>
+        <div class="people-info">
+          <h3>李清照</h3>
+          <div class="period">宋代 · 婉约派词宗</div>
+          <p>号易安居士，济南章丘人。"知否知否，应是绿肥红瘦"——她的词细腻婉转，被誉为"千古第一才女"。趵突泉畔有李清照纪念堂。</p>
+        </div>
+      </div>
+      <div class="people-card rv">
+        <div class="people-avatar">⚔️</div>
+        <div class="people-info">
+          <h3>辛弃疾</h3>
+          <div class="period">宋代 · 豪放派词宗</div>
+          <p>字幼安，济南历城人。"醉里挑灯看剑，梦回吹角连营"——他的词气势磅礴、壮怀激烈。大明湖南岸有辛弃疾纪念祠。</p>
+        </div>
+      </div>
+      <div class="people-card rv">
+        <div class="people-avatar">✍️</div>
+        <div class="people-info">
+          <h3>老舍</h3>
+          <div class="period">现代 · 人民艺术家</div>
+          <p>虽非济南人，却在济南生活多年，写下《济南的冬天》《趵突泉》等名篇。"上帝把夏天的艺术赐给瑞士，把秋天的赐给西湖，冬和春的全赐给了济南。"</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote-block rv">
+      <p>"一个老城，有山有水，全在天底下晒着阳光，暖和安适地睡着，只等春风来把它们唤醒，这是不是个理想的境界？"</p>
+      <div class="author">—— 老舍《济南的冬天》</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FESTIVALS ─── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">活动日历</div>
+      <h2>济南的四季节庆</h2>
+      <p>每个季节都有值得奔赴的理由</p>
+    </div>
+    <div class="festival-grid">
+      <div class="festival-card rv">
+        <div class="festival-month">1-2月</div>
+        <div class="festival-name">🏮 趵突泉花灯会</div>
+        <div class="festival-desc">始于1965年，每年春节期间举办。趵突泉公园内万盏花灯，泉水映灯、灯映水，是济南年味最浓的地方。</div>
+      </div>
+      <div class="festival-card rv">
+        <div class="festival-month">4月</div>
+        <div class="festival-name">🌸 五龙潭樱花节</div>
+        <div class="festival-desc">五龙潭公园200余株樱花盛开，是济南最美的赏樱地。免费开放，花期约2周。</div>
+      </div>
+      <div class="festival-card rv">
+        <div class="festival-month">5-6月</div>
+        <div class="festival-name">💧 济南泉水节</div>
+        <div class="festival-desc">以泉水为主题的城市嘉年华。泉水取水仪式、龙舟赛、泉水美食节、护城河游船嘉年华，全城联动。</div>
+      </div>
+      <div class="festival-card rv">
+        <div class="festival-month">9月</div>
+        <div class="festival-name">⛰️ 千佛山山会</div>
+        <div class="festival-desc">始于元代，每年农历九月九重阳节前后举办。登山祈福、民俗表演、山货大集，是济南最古老的民俗活动。</div>
+      </div>
+      <div class="festival-card rv">
+        <div class="festival-month">10-11月</div>
+        <div class="festival-name">🍁 红叶节</div>
+        <div class="festival-desc">红叶谷4000亩黄栌林漫山红遍。景区举办摄影大赛、红叶诗会，是北方赏红叶的最佳目的地之一。</div>
+      </div>
+      <div class="festival-card rv">
+        <div class="festival-month">12月</div>
+        <div class="festival-name">❄️ 趵突泉冬季观泉</div>
+        <div class="festival-desc">冬日趵突泉水雾氤氲、云蒸霞蔚，恒温18°C的泉水在寒气中形成独特雾景。"趵突腾空"是济南八景之首。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="footer-links">
+    <a href="index.html">首页</a>
+    <a href="spots.html">景点</a>
+    <a href="food.html">美食</a>
+    <a href="itinerary.html">行程</a>
+    <a href="guide.html">指南</a>
+    <a href="culture.html">文化</a>
+  </div>
+  <p>© 2026 济南旅游攻略 · 泉城深度游指南</p>
+</footer>
+
+<!-- ─── MOBILE NAV ─── -->
+<nav class="mob-nav">
+  <a href="index.html"><span class="icon">🏠</span>首页</a>
+  <a href="spots.html"><span class="icon">🏛️</span>景点</a>
+  <a href="food.html"><span class="icon">🍜</span>美食</a>
+  <a href="itinerary.html"><span class="icon">📋</span>行程</a>
+  <a href="guide.html"><span class="icon">📖</span>指南</a>
+</nav>
+
+<button class="btt" aria-label="回到顶部">↑</button>
+
+<script type="module">
+import { initAll } from '/src/components/shared.js';
+initAll();
+
+// Timeline reveal animation
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.tl-item,.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>景点 · 玩乐 — 济南旅游攻略</title>
+  <link rel="stylesheet" href="/src/styles/main.css">
+  <style>
+    /* ─── FILTER & SORT ─── */
+    .filter-section{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-bottom:20px}
+    .filter-group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+    .filter-group-label{font-size:.7rem;font-weight:600;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-right:4px;white-space:nowrap}
+    .sort-wrap{display:flex;align-items:center;gap:6px;margin-left:auto}
+    .sort-wrap label{font-size:.75rem;color:var(--text3);white-space:nowrap}
+    .sort-select{padding:6px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.75rem;color:var(--text2);cursor:pointer;outline:none;transition:all .3s}
+    .sort-select:hover{border-color:var(--accent)}
+
+    /* ─── SPOT CARD EXTRAS ─── */
+    .spot-badge{position:absolute;top:12px;left:12px;z-index:2}
+    .spot-price{position:absolute;top:12px;right:12px;z-index:2;background:rgba(0,0,0,.6);color:#fff;padding:3px 10px;border-radius:100px;font-size:.7rem;font-weight:600;backdrop-filter:blur(4px)}
+    .spot-price .free-tag{color:#5eead4}
+    .card-body .card-stars{color:#f59e0b;font-size:.75rem;letter-spacing:1px}
+    .card-actions{display:flex;gap:8px;margin-top:12px}
+    .card-actions .btn{flex:1;justify-content:center}
+    .count-badge{font-size:.7rem;color:var(--text3);margin-left:8px}
+    .empty-state{text-align:center;padding:80px 20px;color:var(--text3)}
+    .empty-state .emoji{font-size:3rem;margin-bottom:12px}
+
+    /* ─── MAP AREA ─── */
+    .map-area{background:var(--bg2);border-radius:var(--radius-lg);border:1px solid var(--border);min-height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
+    .map-area svg{width:100%;height:100%;position:absolute;top:0;left:0}
+    .map-label{position:relative;z-index:2;text-align:center}
+    .map-label h3{font:700 1.1rem/1.4 var(--serif);margin-bottom:4px}
+    .map-label p{font-size:.8rem;color:var(--text3)}
+
+    /* ─── AUDIENCE PILLS ─── */
+    .audience-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;padding-left:80px}
+    .audience-btn{padding:4px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.7rem;cursor:pointer;transition:all .3s;color:var(--text3)}
+    .audience-btn:hover,.audience-btn.active{border-color:var(--teal);color:var(--teal);background:rgba(42,157,143,.08)}
+
+    @media(max-width:768px){
+      .filter-section{flex-direction:column;gap:12px}
+      .sort-wrap{margin-left:0}
+      .audience-bar{padding-left:0}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress"></div>
+
+  <!-- Top Nav -->
+  <nav class="top-nav">
+    <a href="index.html" class="logo">泉城<span>攻略</span></a>
+    <div class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="spots.html" class="active">景点</a>
+      <a href="food.html">美食</a>
+      <a href="itinerary.html">行程</a>
+      <a href="guide.html">指南</a>
+      <a href="culture.html">文化</a>
+    </div>
+    <button class="dark-toggle" aria-label="切换深色模式">🌙</button>
+    <button class="burger" aria-label="菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <h1>🏛️ 景点 · 玩乐</h1>
+    <p>泉城济南，处处有惊喜</p>
+  </section>
+
+  <!-- Filters & Sort -->
+  <section class="section" style="padding-top:32px;padding-bottom:0">
+    <div class="section-inner">
+      <div class="filter-section">
+        <div class="filter-group">
+          <span class="filter-group-label">分类</span>
+          <div class="filter-bar" id="catFilters">
+            <button class="filter-btn active" data-cat="all">全部</button>
+            <button class="filter-btn" data-cat="spring">⛲ 泉水</button>
+            <button class="filter-btn" data-cat="nature">🌿 自然</button>
+            <button class="filter-btn" data-cat="history">🏛️ 历史</button>
+            <button class="filter-btn" data-cat="food">🍜 美食街</button>
+          </div>
+        </div>
+        <div class="sort-wrap">
+          <label for="sortSelect">排序</label>
+          <select class="sort-select" id="sortSelect">
+            <option value="recommend">综合推荐</option>
+            <option value="rating">评分最高</option>
+            <option value="price">价格最低</option>
+            <option value="reviews">评价最多</option>
+          </select>
+        </div>
+      </div>>
+      <div class="audience-bar" id="audienceFilters">
+        <span class="filter-group-label" style="margin-right:4px">人群</span>
+        <button class="audience-btn active" data-aud="all">全部</button>
+        <button class="audience-btn" data-aud="family">👨‍👩‍👧 亲子</button>
+        <button class="audience-btn" data-aud="couple">💑 情侣</button>
+        <button class="audience-btn" data-aud="elder">👴 老人</button>
+        <button class="audience-btn" data-aud="solo">🎒 独行</button>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <span class="count-badge" id="spotCount"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spot Cards Grid -->
+  <section class="section" style="padding-top:0">
+    <div class="section-inner">
+      <div class="card-grid" id="spotGrid">
+        <!-- Cards rendered by JS -->
+      </div>
+      <div class="empty-state" id="emptyState" style="display:none">
+        <div class="emoji">🔍</div>
+        <p>没有找到符合条件的景点，试试调整筛选条件</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Map -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">互动地图</div>
+        <h2>景点分布</h2>
+        <p>点击景点卡片查看详情，探索泉城济南</p>
+      </div>
+      <div class="map-area" id="mapArea">
+        <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" style="opacity:.15">
+          <!-- Background grid -->
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width=".5"/>
+            </pattern>
+          </defs>
+          <rect width="800" height="400" fill="url(#grid)"/>
+          <!-- Simplified Jinan outline -->
+          <path d="M100,200 Q200,100 400,120 Q600,80 700,200 Q650,320 400,350 Q150,340 100,200Z" fill="none" stroke="currentColor" stroke-width="2"/>
+          <text x="400" y="210" text-anchor="middle" font-size="20" fill="currentColor">济南市区</text>
+          <text x="400" y="240" text-anchor="middle" font-size="12" fill="currentColor">景点标注即将上线</text>
+        </svg>
+        <div class="map-label">
+          <h3>🗺️ 景点地图</h3>
+          <p>互动地图功能开发中，敬请期待</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="index.html">首页</a>
+      <a href="spots.html">景点</a>
+      <a href="food.html">美食</a>
+      <a href="itinerary.html">行程</a>
+      <a href="guide.html">指南</a>
+      <a href="culture.html">文化</a>
+    </div>
+    <p>© 2026 泉城攻略 · 济南旅游指南</p>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="btt" aria-label="回到顶部">↑</button>
+
+  <!-- Mobile Bottom Nav -->
+    <nav class="mob-nav">
+    <a href="index.html"><span class="icon">🏠</span>首页</a>
+    <a href="spots.html" class="active"><span class="icon">🏛️</span>景点</a>
+    <a href="food.html"><span class="icon">🍜</span>美食</a>
+    <a href="itinerary.html"><span class="icon">📋</span>行程</a>
+    <a href="guide.html"><span class="icon">📖</span>指南</a>
+  </nav>
+
+  <script type="module">
+    import { initAll, stars } from '/src/components/shared.js';
+
+    // Badge label map
+    const badgeLabels = { hot: '🔥 热门', must: '⭐ 必去', hidden: '🌿 小众', free: '🆓 免费' };
+    const audienceLabels = { family: '亲子', couple: '情侣', elder: '老人', solo: '独行' };
+
+    let allSpots = [];
+    let activeCat = 'all';
+    let activeAud = 'all';
+    let sortBy = 'recommend';
+
+    // Fetch data
+    async function loadSpots() {
+      try {
+        const res = await fetch('/src/data/spots.json');
+        allSpots = await res.json();
+        render();
+      } catch (e) {
+        console.error('加载景点数据失败:', e);
+        document.getElementById('spotGrid').innerHTML =
+          '<div class="empty-state"><div class="emoji">😢</div><p>数据加载失败，请刷新重试</p></div>';
+      }
+    }
+
+    // Filter & sort
+    function getFiltered() {
+      let list = [...allSpots];
+      if (activeCat !== 'all') list = list.filter(s => s.cat === activeCat);
+      if (activeAud !== 'all') list = list.filter(s => s.audience.includes(activeAud));
+
+      switch (sortBy) {
+        case 'rating': list.sort((a, b) => b.rating - a.rating); break;
+        case 'price': list.sort((a, b) => a.price - b.price); break;
+        case 'reviews': list.sort((a, b) => b.reviews - a.reviews); break;
+        default: /* recommend — keep original order */ break;
+      }
+      return list;
+    }
+
+    // Render cards
+    function render() {
+      const list = getFiltered();
+      const grid = document.getElementById('spotGrid');
+      const empty = document.getElementById('emptyState');
+      const count = document.getElementById('spotCount');
+      count.textContent = `共 ${list.length} 个景点`;
+      const itineraries = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
+
+      if (list.length === 0) {
+        grid.innerHTML = '';
+        empty.style.display = 'block';
+        return;
+      }
+      empty.style.display = 'none';
+
+      grid.innerHTML = list.map(s => {
+        const inItinerary = itineraries.includes(s.id);
+        const priceHtml = s.price === 0
+          ? '<span class="free-tag">免费</span>'
+          : `¥${s.price}`;
+        return `
+          <article class="card rv" data-id="${s.id}">
+            <div class="card-img">
+              <img src="${s.img}" alt="${s.name}" loading="lazy">
+              <span class="spot-badge badge ${s.badge}">${badgeLabels[s.badge] || s.badge}</span>
+              <span class="spot-price">${priceHtml}</span>
+            </div>
+            <div class="card-body">
+              <h3>${s.name} <span class="card-stars">${stars(s.rating)}</span></h3>
+              <p class="desc">${s.desc}</p>
+              <div class="card-meta">
+                <span>⏱ ${s.dur}</span>
+                <span>💬 ${s.reviews} 条评价</span>
+              </div>
+              <div class="card-tags">
+                ${s.audience.map(a => `<span class="tag">${audienceLabels[a] || a}</span>`).join('')}
+              </div>
+              <div class="card-actions">
+                <button class="btn btn-sm ${inItinerary ? 'btn-outline' : 'btn-primary'} add-trip"
+                        data-id="${s.id}" ${inItinerary ? 'disabled' : ''}>
+                  ${inItinerary ? '✓ 已加入' : '＋ 加入行程'}
+                </button>
+                <button class="btn btn-sm btn-outline detail-btn" data-name="${s.name}">详情</button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      // Re-init reveal for new elements
+      document.querySelectorAll('.rv:not(.revealed)').forEach(el => {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
+          });
+        }, { threshold: 0.1 });
+        io.observe(el);
+      });
+
+      // Bind add-to-itinerary buttons
+      document.querySelectorAll('.add-trip:not([disabled])').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const id = btn.dataset.id;
+          const list = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
+          if (!list.includes(id)) {
+            list.push(id);
+            localStorage.setItem('jinan-itinerary', JSON.stringify(list));
+            btn.textContent = '✓ 已加入';
+            btn.classList.remove('btn-primary');
+            btn.classList.add('btn-outline');
+            btn.disabled = true;
+          }
+        });
+      });
+
+      // Bind detail buttons
+      document.querySelectorAll('.detail-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          // TODO: navigate to spot detail page when available
+          console.log('查看景点详情:', btn.dataset.name);
+        });
+      });
+    }
+
+    // Category filter clicks
+    document.getElementById('catFilters').addEventListener('click', (e) => {
+      const btn = e.target.closest('.filter-btn');
+      if (!btn) return;
+      document.querySelectorAll('#catFilters .filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeCat = btn.dataset.cat;
+      render();
+    });
+
+    // Audience filter clicks
+    document.getElementById('audienceFilters').addEventListener('click', (e) => {
+      const btn = e.target.closest('.audience-btn');
+      if (!btn) return;
+      document.querySelectorAll('#audienceFilters .audience-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeAud = btn.dataset.aud;
+      render();
+    });
+
+    // Sort change
+    document.getElementById('sortSelect').addEventListener('change', (e) => {
+      sortBy = e.target.value;
+      render();
+    });
+
+    // Init
+    initAll();
+    loadSpots();
+  </script>
+</body>
+</html>

@@ -15,7 +15,7 @@
   --serif:'Noto Serif SC',"Source Han Serif SC","Songti SC",Georgia,serif;
   --ease:cubic-bezier(.25,.46,.45,.94);
   --ease-out:cubic-bezier(.16,1,.3,1);
-  --section:clamp(60px,8vw,100px);
+  --section:clamp(80px,10vw,120px);
   --gutter:clamp(20px,4vw,48px);
   --max:1200px;--radius:16px;--radius-lg:20px;
 }
@@ -85,15 +85,16 @@ body{animation:pageFadeIn .5s var(--ease) both}
 /* ─── SECTIONS ─── */
 .section{padding:var(--section) var(--gutter)}
 .section-inner{max-width:var(--max);margin:0 auto}
-.section-header{text-align:center;margin-bottom:48px}
-.section-header .eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:8px}
-.section-header h2{font:900 clamp(1.8rem,4vw,2.8rem)/1.2 var(--serif)}
-.section-header p{color:var(--text2);margin-top:12px;max-width:500px;margin-left:auto;margin-right:auto}
+.section-header{text-align:center;margin-bottom:56px}
+.section-header .eyebrow{font-size:.8rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:inline-flex;align-items:center;gap:12px}
+.section-header .eyebrow::before,.section-header .eyebrow::after{content:'';width:24px;height:1px;background:var(--accent);opacity:.6}
+.section-header h2{font:900 clamp(2rem,4vw,3rem)/1.2 var(--serif)}
+.section-header p{color:var(--text2);margin-top:14px;max-width:500px;margin-left:auto;margin-right:auto;font-size:.95rem}
 
 /* ─── CARDS ─── */
 .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
-.card{background:var(--card-bg);border-radius:var(--radius-lg);overflow:hidden;transition:all .35s var(--ease);cursor:pointer;border:1px solid var(--border);position:relative;will-change:transform}
-.card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 12px 40px rgba(0,0,0,.12);border-color:rgba(201,169,110,.2)}
+.card{background:var(--card-bg);border-radius:var(--radius-lg);overflow:hidden;transition:all .35s var(--ease);cursor:pointer;border:none;position:relative;will-change:transform;box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.card:hover{transform:translateY(-8px) scale(1.01);box-shadow:0 16px 48px rgba(0,0,0,.12)}
 .card-img{position:relative;overflow:hidden;aspect-ratio:16/10;background:var(--bg2)}
 .card-img::before{content:'';position:absolute;inset:0;background:var(--bg2);z-index:1;opacity:1;transition:opacity .4s}
 .card-img.img-loaded::before{opacity:0;pointer-events:none}
@@ -101,7 +102,7 @@ body{animation:pageFadeIn .5s var(--ease) both}
 .card-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s,opacity .4s;opacity:0}
 .card-img img.img-loaded{opacity:1}
 .card:hover .card-img img{transform:scale(1.06)}
-.card-body{padding:16px 20px 20px}
+.card-body{padding:20px 24px 24px}
 .card-body h3{font:700 1rem/1.4 var(--serif);margin-bottom:6px;display:flex;align-items:center;gap:8px}
 .card-body .desc{font-size:.85rem;color:var(--text2);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .card-meta{display:flex;gap:12px;margin-top:10px;font-size:.75rem;color:var(--text3)}
@@ -148,11 +149,9 @@ body{animation:pageFadeIn .5s var(--ease) both}
 .filter-btn:hover,.filter-btn.active{border-color:var(--accent);color:var(--accent);background:var(--accent2)}
 
 /* ─── FOOTER ─── */
-.footer{background:var(--bg2);border-top:1px solid var(--border);padding:48px var(--gutter) 32px;text-align:center}
-.footer-links{display:flex;gap:24px;justify-content:center;margin-bottom:16px;flex-wrap:wrap}
-.footer-links a{font-size:.8rem;color:var(--text2);transition:color .3s}
-.footer-links a:hover{color:var(--accent)}
-.footer p{font-size:.75rem;color:var(--text3)}
+.footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px var(--gutter) 32px;text-align:center}
+.footer p{font-size:.75rem;color:var(--text3);margin:0}
+.footer .footer-tagline{font-size:.8rem;color:var(--text2);margin-bottom:8px;font-style:italic}
 
 /* ─── SKELETON ─── */
 .skeleton{background:linear-gradient(90deg,var(--bg2) 25%,var(--bg3) 50%,var(--bg2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite}

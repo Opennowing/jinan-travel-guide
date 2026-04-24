@@ -5,43 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🍜 美食 · 探店 — 济南旅游攻略</title>
   <link rel="stylesheet" href="/src/styles/main.css">
+  <link rel="manifest" href="/jinan-travel-guide/manifest.json">
+  <meta name="theme-color" content="#c9a96e">
   <style>
-    /* ── Food Page Specific ── */
+    .search-bar{max-width:500px;margin:0 auto 32px;position:relative}
+    .search-bar input{width:100%;padding:12px 44px 12px 16px;border:1.5px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.9rem;font-family:var(--sans);outline:none;transition:all .3s}
+    .search-bar input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent2)}
+    .search-bar .search-icon{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:1.1rem;color:var(--text3)}
     .food-tabs{display:flex;gap:4px;background:var(--bg2);padding:4px;border-radius:12px;margin-bottom:32px;overflow-x:auto;justify-content:center;flex-wrap:wrap}
     .food-tab{padding:8px 18px;border:none;background:none;font-size:.85rem;font-weight:500;color:var(--text2);cursor:pointer;border-radius:8px;transition:all .3s;white-space:nowrap}
     .food-tab.active{background:var(--bg);color:var(--text);box-shadow:var(--shadow)}
     .food-tab:hover:not(.active){color:var(--accent)}
 
-    /* Masonry-style grid */
+    /* Must-eat section */
+    .must-eat{margin-bottom:48px}
+    .must-eat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .must-card{background:linear-gradient(135deg,var(--accent2),var(--bg2));border:1px solid var(--accent);border-radius:var(--radius-lg);padding:20px;text-align:center;transition:all .3s;cursor:pointer;position:relative;overflow:hidden}
+    .must-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+    .must-card .rank{position:absolute;top:8px;left:12px;font:900 2rem/1 var(--serif);color:var(--accent);opacity:.3}
+    .must-card .emoji{font-size:2.5rem;margin-bottom:8px;display:block}
+    .must-card h3{font:700 1rem/1.3 var(--serif);margin-bottom:4px}
+    .must-card p{font-size:.75rem;color:var(--text2)}
+    .must-card .price{margin-top:8px;font-weight:700;color:var(--accent);font-size:.9rem}
+
+    /* Food cards */
     .food-masonry{columns:3;column-gap:24px}
     .food-card{break-inside:avoid;margin-bottom:24px;background:var(--card-bg);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);transition:all .3s var(--ease)}
     .food-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
     .food-card-img{width:100%;aspect-ratio:16/10;object-fit:cover}
     .food-card-body{padding:18px 20px 20px}
-    .food-card-name{font:700 1.1rem/1.4 var(--serif);display:flex;align-items:center;gap:8px;margin-bottom:6px}
+    .food-card-name{font:700 1.1rem/1.4 var(--serif);display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
     .food-card-tag{font-size:.65rem;padding:2px 10px;background:var(--accent2);border-radius:100px;color:var(--accent);font-weight:500;white-space:nowrap}
-    .food-card-desc{font-size:.85rem;color:var(--text2);line-height:1.6;margin-bottom:14px}
+    .food-card-must{font-size:.65rem;padding:2px 10px;background:rgba(231,111,81,.1);border-radius:100px;color:var(--coral);font-weight:600}
+    .food-card-season{font-size:.65rem;padding:2px 10px;background:rgba(42,157,143,.1);border-radius:100px;color:var(--teal);font-weight:500}
+    .food-card-desc{font-size:.85rem;color:var(--text2);line-height:1.6;margin-bottom:10px}
+    .food-card-history{font-size:.78rem;color:var(--text3);line-height:1.5;margin-bottom:12px;padding-left:12px;border-left:2px solid var(--accent2);font-style:italic}
+    .food-card-tips{font-size:.8rem;color:var(--teal);background:rgba(42,157,143,.06);padding:8px 12px;border-radius:8px;margin-bottom:12px}
     .food-card-shops{list-style:none;display:flex;flex-direction:column;gap:10px}
     .food-card-shops li{padding:10px 14px;background:var(--bg2);border-radius:10px;border:1px solid var(--border)}
     .shop-name{font-weight:600;font-size:.85rem;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center}
     .shop-rating{color:var(--accent);font-size:.8rem;white-space:nowrap}
     .shop-info{font-size:.75rem;color:var(--text3);display:flex;gap:12px;flex-wrap:wrap}
     .shop-info span{display:inline-flex;align-items:center;gap:3px}
+    .shop-detail{font-size:.73rem;color:var(--text3);margin-top:4px}
 
-    /* Food map area */
-    .food-map{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
-    .map-zone{background:var(--card-bg);border-radius:var(--radius-lg);padding:28px 24px;border:1px solid var(--border);transition:all .3s}
-    .map-zone:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
-    .map-zone-icon{font-size:2rem;margin-bottom:12px}
-    .map-zone h3{font:700 1.1rem/1.3 var(--serif);margin-bottom:8px}
-    .map-zone p{font-size:.85rem;color:var(--text2);line-height:1.6}
-    .map-zone .zone-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-    .map-zone .zone-tag{font-size:.7rem;padding:3px 10px;border-radius:100px;font-weight:500}
-    .zone-tag.hot{background:rgba(231,111,81,.1);color:var(--coral)}
-    .zone-tag.old{background:rgba(201,169,110,.15);color:var(--accent)}
-    .zone-tag.new{background:rgba(42,157,143,.1);color:var(--teal)}
+    /* Season section */
+    .season-section{margin-bottom:48px}
+    .season-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+    .season-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;transition:all .3s}
+    .season-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+    .season-card .icon{font-size:2rem;margin-bottom:10px}
+    .season-card h3{font:700 1rem/1.3 var(--serif);margin-bottom:8px}
+    .season-card p{font-size:.85rem;color:var(--text2);line-height:1.6}
+    .season-card .items{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}
+    .season-card .item{font-size:.7rem;padding:3px 10px;border-radius:100px;background:var(--accent2);color:var(--accent);font-weight:500}
 
-    /* Tips */
+    /* Tips section */
     .tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
     .tip-card{padding:28px 24px;background:var(--card-bg);border-radius:var(--radius-lg);border:1px solid var(--border)}
     .tip-card .tip-icon{font-size:1.8rem;margin-bottom:12px}
@@ -51,25 +70,21 @@
     .tip-card ul li{font-size:.85rem;color:var(--text2);padding:3px 0;padding-left:16px;position:relative}
     .tip-card ul li::before{content:'•';position:absolute;left:0;color:var(--accent)}
 
-    /* Loading */
-    .food-loading{display:flex;justify-content:center;padding:60px 0;color:var(--text3)}
-    .food-loading .spinner{width:36px;height:36px;border:3px solid var(--bg3);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
-
     .food-empty{text-align:center;padding:60px 0;color:var(--text3);font-size:.95rem}
 
     @media(max-width:768px){
       .food-masonry{columns:1}
       .food-tabs{justify-content:flex-start;flex-wrap:nowrap}
+      .must-eat-grid{grid-template-columns:1fr 1fr}
+    }
+    @media(max-width:480px){
+      .must-eat-grid{grid-template-columns:1fr}
     }
   </style>
 </head>
 <body>
-
-  <!-- Scroll progress -->
   <div class="scroll-progress"></div>
 
-  <!-- Top Nav -->
   <nav class="top-nav">
     <a href="index.html" class="logo">泉城<span>攻略</span></a>
     <div class="nav-links">
@@ -84,8 +99,135 @@
     <button class="burger" aria-label="菜单"><span></span><span></span><span></span></button>
   </nav>
 
-  <!-- Mobile bottom nav -->
-    <nav class="mob-nav">
+  <section class="page-hero">
+    <h1>🍜 美食 · 探店</h1>
+    <p>鲁菜正脉与市井烟火，在舌尖上相遇</p>
+  </section>
+
+  <section class="section" style="padding-top:24px">
+    <div class="section-inner">
+      <!-- Search -->
+      <div class="search-bar">
+        <input type="text" id="foodSearch" placeholder="搜索菜名、餐厅…" autocomplete="off">
+        <span class="search-icon">🔍</span>
+      </div>
+
+      <!-- Category Tabs -->
+      <div class="food-tabs" id="foodTabs">
+        <button class="food-tab active" data-cat="all">全部</button>
+      </div>
+
+      <!-- Must Eat TOP 5 -->
+      <div class="must-eat rv">
+        <div class="section-header" style="margin-bottom:24px">
+          <div class="eyebrow">MUST EAT</div>
+          <h2>🏆 必吃榜 TOP 5</h2>
+          <p>来济南不可错过的灵魂美食</p>
+        </div>
+        <div class="must-eat-grid" id="mustEatGrid"></div>
+      </div>
+
+      <!-- All Foods -->
+      <div class="food-masonry" id="foodGrid"></div>
+      <div class="food-empty" id="foodEmpty" style="display:none">没有找到匹配的美食，换个关键词试试</div>
+    </div>
+  </section>
+
+  <!-- Seasonal Foods -->
+  <section class="section section-alt">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">SEASONAL</div>
+        <h2>📅 时令美食</h2>
+        <p>什么季节吃什么，济南人有自己的讲究</p>
+      </div>
+      <div class="season-grid" id="seasonGrid"></div>
+    </div>
+  </section>
+
+  <!-- Food Map -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">FOOD MAP</div>
+        <h2>🗺️ 美食地图</h2>
+        <p>济南美食聚集地一目了然</p>
+      </div>
+      <div id="food-map-container" style="width:100%;height:400px;border-radius:var(--radius-lg);overflow:hidden;background:var(--bg2);display:flex;align-items:center;justify-content:center">
+        <div style="text-align:center;color:var(--text3)">
+          <p style="font-size:1.1rem;margin-bottom:8px">🗺️ 美食地图</p>
+          <p style="font-size:.8rem">高德地图加载中…如未显示请配置 API Key</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:12px;font-size:.75rem;color:var(--text2)">
+        <span>🍲 鲁菜馆</span><span>🍢 小吃摊</span><span>🏮 老字号</span><span>🌅 早餐铺</span><span>🌙 夜宵摊</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Food Tips -->
+  <section class="section section-alt">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">TIPS</div>
+        <h2>💡 美食攻略</h2>
+        <p>像本地人一样吃济南</p>
+      </div>
+      <div class="tips-grid">
+        <div class="tip-card rv">
+          <div class="tip-icon">🍽️</div>
+          <h3>点菜技巧</h3>
+          <ul>
+            <li>鲁菜分量大，2人点 3 个菜足够</li>
+            <li>糖醋鲤鱼点半条就够，一整条吃不完</li>
+            <li>九转大肠配米饭吃更香</li>
+            <li>奶汤蒲菜是时令菜，问清当季有没有</li>
+          </ul>
+        </div>
+        <div class="tip-card rv">
+          <div class="tip-icon">⏰</div>
+          <h3>用餐时间</h3>
+          <ul>
+            <li>老字号午餐 11:00 前到，避开排队</li>
+            <li>把子肉早餐摊 6:00 就开门</li>
+            <li>烧烤夜宵 20:00 后最热闹</li>
+            <li>周末热门餐厅建议提前预约</li>
+          </ul>
+        </div>
+        <div class="tip-card rv">
+          <div class="tip-icon">💰</div>
+          <h3>省钱攻略</h3>
+          <ul>
+            <li>超意兴把子肉 ¥15 一餐，本地人最爱</li>
+            <li>美团/大众点评搜优惠券</li>
+            <li>避开景区餐厅，走两条街价格减半</li>
+            <li>早餐吃甜沫+油旋不到 ¥10</li>
+          </ul>
+        </div>
+        <div class="tip-card rv">
+          <div class="tip-icon">⚠️</div>
+          <h3>避坑指南</h3>
+          <ul>
+            <li>芙蓉街小吃偏贵，尝鲜即可别当正餐</li>
+            <li>泉水宴认准正规酒店，路边不靠谱</li>
+            <li>甜沫是咸的！别被名字骗了</li>
+            <li>外卖平台的鲁菜不如堂食好吃</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="index.html">首页</a><a href="spots.html">景点</a><a href="food.html">美食</a>
+      <a href="itinerary.html">行程</a><a href="guide.html">指南</a><a href="culture.html">文化</a>
+    </div>
+    <p>© 2026 泉城攻略 · 济南旅游指南</p>
+  </footer>
+
+  <button class="btt" aria-label="回到顶部">↑</button>
+  <nav class="mob-nav">
     <a href="index.html"><span class="icon">🏠</span>首页</a>
     <a href="spots.html"><span class="icon">🏛️</span>景点</a>
     <a href="food.html" class="active"><span class="icon">🍜</span>美食</a>
@@ -93,241 +235,165 @@
     <a href="guide.html"><span class="icon">📖</span>指南</a>
   </nav>
 
-  <!-- Hero -->
-  <header class="page-hero">
-    <h1>🍜 美食 · 探店</h1>
-    <p>鲁菜发源地，北方美食重镇</p>
-  </header>
-
-  <!-- Main Content -->
-  <main>
-
-    <!-- ── 分类 Tab ── -->
-    <section class="section">
-      <div class="section-inner">
-        <div class="food-tabs" id="foodTabs">
-          <button class="food-tab active" data-cat="全部">全部</button>
-          <button class="food-tab" data-cat="鲁菜">鲁菜名店</button>
-          <button class="food-tab" data-cat="市井">市井小吃</button>
-          <button class="food-tab" data-cat="老字号">老字号</button>
-          <button class="food-tab" data-cat="早餐">早餐</button>
-          <button class="food-tab" data-cat="特色">泉水特色</button>
-        </div>
-
-        <!-- 美食卡片列表 -->
-        <div class="food-masonry" id="foodGrid">
-          <div class="food-loading"><div class="spinner"></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── 美食地图 ── -->
-    <section class="section" style="background:var(--bg2)">
-      <div class="section-inner">
-        <div class="section-header">
-          <p class="eyebrow">美食地图</p>
-          <h2>三大美食聚集地</h2>
-          <p>跟着地图吃济南，不走回头路</p>
-        </div>
-        <div class="food-map">
-          <div class="map-zone rv">
-            <div class="map-zone-icon">🏮</div>
-            <h3>芙蓉街</h3>
-            <p>济南最负盛名的小吃一条街，百年老街焕新生。油旋、把子肉、烤串、臭豆腐……一路吃到底，烟火气十足。</p>
-            <div class="zone-tags">
-              <span class="zone-tag hot">🔥 必打卡</span>
-              <span class="zone-tag old">百年老街</span>
-            </div>
-          </div>
-          <div class="map-zone rv">
-            <div class="map-zone-icon">🏙️</div>
-            <h3>宽厚里</h3>
-            <p>济南新兴美食地标，集网红餐厅、文创市集于一体。环境出片，适合年轻人聚餐约会。</p>
-            <div class="zone-tags">
-              <span class="zone-tag new">✨ 新派美食</span>
-              <span class="zone-tag hot">拍照圣地</span>
-            </div>
-          </div>
-          <div class="map-zone rv">
-            <div class="map-zone-icon">🎭</div>
-            <h3>大观园</h3>
-            <p>老济南的美食记忆，传统鲁菜和早点聚集地。甜沫、油旋、草包包子……地道济南味从这里开始。</p>
-            <div class="zone-tags">
-              <span class="zone-tag old">老字号聚集</span>
-              <span class="zone-tag new">早餐圣地</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── 就餐贴士 ── -->
-    <section class="section">
-      <div class="section-inner">
-        <div class="section-header">
-          <p class="eyebrow">实用贴士</p>
-          <h2>就餐指南</h2>
-          <p>像济南人一样吃，更地道</p>
-        </div>
-        <div class="tips-grid">
-          <div class="tip-card rv">
-            <div class="tip-icon">⏰</div>
-            <h3>营业时间参考</h3>
-            <ul>
-              <li>早餐店：06:00–10:00（甜沫油旋趁早去）</li>
-              <li>鲁菜馆：11:00–14:00 / 17:00–21:00</li>
-              <li>小吃街：10:00–22:00（芙蓉街周末人多）</li>
-              <li>老字号：多数下午2点后休息，别扑空</li>
-            </ul>
-          </div>
-          <div class="tip-card rv">
-            <div class="tip-icon">💰</div>
-            <h3>省钱技巧</h3>
-            <ul>
-              <li>超意兴遍布全城，把子肉+米饭不到20元管饱</li>
-              <li>鲁菜馆点「糖醋鲤鱼」2人份足够，别点多</li>
-              <li>芙蓉街小吃建议少量多样，边走边吃</li>
-              <li>团购平台提前看，老字号也有套餐优惠</li>
-            </ul>
-          </div>
-          <div class="tip-card rv">
-            <div class="tip-icon">🥢</div>
-            <h3>济南用餐习惯</h3>
-            <ul>
-              <li>济南人午饭偏早，11:30前去热门店不用排队</li>
-              <li>鲁菜分量大，2人点2–3道菜足够</li>
-              <li>「甜沫」是咸的！第一次别被名字骗了</li>
-              <li>本地人推荐的店通常藏在巷子里，跟着导航走</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-links">
-      <a href="index.html">首页</a>
-      <a href="spots.html">景点</a>
-      <a href="food.html">美食</a>
-      <a href="itinerary.html">行程</a>
-      <a href="guide.html">指南</a>
-      <a href="culture.html">文化</a>
-    </div>
-    <p>© 2026 济南旅游攻略 · 愿你在泉城吃好喝好</p>
-  </footer>
-
-  <!-- Back to top -->
-  <button class="btt" aria-label="回到顶部">↑</button>
-
   <script type="module">
     import { initAll, stars } from '/src/components/shared.js';
-
-    // Init shared components
     initAll();
 
-    // ── State ──
-    let allFoods = [];
-    let currentCat = '全部';
-    let foodObserver = null;
+    let allFoods = [], categories = [], activeCat = 'all', searchQuery = '';
 
-    // ── Category mapping (JSON cat → tab cat) ──
-    const catMap = {
-      '鲁菜': '鲁菜',
-      '市井': '市井',
-      '小吃': '市井',
-      '老字号': '老字号',
-      '早餐': '早餐',
-      '特色': '特色'
-    };
-
-    // ── Fetch data ──
-    async function loadFoods() {
+    async function loadData() {
       try {
         const res = await fetch('/src/data/food.json');
-        allFoods = await res.json();
+        const data = await res.json();
+        categories = data.categories || [];
+        allFoods = data.foods || data; // support both new dict and old array format
+        renderTabs();
+        renderMustEat();
         renderFoods();
-      } catch (e) {
-        document.getElementById('foodGrid').innerHTML =
-          '<div class="food-empty">加载美食数据失败，请刷新重试 😢</div>';
+        renderSeasons();
+        loadFoodMap();
+      } catch(e) {
+        console.error('加载美食数据失败:', e);
       }
     }
 
-    // ── Render cards ──
-    function renderFoods() {
-      const grid = document.getElementById('foodGrid');
-      const filtered = currentCat === '全部'
-        ? allFoods
-        : allFoods.filter(f => catMap[f.cat] === currentCat);
+    function renderTabs() {
+      const tabs = document.getElementById('foodTabs');
+      tabs.innerHTML = `<button class="food-tab active" data-cat="all">全部</button>` +
+        categories.map(c => `<button class="food-tab" data-cat="${c.id}">${c.icon} ${c.name}</button>`).join('');
+      tabs.addEventListener('click', e => {
+        const btn = e.target.closest('.food-tab');
+        if (!btn) return;
+        tabs.querySelectorAll('.food-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeCat = btn.dataset.cat;
+        renderFoods();
+      });
+    }
 
-      if (filtered.length === 0) {
-        grid.innerHTML = '<div class="food-empty">这个分类还没有收录，敬请期待 🍽️</div>';
-        return;
+    function getFiltered() {
+      let list = [...allFoods];
+      if (activeCat !== 'all') list = list.filter(f => f.cat === activeCat);
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        list = list.filter(f => f.name.toLowerCase().includes(q) || f.desc.toLowerCase().includes(q) ||
+          (f.shops||[]).some(s => s.name.toLowerCase().includes(q)));
       }
+      return list;
+    }
 
-      grid.innerHTML = filtered.map(food => `
+    function renderMustEat() {
+      const grid = document.getElementById('mustEatGrid');
+      const top5 = allFoods.filter(f => f.must).slice(0, 5);
+      grid.innerHTML = top5.map((f, i) => `
+        <div class="must-card rv" onclick="document.getElementById('foodSearch').value='${f.name}';document.getElementById('foodSearch').dispatchEvent(new Event('input'))">
+          <span class="rank">#${i+1}</span>
+          <span class="emoji">${categories.find(c=>c.id===f.cat)?.icon || '🍜'}</span>
+          <h3>${f.name}</h3>
+          <p>${f.tag}</p>
+          <div class="price">${f.shops?.[0]?.avg || '—'}</div>
+        </div>
+      `).join('');
+    }
+
+    function renderFoods() {
+      const list = getFiltered();
+      const grid = document.getElementById('foodGrid');
+      const empty = document.getElementById('foodEmpty');
+      if (!list.length) { grid.innerHTML = ''; empty.style.display = 'block'; return; }
+      empty.style.display = 'none';
+
+      grid.innerHTML = list.map(f => {
+        const catInfo = categories.find(c => c.id === f.cat);
+        return `
         <div class="food-card rv">
-          <img class="food-card-img" src="${food.img}" alt="${food.name}" loading="lazy">
+          <img class="food-card-img" src="${f.img}" alt="${f.name}" loading="lazy">
           <div class="food-card-body">
             <div class="food-card-name">
-              ${food.name}
-              <span class="food-card-tag">${food.tag}</span>
+              ${f.name}
+              <span class="food-card-tag">${f.tag}</span>
+              ${f.must ? '<span class="food-card-must">🔥 必吃</span>' : ''}
+              ${f.season && f.season !== '四季皆宜' ? `<span class="food-card-season">📅 ${f.season}</span>` : ''}
             </div>
-            <p class="food-card-desc">${food.desc}</p>
+            <p class="food-card-desc">${f.desc}</p>
+            ${f.history ? `<div class="food-card-history">${f.history}</div>` : ''}
+            ${f.tips ? `<div class="food-card-tips">💡 ${f.tips}</div>` : ''}
             <ul class="food-card-shops">
-              ${food.shops.map(s => `
+              ${(f.shops||[]).map(s => `
                 <li>
-                  <div class="shop-name">
-                    ${s.name}
-                    <span class="shop-rating">${stars(s.rating)} ${s.rating}</span>
-                  </div>
+                  <div class="shop-name">${s.name} <span class="shop-rating">★ ${s.rating}</span></div>
                   <div class="shop-info">
-                    <span>💰 ${s.avg}</span>
+                    <span>💰 人均 ${s.avg}</span>
                     <span>📍 ${s.addr}</span>
+                  </div>
+                  <div class="shop-detail">
+                    ${s.hours ? `🕐 ${s.hours}` : ''}${s.wait ? ` · ⏳ ${s.wait}` : ''}${s.bestDish ? ` · 🍽️ 招牌: ${s.bestDish}` : ''}
                   </div>
                 </li>
               `).join('')}
             </ul>
           </div>
-        </div>
-      `).join('');
+        </div>`;
+      }).join('');
 
-      // Re-observe new elements for scroll reveal
-      if (foodObserver) foodObserver.disconnect();
-      foodObserver = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) { e.target.classList.add('revealed'); foodObserver.unobserve(e.target); }
-        });
-      }, { threshold: 0.1 });
-      grid.querySelectorAll('.rv').forEach(el => foodObserver.observe(el));
+      // Reveal
+      document.querySelectorAll('.rv:not(.revealed)').forEach(el => {
+        const io = new IntersectionObserver(es => { es.forEach(e => { if(e.isIntersecting){e.target.classList.add('revealed');io.unobserve(e.target)} }); }, {threshold:.1});
+        io.observe(el);
+      });
     }
 
-    // ── Tab switching ──
-    document.getElementById('foodTabs').addEventListener('click', e => {
-      const btn = e.target.closest('.food-tab');
-      if (!btn) return;
-      document.querySelectorAll('.food-tab').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentCat = btn.dataset.cat;
+    function renderSeasons() {
+      const seasons = [
+        { icon: '🌸', title: '春季 (3-5月)', desc: '泉水最旺，蒲菜鲜嫩', items: ['奶汤蒲菜', '香椿芽', '荠菜水饺', '春笋'] },
+        { icon: '☀️', title: '夏季 (6-8月)', desc: '荷叶入馔，清凉消暑', items: ['荷叶粥', '莲藕排骨', '凉拌苦瓜', '酸梅汤'] },
+        { icon: '🍂', title: '秋季 (9-11月)', desc: '秋蟹肥美，石榴红了', items: ['大闸蟹', '糖炒栗子', '烤地瓜', '石榴'] },
+        { icon: '❄️', title: '冬季 (12-2月)', desc: '热汤暖胃，年味渐浓', items: ['羊肉汤', '把子肉', '甜沫', '火锅'] }
+      ];
+      document.getElementById('seasonGrid').innerHTML = seasons.map(s => `
+        <div class="season-card rv">
+          <div class="icon">${s.icon}</div>
+          <h3>${s.title}</h3>
+          <p>${s.desc}</p>
+          <div class="items">${s.items.map(i => `<span class="item">${i}</span>`).join('')}</div>
+        </div>
+      `).join('');
+    }
+
+    function loadFoodMap() {
+      const AMAP_KEY = 'YOUR_AMAP_KEY_HERE';
+      const script = document.createElement('script');
+      script.src = `https://webapi.amap.com/maps?v=2.0&key=${AMAP_KEY}`;
+      script.onload = () => {
+        try {
+          const map = new AMap.Map('food-map-container', { zoom: 12, center: [117.02, 36.67], mapStyle: 'amap://styles/whitesmoke' });
+          allFoods.forEach(f => {
+            (f.shops||[]).forEach(s => {
+              if (!s.lat || !s.lng) return;
+              const marker = new AMap.Marker({
+                position: [s.lng, s.lat],
+                title: `${f.name} - ${s.name}`,
+                content: `<div style="background:var(--accent,#c9a96e);color:#fff;padding:3px 8px;border-radius:6px;font-size:11px;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.2)">${s.name}</div>`
+              });
+              marker.setMap(map);
+            });
+          });
+          map.setFitView();
+        } catch(e) { console.error('地图初始化失败:', e); }
+      };
+      script.onerror = () => {
+        document.getElementById('food-map-container').innerHTML = '<div style="text-align:center;color:var(--text3);padding:40px"><p>🗺️ 美食地图</p><p style="font-size:.8rem;margin-top:8px">请配置高德地图 API Key</p><a href="https://console.amap.com/dev/key/app" target="_blank" class="btn btn-outline btn-sm" style="margin-top:12px">申请 Key</a></div>';
+      };
+      document.head.appendChild(script);
+    }
+
+    // Search
+    document.getElementById('foodSearch').addEventListener('input', e => {
+      searchQuery = e.target.value.trim();
       renderFoods();
     });
 
-    // ── Init ──
-    loadFoods();
-  </script>
-
-
-  <!-- PWA Service Worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/jinan-travel-guide/sw.js')
-          .then(reg => console.log('SW registered:', reg.scope))
-          .catch(err => console.log('SW failed:', err));
-      });
-    }
+    loadData();
   </script>
 </body>
 </html>

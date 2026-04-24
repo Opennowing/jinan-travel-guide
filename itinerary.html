@@ -337,7 +337,7 @@
 
     async function loadData() {
       const [spotsRes, foodRes] = await Promise.all([
-        fetch('/src/data/spots.json'), fetch('/src/data/food.json')
+        fetch('/jinan-travel-guide/data/spots.json'), fetch('/jinan-travel-guide/data/food.json')
       ]);
       spotsData = await spotsRes.json();
       const foodJson = await foodRes.json();

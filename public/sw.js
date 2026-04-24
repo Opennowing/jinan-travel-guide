@@ -16,9 +16,8 @@ const PRECACHE_ASSETS = [
   '/jinan-travel-guide/culture.html',
   '/jinan-travel-guide/manifest.json',
   '/jinan-travel-guide/offline.html',
-  '/src/styles/main.css',
-  '/src/components/shared.js',
-  '/src/components/data-loader.js'
+  '/jinan-travel-guide/data/spots.json',
+  '/jinan-travel-guide/data/food.json'
 ];
 
 // ── Install: precache core assets ──
@@ -139,7 +138,7 @@ function isImageRequest(url) {
 
 function isStaticAsset(url) {
   return /\.(css|js|json|woff2?|ttf|eot)(\?.*)?$/i.test(url.pathname) ||
-         url.pathname.startsWith('/src/data/');
+         url.pathname.startsWith('/jinan-travel-guide/data/');
 }
 
 function isNavigationRequest(request) {

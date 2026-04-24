@@ -127,7 +127,7 @@ export async function loadSpots(onLoading, onError) {
   }
 
   // 2. 尝试网络加载（带重试）
-  const data = await fetchWithRetry('/src/data/spots.json');
+  const data = await fetchWithRetry('/jinan-travel-guide/data/spots.json');
   if (data && validateSpots(data)) {
     setCache('spots', data);
     onLoading?.(false);
@@ -159,7 +159,7 @@ export async function loadFoods(onLoading, onError) {
   }
 
   // 2. 尝试网络加载
-  const data = await fetchWithRetry('/src/data/food.json');
+  const data = await fetchWithRetry('/jinan-travel-guide/data/food.json');
   if (data && validateFoods(data)) {
     setCache('foods', data);
     onLoading?.(false);

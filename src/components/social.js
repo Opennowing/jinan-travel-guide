@@ -334,7 +334,7 @@ export async function initCheckinMap() {
   // Load spots data
   let spots = [];
   try {
-    const res = await fetch('/src/data/spots.json');
+    const res = await fetch('/jinan-travel-guide/data/spots.json');
     spots = await res.json();
   } catch { return; }
 
@@ -528,8 +528,8 @@ export async function initRankings() {
   let spots = [], foods = [];
   try {
     const [spotsRes, foodRes] = await Promise.all([
-      fetch('/src/data/spots.json'),
-      fetch('/src/data/food.json')
+      fetch('/jinan-travel-guide/data/spots.json'),
+      fetch('/jinan-travel-guide/data/food.json')
     ]);
     spots = await spotsRes.json();
     const foodData = await foodRes.json();

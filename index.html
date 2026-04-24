@@ -449,7 +449,7 @@
     async function loadSearchData() {
       try {
         const [spotsRes, foodsRes] = await Promise.all([
-          fetch('/src/data/spots.json'), fetch('/src/data/food.json')
+          fetch('/jinan-travel-guide/data/spots.json'), fetch('/jinan-travel-guide/data/food.json')
         ]);
         searchData.spots = await spotsRes.json();
         const foodJson = await foodsRes.json();
@@ -570,7 +570,7 @@
     // ── Load Spots ──
     async function loadSpots() {
       try {
-        const res = await fetch('/src/data/spots.json');
+        const res = await fetch('/jinan-travel-guide/data/spots.json');
         const data = await res.json();
         const featured = data.filter(s => ['must','hot'].includes(s.badge)).slice(0, 6);
         if (featured.length < 6) { const rest = data.filter(s => !featured.includes(s)).slice(0, 6-featured.length); featured.push(...rest); }
@@ -593,7 +593,7 @@
     // ── Load Food ──
     async function loadFood() {
       try {
-        const res = await fetch('/src/data/food.json');
+        const res = await fetch('/jinan-travel-guide/data/food.json');
         const data = await res.json();
         const foods = data.foods || data;
         const topFoods = foods.filter(f => f.must).slice(0, 4);

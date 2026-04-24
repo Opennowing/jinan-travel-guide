@@ -340,7 +340,7 @@
 
     async function loadSpots() {
       try {
-        const res = await fetch('/src/data/spots.json');
+        const res = await fetch('/jinan-travel-guide/data/spots.json');
         allSpots = await res.json();
         render();
       } catch (e) {

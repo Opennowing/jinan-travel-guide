@@ -62,46 +62,57 @@
   <meta name="theme-color" content="#c9a96e">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
-    /* ── Search ── */
+    /* ── Search (hero) ── */
     .food-search-wrap{max-width:480px;margin:0 auto 28px;position:relative}
     .food-search{width:100%;padding:12px 18px 12px 42px;border:1px solid var(--border);border-radius:12px;background:var(--card-bg);font-size:.9rem;color:var(--text);outline:none;transition:border-color .2s}
     .food-search:focus{border-color:var(--accent)}
     .food-search::placeholder{color:var(--text3)}
     .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:1rem;color:var(--text3);pointer-events:none}
+    .food-search-hero{max-width:520px;width:100%;margin:24px auto 0;position:relative;z-index:2}
+    .food-search-hero input{width:100%;padding:16px 20px 16px 48px;border:none;border-radius:100px;font-size:1rem;background:rgba(255,255,255,.15);backdrop-filter:blur(12px);color:#fff;box-shadow:0 4px 24px rgba(0,0,0,.2);transition:all .3s}
+    .food-search-hero input:focus{background:rgba(255,255,255,.25);outline:none;box-shadow:0 4px 32px rgba(0,0,0,.3)}
+    .food-search-hero input::placeholder{color:rgba(255,255,255,.6)}
+    .food-search-hero .search-icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:1.1rem;color:rgba(255,255,255,.7);pointer-events:none}
+    .food-search-hero .search-history{border-radius:0 0 20px 20px;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);border-color:rgba(255,255,255,.1)}
+    .food-search-hero .search-history-item{color:rgba(255,255,255,.8)}
+    .food-search-hero .search-history-item:hover{background:rgba(255,255,255,.1)}
+    .food-search-hero .search-history-label{color:rgba(255,255,255,.5)}
+    .food-search-hero .search-history-clear{color:var(--accent)}
 
     /* ── Tabs ── */
-    .food-tabs{display:flex;gap:4px;background:var(--bg2);padding:4px;border-radius:12px;margin-bottom:32px;overflow-x:auto;justify-content:center;flex-wrap:wrap}
-    .food-tab{padding:8px 18px;border:none;background:none;font-size:.85rem;font-weight:500;color:var(--text2);cursor:pointer;border-radius:8px;transition:all .3s;white-space:nowrap}
-    .food-tab.active{background:var(--bg);color:var(--text);box-shadow:var(--shadow)}
-    .food-tab:hover:not(.active){color:var(--accent)}
+    .food-tabs{display:flex;gap:8px;padding:0;overflow-x:auto;justify-content:center;flex-wrap:wrap;background:none;margin-bottom:20px}
+    .food-tab{padding:10px 20px;border:1.5px solid var(--border);background:var(--card-bg);font-size:.85rem;font-weight:500;color:var(--text2);cursor:pointer;border-radius:100px;transition:all .3s;white-space:nowrap}
+    .food-tab.active{background:linear-gradient(135deg,var(--accent),var(--accent-hover));color:#fff;border-color:var(--accent);box-shadow:0 4px 16px rgba(201,169,110,.3)}
+    .food-tab:hover:not(.active){border-color:var(--accent);color:var(--accent);background:var(--accent2)}
 
     /* ── Must-Eat Top 5 ── */
     .must-eat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-    .must-card{position:relative;background:var(--card-bg);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);transition:all .3s var(--ease)}
-    .must-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-    .must-card-rank{position:absolute;top:12px;left:12px;width:36px;height:36px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 1rem/1 var(--serif);z-index:2}
-    .must-card-img{width:100%;aspect-ratio:16/9;object-fit:cover}
-    .must-card-body{padding:16px 18px 18px}
-    .must-card-name{font:700 1.05rem/1.3 var(--serif);margin-bottom:4px}
-    .must-card-desc{font-size:.82rem;color:var(--text2);line-height:1.55;margin-bottom:10px}
+    .must-card{position:relative;background:var(--card-bg);border-radius:20px;overflow:hidden;border:none;box-shadow:0 4px 20px rgba(0,0,0,.08);transition:all .35s var(--ease)}
+    .must-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,.15)}
+    .must-card-rank{position:absolute;top:14px;left:14px;width:40px;height:40px;background:linear-gradient(135deg,var(--accent),var(--accent-hover));color:#fff;border-radius:12px;display:flex;align-items:center;justify-content:center;font:900 1.1rem/1 var(--serif);z-index:2;box-shadow:0 4px 12px rgba(201,169,110,.4)}
+    .must-card-img{width:100%;aspect-ratio:16/10;object-fit:cover}
+    .must-card-body{padding:20px 22px 24px}
+    .must-card-name{font:800 1.15rem/1.3 var(--serif);margin-bottom:6px}
+    .must-card-desc{font-size:.85rem;color:var(--text2);line-height:1.6;margin-bottom:12px}
     .must-card-meta{display:flex;gap:10px;flex-wrap:wrap;font-size:.75rem;color:var(--text3)}
     .must-card-meta span{display:inline-flex;align-items:center;gap:3px}
 
     /* ── Food Cards ── */
     .food-masonry{columns:3;column-gap:24px}
-    .food-card{break-inside:avoid;margin-bottom:24px;background:var(--card-bg);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);transition:all .3s var(--ease)}
-    .food-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
-    .food-card-img{width:100%;aspect-ratio:16/10;object-fit:cover}
-    .food-card-body{padding:18px 20px 20px}
-    .food-card-name{font:700 1.1rem/1.4 var(--serif);display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap}
-    .food-card-tag{font-size:.65rem;padding:2px 10px;background:var(--accent2);border-radius:100px;color:var(--accent);font-weight:500;white-space:nowrap}
+    .food-card{break-inside:avoid;margin-bottom:24px;background:var(--card-bg);border-radius:20px;overflow:hidden;border:none;box-shadow:0 2px 16px rgba(0,0,0,.06);transition:all .35s var(--ease)}
+    .food-card:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 16px 48px rgba(0,0,0,.12)}
+    .food-card-img{width:100%;aspect-ratio:4/3;object-fit:cover}
+    .food-card-body{padding:20px 22px 22px}
+    .food-card-name{font:700 1.15rem/1.3 var(--serif);display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+    .food-card-tag{font-size:.65rem;padding:3px 10px;background:linear-gradient(135deg,var(--accent2),rgba(201,169,110,.15));border-radius:100px;color:var(--accent);font-weight:600;white-space:nowrap}
     .badge-must{font-size:.65rem;padding:2px 10px;background:rgba(231,111,81,.12);color:#e76f51;border-radius:100px;font-weight:600;white-space:nowrap}
     .badge-season{font-size:.6rem;padding:2px 8px;background:rgba(42,157,143,.1);color:var(--teal);border-radius:100px;white-space:nowrap}
     .food-card-history{font-size:.8rem;color:var(--text3);line-height:1.5;margin-bottom:10px;padding:10px 12px;background:var(--bg2);border-radius:8px}
     .food-card-history::before{content:'📜 '}
-    .food-card-desc{font-size:.85rem;color:var(--text2);line-height:1.6;margin-bottom:14px}
+    .food-card-desc{font-size:.85rem;color:var(--text2);line-height:1.65;margin-bottom:14px}
     .food-card-shops{list-style:none;display:flex;flex-direction:column;gap:10px}
-    .food-card-shops li{padding:10px 14px;background:var(--bg2);border-radius:10px;border:1px solid var(--border)}
+    .food-card-shops li{padding:12px 16px;background:var(--bg2);border-radius:12px;border:none;transition:all .2s}
+    .food-card-shops li:hover{background:var(--accent2);transform:translateX(4px)}
     .shop-name{font-weight:600;font-size:.85rem;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center}
     .shop-rating{color:var(--accent);font-size:.8rem;white-space:nowrap}
     .shop-info{font-size:.75rem;color:var(--text3);display:flex;gap:12px;flex-wrap:wrap}
@@ -205,10 +216,10 @@
     .food-empty{text-align:center;padding:60px 0;color:var(--text3);font-size:.95rem}
 
     /* ── 商圈筛选 ── */
-    .district-tabs{display:flex;gap:4px;background:var(--bg2);padding:4px;border-radius:12px;margin-bottom:24px;overflow-x:auto;justify-content:center;flex-wrap:wrap}
-    .district-tab{padding:6px 14px;border:none;background:none;font-size:.78rem;font-weight:500;color:var(--text2);cursor:pointer;border-radius:8px;transition:all .3s;white-space:nowrap}
-    .district-tab.active{background:var(--bg);color:var(--text);box-shadow:var(--shadow)}
-    .district-tab:hover:not(.active){color:var(--accent)}
+    .district-tabs{display:flex;gap:6px;padding:0;overflow-x:auto;justify-content:center;flex-wrap:wrap;background:none;margin-bottom:32px}
+    .district-tab{padding:6px 14px;border:1px solid var(--border);background:var(--card-bg);font-size:.78rem;font-weight:500;color:var(--text2);cursor:pointer;border-radius:100px;transition:all .3s;white-space:nowrap}
+    .district-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .district-tab:hover:not(.active){border-color:var(--accent);color:var(--accent)}
 
     /* ── 每日美食路线 ── */
     .daily-route{background:var(--card-bg);border-radius:var(--radius-lg);padding:28px 24px;border:1px solid var(--border);margin-bottom:24px}
@@ -288,12 +299,18 @@
   </nav>
 
   <!-- Hero -->
-  <header class="page-hero">
-    <button class="btn btn-outline btn-sm" style="position:absolute;top:20px;right:20px;z-index:2" data-share='{"title":"济南美食攻略","subtitle":"鲁菜发源地 · 68道精选","items":[{"name":"糖醋鲤鱼","info":"鲁菜经典 · 聚丰德"},{"name":"把子肉","info":"济南灵魂美食 · 超意兴"},{"name":"油旋","info":"非遗小吃 · 弘春美斋"},{"name":"甜沫","info":"济南早餐必备"},{"name":"九转大肠","info":"鲁菜名菜 · 闫府私房菜"}],"page":"food"}'>📤 分享美食</button>
-    <div class="eyebrow" style="font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:inline-flex;align-items:center;gap:12px;position:relative;z-index:1"><span style="width:24px;height:1px;background:var(--accent);opacity:.6"></span>JINAN FOOD<span style="width:24px;height:1px;background:var(--accent);opacity:.6"></span></div>
-    <h1>🍜 美食 · 探店</h1>
-    <p>鲁菜发源地，北方美食重镇</p>
-    <div style="margin-top:16px;font-size:.85rem;color:var(--text2);position:relative;z-index:1">68 道精选 · 6 大商圈 · 鲁菜正脉</div>
+  <header class="page-hero" style="position:relative;min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.7)),url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600&q=80') center/cover no-repeat">
+    <button class="btn btn-outline btn-sm" style="position:absolute;top:20px;right:20px;z-index:2;color:#fff;border-color:rgba(255,255,255,.4)" data-share='{"title":"济南美食攻略","subtitle":"鲁菜发源地 · 68道精选","items":[{"name":"糖醋鲤鱼","info":"鲁菜经典 · 聚丰德"},{"name":"把子肉","info":"济南灵魂美食 · 超意兴"},{"name":"油旋","info":"非遗小吃 · 弘春美斋"},{"name":"甜沫","info":"济南早餐必备"},{"name":"九转大肠","info":"鲁菜名菜 · 闫府私房菜"}],"page":"food"}'>📤 分享美食</button>
+    <div class="eyebrow" style="font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:12px;display:inline-flex;align-items:center;gap:12px;position:relative;z-index:1"><span style="width:24px;height:1px;background:rgba(255,255,255,.4)"></span>JINAN FOOD<span style="width:24px;height:1px;background:rgba(255,255,255,.4)"></span></div>
+    <h1 style="color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.4)">🍜 美食 · 探店</h1>
+    <p style="color:rgba(255,255,255,.85);text-shadow:0 1px 6px rgba(0,0,0,.3)">鲁菜发源地，北方美食重镇</p>
+    <div style="margin-top:16px;font-size:.85rem;color:rgba(255,255,255,.6);position:relative;z-index:1">68 道精选 · 6 大商圈 · 鲁菜正脉</div>
+    <!-- 搜索框移入 Hero -->
+    <div class="food-search-hero">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="foodSearch" placeholder="搜索菜名、餐厅名、拼音…" autocomplete="off" aria-label="搜索美食">
+      <div class="search-history" id="searchHistory"></div>
+    </div>
   </header>
 
   <!-- Main Content -->
@@ -302,11 +319,6 @@
     <!-- ── 搜索 ── -->
     <section class="section" aria-label="美食搜索与列表">
       <div class="section-inner">
-        <div class="food-search-wrap">
-          <span class="search-icon">🔍</span>
-          <input type="text" class="food-search" id="foodSearch" placeholder="搜索菜名、餐厅名、拼音…" autocomplete="off" aria-label="搜索美食">
-          <div class="search-history" id="searchHistory"></div>
-        </div>
 
         <!-- ── 分类 Tab ── -->
         <div class="food-tabs" id="foodTabs" role="tablist" aria-label="美食分类">

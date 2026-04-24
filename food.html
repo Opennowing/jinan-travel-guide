@@ -1106,7 +1106,7 @@
     // ── Smart Search for food page ──
     (async function initFoodSearch() {
       try {
-        const spotsRes = await fetch('/src/data/spots.json');
+        const spotsRes = await fetch('/jinan-travel-guide/data/spots.json');
         const spots = await spotsRes.json();
         const search = new SmartSearch(spots, allFoods);
         const q = new URLSearchParams(window.location.search).get('q');

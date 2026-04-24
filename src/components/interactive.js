@@ -1212,11 +1212,9 @@ export class OfflineManager {
     try {
       const cache = await caches.open(this.cacheName);
       const urls = [
-        '/src/data/spots.json',
-        '/src/data/food.json',
-        '/src/styles/main.css',
-        '/src/components/shared.js',
-        '/src/components/interactive.js'
+        '/jinan-travel-guide/data/spots.json',
+        '/jinan-travel-guide/data/food.json',
+        '/jinan-travel-guide/assets/social-Dy3PicR1.css'
       ];
       await Promise.all(urls.map(url => cache.add(url).catch(() => {})));
       localStorage.setItem('jinan-cache-time', Date.now().toString());
@@ -1536,8 +1534,8 @@ export async function initInteractive() {
     let spotsData = [], foodsData = [];
     try {
       const [spotsRes, foodRes] = await Promise.all([
-        fetch('/src/data/spots.json').catch(() => null),
-        fetch('/src/data/food.json').catch(() => null)
+        fetch('/jinan-travel-guide/data/spots.json').catch(() => null),
+        fetch('/jinan-travel-guide/data/food.json').catch(() => null)
       ]);
       if (spotsRes) spotsData = await spotsRes.json();
       if (foodRes) {

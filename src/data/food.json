@@ -98,7 +98,10 @@
       ],
       "price": "人均¥85",
       "difficulty": "困难",
-      "where": "泉城路商圈（聚丰德、燕喜堂）"
+      "where": "泉城路商圈（聚丰德、燕喜堂）",
+      "district": [
+        "泉城路"
+      ]
     },
     {
       "id": "jiuzhuan",
@@ -137,7 +140,10 @@
       ],
       "price": "人均¥75",
       "difficulty": "困难",
-      "where": "历山路（闫府私房菜）"
+      "where": "历山路（闫府私房菜）",
+      "district": [
+        "经十路"
+      ]
     },
     {
       "id": "bazirou",
@@ -176,7 +182,15 @@
       ],
       "price": "人均¥15",
       "difficulty": "中等",
-      "where": "全城连锁（超意兴）"
+      "where": "全城连锁（超意兴）",
+      "district": [
+        "泉城路",
+        "芙蓉街",
+        "宽厚里",
+        "回民小区",
+        "大明湖",
+        "经十路"
+      ]
     },
     {
       "id": "naichangpu",
@@ -215,7 +229,11 @@
       ],
       "price": "人均¥70",
       "difficulty": "中等",
-      "where": "大明湖南门（明湖楼）"
+      "where": "大明湖南门（明湖楼）",
+      "district": [
+        "泉城路",
+        "大明湖"
+      ]
     },
     {
       "id": "youxuan",
@@ -254,7 +272,10 @@
       ],
       "price": "人均¥8",
       "difficulty": "中等",
-      "where": "泉城路（油旋张）"
+      "where": "泉城路（油旋张）",
+      "district": [
+        "泉城路"
+      ]
     },
     {
       "id": "caobao",
@@ -293,7 +314,10 @@
       ],
       "price": "人均¥35",
       "difficulty": "中等",
-      "where": "泉城路222号（草包包子铺总店）"
+      "where": "泉城路222号（草包包子铺总店）",
+      "district": [
+        "泉城路"
+      ]
     },
     {
       "id": "tianmo",
@@ -332,7 +356,15 @@
       ],
       "price": "人均¥5",
       "difficulty": "简单",
-      "where": "全城早餐店（春江饭店、超意兴）"
+      "where": "全城早餐店（春江饭店、超意兴）",
+      "district": [
+        "泉城路",
+        "芙蓉街",
+        "宽厚里",
+        "回民小区",
+        "大明湖",
+        "经十路"
+      ]
     },
     {
       "id": "quanshui",
@@ -371,7 +403,10 @@
       ],
       "price": "人均¥120",
       "difficulty": "困难",
-      "where": "泉城路（泉城大酒店、舜耕山庄）"
+      "where": "泉城路（泉城大酒店、舜耕山庄）",
+      "district": [
+        "泉城路"
+      ]
     },
     {
       "id": "baobizhizha",
@@ -410,7 +445,10 @@
       ],
       "price": "人均¥65",
       "difficulty": "困难",
-      "where": "泉城路（聚丰德、会仙楼）"
+      "where": "泉城路（聚丰德、会仙楼）",
+      "district": [
+        "泉城路"
+      ]
     },
     {
       "id": "congsao",
@@ -449,7 +487,10 @@
       ],
       "price": "人均¥168",
       "difficulty": "困难",
-      "where": "历山路（闫府私房菜、舜耕山庄）"
+      "where": "历山路（闫府私房菜、舜耕山庄）",
+      "district": [
+        "经十路"
+      ]
     },
     {
       "id": "shaokao",
@@ -488,7 +529,11 @@
       ],
       "price": "人均¥50",
       "difficulty": "中等",
-      "where": "回民小区烧烤一条街"
+      "where": "回民小区烧烤一条街",
+      "district": [
+        "回民小区",
+        "经十路"
+      ]
     },
     {
       "id": "quanlaonai",
@@ -527,7 +572,11 @@
       ],
       "price": "人均¥15",
       "difficulty": "简单",
-      "where": "趵突泉东门（趵突泉酸奶坊）"
+      "where": "趵突泉东门（趵突泉酸奶坊）",
+      "district": [
+        "泉城路",
+        "宽厚里"
+      ]
     },
     {
       "id": "quancha",
@@ -566,7 +615,11 @@
       ],
       "price": "人均¥10",
       "difficulty": "简单",
-      "where": "黑虎泉畔（黑虎泉茶摊）"
+      "where": "黑虎泉畔（黑虎泉茶摊）",
+      "district": [
+        "泉城路",
+        "宽厚里"
+      ]
     },
     {
       "id": "huangjia",
@@ -594,7 +647,10 @@
       ],
       "price": "人均¥60",
       "difficulty": "困难",
-      "where": "章丘区明水街道（黄家烤肉总店）"
+      "where": "章丘区明水街道（黄家烤肉总店）",
+      "district": [
+        "其他"
+      ]
     },
     {
       "id": "huangmenji",
@@ -633,7 +689,15 @@
       ],
       "price": "人均¥25",
       "difficulty": "简单",
-      "where": "全城连锁"
+      "where": "全城连锁",
+      "district": [
+        "泉城路",
+        "芙蓉街",
+        "宽厚里",
+        "回民小区",
+        "大明湖",
+        "经十路"
+      ]
     },
     {
       "id": "sixiniao",
@@ -661,7 +725,15 @@
       ],
       "price": "人均¥12",
       "difficulty": "中等",
-      "where": "全城连锁（超意兴）"
+      "where": "全城连锁（超意兴）",
+      "district": [
+        "泉城路",
+        "芙蓉街",
+        "宽厚里",
+        "回民小区",
+        "大明湖",
+        "经十路"
+      ]
     },
     {
       "id": "guotie",
@@ -689,7 +761,10 @@
       ],
       "price": "人均¥15",
       "difficulty": "中等",
-      "where": "泉城路（草包包子铺）"
+      "where": "泉城路（草包包子铺）",
+      "district": [
+        "泉城路"
+      ]
     },
     {
       "id": "jitang",
@@ -717,7 +792,10 @@
       ],
       "price": "人均¥15",
       "difficulty": "简单",
-      "where": "老城区早餐店"
+      "where": "老城区早餐店",
+      "district": [
+        "其他"
+      ]
     },
     {
       "id": "jitang-pucai",
@@ -745,7 +823,10 @@
       ],
       "price": "人均¥65",
       "difficulty": "中等",
-      "where": "大明湖南门（明湖楼）"
+      "where": "大明湖南门（明湖楼）",
+      "district": [
+        "大明湖"
+      ]
     },
     {
       "id": "kaorou-mian",
@@ -773,7 +854,10 @@
       ],
       "price": "人均¥25",
       "difficulty": "简单",
-      "where": "回民小区"
+      "where": "回民小区",
+      "district": [
+        "回民小区"
+      ]
     },
     {
       "id": "hetang",
@@ -801,7 +885,10 @@
       ],
       "price": "人均¥15",
       "difficulty": "简单",
-      "where": "大明湖南门（明湖楼）"
+      "where": "大明湖南门（明湖楼）",
+      "district": [
+        "大明湖"
+      ]
     },
     {
       "id": "zhoucun-shaobing",
@@ -830,7 +917,10 @@
       ],
       "price": "人均¥5",
       "difficulty": "简单",
-      "where": "芙蓉街、各大超市"
+      "where": "芙蓉街、各大超市",
+      "district": [
+        "芙蓉街"
+      ]
     },
     {
       "id": "dezhou-baji",
@@ -859,7 +949,10 @@
       ],
       "price": "人均¥35",
       "difficulty": "困难",
-      "where": "济南火车站、各大超市"
+      "where": "济南火车站、各大超市",
+      "district": [
+        "其他"
+      ]
     },
     {
       "id": "mian-sha-bao",
@@ -888,7 +981,10 @@
       ],
       "price": "人均¥3",
       "difficulty": "中等",
-      "where": "大观园老式糕点铺"
+      "where": "大观园老式糕点铺",
+      "district": [
+        "其他"
+      ]
     },
     {
       "id": "jitui-fan",
@@ -917,7 +1013,15 @@
       ],
       "price": "人均¥12",
       "difficulty": "简单",
-      "where": "全城连锁（超意兴）"
+      "where": "全城连锁（超意兴）",
+      "district": [
+        "泉城路",
+        "芙蓉街",
+        "宽厚里",
+        "回民小区",
+        "大明湖",
+        "经十路"
+      ]
     },
     {
       "id": "suan-cu-ou-pian",
@@ -946,7 +1050,10 @@
       ],
       "price": "人均¥18",
       "difficulty": "简单",
-      "where": "大明湖畔餐馆"
+      "where": "大明湖畔餐馆",
+      "district": [
+        "大明湖"
+      ]
     },
     {
       "id": "zhurou-shuijianbao",
@@ -975,7 +1082,10 @@
       ],
       "price": "人均¥8",
       "difficulty": "中等",
-      "where": "泉城路早餐摊"
+      "where": "泉城路早餐摊",
+      "district": [
+        "泉城路"
+      ]
     },
     {
       "id": "lian-ou-cha",
@@ -1004,7 +1114,10 @@
       ],
       "price": "人均¥15",
       "difficulty": "简单",
-      "where": "大明湖畔饮品店"
+      "where": "大明湖畔饮品店",
+      "district": [
+        "大明湖"
+      ]
     },
     {
       "id": "huang-he-li-yu-tang",
@@ -1045,7 +1158,11 @@
       ],
       "price": "人均¥88",
       "difficulty": "中等",
-      "where": "大明湖南门（明湖楼）"
+      "where": "大明湖南门（明湖楼）",
+      "district": [
+        "泉城路",
+        "大明湖"
+      ]
     },
     {
       "id": "laodu-fen-tang",
@@ -1074,7 +1191,10 @@
       ],
       "price": "人均¥6",
       "difficulty": "简单",
-      "where": "大观园早点铺"
+      "where": "大观园早点铺",
+      "district": [
+        "其他"
+      ]
     },
     {
       "id": "chao-bian-rou",
@@ -1103,7 +1223,10 @@
       ],
       "price": "人均¥45",
       "difficulty": "中等",
-      "where": "回民小区家常菜馆"
+      "where": "回民小区家常菜馆",
+      "district": [
+        "回民小区"
+      ]
     },
     {
       "id": "zhangqiu-cong",
@@ -1132,7 +1255,10 @@
       ],
       "price": "人均¥10",
       "difficulty": "简单",
-      "where": "各大超市、章丘特产店"
+      "where": "各大超市、章丘特产店",
+      "district": [
+        "其他"
+      ]
     },
     {
       "id": "ji-dan-guan-bing",
@@ -1161,7 +1287,15 @@
       ],
       "price": "人均¥6",
       "difficulty": "简单",
-      "where": "全城早餐摊"
+      "where": "全城早餐摊",
+      "district": [
+        "泉城路",
+        "芙蓉街",
+        "宽厚里",
+        "回民小区",
+        "大明湖",
+        "经十路"
+      ]
     },
     {
       "id": "rou-jia-mo",
@@ -1190,7 +1324,10 @@
       ],
       "price": "人均¥12",
       "difficulty": "中等",
-      "where": "芙蓉街、各大美食街"
+      "where": "芙蓉街、各大美食街",
+      "district": [
+        "芙蓉街"
+      ]
     },
     {
       "id": "dongpo",
@@ -1218,7 +1355,10 @@
       ],
       "price": "人均¥68",
       "difficulty": "中等",
-      "where": "泉城路（聚丰德）"
+      "where": "泉城路（聚丰德）",
+      "district": [
+        "泉城路"
+      ]
     },
     {
       "id": "cuipi",
@@ -1246,7 +1386,10 @@
       ],
       "price": "人均¥78",
       "difficulty": "困难",
-      "where": "泉城路（会仙楼）"
+      "where": "泉城路（会仙楼）",
+      "district": [
+        "泉城路"
+      ]
     },
     {
       "id": "luhuoshao",
@@ -1274,7 +1417,10 @@
       ],
       "price": "人均¥55",
       "difficulty": "中等",
-      "where": "经七路（老金烧烤）"
+      "where": "经七路（老金烧烤）",
+      "district": [
+        "经十路"
+      ]
     },
     {
       "id": "jitang-mian",
@@ -1302,7 +1448,10 @@
       ],
       "price": "人均¥18",
       "difficulty": "简单",
-      "where": "老城区早餐店"
+      "where": "老城区早餐店",
+      "district": [
+        "其他"
+      ]
     },
     {
       "id": "mala",
@@ -1330,7 +1479,10 @@
       ],
       "price": "人均¥80",
       "difficulty": "中等",
-      "where": "回民小区"
+      "where": "回民小区",
+      "district": [
+        "回民小区"
+      ]
     },
     {
       "id": "doupi",
@@ -1358,7 +1510,10 @@
       ],
       "price": "人均¥5",
       "difficulty": "简单",
-      "where": "芙蓉街"
+      "where": "芙蓉街",
+      "district": [
+        "芙蓉街"
+      ]
     },
     {
       "id": "hongshao",
@@ -1386,7 +1541,10 @@
       ],
       "price": "人均¥88",
       "difficulty": "困难",
-      "where": "泉城路（聚丰德）"
+      "where": "泉城路（聚丰德）",
+      "district": [
+        "泉城路"
+      ]
     },
     {
       "id": "qingzheng",
@@ -1414,7 +1572,10 @@
       ],
       "price": "人均¥75",
       "difficulty": "中等",
-      "where": "大明湖南门（明湖楼）"
+      "where": "大明湖南门（明湖楼）",
+      "district": [
+        "大明湖"
+      ]
     },
     {
       "id": "luwei",
@@ -1442,7 +1603,10 @@
       ],
       "price": "人均¥25",
       "difficulty": "简单",
-      "where": "老城区"
+      "where": "老城区",
+      "district": [
+        "其他"
+      ]
     },
     {
       "id": "tangyuan",
@@ -1470,7 +1634,10 @@
       ],
       "price": "人均¥10",
       "difficulty": "简单",
-      "where": "泉城路"
+      "where": "泉城路",
+      "district": [
+        "泉城路"
+      ]
     },
     {
       "id": "zongzi",
@@ -1498,7 +1665,10 @@
       ],
       "price": "人均¥8",
       "difficulty": "简单",
-      "where": "泉城路老字号"
+      "where": "泉城路老字号",
+      "district": [
+        "泉城路"
+      ]
     },
     {
       "id": "mianjin",
@@ -1526,7 +1696,10 @@
       ],
       "price": "人均¥5",
       "difficulty": "简单",
-      "where": "老城区早餐店"
+      "where": "老城区早餐店",
+      "district": [
+        "其他"
+      ]
     },
     {
       "id": "baicai",
@@ -1554,7 +1727,15 @@
       ],
       "price": "人均¥12",
       "difficulty": "简单",
-      "where": "全城连锁"
+      "where": "全城连锁",
+      "district": [
+        "泉城路",
+        "芙蓉街",
+        "宽厚里",
+        "回民小区",
+        "大明湖",
+        "经十路"
+      ]
     },
     {
       "id": "tudou",
@@ -1582,7 +1763,15 @@
       ],
       "price": "人均¥10",
       "difficulty": "简单",
-      "where": "全城连锁"
+      "where": "全城连锁",
+      "district": [
+        "泉城路",
+        "芙蓉街",
+        "宽厚里",
+        "回民小区",
+        "大明湖",
+        "经十路"
+      ]
     },
     {
       "id": "fanqie",
@@ -1610,7 +1799,15 @@
       ],
       "price": "人均¥10",
       "difficulty": "简单",
-      "where": "全城连锁"
+      "where": "全城连锁",
+      "district": [
+        "泉城路",
+        "芙蓉街",
+        "宽厚里",
+        "回民小区",
+        "大明湖",
+        "经十路"
+      ]
     },
     {
       "id": "mifan",
@@ -1638,7 +1835,15 @@
       ],
       "price": "人均¥18",
       "difficulty": "简单",
-      "where": "全城连锁"
+      "where": "全城连锁",
+      "district": [
+        "泉城路",
+        "芙蓉街",
+        "宽厚里",
+        "回民小区",
+        "大明湖",
+        "经十路"
+      ]
     },
     {
       "id": "jitui",
@@ -1666,7 +1871,15 @@
       ],
       "price": "人均¥15",
       "difficulty": "中等",
-      "where": "全城连锁"
+      "where": "全城连锁",
+      "district": [
+        "泉城路",
+        "芙蓉街",
+        "宽厚里",
+        "回民小区",
+        "大明湖",
+        "经十路"
+      ]
     },
     {
       "id": "doufu",
@@ -1694,7 +1907,10 @@
       ],
       "price": "人均¥35",
       "difficulty": "简单",
-      "where": "大明湖南门（明湖楼）"
+      "where": "大明湖南门（明湖楼）",
+      "district": [
+        "大明湖"
+      ]
     },
     {
       "id": "baozi",
@@ -1722,7 +1938,10 @@
       ],
       "price": "人均¥8",
       "difficulty": "中等",
-      "where": "老城区"
+      "where": "老城区",
+      "district": [
+        "其他"
+      ]
     },
     {
       "id": "lvdagun",
@@ -1750,7 +1969,10 @@
       ],
       "price": "人均¥8",
       "difficulty": "简单",
-      "where": "芙蓉街"
+      "where": "芙蓉街",
+      "district": [
+        "芙蓉街"
+      ]
     },
     {
       "id": "tanghulu",
@@ -1778,7 +2000,10 @@
       ],
       "price": "人均¥5",
       "difficulty": "简单",
-      "where": "泉城路"
+      "where": "泉城路",
+      "district": [
+        "泉城路"
+      ]
     },
     {
       "id": "baojiang",
@@ -1806,7 +2031,10 @@
       ],
       "price": "人均¥15",
       "difficulty": "简单",
-      "where": "芙蓉街"
+      "where": "芙蓉街",
+      "district": [
+        "芙蓉街"
+      ]
     },
     {
       "id": "zhengzhou",
@@ -1834,7 +2062,10 @@
       ],
       "price": "人均¥88",
       "difficulty": "中等",
-      "where": "泉城路（聚丰德）"
+      "where": "泉城路（聚丰德）",
+      "district": [
+        "泉城路"
+      ]
     },
     {
       "id": "roujiamo",
@@ -1862,7 +2093,10 @@
       ],
       "price": "人均¥10",
       "difficulty": "简单",
-      "where": "芙蓉街"
+      "where": "芙蓉街",
+      "district": [
+        "芙蓉街"
+      ]
     },
     {
       "id": "huangmen-pai",
@@ -1887,7 +2121,15 @@
       ],
       "price": "人均¥30",
       "difficulty": "中等",
-      "where": "全城连锁"
+      "where": "全城连锁",
+      "district": [
+        "泉城路",
+        "芙蓉街",
+        "宽厚里",
+        "回民小区",
+        "大明湖",
+        "经十路"
+      ]
     },
     {
       "id": "baipi",
@@ -1912,7 +2154,10 @@
       ],
       "price": "人均¥58",
       "difficulty": "中等",
-      "where": "泉城路（聚丰德）"
+      "where": "泉城路（聚丰德）",
+      "district": [
+        "泉城路"
+      ]
     },
     {
       "id": "roubing",
@@ -1937,7 +2182,10 @@
       ],
       "price": "人均¥10",
       "difficulty": "中等",
-      "where": "老城区"
+      "where": "老城区",
+      "district": [
+        "其他"
+      ]
     },
     {
       "id": "zhou",
@@ -1962,7 +2210,15 @@
       ],
       "price": "人均¥8",
       "difficulty": "简单",
-      "where": "全城早餐店"
+      "where": "全城早餐店",
+      "district": [
+        "泉城路",
+        "芙蓉街",
+        "宽厚里",
+        "回民小区",
+        "大明湖",
+        "经十路"
+      ]
     },
     {
       "id": "huntun",
@@ -1987,7 +2243,10 @@
       ],
       "price": "人均¥10",
       "difficulty": "简单",
-      "where": "老城区"
+      "where": "老城区",
+      "district": [
+        "其他"
+      ]
     },
     {
       "id": "chuan",
@@ -2012,7 +2271,10 @@
       ],
       "price": "人均¥40",
       "difficulty": "简单",
-      "where": "宽厚里"
+      "where": "宽厚里",
+      "district": [
+        "宽厚里"
+      ]
     },
     {
       "id": "malatang",
@@ -2037,7 +2299,10 @@
       ],
       "price": "人均¥25",
       "difficulty": "简单",
-      "where": "芙蓉街"
+      "where": "芙蓉街",
+      "district": [
+        "芙蓉街"
+      ]
     },
     {
       "id": "jiu",
@@ -2062,7 +2327,10 @@
       ],
       "price": "人均¥15",
       "difficulty": "简单",
-      "where": "回民小区"
+      "where": "回民小区",
+      "district": [
+        "回民小区"
+      ]
     },
     {
       "id": "suanmei",
@@ -2087,7 +2355,10 @@
       ],
       "price": "人均¥8",
       "difficulty": "简单",
-      "where": "各景区"
+      "where": "各景区",
+      "district": [
+        "泉城路"
+      ]
     },
     {
       "id": "nuomici",
@@ -2112,7 +2383,10 @@
       ],
       "price": "人均¥5",
       "difficulty": "简单",
-      "where": "芙蓉街"
+      "where": "芙蓉街",
+      "district": [
+        "芙蓉街"
+      ]
     }
   ]
 }

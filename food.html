@@ -583,11 +583,24 @@
     // ── 商圈匹配 ──
     function matchDistrict(food, district) {
       if (district === '全部') return true;
-      const where = (food.where || '').toLowerCase();
-      const shops = food.shops || [];
-      const shopAddrs = shops.map(s => (s.addr || '').toLowerCase()).join(' ');
-      const allText = where + ' ' + shopAddrs;
+      // 优先使用新的 district 字段
+      if (food.district && Array.isArray(food.district)) {
+        return food.district.includes(district);
+      }
+      // 降级到文本匹配
+      const allText = [food.name, food.where, food.cat, food.tag,
+        ...(food.shops||[]).map(s => s.name + ' ' + (s.addr||''))].join(' ').toLowerCase();
       return allText.includes(district.toLowerCase());
+    }
+
+    // ── 更新商圈计数 ──
+    function updateDistrictCounts() {
+      const districts = ['泉城路','芙蓉街','宽厚里','回民小区','大明湖','经十路'];
+      districts.forEach(d => {
+        const count = allFoods.filter(f => matchDistrict(f, d)).length;
+        const btn = document.querySelector(`[data-district="${d}"]`);
+        if (btn) btn.textContent = '📍 ' + d + '(' + count + ')';
+      });
     }
 
     // ── 价格等级 ──
@@ -997,6 +1010,7 @@
         renderDailyRoute();
         initMap();
         updateCompareUI();
+        updateDistrictCounts();
       } catch (e) {
         document.getElementById('foodGrid').innerHTML =
           '<div class="food-empty">加载美食数据失败，请刷新重试 😢</div>';

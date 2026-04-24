@@ -559,7 +559,11 @@
 
   <script type="module">
     import { initAll } from '/src/components/shared.js';
+    import { initPWA } from '/src/components/pwa.js';
+    import { initSocialFeatures } from '/src/components/social.js';
+    initPWA();
     initAll();
+    initSocialFeatures();
 
     // ── Tab switching ──
     document.getElementById('guideTabs').addEventListener('click', e => {

@@ -260,6 +260,7 @@
       <div class="hero-stat"><div class="num">4000+</div><div class="label">年历史</div></div>
       <div class="hero-stat"><div class="num">47+</div><div class="label">精选景点</div></div>
     </div>
+    <button class="btn btn-outline btn-sm" style="margin-top:20px;position:relative;z-index:2" data-share='{"title":"济南·泉城","subtitle":"72泉涌，千年文脉","items":[{"name":"趵突泉","info":"天下第一泉 · 4.8★"},{"name":"大明湖","info":"四面荷花三面柳 · 4.7★"},{"name":"千佛山","info":"齐烟九点 · 4.6★"},{"name":"五龙潭","info":"小众秘境 · 4.5★"},{"name":"把子肉","info":"济南必吃美食"}],"page":"index"}'>📤 分享攻略</button>
   </section>
 
   </main>
@@ -391,6 +392,10 @@
     </div>
   </section>
 
+  <!-- ═══ 本周热门 ═══ -->
+  <section class="section" id="rankings-section" aria-label="本周热门" style="content-visibility:auto;contain-intrinsic-size:auto 500px">
+  </section>
+
   <!-- ═══ 实用工具 ═══ -->
   <section class="section section-alt" aria-label="实用工具" style="content-visibility:auto;contain-intrinsic-size:auto 400px">
     <div class="section-inner">
@@ -428,7 +433,12 @@
 
   <script type="module">
     import { initAll, stars } from '/src/components/shared.js';
+    import { initPWA, initA2HS } from '/src/components/pwa.js';
+    import { initSocialFeatures } from '/src/components/social.js';
     initAll();
+    initPWA();
+    initSocialFeatures();
+    initA2HS();
 
     const nav = document.querySelector('.top-nav');
     window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 10); }, {passive:true});

@@ -228,3 +228,29 @@ body{animation:pageFadeIn .5s var(--ease) both}
 /* ─── BACK TO TOP ─── */
 .btt{position:fixed;bottom:90px;right:20px;width:44px;height:44px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;opacity:0;transform:translateY(10px);transition:all .3s;z-index:99;box-shadow:var(--shadow)}
 .btt.vis{opacity:1;transform:translateY(0)}
+
+/* ─── SOCIAL FEATURES ─── */
+/* Ranking cards */
+.ranking-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;transition:all .3s}
+.ranking-card:hover{box-shadow:var(--shadow-lg)}
+
+/* Utility Widget */
+#utility-widget{font-size:.8rem}
+#utility-widget .widget-header{-webkit-user-select:none;user-select:none}
+
+/* Check-in list hover */
+.checkin-item:hover{background:var(--accent2)!important;transform:translateX(4px)}
+
+/* Journal card hover */
+.journal-card:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+
+/* Share modal image */
+.modal-content img{max-width:100%;height:auto}
+
+/* Ranking animation */
+@keyframes rankIn{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:translateX(0)}}
+.ranking-card .ranking-item{animation:rankIn .4s var(--ease) both}
+.ranking-card .ranking-item:nth-child(2){animation-delay:.05s}
+.ranking-card .ranking-item:nth-child(3){animation-delay:.1s}
+.ranking-card .ranking-item:nth-child(4){animation-delay:.15s}
+.ranking-card .ranking-item:nth-child(5){animation-delay:.2s}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>离线模式 — 济南旅游攻略</title>
+  <link rel="manifest" href="/jinan-travel-guide/manifest.json">
+  <meta name="theme-color" content="#c9a96e">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:linear-gradient(170deg,#faf8f5 0%,#f0ebe3 50%,#e8e0d4 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+    .offline-card{max-width:480px;width:100%;background:#fff;border-radius:20px;padding:48px 36px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.08)}
+    .offline-icon{font-size:4rem;margin-bottom:20px;display:block}
+    h1{font-size:1.5rem;font-weight:800;color:#333;margin-bottom:12px;font-family:Georgia,"Times New Roman",serif}
+    p{color:#666;line-height:1.7;font-size:.95rem;margin-bottom:24px}
+    .tips{background:#f9f6f1;border-radius:12px;padding:20px;text-align:left;margin-bottom:28px}
+    .tips h3{font-size:.85rem;font-weight:700;color:#c9a96e;margin-bottom:10px}
+    .tips li{font-size:.85rem;color:#555;padding:4px 0;padding-left:16px;position:relative;list-style:none}
+    .tips li::before{content:"•";position:absolute;left:0;color:#c9a96e;font-weight:700}
+    .btn{display:inline-block;padding:14px 32px;background:#c9a96e;color:#fff;border:none;border-radius:100px;font-size:1rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .3s}
+    .btn:hover{background:#b8963e;transform:translateY(-2px);box-shadow:0 4px 20px rgba(201,169,110,.3)}
+    .status{margin-top:20px;font-size:.8rem;color:#999}
+    .status .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#ef4444;margin-right:4px;vertical-align:middle}
+    .status.online .dot{background:#22c55e}
+  </style>
+</head>
+<body>
+  <div class="offline-card">
+    <span class="offline-icon">📶</span>
+    <h1>当前为离线模式</h1>
+    <p>网络连接不可用，部分功能暂时受限。<br>已缓存的内容仍可正常浏览。</p>
+    <div class="tips">
+      <h3>💡 你可以尝试</h3>
+      <ul>
+        <li>检查 Wi-Fi 或移动数据连接</li>
+        <li>访问已缓存的页面（首页、景点、美食等）</li>
+        <li>刷新页面重新连接</li>
+      </ul>
+    </div>
+    <button class="btn" onclick="location.reload()">🔄 重新加载</button>
+    <div class="status" id="netStatus">
+      <span class="dot"></span> 网络状态：离线
+    </div>
+  </div>
+  <script>
+    function updateStatus() {
+      const el = document.getElementById('netStatus');
+      if (navigator.onLine) {
+        el.innerHTML = '<span class="dot"></span> 网络状态：已连接';
+        el.classList.add('online');
+        setTimeout(() => location.reload(), 1000);
+      } else {
+        el.innerHTML = '<span class="dot"></span> 网络状态：离线';
+        el.classList.remove('online');
+      }
+    }
+    window.addEventListener('online', updateStatus);
+    window.addEventListener('offline', updateStatus);
+    updateStatus();
+  </script>
+</body>
+</html>

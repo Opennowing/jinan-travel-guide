@@ -166,6 +166,57 @@
   <section class="page-hero" aria-label="页面标题">
     <h1>📋 行程攻略</h1>
     <p>精心规划的路线，让每一分钟都值得</p>
+    <button class="btn btn-outline btn-sm" style="margin-top:16px" data-share='{"title":"济南行程攻略","subtitle":"1-3天精选路线","items":[{"name":"1日精华游","info":"趵突泉→五龙潭→大明湖→芙蓉街"},{"name":"2日深度游","info":"泉水线+文化线，覆盖主要景点"},{"name":"3日全览游","info":"市区精华+灵岩寺/红叶谷"},{"name":"亲子专线","info":"动物园+科技馆+泉水体验"},{"name":"文艺专线","info":"曲水亭街+省博+老城巷弄"}],"page":"itinerary"}'>📤 分享行程</button>
+  </section>
+
+  <!-- Smart Itinerary Planner -->
+  <section class="section section-alt" id="smartPlanner" aria-label="智能行程规划">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">AI PLANNER</div>
+        <h2>🤖 智能行程规划</h2>
+        <p>告诉我你的需求，为你量身定制济南之旅</p>
+      </div>
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:20px">
+          <div>
+            <label style="font-size:.8rem;font-weight:600;color:var(--text2);display:block;margin-bottom:6px">📅 游玩天数</label>
+            <input type="number" id="planDays" min="1" max="5" value="2" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:.9rem;color:var(--text);outline:none">
+          </div>
+          <div>
+            <label style="font-size:.8rem;font-weight:600;color:var(--text2);display:block;margin-bottom:6px">👥 出行人数</label>
+            <input type="number" id="planPeople" min="1" max="10" value="2" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:.9rem;color:var(--text);outline:none">
+          </div>
+          <div>
+            <label style="font-size:.8rem;font-weight:600;color:var(--text2);display:block;margin-bottom:6px">💰 预算等级</label>
+            <select id="planBudget" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:.9rem;color:var(--text);outline:none">
+              <option value="economy">经济型 (¥150/天以内)</option>
+              <option value="comfort" selected>舒适型 (¥300/天以内)</option>
+              <option value="quality">品质型 (¥500+/天)</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-bottom:20px">
+          <label style="font-size:.8rem;font-weight:600;color:var(--text2);display:block;margin-bottom:8px">❤️ 旅行偏好 (可多选)</label>
+          <div style="display:flex;gap:10px;flex-wrap:wrap" id="planPrefs">
+            <label style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid var(--border);border-radius:100px;cursor:pointer;font-size:.85rem;transition:all .2s;user-select:none">
+              <input type="checkbox" value="culture" checked style="accent-color:var(--accent)"> 🏛️ 文化古迹
+            </label>
+            <label style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid var(--border);border-radius:100px;cursor:pointer;font-size:.85rem;transition:all .2s;user-select:none">
+              <input type="checkbox" value="food" checked style="accent-color:var(--accent)"> 🍜 美食探店
+            </label>
+            <label style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid var(--border);border-radius:100px;cursor:pointer;font-size:.85rem;transition:all .2s;user-select:none">
+              <input type="checkbox" value="nature" style="accent-color:var(--accent)"> 🌿 自然风光
+            </label>
+            <label style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid var(--border);border-radius:100px;cursor:pointer;font-size:.85rem;transition:all .2s;user-select:none">
+              <input type="checkbox" value="family" style="accent-color:var(--accent)"> 👨‍👩‍👧 亲子互动
+            </label>
+          </div>
+        </div>
+        <button id="generatePlan" style="display:inline-flex;align-items:center;gap:8px;padding:12px 32px;background:var(--accent);color:#fff;border:none;border-radius:100px;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .3s">🚀 生成行程</button>
+      </div>
+      <div id="planResult" style="margin-top:24px"></div>
+    </div>
   </section>
 
   <!-- Route Tabs -->
@@ -226,6 +277,36 @@
       </div>
     </div>
   </section>
+
+  <!-- Expense Tracker -->
+  <section class="section section-alt" id="expenseTracker" aria-label="花费追踪">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">EXPENSE</div>
+        <h2>💰 花费追踪</h2>
+        <p>记录每笔开销，掌控旅行预算</p>
+      </div>
+      <div id="expenseList"></div>
+      <div id="expenseSummary" style="margin-top:16px"></div>
+    </div>
+  </section>
+
+  <!-- Weather Forecast -->
+  <section class="section" id="weatherSection" aria-label="行程天气">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">WEATHER</div>
+        <h2>🌤️ 行程天气</h2>
+        <p>提前了解天气，做好出行准备</p>
+      </div>
+      <div id="weatherCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px"></div>
+    </div>
+  </section>
+
+  <!-- ═══ 我的游记 ═══ -->
+  <section class="section section-alt" id="journal-section" aria-label="我的游记">
+  </section>
+
   </main>
 
   <footer class="footer" role="contentinfo">
@@ -246,7 +327,11 @@
 
   <script type="module">
     import { initAll, stars } from '/src/components/shared.js';
+    import { initPWA } from '/src/components/pwa.js';
+    import { initSocialFeatures } from '/src/components/social.js';
+    initPWA();
     initAll();
+    initSocialFeatures();
 
     let spotsData = [], foodData = [];
 
@@ -756,6 +841,256 @@
     });
 
     loadData();
+
+    // ── Smart Itinerary Planner ──
+    const prefCatMap = {
+      culture: ['culture', 'history'],
+      food: ['food'],
+      nature: ['nature', 'spring'],
+      family: ['family']
+    };
+
+    function scoreSpot(spot, prefs, budget) {
+      let score = 0;
+      const cats = [spot.cat, ...(spot.audience || [])];
+      prefs.forEach(p => {
+        if (prefCatMap[p] && prefCatMap[p].some(c => cats.includes(c))) score += 3;
+      });
+      // Budget filter
+      const p = spot.price || 0;
+      if (budget === 'economy' && p <= 40) score += 2;
+      else if (budget === 'comfort' && p <= 80) score += 2;
+      else if (budget === 'quality') score += 1;
+      // Bonus for high rating
+      score += (spot.rating || 0) * 0.5;
+      // Bonus for must-see
+      if (spot.badge === 'must') score += 2;
+      return score;
+    }
+
+    function parseDurationMin(dur) {
+      if (!dur) return 60;
+      if (dur.includes('min')) return parseInt(dur) || 60;
+      const m = dur.match(/([\d.]+)/);
+      return m ? Math.round(parseFloat(m[1]) * 60) : 60;
+    }
+
+    document.getElementById('generatePlan')?.addEventListener('click', () => {
+      const days = Math.min(5, Math.max(1, parseInt(document.getElementById('planDays').value) || 2));
+      const people = Math.min(10, Math.max(1, parseInt(document.getElementById('planPeople').value) || 2));
+      const budget = document.getElementById('planBudget').value;
+      const prefs = Array.from(document.querySelectorAll('#planPrefs input:checked')).map(cb => cb.value);
+      if (!prefs.length) { showToast('请至少选择一个偏好'); return; }
+
+      // Score and sort spots
+      const scored = spotsData.map(s => ({ ...s, _score: scoreSpot(s, prefs, budget) }))
+        .filter(s => s._score > 0)
+        .sort((a, b) => b._score - a._score);
+
+      // Distribute across days (4-6 spots per day)
+      const spotsPerDay = Math.min(6, Math.max(3, Math.ceil(scored.length / days)));
+      const selected = scored.slice(0, spotsPerDay * days);
+
+      // Budget limits
+      const maxDaily = budget === 'economy' ? 150 : budget === 'comfort' ? 300 : 600;
+
+      const dayLabels = ['第一天', '第二天', '第三天', '第四天', '第五天'];
+      let html = '';
+      let grandTotal = 0;
+
+      for (let d = 0; d < days; d++) {
+        const daySpots = selected.slice(d * spotsPerDay, (d + 1) * spotsPerDay);
+        if (!daySpots.length) break;
+        let dayCost = 0;
+        let currentMin = 480; // 08:00
+
+        html += `<div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px">
+          <h3 style="font:700 1.1rem/1.4 var(--serif);color:var(--accent);margin-bottom:16px">📅 ${dayLabels[d]}</h3>
+          <div class="timeline" style="padding-left:28px">`;
+
+        daySpots.forEach((spot, i) => {
+          const durMin = parseDurationMin(spot.dur);
+          const h = Math.floor(currentMin / 60);
+          const m = currentMin % 60;
+          const timeStr = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+          const cost = spot.price || 0;
+          dayCost += cost;
+          currentMin += durMin + 30;
+
+          html += `<div class="timeline-item" style="margin-left:0">
+            <div class="ti-top">
+              <span class="ti-time">${timeStr}</span>
+              <span class="ti-name">${spot.name}</span>
+            </div>
+            <div class="ti-details">
+              <span>${spot.desc?.slice(0, 40) || ''}</span>
+            </div>
+            <div class="ti-details" style="margin-top:6px">
+              <span class="ti-cost">💰 ${cost === 0 ? '免费' : '¥' + cost}</span>
+              <span>⏱ ${spot.dur}</span>
+              <span class="ti-transport">🚌 ${spot.transport?.slice(0, 20) || '—'}</span>
+            </div>
+          </div>`;
+        });
+
+        html += `</div>
+          <div class="day-total">当日预估 <strong>¥${dayCost}</strong> / ${people}人 ≈ ¥${dayCost * people}</div>
+        </div>`;
+        grandTotal += dayCost;
+      }
+
+      html = `<div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;margin-bottom:16px;display:flex;justify-content:space-around;flex-wrap:wrap;gap:16px">
+        <div style="text-align:center"><div style="font-size:.75rem;color:var(--text2)">🎫 门票总计</div><div style="font:700 1.2rem var(--serif);color:var(--accent)">¥${grandTotal}</div></div>
+        <div style="text-align:center"><div style="font-size:.75rem;color:var(--text2)">👥 ${people}人总计</div><div style="font:700 1.2rem var(--serif);color:var(--accent)">¥${grandTotal * people}</div></div>
+        <div style="text-align:center"><div style="font-size:.75rem;color:var(--text2)">📅 共 ${days} 天</div><div style="font:700 1.2rem var(--serif);color:var(--accent)">${selected.length} 个景点</div></div>
+      </div>` + html;
+
+      document.getElementById('planResult').innerHTML = html;
+      document.getElementById('planResult').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    // ── Expense Tracker ──
+    function renderExpenseTracker() {
+      const ids = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
+      const expenses = JSON.parse(localStorage.getItem('jinan-expenses') || '{}');
+      const list = document.getElementById('expenseList');
+      const summary = document.getElementById('expenseSummary');
+
+      if (!ids.length) {
+        list.innerHTML = '<div class="my-trip-empty">💰 添加景点到行程后，这里可以追踪花费<br><small>先去上方添加景点吧</small></div>';
+        summary.innerHTML = '';
+        return;
+      }
+
+      let totalEst = 0, totalActual = 0;
+      list.innerHTML = '<div style="display:grid;gap:8px">' + ids.map(id => {
+        const s = spotsData.find(x => x.id === id);
+        if (!s) return '';
+        const est = s.price || 0;
+        const actual = expenses[id] !== undefined ? expenses[id] : est;
+        totalEst += est;
+        totalActual += actual;
+        return `<div style="display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius)">
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:600;font-size:.9rem">${s.name}</div>
+            <div style="font-size:.75rem;color:var(--text2)">预估: ${est === 0 ? '免费' : '¥' + est}</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <span style="font-size:.8rem;color:var(--text2)">实际 ¥</span>
+            <input type="number" min="0" value="${actual}" data-spot-id="${id}"
+              style="width:80px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--bg);font-size:.85rem;color:var(--text);text-align:right;outline:none">
+          </div>
+        </div>`;
+      }).join('') + '</div>';
+
+      // Summary
+      const diff = totalActual - totalEst;
+      const diffColor = diff > 0 ? 'var(--coral)' : diff < 0 ? 'var(--teal)' : 'var(--text2)';
+      const diffLabel = diff > 0 ? `超支 ¥${diff}` : diff < 0 ? `节省 ¥${Math.abs(diff)}` : '持平';
+      summary.innerHTML = `<div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px;display:flex;justify-content:space-around;flex-wrap:wrap;gap:16px">
+        <div style="text-align:center"><div style="font-size:.75rem;color:var(--text2)">预估花费</div><div style="font:700 1.2rem var(--serif);color:var(--accent)">¥${totalEst}</div></div>
+        <div style="text-align:center"><div style="font-size:.75rem;color:var(--text2)">实际花费</div><div style="font:700 1.2rem var(--serif);color:var(--accent)">¥${totalActual}</div></div>
+        <div style="text-align:center"><div style="font-size:.75rem;color:var(--text2)">差额</div><div style="font:700 1.2rem var(--serif);color:${diffColor}">${diffLabel}</div></div>
+      </div>`;
+
+      // Bind input changes
+      list.querySelectorAll('input[data-spot-id]').forEach(input => {
+        input.addEventListener('change', () => {
+          const exp = JSON.parse(localStorage.getItem('jinan-expenses') || '{}');
+          exp[input.dataset.spotId] = parseInt(input.value) || 0;
+          localStorage.setItem('jinan-expenses', JSON.stringify(exp));
+          renderExpenseTracker();
+        });
+      });
+    }
+
+    // Hook into itinerary changes
+    const _origRenderMyTrip = typeof renderMyTrip === 'function' ? renderMyTrip : null;
+    // We'll call renderExpenseTracker after initial load and on trip changes
+    const origClearBtn = document.getElementById('clearTrip');
+    origClearBtn?.addEventListener('click', () => {
+      localStorage.removeItem('jinan-expenses');
+      setTimeout(renderExpenseTracker, 50);
+    });
+
+    // Initial render after data loads
+    const origLoadData = loadData;
+    const _origLoadDataInner = loadData;
+
+    // Watch for itinerary changes via storage event
+    window.addEventListener('storage', e => {
+      if (e.key === 'jinan-itinerary') renderExpenseTracker();
+    });
+
+    // Render expense tracker after spots data loads
+    const checkDataAndRender = setInterval(() => {
+      if (spotsData.length > 0) {
+        clearInterval(checkDataAndRender);
+        renderExpenseTracker();
+      }
+    }, 200);
+
+    // ── Weather Forecast ──
+    async function loadWeather() {
+      const container = document.getElementById('weatherCards');
+      try {
+        const res = await fetch('https://wttr.in/Jinan?format=j1');
+        const data = await res.json();
+        const forecast = data.weather?.slice(0, 3) || [];
+
+        const weatherIcons = {
+          '113': '☀️', '116': '⛅', '119': '☁️', '122': '☁️',
+          '143': '🌫️', '176': '🌦️', '179': '🌨️', '182': '🌧️',
+          '185': '🌧️', '200': '⛈️', '227': '🌨️', '230': '❄️',
+          '248': '🌫️', '260': '🌫️', '263': '🌦️', '266': '🌧️',
+          '281': '🌧️', '284': '🌧️', '293': '🌦️', '296': '🌧️',
+          '299': '🌧️', '302': '🌧️', '305': '🌧️', '308': '🌧️',
+          '311': '🌧️', '314': '🌧️', '317': '🌧️', '320': '🌨️',
+          '323': '🌨️', '326': '🌨️', '329': '❄️', '332': '❄️',
+          '335': '❄️', '338': '❄️', '350': '🌧️', '353': '🌦️',
+          '356': '🌧️', '359': '🌧️', '362': '🌧️', '365': '🌧️',
+          '368': '🌨️', '371': '❄️', '374': '🌧️', '377': '🌧️',
+          '386': '⛈️', '389': '⛈️', '392': '⛈️', '395': '❄️'
+        };
+
+        function getClothingAdvice(maxC, minC) {
+          const avg = (maxC + minC) / 2;
+          if (avg >= 30) return '👕 短袖短裤，注意防晒补水';
+          if (avg >= 25) return '👕 薄T恤/短袖，带件薄外套';
+          if (avg >= 20) return '👔 长袖/薄外套，早晚凉';
+          if (avg >= 15) return '🧥 外套/卫衣，温差较大';
+          if (avg >= 10) return '🧥 厚外套/风衣，注意保暖';
+          if (avg >= 5) return '🧣 棉衣/羽绒服，围巾手套';
+          return '🧤 羽绒服+厚裤，全副武装';
+        }
+
+        container.innerHTML = forecast.map(day => {
+          const date = day.date;
+          const maxC = parseInt(day.maxtempC);
+          const minC = parseInt(day.mintempC);
+          const hourly = day.hourly || [];
+          const noonWeather = hourly.find(h => h.time === '1200') || hourly[4] || hourly[0] || {};
+          const desc = noonWeather.weatherDesc?.[0]?.value || '未知';
+          const code = noonWeather.weatherCode || '116';
+          const icon = weatherIcons[code] || '⛅';
+          const humidity = noonWeather.humidity || '--';
+          const advice = getClothingAdvice(maxC, minC);
+
+          return `<div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;text-align:center">
+            <div style="font-size:.8rem;color:var(--text2);margin-bottom:8px">${date}</div>
+            <div style="font-size:3rem;margin-bottom:8px">${icon}</div>
+            <div style="font-weight:600;font-size:1rem;margin-bottom:4px">${desc}</div>
+            <div style="font:700 1.4rem/1 var(--serif);color:var(--accent);margin-bottom:4px">${minC}° ~ ${maxC}°</div>
+            <div style="font-size:.75rem;color:var(--text3);margin-bottom:12px">💧 湿度 ${humidity}%</div>
+            <div style="font-size:.8rem;color:var(--text2);background:var(--bg2);padding:8px 12px;border-radius:8px">${advice}</div>
+          </div>`;
+        }).join('');
+      } catch (err) {
+        container.innerHTML = '<div style="text-align:center;color:var(--text3);padding:20px;grid-column:1/-1">🌤️ 天气数据暂时无法获取，请稍后再试</div>';
+      }
+    }
+
+    loadWeather();
   </script>
 </body>
 </html>

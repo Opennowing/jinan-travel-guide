@@ -130,13 +130,7 @@
     .hero-search-v2 button:hover{background:var(--accent-hover);transform:translateY(-50%) scale(1.06)}
 
     /* Hero Icons */
-    .hero-icons{display:flex;gap:16px;justify-content:center;margin-bottom:28px;position:relative;z-index:2;flex-wrap:wrap}
-    .hero-icons a{display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px 24px 16px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);border-radius:18px;backdrop-filter:blur(12px);transition:all .35s var(--ease);min-width:100px;text-decoration:none}
-    .hero-icons a:hover{transform:translateY(-6px);background:rgba(255,255,255,.14);border-color:rgba(201,169,110,.45);box-shadow:0 10px 35px rgba(0,0,0,.25),0 0 20px rgba(42,157,143,.1)}
-    .hero-icons a .hi-icon{font-size:2rem;filter:drop-shadow(0 2px 6px rgba(0,0,0,.2));transition:transform .3s var(--ease)}
-    .hero-icons a:hover .hi-icon{transform:scale(1.15)}
-    .hero-icons a .hi-label{font-size:.8rem;font-weight:600;color:rgba(255,255,255,.9);letter-spacing:.04em}
-    .hero-weather-hint{position:relative;z-index:2;font-size:.8rem;color:rgba(255,255,255,.4);margin-top:4px}
+    .hero-weather-hint{position:relative;z-index:2;font-size:.82rem;color:rgba(255,255,255,.5);margin-top:8px}
     .hero-search-v2 .search-dropdown{position:absolute;top:calc(100% + 8px);left:0;right:0;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);max-height:360px;overflow-y:auto;z-index:100;display:none;color:var(--text)}
     .hero-search-v2 .search-dropdown.show{display:block}
 
@@ -336,26 +330,6 @@
       <input type="text" id="heroInlineSearch" placeholder="搜索景点、美食、路线…" autocomplete="off">
       <button id="heroInlineSearchBtn" aria-label="搜索">→</button>
       <div class="search-dropdown" id="heroInlineDropdown"></div>
-    </div>
-
-    <!-- Quick Nav Icons (4 only) -->
-    <div class="hero-icons">
-      <a href="spots.html">
-        <span class="hi-icon">⛲</span>
-        <span class="hi-label">名泉</span>
-      </a>
-      <a href="food.html">
-        <span class="hi-icon">🍜</span>
-        <span class="hi-label">美食</span>
-      </a>
-      <a href="itinerary.html">
-        <span class="hi-icon">🗺️</span>
-        <span class="hi-label">行程</span>
-      </a>
-      <a href="guide.html">
-        <span class="hi-icon">📖</span>
-        <span class="hi-label">指南</span>
-      </a>
     </div>
 
     <!-- Weather hint -->

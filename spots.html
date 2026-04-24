@@ -48,6 +48,15 @@
     .modal-map iframe{width:100%;height:100%;border:none}
     .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);padding:10px 24px;border-radius:100px;font-size:.85rem;font-weight:500;z-index:500;opacity:0;transition:all .3s var(--ease-out);pointer-events:none}
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    .review-form{background:var(--bg2);border-radius:12px;padding:16px;margin-bottom:16px}
+    .review-form h5{font-size:.85rem;font-weight:700;margin-bottom:12px}
+    .star-input{display:flex;gap:4px;margin-bottom:10px}
+    .star-input span{font-size:1.4rem;cursor:pointer;color:var(--text3);transition:color .2s}
+    .star-input span.active,.star-input span:hover{color:#f59e0b}
+    .review-input{width:100%;padding:10px 14px;border:1px solid var(--border2);background:var(--bg);border-radius:10px;font-size:.85rem;font-family:var(--sans);resize:vertical;min-height:60px;outline:none;transition:border-color .3s}
+    .review-input:focus{border-color:var(--accent)}
+    .review-submit{margin-top:10px}
+    .user-review{border-left:3px solid var(--accent);padding-left:12px}
     @media(max-width:768px){
       .filter-section{flex-direction:column;gap:12px}
       .sort-wrap{margin-left:0}
@@ -308,17 +317,24 @@
       const photosHtml = (s.photos||[]).map(p => `<span class="photo-tag">📷 ${p}</span>`).join('');
       const comboHtml = s.combo ? `<div class="modal-combo"><h4>${s.combo.title}</h4><p>${s.combo.desc}</p></div>` : '';
       const mapHtml = s.lat && s.lng ? `<div class="modal-map"><iframe src="https://www.openstreetmap.org/export/embed.html?bbox=${s.lng-0.01}%2C${s.lat-0.005}%2C${s.lng+0.01}%2C${s.lat+0.005}&layer=mapnik&marker=${s.lat}%2C${s.lng}" loading="lazy"></iframe></div>` : '';
-      const reviews = [
+      const defaultReviews = [
         {name:'旅行达人',avatar:'旅',date:'2026-04-15',stars:5,text:'非常值得一去！泉水清澈见底，环境优美。'},
         {name:'小鱼儿',avatar:'鱼',date:'2026-04-10',stars:4,text:'景色不错，就是节假日人太多了，建议工作日去。'},
         {name:'背包客阿杰',avatar:'杰',date:'2026-03-28',stars:5,text:'济南之行最满意的一站，下次还会再来！'}
       ];
-      const reviewsHtml = reviews.map(r => `
-        <div class="review-item">
+      // Load user reviews from localStorage
+      const userReviews = JSON.parse(localStorage.getItem('jinan-reviews') || '{}');
+      const spotUserReviews = (userReviews[s.id] || []).map(r => ({
+        name: r.name || '我', avatar: '👤', date: r.date, stars: r.stars, text: r.text, isUser: true
+      }));
+      const allReviews = [...spotUserReviews, ...defaultReviews];
+      const reviewsHtml = allReviews.map(r => `
+        <div class="review-item ${r.isUser ? 'user-review' : ''}">
           <div class="review-head"><div class="review-avatar">${r.avatar}</div><span class="review-name">${r.name}</span><span class="review-date">${r.date}</span></div>
           <div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
           <div class="review-text">${r.text}</div>
         </div>`).join('');
+      const totalReviews = s.reviews + spotUserReviews.length;
 
       const html = `
         ${galleryHtml(s)}
@@ -348,7 +364,13 @@
             <button class="btn btn-outline modal-share" data-name="${s.name}">📤 分享</button>
           </div>
           <div class="modal-reviews">
-            <h4>💬 游客评价 <span style="font-weight:400;font-size:.8rem;color:var(--text3)">(${s.reviews}条)</span></h4>
+            <h4>💬 游客评价 <span style="font-weight:400;font-size:.8rem;color:var(--text3)">(${totalReviews}条)</span></h4>
+            <div class="review-form">
+              <h5>✍️ 写评价</h5>
+              <div class="star-input" id="starInput">${[1,2,3,4,5].map(i => `<span data-val="${i}">☆</span>`).join('')}</div>
+              <textarea class="review-input" id="reviewText" placeholder="分享你的游玩体验…" maxlength="500"></textarea>
+              <button class="btn btn-sm btn-primary review-submit" id="submitReview" data-spot="${s.id}">提交评价</button>
+            </div>
             ${reviewsHtml}
           </div>
         </div>`;
@@ -363,6 +385,45 @@
           const name = this.dataset.name;
           if (navigator.share) navigator.share({title:`济南旅游 - ${name}`,text:`推荐你去济南的${name}！`,url:location.href});
           else { navigator.clipboard?.writeText(`推荐你去济南的${name}！${location.href}`); showToast('链接已复制'); }
+        });
+        // Star rating input
+        let selectedStars = 0;
+        document.querySelectorAll('#starInput span').forEach(star => {
+          star.addEventListener('click', () => {
+            selectedStars = parseInt(star.dataset.val);
+            document.querySelectorAll('#starInput span').forEach((s,i) => {
+              s.textContent = i < selectedStars ? '★' : '☆';
+              s.classList.toggle('active', i < selectedStars);
+            });
+          });
+          star.addEventListener('mouseenter', () => {
+            document.querySelectorAll('#starInput span').forEach((s,i) => {
+              s.textContent = i < parseInt(star.dataset.val) ? '★' : '☆';
+            });
+          });
+        });
+        document.getElementById('starInput')?.addEventListener('mouseleave', () => {
+          document.querySelectorAll('#starInput span').forEach((s,i) => {
+            s.textContent = i < selectedStars ? '★' : '☆';
+          });
+        });
+        // Submit review
+        document.getElementById('submitReview')?.addEventListener('click', function() {
+          const spotId = this.dataset.spot;
+          const text = document.getElementById('reviewText').value.trim();
+          if (!selectedStars) { showToast('请先选择评分'); return; }
+          if (!text) { showToast('请写点评价内容'); return; }
+          const allReviews = JSON.parse(localStorage.getItem('jinan-reviews') || '{}');
+          if (!allReviews[spotId]) allReviews[spotId] = [];
+          allReviews[spotId].push({
+            name: '我', stars: selectedStars, text: text,
+            date: new Date().toISOString().slice(0,10)
+          });
+          localStorage.setItem('jinan-reviews', JSON.stringify(allReviews));
+          showToast('✓ 评价已提交');
+          // Refresh modal
+          const spot = allSpots.find(x => x.id === spotId);
+          if (spot) setTimeout(() => openQuickView(spot), 300);
         });
       });
     }

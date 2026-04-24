@@ -199,9 +199,11 @@
 
   <main id="main-content">
   <section class="page-hero" aria-label="页面标题">
+    <button class="btn btn-outline btn-sm" style="position:absolute;top:20px;right:20px;z-index:2" data-share='{"title":"济南景点攻略","subtitle":"30+精选景点","items":[{"name":"趵突泉","info":"天下第一泉 · ¥40"},{"name":"大明湖","info":"免费开放"},{"name":"千佛山","info":"¥30 · 登高望远"},{"name":"五龙潭","info":"¥0 · 小众秘境"},{"name":"黑虎泉","info":"免费 · 泉水直饮"}],"page":"spots"}'>📤 分享景点</button>
+    <div class="eyebrow" style="font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:inline-flex;align-items:center;gap:12px;position:relative;z-index:1"><span style="width:24px;height:1px;background:var(--accent);opacity:.6"></span>JINAN SPOTS<span style="width:24px;height:1px;background:var(--accent);opacity:.6"></span></div>
     <h1>🏛️ 景点 · 玩乐</h1>
     <p>泉城济南，处处有惊喜</p>
-    <button class="btn btn-outline btn-sm" style="margin-top:16px" data-share='{"title":"济南景点攻略","subtitle":"30+精选景点","items":[{"name":"趵突泉","info":"天下第一泉 · ¥40"},{"name":"大明湖","info":"免费开放"},{"name":"千佛山","info":"¥30 · 登高望远"},{"name":"五龙潭","info":"¥0 · 小众秘境"},{"name":"黑虎泉","info":"免费 · 泉水直饮"}],"page":"spots"}'>📤 分享景点</button>
+    <div style="margin-top:16px;font-size:.85rem;color:var(--text2);position:relative;z-index:1">80+ 精选景点 · 72 名泉 · 5 大景区</div>
   </section>
 
   <section class="section" style="padding-top:32px;padding-bottom:0" aria-label="今日推荐">
@@ -213,7 +215,7 @@
       <div class="filter-section">
         <div class="filter-group">
           <span class="filter-group-label">分类</span>
-          <div class="filter-bar" id="catFilters" role="group" aria-label="景点分类筛选">
+          <div class="tabs" id="catFilters" role="group" aria-label="景点分类筛选">
               <button class="filter-btn active" data-cat="all">全部</button>
             <button class="filter-btn" data-cat="spring">⛲ 泉水</button>
             <button class="filter-btn" data-cat="nature">🌿 自然</button>

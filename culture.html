@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>济南文化·故事 — 千年泉城，齐鲁风骨</title>
-<meta name="description" content="济南文化深度探索：龙山文化发源地、李清照辛弃疾故里、百年老商埠、泉水民俗。了解泉城的前世今生。">
+<meta name="description" content="济南文化深度探索：龙山文化发源地、李清照辛弃疾故里、百年老商埠、泉水民俗、72名泉、非遗技艺。了解泉城的前世今生。">
 <link rel="stylesheet" href="/src/styles/main.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
 <style>
@@ -46,6 +46,34 @@
 .quote-block{background:var(--bg2);border-left:4px solid var(--accent);padding:28px 32px;border-radius:0 var(--radius) var(--radius) 0;margin:40px 0}
 .quote-block p{font-family:var(--serif);font-size:1.1rem;line-height:1.8;color:var(--text);font-style:italic}
 .quote-block .author{margin-top:12px;font-size:.85rem;color:var(--text3);font-style:normal}
+
+/* ─── Spring List ─── */
+.spring-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:24px}
+.spring-item{background:var(--card-bg);border-radius:var(--radius);padding:18px 20px;border:1px solid var(--border);display:flex;gap:14px;align-items:flex-start}
+.spring-item .sp-icon{font-size:1.6rem;flex-shrink:0;line-height:1}
+.spring-item .sp-info h4{font:700 .95rem/1.3 var(--serif);margin-bottom:4px}
+.spring-item .sp-info .sp-loc{font-size:.72rem;color:var(--accent);font-weight:600;margin-bottom:6px}
+.spring-item .sp-info p{font-size:.82rem;color:var(--text2);line-height:1.6}
+
+/* ─── Literature ─── */
+.lit-card{background:var(--card-bg);border-radius:var(--radius-lg);padding:32px 28px;border:1px solid var(--border);margin-bottom:28px}
+.lit-card .lit-header{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.lit-card .lit-header .lit-icon{font-size:2rem}
+.lit-card .lit-header h3{font:700 1.15rem/1.3 var(--serif)}
+.lit-card .lit-header .lit-author{font-size:.8rem;color:var(--accent);font-weight:600}
+.lit-card .lit-poem{background:var(--bg2);border-radius:var(--radius);padding:24px;margin-bottom:18px;font-family:var(--serif);font-size:1.05rem;line-height:2.2;color:var(--text);text-align:center}
+.lit-card .lit-analysis{font-size:.88rem;color:var(--text2);line-height:1.8}
+.lit-card .lit-analysis strong{color:var(--text)}
+
+/* ─── Architecture ─── */
+.arch-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.arch-card{background:var(--card-bg);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);transition:all .3s}
+.arch-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.arch-card .arch-visual{height:140px;display:flex;align-items:center;justify-content:center;font-size:4rem;background:var(--bg2)}
+.arch-card .arch-body{padding:20px 22px}
+.arch-card .arch-body h3{font:700 1.05rem/1.3 var(--serif);margin-bottom:6px}
+.arch-card .arch-body .arch-loc{font-size:.72rem;color:var(--accent);font-weight:600;margin-bottom:8px}
+.arch-card .arch-body p{font-size:.85rem;color:var(--text2);line-height:1.7}
 
 @media(max-width:768px){
   .timeline::before{left:16px}
@@ -93,27 +121,27 @@
     <div class="timeline">
       <div class="tl-item rv">
         <div class="tl-dot">🏺</div>
-        <div class="tl-year">4000年前</div>
+        <div class="tl-year">公元前2500年</div>
         <div class="tl-title">龙山文化发源地</div>
-        <div class="tl-desc">济南章丘龙山镇发现的龙山文化遗址，是中华文明的重要源头之一。蛋壳黑陶杯——薄如蛋壳、黑如漆、亮如镜，代表了4000年前制陶工艺的巅峰。山东省博物馆镇馆之宝。</div>
+        <div class="tl-desc">济南章丘龙山镇发现的龙山文化遗址，是中华文明的重要源头之一。蛋壳黑陶杯——薄如蛋壳、黑如漆、亮如镜，代表了4000多年前制陶工艺的巅峰。山东省博物馆镇馆之宝。</div>
       </div>
       <div class="tl-item rv">
         <div class="tl-dot">⚔️</div>
         <div class="tl-year">春秋战国</div>
-        <div class="tl-title">齐国要地，齐鲁交汇</div>
-        <div class="tl-desc">济南地处齐、鲁两国交界，兼收齐国的开放进取与鲁国的礼乐教化。这段历史奠定了济南"尚武崇文"的城市性格。至今济南人仍以"齐鲁大地"自称。</div>
+        <div class="tl-title">齐国要邑，齐鲁交汇</div>
+        <div class="tl-desc">济南地处齐、鲁两国交界，兼收齐国的开放进取与鲁国的礼乐教化。这段历史奠定了济南"尚武崇文"的城市性格。管仲相齐、晏婴使楚，齐鲁大地的故事至今流传。</div>
       </div>
       <div class="tl-item rv">
-        <div class="tl-dot">🙏</div>
-        <div class="tl-year">隋开皇年间</div>
-        <div class="tl-title">千佛山佛像开凿</div>
-        <div class="tl-desc">隋代高僧在历山（千佛山）崖壁上镌刻佛像千余尊，"千佛山"由此得名。兴国禅寺始建于唐代，至今香火不断。山上的隋代石刻佛像是济南最古老的宗教遗迹之一。</div>
+        <div class="tl-dot">🏛️</div>
+        <div class="tl-year">汉代</div>
+        <div class="tl-title">济南郡，名城初立</div>
+        <div class="tl-desc">西汉设济南郡，治所东平陵城（今章丘境内）。济南之名始于此——因地处古济水之南而得名。汉代济南已是齐鲁地区的政治经济重镇，东平陵城遗址至今可考。</div>
       </div>
       <div class="tl-item rv">
         <div class="tl-dot">📝</div>
-        <div class="tl-year">宋代</div>
-        <div class="tl-title">李清照、辛弃疾故里</div>
-        <div class="tl-desc">济南同时诞生了婉约派词宗李清照和豪放派词宗辛弃疾——"济南二安"（李清照号易安居士，辛弃疾字幼安）。趵突泉畔的李清照纪念堂、大明湖畔的辛弃疾纪念祠至今可访。一个城市出了两位词坛巨匠，中国文学史上绝无仅有。</div>
+        <div class="tl-year">唐宋</div>
+        <div class="tl-title">文学鼎盛，"济南二安"</div>
+        <div class="tl-desc">宋代济南同时诞生了婉约派词宗李清照（号易安居士）和豪放派词宗辛弃疾（字幼安），合称"济南二安"。一个城市出了两位词坛巨匠，中国文学史上绝无仅有。趵突泉畔的李清照纪念堂、大明湖畔的辛弃疾纪念祠至今可访。</div>
       </div>
       <div class="tl-item rv">
         <div class="tl-dot">🏗️</div>
@@ -122,10 +150,16 @@
         <div class="tl-desc">济南是近代中国第一个自开商埠的城市（非租界）。胶济铁路通车后，德国、日本商人涌入经三路一带，留下了大量德式、日式建筑。这段历史造就了济南独特的"老商埠"文化——既有传统泉水人家的从容，又有近代开放的包容。</div>
       </div>
       <div class="tl-item rv">
+        <div class="tl-dot">🎖️</div>
+        <div class="tl-year">1948年</div>
+        <div class="tl-title">济南战役，古城新生</div>
+        <div class="tl-desc">1948年9月，华东野战军发起济南战役，经8天激战攻克城池，歼敌10万余人。这是人民解放军首次攻克国民党重兵守备的大城市，揭开了战略决战的序幕。济南战役纪念馆位于英雄山下。</div>
+      </div>
+      <div class="tl-item rv">
         <div class="tl-dot">🏙️</div>
-        <div class="tl-year">现代</div>
-        <div class="tl-title">省会城市，泉水之都</div>
-        <div class="tl-desc">济南是山东省省会，拥有72名泉（实际更多），是中国唯一以泉水闻名的特大城市。趵突泉、大明湖、千佛山三大名胜每年吸引数千万游客。2023年趵突泉持续喷涌20年，创下近代最长纪录。</div>
+        <div class="tl-year">2023年</div>
+        <div class="tl-title">GDP破万亿，泉水之都新篇</div>
+        <div class="tl-desc">2023年济南GDP突破万亿元大关，正式跻身"万亿俱乐部"。作为山东省会、黄河流域中心城市，济南正从"泉城"迈向"强城"——趵突泉持续喷涌20年创近代纪录，数字经济、先进制造业蓬勃发展。</div>
       </div>
     </div>
   </div>
@@ -161,6 +195,111 @@
         <p>济南人讲究用泉水泡茶。趵突泉、黑虎泉的泉水水质清冽甘甜，泡出的茶香气更浓。老舍在《济南的冬天》里写道："设若单单是有阳光，那也算不了出奇。请闭上眼睛想……"</p>
       </div>
     </div>
+
+    <!-- 72名泉精选 -->
+    <div class="section-header" style="margin-top:48px">
+      <div class="eyebrow">72名泉精选</div>
+      <h2>泉城明珠</h2>
+      <p>济南名泉七十二，此间精选最璀璨</p>
+    </div>
+    <div class="spring-list">
+      <div class="spring-item rv">
+        <div class="sp-icon">💦</div>
+        <div class="sp-info">
+          <h4>趵突泉</h4>
+          <div class="sp-loc">📍 趵突泉公园内</div>
+          <p>天下第一泉，三股泉水昼夜喷涌，最大涌水量达16.2万m³/日。"趵突腾空"为济南八景之首。</p>
+        </div>
+      </div>
+      <div class="spring-item rv">
+        <div class="sp-icon">🐯</div>
+        <div class="sp-info">
+          <h4>黑虎泉</h4>
+          <div class="sp-loc">📍 护城河南岸</div>
+          <p>泉水从三个石雕虎头喷涌而出，声如虎啸。泉群流量仅次于趵突泉，是市民取水泡茶的首选。</p>
+        </div>
+      </div>
+      <div class="spring-item rv">
+        <div class="sp-icon">🐉</div>
+        <div class="sp-info">
+          <h4>五龙潭</h4>
+          <div class="sp-loc">📍 五龙潭公园</div>
+          <p>济南最深的泉池，深达6米。传说潭中有五条龙镇守，故名。秦琼故宅旧址所在。</p>
+        </div>
+      </div>
+      <div class="spring-item rv">
+        <div class="sp-icon">🎵</div>
+        <div class="sp-info">
+          <h4>琵琶泉</h4>
+          <div class="sp-loc">📍 护城河畔</div>
+          <p>泉水涌出时如琵琶弹奏，叮咚作响。泉池呈琵琶形，水质清冽，常有市民在此取水。</p>
+        </div>
+      </div>
+      <div class="spring-item rv">
+        <div class="sp-icon">🌿</div>
+        <div class="sp-info">
+          <h4>珍珠泉</h4>
+          <div class="sp-loc">📍 珍珠泉大院内</div>
+          <p>泉底涌出串串水泡如珍珠，晶莹剔透。明清时期为山东巡抚衙门，现为省人大常委会驻地。</p>
+        </div>
+      </div>
+      <div class="spring-item rv">
+        <div class="sp-icon">💧</div>
+        <div class="sp-info">
+          <h4>濯缨泉</h4>
+          <div class="sp-loc">📍 王府池子街</div>
+          <p>古称"王府池子"，取《孟子》"沧浪之水清兮，可以濯吾缨"之意。泉水汇入曲水亭街的溪流中。</p>
+        </div>
+      </div>
+      <div class="spring-item rv">
+        <div class="sp-icon">🌺</div>
+        <div class="sp-info">
+          <h4>芙蓉泉</h4>
+          <div class="sp-loc">📍 芙蓉街中段</div>
+          <p>因泉边遍植木芙蓉而得名。位于济南最繁华的芙蓉街上，闹中取静，是古城区的标志性名泉。</p>
+        </div>
+      </div>
+      <div class="spring-item rv">
+        <div class="sp-icon">🪷</div>
+        <div class="sp-info">
+          <h4>白石泉</h4>
+          <div class="sp-loc">📍 大明湖南岸</div>
+          <p>泉池以白石砌成，泉水清澈见底。因靠近大明湖，水位随湖水涨落，与湖景融为一体。</p>
+        </div>
+      </div>
+      <div class="spring-item rv">
+        <div class="sp-icon">🌙</div>
+        <div class="sp-info">
+          <h4>月牙泉</h4>
+          <div class="sp-loc">📍 大明湖南门附近</div>
+          <p>泉池形如新月，故名。月牙泉是济南72名泉中水位最高的泉之一，只有在地下水位极高时才会喷涌。</p>
+        </div>
+      </div>
+      <div class="spring-item rv">
+        <div class="sp-icon">🦁</div>
+        <div class="sp-info">
+          <h4>金线泉</h4>
+          <div class="sp-loc">📍 趵突泉公园内</div>
+          <p>泉底有一道天然石缝，水流交汇时形成一条若隐若现的金线，故名。曾巩、赵孟頫均有题咏。</p>
+        </div>
+      </div>
+      <div class="spring-item rv">
+        <div class="sp-icon">🌧️</div>
+        <div class="sp-info">
+          <h4>玛瑙泉</h4>
+          <div class="sp-loc">📍 环城公园内</div>
+          <p>泉水涌出时水面呈彩色波纹，如玛瑙般绚丽。泉池小巧精致，周围绿树环绕，极富诗意。</p>
+        </div>
+      </div>
+      <div class="spring-item rv">
+        <div class="sp-icon">🫧</div>
+        <div class="sp-info">
+          <h4>百脉泉</h4>
+          <div class="sp-loc">📍 章丘百脉泉公园</div>
+          <p>泉水从池底无数细孔涌出，如百脉沸腾。与趵突泉齐名，素有"西趵突、东百脉"之说。李清照故居即在附近。</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -193,6 +332,141 @@
         <h3>章丘铁锅</h3>
         <p>章丘铁锅因《舌尖上的中国》走红。需经36000次手工锻打，锅面光滑如镜，不粘锅、省油。正宗章丘铁锅在章丘区相公庄镇可参观制作过程并购买。</p>
       </div>
+      <div class="culture-card rv">
+        <div class="culture-icon">🎵</div>
+        <h3>济南吕剧</h3>
+        <p>山东地方戏曲代表剧种，源于济南一带的民间小曲"坐腔扬琴"。唱腔质朴优美，语言通俗易懂，代表剧目有《李二嫂改嫁》《姊妹易嫁》等。济南市吕剧院常有惠民演出。</p>
+      </div>
+      <div class="culture-card rv">
+        <div class="culture-icon">🎤</div>
+        <h3>山东快书</h3>
+        <p>起源于济南的说唱艺术，以鸳鸯板击节伴奏，节奏明快、语言诙谐。经典曲目《武松传》《鲁达除霸》脍炙人口。高元钧、杨派快书皆发源于济南。</p>
+      </div>
+      <div class="culture-card rv">
+        <div class="culture-icon">🥁</div>
+        <h3>商河鼓子秧歌</h3>
+        <p>济南商河县的传统舞蹈，始于秦汉，兴于唐宋。舞者持鼓、伞、棒表演，气势恢宏、粗犷豪放。被誉为"北方汉民族舞蹈的代表"，入选国家级非物质文化遗产名录。</p>
+      </div>
+      <div class="culture-card rv">
+        <div class="culture-icon">🏺</div>
+        <h3>章丘黑陶</h3>
+        <p>承袭4000年前龙山文化蛋壳黑陶技艺，以"黑如漆、明如镜、薄如纸、硬如瓷"著称。现代章丘黑陶在传承古法基础上融入创新设计，是济南最具文化代表性的工艺品。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ARCHITECTURE ─── -->
+<section class="section" style="background:var(--bg2)">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">建筑与街区</div>
+      <h2>时光凝固的街巷</h2>
+      <p>中西交融，古今对话</p>
+    </div>
+    <div class="arch-grid">
+      <div class="arch-card rv">
+        <div class="arch-visual">🏛️</div>
+        <div class="arch-body">
+          <h3>老商埠德式建筑群</h3>
+          <div class="arch-loc">📍 经三路—纬二路一带</div>
+          <p>1904年开埠后德国商人修建的洋行、银行、邮局等建筑。红砖拱廊、老虎窗、坡屋顶，典型的德式殖民风格。现经改造成为"老商埠"文创街区，咖啡馆、书店、艺术空间林立。</p>
+        </div>
+      </div>
+      <div class="arch-card rv">
+        <div class="arch-visual">⛪</div>
+        <div class="arch-body">
+          <h3>洪家楼天主教堂</h3>
+          <div class="arch-loc">📍 洪家楼广场</div>
+          <p>1901年建成，哥特式建筑，高55米的双塔钟楼是济南的地标之一。由中国工匠用传统砌筑工艺建造，被誉为"中国最美天主教堂"之一。内部穹顶彩窗精美绝伦，免费参观。</p>
+        </div>
+      </div>
+      <div class="arch-card rv">
+        <div class="arch-visual">🏯</div>
+        <div class="arch-body">
+          <h3>府学文庙</h3>
+          <div class="arch-loc">📍 大明湖路214号</div>
+          <p>始建于北宋熙宁年间，是济南古代最高学府所在地。现存大成殿、泮池、棂星门等建筑，古柏参天。每年高考前，常有家长来此祈福。门票免费。</p>
+        </div>
+      </div>
+      <div class="arch-card rv">
+        <div class="arch-visual">🏮</div>
+        <div class="arch-body">
+          <h3>芙蓉街历史街区</h3>
+          <div class="arch-loc">📍 芙蓉街—曲水亭街</div>
+          <p>济南最古老的商业街之一，因芙蓉泉得名。青石板路两侧是明清风格的老建筑，泉水从脚下流过。串联起府学文庙、百花洲、大明湖，是体验"家家泉水、户户垂杨"的最佳路线。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── LITERATURE ─── -->
+<section class="section">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="eyebrow">文学与济南</div>
+      <h2>千古诗文里的泉城</h2>
+      <p>他们用文字，让济南永垂不朽</p>
+    </div>
+
+    <div class="lit-card rv">
+      <div class="lit-header">
+        <div class="lit-icon">🌸</div>
+        <div>
+          <h3>如梦令</h3>
+          <div class="lit-author">李清照（宋代）</div>
+        </div>
+      </div>
+      <div class="lit-poem">
+        昨夜雨疏风骤，浓睡不消残酒。<br>
+        试问卷帘人，却道海棠依旧。<br>
+        知否，知否？应是绿肥红瘦。
+      </div>
+      <div class="lit-analysis">
+        <strong>赏析：</strong>这首小令仅33字，却写尽了一个春天的惆怅。"绿肥红瘦"四字，前无古人后无来者——以拟人手法写叶盛花衰，将惜春之情凝于四字之中。李清照以女性视角入词，细腻入微而不纤弱，正是她超越同时代词人之处。这首词写于济南章丘的故居，彼时她还是一个无忧的少女。
+      </div>
+    </div>
+
+    <div class="lit-card rv">
+      <div class="lit-header">
+        <div class="lit-icon">⚔️</div>
+        <div>
+          <h3>破阵子·为陈同甫赋壮词以寄之</h3>
+          <div class="lit-author">辛弃疾（宋代）</div>
+        </div>
+      </div>
+      <div class="lit-poem">
+        醉里挑灯看剑，梦回吹角连营。<br>
+        八百里分麾下炙，五十弦翻塞外声，沙场秋点兵。<br>
+        马作的卢飞快，弓如霹雳弦惊。<br>
+        了却君王天下事，赢得生前身后名。可怜白发生！
+      </div>
+      <div class="lit-analysis">
+        <strong>赏析：</strong>全词以梦境写壮志，前九句如长江奔涌，一气呵成写尽沙场豪情；末句"可怜白发生"五字陡然跌落，梦醒时分的悲凉令人扼腕。辛弃疾21岁率骑兵闯入金营活捉叛将，一生以恢复中原为志，却壮志难酬。这首词写于他闲居江西之时，梦里仍是他少年时济南的金戈铁马。
+      </div>
+    </div>
+
+    <div class="lit-card rv">
+      <div class="lit-header">
+        <div class="lit-icon">✍️</div>
+        <div>
+          <h3>济南的冬天（节选）</h3>
+          <div class="lit-author">老舍（现代）</div>
+        </div>
+      </div>
+      <div class="lit-poem" style="text-align:left;font-style:italic;font-size:.98rem;line-height:2">
+        对于一个在北平住惯的人，像我，冬天要是不刮风，便觉得是奇迹；济南的冬天是没有风声的。对于一个刚由伦敦回来的人，像我，冬天要能看得见日光，便觉得是怪事；济南的冬天是响晴的。自然，在热带的地方，日光是永远那么毒，响亮的天气，反有点叫人害怕。可是，在北中国的冬天，而能有温晴的天气，济南真得算个宝地。<br><br>
+        设若单单是有阳光，那也算不了出奇。请闭上眼睛想：一个老城，有山有水，全在天底下晒着阳光，暖和安适地睡着，只等春风来把它们唤醒，这是不是个理想的境界？
+      </div>
+      <div class="lit-analysis">
+        <strong>赏析：</strong>老舍用最朴素的语言，写出了最动人的济南。他不说济南"美"，只说济南"温晴"；不说济南"好"，只说济南"真得算个宝地"。这种克制的深情，恰恰是最高级的赞美。"暖和安适地睡着"——他把一座城写成了一个人。这篇文章入选中国中学语文课本，影响了几代人对济南的想象。
+      </div>
+    </div>
+
+    <div class="quote-block rv">
+      <p>"一个老城，有山有水，全在天底下晒着阳光，暖和安适地睡着，只等春风来把它们唤醒，这是不是个理想的境界？"</p>
+      <div class="author">—— 老舍《济南的冬天》</div>
     </div>
   </div>
 </section>
@@ -231,11 +505,6 @@
         </div>
       </div>
     </div>
-
-    <div class="quote-block rv">
-      <p>"一个老城，有山有水，全在天底下晒着阳光，暖和安适地睡着，只等春风来把它们唤醒，这是不是个理想的境界？"</p>
-      <div class="author">—— 老舍《济南的冬天》</div>
-    </div>
   </div>
 </section>
 
@@ -245,13 +514,23 @@
     <div class="section-header">
       <div class="eyebrow">活动日历</div>
       <h2>济南的四季节庆</h2>
-      <p>每个季节都有值得奔赴的理由</p>
+      <p>每个月都有值得奔赴的理由</p>
     </div>
     <div class="festival-grid">
       <div class="festival-card rv">
-        <div class="festival-month">1-2月</div>
+        <div class="festival-month">1月</div>
         <div class="festival-name">🏮 趵突泉花灯会</div>
         <div class="festival-desc">始于1965年，每年春节期间举办。趵突泉公园内万盏花灯，泉水映灯、灯映水，是济南年味最浓的地方。</div>
+      </div>
+      <div class="festival-card rv">
+        <div class="festival-month">2月</div>
+        <div class="festival-name">🧧 大明湖春节庙会</div>
+        <div class="festival-desc">春节期间大明湖畔的传统庙会，有民俗表演、非遗市集、传统小吃。免费入园，是济南人过年必去之地。</div>
+      </div>
+      <div class="festival-card rv">
+        <div class="festival-month">3月</div>
+        <div class="festival-name">🌿 泉水人家踏春节</div>
+        <div class="festival-desc">春暖花开时节，护城河畔柳绿花红。市民沿泉水步道踏青，五龙潭、趵突泉畔春花烂漫，适合慢行赏春。</div>
       </div>
       <div class="festival-card rv">
         <div class="festival-month">4月</div>
@@ -259,9 +538,24 @@
         <div class="festival-desc">五龙潭公园200余株樱花盛开，是济南最美的赏樱地。免费开放，花期约2周。</div>
       </div>
       <div class="festival-card rv">
-        <div class="festival-month">5-6月</div>
+        <div class="festival-month">5月</div>
         <div class="festival-name">💧 济南泉水节</div>
         <div class="festival-desc">以泉水为主题的城市嘉年华。泉水取水仪式、龙舟赛、泉水美食节、护城河游船嘉年华，全城联动。</div>
+      </div>
+      <div class="festival-card rv">
+        <div class="festival-month">6月</div>
+        <div class="festival-name">🐉 端午龙舟赛</div>
+        <div class="festival-desc">护城河与大明湖上的龙舟竞渡，是济南夏季最热闹的水上赛事。岸边还有包粽子、挂艾草等民俗体验。</div>
+      </div>
+      <div class="festival-card rv">
+        <div class="festival-month">7月</div>
+        <div class="festival-name">🏊 泉水浴场开放季</div>
+        <div class="festival-desc">五龙潭天然泉水浴场进入最佳季节。泉水恒温18°C，酷暑中清凉宜人。夜晚护城河沿岸灯光璀璨，适合夜游。</div>
+      </div>
+      <div class="festival-card rv">
+        <div class="festival-month">8月</div>
+        <div class="festival-name">🎶 大明湖荷花音乐节</div>
+        <div class="festival-desc">大明湖荷花盛放之际，湖畔举办露天音乐会。荷塘月色、琴声悠扬，是济南夏夜最浪漫的文化活动。</div>
       </div>
       <div class="festival-card rv">
         <div class="festival-month">9月</div>
@@ -269,9 +563,14 @@
         <div class="festival-desc">始于元代，每年农历九月九重阳节前后举办。登山祈福、民俗表演、山货大集，是济南最古老的民俗活动。</div>
       </div>
       <div class="festival-card rv">
-        <div class="festival-month">10-11月</div>
-        <div class="festival-name">🍁 红叶节</div>
+        <div class="festival-month">10月</div>
+        <div class="festival-name">🍁 红叶谷赏红叶</div>
         <div class="festival-desc">红叶谷4000亩黄栌林漫山红遍。景区举办摄影大赛、红叶诗会，是北方赏红叶的最佳目的地之一。</div>
+      </div>
+      <div class="festival-card rv">
+        <div class="festival-month">11月</div>
+        <div class="festival-name">📚 泉城读书月</div>
+        <div class="festival-desc">济南市图书馆联动各区举办阅读推广活动。名人讲座、书展、亲子阅读，营造书香泉城氛围。</div>
       </div>
       <div class="festival-card rv">
         <div class="festival-month">12月</div>
@@ -331,4 +630,3 @@ document.querySelectorAll('.tl-item,.rv').forEach(el => io.observe(el));
   </script>
 </body>
 </html>
-<!-- auto-deploy test Fri Apr 24 09:33:17 PM CST 2026 -->

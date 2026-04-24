@@ -1,162 +1,155 @@
 #!/bin/bash
 # ══════════════════════════════════════
 # 济南旅游攻略 · 一键部署脚本
+# 支持 --token / --ssh / 自动检测 / CI 友好
 # ══════════════════════════════════════
 set -e
 
-# ── 颜色 ──
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; CYAN='\033[0;36m'; NC='\033[0m'
+
+# ── 解析参数 ──
+GITHUB_TOKEN="${GITHUB_TOKEN:-}"
+USE_SSH=false
+DEPLOY_BRANCH="gh-pages"
+
+show_help() {
+  echo "用法: bash deploy.sh [选项]"
+  echo ""
+  echo "选项:"
+  echo "  --token TOKEN   使用 GitHub Token 认证"
+  echo "  --ssh           使用 SSH Key 认证"
+  echo "  --help          显示此帮助"
+  echo ""
+  echo "认证优先级:"
+  echo "  1. --token 参数"
+  echo "  2. GITHUB_TOKEN 环境变量"
+  echo "  3. SSH Key (~/.ssh/id_ed25519)"
+  echo "  4. Git Credential Store"
+  echo ""
+  echo "示例:"
+  echo "  bash deploy.sh                          # 自动检测认证"
+  echo "  bash deploy.sh --token ghp_xxxx         # 使用 Token"
+  echo "  bash deploy.sh --ssh                    # 使用 SSH"
+  echo "  GITHUB_TOKEN=ghp_xxx bash deploy.sh     # 环境变量"
+  exit 0
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --token) GITHUB_TOKEN="$2"; shift 2 ;;
+    --ssh) USE_SSH=true; shift ;;
+    --help|-h) show_help ;;
+    *) echo -e "${RED}未知参数: $1${NC}"; show_help ;;
+  esac
+done
 
 echo -e "${CYAN}╔══════════════════════════════════════╗${NC}"
 echo -e "${CYAN}║   🏛️ 济南旅游攻略 · 部署工具       ║${NC}"
 echo -e "${CYAN}╚══════════════════════════════════════╝${NC}"
 echo ""
 
-# ── 检查环境 ──
-check_env() {
-  echo -e "${YELLOW}[1/5] 检查环境...${NC}"
-  
-  if ! command -v git &>/dev/null; then
-    echo -e "${RED}❌ 未安装 git${NC}"; exit 1
+# ── [1/5] 检查环境 ──
+echo -e "${YELLOW}[1/5] 检查环境...${NC}"
+for cmd in git node npx; do
+  if ! command -v $cmd &>/dev/null; then
+    echo -e "${RED}  ❌ 未安装 $cmd${NC}"; exit 1
   fi
-  
-  if ! command -v node &>/dev/null; then
-    echo -e "${RED}❌ 未安装 Node.js${NC}"; exit 1
-  fi
-  
-  if ! command -v npx &>/dev/null; then
-    echo -e "${RED}❌ 未安装 npx${NC}"; exit 1
-  fi
-  
-  echo -e "${GREEN}  ✓ git $(git --version | cut -d' ' -f3)${NC}"
-  echo -e "${GREEN}  ✓ node $(node -v)${NC}"
-  echo ""
-}
+done
+echo -e "${GREEN}  ✓ git $(git --version | cut -d' ' -f3)${NC}"
+echo -e "${GREEN}  ✓ node $(node -v)${NC}"
 
-# ── 检查/配置 GitHub 认证 ──
-check_auth() {
-  echo -e "${YELLOW}[2/5] 检查 GitHub 认证...${NC}"
-  
-  # 检查是否已有认证
-  if git ls-remote origin &>/dev/null; then
-    echo -e "${GREEN}  ✓ GitHub 认证已配置${NC}"
-    return 0
-  fi
-  
-  # 检查 SSH
-  if ssh -T git@github.com 2>&1 | grep -q "successfully"; then
-    echo -e "${GREEN}  ✓ SSH Key 可用${NC}"
-    git remote set-url origin git@github.com:Opennowing/jinan-travel-guide.git 2>/dev/null || true
-    return 0
-  fi
-  
-  # 需要配置 Token
-  echo -e "${YELLOW}  ⚠ GitHub 认证未配置${NC}"
-  echo ""
-  echo -e "  请提供 GitHub Personal Access Token:"
-  echo -e "  ${CYAN}申请地址: https://github.com/settings/tokens/new${NC}"
-  echo -e "  ${CYAN}权限勾选: repo (全部)${NC}"
-  echo ""
-  read -p "  粘贴 Token (ghp_xxxx): " GITHUB_TOKEN
-  
-  if [ -z "$GITHUB_TOKEN" ]; then
-    echo -e "${RED}  ❌ Token 为空，跳过部署${NC}"; return 1
-  fi
-  
-  git remote set-url origin "https://${GITHUB_TOKEN}@github.com/Opennowing/jinan-travel-guide.git"
-  
-  # 验证
-  if git ls-remote origin &>/dev/null; then
+# ── [2/5] 配置认证 ──
+echo ""
+echo -e "${YELLOW}[2/5] 配置 GitHub 认证...${NC}"
+
+ORIGIN_URL=$(git remote get-url origin 2>/dev/null || echo "")
+
+# 方式 1: --token 参数或环境变量
+if [ -n "$GITHUB_TOKEN" ]; then
+  REMOTE_REPO=$(echo "$ORIGIN_URL" | sed -E 's|git@github.com:|https://github.com/|; s|\.git$||')
+  git remote set-url origin "https://${GITHUB_TOKEN}@github.com/$(echo "$ORIGIN_URL" | sed -E 's|.*github.com[:/](.*)\.git$|\1|; s|.*github.com[:/](.*)$|\1|')"
+  if git ls-remote origin &>/dev/null 2>&1; then
     echo -e "${GREEN}  ✓ Token 认证成功${NC}"
-    # 保存到 git credential
-    git config credential.helper store
-    return 0
   else
-    echo -e "${RED}  ❌ Token 认证失败，请检查${NC}"; return 1
+    echo -e "${RED}  ❌ Token 认证失败${NC}"; exit 1
   fi
-}
 
-# ── 构建 ──
-build() {
-  echo ""
-  echo -e "${YELLOW}[3/5] 构建项目...${NC}"
-  
-  if [ ! -d "node_modules" ]; then
-    echo -e "  安装依赖..."
-    npm install 2>&1 | tail -3
+# 方式 2: --ssh 标志
+elif [ "$USE_SSH" = true ]; then
+  if [ -f "$HOME/.ssh/id_ed25519" ] || [ -f "$HOME/.ssh/id_rsa" ]; then
+    REPO_PATH=$(echo "$ORIGIN_URL" | sed -E 's|https://github.com/||; s|git@github.com:||; s|\.git$||')
+    git remote set-url origin "git@github.com:${REPO_PATH}.git"
+    if git ls-remote origin &>/dev/null 2>&1; then
+      echo -e "${GREEN}  ✓ SSH 认证成功${NC}"
+    else
+      echo -e "${RED}  ❌ SSH 认证失败${NC}"; exit 1
+    fi
+  else
+    echo -e "${RED}  ❌ 未找到 SSH Key${NC}"; exit 1
   fi
-  
-  npx vite build 2>&1 | tail -5
-  
-  if [ ! -d "dist" ]; then
-    echo -e "${RED}  ❌ 构建失败，dist/ 目录不存在${NC}"; exit 1
-  fi
-  
-  local size=$(du -sh dist/ | cut -f1)
-  echo -e "${GREEN}  ✓ 构建完成，dist/ 大小: ${size}${NC}"
-}
 
-# ── 推送 main 分支 ──
-push_main() {
-  echo ""
-  echo -e "${YELLOW}[4/5] 推送 main 分支...${NC}"
-  
-  # 检查是否有未提交的更改
-  if ! git diff-index --quiet HEAD -- 2>/dev/null; then
-    echo -e "  发现未提交的更改，自动提交..."
-    git add -A
-    git commit -m "auto: 部署前自动提交 $(date +%Y-%m-%d_%H:%M)" 2>/dev/null || true
+# 方式 3: 自动检测
+else
+  if git ls-remote origin &>/dev/null 2>&1; then
+    echo -e "${GREEN}  ✓ 认证可用 (自动检测)${NC}"
+  elif ssh -T git@github.com 2>&1 | grep -q "successfully"; then
+    REPO_PATH=$(echo "$ORIGIN_URL" | sed -E 's|https://github.com/||; s|git@github.com:||; s|\.git$||')
+    git remote set-url origin "git@github.com:${REPO_PATH}.git"
+    echo -e "${GREEN}  ✓ SSH 认证成功${NC}"
+  else
+    echo -e "${RED}  ❌ 未找到认证方式${NC}"
+    echo -e "${YELLOW}  请使用 --token 或 --ssh 参数，或设置 GITHUB_TOKEN 环境变量${NC}"
+    echo -e "${YELLOW}  运行 bash deploy-env.sh 查看详细配置指南${NC}"
+    exit 1
   fi
-  
-  git push origin main 2>&1
-  echo -e "${GREEN}  ✓ main 分支已推送${NC}"
-}
+fi
 
-# ── 部署到 gh-pages ──
-deploy_ghpages() {
-  echo ""
-  echo -e "${YELLOW}[5/5] 部署到 gh-pages...${NC}"
-  
-  # 创建临时分支
-  local TEMP_BRANCH="gh-pages-deploy-$$"
-  
-  # 使用 git worktree 或 subtree 方式
-  cd dist/
-  git init
+# ── [3/5] 构建 ──
+echo ""
+echo -e "${YELLOW}[3/5] 构建项目...${NC}"
+if [ ! -d "node_modules" ]; then
+  echo -e "  安装依赖..."
+  npm install 2>&1 | tail -3
+fi
+npx vite build 2>&1 | tail -5
+if [ ! -d "dist" ]; then
+  echo -e "${RED}  ❌ 构建失败${NC}"; exit 1
+fi
+echo -e "${GREEN}  ✓ 构建完成 ($(du -sh dist/ | cut -f1))${NC}"
+
+# ── [4/5] 推送 main ──
+echo ""
+echo -e "${YELLOW}[4/5] 推送 main 分支...${NC}"
+if ! git diff-index --quiet HEAD -- 2>/dev/null; then
   git add -A
-  git commit -m "deploy: $(date +%Y-%m-%d_%H:%M) $(cd .. && git log --oneline -1)"
-  git branch -M gh-pages
-  git remote add origin "$(cd .. && git remote get-url origin)" 2>/dev/null || \
-    git remote set-url origin "$(cd .. && git remote get-url origin)"
-  git push -f origin gh-pages 2>&1
-  cd ..
-  
-  echo -e "${GREEN}  ✓ gh-pages 已部署${NC}"
-}
+  git commit -m "auto: 部署前自动提交 $(date +%Y-%m-%d_%H:%M)" 2>/dev/null || true
+fi
+git push origin main 2>&1
+echo -e "${GREEN}  ✓ main 已推送${NC}"
+
+# ── [5/5] 部署 gh-pages ──
+echo ""
+echo -e "${YELLOW}[5/5] 部署到 gh-pages...${NC}"
+cd dist/
+git init -q
+git config user.name "$(cd .. && git config user.name 2>/dev/null || echo 'Deploy Bot')"
+git config user.email "$(cd .. && git config user.email 2>/dev/null || echo 'bot@deploy.local')"
+git add -A
+git commit -q -m "deploy: $(date +%Y-%m-%d_%H:%M) $(cd .. && git log --oneline -1)"
+git branch -M gh-pages
+ORIGIN_URL=$(cd .. && git remote get-url origin)
+git remote add origin "$ORIGIN_URL" 2>/dev/null || git remote set-url origin "$ORIGIN_URL"
+git push -fq origin gh-pages 2>&1
+cd ..
+echo -e "${GREEN}  ✓ gh-pages 已部署${NC}"
 
 # ── 完成 ──
-done_msg() {
-  echo ""
-  echo -e "${CYAN}╔══════════════════════════════════════╗${NC}"
-  echo -e "${CYAN}║   ✅ 部署完成！                      ║${NC}"
-  echo -e "${CYAN}║                                      ║${NC}"
-  echo -e "${CYAN}║   🌐 线上地址:                       ║${NC}"
-  echo -e "${CYAN}║   https://opennowing.github.io/      ║${NC}"
-  echo -e "${CYAN}║       jinan-travel-guide/             ║${NC}"
-  echo -e "${CYAN}║                                      ║${NC}"
-  echo -e "${CYAN}║   📝 后续更新只需运行:               ║${NC}"
-  echo -e "${CYAN}║   bash deploy.sh                     ║${NC}"
-  echo -e "${CYAN}╚══════════════════════════════════════╝${NC}"
-}
-
-# ── 主流程 ──
-check_env
-if check_auth; then
-  build
-  push_main
-  deploy_ghpages
-  done_msg
-else
-  echo -e "${RED}认证失败，无法部署${NC}"
-  exit 1
-fi
+echo ""
+echo -e "${CYAN}╔══════════════════════════════════════╗${NC}"
+echo -e "${CYAN}║   ✅ 部署完成！                      ║${NC}"
+echo -e "${CYAN}║                                      ║${NC}"
+echo -e "${CYAN}║   🌐 https://opennowing.github.io/  ║${NC}"
+echo -e "${CYAN}║       jinan-travel-guide/             ║${NC}"
+echo -e "${CYAN}║                                      ║${NC}"
+echo -e "${CYAN}║   📝 后续更新: bash deploy.sh       ║${NC}"
+echo -e "${CYAN}╚══════════════════════════════════════╝${NC}"

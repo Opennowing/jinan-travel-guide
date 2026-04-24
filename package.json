@@ -10,7 +10,10 @@
     "deploy": "bash deploy.sh",
     "setup": "bash setup.sh",
     "live": "bash live.sh",
-    "push": "bash push.sh"
+    "push": "bash push.sh",
+    "watch": "bash watch.sh",
+    "status": "bash status.sh",
+    "rollback": "bash rollback.sh"
   },
   "devDependencies": {
     "vite": "^6.0.0"

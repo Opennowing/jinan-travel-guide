@@ -1,5 +1,7 @@
 # 🏛️ 济南旅游攻略 · 泉城
 
+[![Deploy to GitHub Pages](https://github.com/Opennowing/jinan-travel-guide/actions/workflows/deploy.yml/badge.svg)](https://github.com/Opennowing/jinan-travel-guide/actions/workflows/deploy.yml)
+
 > 72泉涌，千年文脉 — 济南旅游一站式攻略
 
 🌐 **线上地址**: https://opennowing.github.io/jinan-travel-guide/
@@ -91,6 +93,27 @@ bash deploy.sh
 - ✅ 行程页全面升级（5条路线/时间轴/费用）
 - ✅ 指南页全面升级（计算器/清单/FAQ）
 - ✅ 首页全面升级（搜索/季节/路线/评价/SEO）
+
+## 🚦 CI/CD 自动部署
+
+本项目使用 GitHub Actions 实现自动部署，无需手动操作。
+
+### 自动部署流程
+
+1. **推送到 `main` 分支** → 自动触发 `deploy.yml`
+2. **工作流步骤**：Checkout → Node.js 18 → npm install → npm run build → 部署 `dist/` 到 `gh-pages` 分支
+3. **访问地址**：https://opennowing.github.io/jinan-travel-guide/
+
+### PR 预览
+
+1. **创建 PR 到 `main`** → 自动触发 `pr-preview.yml`
+2. **构建并部署** 到 `gh-pages-preview` 分支
+3. **自动在 PR 中评论** 预览链接
+
+### 工作流文件
+
+- `.github/workflows/deploy.yml` — 主部署工作流（push 到 main 触发）
+- `.github/workflows/pr-preview.yml` — PR 预览工作流（PR 到 main 触发）
 
 ## 📄 License
 

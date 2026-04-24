@@ -7,6 +7,8 @@
   <meta name="description" content="济南旅游攻略：趵突泉、大明湖、千佛山，鲁菜美食，泉水人家。一座让你慢下来的城市。">
   <link rel="stylesheet" href="/src/styles/main.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛲</text></svg>">
+  <link rel="manifest" href="/jinan-travel-guide/manifest.json">
+  <meta name="theme-color" content="#c9a96e">
   <style>
     /* ── Hero ── */
     .hero{
@@ -382,6 +384,17 @@
     loadSpots();
     loadFood();
     loadWeather();
+  </script>
+
+  <!-- PWA Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/jinan-travel-guide/sw.js')
+          .then(reg => console.log('SW registered:', reg.scope))
+          .catch(err => console.log('SW failed:', err));
+      });
+    }
   </script>
 </body>
 </html>

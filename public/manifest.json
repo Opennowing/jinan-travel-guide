@@ -1,0 +1,26 @@
+{
+  "name": "济南旅游攻略 · 泉城",
+  "short_name": "泉城攻略",
+  "description": "72泉涌，千年文脉 — 济南旅游一站式攻略",
+  "start_url": "/jinan-travel-guide/",
+  "scope": "/jinan-travel-guide/",
+  "display": "standalone",
+  "background_color": "#fff",
+  "theme_color": "#c9a96e",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/jinan-travel-guide/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/jinan-travel-guide/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["travel", "navigation"]
+}

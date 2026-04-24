@@ -46,6 +46,11 @@
     .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
     .hero-slide.active{opacity:1}
     .hero-slide img{width:100%;height:100%;object-fit:cover;filter:brightness(.3) saturate(1.3)}
+    .hero-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);width:48px;height:48px;border-radius:50%;cursor:pointer;font-size:1.3rem;display:flex;align-items:center;justify-content:center;transition:all .3s;opacity:0}
+    .hero:hover .hero-arrow{opacity:1}
+    .hero-arrow:hover{background:rgba(255,255,255,.25);color:#fff;transform:translateY(-50%) scale(1.08)}
+    .hero-arrow.prev{left:24px}
+    .hero-arrow.next{right:24px}
     .hero::before{content:'';position:absolute;top:-40%;right:-20%;width:700px;height:700px;background:radial-gradient(circle,rgba(42,157,143,.18) 0%,transparent 70%);pointer-events:none;animation:heroGlow1 8s ease-in-out infinite alternate}
     .hero::after{content:'';position:absolute;bottom:-30%;left:-15%;width:500px;height:500px;background:radial-gradient(circle,rgba(201,169,110,.12) 0%,transparent 70%);pointer-events:none;animation:heroGlow2 10s ease-in-out infinite alternate}
     @keyframes heroGlow1{0%{opacity:.5;transform:translate(0,0)}100%{opacity:1;transform:translate(-30px,20px)}}
@@ -304,6 +309,8 @@
         <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600&q=80" alt="鲁菜美食">
       </div>
     </div>
+    <button class="hero-arrow prev" id="heroPrev" aria-label="上一张">‹</button>
+    <button class="hero-arrow next" id="heroNext" aria-label="下一张">›</button>
 
     <!-- Fountain Animation Layer -->
     <canvas class="fountain-canvas" id="fountainCanvas"></canvas>
@@ -898,13 +905,23 @@
     // ── Hero Photo Carousel ──
     (function initHeroCarousel(){
       const slides = document.querySelectorAll('.hero-slide');
+      const prev = document.getElementById('heroPrev');
+      const next = document.getElementById('heroNext');
       if (!slides.length) return;
-      let current = 0;
-      setInterval(() => {
+      let current = 0, timer = null;
+      const INTERVAL = 5000;
+
+      function goTo(idx) {
         slides[current].classList.remove('active');
-        current = (current + 1) % slides.length;
+        current = (idx + slides.length) % slides.length;
         slides[current].classList.add('active');
-      }, 5000);
+      }
+      function startAuto() { stopAuto(); timer = setInterval(() => goTo(current + 1), INTERVAL); }
+      function stopAuto() { if (timer) { clearInterval(timer); timer = null; } }
+
+      prev.addEventListener('click', () => { goTo(current - 1); startAuto(); });
+      next.addEventListener('click', () => { goTo(current + 1); startAuto(); });
+      startAuto();
     })();
 
     // ── Lazy Image Loading with blur-up ──

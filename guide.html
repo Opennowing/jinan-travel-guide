@@ -779,8 +779,9 @@
     async function loadWeather() {
       try {
         // Current weather
-        const res = await fetch('https://wttr.in/Jinan?format=%t|%C|%h|%w&lang=zh');
+        const res = await fetch('https://wttr.in/Jinan?format=%t|%C|%h|%w&lang=zh', { headers: { 'User-Agent': 'curl/8.0' } });
         const text = await res.text();
+        if (text.includes('<!DOCTYPE') || text.includes('<html')) throw new Error('HTML');
         const [temp, desc, humidity, wind] = text.trim().split('|');
         document.getElementById('wTemp').textContent = temp;
         document.getElementById('wDesc').textContent = desc || '济南天气';

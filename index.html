@@ -598,8 +598,9 @@
     // ── Weather ──
     async function loadWeather() {
       try {
-        const res = await fetch('https://wttr.in/Jinan?format=%t|%C&lang=zh');
+        const res = await fetch('https://wttr.in/Jinan?format=%t|%C&lang=zh', { headers: { 'User-Agent': 'curl/8.0' } });
         const text = await res.text();
+        if (text.includes('<!DOCTYPE') || text.includes('<html')) throw new Error('HTML');
         const [temp, desc] = text.trim().split('|');
         document.getElementById('heroWeather').textContent = `🌤️ 济南 ${temp} ${desc || ''}`;
       } catch(e) {

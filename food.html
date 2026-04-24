@@ -469,7 +469,6 @@
     import { initPWA } from '/src/components/pwa.js';
     import { initSocialFeatures } from '/src/components/social.js';
     initPWA();
-
     initAll();
     initSocialFeatures();
 
@@ -479,6 +478,300 @@
     let currentCat = '全部';
     let searchQuery = '';
     let foodObserver = null;
+
+    // ── Pinyin Mapping ──
+    const pinyinMap = {
+      '糖醋黄河鲤鱼': ['tangcu', 'tangcuhuangheliyu', 'tangcu liyu', 'tchhly', 'liyu'],
+      '九转大肠': ['jiuzhuandachang', 'jiuzhuan', 'jzdc', 'dachang'],
+      '把子肉': ['bazirou', 'bazhi', 'bzr'],
+      '奶汤蒲菜': ['naitangpucai', 'naitang', 'tpc', 'pucai'],
+      '油旋': ['youxuan', 'yx'],
+      '草包包子': ['caobao', 'caobaobaozi', 'cbbz', 'baozi'],
+      '甜沫': ['tianmo', 'tm'],
+      '泉水宴': ['quanshuiyan', 'quanshui', 'qsy'],
+      '爆炒腰花': ['baochaoyaohua', 'baochao', 'bcyh', 'yaohua'],
+      '葱烧海参': ['congshaohaishen', 'congshao', 'cshs', 'haishen'],
+      '济南烧烤': ['jinanshaokao', 'shaokao', 'jnsk'],
+      '泉水老酸奶': ['quanshuilaosuannai', 'suannai', 'qslsn'],
+      '泉水泡茶': ['quanshuipaocha', 'paocha', 'qspc'],
+      '黄家烤肉': ['huangjiakaorou', 'huangjia', 'hjkr'],
+      '黄焖鸡': ['huangmenji', 'huangmen', 'hmj'],
+      '四喜丸子': ['sixiwanzi', 'sixi', 'sxwz'],
+      '济南锅贴': ['jinanguotie', 'guotie', 'jngt'],
+      '老济南鸡汤': ['laojinanjitang', 'jitang', 'ljnjt'],
+      '鸡汤蒲菜': ['jitangpucai', 'jtpc'],
+      '烤肉拌面': ['kaoroubanmian', 'kaorou', 'krbm'],
+      '荷叶粥': ['heyezhou', 'heye', 'hyz'],
+      '周村烧饼': ['zhouncunshaobing', 'zhoucun', 'zcsb'],
+      '德州扒鸡': ['dezhoubaji', 'dezhou', 'dzbj'],
+      '棉纱包': ['mianshabao', 'miansha', 'msb'],
+      '鸡腿饭': ['jituiifan', 'jitui', 'jtf'],
+      '酸醋藕片': ['suancuoupian', 'suancu', 'scop'],
+      '猪肉水煎包': ['zhuroushuijianbao', 'shuijianbao', 'zrsjb'],
+      '莲藕茶': ['lianoucha', 'lianou', 'loc'],
+      '黄河鲤鱼汤': ['huangheliyutang', 'liyutang', 'hhlyt'],
+      '老醋粉汤': ['laoocufentang', 'fentang', 'lcft'],
+      '炒边肉': ['chaobianrou', 'chaobian', 'cbr'],
+      '章丘大葱': ['zhangqiucong', 'zhangqiu', 'zqdc'],
+      '鸡蛋灌饼': ['jidanmguanbing', 'jidan', 'jdgb'],
+      '肉夹馍': ['roujiamo', 'rjm'],
+      '东坡肉': ['dongporou', 'dongpo', 'dpr'],
+      '脆皮鸡': ['cuipiji', 'cuipi', 'cpj'],
+      '炉火烧烤': ['luhuoshaokao', 'luhuo', 'lhsk'],
+      '鸡汤面': ['jitangmian', 'jtm'],
+      '麻辣小龙虾': ['malaxialongxia', 'malaxia', 'mlxl'],
+      '豆腐皮': ['doufupi', 'doufu', 'dfp'],
+      '红烧肘子': ['hongshaozhouzi', 'hongshao', 'hszz'],
+      '清蒸鲈鱼': ['qingzhenglluyu', 'qingzheng', 'qzly', 'luyu'],
+      '济南卤味': ['jinanluwei', 'luwei', 'jnlw'],
+      '济南汤圆': ['jinantangyuan', 'tangyuan', 'jnty'],
+      '济南粽子': ['jinanzongzi', 'zongzi', 'jnzl'],
+      '面筋汤': ['mianjintang', 'mianjin', 'mjt'],
+      '醋溜白菜': ['culiubacai', 'culiu', 'clbc'],
+      '酸辣土豆丝': ['suanlatudousi', 'tudou', 'sltd'],
+      '番茄炒蛋': ['fanqiechaodan', 'fanqie', 'fqcd'],
+      '把子肉盖饭': ['bazirougaifan', 'gaifan', 'bzrgf'],
+      '酱鸡腿': ['jiangjitui', 'jiang', 'jjt'],
+      '泉水豆腐': ['quanshuidoufu', 'qsdF'],
+      '水煎包': ['shuijianbao2', 'sjb'],
+      '驴打滚': ['lvdagun', 'ldg'],
+      '糖葫芦': ['tanghulu', 'thl'],
+      '爆浆鸡排': ['baojiangjipai', 'baojiang', 'bjjp'],
+      '蒸碗': ['zhengwan', 'zw'],
+      '济南肉夹馍': ['jinanroujiamo', 'jnrjm'],
+      '黄焖排骨': ['huangmenpaigu', 'hmpg'],
+      '白斩鸡': ['baizhanji', 'bzj'],
+      '济南肉饼': ['jinanroubing', 'jnrb'],
+      '济南粥铺': ['jinanzhoupu', 'jnzp'],
+      '济南馄饨': ['jinanhuntun', 'jnht'],
+      '济南串串': ['jinanchuanchuan', 'jncc'],
+      '麻辣烫': ['malatang', 'mlt'],
+      '济南扎啤': ['jinanzapi', 'jnzp2'],
+      '酸梅汤': ['suanmeitang', 'smt'],
+      '糯米糍': ['nuomici', 'nmc']
+    };
+
+    // ── Nutrition Data ──
+    const nutritionData = {
+      'tangcu': { kcal: 650, suit: '适合宴请、聚餐', tags: ['高蛋白', '高碳水'] },
+      'jiuzhuan': { kcal: 480, suit: '适合内脏爱好者', tags: ['高蛋白', '高脂肪'] },
+      'bazirou': { kcal: 550, suit: '适合体力劳动者', tags: ['高蛋白', '高碳水', '高脂肪'] },
+      'naichangpu': { kcal: 180, suit: '适合清淡饮食者', tags: ['低热量', '素食可选'] },
+      'youxuan': { kcal: 280, suit: '适合早餐', tags: ['高碳水'] },
+      'caobao': { kcal: 320, suit: '适合全家', tags: ['高蛋白', '高碳水'] },
+      'tianmo': { kcal: 220, suit: '适合早餐', tags: ['高碳水', '素食可选'] },
+      'quanshui': { kcal: 450, suit: '适合宴请', tags: ['高蛋白'] },
+      'baobizhizha': { kcal: 380, suit: '适合内脏爱好者', tags: ['高蛋白'] },
+      'congsao': { kcal: 320, suit: '适合进补', tags: ['高蛋白', '低脂肪'] },
+      'shaokao': { kcal: 600, suit: '适合夜宵聚餐', tags: ['高蛋白', '高脂肪'] },
+      'quanlaonai': { kcal: 180, suit: '适合所有人群', tags: ['高蛋白', '低热量'] },
+      'quancha': { kcal: 5, suit: '适合所有人群', tags: ['低热量', '素食可选'] },
+      'huangjia': { kcal: 520, suit: '适合聚餐', tags: ['高蛋白', '高脂肪'] },
+      'huangmenji': { kcal: 480, suit: '适合上班族', tags: ['高蛋白', '高碳水'] },
+      'sixiniao': { kcal: 580, suit: '适合宴请', tags: ['高蛋白', '高脂肪'] },
+      'guotie': { kcal: 350, suit: '适合早餐', tags: ['高碳水', '高蛋白'] },
+      'jitang': { kcal: 280, suit: '适合冬季暖身', tags: ['高蛋白'] },
+      'jitang-pucai': { kcal: 220, suit: '适合清淡饮食', tags: ['高蛋白', '低脂肪'] },
+      'kaorou-mian': { kcal: 680, suit: '适合体力劳动者', tags: ['高蛋白', '高碳水'] },
+      'hetang': { kcal: 150, suit: '适合夏季消暑', tags: ['低热量', '素食可选'] },
+      'zhoucun-shaobing': { kcal: 250, suit: '适合零食', tags: ['高碳水'] },
+      'dezhou-baji': { kcal: 420, suit: '适合伴手礼', tags: ['高蛋白'] },
+      'mian-sha-bao': { kcal: 220, suit: '适合怀旧', tags: ['高碳水'] },
+      'jitui-fan': { kcal: 550, suit: '适合上班族', tags: ['高蛋白', '高碳水'] },
+      'suan-cu-ou-pian': { kcal: 120, suit: '适合开胃', tags: ['低热量', '素食可选'] },
+      'zhurou-shuijianbao': { kcal: 380, suit: '适合早餐', tags: ['高蛋白', '高碳水'] },
+      'lian-ou-cha': { kcal: 80, suit: '适合夏季消暑', tags: ['低热量', '素食可选'] },
+      'huang-he-li-yu-tang': { kcal: 350, suit: '适合冬季暖身', tags: ['高蛋白'] },
+      'laodu-fen-tang': { kcal: 200, suit: '适合冬季暖身', tags: ['高碳水', '素食可选'] },
+      'chao-bian-rou': { kcal: 420, suit: '适合家常', tags: ['高蛋白'] },
+      'zhangqiu-cong': { kcal: 60, suit: '适合开胃', tags: ['低热量', '素食可选'] },
+      'ji-dan-guan-bing': { kcal: 320, suit: '适合早餐', tags: ['高碳水', '高蛋白'] },
+      'rou-jia-mo': { kcal: 420, suit: '适合快餐', tags: ['高蛋白', '高碳水'] },
+      'dongpo': { kcal: 600, suit: '适合聚餐', tags: ['高蛋白', '高脂肪'] },
+      'cuipi': { kcal: 480, suit: '适合宴请', tags: ['高蛋白'] },
+      'luhuoshao': { kcal: 550, suit: '适合夜宵', tags: ['高蛋白', '高脂肪'] },
+      'jitang-mian': { kcal: 380, suit: '适合冬季暖身', tags: ['高碳水', '高蛋白'] },
+      'mala': { kcal: 350, suit: '适合夏季夜宵', tags: ['高蛋白'] },
+      'doupi': { kcal: 180, suit: '适合零食', tags: ['高蛋白', '素食可选'] },
+      'hongshao': { kcal: 650, suit: '适合宴请', tags: ['高蛋白', '高脂肪'] },
+      'qingzheng': { kcal: 280, suit: '适合清淡饮食', tags: ['高蛋白', '低脂肪'] },
+      'luwei': { kcal: 350, suit: '适合下酒', tags: ['高蛋白'] },
+      'tangyuan': { kcal: 300, suit: '适合节日', tags: ['高碳水'] },
+      'zongzi': { kcal: 280, suit: '适合端午', tags: ['高碳水'] },
+      'mianjin': { kcal: 180, suit: '适合早餐', tags: ['高碳水', '素食可选'] },
+      'baicai': { kcal: 80, suit: '适合清淡饮食', tags: ['低热量', '素食可选'] },
+      'tudou': { kcal: 150, suit: '适合家常', tags: ['高碳水', '素食可选'] },
+      'fanqie': { kcal: 180, suit: '适合全家', tags: ['低热量', '素食可选'] },
+      'mifan': { kcal: 650, suit: '适合体力劳动者', tags: ['高蛋白', '高碳水', '高脂肪'] },
+      'jitui': { kcal: 450, suit: '适合快餐', tags: ['高蛋白'] },
+      'doufu': { kcal: 120, suit: '适合清淡饮食', tags: ['高蛋白', '低热量', '素食可选'] },
+      'baozi': { kcal: 300, suit: '适合早餐', tags: ['高碳水'] },
+      'lvdagun': { kcal: 280, suit: '适合甜食爱好者', tags: ['高碳水'] },
+      'tanghulu': { kcal: 200, suit: '适合冬日零食', tags: ['高碳水'] },
+      'baojiang': { kcal: 480, suit: '适合年轻人', tags: ['高蛋白', '高脂肪'] },
+      'zhengzhou': { kcal: 500, suit: '适合宴请', tags: ['高蛋白', '高脂肪'] },
+      'roujiamo': { kcal: 400, suit: '适合快餐', tags: ['高蛋白', '高碳水'] },
+      'huangmen-pai': { kcal: 520, suit: '适合家常', tags: ['高蛋白', '高碳水'] },
+      'baipi': { kcal: 300, suit: '适合清淡饮食', tags: ['高蛋白', '低脂肪'] },
+      'roubing': { kcal: 380, suit: '适合早餐', tags: ['高蛋白', '高碳水'] },
+      'zhou': { kcal: 180, suit: '适合养生', tags: ['高碳水', '素食可选'] },
+      'huntun': { kcal: 280, suit: '适合冬季早餐', tags: ['高蛋白', '高碳水'] },
+      'chuan': { kcal: 450, suit: '适合夜宵聚餐', tags: ['高蛋白'] },
+      'malatang': { kcal: 400, suit: '适合夜宵', tags: ['高蛋白', '高碳水'] },
+      'jiu': { kcal: 200, suit: '适合夏季聚餐', tags: [] },
+      'suanmei': { kcal: 120, suit: '适合夏季消暑', tags: ['低热量', '素食可选'] },
+      'nuomici': { kcal: 250, suit: '适合甜食爱好者', tags: ['高碳水'] }
+    };
+
+    // ── Food Routes ──
+    const foodRoutes = [
+      {
+        name: '老城区早餐线', icon: '🌅',
+        time: '约 2 小时（7:00-9:00）', cost: '人均 ¥40-60',
+        desc: '从一碗甜沫开始，打卡老城区最经典的早餐',
+        stops: [
+          { name: '春江饭店', dish: '甜沫 + 油旋', detail: '先来一碗咸甜沫配油旋，济南早餐的灵魂组合' },
+          { name: '油旋张(泉城路店)', dish: '现烤油旋', detail: '趁热吃，外酥内软，葱香四溢' },
+          { name: '草包包子铺(总店)', dish: '鲜肉包 + 三鲜包', detail: '皮薄馅大汁多，荷叶包裹的百年老味道' },
+          { name: '超意兴', dish: '把子肉盖饭', detail: '一碗把子肉浇汤汁配米饭，元气满满开启一天' }
+        ]
+      },
+      {
+        name: '鲁菜经典线', icon: '🍲',
+        time: '约 3 小时（11:30-14:30）', cost: '人均 ¥80-120',
+        desc: '品尝鲁菜精髓，体验八大菜系之首的风采',
+        stops: [
+          { name: '聚丰德(泉城路店)', dish: '糖醋黄河鲤鱼', detail: '头尾翘起形似龙门，外酥里嫩的经典' },
+          { name: '聚丰德(泉城路店)', dish: '九转大肠', detail: '酸甜苦辣咸五味俱全，同一家店顺路点' },
+          { name: '燕喜堂', dish: '奶汤蒲菜', detail: '大明湖特产蒲菜配奶白高汤，济南第一汤菜' },
+          { name: '闫府私房菜', dish: '葱烧海参', detail: '章丘大葱配辽参，鲁菜高端代表作' }
+        ]
+      },
+      {
+        name: '夜宵烧烤线', icon: '🌙',
+        time: '约 3 小时（18:00-21:00）', cost: '人均 ¥60-100',
+        desc: '夏夜标配，撸串喝扎啤的济南之夜',
+        stops: [
+          { name: '回民小区烧烤一条街', dish: '羊肉串 + 扎啤', detail: '炭火烤的羊肉串，配冰扎啤是灵魂' },
+          { name: '回民小区面馆', dish: '烤肉拌面', detail: '碳水+蛋白质的完美组合，先垫垫肚子' },
+          { name: '宽厚里串串店', dish: '串串香', detail: '逛宽厚里顺便来几串，边走边吃' },
+          { name: '老金烧烤', dish: '果木烤串 + 烤蒜瓣肉', detail: '果木炭火慢烤，蒜瓣肉是隐藏菜单' }
+        ]
+      }
+    ];
+
+    // ── Compare State ──
+    let compareList = JSON.parse(localStorage.getItem('jinan-food-compare') || '[]');
+    const MAX_COMPARE = 3;
+
+    function saveCompare() {
+      localStorage.setItem('jinan-food-compare', JSON.stringify(compareList));
+      updateCompareUI();
+    }
+
+    function toggleCompare(shopName, foodName) {
+      const idx = compareList.findIndex(c => c.shop === shopName);
+      if (idx >= 0) {
+        compareList.splice(idx, 1);
+      } else {
+        if (compareList.length >= MAX_COMPARE) {
+          alert('最多对比 ' + MAX_COMPARE + ' 家餐厅，请先移除一个');
+          return;
+        }
+        const food = allFoods.find(f => f.name === foodName);
+        const shop = food?.shops.find(s => s.name === shopName);
+        if (shop) {
+          compareList.push({
+            shop: shop.name, food: foodName, avg: shop.avg,
+            rating: shop.rating, bestDish: shop.bestDish || '',
+            wait: shop.wait || '未知', addr: shop.addr || ''
+          });
+        }
+      }
+      saveCompare();
+      renderFoods();
+    }
+
+    function updateCompareUI() {
+      const fab = document.getElementById('compareFab');
+      const count = document.getElementById('compareCount');
+      count.textContent = compareList.length;
+      fab.classList.toggle('visible', compareList.length > 0);
+    }
+
+    function renderComparePanel() {
+      const content = document.getElementById('compareContent');
+      if (compareList.length === 0) {
+        content.innerHTML = '<div class="compare-empty">还没有添加对比餐厅<br><small style="color:var(--text3)">在美食卡片上点击「对比」按钮添加</small></div>';
+        return;
+      }
+      const rows = [
+        { label: '餐厅', key: 'shop' },
+        { label: '菜品', key: 'food' },
+        { label: '人均', key: 'avg' },
+        { label: '评分', key: 'rating', format: v => stars(v) + ' ' + v },
+        { label: '推荐菜', key: 'bestDish' },
+        { label: '等待时间', key: 'wait' },
+        { label: '地址', key: 'addr' }
+      ];
+      let html = '<table class="compare-table"><thead><tr><th></th>';
+      compareList.forEach(c => {
+        html += '<th>' + (c.shop.length > 8 ? c.shop.substring(0, 8) + '…' : c.shop) + '</th>';
+      });
+      html += '</tr></thead><tbody>';
+      rows.forEach(r => {
+        html += '<tr><td>' + r.label + '</td>';
+        compareList.forEach(c => {
+          const val = r.format ? r.format(c[r.key]) : (c[r.key] || '-');
+          html += '<td>' + val + '</td>';
+        });
+        html += '</tr>';
+      });
+      html += '</tbody></table>';
+      content.innerHTML = html;
+    }
+
+    // ── Search History ──
+    const HISTORY_KEY = 'jinan-food-search-history';
+    const MAX_HISTORY = 5;
+
+    function getSearchHistory() {
+      try { return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch(e) { return []; }
+    }
+
+    function addSearchHistory(q) {
+      if (!q.trim()) return;
+      let history = getSearchHistory().filter(h => h !== q);
+      history.unshift(q);
+      if (history.length > MAX_HISTORY) history = history.slice(0, MAX_HISTORY);
+      localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+    }
+
+    function renderSearchHistory() {
+      const el = document.getElementById('searchHistory');
+      const history = getSearchHistory();
+      if (history.length === 0) { el.classList.remove('visible'); return; }
+      let html = '<div class="search-history-label">🕐 最近搜索</div>';
+      history.forEach(h => {
+        html += '<div class="search-history-item" data-q="' + h + '">🔍 ' + h + '</div>';
+      });
+      html += '<div class="search-history-clear" id="clearHistory">清除搜索历史</div>';
+      el.innerHTML = html;
+      el.classList.add('visible');
+      el.querySelectorAll('.search-history-item').forEach(item => {
+        item.addEventListener('click', () => {
+          document.getElementById('foodSearch').value = item.dataset.q;
+          searchQuery = item.dataset.q;
+          el.classList.remove('visible');
+          renderFoods();
+        });
+      });
+      const clearBtn = document.getElementById('clearHistory');
+      if (clearBtn) clearBtn.addEventListener('click', () => {
+        localStorage.removeItem(HISTORY_KEY);
+        el.classList.remove('visible');
+      });
+    }
 
     // ── Helpers ──
     function getSeasonLabel(season) {
@@ -490,6 +783,49 @@
       return '';
     }
 
+    function getNutrition(foodId) { return nutritionData[foodId] || null; }
+
+    function renderNutrition(food) {
+      const n = getNutrition(food.id);
+      if (!n) return '';
+      const tagColors = {
+        '高蛋白': 'high-protein', '高碳水': 'high-carb', '高脂肪': 'high-fat',
+        '素食可选': 'vegan', '低热量': 'low-cal'
+      };
+      return '<div class="nutrition-info">' +
+        '<div class="nutrition-header">🔥 营养参考（估算，仅供参考）</div>' +
+        '<div class="nutrition-row">' +
+          '<span>⚡ 约 ' + n.kcal + ' kcal</span>' +
+          '<span>👤 ' + n.suit + '</span>' +
+        '</div>' +
+        '<div class="nutrition-tags">' +
+          n.tags.map(t => '<span class="nutrition-tag ' + (tagColors[t] || '') + '">' + t + '</span>').join('') +
+        '</div>' +
+      '</div>';
+    }
+
+    // ── Search matching (pinyin + fuzzy) ──
+    function matchFood(food, query) {
+      const q = query.toLowerCase().trim();
+      if (!q) return true;
+      // Direct text match
+      if (food.name.toLowerCase().includes(q) ||
+          food.desc.toLowerCase().includes(q) ||
+          food.tag.toLowerCase().includes(q) ||
+          food.shops.some(s => s.name.toLowerCase().includes(q))) return true;
+      // Pinyin match
+      const pinyinList = pinyinMap[food.name] || [];
+      for (const py of pinyinList) { if (py.includes(q)) return true; }
+      // Fuzzy: query chars in order
+      const nameChars = food.name.toLowerCase();
+      let qi = 0;
+      for (let i = 0; i < nameChars.length && qi < q.length; i++) {
+        if (nameChars[i] === q[qi]) qi++;
+      }
+      if (qi === q.length) return true;
+      return false;
+    }
+
     // ── Fetch data ──
     async function loadFoods() {
       try {
@@ -499,32 +835,64 @@
         allCategories = data.categories || [];
         renderMustEat();
         renderFoods();
+        renderRoutes();
         initMap();
+        updateCompareUI();
       } catch (e) {
         document.getElementById('foodGrid').innerHTML =
           '<div class="food-empty">加载美食数据失败，请刷新重试 😢</div>';
       }
     }
 
+    // ── Render Routes ──
+    function renderRoutes() {
+      const grid = document.getElementById('routesGrid');
+      grid.innerHTML = foodRoutes.map(route => {
+        return '<div class="route-card rv">' +
+          '<div class="route-header">' +
+            '<span class="route-icon">' + route.icon + '</span>' +
+            '<div>' +
+              '<div class="route-title">' + route.name + '</div>' +
+              '<div style="font-size:.78rem;color:var(--text3);margin-top:2px">' + route.desc + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="route-meta">' +
+            '<span>⏱️ ' + route.time + '</span>' +
+            '<span>💰 ' + route.cost + '</span>' +
+            '<span>📍 ' + route.stops.length + ' 站</span>' +
+          '</div>' +
+          '<ul class="route-stops">' +
+            route.stops.map(stop =>
+              '<li class="route-stop">' +
+                '<div class="route-stop-name">' + stop.name + '</div>' +
+                '<div class="route-stop-detail">🍽️ ' + stop.dish + ' — ' + stop.detail + '</div>' +
+              '</li>'
+            ).join('') +
+          '</ul>' +
+        '</div>';
+      }).join('');
+      observeElements(grid);
+    }
+
     // ── Must-Eat TOP 5 ──
     function renderMustEat() {
       const grid = document.getElementById('mustEatGrid');
       const mustFoods = allFoods.filter(f => f.must).slice(0, 5);
-      grid.innerHTML = mustFoods.map((food, i) => `
-        <div class="must-card rv">
-          <div class="must-card-rank">${i + 1}</div>
-          <img class="must-card-img" src="${food.img}" alt="${food.name}" loading="lazy">
-          <div class="must-card-body">
-            <div class="must-card-name">${food.name}</div>
-            <p class="must-card-desc">${food.desc}</p>
-            <div class="must-card-meta">
-              <span>💰 ${food.shops[0]?.avg || ''}</span>
-              <span>📍 ${food.shops[0]?.name || ''}</span>
-              ${food.season ? `<span>${getSeasonLabel(food.season) || food.season}</span>` : ''}
-            </div>
-          </div>
-        </div>
-      `).join('');
+      grid.innerHTML = mustFoods.map((food, i) =>
+        '<div class="must-card rv">' +
+          '<div class="must-card-rank">' + (i + 1) + '</div>' +
+          '<img class="must-card-img" src="' + food.img + '" alt="' + food.name + '" loading="lazy">' +
+          '<div class="must-card-body">' +
+            '<div class="must-card-name">' + food.name + '</div>' +
+            '<p class="must-card-desc">' + food.desc + '</p>' +
+            '<div class="must-card-meta">' +
+              '<span>💰 ' + (food.shops[0]?.avg || '') + '</span>' +
+              '<span>📍 ' + (food.shops[0]?.name || '') + '</span>' +
+              (food.season ? '<span>' + (getSeasonLabel(food.season) || food.season) + '</span>' : '') +
+            '</div>' +
+          '</div>' +
+        '</div>'
+      ).join('');
       observeElements(grid);
     }
 
@@ -536,13 +904,7 @@
         : allFoods.filter(f => f.cat === currentCat);
 
       if (searchQuery) {
-        const q = searchQuery.toLowerCase();
-        filtered = filtered.filter(f =>
-          f.name.toLowerCase().includes(q) ||
-          f.desc.toLowerCase().includes(q) ||
-          f.tag.toLowerCase().includes(q) ||
-          f.shops.some(s => s.name.toLowerCase().includes(q))
-        );
+        filtered = filtered.filter(f => matchFood(f, searchQuery));
       }
 
       if (filtered.length === 0) {
@@ -550,40 +912,52 @@
         return;
       }
 
-      grid.innerHTML = filtered.map(food => `
-        <div class="food-card rv">
-          <img class="food-card-img" src="${food.img}" alt="${food.name}" loading="lazy">
-          <div class="food-card-body">
-            <div class="food-card-name">
-              ${food.name}
-              <span class="food-card-tag">${food.tag}</span>
-              ${food.must ? '<span class="badge-must">🔥 必吃</span>' : ''}
-              ${food.season && food.season !== '四季皆宜' ? `<span class="badge-season">${getSeasonLabel(food.season) || food.season}</span>` : ''}
-            </div>
-            <p class="food-card-desc">${food.desc}</p>
-            ${food.history ? `<div class="food-card-history">${food.history}</div>` : ''}
-            <ul class="food-card-shops">
-              ${food.shops.map(s => `
-                <li>
-                  <div class="shop-name">
-                    ${s.name}
-                    <span class="shop-rating">${stars(s.rating)} ${s.rating}</span>
-                  </div>
-                  <div class="shop-info">
-                    <span>💰 ${s.avg}</span>
-                    <span>📍 ${s.addr}</span>
-                  </div>
-                  <div class="shop-extras">
-                    ${s.hours ? `<span>🕐 ${s.hours}</span>` : ''}
-                    ${s.wait ? `<span>⏳ ${s.wait}</span>` : ''}
-                    ${s.bestDish ? `<span>⭐ ${s.bestDish}</span>` : ''}
-                  </div>
-                </li>
-              `).join('')}
-            </ul>
-          </div>
-        </div>
-      `).join('');
+      grid.innerHTML = filtered.map(food => {
+        return '<div class="food-card rv">' +
+          '<img class="food-card-img" src="' + food.img + '" alt="' + food.name + '" loading="lazy">' +
+          '<div class="food-card-body">' +
+            '<div class="food-card-name">' +
+              food.name +
+              '<span class="food-card-tag">' + food.tag + '</span>' +
+              (food.must ? '<span class="badge-must">🔥 必吃</span>' : '') +
+              (food.season && food.season !== '四季皆宜' ? '<span class="badge-season">' + (getSeasonLabel(food.season) || food.season) + '</span>' : '') +
+            '</div>' +
+            '<p class="food-card-desc">' + food.desc + '</p>' +
+            (food.history ? '<div class="food-card-history">' + food.history + '</div>' : '') +
+            '<ul class="food-card-shops">' +
+              food.shops.map(s => {
+                const isCompared = compareList.some(c => c.shop === s.name);
+                return '<li>' +
+                  '<div class="shop-name">' +
+                    s.name +
+                    '<span class="shop-rating">' + stars(s.rating) + ' ' + s.rating + '</span>' +
+                  '</div>' +
+                  '<div class="shop-info">' +
+                    '<span>💰 ' + s.avg + '</span>' +
+                    '<span>📍 ' + s.addr + '</span>' +
+                  '</div>' +
+                  '<div class="shop-extras">' +
+                    (s.hours ? '<span>🕐 ' + s.hours + '</span>' : '') +
+                    (s.wait ? '<span>⏳ ' + s.wait + '</span>' : '') +
+                    (s.bestDish ? '<span>⭐ ' + s.bestDish + '</span>' : '') +
+                  '</div>' +
+                  '<button class="compare-btn ' + (isCompared ? 'active' : '') + '" data-shop="' + s.name + '" data-food="' + food.name + '">' +
+                    (isCompared ? '✓ 已对比' : '📊 对比') +
+                  '</button>' +
+                '</li>';
+              }).join('') +
+            '</ul>' +
+            renderNutrition(food) +
+          '</div>' +
+        '</div>';
+      }).join('');
+
+      // Attach compare button events
+      grid.querySelectorAll('.compare-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          toggleCompare(btn.dataset.shop, btn.dataset.food);
+        });
+      });
 
       observeElements(grid);
     }
@@ -611,12 +985,48 @@
 
     // ── Search ──
     let searchTimer;
-    document.getElementById('foodSearch').addEventListener('input', e => {
+    const searchInput = document.getElementById('foodSearch');
+    const searchHistoryEl = document.getElementById('searchHistory');
+
+    searchInput.addEventListener('input', e => {
       clearTimeout(searchTimer);
       searchTimer = setTimeout(() => {
         searchQuery = e.target.value.trim();
         renderFoods();
       }, 200);
+    });
+
+    searchInput.addEventListener('focus', () => {
+      if (!searchInput.value.trim()) renderSearchHistory();
+    });
+
+    searchInput.addEventListener('blur', () => {
+      setTimeout(() => searchHistoryEl.classList.remove('visible'), 200);
+    });
+
+    searchInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && searchQuery) {
+        addSearchHistory(searchQuery);
+        searchHistoryEl.classList.remove('visible');
+      }
+    });
+
+    // ── Compare UI events ──
+    document.getElementById('compareFab').addEventListener('click', () => {
+      renderComparePanel();
+      document.getElementById('compareOverlay').classList.add('visible');
+    });
+    document.getElementById('compareClose').addEventListener('click', () => {
+      document.getElementById('compareOverlay').classList.remove('visible');
+    });
+    document.getElementById('compareOverlay').addEventListener('click', e => {
+      if (e.target === e.currentTarget) e.currentTarget.classList.remove('visible');
+    });
+    document.getElementById('compareClear').addEventListener('click', () => {
+      compareList = [];
+      saveCompare();
+      renderFoods();
+      renderComparePanel();
     });
 
     // ── Leaflet + OpenStreetMap ──
@@ -637,17 +1047,16 @@
               seen.add(s.name);
               const icon = L.divIcon({
                 className: 'leaflet-div-icon custom-marker',
-                html: `<div style="background:#e76f51;color:#fff;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.25);cursor:pointer;border:2px solid #fff">${s.name}</div>`,
+                html: '<div style="background:#e76f51;color:#fff;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.25);cursor:pointer;border:2px solid #fff">' + s.name + '</div>',
                 iconSize: [0, 0],
                 iconAnchor: [0, 0]
               });
               const marker = L.marker([s.lat, s.lng], { icon }).addTo(map);
-              marker.bindPopup(`<b>${s.name}</b><br>${food.name} · ${s.avg}<br>📍 ${s.addr}`);
+              marker.bindPopup('<b>' + s.name + '</b><br>' + food.name + ' · ' + s.avg + '<br>📍 ' + s.addr);
             }
           });
         });
 
-        // Fit bounds
         const bounds = [];
         seen.clear();
         allFoods.forEach(food => {

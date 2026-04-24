@@ -703,8 +703,9 @@ export function initUtilityWidget() {
   // Load weather
   async function loadWidgetWeather() {
     try {
-      const res = await fetch('https://wttr.in/Jinan?format=%t+%C&lang=zh');
+      const res = await fetch('https://wttr.in/Jinan?format=%t+%C&lang=zh', { headers: { 'User-Agent': 'curl/8.0' } });
       const text = await res.text();
+      if (text.includes('<!DOCTYPE') || text.includes('<html')) throw new Error('HTML response');
       document.getElementById('widgetWeather').textContent = `🌤️ ${text.trim()}`;
     } catch {
       document.getElementById('widgetWeather').textContent = '🌤️ 济南天气';

@@ -171,6 +171,27 @@
 
     const badgeLabels = { hot: '🔥 热门', must: '⭐ 必去', hidden: '🌿 小众', free: '🆓 免费' };
     const audienceLabels = { family: '亲子', couple: '情侣', elder: '老人', solo: '独行' };
+
+    // ── CPS Affiliate Config ──
+    // 替换为你自己的联盟 ID
+    const CPS = {
+      ctrip: {
+        baseUrl: 'https://m.ctrip.com/webapp/you/article/searchresult.html',
+        affId: 'YOUR_CTRIP_AFF_ID',  // 携程联盟 ID
+        subId: 'jinan-guide'
+      },
+      meituan: {
+        baseUrl: 'https://i.meituan.com/s/',
+        affId: 'YOUR_MEITUAN_AFF_ID'  // 美团联盟 ID
+      }
+    };
+
+    function getCtripLink(spotName) {
+      return `${CPS.ctrip.baseUrl}?keyword=${encodeURIComponent(spotName + ' 门票')}&allianceid=${CPS.ctrip.affId}&sid=${CPS.ctrip.subId}`;
+    }
+    function getMeituanLink(spotName) {
+      return `${CPS.meituan.baseUrl}${encodeURIComponent(spotName)}?ci=111&f=${CPS.meituan.affId}`;
+    }
     let allSpots = [], activeCat = 'all', activeAud = 'all', sortBy = 'recommend', currentGalleryIndex = 0;
 
     function showToast(msg) {
@@ -230,7 +251,8 @@
               ${s.transport ? `<div class="card-meta" style="margin-top:4px"><span>🚌 ${s.transport.slice(0,20)}</span></div>` : ''}
               <div class="card-tags">${s.audience.map(a => `<span class="tag">${audienceLabels[a]||a}</span>`).join('')}</div>
               <div class="card-actions">
-                <button class="btn btn-sm ${inIt?'btn-outline':'btn-primary'} add-trip" data-id="${s.id}" ${inIt?'disabled':''}>${inIt?'✓ 已加入':'＋ 加入行程'}</button>
+                <a href="${getCtripLink(s.name)}" target="_blank" rel="noopener" class="btn btn-sm btn-outline" style="color:#2681ff;border-color:#2681ff" onclick="event.stopPropagation()">🐬 订票</a>
+                <button class="btn btn-sm ${inIt?'btn-outline':'btn-primary'} add-trip" data-id="${s.id}" ${inIt?'disabled':''}>${inIt?'✓ 已加入':'＋ 行程'}</button>
                 <button class="btn btn-sm btn-outline detail-btn" data-id="${s.id}">详情</button>
               </div>
             </div>
@@ -359,10 +381,13 @@
             ${(s.audience||[]).map(a => `<span class="tag">${audienceLabels[a]||a}</span>`).join('')}
             <span class="tag" style="background:rgba(42,157,143,.1);color:var(--teal)">✓ ${s.trust}</span>
           </div>
-          <div class="modal-actions">
+          <div class="modal-actions" style="flex-wrap:wrap">
             <button class="btn btn-primary modal-add-trip" data-id="${s.id}">＋ 加入行程</button>
+            <a href="${getCtripLink(s.name)}" target="_blank" rel="noopener" class="btn btn-outline" style="background:linear-gradient(135deg,#2681ff 0%,#1a6dff 100%);color:#fff;border:none">🐬 携程订票</a>
+            <a href="${getMeituanLink(s.name)}" target="_blank" rel="noopener" class="btn btn-outline" style="background:linear-gradient(135deg,#ffc107 0%,#ff9800 100%);color:#fff;border:none">🟡 美团预订</a>
             <button class="btn btn-outline modal-share" data-name="${s.name}">📤 分享</button>
           </div>
+          <p style="font-size:.7rem;color:var(--text3);text-align:center;margin-top:8px">通过以上链接预订，本站可获得少量佣金，不影响你的价格 ❤️</p>
           <div class="modal-reviews">
             <h4>💬 游客评价 <span style="font-weight:400;font-size:.8rem;color:var(--text3)">(${totalReviews}条)</span></h4>
             <div class="review-form">

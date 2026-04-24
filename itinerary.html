@@ -5,162 +5,145 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>行程攻略 — 济南旅游指南</title>
   <link rel="stylesheet" href="/src/styles/main.css">
+  <link rel="manifest" href="/jinan-travel-guide/manifest.json">
+  <meta name="theme-color" content="#c9a96e">
   <style>
-    /* ─── Timeline ─── */
-    .timeline { position: relative; padding-left: 32px; }
-    .timeline::before {
-      content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
-      width: 2px; background: var(--border2);
-    }
-    .timeline-day { margin-bottom: 40px; }
-    .timeline-day-header {
-      position: relative; font: 700 1.2rem/1 var(--serif);
-      color: var(--accent); margin-bottom: 20px; padding: 8px 0;
-    }
-    .timeline-day-header::before {
-      content: ''; position: absolute; left: -26px; top: 6px;
-      width: 14px; height: 14px; border-radius: 50%;
-      background: var(--accent); border: 3px solid var(--bg);
-      box-shadow: 0 0 0 2px var(--accent);
-    }
-    .timeline-item {
-      position: relative; background: var(--card-bg);
-      border: 1px solid var(--border); border-radius: var(--radius);
-      padding: 16px 20px; margin-bottom: 12px;
-      transition: all .3s var(--ease);
-    }
-    .timeline-item:hover {
-      transform: translateX(4px); box-shadow: var(--shadow);
-    }
-    .timeline-item::before {
-      content: ''; position: absolute; left: -26px; top: 22px;
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--bg3); border: 2px solid var(--accent);
-    }
-    .timeline-item .ti-top {
-      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-      margin-bottom: 6px;
-    }
-    .timeline-item .ti-time {
-      font: 600 .8rem/1 var(--sans); color: var(--accent);
-      background: var(--accent2); padding: 3px 10px; border-radius: 100px;
-    }
-    .timeline-item .ti-name {
-      font: 700 .95rem/1.3 var(--serif);
-    }
-    .timeline-item .ti-details {
-      display: flex; gap: 16px; flex-wrap: wrap;
-      font-size: .8rem; color: var(--text2);
-    }
-    .timeline-item .ti-details span { display: inline-flex; align-items: center; gap: 4px; }
-    .ti-cost { font-weight: 600; color: var(--teal); }
-    .ti-transport { color: var(--text3); }
+    .timeline{position:relative;padding-left:32px}
+    .timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:2px;background:var(--border2)}
+    .timeline-day{margin-bottom:40px}
+    .timeline-day-header{position:relative;font:700 1.2rem/1 var(--serif);color:var(--accent);margin-bottom:20px;padding:8px 0}
+    .timeline-day-header::before{content:'';position:absolute;left:-26px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--accent)}
+    .timeline-item{position:relative;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:12px;transition:all .3s var(--ease)}
+    .timeline-item:hover{transform:translateX(4px);box-shadow:var(--shadow)}
+    .timeline-item::before{content:'';position:absolute;left:-26px;top:22px;width:8px;height:8px;border-radius:50%;background:var(--bg3);border:2px solid var(--accent)}
+    .ti-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+    .ti-time{font:600 .8rem/1 var(--sans);color:var(--accent);background:var(--accent2);padding:3px 10px;border-radius:100px}
+    .ti-name{font:700 .95rem/1.3 var(--serif)}
+    .ti-details{display:flex;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--text2)}
+    .ti-details span{display:inline-flex;align-items:center;gap:4px}
+    .ti-cost{font-weight:600;color:var(--teal)}
+    .ti-transport{color:var(--text3)}
+    .day-total{text-align:right;font-size:.85rem;color:var(--text2);padding:8px 0;border-top:1px dashed var(--border);margin-top:8px}
+    .day-total strong{color:var(--accent);font-size:1rem}
 
-    /* ─── Day total ─── */
-    .day-total {
-      text-align: right; font-size: .85rem; color: var(--text2);
-      padding: 8px 0; border-top: 1px dashed var(--border);
-      margin-top: 8px;
-    }
-    .day-total strong { color: var(--accent); font-size: 1rem; }
+    .cost-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:32px}
+    .cost-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center}
+    .cost-card .label{font-size:.8rem;color:var(--text2);margin-bottom:4px}
+    .cost-card .amount{font:900 1.6rem/1 var(--serif);color:var(--accent)}
+    .cost-card .note{font-size:.7rem;color:var(--text3);margin-top:4px}
 
-    /* ─── Trip cost summary ─── */
-    .cost-summary {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px; margin-top: 32px;
-    }
-    .cost-card {
-      background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 20px; text-align: center;
-    }
-    .cost-card .label { font-size: .8rem; color: var(--text2); margin-bottom: 4px; }
-    .cost-card .amount { font: 900 1.6rem/1 var(--serif); color: var(--accent); }
-    .cost-card .note { font-size: .7rem; color: var(--text3); margin-top: 4px; }
+    .route-tabs{display:flex;gap:4px;background:var(--bg2);padding:4px;border-radius:12px;margin-bottom:32px;overflow-x:auto;justify-content:center;flex-wrap:wrap}
+    .route-tab{padding:8px 16px;border:none;background:none;font-size:.85rem;font-weight:500;color:var(--text2);cursor:pointer;border-radius:8px;transition:all .3s;white-space:nowrap}
+    .route-tab.active{background:var(--bg);color:var(--text);box-shadow:var(--shadow)}
 
-    /* ─── My trip planner ─── */
-    .my-trip { margin-top: 48px; }
-    .my-trip-list { list-style: none; }
-    .my-trip-item {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 16px; background: var(--card-bg);
-      border: 1px solid var(--border); border-radius: var(--radius);
-      margin-bottom: 8px;
-    }
-    .my-trip-item .trip-name { font-weight: 600; font-size: .9rem; }
-    .my-trip-item .trip-meta { font-size: .75rem; color: var(--text2); }
-    .my-trip-item .remove-btn {
-      background: none; border: none; color: var(--coral);
-      cursor: pointer; font-size: .85rem; padding: 4px 8px;
-      border-radius: 6px; transition: background .2s;
-    }
-    .my-trip-item .remove-btn:hover { background: rgba(231,111,81,.1); }
-    .my-trip-empty {
-      text-align: center; padding: 40px 20px; color: var(--text3);
-      font-size: .9rem;
-    }
+    .route-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+    .route-header h2{font:900 1.5rem/1.2 var(--serif)}
+    .route-meta{display:flex;gap:16px;font-size:.8rem;color:var(--text2);flex-wrap:wrap}
+    .route-meta span{display:flex;align-items:center;gap:4px}
+    .route-badge{display:inline-flex;align-items:center;gap:4px;font-size:.7rem;padding:4px 12px;border-radius:100px;font-weight:600}
+    .route-badge.easy{background:rgba(42,157,143,.1);color:var(--teal)}
+    .route-badge.medium{background:rgba(201,169,110,.15);color:var(--accent)}
+    .route-badge.hard{background:rgba(231,111,81,.1);color:var(--coral)}
 
-    /* ─── Nearby section ─── */
-    .nearby-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-    }
-    .nearby-card {
-      background: var(--card-bg); border: 1px solid var(--border);
-      border-radius: var(--radius-lg); overflow: hidden;
-      transition: all .3s var(--ease);
-    }
-    .nearby-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-    .nearby-card .nc-img {
-      height: 160px; background: var(--bg3);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3rem;
-    }
-    .nearby-card .nc-body { padding: 16px 20px; }
-    .nearby-card .nc-title { font: 700 1rem/1.3 var(--serif); margin-bottom: 6px; }
-    .nearby-card .nc-desc { font-size: .8rem; color: var(--text2); line-height: 1.6; }
-    .nearby-card .nc-meta {
-      display: flex; gap: 12px; margin-top: 10px;
-      font-size: .75rem; color: var(--text3);
-    }
+    .season-tabs{display:flex;gap:4px;background:var(--bg2);padding:4px;border-radius:12px;margin-bottom:24px;overflow-x:auto}
+    .season-tab{padding:8px 16px;border:none;background:none;font-size:.85rem;font-weight:500;color:var(--text2);cursor:pointer;border-radius:8px;transition:all .3s;white-space:nowrap}
+    .season-tab.active{background:var(--bg);color:var(--text);box-shadow:var(--shadow)}
+    .season-panel{display:none}
+    .season-panel.active{display:block}
 
-    /* ─── Tab content ─── */
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
+    .my-trip{margin-top:48px}
+    .my-trip-item{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px}
+    .my-trip-item .trip-name{font-weight:600;font-size:.9rem}
+    .my-trip-item .trip-meta{font-size:.75rem;color:var(--text2)}
+    .my-trip-item .remove-btn{background:none;border:none;color:var(--coral);cursor:pointer;font-size:.85rem;padding:4px 8px;border-radius:6px;transition:background .2s}
+    .my-trip-item .remove-btn:hover{background:rgba(231,111,81,.1)}
+    .my-trip-empty{text-align:center;padding:40px 20px;color:var(--text3);font-size:.9rem}
 
-    /* ─── Add to trip btn ─── */
-    .add-trip-btn {
-      background: var(--accent); color: #fff; border: none;
-      padding: 6px 14px; border-radius: 100px; font-size: .75rem;
-      cursor: pointer; transition: all .3s; font-weight: 600;
+    .share-bar{display:flex;gap:8px;margin-top:16px;justify-content:center}
+    .panel{display:none}
+    .panel.active{display:block}
+
+    @media(max-width:768px){
+      .route-header{flex-direction:column;align-items:flex-start}
+      .route-tabs,.season-tabs{justify-content:flex-start;flex-wrap:nowrap}
     }
-    .add-trip-btn:hover { background: var(--accent-hover); }
-    .add-trip-btn.added { background: var(--teal); }
   </style>
 </head>
 <body>
-
-  <!-- Scroll Progress -->
   <div class="scroll-progress"></div>
-
-  <!-- Top Nav -->
   <nav class="top-nav">
     <a href="index.html" class="logo">泉城<span>攻略</span></a>
     <div class="nav-links">
-      <a href="index.html">首页</a>
-      <a href="spots.html">景点</a>
-      <a href="food.html">美食</a>
-      <a href="itinerary.html" class="active">行程</a>
-      <a href="guide.html">指南</a>
-      <a href="culture.html">文化</a>
+      <a href="index.html">首页</a><a href="spots.html">景点</a><a href="food.html">美食</a>
+      <a href="itinerary.html" class="active">行程</a><a href="guide.html">指南</a><a href="culture.html">文化</a>
     </div>
-    <div style="display:flex;gap:8px;align-items:center">
-      <button class="dark-toggle" aria-label="切换深色模式">🌙</button>
-      <button class="burger" aria-label="菜单"><span></span><span></span><span></span></button>
-    </div>
+    <button class="dark-toggle" aria-label="切换深色模式">🌙</button>
+    <button class="burger" aria-label="菜单"><span></span><span></span><span></span></button>
   </nav>
 
-  <!-- Mobile Bottom Nav -->
-    <nav class="mob-nav">
+  <section class="page-hero">
+    <h1>📋 行程攻略</h1>
+    <p>精心规划的路线，让每一分钟都值得</p>
+  </section>
+
+  <!-- Route Tabs -->
+  <section class="section" style="padding-top:24px">
+    <div class="section-inner">
+      <div class="route-tabs" id="routeTabs">
+        <button class="route-tab active" data-route="1day">⏰ 1日精华游</button>
+        <button class="route-tab" data-route="2day">📅 2日深度游</button>
+        <button class="route-tab" data-route="3day">🗓️ 3日全览游</button>
+        <button class="route-tab" data-route="family">👨‍👩‍👧 亲子专线</button>
+        <button class="route-tab" data-route="art">🎨 文艺专线</button>
+      </div>
+
+      <div id="routeContent"></div>
+    </div>
+  </section>
+
+  <!-- Seasonal Recommendations -->
+  <section class="section section-alt">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">SEASONAL</div>
+        <h2>🗓️ 当季推荐</h2>
+        <p>不同季节来济南，有不同玩法</p>
+      </div>
+      <div class="season-tabs" id="seasonTabs">
+        <button class="season-tab active" data-season="spring">🌸 春季</button>
+        <button class="season-tab" data-season="summer">☀️ 夏季</button>
+        <button class="season-tab" data-season="autumn">🍂 秋季</button>
+        <button class="season-tab" data-season="winter">❄️ 冬季</button>
+      </div>
+      <div id="seasonContent"></div>
+    </div>
+  </section>
+
+  <!-- My Trip -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="eyebrow">MY TRIP</div>
+        <h2>📌 我的行程</h2>
+        <p>从景点页面添加心仪的目的地</p>
+      </div>
+      <div id="myTripList"></div>
+      <div class="share-bar">
+        <button class="btn btn-sm btn-outline" id="copyTrip">📋 复制行程</button>
+        <button class="btn btn-sm btn-outline" id="clearTrip">🗑️ 清空</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="index.html">首页</a><a href="spots.html">景点</a><a href="food.html">美食</a>
+      <a href="itinerary.html">行程</a><a href="guide.html">指南</a><a href="culture.html">文化</a>
+    </div>
+    <p>© 2026 泉城攻略 · 济南旅游指南</p>
+  </footer>
+  <button class="btt" aria-label="回到顶部">↑</button>
+  <nav class="mob-nav">
     <a href="index.html"><span class="icon">🏠</span>首页</a>
     <a href="spots.html"><span class="icon">🏛️</span>景点</a>
     <a href="food.html"><span class="icon">🍜</span>美食</a>
@@ -168,769 +151,343 @@
     <a href="guide.html"><span class="icon">📖</span>指南</a>
   </nav>
 
-  <!-- Page Hero -->
-  <header class="page-hero">
-    <h1>📋 行程 · 攻略</h1>
-    <p>选一条路线，说走就走</p>
-  </header>
-
-  <!-- Main Content -->
-  <main class="section">
-    <div class="section-inner">
-
-      <!-- Tabs -->
-      <div class="tabs" role="tablist">
-        <button class="tab-btn active" data-tab="one" role="tab">一日游</button>
-        <button class="tab-btn" data-tab="two" role="tab">两日游</button>
-        <button class="tab-btn" data-tab="three" role="tab">三日游</button>
-        <button class="tab-btn" data-tab="nearby" role="tab">周边游</button>
-      </div>
-
-      <!-- ══════ 一日游 ══════ -->
-      <div class="tab-content active" id="tab-one">
-        <div class="timeline">
-          <div class="timeline-day">
-            <div class="timeline-day-header">☀️ 泉城精华一日</div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">08:00</span>
-                <span class="ti-name">趵突泉</span>
-                <button class="add-trip-btn" data-name="趵突泉" data-time="08:00" data-cost="40">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 2h</span>
-                <span class="ti-cost">🎫 ¥40</span>
-                <span class="ti-transport">🚇 地铁2号线趵突泉站</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">10:30</span>
-                <span class="ti-name">黑虎泉</span>
-                <button class="add-trip-btn" data-name="黑虎泉" data-time="10:30" data-cost="0">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 40min</span>
-                <span class="ti-cost">🎫 免费</span>
-                <span class="ti-transport">🚶 步行 15min</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">12:00</span>
-                <span class="ti-name">芙蓉街午餐</span>
-                <button class="add-trip-btn" data-name="芙蓉街午餐" data-time="12:00" data-cost="50">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 1.5h</span>
-                <span class="ti-cost">🍜 人均 ¥50</span>
-                <span class="ti-transport">🚶 步行 10min</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">14:00</span>
-                <span class="ti-name">大明湖（免费区）</span>
-                <button class="add-trip-btn" data-name="大明湖" data-time="14:00" data-cost="0">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 2.5h</span>
-                <span class="ti-cost">🎫 免费</span>
-                <span class="ti-transport">🚶 步行 10min</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">17:30</span>
-                <span class="ti-name">超然楼亮灯 ✨</span>
-                <button class="add-trip-btn" data-name="超然楼" data-time="17:30" data-cost="40">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 1h</span>
-                <span class="ti-cost">🎫 ¥40</span>
-                <span class="ti-transport">🚶 园内步行</span>
-              </div>
-            </div>
-
-            <div class="day-total">一日费用合计：<strong>¥170</strong>（含午餐）</div>
-          </div>
-        </div>
-
-        <div class="cost-summary">
-          <div class="cost-card">
-            <div class="label">门票</div>
-            <div class="amount">¥80</div>
-            <div class="note">趵突泉40 + 超然楼40</div>
-          </div>
-          <div class="cost-card">
-            <div class="label">餐饮</div>
-            <div class="amount">¥50</div>
-            <div class="note">芙蓉街小吃午餐</div>
-          </div>
-          <div class="cost-card">
-            <div class="label">交通</div>
-            <div class="amount">¥40</div>
-            <div class="note">地铁+步行为主</div>
-          </div>
-          <div class="cost-card">
-            <div class="label">总计</div>
-            <div class="amount" id="one-day-total">¥170</div>
-            <div class="note">约 170 元/人</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ══════ 两日游 ══════ -->
-      <div class="tab-content" id="tab-two">
-        <div class="timeline">
-          <div class="timeline-day">
-            <div class="timeline-day-header">Day 1 ☀️ 泉城核心</div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">08:00</span>
-                <span class="ti-name">趵突泉</span>
-                <button class="add-trip-btn" data-name="趵突泉" data-time="08:00" data-cost="40">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 2h</span>
-                <span class="ti-cost">🎫 ¥40</span>
-                <span class="ti-transport">🚇 地铁2号线趵突泉站</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">10:30</span>
-                <span class="ti-name">五龙潭公园</span>
-                <button class="add-trip-btn" data-name="五龙潭" data-time="10:30" data-cost="5">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 1h</span>
-                <span class="ti-cost">🎫 ¥5</span>
-                <span class="ti-transport">🚶 步行 5min</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">12:00</span>
-                <span class="ti-name">芙蓉街午餐</span>
-                <button class="add-trip-btn" data-name="芙蓉街午餐" data-time="12:00" data-cost="50">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 1.5h</span>
-                <span class="ti-cost">🍜 人均 ¥50</span>
-                <span class="ti-transport">🚶 步行 10min</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">14:00</span>
-                <span class="ti-name">大明湖 → 超然楼亮灯</span>
-                <button class="add-trip-btn" data-name="大明湖+超然楼" data-time="14:00" data-cost="40">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 4h</span>
-                <span class="ti-cost">🎫 ¥40</span>
-                <span class="ti-transport">🚶 步行</span>
-              </div>
-            </div>
-
-            <div class="day-total">Day 1 费用合计：<strong>¥185</strong></div>
-          </div>
-
-          <div class="timeline-day">
-            <div class="timeline-day-header">Day 2 🏛️ 文化探索</div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">08:30</span>
-                <span class="ti-name">千佛山</span>
-                <button class="add-trip-btn" data-name="千佛山" data-time="08:30" data-cost="30">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 3h</span>
-                <span class="ti-cost">🎫 ¥30</span>
-                <span class="ti-transport">🚌 公交K51路</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">12:00</span>
-                <span class="ti-name">鲁菜馆午餐</span>
-                <button class="add-trip-btn" data-name="鲁菜馆午餐" data-time="12:00" data-cost="80">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 1.5h</span>
-                <span class="ti-cost">🍜 人均 ¥80</span>
-                <span class="ti-transport">🚌 公交/打车</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">14:00</span>
-                <span class="ti-name">山东省博物馆</span>
-                <button class="add-trip-btn" data-name="省博物馆" data-time="14:00" data-cost="0">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 2.5h</span>
-                <span class="ti-cost">🎫 免费（需预约）</span>
-                <span class="ti-transport">🚌 公交K51路</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">17:00</span>
-                <span class="ti-name">曲水亭街漫步</span>
-                <button class="add-trip-btn" data-name="曲水亭街" data-time="17:00" data-cost="0">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 1h</span>
-                <span class="ti-cost">🎫 免费</span>
-                <span class="ti-transport">🚌 公交/打车</span>
-              </div>
-            </div>
-
-            <div class="day-total">Day 2 费用合计：<strong>¥160</strong></div>
-          </div>
-        </div>
-
-        <div class="cost-summary">
-          <div class="cost-card">
-            <div class="label">门票</div>
-            <div class="amount">¥115</div>
-            <div class="note">趵突泉+五龙潭+超然楼+千佛山</div>
-          </div>
-          <div class="cost-card">
-            <div class="label">餐饮</div>
-            <div class="amount">¥130</div>
-            <div class="note">芙蓉街+鲁菜馆</div>
-          </div>
-          <div class="cost-card">
-            <div class="label">交通</div>
-            <div class="amount">¥80</div>
-            <div class="note">地铁+公交+步行</div>
-          </div>
-          <div class="cost-card">
-            <div class="label">两日总计</div>
-            <div class="amount" id="two-day-total">¥345</div>
-            <div class="note">约 345 元/人</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ══════ 三日游 ══════ -->
-      <div class="tab-content" id="tab-three">
-        <div class="timeline">
-          <div class="timeline-day">
-            <div class="timeline-day-header">Day 1 ☀️ 泉城核心</div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">08:00</span>
-                <span class="ti-name">趵突泉</span>
-                <button class="add-trip-btn" data-name="趵突泉" data-time="08:00" data-cost="40">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 2h</span>
-                <span class="ti-cost">🎫 ¥40</span>
-                <span class="ti-transport">🚇 地铁2号线趵突泉站</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">10:30</span>
-                <span class="ti-name">黑虎泉</span>
-                <button class="add-trip-btn" data-name="黑虎泉" data-time="10:30" data-cost="0">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 40min</span>
-                <span class="ti-cost">🎫 免费</span>
-                <span class="ti-transport">🚶 步行 15min</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">12:00</span>
-                <span class="ti-name">芙蓉街午餐</span>
-                <button class="add-trip-btn" data-name="芙蓉街午餐" data-time="12:00" data-cost="50">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 1.5h</span>
-                <span class="ti-cost">🍜 人均 ¥50</span>
-                <span class="ti-transport">🚶 步行 10min</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">14:00</span>
-                <span class="ti-name">大明湖（免费区）</span>
-                <button class="add-trip-btn" data-name="大明湖" data-time="14:00" data-cost="0">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 2.5h</span>
-                <span class="ti-cost">🎫 免费</span>
-                <span class="ti-transport">🚶 步行 10min</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">17:30</span>
-                <span class="ti-name">超然楼亮灯 ✨</span>
-                <button class="add-trip-btn" data-name="超然楼" data-time="17:30" data-cost="40">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 1h</span>
-                <span class="ti-cost">🎫 ¥40</span>
-                <span class="ti-transport">🚶 园内步行</span>
-              </div>
-            </div>
-
-            <div class="day-total">Day 1 费用合计：<strong>¥170</strong></div>
-          </div>
-
-          <div class="timeline-day">
-            <div class="timeline-day-header">Day 2 🏛️ 文化探索</div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">08:30</span>
-                <span class="ti-name">千佛山</span>
-                <button class="add-trip-btn" data-name="千佛山" data-time="08:30" data-cost="30">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 3h</span>
-                <span class="ti-cost">🎫 ¥30</span>
-                <span class="ti-transport">🚌 公交K51路</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">12:00</span>
-                <span class="ti-name">鲁菜馆午餐</span>
-                <button class="add-trip-btn" data-name="鲁菜馆午餐" data-time="12:00" data-cost="80">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 1.5h</span>
-                <span class="ti-cost">🍜 人均 ¥80</span>
-                <span class="ti-transport">🚌 公交/打车</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">14:00</span>
-                <span class="ti-name">山东省博物馆</span>
-                <button class="add-trip-btn" data-name="省博物馆" data-time="14:00" data-cost="0">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 2.5h</span>
-                <span class="ti-cost">🎫 免费（需预约）</span>
-                <span class="ti-transport">🚌 公交K51路</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">17:00</span>
-                <span class="ti-name">曲水亭街漫步</span>
-                <button class="add-trip-btn" data-name="曲水亭街" data-time="17:00" data-cost="0">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 1h</span>
-                <span class="ti-cost">🎫 免费</span>
-                <span class="ti-transport">🚌 公交/打车</span>
-              </div>
-            </div>
-
-            <div class="day-total">Day 2 费用合计：<strong>¥160</strong></div>
-          </div>
-
-          <div class="timeline-day">
-            <div class="timeline-day-header">Day 3 🌿 周边拓展</div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">08:00</span>
-                <span class="ti-name">五龙潭公园</span>
-                <button class="add-trip-btn" data-name="五龙潭" data-time="08:00" data-cost="5">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 1h</span>
-                <span class="ti-cost">🎫 ¥5</span>
-                <span class="ti-transport">🚶 步行</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">09:30</span>
-                <span class="ti-name">老商埠 Citywalk</span>
-                <button class="add-trip-btn" data-name="老商埠Citywalk" data-time="09:30" data-cost="0">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 1.5h</span>
-                <span class="ti-cost">🎫 免费</span>
-                <span class="ti-transport">🚌 公交K51路</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">12:00</span>
-                <span class="ti-name">宽厚里午餐</span>
-                <button class="add-trip-btn" data-name="宽厚里午餐" data-time="12:00" data-cost="60">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 1.5h</span>
-                <span class="ti-cost">🍜 人均 ¥60</span>
-                <span class="ti-transport">🚌 公交/打车</span>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="ti-top">
-                <span class="ti-time">14:00</span>
-                <span class="ti-name">解放阁 + 护城河游船</span>
-                <button class="add-trip-btn" data-name="解放阁+护城河" data-time="14:00" data-cost="75">+ 加入行程</button>
-              </div>
-              <div class="ti-details">
-                <span>⏱ 预计 2h</span>
-                <span class="ti-cost">🎫 ¥75（游船）</span>
-                <span class="ti-transport">🚶 步行</span>
-              </div>
-            </div>
-
-            <div class="day-total">Day 3 费用合计：<strong>¥190</strong></div>
-          </div>
-        </div>
-
-        <div class="cost-summary">
-          <div class="cost-card">
-            <div class="label">门票</div>
-            <div class="amount">¥190</div>
-            <div class="note">趵突泉+超然楼+千佛山+五龙潭+游船</div>
-          </div>
-          <div class="cost-card">
-            <div class="label">餐饮</div>
-            <div class="amount">¥190</div>
-            <div class="note">芙蓉街+鲁菜馆+宽厚里</div>
-          </div>
-          <div class="cost-card">
-            <div class="label">交通</div>
-            <div class="amount">¥100</div>
-            <div class="note">地铁+公交+步行</div>
-          </div>
-          <div class="cost-card">
-            <div class="label">三日总计</div>
-            <div class="amount" id="three-day-total">¥520</div>
-            <div class="note">约 520 元/人</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ══════ 周边游 ══════ -->
-      <div class="tab-content" id="tab-nearby">
-        <div class="section-header" style="margin-bottom:32px">
-          <h2>🏔️ 周边游推荐</h2>
-          <p>从济南出发，1-2小时可达的精彩目的地</p>
-        </div>
-
-        <div class="nearby-grid">
-          <div class="nearby-card">
-            <div class="nc-img">⛰️</div>
-            <div class="nc-body">
-              <div class="nc-title">泰山一日游</div>
-              <div class="nc-desc">
-                五岳之首，海拔1545米。建议早起乘高铁到泰安（15分钟），红门步行上山或天外村乘大巴+索道。
-                登顶看日出、逛天街、拜碧霞祠。体力好可全程徒步约5-6小时登顶。
-              </div>
-              <div class="nc-meta">
-                <span>⏱ 全天</span>
-                <span>🎫 ¥115</span>
-                <span>🚄 高铁15min</span>
-              </div>
-              <div style="margin-top:12px">
-                <button class="add-trip-btn" data-name="泰山一日游" data-time="06:00" data-cost="115">+ 加入行程</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="nearby-card">
-            <div class="nc-img">🏯</div>
-            <div class="nc-body">
-              <div class="nc-title">灵岩寺半日游</div>
-              <div class="nc-desc">
-                "灵岩为泰山背幽绝处"，千年古刹，四十尊宋代彩塑罗汉像栩栩如生。
-                墓塔林是中国第二大塔林。秋季银杏金黄时最美。适合喜欢安静历史的人。
-              </div>
-              <div class="nc-meta">
-                <span>⏱ 半天</span>
-                <span>🎫 ¥40</span>
-                <span>🚌 长途车1.5h</span>
-              </div>
-              <div style="margin-top:12px">
-                <button class="add-trip-btn" data-name="灵岩寺半日游" data-time="08:00" data-cost="40">+ 加入行程</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="nearby-card">
-            <div class="nc-img">🍂</div>
-            <div class="nc-body">
-              <div class="nc-title">红叶谷（秋季限定）</div>
-              <div class="nc-desc">
-                济南南部山区，10月漫山红叶如火。4000余亩黄栌林，北方赏红叶最佳地之一。
-                仅秋季（10月中-11月中）推荐，其余季节可跳过。
-              </div>
-              <div class="nc-meta">
-                <span>⏱ 4-5h</span>
-                <span>🎫 ¥80</span>
-                <span>🚗 自驾40min</span>
-              </div>
-              <div style="margin-top:12px">
-                <button class="add-trip-btn" data-name="红叶谷" data-time="08:00" data-cost="80">+ 加入行程</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="nearby-card">
-            <div class="nc-img">💧</div>
-            <div class="nc-body">
-              <div class="nc-title">百脉泉（章丘）</div>
-              <div class="nc-desc">
-                "西则趵突为魁，东则百脉为冠"。章丘百脉泉群，墨泉、梅花泉各具特色。
-                明水古城泉水穿城，比趵突泉人少很多，适合喜欢清静的游客。
-              </div>
-              <div class="nc-meta">
-                <span>⏱ 2-3h</span>
-                <span>🎫 ¥50</span>
-                <span>🚄 高铁15min</span>
-              </div>
-              <div style="margin-top:12px">
-                <button class="add-trip-btn" data-name="百脉泉" data-time="09:00" data-cost="50">+ 加入行程</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="cost-summary" style="margin-top:40px">
-          <div class="cost-card">
-            <div class="label">泰山一日游</div>
-            <div class="amount">¥260</div>
-            <div class="note">门票115+高铁30+餐饮60+交通55</div>
-          </div>
-          <div class="cost-card">
-            <div class="label">灵岩寺半日游</div>
-            <div class="amount">¥120</div>
-            <div class="note">门票40+长途车40+餐饮40</div>
-          </div>
-          <div class="cost-card">
-            <div class="label">红叶谷</div>
-            <div class="amount">¥180</div>
-            <div class="note">门票80+自驾油费40+餐饮60</div>
-          </div>
-          <div class="cost-card">
-            <div class="label">百脉泉</div>
-            <div class="amount">¥140</div>
-            <div class="note">门票50+高铁30+打车20+餐饮40</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ══════ 行程规划器 ══════ -->
-      <div class="my-trip" style="margin-top:60px">
-        <div class="section-header" style="margin-bottom:24px">
-          <div class="eyebrow">我的行程</div>
-          <h2>📋 行程规划器</h2>
-          <p>点击上方「+ 加入行程」按钮，自定义你的专属路线</p>
-        </div>
-        <ul class="my-trip-list" id="my-trip-list">
-          <li class="my-trip-empty" id="trip-empty">还没有添加任何行程，点击上方按钮开始规划吧 ✈️</li>
-        </ul>
-        <div id="trip-total" style="text-align:right;margin-top:12px;font-size:.9rem;color:var(--text2);display:none">
-          自定义行程费用合计：<strong style="color:var(--accent);font-size:1.1rem" id="trip-total-amount">¥0</strong>
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-links">
-      <a href="index.html">首页</a>
-      <a href="spots.html">景点</a>
-      <a href="food.html">美食</a>
-      <a href="itinerary.html">行程</a>
-      <a href="guide.html">指南</a>
-      <a href="culture.html">文化</a>
-    </div>
-    <p>© 2026 济南旅游攻略 · 泉城欢迎你</p>
-  </footer>
-
-  <!-- Back to Top -->
-  <button class="btt" aria-label="回到顶部">↑</button>
-
   <script type="module">
-    import { initAll } from '/src/components/shared.js';
-
-    // ─── Init shared components ───
+    import { initAll, stars } from '/src/components/shared.js';
     initAll();
 
-    // ─── Tab switching ───
-    const tabBtns = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
+    let spotsData = [], foodData = [];
 
-    tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        tabBtns.forEach(b => b.classList.remove('active'));
-        tabContents.forEach(c => c.classList.remove('active'));
-        btn.classList.add('active');
-        const target = document.getElementById('tab-' + btn.dataset.tab);
-        if (target) target.classList.add('active');
+    async function loadData() {
+      const [spotsRes, foodRes] = await Promise.all([
+        fetch('/src/data/spots.json'), fetch('/src/data/food.json')
+      ]);
+      spotsData = await spotsRes.json();
+      const foodJson = await foodRes.json();
+      foodData = foodJson.foods || foodJson;
+      renderRoute('1day');
+      renderSeason('spring');
+      renderMyTrip();
+    }
+
+    // ── Routes Data ──
+    const routes = {
+      '1day': {
+        title: '⏰ 1日精华游', difficulty: 'easy', duration: '8-9h', cost: '¥150-250',
+        distance: '约 8km', bestFor: '时间紧张的首次游客',
+        desc: '一天打卡济南三大名胜，泉水+湖泊+老街，不走回头路',
+        days: [{
+          header: 'Day 1 · 泉水精华线',
+          items: [
+            { time: '08:00-10:00', name: '趵突泉', icon: '⛲', details: '天下第一泉，三窟并发', cost: '¥40', transport: '地铁2号线趵突泉站B口', tips: '建议8点前入园避开人流' },
+            { time: '10:00-10:20', name: '步行 → 五龙潭', icon: '🚶', details: '步行约15分钟', cost: '—', transport: '步行', tips: '趵突泉北门出，沿共青团路向北' },
+            { time: '10:20-11:20', name: '五龙潭公园', icon: '🌊', details: '比趵突泉人少，秦琼故宅', cost: '¥5', transport: '步行可达', tips: '4月樱花季超美' },
+            { time: '11:30-12:30', name: '午餐：草包包子铺', icon: '🍜', details: '百年老字号，皮薄馅大', cost: '¥35', transport: '步行10分钟到泉城路', tips: '荷叶包子必点' },
+            { time: '13:00-14:30', name: '大明湖（免费区）', icon: '🏞️', details: '四面荷花三面柳，湖心岛散步', cost: '免费', transport: '步行15分钟', tips: '沿湖散步，拍照超出片' },
+            { time: '14:30-15:30', name: '超然楼', icon: '🏯', details: '大明湖标志性建筑，登楼俯瞰', cost: '¥40', transport: '湖内步行', tips: '下午光线好适合拍照' },
+            { time: '16:00-17:00', name: '芙蓉街·曲水亭街', icon: '🏮', details: '青石板路，泉水人家，边逛边吃', cost: '人均¥30', transport: '步行10分钟', tips: '油旋、甜沫尝一下' },
+            { time: '17:30-18:30', name: '黑虎泉', icon: '🐯', details: '护城河畔散步，看本地人打水', cost: '免费', transport: '步行15分钟', tips: '傍晚光线最美' },
+            { time: '18:30-19:30', name: '晚餐：宽厚里', icon: '🍖', details: '护城河畔美食街，烧烤+小吃', cost: '人均¥60', transport: '步行5分钟', tips: '夜景绝佳' }
+          ]
+        }]
+      },
+      '2day': {
+        title: '📅 2日深度游', difficulty: 'medium', duration: '2天', cost: '¥400-600',
+        distance: '约 15km', bestFor: '想深度体验济南的游客',
+        desc: 'Day1 泉水线 + Day2 文化线，覆盖主要景点和美食',
+        days: [
+          {
+            header: 'Day 1 · 泉水寻踪',
+            items: [
+              { time: '07:30-08:30', name: '早餐：甜沫+油旋', icon: '🌅', details: '济南灵魂早餐', cost: '¥10', transport: '—', tips: '超意兴或春江饭店' },
+              { time: '09:00-11:00', name: '趵突泉', icon: '⛲', details: '天下第一泉，李清照纪念堂', cost: '¥40', transport: '地铁2号线', tips: '早上人少，慢慢逛' },
+              { time: '11:15-12:00', name: '五龙潭公园', icon: '🌊', details: '小众秘境，清澈见底', cost: '¥5', transport: '步行15分钟', tips: '比趵突泉清净' },
+              { time: '12:15-13:30', name: '午餐：聚丰德', icon: '🍲', details: '糖醋鲤鱼+九转大肠', cost: '人均¥85', transport: '步行10分钟', tips: '经典鲁菜体验' },
+              { time: '14:00-16:00', name: '大明湖+超然楼', icon: '🏞️', details: '湖心岛+登楼俯瞰', cost: '¥40', transport: '步行15分钟', tips: '下午光线好' },
+              { time: '16:30-18:00', name: '黑虎泉+护城河步道', icon: '🐯', details: '沿护城河散步，看打水', cost: '免费', transport: '步行', tips: '泉水可直饮' },
+              { time: '18:30-20:00', name: '芙蓉街+宽厚里', icon: '🏮', details: '逛吃一条龙，夜景绝佳', cost: '人均¥60', transport: '步行', tips: '工作日人少' }
+            ]
+          },
+          {
+            header: 'Day 2 · 文化探索',
+            items: [
+              { time: '08:00-08:30', name: '早餐：把子肉', icon: '🍖', details: '超意兴，济南灵魂快餐', cost: '¥15', transport: '—', tips: '浇汤汁配米饭' },
+              { time: '09:00-11:30', name: '千佛山', icon: '⛰️', details: '登顶俯瞰全城，佛像石刻', cost: '¥30', transport: '公交K51路', tips: '索道上山步行下山最省力' },
+              { time: '12:00-13:30', name: '午餐：闫府私房菜', icon: '🍲', details: '爆炒腰花+奶汤蒲菜', cost: '人均¥95', transport: '打车15分钟', tips: '环境好适合拍照' },
+              { time: '14:00-16:30', name: '山东省博物馆', icon: '🏛️', details: '镇馆之宝：蛋壳黑陶杯', cost: '免费(预约)', transport: '公交K51路', tips: '租讲解器¥20' },
+              { time: '17:00-18:00', name: '老商埠区', icon: '🏘️', details: '百年近代建筑，Citywalk', cost: '免费', transport: '公交', tips: '爱心红绿灯打卡' },
+              { time: '18:30-19:30', name: '晚餐：泉水宴', icon: '🍵', details: '趵突泉水烹制系列菜肴', cost: '人均¥120', transport: '打车', tips: '泉水豆腐必点' }
+            ]
+          }
+        ]
+      },
+      '3day': {
+        title: '🗓️ 3日全览游', difficulty: 'hard', duration: '3天', cost: '¥800-1200',
+        distance: '约 30km', bestFor: '时间充裕、想深度探索',
+        desc: '覆盖市区所有精华 + 周边灵岩寺/红叶谷',
+        days: [
+          {
+            header: 'Day 1 · 泉水精华（同1日游）',
+            items: [
+              { time: '08:00-10:00', name: '趵突泉', icon: '⛲', details: '天下第一泉', cost: '¥40', transport: '地铁2号线', tips: '8点前入园' },
+              { time: '10:15-11:15', name: '五龙潭', icon: '🌊', details: '小众秘境', cost: '¥5', transport: '步行', tips: '樱花季最美' },
+              { time: '11:30-13:00', name: '午餐+芙蓉街', icon: '🍜', details: '草包包子+油旋', cost: '¥40', transport: '步行', tips: '边走边吃' },
+              { time: '13:30-16:00', name: '大明湖+超然楼', icon: '🏞️', details: '湖心岛+登楼', cost: '¥40', transport: '步行', tips: '等亮灯' },
+              { time: '16:30-18:00', name: '黑虎泉+护城河', icon: '🐯', details: '散步+打水', cost: '免费', transport: '步行', tips: '傍晚最美' },
+              { time: '18:30-20:00', name: '宽厚里晚餐+夜景', icon: '🌙', details: '烧烤+酒吧街', cost: '¥80', transport: '步行', tips: '夜景绝佳' }
+            ]
+          },
+          {
+            header: 'Day 2 · 文化深度',
+            items: [
+              { time: '08:00-08:30', name: '把子肉早餐', icon: '🍖', details: '超意兴', cost: '¥15', transport: '—', tips: '浇汤汁' },
+              { time: '09:00-12:00', name: '千佛山', icon: '⛰️', details: '登顶+佛像+兴国禅寺', cost: '¥30', transport: 'K51路', tips: '索道上步行下' },
+              { time: '12:30-14:00', name: '午餐：燕喜堂', icon: '🍲', details: '奶汤蒲菜+糖醋鲤鱼', cost: '¥90', transport: '打车', tips: '老字号' },
+              { time: '14:30-17:00', name: '山东省博物馆', icon: '🏛️', details: '3小时深度游', cost: '免费', transport: 'K51路', tips: '租讲解器' },
+              { time: '17:30-18:30', name: '洪家楼教堂', icon: '⛪', details: '华北最大天主教堂', cost: '免费', transport: 'K55路', tips: '拍照出片' },
+              { time: '19:00-20:00', name: '晚餐：聚丰德', icon: '🍲', details: '九转大肠', cost: '¥85', transport: '打车', tips: '经典鲁菜' }
+            ]
+          },
+          {
+            header: 'Day 3 · 周边探索',
+            items: [
+              { time: '07:00-09:00', name: '出发 → 灵岩寺', icon: '🚗', details: '长途汽车站班车', cost: '车票¥30', transport: '长途汽车1.5h', tips: '早出发' },
+              { time: '09:30-12:00', name: '灵岩寺', icon: '🏛️', details: '千年古刹，彩塑罗汉', cost: '¥40', transport: '—', tips: '秋季银杏最美' },
+              { time: '12:00-13:00', name: '寺内素斋/自带午餐', icon: '🍱', details: '简单午餐', cost: '¥20', transport: '—', tips: '自带干粮也行' },
+              { time: '13:30-15:00', name: '墓塔林+辟支塔', icon: '🕌', details: '中国第二大塔林', cost: '含在门票', transport: '步行', tips: '拍照绝佳' },
+              { time: '15:30-17:30', name: '返回济南市区', icon: '🚗', details: '班车返回', cost: '¥30', transport: '长途汽车1.5h', tips: '注意末班时间' },
+              { time: '18:00-19:30', name: '告别晚餐：老商埠区', icon: '🍷', details: '文艺餐厅+咖啡', cost: '¥100', transport: '打车', tips: '完美收官' }
+            ]
+          }
+        ]
+      },
+      'family': {
+        title: '👨‍👩‍👧 亲子专线', difficulty: 'easy', duration: '2天', cost: '¥500-800',
+        distance: '约 10km', bestFor: '带 3-12 岁孩子的家庭',
+        desc: '节奏轻松，互动体验多，孩子不无聊',
+        days: [
+          {
+            header: 'Day 1 · 泉水+动物',
+            items: [
+              { time: '09:00-11:00', name: '趵突泉', icon: '⛲', details: '看锦鲤喂鱼，孩子最爱', cost: '¥40(1.4m以下免费)', transport: '地铁', tips: '买鱼食¥5' },
+              { time: '11:15-12:15', name: '午餐：草包包子铺', icon: '🥟', details: '孩子爱吃包子', cost: '¥35', transport: '步行', tips: '荷叶包子' },
+              { time: '13:30-16:00', name: '大明湖游船', icon: '🚣', details: '坐船游湖，孩子超开心', cost: '¥40/人', transport: '步行', tips: '电动船更安全' },
+              { time: '16:30-17:30', name: '芙蓉街小吃', icon: '🍡', details: '糖画、棉花糖、冰淇淋', cost: '¥30', transport: '步行', tips: '控制零食量' },
+              { time: '18:00-19:00', name: '晚餐：超意兴', icon: '🍖', details: '把子肉+米饭，简单实惠', cost: '¥15/人', transport: '步行', tips: '孩子也能吃' }
+            ]
+          },
+          {
+            header: 'Day 2 · 博物馆+公园',
+            items: [
+              { time: '09:00-11:30', name: '山东省博物馆', icon: '🏛️', details: '恐龙化石+互动展区', cost: '免费', transport: 'K51路', tips: '有儿童导览' },
+              { time: '12:00-13:00', name: '午餐', icon: '🍕', details: '博物馆附近餐厅', cost: '¥50', transport: '—', tips: '—' },
+              { time: '14:00-16:00', name: '千佛山（索道上山）', icon: '🚡', details: '坐索道上山，孩子兴奋', cost: '¥30+索道¥30', transport: 'K51路', tips: '索道省力' },
+              { time: '16:30-17:30', name: '五龙潭公园', icon: '🌸', details: '樱花季超美，草坪野餐', cost: '¥5', transport: '打车', tips: '带野餐垫' }
+            ]
+          }
+        ]
+      },
+      'art': {
+        title: '🎨 文艺专线', difficulty: 'easy', duration: '1.5天', cost: '¥300-500',
+        distance: '约 12km', bestFor: '文艺青年、拍照爱好者',
+        desc: 'Citywalk+老建筑+咖啡+书店，出片率拉满',
+        days: [
+          {
+            header: 'Day 1 · 老建筑+咖啡',
+            items: [
+              { time: '09:00-10:30', name: '老商埠区(经三路)', icon: '🏘️', details: '德式建筑群，爱心红绿灯', cost: '免费', transport: 'K51路', tips: '上午光线最好' },
+              { time: '10:30-12:00', name: '洪家楼教堂', icon: '⛪', details: '哥特式双塔，彩色玻璃', cost: '免费', transport: 'K55路', tips: '周日弥撒氛围最佳' },
+              { time: '12:00-13:30', name: '咖啡+轻食', icon: '☕', details: '老商埠区独立咖啡馆', cost: '¥50', transport: '步行', tips: '拿铁+蛋糕' },
+              { time: '14:00-16:00', name: '曲水亭街+百花洲', icon: '🏮', details: '泉水人家，青石板路', cost: '免费', transport: '步行', tips: '拍照圣地' },
+              { time: '16:30-18:00', name: '山东省博物馆', icon: '🏛️', details: '蛋壳黑陶杯，极简美学', cost: '免费', transport: 'K51路', tips: '拍文物细节' },
+              { time: '18:30-20:00', name: '宽厚里夜景', icon: '🌙', details: '护城河灯光+酒吧街', cost: '¥80', transport: '打车', tips: '夜景模式拍' }
+            ]
+          },
+          {
+            header: 'Day 2 上午 · 泉水+书店',
+            items: [
+              { time: '08:00-09:30', name: '黑虎泉晨拍', icon: '🐯', details: '清晨打水的老济南', cost: '免费', transport: '步行', tips: '6-7点最有生活气' },
+              { time: '10:00-11:30', name: '趵突泉', icon: '⛲', details: '观澜亭+万竹园', cost: '¥40', transport: '步行', tips: '万竹园人少' },
+              { time: '11:30-12:30', name: '芙蓉街收尾', icon: '🛍️', details: '买伴手礼+最后的小吃', cost: '¥30', transport: '步行', tips: '油旋带走' }
+            ]
+          }
+        ]
+      }
+    };
+
+    function renderRoute(routeKey) {
+      const route = routes[routeKey];
+      if (!route) return;
+      const diffLabel = { easy: '轻松', medium: '适中', hard: '挑战' };
+      let html = `
+        <div class="route-header">
+          <div>
+            <h2>${route.title}</h2>
+            <p style="color:var(--text2);margin-top:4px">${route.desc}</p>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <span class="route-badge ${route.difficulty}">${diffLabel[route.difficulty]}</span>
+            <span class="route-meta"><span>⏱ ${route.duration}</span><span>💰 ${route.cost}</span><span>🚶 ${route.distance}</span><span>👥 ${route.bestFor}</span></span>
+          </div>
+        </div>
+        <div class="timeline">`;
+
+      route.days.forEach(day => {
+        html += `<div class="timeline-day"><div class="timeline-day-header">${day.header}</div>`;
+        let dayCost = 0;
+        day.items.forEach(item => {
+          const costNum = parseInt(item.cost.replace(/[^0-9]/g, '')) || 0;
+          dayCost += costNum;
+          html += `
+            <div class="timeline-item">
+              <div class="ti-top">
+                <span class="ti-time">${item.time}</span>
+                <span class="ti-name">${item.icon} ${item.name}</span>
+              </div>
+              <div class="ti-details">
+                <span>${item.details}</span>
+              </div>
+              <div class="ti-details" style="margin-top:6px">
+                <span class="ti-cost">💰 ${item.cost}</span>
+                <span class="ti-transport">🚌 ${item.transport}</span>
+                ${item.tips ? `<span>💡 ${item.tips}</span>` : ''}
+              </div>
+            </div>`;
+        });
+        html += `<div class="day-total">当日预算约 <strong>¥${dayCost}</strong></div></div>`;
       });
-    });
 
-    // ─── Trip planner (localStorage) ───
-    const STORAGE_KEY = 'jinan-trip-planner';
+      html += '</div>';
 
-    function getTrips() {
-      try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-      } catch { return []; }
+      // Cost summary
+      const totalTickets = route.days.reduce((sum, d) => sum + d.items.reduce((s, i) => s + (parseInt(i.cost.replace(/[^0-9]/g, '')) || 0), 0), 0);
+      html += `
+        <div class="cost-summary">
+          <div class="cost-card"><div class="label">🎫 门票</div><div class="amount">¥${Math.round(totalTickets * 0.3)}</div><div class="note">预估总和</div></div>
+          <div class="cost-card"><div class="label">🍜 餐饮</div><div class="amount">¥${Math.round(totalTickets * 0.4)}</div><div class="note">预估总和</div></div>
+          <div class="cost-card"><div class="label">🚌 交通</div><div class="amount">¥${Math.round(totalTickets * 0.2)}</div><div class="note">预估总和</div></div>
+          <div class="cost-card"><div class="label">💰 总计</div><div class="amount">¥${totalTickets}</div><div class="note">所有费用</div></div>
+        </div>`;
+
+      document.getElementById('routeContent').innerHTML = html;
     }
 
-    function saveTrips(trips) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(trips));
+    // ── Seasons Data ──
+    const seasons = {
+      spring: {
+        title: '🌸 春季 (3-5月)', icon: '🌸',
+        desc: '泉水最旺，百花盛开，是济南最美的季节',
+        tips: ['3月底趵突泉水位最高，水涌最壮观', '4月五龙潭樱花超美', '4-5月大明湖荷花初开', '气温15-25°C，薄外套即可'],
+        route: '泉水赏花线：趵突泉→五龙潭(樱花)→大明湖→护城河步道',
+        foods: ['奶汤蒲菜(时令)', '香椿芽炒蛋', '荠菜水饺']
+      },
+      summer: {
+        title: '☀️ 夏季 (6-8月)', icon: '☀️',
+        desc: '荷花满湖，夜游绝佳，但白天酷热',
+        tips: ['6-8月大明湖荷花盛开', '建议早出晚归，中午室内避暑', '护城河夜游超舒服', '7-8月多雨，带伞'],
+        route: '避暑线：省博物馆(空调)→趵突泉(泉水凉爽)→宽厚里(夜游)',
+        foods: ['荷叶粥', '酸梅汤', '冰粉', '绿豆糕']
+      },
+      autumn: {
+        title: '🍂 秋季 (9-11月)', icon: '🍂',
+        desc: '秋高气爽，红叶漫山，最佳登山季',
+        tips: ['10月中-11月中红叶谷红叶最盛', '10月千佛山秋色最美', '11月灵岩寺银杏金黄', '气温10-22°C，早晚凉'],
+        route: '红叶登山线：千佛山→红叶谷→灵岩寺(银杏)',
+        foods: ['糖炒栗子', '烤地瓜', '大闸蟹']
+      },
+      winter: {
+        title: '❄️ 冬季 (12-2月)', icon: '❄️',
+        desc: '泉水雾气如仙境，人少清净，年味浓',
+        tips: ['12-1月趵突泉水雾氤氲如仙境', '游客少，拍照不用排队', '1-2月有庙会和年味活动', '气温-5~5°C，注意保暖'],
+        route: '仙境线：趵突泉(雾气)→大明湖(雪景)→宽厚里(年味)',
+        foods: ['羊肉汤', '把子肉(暖胃)', '甜沫', '火锅']
+      }
+    };
+
+    function renderSeason(key) {
+      const s = seasons[key];
+      document.getElementById('seasonContent').innerHTML = `
+        <div class="season-panel active">
+          <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px">
+            <h3 style="font:700 1.2rem/1.4 var(--serif);margin-bottom:12px">${s.title}</h3>
+            <p style="color:var(--text2);margin-bottom:16px">${s.desc}</p>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px">
+              <div>
+                <h4 style="font-size:.85rem;font-weight:700;color:var(--accent);margin-bottom:8px">📝 出行建议</h4>
+                <ul style="list-style:none">${s.tips.map(t => `<li style="font-size:.85rem;color:var(--text2);padding:3px 0;padding-left:16px;position:relative"><span style="position:absolute;left:0;color:var(--accent)">•</span>${t}</li>`).join('')}</ul>
+              </div>
+              <div>
+                <h4 style="font-size:.85rem;font-weight:700;color:var(--accent);margin-bottom:8px">🗺️ 推荐路线</h4>
+                <p style="font-size:.85rem;color:var(--text2);line-height:1.6">${s.route}</p>
+              </div>
+              <div>
+                <h4 style="font-size:.85rem;font-weight:700;color:var(--accent);margin-bottom:8px">🍜 当季美食</h4>
+                <div style="display:flex;gap:6px;flex-wrap:wrap">${s.foods.map(f => `<span style="font-size:.7rem;padding:3px 10px;border-radius:100px;background:var(--accent2);color:var(--accent);font-weight:500">${f}</span>`).join('')}</div>
+              </div>
+            </div>
+          </div>
+        </div>`;
     }
 
-    function renderTrips() {
-      const list = document.getElementById('my-trip-list');
-      const empty = document.getElementById('trip-empty');
-      const totalWrap = document.getElementById('trip-total');
-      const totalAmount = document.getElementById('trip-total-amount');
-      const trips = getTrips();
-
-      // Remove all items except empty state
-      list.querySelectorAll('.my-trip-item').forEach(el => el.remove());
-
-      if (trips.length === 0) {
-        empty.style.display = 'block';
-        totalWrap.style.display = 'none';
+    // ── My Trip ──
+    function renderMyTrip() {
+      const ids = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
+      const list = document.getElementById('myTripList');
+      if (!ids.length) {
+        list.innerHTML = '<div class="my-trip-empty">📌 还没有添加景点<br><small>去 <a href="spots.html" style="color:var(--accent)">景点页面</a> 点击「加入行程」</small></div>';
         return;
       }
+      list.innerHTML = ids.map(id => {
+        const s = spotsData.find(x => x.id === id);
+        if (!s) return '';
+        return `<div class="my-trip-item">
+          <div><div class="trip-name">${s.name}</div><div class="trip-meta">⏱ ${s.dur} · 🎫 ${s.price === 0 ? '免费' : '¥' + s.price}</div></div>
+          <button class="remove-btn" data-id="${s.id}">✕ 移除</button>
+        </div>`;
+      }).join('');
 
-      empty.style.display = 'none';
-      totalWrap.style.display = 'block';
-
-      let total = 0;
-      trips.forEach((trip, idx) => {
-        total += trip.cost || 0;
-        const li = document.createElement('li');
-        li.className = 'my-trip-item';
-
-        const info = document.createElement('div');
-        const nameDiv = document.createElement('div');
-        nameDiv.className = 'trip-name';
-        nameDiv.textContent = trip.name;
-        const metaDiv = document.createElement('div');
-        metaDiv.className = 'trip-meta';
-        metaDiv.textContent = `⏰ ${trip.time} · 💰 ¥${trip.cost}`;
-        info.appendChild(nameDiv);
-        info.appendChild(metaDiv);
-
-        const removeBtn = document.createElement('button');
-        removeBtn.className = 'remove-btn';
-        removeBtn.dataset.idx = idx;
-        removeBtn.textContent = '✕ 移除';
-
-        li.appendChild(info);
-        li.appendChild(removeBtn);
-        list.appendChild(li);
-      });
-
-      totalAmount.textContent = '¥' + total;
-
-      // Bind remove buttons
       list.querySelectorAll('.remove-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-          const trips = getTrips();
-          trips.splice(parseInt(btn.dataset.idx), 1);
-          saveTrips(trips);
-          renderTrips();
-          updateAddButtons();
+          const newIds = ids.filter(id => id !== btn.dataset.id);
+          localStorage.setItem('jinan-itinerary', JSON.stringify(newIds));
+          renderMyTrip();
         });
       });
     }
 
-    function updateAddButtons() {
-      const trips = getTrips();
-      const names = new Set(trips.map(t => t.name));
-      document.querySelectorAll('.add-trip-btn').forEach(btn => {
-        if (names.has(btn.dataset.name)) {
-          btn.textContent = '✓ 已加入';
-          btn.classList.add('added');
-        } else {
-          btn.textContent = '+ 加入行程';
-          btn.classList.remove('added');
-        }
-      });
-    }
-
-    // Bind add buttons
-    document.querySelectorAll('.add-trip-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const trips = getTrips();
-        const name = btn.dataset.name;
-        const existing = trips.findIndex(t => t.name === name);
-
-        if (existing >= 0) {
-          // Remove if already added
-          trips.splice(existing, 1);
-        } else {
-          trips.push({
-            name: name,
-            time: btn.dataset.time,
-            cost: parseInt(btn.dataset.cost) || 0
-          });
-        }
-
-        saveTrips(trips);
-        renderTrips();
-        updateAddButtons();
-      });
+    // Copy trip
+    document.getElementById('copyTrip')?.addEventListener('click', () => {
+      const ids = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
+      const text = ids.map((id, i) => {
+        const s = spotsData.find(x => x.id === id);
+        return s ? `${i+1}. ${s.name} (${s.dur}, ${s.price === 0 ? '免费' : '¥' + s.price})` : '';
+      }).filter(Boolean).join('\n');
+      navigator.clipboard?.writeText(`济南行程\n${text}`);
     });
 
-    // Initial render
-    renderTrips();
-    updateAddButtons();
-  </script>
+    document.getElementById('clearTrip')?.addEventListener('click', () => {
+      localStorage.setItem('jinan-itinerary', '[]');
+      renderMyTrip();
+    });
 
-  <!-- PWA Service Worker -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/jinan-travel-guide/sw.js')
-          .then(reg => console.log('SW registered:', reg.scope))
-          .catch(err => console.log('SW failed:', err));
-      });
-    }
+    // Route tabs
+    document.getElementById('routeTabs').addEventListener('click', e => {
+      const btn = e.target.closest('.route-tab');
+      if (!btn) return;
+      document.querySelectorAll('.route-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderRoute(btn.dataset.route);
+    });
+
+    // Season tabs
+    document.getElementById('seasonTabs').addEventListener('click', e => {
+      const btn = e.target.closest('.season-tab');
+      if (!btn) return;
+      document.querySelectorAll('.season-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderSeason(btn.dataset.season);
+    });
+
+    loadData();
   </script>
 </body>
 </html>

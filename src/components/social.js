@@ -193,7 +193,7 @@ function wrapText(ctx, text, x, y, maxW, lineH) {
   ctx.fillText(line, x, y);
 }
 
-function showShareModal(dataUrl, title) {
+async function showShareModal(dataUrl, title) {
   const html = `
     <div style="text-align:center">
       <h3 style="margin-bottom:16px">📤 分享卡片</h3>

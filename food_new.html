@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🍜 美食 · 探店 — 济南旅游攻略</title>
+  <meta name="description" content="济南美食攻略：糖醋鲤鱼、把子肉、油旋、甜沫、九转大肠等鲁菜经典。推荐餐厅、人均价格、点菜攻略，吃遍泉城。">
+  <meta name="keywords" content="济南美食,鲁菜,糖醋鲤鱼,把子肉,油旋,甜沫,九转大肠,济南餐厅">
+  <meta property="og:title" content="美食 · 探店 — 济南旅游攻略">
+  <meta property="og:description" content="鲁菜发源地，北方美食重镇。糖醋鲤鱼、把子肉、油旋……吃遍泉城">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://opennowing.github.io/jinan-travel-guide/food.html">
+  <meta property="og:image" content="https://opennowing.github.io/jinan-travel-guide/public/banner.jpg">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="美食 · 探店 — 济南旅游攻略">
+  <meta name="twitter:description" content="鲁菜发源地，把子肉、糖醋鲤鱼、油旋……吃遍泉城">
+  <meta name="twitter:image" content="https://opennowing.github.io/jinan-travel-guide/public/banner.jpg">
+  <link rel="canonical" href="https://opennowing.github.io/jinan-travel-guide/food.html">
+  <meta name="author" content="泉城攻略">
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://opennowing.github.io/jinan-travel-guide/" },
+      { "@type": "ListItem", "position": 2, "name": "美食", "item": "https://opennowing.github.io/jinan-travel-guide/food.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "济南美食推荐",
+    "description": "济南经典美食与推荐餐厅",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "item": { "@type": "Restaurant", "name": "聚丰德", "servesCuisine": "鲁菜", "priceRange": "¥85/人", "address": { "@type": "PostalAddress", "addressLocality": "济南市" } } },
+      { "@type": "ListItem", "position": 2, "item": { "@type": "Restaurant", "name": "草包包子铺", "servesCuisine": "包子", "priceRange": "¥35/人", "address": { "@type": "PostalAddress", "addressLocality": "济南市" } } },
+      { "@type": "ListItem", "position": 3, "item": { "@type": "Restaurant", "name": "超意兴", "servesCuisine": "把子肉", "priceRange": "¥15/人", "address": { "@type": "PostalAddress", "addressLocality": "济南市" } } },
+      { "@type": "ListItem", "position": 4, "item": { "@type": "Restaurant", "name": "闫府私房菜", "servesCuisine": "鲁菜", "priceRange": "¥95/人", "address": { "@type": "PostalAddress", "addressLocality": "济南市" } } }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "济南经典菜品",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "item": { "@type": "Recipe", "name": "糖醋鲤鱼", "description": "鲁菜经典，黄河鲤鱼现杀现做，外酥里嫩" } },
+      { "@type": "ListItem", "position": 2, "item": { "@type": "Recipe", "name": "九转大肠", "description": "鲁菜代表，五味俱全，肥而不腻" } },
+      { "@type": "ListItem", "position": 3, "item": { "@type": "Recipe", "name": "把子肉", "description": "济南灵魂快餐，肥瘦相间，浇汤汁配米饭" } },
+      { "@type": "ListItem", "position": 4, "item": { "@type": "Recipe", "name": "油旋", "description": "济南特色面食，外酥里嫩，葱香四溢" } },
+      { "@type": "ListItem", "position": 5, "item": { "@type": "Recipe", "name": "甜沫", "description": "济南灵魂早餐，咸味粥品" } }
+    ]
+  }
+  </script>
+  <link rel="stylesheet" href="/src/styles/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    /* ── Search ── */
+    .food-search-wrap{max-width:480px;margin:0 auto 28px;position:relative}
+    .food-search{width:100%;padding:12px 18px 12px 42px;border:1px solid var(--border);border-radius:12px;background:var(--card-bg);font-size:.9rem;color:var(--text);outline:none;transition:border-color .2s}
+    .food-search:focus{border-color:var(--accent)}
+    .food-search::placeholder{color:var(--text3)}
+    .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:1rem;color:var(--text3);pointer-events:none}
+
+    /* ── Tabs ── */
+    .food-tabs{display:flex;gap:4px;background:var(--bg2);padding:4px;border-radius:12px;margin-bottom:32px;overflow-x:auto;justify-content:center;flex-wrap:wrap}
+    .food-tab{padding:8px 18px;border:none;background:none;font-size:.85rem;font-weight:500;color:var(--text2);cursor:pointer;border-radius:8px;transition:all .3s;white-space:nowrap}
+    .food-tab.active{background:var(--bg);color:var(--text);box-shadow:var(--shadow)}
+    .food-tab:hover:not(.active){color:var(--accent)}
+
+    /* ── Must-Eat Top 5 ── */
+    .must-eat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+    .must-card{position:relative;background:var(--card-bg);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);transition:all .3s var(--ease)}
+    .must-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+    .must-card-rank{position:absolute;top:12px;left:12px;width:36px;height:36px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font:800 1rem/1 var(--serif);z-index:2}
+    .must-card-img{width:100%;aspect-ratio:16/9;object-fit:cover}
+    .must-card-body{padding:16px 18px 18px}
+    .must-card-name{font:700 1.05rem/1.3 var(--serif);margin-bottom:4px}
+    .must-card-desc{font-size:.82rem;color:var(--text2);line-height:1.55;margin-bottom:10px}
+    .must-card-meta{display:flex;gap:10px;flex-wrap:wrap;font-size:.75rem;color:var(--text3)}
+    .must-card-meta span{display:inline-flex;align-items:center;gap:3px}
+
+    /* ── Food Cards ── */
+    .food-masonry{columns:3;column-gap:24px}
+    .food-card{break-inside:avoid;margin-bottom:24px;background:var(--card-bg);border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);transition:all .3s var(--ease)}
+    .food-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+    .food-card-img{width:100%;aspect-ratio:16/10;object-fit:cover}
+    .food-card-body{padding:18px 20px 20px}
+    .food-card-name{font:700 1.1rem/1.4 var(--serif);display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap}
+    .food-card-tag{font-size:.65rem;padding:2px 10px;background:var(--accent2);border-radius:100px;color:var(--accent);font-weight:500;white-space:nowrap}
+    .badge-must{font-size:.65rem;padding:2px 10px;background:rgba(231,111,81,.12);color:#e76f51;border-radius:100px;font-weight:600;white-space:nowrap}
+    .badge-season{font-size:.6rem;padding:2px 8px;background:rgba(42,157,143,.1);color:var(--teal);border-radius:100px;white-space:nowrap}
+    .food-card-history{font-size:.8rem;color:var(--text3);line-height:1.5;margin-bottom:10px;padding:10px 12px;background:var(--bg2);border-radius:8px}
+    .food-card-history::before{content:'📜 '}
+    .food-card-desc{font-size:.85rem;color:var(--text2);line-height:1.6;margin-bottom:14px}
+    .food-card-shops{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .food-card-shops li{padding:10px 14px;background:var(--bg2);border-radius:10px;border:1px solid var(--border)}
+    .shop-name{font-weight:600;font-size:.85rem;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center}
+    .shop-rating{color:var(--accent);font-size:.8rem;white-space:nowrap}
+    .shop-info{font-size:.75rem;color:var(--text3);display:flex;gap:12px;flex-wrap:wrap}
+    .shop-info span{display:inline-flex;align-items:center;gap:3px}
+    .shop-extras{font-size:.72rem;color:var(--text3);display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+
+    /* ── Map ── */
+    .food-map-container{width:100%;height:420px;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);background:var(--bg2)}
+    .custom-marker{background:none!important;border:none!important}
+    .leaflet-div-icon{background:none!important;border:none!important}
+
+    /* ── Season ── */
+    .season-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+    .season-card{background:var(--card-bg);border-radius:var(--radius-lg);padding:24px 22px;border:1px solid var(--border);transition:all .3s}
+    .season-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+    .season-icon{font-size:2rem;margin-bottom:10px}
+    .season-card h3{font:700 1.05rem/1.3 var(--serif);margin-bottom:6px}
+    .season-card p{font-size:.82rem;color:var(--text2);line-height:1.55;margin-bottom:10px}
+    .season-foods{display:flex;gap:6px;flex-wrap:wrap}
+    .season-food-tag{font-size:.7rem;padding:3px 10px;border-radius:100px;font-weight:500;background:var(--accent2);color:var(--accent)}
+
+    /* ── Tips ── */
+    .tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+    .tip-card{padding:28px 24px;background:var(--card-bg);border-radius:var(--radius-lg);border:1px solid var(--border)}
+    .tip-card .tip-icon{font-size:1.8rem;margin-bottom:12px}
+    .tip-card h3{font:700 1rem/1.3 var(--serif);margin-bottom:8px}
+    .tip-card p{font-size:.85rem;color:var(--text2);line-height:1.6}
+    .tip-card ul{list-style:none;margin-top:8px}
+    .tip-card ul li{font-size:.85rem;color:var(--text2);padding:3px 0;padding-left:16px;position:relative}
+    .tip-card ul li::before{content:'•';position:absolute;left:0;color:var(--accent)}
+
+    /* ── Food Routes ── */
+    .routes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px}
+    .route-card{background:var(--card-bg);border-radius:var(--radius-lg);padding:24px 22px;border:1px solid var(--border);transition:all .3s;position:relative;overflow:hidden}
+    .route-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+    .route-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+    .route-card:nth-child(1)::before{background:linear-gradient(90deg,#e76f51,#f4a261)}
+    .route-card:nth-child(2)::before{background:linear-gradient(90deg,#2a9d8f,#264653)}
+    .route-card:nth-child(3)::before{background:linear-gradient(90deg,#e9c46a,#e76f51)}
+    .route-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+    .route-icon{font-size:2rem}
+    .route-title{font:700 1.1rem/1.3 var(--serif)}
+    .route-meta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+    .route-meta span{font-size:.78rem;color:var(--text3);display:inline-flex;align-items:center;gap:4px}
+    .route-stops{list-style:none;position:relative;padding-left:28px}
+    .route-stops::before{content:'';position:absolute;left:8px;top:8px;bottom:8px;width:2px;background:var(--border)}
+    .route-stop{position:relative;padding:8px 0 8px 14px;font-size:.85rem;color:var(--text2)}
+    .route-stop::before{content:'';position:absolute;left:-24px;top:14px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--card-bg);z-index:1}
+    .route-stop-name{font-weight:600;color:var(--text)}
+    .route-stop-detail{font-size:.75rem;color:var(--text3);margin-top:2px}
+    .route-arrow{position:absolute;left:-20px;top:14px;color:var(--text3);font-size:.7rem}
+
+    /* ── Nutrition Info ── */
+    .nutrition-info{margin-top:12px;padding:10px 14px;background:var(--bg2);border-radius:8px;border:1px solid var(--border)}
+    .nutrition-header{font-size:.72rem;color:var(--text3);margin-bottom:6px;display:flex;align-items:center;gap:4px}
+    .nutrition-row{display:flex;gap:10px;flex-wrap:wrap;font-size:.72rem;color:var(--text2)}
+    .nutrition-row span{display:inline-flex;align-items:center;gap:3px}
+    .nutrition-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+    .nutrition-tag{font-size:.62rem;padding:2px 8px;border-radius:100px;font-weight:500}
+    .nutrition-tag.high-protein{background:rgba(42,157,143,.1);color:#2a9d8f}
+    .nutrition-tag.high-carb{background:rgba(231,111,81,.1);color:#e76f51}
+    .nutrition-tag.high-fat{background:rgba(233,196,106,.1);color:#b8860b}
+    .nutrition-tag.vegan{background:rgba(76,175,80,.1);color:#4caf50}
+    .nutrition-tag.low-cal{background:rgba(100,181,246,.1);color:#42a5f5}
+
+    /* ── Compare ── */
+    .compare-fab{position:fixed;bottom:24px;right:24px;z-index:100;padding:14px 22px;background:var(--accent);color:#fff;border:none;border-radius:50px;font-size:.85rem;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(231,111,81,.35);transition:all .3s;display:none;gap:8px;align-items:center}
+    .compare-fab.visible{display:flex}
+    .compare-fab:hover{transform:scale(1.05);box-shadow:0 6px 24px rgba(231,111,81,.45)}
+    .compare-fab .count{background:#fff;color:var(--accent);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700}
+    .compare-btn{font-size:.68rem;padding:3px 10px;background:rgba(42,157,143,.1);color:#2a9d8f;border:1px solid rgba(42,157,143,.2);border-radius:100px;cursor:pointer;font-weight:500;transition:all .2s;margin-top:8px;display:inline-flex;align-items:center;gap:4px}
+    .compare-btn:hover{background:rgba(42,157,143,.2)}
+    .compare-btn.active{background:#2a9d8f;color:#fff;border-color:#2a9d8f}
+    .compare-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:flex-end;justify-content:center}
+    .compare-overlay.visible{display:flex}
+    .compare-panel{background:var(--card-bg);border-radius:var(--radius-lg) var(--radius-lg) 0 0;max-height:80vh;width:100%;max-width:700px;overflow-y:auto;padding:24px;animation:slideUp .3s var(--ease)}
+    @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+    .compare-panel-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+    .compare-panel-header h3{font:700 1.1rem/1.3 var(--serif)}
+    .compare-close{background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--text2);padding:4px}
+    .compare-table{width:100%;border-collapse:collapse;font-size:.82rem}
+    .compare-table th{text-align:left;padding:10px 12px;background:var(--bg2);color:var(--text3);font-weight:500;border-bottom:1px solid var(--border);white-space:nowrap}
+    .compare-table td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text2)}
+    .compare-table td:first-child{font-weight:600;color:var(--text)}
+    .compare-empty{text-align:center;padding:40px 0;color:var(--text3);font-size:.9rem}
+    .compare-clear{font-size:.78rem;padding:6px 14px;background:rgba(231,111,81,.1);color:#e76f51;border:1px solid rgba(231,111,81,.2);border-radius:8px;cursor:pointer;font-weight:500;transition:all .2s}
+    .compare-clear:hover{background:rgba(231,111,81,.2)}
+
+    /* ── Search History ── */
+    .search-history{position:absolute;top:100%;left:0;right:0;background:var(--card-bg);border:1px solid var(--border);border-radius:0 0 12px 12px;box-shadow:var(--shadow-lg);z-index:50;display:none;max-height:240px;overflow-y:auto}
+    .search-history.visible{display:block}
+    .search-history-item{padding:10px 18px;font-size:.82rem;color:var(--text2);cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .15s}
+    .search-history-item:hover{background:var(--bg2)}
+    .search-history-label{font-size:.7rem;color:var(--text3);padding:6px 18px 2px;font-weight:500}
+    .search-history-clear{padding:8px 18px;font-size:.72rem;color:var(--accent);cursor:pointer;text-align:right;font-weight:500}
+
+    /* ── Loading & Empty ── */
+    .food-loading{display:flex;justify-content:center;padding:60px 0;color:var(--text3)}
+    .food-loading .spinner{width:36px;height:36px;border:3px solid var(--bg3);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .food-empty{text-align:center;padding:60px 0;color:var(--text3);font-size:.95rem}
+
+    @media(max-width:768px){
+      .food-masonry{columns:1}
+      .food-tabs{justify-content:flex-start;flex-wrap:nowrap}
+      .must-eat-grid{grid-template-columns:1fr}
+      .food-map-container{height:300px}
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:16px;z-index:999;background:var(--accent);color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-100%'">跳到主要内容</a>
+
+  <!-- Scroll progress -->
+  <div class="scroll-progress"></div>
+
+  <!-- Top Nav -->
+  <nav class="top-nav" aria-label="主导航">
+    <a href="index.html" class="logo">泉城<span>攻略</span></a>
+    <div class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="spots.html">景点</a>
+      <a href="food.html" class="active">美食</a>
+      <a href="itinerary.html">行程</a>
+      <a href="guide.html">指南</a>
+      <a href="culture.html">文化</a>
+    </div>
+    <button class="dark-toggle" aria-label="切换深色模式">🌙</button>
+    <button class="burger" aria-label="菜单"><span></span><span></span><span></span></button>
+  </nav>
+
+  <!-- Mobile bottom nav -->
+  <nav class="mob-nav" aria-label="移动端导航">
+    <a href="index.html"><span class="icon" aria-hidden="true">🏠</span>首页</a>
+    <a href="spots.html"><span class="icon">🏛️</span>景点</a>
+    <a href="food.html" class="active"><span class="icon">🍜</span>美食</a>
+    <a href="itinerary.html"><span class="icon">📋</span>行程</a>
+    <a href="guide.html"><span class="icon">📖</span>指南</a>
+  </nav>
+
+  <!-- Hero -->
+  <header class="page-hero">
+    <h1>🍜 美食 · 探店</h1>
+    <p>鲁菜发源地，北方美食重镇</p>
+    <button class="btn btn-outline btn-sm" style="margin-top:16px" data-share='{"title":"济南美食攻略","subtitle":"鲁菜发源地 · 68道精选","items":[{"name":"糖醋鲤鱼","info":"鲁菜经典 · 聚丰德"},{"name":"把子肉","info":"济南灵魂美食 · 超意兴"},{"name":"油旋","info":"非遗小吃 · 弘春美斋"},{"name":"甜沫","info":"济南早餐必备"},{"name":"九转大肠","info":"鲁菜名菜 · 闫府私房菜"}],"page":"food"}'>📤 分享美食</button>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content">
+
+    <!-- ── 搜索 ── -->
+    <section class="section" aria-label="美食搜索与列表">
+      <div class="section-inner">
+        <div class="food-search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="food-search" id="foodSearch" placeholder="搜索菜名、餐厅名、拼音…" autocomplete="off" aria-label="搜索美食">
+          <div class="search-history" id="searchHistory"></div>
+        </div>
+
+        <!-- ── 分类 Tab ── -->
+        <div class="food-tabs" id="foodTabs" role="tablist" aria-label="美食分类">
+          <button class="food-tab active" data-cat="全部">全部</button>
+          <button class="food-tab" data-cat="lucai">🍲 鲁菜经典</button>
+          <button class="food-tab" data-cat="xiaochi">🍢 市井小吃</button>
+          <button class="food-tab" data-cat="laozihao">🏮 老字号</button>
+          <button class="food-tab" data-cat="zaocan">🌅 早餐</button>
+          <button class="food-tab" data-cat="yexiao">🌙 夜宵</button>
+          <button class="food-tab" data-cat="yinpin">🍵 饮品</button>
+        </div>
+
+        <!-- 美食卡片列表 -->
+        <div class="food-masonry" id="foodGrid">
+          <div class="food-loading"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 必吃榜 TOP 5 ── -->
+    <section class="section" style="background:var(--bg2)" aria-label="必吃榜TOP5">
+      <div class="section-inner">
+        <div class="section-header">
+          <p class="eyebrow">必吃榜</p>
+          <h2>🏆 来济南必吃的 TOP 5</h2>
+          <p>本地人认证，错过等于白来</p>
+        </div>
+        <div class="must-eat-grid" id="mustEatGrid">
+          <!-- JS 渲染 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 美食地图 ── -->
+    <section class="section" aria-label="美食地图">
+      <div class="section-inner">
+        <div class="section-header">
+          <p class="eyebrow">互动地图</p>
+          <h2>🗺️ 美食地图</h2>
+          <p>跟着地图吃济南，不走回头路</p>
+        </div>
+        <div class="food-map-container" id="foodMapContainer"></div>
+      </div>
+    </section>
+
+    <!-- ── 美食路线 ── -->
+    <section class="section" style="background:var(--bg2)" aria-label="美食路线">
+      <div class="section-inner">
+        <div class="section-header">
+          <p class="eyebrow">路线推荐</p>
+          <h2>🗺️ 美食路线</h2>
+          <p>跟着路线吃，不走冤枉路</p>
+        </div>
+        <div class="routes-grid" id="routesGrid">
+          <!-- JS 渲染 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 时令美食 ── -->
+    <section class="section" style="background:var(--bg2)" aria-label="时令美食">
+      <div class="section-inner">
+        <div class="section-header">
+          <p class="eyebrow">时令推荐</p>
+          <h2>📅 时令美食</h2>
+          <p>什么季节吃什么，济南人最懂</p>
+        </div>
+        <div class="season-grid">
+          <div class="season-card rv">
+            <div class="season-icon">🌸</div>
+            <h3>春季（3-5月）</h3>
+            <p>春暖花开，蒲菜鲜嫩正当时。奶汤蒲菜是一年中最好吃的时候，配上清清爽爽的泉水豆腐，满口春意。</p>
+            <div class="season-foods">
+              <span class="season-food-tag">奶汤蒲菜</span>
+              <span class="season-food-tag">泉水豆腐</span>
+              <span class="season-food-tag">油旋</span>
+            </div>
+          </div>
+          <div class="season-card rv">
+            <div class="season-icon">☀️</div>
+            <h3>夏季（6-8月）</h3>
+            <p>炎热的夏天，傍晚来顿烧烤配扎啤是济南人的标配。回民小区的炭火烤串，配上冰镇泉水老酸奶，绝了。</p>
+            <div class="season-foods">
+              <span class="season-food-tag">济南烧烤</span>
+              <span class="season-food-tag">泉水老酸奶</span>
+              <span class="season-food-tag">泉水泡茶</span>
+            </div>
+          </div>
+          <div class="season-card rv">
+            <div class="season-icon">🍂</div>
+            <h3>秋季（9-11月）</h3>
+            <p>秋高气爽，正是进补好时节。葱烧海参搭配章丘大葱，温润滋补。烤地瓜也开始上市，暖手又暖心。</p>
+            <div class="season-foods">
+              <span class="season-food-tag">葱烧海参</span>
+              <span class="season-food-tag">烤地瓜</span>
+              <span class="season-food-tag">糖醋鲤鱼</span>
+            </div>
+          </div>
+          <div class="season-card rv">
+            <div class="season-icon">❄️</div>
+            <h3>冬季（12-2月）</h3>
+            <p>寒冬腊月，一碗热腾腾的甜沫配把子肉，从胃暖到心。奶汤蒲菜虽然蒲菜不如春天嫩，但奶汤依然鲜美。</p>
+            <div class="season-foods">
+              <span class="season-food-tag">甜沫</span>
+              <span class="season-food-tag">把子肉</span>
+              <span class="season-food-tag">九转大肠</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 美食Tips ── -->
+    <section class="section" aria-label="美食攻略">
+      <div class="section-inner">
+        <div class="section-header">
+          <p class="eyebrow">实用攻略</p>
+          <h2>💡 美食 Tips</h2>
+          <p>点菜攻略、避坑指南、省钱秘籍</p>
+        </div>
+        <div class="tips-grid">
+          <div class="tip-card rv">
+            <div class="tip-icon">🥢</div>
+            <h3>点菜攻略</h3>
+            <ul>
+              <li>鲁菜分量大，2人点2-3道菜足够</li>
+              <li>糖醋鲤鱼要求现杀现做，口感差很多</li>
+              <li>九转大肠配米饭吃更香，单吃偏腻</li>
+              <li>把子肉要肥瘦相间的才正宗</li>
+              <li>甜沫是咸的！第一次别被名字骗了</li>
+            </ul>
+          </div>
+          <div class="tip-card rv">
+            <div class="tip-icon">⏰</div>
+            <h3>时间攻略</h3>
+            <ul>
+              <li>早餐店 06:00-10:00（甜沫油旋趁早去）</li>
+              <li>鲁菜馆 11:00-14:00 / 17:00-21:00</li>
+              <li>老字号下午2点后可能休息，别扑空</li>
+              <li>11:30前去热门店避开排队高峰</li>
+              <li>烧烤店 17:00 才开，夏天晚上最热闹</li>
+            </ul>
+          </div>
+          <div class="tip-card rv">
+            <div class="tip-icon">💰</div>
+            <h3>省钱技巧</h3>
+            <ul>
+              <li>超意兴遍布全城，把子肉+米饭不到20元管饱</li>
+              <li>芙蓉街小吃建议少量多样，边走边吃</li>
+              <li>团购平台提前看，老字号也有套餐优惠</li>
+              <li>黑虎泉水免费取用，自带保温杯泡茶</li>
+              <li>景区门口饮品偏贵，走远几步更实惠</li>
+            </ul>
+          </div>
+          <div class="tip-card rv">
+            <div class="tip-icon">⚠️</div>
+            <h3>避坑指南</h3>
+            <ul>
+              <li>芙蓉街周末人山人海，工作日去体验更好</li>
+              <li>蒲菜有季节性，冬季可能用替代食材</li>
+              <li>认准炭火烧烤，电烤的味道差远了</li>
+              <li>景区茶馆价格高，本地人去黑虎泉打水泡茶</li>
+              <li>油旋趁热吃，凉了口感差很多</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Compare FAB -->
+  <button class="compare-fab" id="compareFab" aria-label="查看对比">
+    📊 对比 <span class="count" id="compareCount">0</span>
+  </button>
+
+  <!-- Compare Overlay -->
+  <div class="compare-overlay" id="compareOverlay">
+    <div class="compare-panel">
+      <div class="compare-panel-header">
+        <h3>📊 餐厅对比</h3>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="compare-clear" id="compareClear">清空对比</button>
+          <button class="compare-close" id="compareClose">✕</button>
+        </div>
+      </div>
+      <div id="compareContent"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer" role="contentinfo">
+    <nav class="footer-links" aria-label="页脚导航">
+      <a href="index.html">首页</a>
+      <a href="spots.html">景点</a>
+      <a href="food.html">美食</a>
+      <a href="itinerary.html">行程</a>
+      <a href="guide.html">指南</a>
+      <a href="culture.html">文化</a>
+    </nav>
+    <p>© 2026 济南旅游攻略 · 愿你在泉城吃好喝好</p>
+  </footer>
+
+  <!-- Back to top -->
+  <button class="btt" aria-label="回到顶部">↑</button>
+

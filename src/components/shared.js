@@ -51,6 +51,48 @@ export function initBackToTop() {
   btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
+// Modal utility
+export function openModal(html) {
+  let overlay = document.querySelector('.modal-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = '<div class="modal"><button class="modal-close">✕</button><div class="modal-content"></div></div>';
+    document.body.appendChild(overlay);
+    overlay.querySelector('.modal-close').addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+  }
+  overlay.querySelector('.modal-content').innerHTML = html;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+export function closeModal() {
+  const overlay = document.querySelector('.modal-overlay');
+  if (overlay) {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+// Skeleton card generator
+export function skeletonCards(n = 6) {
+  let html = '';
+  for (let i = 0; i < n; i++) {
+    html += `<div class="card skeleton-card">
+      <div class="skeleton-img skeleton"></div>
+      <div class="card-body">
+        <div class="skeleton skeleton-line" style="width:70%"></div>
+        <div class="skeleton skeleton-line"></div>
+        <div class="skeleton skeleton-line short"></div>
+        <div class="skeleton skeleton-line xshort"></div>
+      </div>
+    </div>`;
+  }
+  return html;
+}
+
 // Stars helper
 export function stars(n) {
   let s = '';

@@ -115,7 +115,12 @@
   <section class="section" style="padding-top:0">
     <div class="section-inner">
       <div class="card-grid" id="spotGrid">
-        <!-- Cards rendered by JS -->
+        <div class="card skeleton-card"><div class="skeleton-img skeleton"></div><div class="card-body"><div class="skeleton skeleton-line" style="width:70%"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
+        <div class="card skeleton-card"><div class="skeleton-img skeleton"></div><div class="card-body"><div class="skeleton skeleton-line" style="width:70%"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
+        <div class="card skeleton-card"><div class="skeleton-img skeleton"></div><div class="card-body"><div class="skeleton skeleton-line" style="width:70%"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
+        <div class="card skeleton-card"><div class="skeleton-img skeleton"></div><div class="card-body"><div class="skeleton skeleton-line" style="width:70%"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
+        <div class="card skeleton-card"><div class="skeleton-img skeleton"></div><div class="card-body"><div class="skeleton skeleton-line" style="width:70%"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
+        <div class="card skeleton-card"><div class="skeleton-img skeleton"></div><div class="card-body"><div class="skeleton skeleton-line" style="width:70%"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
       </div>
       <div class="empty-state" id="emptyState" style="display:none">
         <div class="emoji">🔍</div>
@@ -180,7 +185,7 @@
   </nav>
 
   <script type="module">
-    import { initAll, stars } from '/src/components/shared.js';
+    import { initAll, stars, openModal, closeModal, skeletonCards } from '/src/components/shared.js';
 
     // Badge label map
     const badgeLabels = { hot: '🔥 热门', must: '⭐ 必去', hidden: '🌿 小众', free: '🆓 免费' };
@@ -254,6 +259,11 @@
                 <span>⏱ ${s.dur}</span>
                 <span>💬 ${s.reviews} 条评价</span>
               </div>
+              <div class="card-meta" style="margin-top:4px">
+                <span>🕐 ${s.open ? s.open.split('(')[0].split('·')[0].trim() : '全天'}</span>
+                <span>📅 ${s.bestTime ? s.bestTime.slice(0, 12) : '全年'}</span>
+              </div>
+              ${s.transport ? `<div class="card-meta" style="margin-top:4px"><span>🚌 ${s.transport.slice(0, 20)}</span></div>` : ''}
               <div class="card-tags">
                 ${s.audience.map(a => `<span class="tag">${audienceLabels[a] || a}</span>`).join('')}
               </div>
@@ -279,6 +289,16 @@
         io.observe(el);
       });
 
+      // Bind card click to open Quick View
+      document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('.add-trip') || e.target.closest('.detail-btn')) return;
+          const id = card.dataset.id;
+          const s = spotsData.find(x => x.id === id);
+          if (s) openQuickView(s);
+        });
+      });
+
       // Bind add-to-itinerary buttons
       document.querySelectorAll('.add-trip:not([disabled])').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -296,15 +316,78 @@
         });
       });
 
-      // Bind detail buttons
+      // Bind detail buttons — open Quick View modal
       document.querySelectorAll('.detail-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
-          // TODO: navigate to spot detail page when available
-          console.log('查看景点详情:', btn.dataset.name);
+          const id = btn.closest('.card').dataset.id;
+          const s = spotsData.find(x => x.id === id);
+          if (!s) return;
+          openQuickView(s);
         });
       });
     }
+
+    // Quick View Modal
+    function openQuickView(s) {
+      const badgeLabels = { hot: '🔥 热门', must: '⭐ 必去', free: '🆓 免费', hidden: '💎 小众' };
+      const audienceLabels = { family: '亲子', couple: '情侣', elder: '老人', solo: '独行', student: '学生' };
+      const priceHtml = s.price === 0
+        ? '<span style="color:var(--teal);font-weight:700">免费</span>'
+        : `<span style="font-weight:700">¥${s.price}</span>${s.priceOld ? `<span style="text-decoration:line-through;color:var(--text3);margin-left:6px">¥${s.priceOld}</span>` : ''}/人`;
+
+      const photosHtml = (s.photos || []).map(p => `<span class="photo-tag">📷 ${p}</span>`).join('');
+      const comboHtml = s.combo ? `<div class="modal-combo"><h4>${s.combo.title}</h4><p>${s.combo.desc}</p></div>` : '';
+
+      const html = `
+        <div class="modal-img">
+          <img src="${s.img}" alt="${s.name}">
+          <span class="badge ${s.badge}" style="position:absolute;top:16px;left:16px">${badgeLabels[s.badge] || s.badge}</span>
+        </div>
+        <div class="modal-body">
+          <h2>${s.name}</h2>
+          <div class="modal-rating">
+            <span class="stars">${stars(s.rating)}</span>
+            <span class="score">${s.rating}</span>
+            <span class="count">${s.reviews} 条评价</span>
+          </div>
+          <p class="modal-desc">${s.desc}</p>
+          ${photosHtml ? `<div class="modal-photos">${photosHtml}</div>` : ''}
+          <div class="modal-info-grid">
+            <div class="modal-info-item"><div class="label">🎫 门票</div><div class="value">${priceHtml}</div></div>
+            <div class="modal-info-item"><div class="label">⏱ 建议时长</div><div class="value">${s.dur}</div></div>
+            <div class="modal-info-item"><div class="label">🕐 开放时间</div><div class="value">${s.open || '全天'}</div></div>
+            <div class="modal-info-item"><div class="label">📅 最佳时间</div><div class="value">${s.bestTime || '全年'}</div></div>
+            <div class="modal-info-item"><div class="label">👥 拥挤程度</div><div class="value">${s.crowd || '一般'}</div></div>
+            <div class="modal-info-item"><div class="label">🎫 预约方式</div><div class="value">${s.book || '无需预约'}</div></div>
+            <div class="modal-info-item"><div class="label">🚌 交通</div><div class="value">${s.transport || '—'}</div></div>
+            <div class="modal-info-item"><div class="label">💰 优惠政策</div><div class="value">${s.discount || '无'}</div></div>
+          </div>
+          ${comboHtml}
+          <div class="card-tags" style="margin-bottom:16px">
+            ${(s.audience || []).map(a => `<span class="tag">${audienceLabels[a] || a}</span>`).join('')}
+            <span class="tag" style="background:rgba(42,157,143,.1);color:var(--teal)">✓ ${s.trust}</span>
+          </div>
+          <div class="modal-actions">
+            <button class="btn btn-primary" onclick="addToTrip('${s.id}', this)">＋ 加入行程</button>
+            <button class="btn btn-outline" onclick="closeModal()">关闭</button>
+          </div>
+        </div>
+      `;
+      openModal(html);
+    }
+
+    window.addToTrip = function(id, btn) {
+      const list = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
+      if (!list.includes(id)) {
+        list.push(id);
+        localStorage.setItem('jinan-itinerary', JSON.stringify(list));
+        btn.textContent = '✓ 已加入';
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-outline');
+        render();
+      }
+    };
 
     // Category filter clicks
     document.getElementById('catFilters').addEventListener('click', (e) => {

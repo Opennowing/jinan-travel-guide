@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 
 export default defineConfig({
+  base: '/jinan-travel-guide/',
   root: '.',
   build: {
     outDir: 'dist',

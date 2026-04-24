@@ -4,6 +4,71 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>行程攻略 — 济南旅游指南</title>
+  <meta name="description" content="济南行程攻略：1日精华游、2日深度游、3日全览游、亲子专线、文艺专线。精心规划的路线，让每一分钟都值得。">
+  <meta name="keywords" content="济南行程,济南旅游路线,济南1日游,济南2日游,济南3日游,济南亲子游">
+  <meta property="og:title" content="行程攻略 — 济南旅游指南">
+  <meta property="og:description" content="1-5天行程模板，亲子、情侣、文艺、穷游，总有一款适合你">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://opennowing.github.io/jinan-travel-guide/itinerary.html">
+  <meta property="og:image" content="https://opennowing.github.io/jinan-travel-guide/public/banner.jpg">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="行程攻略 — 济南旅游指南">
+  <meta name="twitter:description" content="1-5天行程模板，亲子、情侣、文艺、穷游，总有一款适合你">
+  <meta name="twitter:image" content="https://opennowing.github.io/jinan-travel-guide/public/banner.jpg">
+  <link rel="canonical" href="https://opennowing.github.io/jinan-travel-guide/itinerary.html">
+  <meta name="author" content="泉城攻略">
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://opennowing.github.io/jinan-travel-guide/" },
+      { "@type": "ListItem", "position": 2, "name": "行程", "item": "https://opennowing.github.io/jinan-travel-guide/itinerary.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "济南旅游行程方案",
+    "description": "精心规划的济南旅游行程，包含1日到3日多种方案",
+    "itemListElement": [
+      {
+        "@type": "ListItem", "position": 1,
+        "item": {
+          "@type": "Trip",
+          "name": "1日精华游",
+          "description": "一天打卡济南三大名胜：趵突泉→五龙潭→大明湖→芙蓉街→黑虎泉",
+          "touristType": "首次游客",
+          "estimatedCost": { "@type": "MonetaryAmount", "currency": "CNY", "value": "150-250" }
+        }
+      },
+      {
+        "@type": "ListItem", "position": 2,
+        "item": {
+          "@type": "Trip",
+          "name": "2日深度游",
+          "description": "Day1泉水线+Day2文化线，覆盖主要景点和美食",
+          "touristType": "深度游",
+          "estimatedCost": { "@type": "MonetaryAmount", "currency": "CNY", "value": "400-600" }
+        }
+      },
+      {
+        "@type": "ListItem", "position": 3,
+        "item": {
+          "@type": "Trip",
+          "name": "3日全览游",
+          "description": "市区精华+灵岩寺/红叶谷周边，深度探索泉城",
+          "touristType": "时间充裕",
+          "estimatedCost": { "@type": "MonetaryAmount", "currency": "CNY", "value": "800-1200" }
+        }
+      }
+    ]
+  }
+  </script>
   <link rel="stylesheet" href="/src/styles/main.css">
   <link rel="manifest" href="/jinan-travel-guide/manifest.json">
   <meta name="theme-color" content="#c9a96e">
@@ -52,14 +117,29 @@
     .season-panel.active{display:block}
 
     .my-trip{margin-top:48px}
-    .my-trip-item{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px}
+    .my-trip-item{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;cursor:grab;transition:all .2s;user-select:none}
+    .my-trip-item:active{cursor:grabbing}
+    .my-trip-item.dragging{opacity:.5;border-color:var(--accent);transform:scale(.98)}
+    .my-trip-item.drag-over{border-color:var(--accent);box-shadow:0 0 0 2px rgba(201,169,110,.3)}
+    .my-trip-item .drag-handle{color:var(--text3);font-size:1.1rem;cursor:grab;flex-shrink:0}
+    .my-trip-item .trip-info{flex:1;min-width:0}
     .my-trip-item .trip-name{font-weight:600;font-size:.9rem}
     .my-trip-item .trip-meta{font-size:.75rem;color:var(--text2)}
-    .my-trip-item .remove-btn{background:none;border:none;color:var(--coral);cursor:pointer;font-size:.85rem;padding:4px 8px;border-radius:6px;transition:background .2s}
+    .my-trip-item .remove-btn{background:none;border:none;color:var(--coral);cursor:pointer;font-size:.85rem;padding:4px 8px;border-radius:6px;transition:background .2s;flex-shrink:0}
     .my-trip-item .remove-btn:hover{background:rgba(231,111,81,.1)}
     .my-trip-empty{text-align:center;padding:40px 20px;color:var(--text3);font-size:.9rem}
+    .my-trip-timeline{position:relative;padding-left:28px;margin-top:16px}
+    .my-trip-timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--accent);opacity:.3}
+    .my-trip-timeline-item{position:relative;padding:8px 0 8px 16px;font-size:.85rem;color:var(--text2)}
+    .my-trip-timeline-item::before{content:'';position:absolute;left:-24px;top:14px;width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+    .my-trip-timeline-item .tl-time{font-weight:600;color:var(--accent);font-size:.8rem}
+    .my-trip-timeline-item .tl-name{font-weight:600;color:var(--text)}
+    .export-panel{margin-top:16px;padding:16px;background:var(--bg2);border-radius:var(--radius);display:none}
+    .export-panel.show{display:block}
+    .export-panel textarea{width:100%;min-height:120px;padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-family:var(--sans);font-size:.85rem;resize:vertical;outline:none;color:var(--text)}
+    .export-panel textarea:focus{border-color:var(--accent)}
 
-    .share-bar{display:flex;gap:8px;margin-top:16px;justify-content:center}
+    .share-bar{display:flex;gap:8px;margin-top:16px;justify-content:center;flex-wrap:wrap}
     .panel{display:none}
     .panel.active{display:block}
 
@@ -70,8 +150,9 @@
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:16px;z-index:999;background:var(--accent);color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-100%'">跳到主要内容</a>
   <div class="scroll-progress"></div>
-  <nav class="top-nav">
+  <nav class="top-nav" aria-label="主导航">
     <a href="index.html" class="logo">泉城<span>攻略</span></a>
     <div class="nav-links">
       <a href="index.html">首页</a><a href="spots.html">景点</a><a href="food.html">美食</a>
@@ -81,15 +162,16 @@
     <button class="burger" aria-label="菜单"><span></span><span></span><span></span></button>
   </nav>
 
-  <section class="page-hero">
+  <main id="main-content">
+  <section class="page-hero" aria-label="页面标题">
     <h1>📋 行程攻略</h1>
     <p>精心规划的路线，让每一分钟都值得</p>
   </section>
 
   <!-- Route Tabs -->
-  <section class="section" style="padding-top:24px">
+  <section class="section" style="padding-top:24px" aria-label="行程路线">
     <div class="section-inner">
-      <div class="route-tabs" id="routeTabs">
+      <div class="route-tabs" id="routeTabs" role="tablist" aria-label="行程路线选择">
         <button class="route-tab active" data-route="1day">⏰ 1日精华游</button>
         <button class="route-tab" data-route="2day">📅 2日深度游</button>
         <button class="route-tab" data-route="3day">🗓️ 3日全览游</button>
@@ -102,14 +184,14 @@
   </section>
 
   <!-- Seasonal Recommendations -->
-  <section class="section section-alt">
+  <section class="section section-alt" aria-label="当季推荐">
     <div class="section-inner">
       <div class="section-header">
         <div class="eyebrow">SEASONAL</div>
         <h2>🗓️ 当季推荐</h2>
         <p>不同季节来济南，有不同玩法</p>
       </div>
-      <div class="season-tabs" id="seasonTabs">
+      <div class="season-tabs" id="seasonTabs" role="tablist" aria-label="季节选择">
         <button class="season-tab active" data-season="spring">🌸 春季</button>
         <button class="season-tab" data-season="summer">☀️ 夏季</button>
         <button class="season-tab" data-season="autumn">🍂 秋季</button>
@@ -120,7 +202,7 @@
   </section>
 
   <!-- My Trip -->
-  <section class="section">
+  <section class="section" aria-label="我的行程">
     <div class="section-inner">
       <div class="section-header">
         <div class="eyebrow">MY TRIP</div>
@@ -128,23 +210,34 @@
         <p>从景点页面添加心仪的目的地</p>
       </div>
       <div id="myTripList"></div>
+      <div class="my-trip-timeline" id="myTripTimeline" style="display:none"></div>
       <div class="share-bar">
         <button class="btn btn-sm btn-outline" id="copyTrip">📋 复制行程</button>
+        <button class="btn btn-sm btn-outline" id="exportTrip">📤 导出行程</button>
         <button class="btn btn-sm btn-outline" id="clearTrip">🗑️ 清空</button>
+      </div>
+      <div class="export-panel" id="exportPanel">
+        <textarea id="exportText" readonly></textarea>
+        <div style="display:flex;gap:8px;margin-top:8px;justify-content:center">
+          <button class="btn btn-sm btn-primary" id="copyExport">📋 复制文本</button>
+          <button class="btn btn-sm btn-outline" id="downloadExport">💾 下载文件</button>
+          <button class="btn btn-sm btn-outline" id="closeExport">✕ 关闭</button>
+        </div>
       </div>
     </div>
   </section>
+  </main>
 
-  <footer class="footer">
-    <div class="footer-links">
+  <footer class="footer" role="contentinfo">
+    <nav class="footer-links" aria-label="页脚导航">
       <a href="index.html">首页</a><a href="spots.html">景点</a><a href="food.html">美食</a>
       <a href="itinerary.html">行程</a><a href="guide.html">指南</a><a href="culture.html">文化</a>
-    </div>
+    </nav>
     <p>© 2026 泉城攻略 · 济南旅游指南</p>
   </footer>
   <button class="btt" aria-label="回到顶部">↑</button>
-  <nav class="mob-nav">
-    <a href="index.html"><span class="icon">🏠</span>首页</a>
+  <nav class="mob-nav" aria-label="移动端导航">
+    <a href="index.html"><span class="icon" aria-hidden="true">🏠</span>首页</a>
     <a href="spots.html"><span class="icon">🏛️</span>景点</a>
     <a href="food.html"><span class="icon">🍜</span>美食</a>
     <a href="itinerary.html" class="active"><span class="icon">📋</span>行程</a>
@@ -428,23 +521,51 @@
         </div>`;
     }
 
-    // ── My Trip ──
+    // ── My Trip (with drag, export, timeline) ──
+    let draggedItem = null;
+    let draggedIndex = -1;
+
+    function parseDuration(dur) {
+      if (!dur) return 60;
+      if (dur.includes('min')) {
+        const m = parseInt(dur);
+        return isNaN(m) ? 60 : m;
+      }
+      // Handle "2-3h" → take first number, "2.5h" → 2.5
+      const hMatch = dur.match(/([\d.]+)\s*-?\s*[\d.]*\s*h/);
+      if (hMatch) return Math.round(parseFloat(hMatch[1]) * 60);
+      const num = parseInt(dur);
+      return isNaN(num) ? 60 : num * 60;
+    }
+
     function renderMyTrip() {
       const ids = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
       const list = document.getElementById('myTripList');
+      const timeline = document.getElementById('myTripTimeline');
+
       if (!ids.length) {
         list.innerHTML = '<div class="my-trip-empty">📌 还没有添加景点<br><small>去 <a href="spots.html" style="color:var(--accent)">景点页面</a> 点击「加入行程」</small></div>';
+        timeline.style.display = 'none';
         return;
       }
-      list.innerHTML = ids.map(id => {
+
+      list.innerHTML = ids.map((id, idx) => {
         const s = spotsData.find(x => x.id === id);
         if (!s) return '';
-        return `<div class="my-trip-item">
-          <div><div class="trip-name">${s.name}</div><div class="trip-meta">⏱ ${s.dur} · 🎫 ${s.price === 0 ? '免费' : '¥' + s.price}</div></div>
-          <button class="remove-btn" data-id="${s.id}">✕ 移除</button>
+        return `<div class="my-trip-item" draggable="true" data-index="${idx}" data-id="${s.id}">
+          <span class="drag-handle">⠿</span>
+          <div class="trip-info">
+            <div class="trip-name">${s.name}</div>
+            <div class="trip-meta">⏱ ${s.dur} · 🎫 ${s.price === 0 ? '免费' : '¥' + s.price}</div>
+          </div>
+          <button class="remove-btn" data-id="${s.id}">✕</button>
         </div>`;
       }).join('');
 
+      // Render timeline
+      renderTimeline(ids);
+
+      // Remove buttons
       list.querySelectorAll('.remove-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           const newIds = ids.filter(id => id !== btn.dataset.id);
@@ -452,22 +573,169 @@
           renderMyTrip();
         });
       });
+
+      // Drag & Drop
+      list.querySelectorAll('.my-trip-item').forEach(item => {
+        item.addEventListener('dragstart', e => {
+          draggedItem = item;
+          draggedIndex = parseInt(item.dataset.index);
+          item.classList.add('dragging');
+          e.dataTransfer.effectAllowed = 'move';
+        });
+        item.addEventListener('dragend', () => {
+          item.classList.remove('dragging');
+          list.querySelectorAll('.my-trip-item').forEach(el => el.classList.remove('drag-over'));
+          draggedItem = null;
+          draggedIndex = -1;
+        });
+        item.addEventListener('dragover', e => {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+          item.classList.add('drag-over');
+        });
+        item.addEventListener('dragleave', () => {
+          item.classList.remove('drag-over');
+        });
+        item.addEventListener('drop', e => {
+          e.preventDefault();
+          item.classList.remove('drag-over');
+          const targetIndex = parseInt(item.dataset.index);
+          if (draggedIndex === targetIndex || draggedIndex < 0) return;
+          const currentIds = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
+          const [moved] = currentIds.splice(draggedIndex, 1);
+          currentIds.splice(targetIndex, 0, moved);
+          localStorage.setItem('jinan-itinerary', JSON.stringify(currentIds));
+          renderMyTrip();
+        });
+      });
+
+      // Touch drag for mobile
+      let touchStartY = 0, touchItem = null, touchIndex = -1;
+      list.querySelectorAll('.my-trip-item').forEach(item => {
+        item.addEventListener('touchstart', e => {
+          touchStartY = e.touches[0].clientY;
+          touchItem = item;
+          touchIndex = parseInt(item.dataset.index);
+        }, { passive: true });
+        item.addEventListener('touchend', e => {
+          const touchEndY = e.changedTouches[0].clientY;
+          const diff = touchEndY - touchStartY;
+          if (Math.abs(diff) < 30 || !touchItem) return;
+          const currentIds = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
+          const direction = diff > 0 ? 1 : -1;
+          const newIndex = touchIndex + direction;
+          if (newIndex < 0 || newIndex >= currentIds.length) return;
+          [currentIds[touchIndex], currentIds[newIndex]] = [currentIds[newIndex], currentIds[touchIndex]];
+          localStorage.setItem('jinan-itinerary', JSON.stringify(currentIds));
+          renderMyTrip();
+        }, { passive: true });
+      });
+    }
+
+    function renderTimeline(ids) {
+      const timeline = document.getElementById('myTripTimeline');
+      if (!ids.length) { timeline.style.display = 'none'; return; }
+      timeline.style.display = 'block';
+      let currentTime = 480; // 08:00 in minutes
+      timeline.innerHTML = ids.map((id, i) => {
+        const s = spotsData.find(x => x.id === id);
+        if (!s) return '';
+        const h = Math.floor(currentTime / 60);
+        const m = currentTime % 60;
+        const timeStr = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+        // Parse duration to minutes
+        const durMin = parseDuration(s.dur);
+        currentTime += durMin + 30; // spot time + 30min travel
+        return `<div class="my-trip-timeline-item">
+          <span class="tl-time">${timeStr}</span> · <span class="tl-name">${s.name}</span>
+          <span style="color:var(--text3);font-size:.8rem"> (${s.dur})</span>
+        </div>`;
+      }).join('');
+    }
+
+    function generateExportText() {
+      const ids = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
+      if (!ids.length) return '行程为空';
+      let text = '🏙️ 济南行程安排\n';
+      text += '═'.repeat(30) + '\n\n';
+      let totalCost = 0, totalMin = 0;
+      let currentTime = 480;
+      ids.forEach((id, i) => {
+        const s = spotsData.find(x => x.id === id);
+        if (!s) return;
+        const h = Math.floor(currentTime / 60);
+        const m = currentTime % 60;
+        const timeStr = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+        const costNum = s.price || 0;
+        totalCost += costNum;
+        const durMin = parseDuration(s.dur);
+        totalMin += durMin;
+        text += `${timeStr}  ${i+1}. ${s.name}\n`;
+        text += `   📍 ${s.desc.slice(0, 50)}\n`;
+        text += `   ⏱ ${s.dur} · 🎫 ${s.price === 0 ? '免费' : '¥' + s.price}\n`;
+        text += `   🚌 ${s.transport || '—'}\n\n`;
+        currentTime += durMin + 30;
+      });
+      text += '═'.repeat(30) + '\n';
+      text += `💰 预估总费用: ¥${totalCost}\n`;
+      text += `⏱ 预估总时长: ${Math.round(totalMin/60)}h\n`;
+      text += `📅 生成时间: ${new Date().toLocaleString('zh-CN')}\n`;
+      return text;
     }
 
     // Copy trip
     document.getElementById('copyTrip')?.addEventListener('click', () => {
-      const ids = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
-      const text = ids.map((id, i) => {
-        const s = spotsData.find(x => x.id === id);
-        return s ? `${i+1}. ${s.name} (${s.dur}, ${s.price === 0 ? '免费' : '¥' + s.price})` : '';
-      }).filter(Boolean).join('\n');
-      navigator.clipboard?.writeText(`济南行程\n${text}`);
+      const text = generateExportText();
+      navigator.clipboard?.writeText(text);
+      showToast('✓ 行程已复制到剪贴板');
+    });
+
+    // Export trip
+    document.getElementById('exportTrip')?.addEventListener('click', () => {
+      const panel = document.getElementById('exportPanel');
+      const text = generateExportText();
+      document.getElementById('exportText').value = text;
+      panel.classList.toggle('show');
+    });
+
+    document.getElementById('copyExport')?.addEventListener('click', () => {
+      const text = document.getElementById('exportText').value;
+      navigator.clipboard?.writeText(text);
+      showToast('✓ 已复制');
+    });
+
+    document.getElementById('downloadExport')?.addEventListener('click', () => {
+      const text = document.getElementById('exportText').value;
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = '济南行程.txt';
+      a.click(); URL.revokeObjectURL(url);
+      showToast('✓ 文件已下载');
+    });
+
+    document.getElementById('closeExport')?.addEventListener('click', () => {
+      document.getElementById('exportPanel').classList.remove('show');
     });
 
     document.getElementById('clearTrip')?.addEventListener('click', () => {
       localStorage.setItem('jinan-itinerary', '[]');
       renderMyTrip();
     });
+
+    function showToast(msg) {
+      let toast = document.getElementById('toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast';
+        toast.style.cssText = 'position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);padding:10px 24px;border-radius:100px;font-size:.85rem;font-weight:500;z-index:500;opacity:0;transition:all .3s;pointer-events:none';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+      setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateX(-50%) translateY(20px)'; }, 2000);
+    }
 
     // Route tabs
     document.getElementById('routeTabs').addEventListener('click', e => {

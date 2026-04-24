@@ -100,14 +100,9 @@ export function stars(n) {
   return s;
 }
 
-// Reveal on scroll
+// Reveal on scroll (legacy, now handled by initStaggerReveal in initAll)
 export function initReveal() {
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.1 });
-  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+  initStaggerReveal();
 }
 
 // Mobile bottom nav active state
@@ -121,12 +116,98 @@ export function initMobNav() {
   });
 }
 
+// Nav scroll effect
+export function initNavScroll() {
+  const nav = document.querySelector('.top-nav');
+  if (!nav) return;
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+}
+
+// Lazy image loading with blur-up
+export function initLazyImages() {
+  const imgs = document.querySelectorAll('img[loading="lazy"]');
+  if (!imgs.length) return;
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const img = entry.target;
+      img.parentElement.classList.add('img-loading');
+      img.addEventListener('load', () => {
+        img.parentElement.classList.remove('img-loading');
+        img.classList.add('img-loaded');
+      }, {once:true});
+      img.addEventListener('error', () => {
+        img.parentElement.classList.remove('img-loading');
+        img.src = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250" viewBox="0 0 400 250"><rect fill="#e8dcc8" width="400" height="250"/><text x="200" y="120" text-anchor="middle" fill="#c9a96e" font-size="40">🏔️</text><text x="200" y="160" text-anchor="middle" fill="#999" font-size="14" font-family="sans-serif">图片加载中...</text></svg>');
+        img.classList.add('img-loaded');
+      }, {once:true});
+      io.unobserve(img);
+    });
+  }, {rootMargin:'200px'});
+  imgs.forEach(img => io.observe(img));
+}
+
+// Ripple effect on interactive cards
+export function initRipple() {
+  document.addEventListener('click', e => {
+    const card = e.target.closest('.card, .highlight-card, .route-card, .tool-card');
+    if (!card) return;
+    card.style.position = card.style.position || 'relative';
+    card.style.overflow = 'hidden';
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    const rect = card.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height) * 2;
+    ripple.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px`;
+    card.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove());
+  });
+}
+
+// Mobile swipe gesture for page navigation
+export function initSwipeNav() {
+  if (window.innerWidth > 768) return;
+  const pages = ['index.html','spots.html','food.html','itinerary.html','guide.html','culture.html'];
+  const current = location.pathname.replace(/.*\//,'') || 'index.html';
+  const idx = pages.indexOf(current);
+  if (idx < 0) return;
+  let startX = 0;
+  document.addEventListener('touchstart', e => { startX = e.changedTouches[0].screenX; }, {passive:true});
+  document.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].screenX;
+    if (Math.abs(diff) < 80) return;
+    if (diff > 0 && idx < pages.length - 1) location.href = pages[idx + 1];
+    else if (diff < 0 && idx > 0) location.href = pages[idx - 1];
+  }, {passive:true});
+}
+
+// Stagger reveal on scroll
+export function initStaggerReveal() {
+  const io = new IntersectionObserver((entries) => {
+    let delay = 0;
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        setTimeout(() => { e.target.classList.add('revealed'); }, delay);
+        delay += 80;
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+}
+
 // Init all
 export function initAll() {
   initDarkMode();
   initMobileMenu();
   initScrollProgress();
   initBackToTop();
-  initReveal();
+  initStaggerReveal();
   initMobNav();
+  initNavScroll();
+  initLazyImages();
+  initRipple();
+  initSwipeNav();
 }

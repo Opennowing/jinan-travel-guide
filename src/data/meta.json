@@ -1,0 +1,34 @@
+{
+  "version": "2.0",
+  "built": "2026-04-24T22:02:28.493458",
+  "spotCount": 58,
+  "foodCount": 46,
+  "restaurantCount": 45,
+  "spotCats": [
+    "spring",
+    "nature",
+    "history",
+    "food",
+    "culture",
+    "family"
+  ],
+  "foodCats": [
+    "lucai",
+    "xiaochi",
+    "laozihao",
+    "zaocan",
+    "yexiao",
+    "yinpin"
+  ],
+  "spotBadges": [
+    "must",
+    "free",
+    "hidden",
+    "hot",
+    "kid"
+  ],
+  "checksums": {
+    "spots": "ed0238c2",
+    "foods": "9b50bf86"
+  }
+}

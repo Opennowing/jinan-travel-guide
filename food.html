@@ -4,7 +4,61 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🍜 美食 · 探店 — 济南旅游攻略</title>
+  <meta name="description" content="济南美食攻略：糖醋鲤鱼、把子肉、油旋、甜沫、九转大肠等鲁菜经典。推荐餐厅、人均价格、点菜攻略，吃遍泉城。">
+  <meta name="keywords" content="济南美食,鲁菜,糖醋鲤鱼,把子肉,油旋,甜沫,九转大肠,济南餐厅">
+  <meta property="og:title" content="美食 · 探店 — 济南旅游攻略">
+  <meta property="og:description" content="鲁菜发源地，北方美食重镇。糖醋鲤鱼、把子肉、油旋……吃遍泉城">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://opennowing.github.io/jinan-travel-guide/food.html">
+  <meta property="og:image" content="https://opennowing.github.io/jinan-travel-guide/public/banner.jpg">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="美食 · 探店 — 济南旅游攻略">
+  <meta name="twitter:description" content="鲁菜发源地，把子肉、糖醋鲤鱼、油旋……吃遍泉城">
+  <meta name="twitter:image" content="https://opennowing.github.io/jinan-travel-guide/public/banner.jpg">
+  <link rel="canonical" href="https://opennowing.github.io/jinan-travel-guide/food.html">
+  <meta name="author" content="泉城攻略">
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://opennowing.github.io/jinan-travel-guide/" },
+      { "@type": "ListItem", "position": 2, "name": "美食", "item": "https://opennowing.github.io/jinan-travel-guide/food.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "济南美食推荐",
+    "description": "济南经典美食与推荐餐厅",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "item": { "@type": "Restaurant", "name": "聚丰德", "servesCuisine": "鲁菜", "priceRange": "¥85/人", "address": { "@type": "PostalAddress", "addressLocality": "济南市" } } },
+      { "@type": "ListItem", "position": 2, "item": { "@type": "Restaurant", "name": "草包包子铺", "servesCuisine": "包子", "priceRange": "¥35/人", "address": { "@type": "PostalAddress", "addressLocality": "济南市" } } },
+      { "@type": "ListItem", "position": 3, "item": { "@type": "Restaurant", "name": "超意兴", "servesCuisine": "把子肉", "priceRange": "¥15/人", "address": { "@type": "PostalAddress", "addressLocality": "济南市" } } },
+      { "@type": "ListItem", "position": 4, "item": { "@type": "Restaurant", "name": "闫府私房菜", "servesCuisine": "鲁菜", "priceRange": "¥95/人", "address": { "@type": "PostalAddress", "addressLocality": "济南市" } } }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "济南经典菜品",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "item": { "@type": "Recipe", "name": "糖醋鲤鱼", "description": "鲁菜经典，黄河鲤鱼现杀现做，外酥里嫩" } },
+      { "@type": "ListItem", "position": 2, "item": { "@type": "Recipe", "name": "九转大肠", "description": "鲁菜代表，五味俱全，肥而不腻" } },
+      { "@type": "ListItem", "position": 3, "item": { "@type": "Recipe", "name": "把子肉", "description": "济南灵魂快餐，肥瘦相间，浇汤汁配米饭" } },
+      { "@type": "ListItem", "position": 4, "item": { "@type": "Recipe", "name": "油旋", "description": "济南特色面食，外酥里嫩，葱香四溢" } },
+      { "@type": "ListItem", "position": 5, "item": { "@type": "Recipe", "name": "甜沫", "description": "济南灵魂早餐，咸味粥品" } }
+    ]
+  }
+  </script>
   <link rel="stylesheet" href="/src/styles/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
     /* ── Search ── */
     .food-search-wrap{max-width:480px;margin:0 auto 28px;position:relative}
@@ -54,9 +108,8 @@
 
     /* ── Map ── */
     .food-map-container{width:100%;height:420px;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);background:var(--bg2)}
-    .map-fallback{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:24px}
-    .map-fallback h3{font:700 1.1rem/1.3 var(--serif)}
-    .map-fallback p{font-size:.85rem;color:var(--text2)}
+    .custom-marker{background:none!important;border:none!important}
+    .leaflet-div-icon{background:none!important;border:none!important}
 
     /* ── Season ── */
     .season-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
@@ -93,12 +146,13 @@
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:16px;z-index:999;background:var(--accent);color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-100%'">跳到主要内容</a>
 
   <!-- Scroll progress -->
   <div class="scroll-progress"></div>
 
   <!-- Top Nav -->
-  <nav class="top-nav">
+  <nav class="top-nav" aria-label="主导航">
     <a href="index.html" class="logo">泉城<span>攻略</span></a>
     <div class="nav-links">
       <a href="index.html">首页</a>
@@ -113,8 +167,8 @@
   </nav>
 
   <!-- Mobile bottom nav -->
-  <nav class="mob-nav">
-    <a href="index.html"><span class="icon">🏠</span>首页</a>
+  <nav class="mob-nav" aria-label="移动端导航">
+    <a href="index.html"><span class="icon" aria-hidden="true">🏠</span>首页</a>
     <a href="spots.html"><span class="icon">🏛️</span>景点</a>
     <a href="food.html" class="active"><span class="icon">🍜</span>美食</a>
     <a href="itinerary.html"><span class="icon">📋</span>行程</a>
@@ -128,18 +182,18 @@
   </header>
 
   <!-- Main Content -->
-  <main>
+  <main id="main-content">
 
     <!-- ── 搜索 ── -->
-    <section class="section">
+    <section class="section" aria-label="美食搜索与列表">
       <div class="section-inner">
         <div class="food-search-wrap">
           <span class="search-icon">🔍</span>
-          <input type="text" class="food-search" id="foodSearch" placeholder="搜索菜名、餐厅名…" autocomplete="off">
+          <input type="text" class="food-search" id="foodSearch" placeholder="搜索菜名、餐厅名…" autocomplete="off" aria-label="搜索美食">
         </div>
 
         <!-- ── 分类 Tab ── -->
-        <div class="food-tabs" id="foodTabs">
+        <div class="food-tabs" id="foodTabs" role="tablist" aria-label="美食分类">
           <button class="food-tab active" data-cat="全部">全部</button>
           <button class="food-tab" data-cat="lucai">🍲 鲁菜经典</button>
           <button class="food-tab" data-cat="xiaochi">🍢 市井小吃</button>
@@ -157,7 +211,7 @@
     </section>
 
     <!-- ── 必吃榜 TOP 5 ── -->
-    <section class="section" style="background:var(--bg2)">
+    <section class="section" style="background:var(--bg2)" aria-label="必吃榜TOP5">
       <div class="section-inner">
         <div class="section-header">
           <p class="eyebrow">必吃榜</p>
@@ -171,25 +225,19 @@
     </section>
 
     <!-- ── 美食地图 ── -->
-    <section class="section">
+    <section class="section" aria-label="美食地图">
       <div class="section-inner">
         <div class="section-header">
           <p class="eyebrow">互动地图</p>
           <h2>🗺️ 美食地图</h2>
           <p>跟着地图吃济南，不走回头路</p>
         </div>
-        <div class="food-map-container" id="foodMapContainer">
-          <div class="map-fallback" id="mapFallback">
-            <h3>🗺️ 互动地图</h3>
-            <p>高德地图加载中…如未显示，请申请免费 API Key</p>
-            <a href="https://console.amap.com/dev/key/app" target="_blank" class="btn btn-outline btn-sm" style="margin-top:8px">申请高德 Key</a>
-          </div>
-        </div>
+        <div class="food-map-container" id="foodMapContainer"></div>
       </div>
     </section>
 
     <!-- ── 时令美食 ── -->
-    <section class="section" style="background:var(--bg2)">
+    <section class="section" style="background:var(--bg2)" aria-label="时令美食">
       <div class="section-inner">
         <div class="section-header">
           <p class="eyebrow">时令推荐</p>
@@ -242,7 +290,7 @@
     </section>
 
     <!-- ── 美食Tips ── -->
-    <section class="section">
+    <section class="section" aria-label="美食攻略">
       <div class="section-inner">
         <div class="section-header">
           <p class="eyebrow">实用攻略</p>
@@ -301,15 +349,15 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-links">
+  <footer class="footer" role="contentinfo">
+    <nav class="footer-links" aria-label="页脚导航">
       <a href="index.html">首页</a>
       <a href="spots.html">景点</a>
       <a href="food.html">美食</a>
       <a href="itinerary.html">行程</a>
       <a href="guide.html">指南</a>
       <a href="culture.html">文化</a>
-    </div>
+    </nav>
     <p>© 2026 济南旅游攻略 · 愿你在泉城吃好喝好</p>
   </footer>
 
@@ -467,50 +515,48 @@
       }, 200);
     });
 
-    // ── AMap ──
-    const AMAP_KEY = 'YOUR_AMAP_KEY_HERE';
-
+    // ── Leaflet + OpenStreetMap ──
     function initMap() {
-      const script = document.createElement('script');
-      script.src = `https://webapi.amap.com/maps?v=2.0&key=${AMAP_KEY}`;
-      script.onload = () => {
-        try {
-          if (typeof AMap === 'undefined') throw new Error('AMap undefined');
-          const map = new AMap.Map('foodMapContainer', {
-            zoom: 13,
-            center: [117.024, 36.668],
-            mapStyle: 'amap://styles/whitesmoke'
+      const leafletScript = document.createElement('script');
+      leafletScript.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+      leafletScript.onload = () => {
+        const map = L.map('foodMapContainer').setView([36.668, 117.024], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          maxZoom: 18
+        }).addTo(map);
+
+        const seen = new Set();
+        allFoods.forEach(food => {
+          food.shops.forEach(s => {
+            if (s.lat && s.lng && !seen.has(s.name)) {
+              seen.add(s.name);
+              const icon = L.divIcon({
+                className: 'leaflet-div-icon custom-marker',
+                html: `<div style="background:#e76f51;color:#fff;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.25);cursor:pointer;border:2px solid #fff">${s.name}</div>`,
+                iconSize: [0, 0],
+                iconAnchor: [0, 0]
+              });
+              const marker = L.marker([s.lat, s.lng], { icon }).addTo(map);
+              marker.bindPopup(`<b>${s.name}</b><br>${food.name} · ${s.avg}<br>📍 ${s.addr}`);
+            }
           });
-          // Collect all unique shops with coords
-          const seen = new Set();
-          allFoods.forEach(food => {
-            food.shops.forEach(s => {
-              if (s.lat && s.lng && !seen.has(s.name)) {
-                seen.add(s.name);
-                const marker = new AMap.Marker({
-                  position: [s.lng, s.lat],
-                  title: `${s.name} · ${food.name}`,
-                  map
-                });
-                marker.on('click', () => {
-                  const info = new AMap.InfoWindow({
-                    content: `<div style="padding:6px 10px;font-size:13px"><b>${s.name}</b><br>${food.name} · ${s.avg}<br>${s.addr}</div>`,
-                    offset: new AMap.Pixel(0, -30)
-                  });
-                  info.open(map, marker.getPosition());
-                });
-              }
-            });
+        });
+
+        // Fit bounds
+        const bounds = [];
+        seen.clear();
+        allFoods.forEach(food => {
+          food.shops.forEach(s => {
+            if (s.lat && s.lng && !seen.has(s.name)) {
+              seen.add(s.name);
+              bounds.push([s.lat, s.lng]);
+            }
           });
-          document.getElementById('mapFallback').style.display = 'none';
-        } catch (e) {
-          console.error('地图初始化失败:', e);
-        }
+        });
+        if (bounds.length) map.fitBounds(bounds, { padding: [30, 30] });
       };
-      script.onerror = () => {
-        console.warn('高德地图 SDK 未加载，显示回退 UI');
-      };
-      document.head.appendChild(script);
+      document.head.appendChild(leafletScript);
     }
 
     // ── Init ──

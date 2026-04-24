@@ -4,7 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>景点 · 玩乐 — 济南旅游攻略</title>
+  <meta name="description" content="济南景点大全：趵突泉、大明湖、千佛山、五龙潭、黑虎泉等30+精选景点，附地图、门票、交通、评价。泉城济南必游景点攻略。">
+  <meta name="keywords" content="济南景点,趵突泉,大明湖,千佛山,五龙潭,黑虎泉,济南旅游景点">
+  <meta property="og:title" content="景点 · 玩乐 — 济南旅游攻略">
+  <meta property="og:description" content="济南30+精选景点，趵突泉、大明湖、千佛山，附地图与攻略">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://opennowing.github.io/jinan-travel-guide/spots.html">
+  <meta property="og:image" content="https://opennowing.github.io/jinan-travel-guide/public/banner.jpg">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="景点 · 玩乐 — 济南旅游攻略">
+  <meta name="twitter:description" content="济南30+精选景点，附地图与攻略">
+  <meta name="twitter:image" content="https://opennowing.github.io/jinan-travel-guide/public/banner.jpg">
+  <link rel="canonical" href="https://opennowing.github.io/jinan-travel-guide/spots.html">
+  <meta name="author" content="泉城攻略">
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://opennowing.github.io/jinan-travel-guide/" },
+      { "@type": "ListItem", "position": 2, "name": "景点", "item": "https://opennowing.github.io/jinan-travel-guide/spots.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "济南旅游景点",
+    "description": "济南精选景点列表，包含趵突泉、大明湖、千佛山等著名景点",
+    "numberOfItems": 15,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "item": { "@type": "TouristAttraction", "name": "趵突泉", "description": "天下第一泉，三窟并发，水涌若轮", "address": { "@type": "PostalAddress", "addressLocality": "济南市", "addressRegion": "山东省" }, "geo": { "@type": "GeoCoordinates", "latitude": 36.6636, "longitude": 116.9986 } } },
+      { "@type": "ListItem", "position": 2, "item": { "@type": "TouristAttraction", "name": "大明湖", "description": "四面荷花三面柳，一城山色半城湖", "address": { "@type": "PostalAddress", "addressLocality": "济南市", "addressRegion": "山东省" }, "geo": { "@type": "GeoCoordinates", "latitude": 36.6778, "longitude": 117.0228 } } },
+      { "@type": "ListItem", "position": 3, "item": { "@type": "TouristAttraction", "name": "千佛山", "description": "登顶俯瞰全城，佛像石刻", "address": { "@type": "PostalAddress", "addressLocality": "济南市", "addressRegion": "山东省" }, "geo": { "@type": "GeoCoordinates", "latitude": 36.6511, "longitude": 117.0386 } } },
+      { "@type": "ListItem", "position": 4, "item": { "@type": "TouristAttraction", "name": "五龙潭", "description": "小众秘境，秦琼故宅旧址", "address": { "@type": "PostalAddress", "addressLocality": "济南市", "addressRegion": "山东省" } } },
+      { "@type": "ListItem", "position": 5, "item": { "@type": "TouristAttraction", "name": "黑虎泉", "description": "泉水从三个石雕虎头喷涌而出", "address": { "@type": "PostalAddress", "addressLocality": "济南市", "addressRegion": "山东省" } } }
+    ]
+  }
+  </script>
   <link rel="stylesheet" href="/src/styles/main.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
     .filter-section{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-bottom:20px}
     .filter-group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
@@ -22,11 +64,9 @@
     .count-badge{font-size:.7rem;color:var(--text3);margin-left:8px}
     .empty-state{text-align:center;padding:80px 20px;color:var(--text3)}
     .empty-state .emoji{font-size:3rem;margin-bottom:12px}
-        #amap-container{width:100%;height:400px;border-radius:var(--radius-lg);overflow:hidden}
-    .map-fallback{background:var(--bg2);border-radius:var(--radius-lg);border:1px solid var(--border);min-height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px}
-    .map-fallback h3{font:700 1.1rem/1.4 var(--serif);margin-bottom:4px}
-    .map-fallback p{font-size:.8rem;color:var(--text3)}
-    .map-fallback .btn{margin-top:16px}
+    #map-container{width:100%;height:400px;border-radius:var(--radius-lg);overflow:hidden}
+    .custom-marker{background:none!important;border:none!important}
+    .leaflet-div-icon{background:none!important;border:none!important}
     .map-legend{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:12px;font-size:.75rem;color:var(--text2)}
     .map-legend span{display:flex;align-items:center;gap:4px}
     .audience-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;padding-left:80px}
@@ -67,8 +107,9 @@
   </style>
 </head>
 <body>
+  <a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:16px;z-index:999;background:var(--accent);color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-100%'">跳到主要内容</a>
   <div class="scroll-progress"></div>
-  <nav class="top-nav">
+  <nav class="top-nav" aria-label="主导航">
     <a href="index.html" class="logo">泉城<span>攻略</span></a>
     <div class="nav-links">
       <a href="index.html">首页</a>
@@ -82,22 +123,25 @@
     <button class="burger" aria-label="菜单"><span></span><span></span><span></span></button>
   </nav>
 
-  <section class="page-hero">
+  <main id="main-content">
+  <section class="page-hero" aria-label="页面标题">
     <h1>🏛️ 景点 · 玩乐</h1>
     <p>泉城济南，处处有惊喜</p>
   </section>
 
-  <section class="section" style="padding-top:32px;padding-bottom:0">
+  <section class="section" style="padding-top:32px;padding-bottom:0" aria-label="景点筛选">
     <div class="section-inner">
       <div class="filter-section">
         <div class="filter-group">
           <span class="filter-group-label">分类</span>
-          <div class="filter-bar" id="catFilters">
-            <button class="filter-btn active" data-cat="all">全部</button>
+          <div class="filter-bar" id="catFilters" role="group" aria-label="景点分类筛选">
+              <button class="filter-btn active" data-cat="all">全部</button>
             <button class="filter-btn" data-cat="spring">⛲ 泉水</button>
             <button class="filter-btn" data-cat="nature">🌿 自然</button>
             <button class="filter-btn" data-cat="history">🏛️ 历史</button>
+            <button class="filter-btn" data-cat="culture">📚 文化</button>
             <button class="filter-btn" data-cat="food">🍜 美食街</button>
+            <button class="filter-btn" data-cat="family">👨‍👩‍👧 亲子</button>
           </div>
         </div>
         <div class="sort-wrap">
@@ -110,7 +154,7 @@
           </select>
         </div>
       </div>
-      <div class="audience-bar" id="audienceFilters">
+      <div class="audience-bar" id="audienceFilters" role="group" aria-label="人群筛选">
         <span class="filter-group-label" style="margin-right:4px">人群</span>
         <button class="audience-btn active" data-aud="all">全部</button>
         <button class="audience-btn" data-aud="family">👨‍👩‍👧 亲子</button>
@@ -124,7 +168,7 @@
     </div>
   </section>
 
-  <section class="section" style="padding-top:0">
+  <section class="section" style="padding-top:0" aria-label="景点列表">
     <div class="section-inner">
       <div class="card-grid" id="spotGrid"></div>
       <div class="empty-state" id="emptyState" style="display:none">
@@ -134,31 +178,32 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" aria-label="景点地图">
     <div class="section-inner">
       <div class="section-header">
         <div class="eyebrow">互动地图</div>
         <h2>景点分布</h2>
         <p>点击景点卡片查看详情，探索泉城济南</p>
       </div>
-      <div id="amap-container"></div>
+      <div id="map-container"></div>
       <div class="map-legend">
-        <span>⛲ 泉水</span><span>🌿 自然</span><span>🏛️ 历史</span><span>🍜 美食街</span>
+        <span>⛲ 泉水</span><span>🌿 自然</span><span>🏛️ 历史</span><span>📚 文化</span><span>🍜 美食街</span><span>👨‍👩‍👧 亲子</span>
       </div>
     </div>
   </section>
+  </main>
 
-  <footer class="footer">
-    <div class="footer-links">
+  <footer class="footer" role="contentinfo">
+    <nav class="footer-links" aria-label="页脚导航">
       <a href="index.html">首页</a><a href="spots.html">景点</a><a href="food.html">美食</a>
       <a href="itinerary.html">行程</a><a href="guide.html">指南</a><a href="culture.html">文化</a>
-    </div>
+    </nav>
     <p>© 2026 泉城攻略 · 济南旅游指南</p>
   </footer>
 
   <button class="btt" aria-label="回到顶部">↑</button>
-  <nav class="mob-nav">
-    <a href="index.html"><span class="icon">🏠</span>首页</a>
+  <nav class="mob-nav" aria-label="移动端导航">
+    <a href="index.html"><span class="icon" aria-hidden="true">🏠</span>首页</a>
     <a href="spots.html" class="active"><span class="icon">🏛️</span>景点</a>
     <a href="food.html"><span class="icon">🍜</span>美食</a>
     <a href="itinerary.html"><span class="icon">📋</span>行程</a>
@@ -169,7 +214,8 @@
   <script type="module">
     import { initAll, stars, openModal, closeModal } from '/src/components/shared.js';
 
-    const badgeLabels = { hot: '🔥 热门', must: '⭐ 必去', hidden: '🌿 小众', free: '🆓 免费' };
+    const badgeLabels = { hot: '🔥 热门', must: '⭐ 必去', hidden: '🌿 小众', free: '🆓 免费', kid: '👶 亲子', night: '🌙 夜游', new: '🆕 新增' };
+    const catColors = { spring: '#3b82f6', nature: '#22c55e', history: '#a855f7', food: '#f59e0b', landmark: '#ec4899', culture: '#8b5cf6', family: '#14b8a6', amusement: '#f97316' };
     const audienceLabels = { family: '亲子', couple: '情侣', elder: '老人', solo: '独行' };
 
     // ── CPS Affiliate Config ──
@@ -193,6 +239,11 @@
       return `${CPS.meituan.baseUrl}${encodeURIComponent(spotName)}?ci=111&f=${CPS.meituan.affId}`;
     }
     let allSpots = [], activeCat = 'all', activeAud = 'all', sortBy = 'recommend', currentGalleryIndex = 0;
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
 
     function showToast(msg) {
       const t = document.getElementById('toast');
@@ -352,9 +403,9 @@
       const allReviews = [...spotUserReviews, ...defaultReviews];
       const reviewsHtml = allReviews.map(r => `
         <div class="review-item ${r.isUser ? 'user-review' : ''}">
-          <div class="review-head"><div class="review-avatar">${r.avatar}</div><span class="review-name">${r.name}</span><span class="review-date">${r.date}</span></div>
+          <div class="review-head"><div class="review-avatar">${r.avatar}</div><span class="review-name">${escapeHtml(r.name)}</span><span class="review-date">${escapeHtml(r.date)}</span></div>
           <div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
-          <div class="review-text">${r.text}</div>
+          <div class="review-text">${escapeHtml(r.text)}</div>
         </div>`).join('');
       const totalReviews = s.reviews + spotUserReviews.length;
 
@@ -468,61 +519,48 @@
     initAll();
     loadSpots();
 
-    // ── Amap Integration ──
-    // 请替换为你自己的高德地图 JS API Key (免费申请: https://console.amap.com/dev/key/app)
-    const AMAP_KEY = 'YOUR_AMAP_KEY_HERE';
+    // ── Leaflet + OpenStreetMap Integration ──
+    function initLeafletMap() {
+      const container = document.getElementById('map-container');
+      if (!container || !allSpots.length) return;
+      const map = L.map('map-container').setView([36.67, 117.02], 12);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
 
-    function initAmap() {
-      if (typeof AMap === 'undefined') {
-        console.warn('高德地图 SDK 未加载，显示回退 UI');
-        showMapFallback();
-        return;
-      }
-      try {
-        const map = new AMap.Map('amap-container', {
-          zoom: 12,
-          center: [117.02, 36.67],
-          mapStyle: 'amap://styles/whitesmoke'
+      const catColors = { spring: '#3b82f6', nature: '#22c55e', history: '#a855f7', food: '#f59e0b' };
+      allSpots.forEach(s => {
+        if (!s.lat || !s.lng) return;
+        const color = catColors[s.cat] || '#c9a96e';
+        const icon = L.divIcon({
+          className: 'leaflet-div-icon custom-marker',
+          html: `<div style="background:${color};color:#fff;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.25);cursor:pointer;border:2px solid #fff">${s.name}</div>`,
+          iconSize: [0, 0],
+          iconAnchor: [0, 0]
         });
+        const marker = L.marker([s.lat, s.lng], { icon }).addTo(map);
+        marker.bindPopup(`<b>${s.name}</b><br>${s.desc.slice(0, 60)}…`);
+        marker.on('click', () => openQuickView(s));
+      });
 
-        // Add markers for each spot
-        allSpots.forEach(s => {
-          if (!s.lat || !s.lng) return;
-          const marker = new AMap.Marker({
-            position: [s.lng, s.lat],
-            title: s.name,
-            extData: s,
-            content: `<div style="background:var(--accent,#c9a96e);color:#fff;padding:4px 8px;border-radius:8px;font-size:12px;font-weight:600;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.2);cursor:pointer">${s.name}</div>`
-          });
-          marker.on('click', () => openQuickView(s));
-          marker.setMap(map);
-        });
-
-        // Fit view to show all markers
-        if (allSpots.length > 0) {
-          map.setFitView();
-        }
-      } catch(e) {
-        console.error('地图初始化失败:', e);
-        showMapFallback();
-      }
+      // Fit bounds
+      const bounds = allSpots.filter(s => s.lat && s.lng).map(s => [s.lat, s.lng]);
+      if (bounds.length) map.fitBounds(bounds, { padding: [30, 30] });
     }
 
-    function showMapFallback() {
-      const container = document.getElementById('amap-container');
-      container.outerHTML = `<div class="map-fallback" id="mapFallback">
-        <h3>🗺️ 互动地图</h3>
-        <p>高德地图加载中…如未显示，请申请免费 API Key</p>
-        <a href="https://console.amap.com/dev/key/app" target="_blank" class="btn btn-outline btn-sm">申请高德 Key</a>
-      </div>`;
-    }
-
-    // Load Amap SDK dynamically
-    const script = document.createElement('script');
-    script.src = `https://webapi.amap.com/maps?v=2.0&key=${AMAP_KEY}`;
-    script.onload = initAmap;
-    script.onerror = showMapFallback;
-    document.head.appendChild(script);
+    // Load Leaflet JS
+    const leafletScript = document.createElement('script');
+    leafletScript.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    leafletScript.onload = () => {
+      // Wait for spots to load, then init map
+      const tryInit = () => {
+        if (allSpots.length) initLeafletMap();
+        else setTimeout(tryInit, 200);
+      };
+      tryInit();
+    };
+    document.head.appendChild(leafletScript);
   </script>
 
   <!-- PWA Service Worker -->

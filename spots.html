@@ -6,7 +6,6 @@
   <title>景点 · 玩乐 — 济南旅游攻略</title>
   <link rel="stylesheet" href="/src/styles/main.css">
   <style>
-    /* ─── FILTER & SORT ─── */
     .filter-section{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-bottom:20px}
     .filter-group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
     .filter-group-label{font-size:.7rem;font-weight:600;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;margin-right:4px;white-space:nowrap}
@@ -14,8 +13,6 @@
     .sort-wrap label{font-size:.75rem;color:var(--text3);white-space:nowrap}
     .sort-select{padding:6px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.75rem;color:var(--text2);cursor:pointer;outline:none;transition:all .3s}
     .sort-select:hover{border-color:var(--accent)}
-
-    /* ─── SPOT CARD EXTRAS ─── */
     .spot-badge{position:absolute;top:12px;left:12px;z-index:2}
     .spot-price{position:absolute;top:12px;right:12px;z-index:2;background:rgba(0,0,0,.6);color:#fff;padding:3px 10px;border-radius:100px;font-size:.7rem;font-weight:600;backdrop-filter:blur(4px)}
     .spot-price .free-tag{color:#5eead4}
@@ -25,32 +22,41 @@
     .count-badge{font-size:.7rem;color:var(--text3);margin-left:8px}
     .empty-state{text-align:center;padding:80px 20px;color:var(--text3)}
     .empty-state .emoji{font-size:3rem;margin-bottom:12px}
-
-    /* ─── MAP AREA ─── */
     .map-area{background:var(--bg2);border-radius:var(--radius-lg);border:1px solid var(--border);min-height:360px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
     .map-area svg{width:100%;height:100%;position:absolute;top:0;left:0}
     .map-label{position:relative;z-index:2;text-align:center}
     .map-label h3{font:700 1.1rem/1.4 var(--serif);margin-bottom:4px}
     .map-label p{font-size:.8rem;color:var(--text3)}
-
-    /* ─── AUDIENCE PILLS ─── */
     .audience-bar{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;padding-left:80px}
     .audience-btn{padding:4px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.7rem;cursor:pointer;transition:all .3s;color:var(--text3)}
     .audience-btn:hover,.audience-btn.active{border-color:var(--teal);color:var(--teal);background:rgba(42,157,143,.08)}
-
+    .modal-gallery{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#000}
+    .gallery-track{display:flex;transition:transform .4s cubic-bezier(.25,.46,.45,.94);height:100%}
+    .gallery-slide{flex:0 0 100%;height:100%}
+    .gallery-slide img{width:100%;height:100%;object-fit:cover}
+    .gallery-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;border:none;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;z-index:3;transition:all .2s;backdrop-filter:blur(4px)}
+    .gallery-btn:hover{background:rgba(0,0,0,.8)}
+    .gallery-btn.prev{left:12px}
+    .gallery-btn.next{right:12px}
+    .gallery-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:3}
+    .gallery-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);border:none;cursor:pointer;transition:all .3s}
+    .gallery-dot.active{background:#fff;width:20px;border-radius:4px}
+    .gallery-counter{position:absolute;top:16px;right:16px;background:rgba(0,0,0,.6);color:#fff;padding:4px 10px;border-radius:100px;font-size:.7rem;font-weight:600;z-index:3;backdrop-filter:blur(4px)}
+    .modal-map{width:100%;height:140px;border-radius:10px;overflow:hidden;margin-bottom:16px;position:relative;background:var(--bg3)}
+    .modal-map iframe{width:100%;height:100%;border:none}
+    .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);padding:10px 24px;border-radius:100px;font-size:.85rem;font-weight:500;z-index:500;opacity:0;transition:all .3s var(--ease-out);pointer-events:none}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
     @media(max-width:768px){
       .filter-section{flex-direction:column;gap:12px}
       .sort-wrap{margin-left:0}
       .audience-bar{padding-left:0}
+      .modal{max-height:92vh;border-radius:var(--radius) var(--radius) 0 0}
+      .modal-gallery{aspect-ratio:4/3}
     }
   </style>
 </head>
 <body>
-
-  <!-- Scroll Progress -->
   <div class="scroll-progress"></div>
-
-  <!-- Top Nav -->
   <nav class="top-nav">
     <a href="index.html" class="logo">泉城<span>攻略</span></a>
     <div class="nav-links">
@@ -62,18 +68,14 @@
       <a href="culture.html">文化</a>
     </div>
     <button class="dark-toggle" aria-label="切换深色模式">🌙</button>
-    <button class="burger" aria-label="菜单">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="burger" aria-label="菜单"><span></span><span></span><span></span></button>
   </nav>
 
-  <!-- Page Hero -->
   <section class="page-hero">
     <h1>🏛️ 景点 · 玩乐</h1>
     <p>泉城济南，处处有惊喜</p>
   </section>
 
-  <!-- Filters & Sort -->
   <section class="section" style="padding-top:32px;padding-bottom:0">
     <div class="section-inner">
       <div class="filter-section">
@@ -96,7 +98,7 @@
             <option value="reviews">评价最多</option>
           </select>
         </div>
-      </div>>
+      </div>
       <div class="audience-bar" id="audienceFilters">
         <span class="filter-group-label" style="margin-right:4px">人群</span>
         <button class="audience-btn active" data-aud="all">全部</button>
@@ -111,17 +113,9 @@
     </div>
   </section>
 
-  <!-- Spot Cards Grid -->
   <section class="section" style="padding-top:0">
     <div class="section-inner">
-      <div class="card-grid" id="spotGrid">
-        <div class="card skeleton-card"><div class="skeleton-img skeleton"></div><div class="card-body"><div class="skeleton skeleton-line" style="width:70%"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
-        <div class="card skeleton-card"><div class="skeleton-img skeleton"></div><div class="card-body"><div class="skeleton skeleton-line" style="width:70%"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
-        <div class="card skeleton-card"><div class="skeleton-img skeleton"></div><div class="card-body"><div class="skeleton skeleton-line" style="width:70%"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
-        <div class="card skeleton-card"><div class="skeleton-img skeleton"></div><div class="card-body"><div class="skeleton skeleton-line" style="width:70%"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
-        <div class="card skeleton-card"><div class="skeleton-img skeleton"></div><div class="card-body"><div class="skeleton skeleton-line" style="width:70%"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
-        <div class="card skeleton-card"><div class="skeleton-img skeleton"></div><div class="card-body"><div class="skeleton skeleton-line" style="width:70%"></div><div class="skeleton skeleton-line"></div><div class="skeleton skeleton-line short"></div></div></div>
-      </div>
+      <div class="card-grid" id="spotGrid"></div>
       <div class="empty-state" id="emptyState" style="display:none">
         <div class="emoji">🔍</div>
         <p>没有找到符合条件的景点，试试调整筛选条件</p>
@@ -129,7 +123,6 @@
     </div>
   </section>
 
-  <!-- Interactive Map -->
   <section class="section">
     <div class="section-inner">
       <div class="section-header">
@@ -139,64 +132,48 @@
       </div>
       <div class="map-area" id="mapArea">
         <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" style="opacity:.15">
-          <!-- Background grid -->
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width=".5"/>
-            </pattern>
-          </defs>
+          <defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width=".5"/></pattern></defs>
           <rect width="800" height="400" fill="url(#grid)"/>
-          <!-- Simplified Jinan outline -->
           <path d="M100,200 Q200,100 400,120 Q600,80 700,200 Q650,320 400,350 Q150,340 100,200Z" fill="none" stroke="currentColor" stroke-width="2"/>
           <text x="400" y="210" text-anchor="middle" font-size="20" fill="currentColor">济南市区</text>
           <text x="400" y="240" text-anchor="middle" font-size="12" fill="currentColor">景点标注即将上线</text>
         </svg>
-        <div class="map-label">
-          <h3>🗺️ 景点地图</h3>
-          <p>互动地图功能开发中，敬请期待</p>
-        </div>
+        <div class="map-label"><h3>🗺️ 景点地图</h3><p>互动地图功能开发中，敬请期待</p></div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="footer-links">
-      <a href="index.html">首页</a>
-      <a href="spots.html">景点</a>
-      <a href="food.html">美食</a>
-      <a href="itinerary.html">行程</a>
-      <a href="guide.html">指南</a>
-      <a href="culture.html">文化</a>
+      <a href="index.html">首页</a><a href="spots.html">景点</a><a href="food.html">美食</a>
+      <a href="itinerary.html">行程</a><a href="guide.html">指南</a><a href="culture.html">文化</a>
     </div>
     <p>© 2026 泉城攻略 · 济南旅游指南</p>
   </footer>
 
-  <!-- Back to Top -->
   <button class="btt" aria-label="回到顶部">↑</button>
-
-  <!-- Mobile Bottom Nav -->
-    <nav class="mob-nav">
+  <nav class="mob-nav">
     <a href="index.html"><span class="icon">🏠</span>首页</a>
     <a href="spots.html" class="active"><span class="icon">🏛️</span>景点</a>
     <a href="food.html"><span class="icon">🍜</span>美食</a>
     <a href="itinerary.html"><span class="icon">📋</span>行程</a>
     <a href="guide.html"><span class="icon">📖</span>指南</a>
   </nav>
+  <div class="toast" id="toast"></div>
 
   <script type="module">
-    import { initAll, stars, openModal, closeModal, skeletonCards } from '/src/components/shared.js';
+    import { initAll, stars, openModal, closeModal } from '/src/components/shared.js';
 
-    // Badge label map
     const badgeLabels = { hot: '🔥 热门', must: '⭐ 必去', hidden: '🌿 小众', free: '🆓 免费' };
     const audienceLabels = { family: '亲子', couple: '情侣', elder: '老人', solo: '独行' };
+    let allSpots = [], activeCat = 'all', activeAud = 'all', sortBy = 'recommend', currentGalleryIndex = 0;
 
-    let allSpots = [];
-    let activeCat = 'all';
-    let activeAud = 'all';
-    let sortBy = 'recommend';
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
 
-    // Fetch data
     async function loadSpots() {
       try {
         const res = await fetch('/src/data/spots.json');
@@ -204,47 +181,35 @@
         render();
       } catch (e) {
         console.error('加载景点数据失败:', e);
-        document.getElementById('spotGrid').innerHTML =
-          '<div class="empty-state"><div class="emoji">😢</div><p>数据加载失败，请刷新重试</p></div>';
+        document.getElementById('spotGrid').innerHTML = '<div class="empty-state"><div class="emoji">😢</div><p>数据加载失败</p></div>';
       }
     }
 
-    // Filter & sort
     function getFiltered() {
       let list = [...allSpots];
       if (activeCat !== 'all') list = list.filter(s => s.cat === activeCat);
       if (activeAud !== 'all') list = list.filter(s => s.audience.includes(activeAud));
-
       switch (sortBy) {
         case 'rating': list.sort((a, b) => b.rating - a.rating); break;
         case 'price': list.sort((a, b) => a.price - b.price); break;
         case 'reviews': list.sort((a, b) => b.reviews - a.reviews); break;
-        default: /* recommend — keep original order */ break;
       }
       return list;
     }
 
-    // Render cards
     function render() {
       const list = getFiltered();
       const grid = document.getElementById('spotGrid');
       const empty = document.getElementById('emptyState');
-      const count = document.getElementById('spotCount');
-      count.textContent = `共 ${list.length} 个景点`;
+      document.getElementById('spotCount').textContent = `共 ${list.length} 个景点`;
       const itineraries = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
 
-      if (list.length === 0) {
-        grid.innerHTML = '';
-        empty.style.display = 'block';
-        return;
-      }
+      if (!list.length) { grid.innerHTML = ''; empty.style.display = 'block'; return; }
       empty.style.display = 'none';
 
       grid.innerHTML = list.map(s => {
-        const inItinerary = itineraries.includes(s.id);
-        const priceHtml = s.price === 0
-          ? '<span class="free-tag">免费</span>'
-          : `¥${s.price}`;
+        const inIt = itineraries.includes(s.id);
+        const priceHtml = s.price === 0 ? '<span class="free-tag">免费</span>' : `¥${s.price}`;
         return `
           <article class="card rv" data-id="${s.id}">
             <div class="card-img">
@@ -255,167 +220,169 @@
             <div class="card-body">
               <h3>${s.name} <span class="card-stars">${stars(s.rating)}</span></h3>
               <p class="desc">${s.desc}</p>
-              <div class="card-meta">
-                <span>⏱ ${s.dur}</span>
-                <span>💬 ${s.reviews} 条评价</span>
-              </div>
-              <div class="card-meta" style="margin-top:4px">
-                <span>🕐 ${s.open ? s.open.split('(')[0].split('·')[0].trim() : '全天'}</span>
-                <span>📅 ${s.bestTime ? s.bestTime.slice(0, 12) : '全年'}</span>
-              </div>
-              ${s.transport ? `<div class="card-meta" style="margin-top:4px"><span>🚌 ${s.transport.slice(0, 20)}</span></div>` : ''}
-              <div class="card-tags">
-                ${s.audience.map(a => `<span class="tag">${audienceLabels[a] || a}</span>`).join('')}
-              </div>
+              <div class="card-meta"><span>⏱ ${s.dur}</span><span>💬 ${s.reviews} 条评价</span></div>
+              <div class="card-meta" style="margin-top:4px"><span>🕐 ${(s.open||'全天').split('(')[0].split('·')[0].trim()}</span><span>📅 ${(s.bestTime||'全年').slice(0,12)}</span></div>
+              ${s.transport ? `<div class="card-meta" style="margin-top:4px"><span>🚌 ${s.transport.slice(0,20)}</span></div>` : ''}
+              <div class="card-tags">${s.audience.map(a => `<span class="tag">${audienceLabels[a]||a}</span>`).join('')}</div>
               <div class="card-actions">
-                <button class="btn btn-sm ${inItinerary ? 'btn-outline' : 'btn-primary'} add-trip"
-                        data-id="${s.id}" ${inItinerary ? 'disabled' : ''}>
-                  ${inItinerary ? '✓ 已加入' : '＋ 加入行程'}
-                </button>
-                <button class="btn btn-sm btn-outline detail-btn" data-name="${s.name}">详情</button>
+                <button class="btn btn-sm ${inIt?'btn-outline':'btn-primary'} add-trip" data-id="${s.id}" ${inIt?'disabled':''}>${inIt?'✓ 已加入':'＋ 加入行程'}</button>
+                <button class="btn btn-sm btn-outline detail-btn" data-id="${s.id}">详情</button>
               </div>
             </div>
-          </article>
-        `;
+          </article>`;
       }).join('');
 
-      // Re-init reveal for new elements
+      // Reveal
       document.querySelectorAll('.rv:not(.revealed)').forEach(el => {
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach(e => {
-            if (e.isIntersecting) { e.target.classList.add('revealed'); io.unobserve(e.target); }
-          });
-        }, { threshold: 0.1 });
+        const io = new IntersectionObserver(es => { es.forEach(e => { if(e.isIntersecting){e.target.classList.add('revealed');io.unobserve(e.target)} }); }, {threshold:.1});
         io.observe(el);
       });
 
-      // Bind card click to open Quick View
+      // Card click → Quick View
       document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('click', (e) => {
+        card.addEventListener('click', e => {
           if (e.target.closest('.add-trip') || e.target.closest('.detail-btn')) return;
-          const id = card.dataset.id;
-          const s = spotsData.find(x => x.id === id);
+          const s = allSpots.find(x => x.id === card.dataset.id);
           if (s) openQuickView(s);
         });
       });
 
-      // Bind add-to-itinerary buttons
+      // Add trip
       document.querySelectorAll('.add-trip:not([disabled])').forEach(btn => {
-        btn.addEventListener('click', (e) => {
+        btn.addEventListener('click', e => {
           e.stopPropagation();
-          const id = btn.dataset.id;
-          const list = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
-          if (!list.includes(id)) {
-            list.push(id);
-            localStorage.setItem('jinan-itinerary', JSON.stringify(list));
-            btn.textContent = '✓ 已加入';
-            btn.classList.remove('btn-primary');
-            btn.classList.add('btn-outline');
-            btn.disabled = true;
-          }
+          addToTrip(btn.dataset.id);
+          btn.textContent = '✓ 已加入'; btn.classList.remove('btn-primary'); btn.classList.add('btn-outline'); btn.disabled = true;
         });
       });
 
-      // Bind detail buttons — open Quick View modal
+      // Detail
       document.querySelectorAll('.detail-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
+        btn.addEventListener('click', e => {
           e.stopPropagation();
-          const id = btn.closest('.card').dataset.id;
-          const s = spotsData.find(x => x.id === id);
-          if (!s) return;
-          openQuickView(s);
+          const s = allSpots.find(x => x.id === btn.dataset.id);
+          if (s) openQuickView(s);
         });
       });
     }
 
-    // Quick View Modal
+    function addToTrip(id) {
+      const list = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
+      if (!list.includes(id)) { list.push(id); localStorage.setItem('jinan-itinerary', JSON.stringify(list)); showToast('✓ 已加入行程'); render(); }
+    }
+
+    function galleryHtml(s) {
+      const imgs = [s.img];
+      return `
+        <div class="modal-gallery" data-count="${imgs.length}">
+          <div class="gallery-track">${imgs.map((img,i) => `<div class="gallery-slide"><img src="${img}" alt="${s.name}" loading="lazy"></div>`).join('')}</div>
+          ${imgs.length > 1 ? `<button class="gallery-btn prev" aria-label="上一张">‹</button><button class="gallery-btn next" aria-label="下一张">›</button><div class="gallery-dots">${imgs.map((_,i) => `<button class="gallery-dot ${i===0?'active':''}" data-index="${i}"></button>`).join('')}</div><span class="gallery-counter">1 / ${imgs.length}</span>` : ''}
+        </div>`;
+    }
+
+    function initGallery() {
+      const gallery = document.querySelector('.modal-gallery');
+      if (!gallery) return;
+      const track = gallery.querySelector('.gallery-track');
+      const counter = gallery.querySelector('.gallery-counter');
+      const dots = gallery.querySelectorAll('.gallery-dot');
+      const total = parseInt(gallery.dataset.count);
+      currentGalleryIndex = 0;
+      function goTo(i) {
+        if (i < 0 || i >= total) return;
+        currentGalleryIndex = i;
+        track.style.transform = `translateX(-${i*100}%)`;
+        if (counter) counter.textContent = `${i+1} / ${total}`;
+        dots.forEach((d,idx) => d.classList.toggle('active', idx===i));
+      }
+      gallery.querySelector('.prev')?.addEventListener('click', e => { e.stopPropagation(); goTo(currentGalleryIndex-1); });
+      gallery.querySelector('.next')?.addEventListener('click', e => { e.stopPropagation(); goTo(currentGalleryIndex+1); });
+      dots.forEach(d => d.addEventListener('click', e => { e.stopPropagation(); goTo(parseInt(d.dataset.index)); }));
+      document.addEventListener('keydown', e => { if(e.key==='ArrowLeft') goTo(currentGalleryIndex-1); if(e.key==='ArrowRight') goTo(currentGalleryIndex+1); });
+      let startX=0, moved=false;
+      gallery.addEventListener('touchstart', e => { startX=e.touches[0].clientX; moved=false; }, {passive:true});
+      gallery.addEventListener('touchmove', () => { moved=true; }, {passive:true});
+      gallery.addEventListener('touchend', e => { if(!moved) return; const diff=startX-e.changedTouches[0].clientX; if(Math.abs(diff)>50) goTo(currentGalleryIndex+(diff>0?1:-1)); });
+    }
+
     function openQuickView(s) {
-      const badgeLabels = { hot: '🔥 热门', must: '⭐ 必去', free: '🆓 免费', hidden: '💎 小众' };
-      const audienceLabels = { family: '亲子', couple: '情侣', elder: '老人', solo: '独行', student: '学生' };
       const priceHtml = s.price === 0
         ? '<span style="color:var(--teal);font-weight:700">免费</span>'
         : `<span style="font-weight:700">¥${s.price}</span>${s.priceOld ? `<span style="text-decoration:line-through;color:var(--text3);margin-left:6px">¥${s.priceOld}</span>` : ''}/人`;
-
-      const photosHtml = (s.photos || []).map(p => `<span class="photo-tag">📷 ${p}</span>`).join('');
+      const photosHtml = (s.photos||[]).map(p => `<span class="photo-tag">📷 ${p}</span>`).join('');
       const comboHtml = s.combo ? `<div class="modal-combo"><h4>${s.combo.title}</h4><p>${s.combo.desc}</p></div>` : '';
+      const mapHtml = s.lat && s.lng ? `<div class="modal-map"><iframe src="https://www.openstreetmap.org/export/embed.html?bbox=${s.lng-0.01}%2C${s.lat-0.005}%2C${s.lng+0.01}%2C${s.lat+0.005}&layer=mapnik&marker=${s.lat}%2C${s.lng}" loading="lazy"></iframe></div>` : '';
+      const reviews = [
+        {name:'旅行达人',avatar:'旅',date:'2026-04-15',stars:5,text:'非常值得一去！泉水清澈见底，环境优美。'},
+        {name:'小鱼儿',avatar:'鱼',date:'2026-04-10',stars:4,text:'景色不错，就是节假日人太多了，建议工作日去。'},
+        {name:'背包客阿杰',avatar:'杰',date:'2026-03-28',stars:5,text:'济南之行最满意的一站，下次还会再来！'}
+      ];
+      const reviewsHtml = reviews.map(r => `
+        <div class="review-item">
+          <div class="review-head"><div class="review-avatar">${r.avatar}</div><span class="review-name">${r.name}</span><span class="review-date">${r.date}</span></div>
+          <div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
+          <div class="review-text">${r.text}</div>
+        </div>`).join('');
 
       const html = `
-        <div class="modal-img">
-          <img src="${s.img}" alt="${s.name}">
-          <span class="badge ${s.badge}" style="position:absolute;top:16px;left:16px">${badgeLabels[s.badge] || s.badge}</span>
-        </div>
+        ${galleryHtml(s)}
         <div class="modal-body">
           <h2>${s.name}</h2>
-          <div class="modal-rating">
-            <span class="stars">${stars(s.rating)}</span>
-            <span class="score">${s.rating}</span>
-            <span class="count">${s.reviews} 条评价</span>
-          </div>
+          <div class="modal-rating"><span class="stars">${stars(s.rating)}</span><span class="score">${s.rating}</span><span class="count">${s.reviews} 条评价</span></div>
           <p class="modal-desc">${s.desc}</p>
           ${photosHtml ? `<div class="modal-photos">${photosHtml}</div>` : ''}
           <div class="modal-info-grid">
             <div class="modal-info-item"><div class="label">🎫 门票</div><div class="value">${priceHtml}</div></div>
             <div class="modal-info-item"><div class="label">⏱ 建议时长</div><div class="value">${s.dur}</div></div>
-            <div class="modal-info-item"><div class="label">🕐 开放时间</div><div class="value">${s.open || '全天'}</div></div>
-            <div class="modal-info-item"><div class="label">📅 最佳时间</div><div class="value">${s.bestTime || '全年'}</div></div>
-            <div class="modal-info-item"><div class="label">👥 拥挤程度</div><div class="value">${s.crowd || '一般'}</div></div>
-            <div class="modal-info-item"><div class="label">🎫 预约方式</div><div class="value">${s.book || '无需预约'}</div></div>
-            <div class="modal-info-item"><div class="label">🚌 交通</div><div class="value">${s.transport || '—'}</div></div>
-            <div class="modal-info-item"><div class="label">💰 优惠政策</div><div class="value">${s.discount || '无'}</div></div>
+            <div class="modal-info-item"><div class="label">🕐 开放时间</div><div class="value">${s.open||'全天'}</div></div>
+            <div class="modal-info-item"><div class="label">📅 最佳时间</div><div class="value">${s.bestTime||'全年'}</div></div>
+            <div class="modal-info-item"><div class="label">👥 拥挤程度</div><div class="value">${s.crowd||'一般'}</div></div>
+            <div class="modal-info-item"><div class="label">🎫 预约方式</div><div class="value">${s.book||'无需预约'}</div></div>
+            <div class="modal-info-item"><div class="label">🚌 交通</div><div class="value">${s.transport||'—'}</div></div>
+            <div class="modal-info-item"><div class="label">💰 优惠政策</div><div class="value">${s.discount||'无'}</div></div>
           </div>
           ${comboHtml}
+          ${mapHtml}
           <div class="card-tags" style="margin-bottom:16px">
-            ${(s.audience || []).map(a => `<span class="tag">${audienceLabels[a] || a}</span>`).join('')}
+            ${(s.audience||[]).map(a => `<span class="tag">${audienceLabels[a]||a}</span>`).join('')}
             <span class="tag" style="background:rgba(42,157,143,.1);color:var(--teal)">✓ ${s.trust}</span>
           </div>
           <div class="modal-actions">
-            <button class="btn btn-primary" onclick="addToTrip('${s.id}', this)">＋ 加入行程</button>
-            <button class="btn btn-outline" onclick="closeModal()">关闭</button>
+            <button class="btn btn-primary modal-add-trip" data-id="${s.id}">＋ 加入行程</button>
+            <button class="btn btn-outline modal-share" data-name="${s.name}">📤 分享</button>
           </div>
-        </div>
-      `;
+          <div class="modal-reviews">
+            <h4>💬 游客评价 <span style="font-weight:400;font-size:.8rem;color:var(--text3)">(${s.reviews}条)</span></h4>
+            ${reviewsHtml}
+          </div>
+        </div>`;
       openModal(html);
+      requestAnimationFrame(() => {
+        initGallery();
+        document.querySelector('.modal-add-trip')?.addEventListener('click', function() {
+          addToTrip(this.dataset.id);
+          this.textContent='✓ 已加入'; this.classList.remove('btn-primary'); this.classList.add('btn-outline'); this.disabled=true;
+        });
+        document.querySelector('.modal-share')?.addEventListener('click', function() {
+          const name = this.dataset.name;
+          if (navigator.share) navigator.share({title:`济南旅游 - ${name}`,text:`推荐你去济南的${name}！`,url:location.href});
+          else { navigator.clipboard?.writeText(`推荐你去济南的${name}！${location.href}`); showToast('链接已复制'); }
+        });
+      });
     }
 
-    window.addToTrip = function(id, btn) {
-      const list = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
-      if (!list.includes(id)) {
-        list.push(id);
-        localStorage.setItem('jinan-itinerary', JSON.stringify(list));
-        btn.textContent = '✓ 已加入';
-        btn.classList.remove('btn-primary');
-        btn.classList.add('btn-outline');
-        render();
-      }
-    };
-
-    // Category filter clicks
-    document.getElementById('catFilters').addEventListener('click', (e) => {
-      const btn = e.target.closest('.filter-btn');
-      if (!btn) return;
+    document.getElementById('catFilters').addEventListener('click', e => {
+      const btn = e.target.closest('.filter-btn'); if(!btn) return;
       document.querySelectorAll('#catFilters .filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeCat = btn.dataset.cat;
-      render();
+      btn.classList.add('active'); activeCat = btn.dataset.cat; render();
     });
-
-    // Audience filter clicks
-    document.getElementById('audienceFilters').addEventListener('click', (e) => {
-      const btn = e.target.closest('.audience-btn');
-      if (!btn) return;
+    document.getElementById('audienceFilters').addEventListener('click', e => {
+      const btn = e.target.closest('.audience-btn'); if(!btn) return;
       document.querySelectorAll('#audienceFilters .audience-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      activeAud = btn.dataset.aud;
-      render();
+      btn.classList.add('active'); activeAud = btn.dataset.aud; render();
     });
+    document.getElementById('sortSelect').addEventListener('change', e => { sortBy = e.target.value; render(); });
 
-    // Sort change
-    document.getElementById('sortSelect').addEventListener('change', (e) => {
-      sortBy = e.target.value;
-      render();
-    });
-
-    // Init
     initAll();
     loadSpots();
   </script>

@@ -534,6 +534,11 @@
             <span class="route-meta"><span>⏱ ${route.duration}</span><span>💰 ${route.cost}</span><span>🚶 ${route.distance}</span><span>👥 ${route.bestFor}</span></span>
           </div>
         </div>
+        <div style="display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap">
+          <button class="btn btn-sm btn-outline copy-route-btn" data-route="${routeKey}">📋 复制路线</button>
+          <button class="btn btn-sm btn-outline add-route-btn" data-route="${routeKey}">📌 一键加入行程</button>
+          <a href="guide.html#panel-tools" class="btn btn-sm btn-outline" style="text-decoration:none">💰 详细预算</a>
+        </div>
         <div class="timeline">`;
 
       route.days.forEach(day => {
@@ -563,14 +568,29 @@
 
       html += '</div>';
 
-      // Cost summary
-      const totalTickets = route.days.reduce((sum, d) => sum + d.items.reduce((s, i) => s + (parseInt(i.cost.replace(/[^0-9]/g, '')) || 0), 0), 0);
+      // Cost summary - categorize by item type
+      let catTickets = 0, catFood = 0, catTransport = 0, catAll = 0;
+      const foodIcons = ['🍜','🍲','🍖','🍕','🥟','☕','🍵','🍱','🍡','🍷','🌙','🛍️','🌅'];
+      const transportIcons = ['🚶','🚗'];
+      route.days.forEach(d => {
+        d.items.forEach(i => {
+          const costNum = parseInt(i.cost.replace(/[^0-9]/g, '')) || 0;
+          catAll += costNum;
+          if (foodIcons.includes(i.icon) || i.name.includes('餐') || i.name.includes('咖啡') || i.details.includes('老字号') || i.details.includes('美食')) {
+            catFood += costNum;
+          } else if (transportIcons.includes(i.icon) || i.name.includes('步行') || i.name.includes('出发') || i.name.includes('返回')) {
+            catTransport += costNum;
+          } else {
+            catTickets += costNum;
+          }
+        });
+      });
       html += `
         <div class="cost-summary">
-          <div class="cost-card"><div class="label">🎫 门票</div><div class="amount">¥${Math.round(totalTickets * 0.3)}</div><div class="note">预估总和</div></div>
-          <div class="cost-card"><div class="label">🍜 餐饮</div><div class="amount">¥${Math.round(totalTickets * 0.4)}</div><div class="note">预估总和</div></div>
-          <div class="cost-card"><div class="label">🚌 交通</div><div class="amount">¥${Math.round(totalTickets * 0.2)}</div><div class="note">预估总和</div></div>
-          <div class="cost-card"><div class="label">💰 总计</div><div class="amount">¥${totalTickets}</div><div class="note">所有费用</div></div>
+          <div class="cost-card"><div class="label">🎫 门票</div><div class="amount">¥${catTickets}</div><div class="note">景点门票合计</div></div>
+          <div class="cost-card"><div class="label">🍜 餐饮</div><div class="amount">¥${catFood}</div><div class="note">餐饮合计</div></div>
+          <div class="cost-card"><div class="label">🚌 交通</div><div class="amount">¥${catTransport}</div><div class="note">交通合计</div></div>
+          <div class="cost-card"><div class="label">💰 总计</div><div class="amount">¥${catAll}</div><div class="note">所有费用</div></div>
         </div>`;
 
       document.getElementById('routeContent').innerHTML = html;
@@ -865,6 +885,50 @@
       document.querySelectorAll('.season-tab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       renderSeason(btn.dataset.season);
+    });
+
+    // Route action buttons (copy + add to trip)
+    document.getElementById('routeContent').addEventListener('click', e => {
+      const copyBtn = e.target.closest('.copy-route-btn');
+      if (copyBtn) {
+        const routeKey = copyBtn.dataset.route;
+        const route = routes[routeKey];
+        if (!route) return;
+        let text = `${route.title}\n${route.desc}\n\n`;
+        route.days.forEach(day => {
+          text += `${day.header}\n`;
+          day.items.forEach(item => {
+            text += `  ${item.time} ${item.icon} ${item.name} — ${item.details} (${item.cost})\n`;
+            if (item.tips) text += `    💡 ${item.tips}\n`;
+          });
+          text += '\n';
+        });
+        navigator.clipboard?.writeText(text);
+        showToast('✓ 路线已复制到剪贴板');
+      }
+
+      const addBtn = e.target.closest('.add-route-btn');
+      if (addBtn) {
+        const routeKey = addBtn.dataset.route;
+        const route = routes[routeKey];
+        if (!route) return;
+        let added = 0;
+        const ids = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
+        route.days.forEach(day => {
+          day.items.forEach(item => {
+            // Try exact match first, then partial match
+            const match = spotsData.find(s => s.name === item.name) ||
+                          spotsData.find(s => item.name.includes(s.name) && s.name.length >= 2);
+            if (match && !ids.includes(match.id)) {
+              ids.push(match.id);
+              added++;
+            }
+          });
+        });
+        localStorage.setItem('jinan-itinerary', JSON.stringify(ids));
+        renderMyTrip();
+        showToast(added > 0 ? `✓ 已加入 ${added} 个景点到行程` : '该路线景点已在行程中');
+      }
     });
 
     loadData().then(() => {

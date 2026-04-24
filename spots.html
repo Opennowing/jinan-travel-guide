@@ -46,6 +46,8 @@
   }
   </script>
   <link rel="stylesheet" href="/src/styles/main.css">
+  <link rel="manifest" href="/jinan-travel-guide/manifest.json">
+  <meta name="theme-color" content="#c9a96e">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
     .filter-section{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-bottom:20px}
@@ -150,7 +152,25 @@
       .audience-bar{padding-left:0}
       .modal{max-height:92vh;border-radius:var(--radius) var(--radius) 0 0}
       .modal-gallery{aspect-ratio:4/3}
+      .area-filter-row,.ticket-filter-row{flex-wrap:wrap}
     }
+    /* ── 区域筛选 ── */
+    .area-filter-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:12px}
+    .area-btn{padding:4px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.7rem;cursor:pointer;transition:all .3s;color:var(--text3)}
+    .area-btn:hover,.area-btn.active{border-color:var(--teal);color:var(--teal);background:rgba(42,157,143,.08)}
+    /* ── 门票筛选 ── */
+    .ticket-filter-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:12px}
+    .ticket-btn{padding:4px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.7rem;cursor:pointer;transition:all .3s;color:var(--text3)}
+    .ticket-btn:hover,.ticket-btn.active{border-color:#22c55e;color:#22c55e;background:rgba(34,197,94,.08)}
+    /* ── 当季推荐标签 ── */
+    .seasonal-rec-tag{position:absolute;bottom:12px;left:12px;z-index:2;background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;padding:3px 10px;border-radius:100px;font-size:.65rem;font-weight:600;backdrop-filter:blur(4px);pointer-events:none}
+    /* ── 拥挤度指示器 ── */
+    .crowd-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:3px;vertical-align:middle}
+    .crowd-low{background:#22c55e}
+    .crowd-medium{background:#f59e0b}
+    .crowd-high{background:#ef4444}
+    /* ── 区域标签 ── */
+    .area-label{font-size:.65rem;padding:2px 8px;background:rgba(42,157,143,.08);color:var(--teal);border-radius:100px;display:inline-flex;align-items:center;gap:3px}
   </style>
 </head>
 <body>
@@ -213,6 +233,21 @@
         <button class="audience-btn" data-aud="couple">💑 情侣</button>
         <button class="audience-btn" data-aud="elder">👴 老人</button>
         <button class="audience-btn" data-aud="solo">🎒 独行</button>
+      </div>
+      <div class="area-filter-row" id="areaFilters" role="group" aria-label="区域筛选">
+        <span class="filter-group-label">区域</span>
+        <button class="area-btn active" data-area="all">全部</button>
+        <button class="area-btn" data-area="历下区">📍 历下区</button>
+        <button class="area-btn" data-area="市中区">📍 市中区</button>
+        <button class="area-btn" data-area="天桥区">📍 天桥区</button>
+        <button class="area-btn" data-area="槐荫区">📍 槐荫区</button>
+        <button class="area-btn" data-area="历城区">📍 历城区</button>
+      </div>
+      <div class="ticket-filter-row" id="ticketFilters" role="group" aria-label="门票筛选">
+        <span class="filter-group-label">门票</span>
+        <button class="ticket-btn active" data-ticket="all">全部</button>
+        <button class="ticket-btn" data-ticket="free">🆓 免费</button>
+        <button class="ticket-btn" data-ticket="paid">🎫 收费</button>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
         <span class="count-badge" id="spotCount"></span>
@@ -339,7 +374,37 @@
     function getMeituanLink(spotName) {
       return `${CPS.meituan.baseUrl}${encodeURIComponent(spotName)}?ci=111&f=${CPS.meituan.affId}`;
     }
-    let allSpots = [], activeCat = 'all', activeAud = 'all', sortBy = 'recommend', currentGalleryIndex = 0;
+    let allSpots = [], activeCat = 'all', activeAud = 'all', activeArea = 'all', activeTicket = 'all', sortBy = 'recommend', currentGalleryIndex = 0;
+
+    // ── 区域分类（基于经纬度） ──
+    function getArea(spot) {
+      if (!spot.lat || !spot.lng) return '其他';
+      if (spot.lng < 116.98) return '槐荫区';
+      if (spot.lng > 117.06) return '历城区';
+      if (spot.lat > 36.68 && spot.lng < 117.02) return '天桥区';
+      if (spot.lat < 36.64) return '市中区';
+      return '历下区';
+    }
+
+    // ── 当季推荐判断 ──
+    function isSeasonalRecommended(spot) {
+      const month = new Date().getMonth() + 1;
+      const best = (spot.bestTime || '').toLowerCase();
+      const desc = (spot.desc || '').toLowerCase();
+      if (month >= 3 && month <= 5 && (best.includes('春') || best.includes('4月') || best.includes('5月') || best.includes('樱花'))) return true;
+      if (month >= 6 && month <= 8 && (best.includes('夏') || best.includes('避暑') || desc.includes('清凉'))) return true;
+      if (month >= 9 && month <= 11 && (best.includes('秋') || best.includes('红叶') || best.includes('秋色'))) return true;
+      if ((month >= 12 || month <= 2) && (best.includes('冬') || best.includes('雾气') || desc.includes('仙境'))) return true;
+      return false;
+    }
+
+    // ── 拥挤度分类 ──
+    function getCrowdLevel(spot) {
+      const c = (spot.crowd || '').toLowerCase();
+      if (c.includes('爆满') || c.includes('人山人海') || c.includes('很多')) return 'high';
+      if (c.includes('人少') || c.includes('清净') || c.includes('不多') || c.includes('私藏')) return 'low';
+      return 'medium';
+    }
 
     function escapeHtml(str) {
       if (!str) return '';
@@ -367,6 +432,9 @@
       let list = [...allSpots];
       if (activeCat !== 'all') list = list.filter(s => s.cat === activeCat);
       if (activeAud !== 'all') list = list.filter(s => s.audience.includes(activeAud));
+      if (activeArea !== 'all') list = list.filter(s => getArea(s) === activeArea);
+      if (activeTicket === 'free') list = list.filter(s => s.price === 0);
+      if (activeTicket === 'paid') list = list.filter(s => s.price > 0);
       switch (sortBy) {
         case 'rating': list.sort((a, b) => b.rating - a.rating); break;
         case 'price': list.sort((a, b) => a.price - b.price); break;
@@ -653,6 +721,16 @@
       btn.classList.add('active'); activeAud = btn.dataset.aud; render();
     });
     document.getElementById('sortSelect').addEventListener('change', e => { sortBy = e.target.value; render(); });
+    document.getElementById('areaFilters').addEventListener('click', e => {
+      const btn = e.target.closest('.area-btn'); if(!btn) return;
+      document.querySelectorAll('#areaFilters .area-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active'); activeArea = btn.dataset.area; render();
+    });
+    document.getElementById('ticketFilters').addEventListener('click', e => {
+      const btn = e.target.closest('.ticket-btn'); if(!btn) return;
+      document.querySelectorAll('#ticketFilters .ticket-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active'); activeTicket = btn.dataset.ticket; render();
+    });
 
     initAll();
     initSocialFeatures();
@@ -877,12 +955,13 @@
                 <button class="card-compare-btn ${isComp?'compared':''}" data-id="${s.id}" title="对比">⚖️</button>
               </div>
               <span class="spot-price">${priceHtml}</span>
+              ${isSeasonalRecommended(s) ? '<span class="seasonal-rec-tag">🌟 当季推荐</span>' : ''}
             </div>
             <div class="card-body">
               <h3>${s.name} <span class="card-stars">${stars(s.rating)}</span></h3>
               <p class="desc">${s.desc}</p>
-              <div class="card-meta"><span>⏱ ${s.dur}</span><span>💬 ${s.reviews} 条评价</span></div>
-              <div class="card-meta" style="margin-top:4px"><span>🕐 ${(s.open||'全天').split('(')[0].split('·')[0].trim()}</span><span>📅 ${(s.bestTime||'全年').slice(0,12)}</span></div>
+              <div class="card-meta"><span>⏱ ${s.dur}</span><span>💬 ${s.reviews} 条评价</span><span><span class="crowd-dot crowd-${getCrowdLevel(s)}"></span>${(s.crowd||'一般').split('·')[0].trim().slice(0,8)}</span></div>
+              <div class="card-meta" style="margin-top:4px"><span>🕐 ${(s.open||'全天').split('(')[0].split('·')[0].trim()}</span><span>📅 ${(s.bestTime||'全年').slice(0,12)}</span><span class="area-label">📍 ${getArea(s)}</span></div>
               ${s.transport ? `<div class="card-meta" style="margin-top:4px"><span>🚌 ${s.transport.slice(0,20)}</span></div>` : ''}
               <div class="card-tags">${s.audience.map(a => `<span class="tag">${audienceLabels[a]||a}</span>`).join('')}</div>
               <div class="card-actions">

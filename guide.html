@@ -160,14 +160,25 @@
 <body>
   <a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:16px;z-index:999;background:var(--accent);color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-100%'">跳到主要内容</a>
   <div class="scroll-progress"></div>
-  <nav class="top-nav" aria-label="主导航">
-    <a href="index.html" class="logo">泉城<span>攻略</span></a>
+    <nav class="top-nav" aria-label="主导航">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">⛲</span>
+      <span class="logo-text">泉城攻略</span>
+      <span class="logo-sub">JINAN TRAVEL</span>
+    </a>
     <div class="nav-links">
-      <a href="index.html">首页</a><a href="spots.html">景点</a><a href="food.html">美食</a>
-      <a href="itinerary.html">行程</a><a href="guide.html" class="active">指南</a><a href="culture.html">文化</a>
+      <a href="index.html"><span class="nav-icon">🏠</span>首页</a>
+      <a href="spots.html"><span class="nav-icon">🏛️</span>景点</a>
+      <a href="food.html"><span class="nav-icon">🍜</span>美食</a>
+      <a href="itinerary.html"><span class="nav-icon">📋</span>行程</a>
+      <a href="guide.html" class="active"><span class="nav-icon">📖</span>指南</a>
+      <a href="culture.html"><span class="nav-icon">📚</span>文化</a>
     </div>
-    <button class="dark-toggle" aria-label="切换深色模式">🌙</button>
-    <button class="burger" aria-label="菜单"><span></span><span></span><span></span></button>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="nav-search-btn" id="navSearchBtn" aria-label="搜索">🔍</button>
+      <button class="dark-toggle" aria-label="切换深色模式">🌙</button>
+      <button class="burger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
   </nav>
 
   <main id="main-content">

@@ -189,6 +189,53 @@
       .highlight-grid{grid-template-columns:1fr}
       .tools-grid{grid-template-columns:1fr 1fr}
     }
+
+    /* ═══ PREMIUM NAV ═══ */
+    .top-nav{height:72px;padding:0 clamp(16px,3vw,32px)}
+    .top-nav .logo{display:flex;align-items:center;gap:8px;font:800 1.15rem/1 var(--serif);color:var(--accent);letter-spacing:.06em;text-decoration:none;position:relative}
+    .top-nav .logo .logo-icon{font-size:1.5rem;line-height:1;filter:drop-shadow(0 2px 6px rgba(201,169,110,.3))}
+    .top-nav .logo .logo-text{background:linear-gradient(135deg,#c9a96e 0%,#e8dcc8 40%,#c9a96e 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .top-nav .logo .logo-sub{font-size:.55rem;font-weight:500;color:var(--text3);letter-spacing:.18em;text-transform:uppercase;-webkit-text-fill-color:var(--text3);margin-left:2px;position:absolute;bottom:-14px;left:30px;white-space:nowrap}
+    .top-nav .logo span:not(.logo-icon):not(.logo-text):not(.logo-sub){color:var(--text);-webkit-text-fill-color:var(--text)}
+
+    .nav-links{display:flex;gap:4px;align-items:center;background:var(--bg2);padding:4px;border-radius:100px;border:1px solid var(--border)}
+    .nav-links a{display:flex;align-items:center;gap:5px;font-size:.82rem;font-weight:500;letter-spacing:.02em;color:var(--nav-text2);transition:all .25s var(--ease);padding:8px 16px;border-radius:100px;position:relative;white-space:nowrap}
+    .nav-links a .nav-icon{font-size:.9rem;transition:transform .25s var(--ease)}
+    .nav-links a:hover{color:var(--accent);background:var(--accent2)}
+    .nav-links a:hover .nav-icon{transform:scale(1.15)}
+    .nav-links a.active{color:#fff;background:var(--accent);box-shadow:0 2px 8px rgba(201,169,110,.3)}
+    .nav-links a.active .nav-icon{transform:scale(1.1)}
+    .nav-links a.active::after{display:none}
+    .nav-search-btn{background:none;border:1px solid var(--border2);width:40px;height:40px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.05rem;border-radius:50%;transition:all .3s}
+    .nav-search-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:scale(1.08)}
+    .dark-toggle{width:40px;height:40px;font-size:1.05rem}
+    .dark-toggle:hover{transform:scale(1.08)}
+
+    /* ═══ HERO QUICK NAV (restored) ═══ */
+    .hero-quick-nav{display:flex;gap:14px;justify-content:center;margin:28px 0 12px;position:relative;z-index:2;flex-wrap:wrap}
+    .hero-quick-nav a{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 22px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;backdrop-filter:blur(10px);transition:all .3s var(--ease);min-width:90px;text-decoration:none}
+    .hero-quick-nav a:hover{transform:translateY(-5px);background:rgba(255,255,255,.12);border-color:rgba(201,169,110,.4);box-shadow:0 8px 30px rgba(0,0,0,.2)}
+    .hero-quick-nav a .qn-icon{font-size:1.8rem;filter:drop-shadow(0 2px 4px rgba(0,0,0,.2))}
+    .hero-quick-nav a .qn-label{font-size:.75rem;font-weight:600;color:rgba(255,255,255,.85);letter-spacing:.04em}
+    .hero-quick-nav a .qn-desc{font-size:.6rem;color:rgba(255,255,255,.45);margin-top:-4px}
+
+    @media(max-width:768px){
+      .nav-links{display:none}
+      .burger{display:block}
+      .nav-links.mob-open{display:flex;position:fixed;top:72px;left:0;right:0;bottom:0;background:var(--bg);flex-direction:column;padding:32px var(--gutter);gap:8px;z-index:99;animation:pageFadeIn .3s var(--ease);border-radius:0;border:none}
+      .nav-links.mob-open a{font-size:1rem;color:var(--text);padding:14px 20px;min-height:48px;border-radius:12px}
+      .nav-links.mob-open a.active{background:var(--accent);color:#fff}
+      .top-nav .logo .logo-sub{display:none}
+      .hero-quick-nav{gap:10px}
+      .hero-quick-nav a{padding:14px 16px 10px;min-width:72px}
+      .hero-quick-nav a .qn-icon{font-size:1.5rem}
+    }
+    @media(max-width:480px){
+      .hero-quick-nav{gap:8px}
+      .hero-quick-nav a{padding:12px 10px 8px;min-width:64px;border-radius:12px}
+      .hero-quick-nav a .qn-icon{font-size:1.3rem}
+      .hero-quick-nav a .qn-label{font-size:.68rem}
+    }
   </style>
 </head>
 <body>
@@ -196,12 +243,20 @@
   <div class="scroll-progress"></div>
 
   <nav class="top-nav" aria-label="主导航">
-    <a href="index.html" class="logo">泉城<span>攻略</span></a>
+    <a href="index.html" class="logo">
+      <span class="logo-icon">⛲</span>
+      <span class="logo-text">泉城攻略</span>
+      <span class="logo-sub">JINAN TRAVEL</span>
+    </a>
     <div class="nav-links">
-      <a href="index.html" class="active">首页</a><a href="spots.html">景点</a><a href="food.html">美食</a>
-      <a href="itinerary.html">行程</a><a href="guide.html">指南</a><a href="culture.html">文化</a>
+      <a href="index.html" class="active"><span class="nav-icon">🏠</span>首页</a>
+      <a href="spots.html"><span class="nav-icon">🏛️</span>景点</a>
+      <a href="food.html"><span class="nav-icon">🍜</span>美食</a>
+      <a href="itinerary.html"><span class="nav-icon">📋</span>行程</a>
+      <a href="guide.html"><span class="nav-icon">📖</span>指南</a>
+      <a href="culture.html"><span class="nav-icon">📚</span>文化</a>
     </div>
-    <div style="display:flex;align-items:center;gap:12px">
+    <div style="display:flex;align-items:center;gap:10px">
       <button class="nav-search-btn" id="navSearchBtn" aria-label="搜索">🔍</button>
       <button class="dark-toggle" aria-label="切换深色模式">🌙</button>
       <button class="burger" aria-label="菜单"><span></span><span></span><span></span></button>
@@ -244,7 +299,41 @@
     <p class="subtitle" style="position:relative;z-index:2;color:rgba(255,255,255,.75)">72 泉涌，千年文脉，一座让你慢下来的城市</p>
 
     <!-- Weather -->
-    <div style="position:relative;z-index:2;margin-bottom:16px;font-size:.85rem;color:rgba(255,255,255,.6)" id="heroWeather">🌤️ 加载天气…</div>
+    <div style="position:relative;z-index:2;margin-bottom:12px;font-size:.85rem;color:rgba(255,255,255,.6)" id="heroWeather">🌤️ 加载天气…</div>
+
+    <!-- Quick Nav Icons -->
+    <div class="hero-quick-nav">
+      <a href="spots.html">
+        <span class="qn-icon">⛲</span>
+        <span class="qn-label">名泉</span>
+        <span class="qn-desc">72泉涌</span>
+      </a>
+      <a href="spots.html">
+        <span class="qn-icon">🏛️</span>
+        <span class="qn-label">景点</span>
+        <span class="qn-desc">47+精选</span>
+      </a>
+      <a href="food.html">
+        <span class="qn-icon">🍜</span>
+        <span class="qn-label">美食</span>
+        <span class="qn-desc">鲁菜正脉</span>
+      </a>
+      <a href="itinerary.html">
+        <span class="qn-icon">🗺️</span>
+        <span class="qn-label">路线</span>
+        <span class="qn-desc">1-3日游</span>
+      </a>
+      <a href="culture.html">
+        <span class="qn-icon">📚</span>
+        <span class="qn-label">文化</span>
+        <span class="qn-desc">千年文脉</span>
+      </a>
+      <a href="guide.html">
+        <span class="qn-icon">📖</span>
+        <span class="qn-label">指南</span>
+        <span class="qn-desc">实用工具</span>
+      </a>
+    </div>
 
     <div class="hero-stats" style="position:relative;z-index:2">
       <div class="hero-stat"><div class="num" style="color:#c9a96e">72</div><div class="label" style="color:rgba(255,255,255,.5)">名泉</div></div>

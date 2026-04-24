@@ -74,6 +74,18 @@
     .hero-search input::placeholder{color:var(--text3)}
     .hero-search button{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
     .hero-search button:hover{background:var(--accent-hover)}
+    .nav-search-btn{background:none;border:1px solid var(--border2);width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;border-radius:50%;transition:all .3s}
+    .nav-search-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .search-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:200;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;padding-top:120px}
+    .search-overlay.open{display:flex}
+    .search-overlay-inner{background:var(--bg);border-radius:var(--radius-lg);width:90%;max-width:600px;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden}
+    .search-overlay-header{display:flex;align-items:center;gap:8px;padding:16px 20px;border-bottom:1px solid var(--border)}
+    .search-overlay-header input{flex:1;padding:12px 16px;border:2px solid var(--border);background:var(--bg2);border-radius:100px;font-size:1rem;font-family:var(--sans);outline:none;transition:border-color .3s}
+    .search-overlay-header input:focus{border-color:var(--accent)}
+    .search-overlay-header button{width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+    .search-overlay-header button:hover{background:var(--accent-hover)}
+    .search-close{background:none!important;color:var(--text2)!important;font-size:1.2rem!important}
+    .search-close:hover{color:var(--text)!important}
     .search-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);max-height:360px;overflow-y:auto;z-index:100;display:none}
     .search-dropdown.show{display:block}
     .search-dropdown-section{padding:8px 0}
@@ -181,10 +193,23 @@
       <a href="itinerary.html">行程</a><a href="guide.html">指南</a><a href="culture.html">文化</a>
     </div>
     <div style="display:flex;align-items:center;gap:12px">
+      <button class="nav-search-btn" id="navSearchBtn" aria-label="搜索">🔍</button>
       <button class="dark-toggle" aria-label="切换深色模式">🌙</button>
       <button class="burger" aria-label="菜单"><span></span><span></span><span></span></button>
     </div>
   </nav>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-overlay-inner">
+      <div class="search-overlay-header">
+        <input type="text" id="heroSearch" placeholder="搜索景点、美食…" autocomplete="off" autofocus>
+        <button id="searchBtn" aria-label="搜索">🔍</button>
+        <button class="search-close" id="searchClose" aria-label="关闭搜索">✕</button>
+      </div>
+      <div class="search-dropdown" id="searchDropdown"></div>
+    </div>
+  </div>
 
   <!-- ═══ HERO ═══ -->
   <main id="main-content">
@@ -233,24 +258,8 @@
       </div>
     </div>
 
-    <div class="hero-badge">🌊 中国泉城 · 世界泉水之都</div>
     <h1>济南 · <span class="accent">泉城</span></h1>
     <p class="subtitle">72 泉涌，千年文脉，一座让你慢下来的城市</p>
-
-    <!-- Search -->
-    <div class="hero-search">
-      <input type="text" id="heroSearch" placeholder="搜索景点、美食、行程…" autocomplete="off">
-      <button id="searchBtn" aria-label="搜索">🔍</button>
-      <div class="search-dropdown" id="searchDropdown"></div>
-    </div>
-
-    <!-- Quick Nav -->
-    <div class="quick-nav">
-      <a href="spots.html"><span class="icon">🏛️</span><span>景点</span></a>
-      <a href="food.html"><span class="icon">🍜</span><span>美食</span></a>
-      <a href="itinerary.html"><span class="icon">📋</span><span>行程</span></a>
-      <a href="guide.html"><span class="icon">📖</span><span>指南</span></a>
-    </div>
 
     <!-- Weather -->
     <div style="position:relative;z-index:1;margin-bottom:16px;font-size:.85rem;color:var(--text2)" id="heroWeather">🌤️ 加载天气…</div>
@@ -260,7 +269,6 @@
       <div class="hero-stat"><div class="num">4000+</div><div class="label">年历史</div></div>
       <div class="hero-stat"><div class="num">47+</div><div class="label">精选景点</div></div>
     </div>
-    <button class="btn btn-outline btn-sm" style="margin-top:20px;position:relative;z-index:2" data-share='{"title":"济南·泉城","subtitle":"72泉涌，千年文脉","items":[{"name":"趵突泉","info":"天下第一泉 · 4.8★"},{"name":"大明湖","info":"四面荷花三面柳 · 4.7★"},{"name":"千佛山","info":"齐烟九点 · 4.6★"},{"name":"五龙潭","info":"小众秘境 · 4.5★"},{"name":"把子肉","info":"济南必吃美食"}],"page":"index"}'>📤 分享攻略</button>
   </section>
 
   </main>
@@ -472,6 +480,34 @@
 
     const dropdown = document.getElementById('searchDropdown');
     const searchInput = document.getElementById('heroSearch');
+    const searchOverlay = document.getElementById('searchOverlay');
+    const navSearchBtn = document.getElementById('navSearchBtn');
+    const searchClose = document.getElementById('searchClose');
+
+    // Open search overlay
+    navSearchBtn?.addEventListener('click', () => {
+      searchOverlay.classList.add('open');
+      searchInput.focus();
+    });
+
+    // Close search overlay
+    searchClose?.addEventListener('click', () => {
+      searchOverlay.classList.remove('open');
+    });
+
+    // Close on overlay click
+    searchOverlay?.addEventListener('click', (e) => {
+      if (e.target === searchOverlay) {
+        searchOverlay.classList.remove('open');
+      }
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && searchOverlay.classList.contains('open')) {
+        searchOverlay.classList.remove('open');
+      }
+    });
 
     function renderSearchResults(q) {
       if (!q) { dropdown.classList.remove('show'); return; }

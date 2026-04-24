@@ -1034,7 +1034,7 @@
     async function loadWeather() {
       const container = document.getElementById('weatherCards');
       try {
-        const res = await fetch('https://wttr.in/Jinan?format=j1');
+        const res = await fetch('https://wttr.in/Jinan?format=j1', { headers: { 'User-Agent': 'curl/8.0' } });
         const data = await res.json();
         const forecast = data.weather?.slice(0, 3) || [];
 

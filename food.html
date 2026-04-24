@@ -467,6 +467,15 @@
   <script type="module">
     import { initAll, stars } from '/src/components/shared.js';
     import { initPWA } from '/src/components/pwa.js';
+
+    // Image fallback: generate colorful SVG by name
+    window.imgFallback = function(name) {
+      const colors = [['#c9a96e','#e8dcc8'],['#2a9d8f','#d4f1ed'],['#e76f51','#fce4de'],['#8b5cf6','#ede9fe'],['#3b82f6','#dbeafe'],['#f59e0b','#fef3c7']];
+      const ci = Math.abs([...name].reduce((a,c)=>a+c.charCodeAt(0),0)) % colors.length;
+      const [bg,fg] = colors[ci];
+      return `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect fill="${bg}" width="600" height="400" rx="12"/><text x="300" y="180" text-anchor="middle" font-size="50">🏔️</text><text x="300" y="250" text-anchor="middle" fill="${fg}" font-size="22" font-family="sans-serif" font-weight="bold">${name}</text><text x="300" y="285" text-anchor="middle" fill="${fg}" font-size="13" font-family="sans-serif" opacity="0.6">济南旅游攻略</text></svg>`)}`;
+    };
+
     import { initSocialFeatures } from '/src/components/social.js';
     initPWA();
     initAll();
@@ -881,7 +890,7 @@
       grid.innerHTML = mustFoods.map((food, i) =>
         '<div class="must-card rv">' +
           '<div class="must-card-rank">' + (i + 1) + '</div>' +
-          '<img class="must-card-img" src="' + food.img + '" alt="' + food.name + '" loading="lazy">' +
+          '<img class="must-card-img" src="' + food.img + '" alt="' + food.name + '" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
           '<div class="must-card-body">' +
             '<div class="must-card-name">' + food.name + '</div>' +
             '<p class="must-card-desc">' + food.desc + '</p>' +
@@ -914,7 +923,7 @@
 
       grid.innerHTML = filtered.map(food => {
         return '<div class="food-card rv">' +
-          '<img class="food-card-img" src="' + food.img + '" alt="' + food.name + '" loading="lazy">' +
+          '<img class="food-card-img" src="' + food.img + '" alt="' + food.name + '" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
           '<div class="food-card-body">' +
             '<div class="food-card-name">' +
               food.name +

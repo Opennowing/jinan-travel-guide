@@ -325,7 +325,7 @@
   </section>
 
   <!-- ═══ 精选景点 ═══ -->
-  <section class="section" aria-label="精选景点" style="content-visibility:auto;contain-intrinsic-size:auto 600px">
+  <section class="section" aria-label="精选景点">
     <div class="section-inner">
       <div class="section-header">
         <div class="eyebrow">TOP SPOTS</div>
@@ -338,7 +338,7 @@
   </section>
 
   <!-- ═══ 美食速览 ═══ -->
-  <section class="section section-alt" aria-label="必吃美食" style="content-visibility:auto;contain-intrinsic-size:auto 600px">
+  <section class="section section-alt" aria-label="必吃美食">
     <div class="section-inner">
       <div class="section-header">
         <div class="eyebrow">LOCAL FLAVORS</div>
@@ -393,7 +393,7 @@
   </section>
 
   <!-- ═══ 本周热门 ═══ -->
-  <section class="section" id="rankings-section" aria-label="本周热门" style="content-visibility:auto;contain-intrinsic-size:auto 500px">
+  <section class="section" id="rankings-section" aria-label="本周热门">
   </section>
 
   <!-- ═══ 实用工具 ═══ -->
@@ -552,6 +552,21 @@
         <a href="itinerary.html" class="btn btn-primary">🗺️ 查看${current.route}</a>
       </div>`;
 
+    // ── Image fallback: generate colorful SVG by name ──
+    window.imgFallback = function(name) {
+      const colors = [['#c9a96e','#e8dcc8'],['#2a9d8f','#d4f1ed'],['#e76f51','#fce4de'],['#8b5cf6','#ede9fe'],['#3b82f6','#dbeafe'],['#f59e0b','#fef3c7']];
+      const ci = Math.abs([...name].reduce((a,c)=>a+c.charCodeAt(0),0)) % colors.length;
+      const [bg,fg] = colors[ci];
+      const emoji = {spring:'⛲',nature:'🌿',history:'🏛️',culture:'📚',food:'🍜',family:'👨‍👩‍👧'}[name] || '🏔️';
+      return `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect fill="${bg}" width="600" height="400" rx="12"/><text x="300" y="170" text-anchor="middle" font-size="60">${emoji}</text><text x="300" y="240" text-anchor="middle" fill="${fg}" font-size="24" font-family="sans-serif" font-weight="bold">${name}</text><text x="300" y="280" text-anchor="middle" fill="${fg}" font-size="14" font-family="sans-serif" opacity="0.7">济南旅游攻略</text></svg>`)}`;
+    }
+
+    // ── Observe new .rv elements dynamically ──
+    function observeNewRv(container) {
+      if (!rvIO) return;
+      container.querySelectorAll('.rv:not(.revealed)').forEach(el => rvIO.observe(el));
+    }
+
     // ── Load Spots ──
     async function loadSpots() {
       try {
@@ -559,9 +574,10 @@
         const data = await res.json();
         const featured = data.filter(s => ['must','hot'].includes(s.badge)).slice(0, 6);
         if (featured.length < 6) { const rest = data.filter(s => !featured.includes(s)).slice(0, 6-featured.length); featured.push(...rest); }
-        document.getElementById('spots-grid').innerHTML = featured.map(s => `
+        const grid = document.getElementById('spots-grid');
+        grid.innerHTML = featured.map(s => `
           <div class="card rv" onclick="location.href='spots.html'">
-            <div class="card-img"><img src="${s.img}" alt="${s.name}" loading="lazy"></div>
+            <div class="card-img img-loaded"><img src="${s.img}" alt="${s.name}" onerror="this.onerror=null;this.src=imgFallback('${s.name}');this.classList.add('img-loaded')" class="img-loaded"></div>
             <div class="card-body">
               <h3>${s.name}${s.badge==='must'?'<span class="badge must">必去</span>':''}${s.badge==='hot'?'<span class="badge hot">热门</span>':''}${s.badge==='free'?'<span class="badge free">免费</span>':''}</h3>
               <p class="desc">${s.desc}</p>
@@ -570,6 +586,7 @@
             </div>
           </div>
         `).join('');
+        observeNewRv(grid);
       } catch(e) { console.error('加载景点失败:', e); }
     }
 
@@ -581,9 +598,10 @@
         const foods = data.foods || data;
         const topFoods = foods.filter(f => f.must).slice(0, 4);
         if (topFoods.length < 4) { const rest = foods.filter(f => !topFoods.includes(f)).slice(0, 4-topFoods.length); topFoods.push(...rest); }
-        document.getElementById('food-grid').innerHTML = topFoods.map(f => `
+        const grid = document.getElementById('food-grid');
+        grid.innerHTML = topFoods.map(f => `
           <div class="card rv" onclick="location.href='food.html'">
-            <div class="card-img"><img src="${f.img}" alt="${f.name}" loading="lazy"></div>
+            <div class="card-img img-loaded"><img src="${f.img}" alt="${f.name}" onerror="this.onerror=null;this.src=imgFallback('${f.name}');this.classList.add('img-loaded')" class="img-loaded"></div>
             <div class="card-body">
               <h3>${f.name}${f.must?'<span class="badge hot">🔥 必吃</span>':''}</h3>
               <div class="card-tags"><span class="tag">${f.tag}</span></div>
@@ -592,6 +610,7 @@
             </div>
           </div>
         `).join('');
+        observeNewRv(grid);
       } catch(e) { console.error('加载美食失败:', e); }
     }
 
@@ -608,17 +627,18 @@
       }
     }
 
-    // Reveal on scroll with stagger
-    const rvEls = document.querySelectorAll('.rv');
-    const rvIO = new IntersectionObserver(es => {
-      es.forEach((e,i) => {
+    // Reveal on scroll with stagger (reusable for dynamic content)
+    let rvIO = new IntersectionObserver(es => {
+      let delay = 0;
+      es.forEach(e => {
         if(e.isIntersecting){
-          setTimeout(() => { e.target.classList.add('revealed'); }, i * 80);
+          setTimeout(() => { e.target.classList.add('revealed'); }, delay);
+          delay += 80;
           rvIO.unobserve(e.target);
         }
       });
     }, {threshold:.1});
-    rvEls.forEach(el => rvIO.observe(el));
+    document.querySelectorAll('.rv').forEach(el => rvIO.observe(el));
 
     // ── Hero Carousel ──
     (function initCarousel(){

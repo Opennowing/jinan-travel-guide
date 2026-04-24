@@ -561,6 +561,15 @@
   <script type="module">
     import { initAll } from '/src/components/shared.js';
     import { initPWA } from '/src/components/pwa.js';
+
+    // Image fallback: generate colorful SVG by name
+    window.imgFallback = function(name) {
+      const colors = [['#c9a96e','#e8dcc8'],['#2a9d8f','#d4f1ed'],['#e76f51','#fce4de'],['#8b5cf6','#ede9fe'],['#3b82f6','#dbeafe'],['#f59e0b','#fef3c7']];
+      const ci = Math.abs([...name].reduce((a,c)=>a+c.charCodeAt(0),0)) % colors.length;
+      const [bg,fg] = colors[ci];
+      return `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect fill="${bg}" width="600" height="400" rx="12"/><text x="300" y="180" text-anchor="middle" font-size="50">🏔️</text><text x="300" y="250" text-anchor="middle" fill="${fg}" font-size="22" font-family="sans-serif" font-weight="bold">${name}</text><text x="300" y="285" text-anchor="middle" fill="${fg}" font-size="13" font-family="sans-serif" opacity="0.6">济南旅游攻略</text></svg>`)}`;
+    };
+
     import { initSocialFeatures } from '/src/components/social.js';
     initPWA();
     initAll();
@@ -788,7 +797,7 @@
         document.getElementById('wDetail').innerHTML = `<span>💧 湿度 ${humidity}</span><span>🌬️ 风 ${wind}</span>`;
 
         // 7-day forecast
-        const res2 = await fetch('https://wttr.in/Jinan?format=j1');
+        const res2 = await fetch('https://wttr.in/Jinan?format=j1', { headers: { 'User-Agent': 'curl/8.0' } });
         const data = await res2.json();
         const days = data.weather || [];
         const cardsEl = document.getElementById('weatherCards');

@@ -371,6 +371,17 @@
       <input type="text" id="foodSearch" placeholder="搜索菜名、餐厅名、拼音…" autocomplete="off" aria-label="搜索美食">
       <div class="search-history" id="searchHistory"></div>
     </div>
+    <!-- 猜你想搜 -->
+    <div class="smart-search-wrap">
+      <div class="guess-search" id="guessSearch">
+        <span class="guess-label">🔮 猜你想搜</span>
+        <!-- JS 动态渲染 -->
+      </div>
+      <div class="hot-search" id="hotSearch">
+        <span class="guess-label">🔥 热搜</span>
+        <!-- JS 动态渲染 -->
+      </div>
+    </div>
   </header>
 
   <!-- Main Content -->
@@ -1032,6 +1043,66 @@
       });
     }
 
+    // ── 猜你想搜 & 热搜 ──
+    function getCurrentSeason() {
+      const m = new Date().getMonth() + 1;
+      if (m >= 3 && m <= 5) return 'spring';
+      if (m >= 6 && m <= 8) return 'summer';
+      if (m >= 9 && m <= 11) return 'autumn';
+      return 'winter';
+    }
+
+    const seasonGuess = {
+      spring: ['奶汤蒲菜', '油旋', '泉水豆腐', '鸡汤蒲菜', '草莓糖葫芦'],
+      summer: ['济南烧烤', '泉水老酸奶', '荷叶粥', '酸醋藕片', '莲藕茶', '麻辣小龙虾'],
+      autumn: ['葱烧海参', '章丘大葱蘸酱', '糖醋鲤鱼', '把子肉', '老济南鸡汤'],
+      winter: ['甜沫', '把子肉', '九转大肠', '老醋粉汤', '鸡汤面', '糖葫芦']
+    };
+
+    const hotKeywords = ['把子肉', '糖醋鲤鱼', '油旋', '甜沫', '九转大肠', '黄焖鸡', '超意兴', '草包包子', '济南烧烤', '泉水老酸奶'];
+
+    function renderSmartSearch() {
+      const season = getCurrentSeason();
+      const guesses = seasonGuess[season] || [];
+
+      const guessEl = document.getElementById('guessSearch');
+      if (guessEl) {
+        guessEl.innerHTML = '<span class="guess-label">🔮 猜你想搜</span>' +
+          guesses.map(g => '<span class="guess-tag" data-q="' + g + '">' + g + '</span>').join('');
+        guessEl.querySelectorAll('.guess-tag').forEach(tag => {
+          tag.addEventListener('click', () => {
+            const q = tag.dataset.q;
+            document.getElementById('foodSearch').value = q;
+            searchQuery = q;
+            renderFoods();
+          });
+        });
+      }
+
+      const hotEl = document.getElementById('hotSearch');
+      if (hotEl) {
+        hotEl.innerHTML = '<span class="guess-label">🔥 热搜</span>' +
+          hotKeywords.map(h => '<span class="hot-tag" data-q="' + h + '">' + h + '</span>').join('');
+        hotEl.querySelectorAll('.hot-tag').forEach(tag => {
+          tag.addEventListener('click', () => {
+            const q = tag.dataset.q;
+            document.getElementById('foodSearch').value = q;
+            searchQuery = q;
+            renderFoods();
+          });
+        });
+      }
+    }
+
+    // ── 附近美食推荐 ──
+    function getNearbyFoods(currentFood) {
+      if (!currentFood.district || !currentFood.district.length) return [];
+      return allFoods.filter(f =>
+        f.id !== currentFood.id &&
+        f.district && f.district.some(d => currentFood.district.includes(d))
+      ).slice(0, 5);
+    }
+
     // ── Helpers ──
     function getSeasonLabel(season) {
       if (!season) return '';
@@ -1192,6 +1263,8 @@
 
       grid.innerHTML = filtered.map(food => {
         const isFav = favs.isFavorite(food.id);
+        const nearby = getNearbyFoods(food);
+        const mainDish = food.shops[0]?.bestDish?.split('、')[0] || food.name;
         return '<div class="food-card rv" style="position:relative">' +
           '<img class="food-card-img" src="' + food.img + '" alt="' + food.name + '" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
           '<button class="fav-btn ' + (isFav ? 'active' : '') + '" data-id="' + food.id + '" aria-label="' + (isFav ? '取消收藏' : '收藏') + '" onclick="event.stopPropagation();window._toggleFoodFav(\'' + food.id + '\',this)">' + (isFav ? '♥' : '♡') + '</button>' +
@@ -1205,6 +1278,15 @@
             '</div>' +
             '<p class="food-card-desc">' + food.desc + '</p>' +
             (food.history ? '<div class="food-card-history">' + food.history + '</div>' : '') +
+            // 制作时长 & 发源地
+            (food.cookTime || food.origin ? '<div class="food-meta-extra">' +
+              (food.cookTime ? '<span>⏱️ 制作: ' + food.cookTime + '</span>' : '') +
+              (food.origin ? '<span>📍 发源: ' + food.origin + '</span>' : '') +
+            '</div>' : '') +
+            // 推荐菜品
+            (food.recommendedDishes && food.recommendedDishes.length ? '<div class="recommended-dishes">' +
+              food.recommendedDishes.map((d, i) => '<span class="dish-tag' + (i === 0 ? ' main' : '') + '">' + d + '</span>').join('') +
+            '</div>' : '') +
             '<ul class="food-card-shops">' +
               food.shops.map(s => {
                 const isCompared = compareList.some(c => c.shop === s.name);
@@ -1222,6 +1304,13 @@
                     (s.wait ? '<span>⏳ ' + s.wait + '</span>' : '') +
                     (s.bestDish ? '<span>⭐ ' + s.bestDish + '</span>' : '') +
                   '</div>' +
+                  // 餐厅详情增强
+                  '<div class="shop-detail-row">' +
+                    (s.wifi ? '<span class="shop-detail-badge badge-wifi">📶 WiFi</span>' : '') +
+                    (s.parking ? '<span class="shop-detail-badge badge-parking">🅿️ ' + s.parking + '</span>' : '') +
+                    (s.privateRoom && s.privateRoom !== '无' ? '<span class="shop-detail-badge badge-room">🚪 ' + s.privateRoom + '</span>' : '') +
+                    (s.bestTime ? '<span class="shop-detail-badge badge-besttime">⏰ 最佳: ' + s.bestTime + '</span>' : '') +
+                  '</div>' +
                   '<button class="compare-btn ' + (isCompared ? 'active' : '') + '" data-shop="' + s.name + '" data-food="' + food.name + '">' +
                     (isCompared ? '✓ 已对比' : '📊 对比') +
                   '</button>' +
@@ -1229,6 +1318,13 @@
               }).join('') +
             '</ul>' +
             renderNutrition(food) +
+            // 附近美食推荐
+            (nearby.length > 0 ? '<div class="nearby-section">' +
+              '<div class="nearby-title">📍 附近还有这些</div>' +
+              '<div class="nearby-list">' +
+                nearby.map(n => '<a class="nearby-chip" href="javascript:void(0)" data-food-id="' + n.id + '">' + n.name + '</a>').join('') +
+              '</div>' +
+            '</div>' : '') +
           '</div>' +
         '</div>';
       }).join('');
@@ -1237,6 +1333,28 @@
       grid.querySelectorAll('.compare-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           toggleCompare(btn.dataset.shop, btn.dataset.food);
+        });
+      });
+
+      // Attach nearby chip click events
+      grid.querySelectorAll('.nearby-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          const foodId = chip.dataset.foodId;
+          const food = allFoods.find(f => f.id === foodId);
+          if (food) {
+            searchQuery = food.name;
+            document.getElementById('foodSearch').value = food.name;
+            renderFoods();
+            setTimeout(() => {
+              const card = document.querySelector('.food-card');
+              if (card) {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                card.style.boxShadow = '0 0 0 3px var(--accent), 0 8px 32px rgba(201,169,110,.3)';
+                card.style.transition = 'box-shadow .3s';
+                setTimeout(() => card.style.boxShadow = '', 1500);
+              }
+            }, 200);
+          }
         });
       });
 

@@ -612,11 +612,11 @@ export function initUtilityWidget() {
     <div class="widget-header" style="display:flex;align-items:center;justify-content:space-between;cursor:move;padding:10px 14px;background:linear-gradient(135deg,var(--accent),var(--accent-hover));color:#fff;border-radius:12px 12px 0 0">
       <span style="font-size:.82rem;font-weight:700;letter-spacing:.02em">📌 实用信息</span>
       <div style="display:flex;gap:4px;align-items:center">
-        <button id="widgetCollapse" style="background:rgba(255,255,255,.15);border:none;color:#fff;cursor:pointer;font-size:.8rem;padding:4px 8px;border-radius:6px;transition:all .2s;line-height:1" title="折叠">−</button>
-        <button id="widgetClose" style="background:rgba(255,255,255,.15);border:none;color:#fff;cursor:pointer;font-size:.8rem;padding:4px 8px;border-radius:6px;transition:all .2s;line-height:1" title="关闭">✕</button>
+        <button id="widgetCollapse" style="background:rgba(255,255,255,.2);border:none;color:#fff;cursor:pointer;font-size:.9rem;padding:6px 10px;border-radius:6px;transition:all .2s;line-height:1;min-width:28px;min-height:28px" title="折叠">−</button>
+        <button id="widgetClose" style="background:rgba(255,255,255,.2);border:none;color:#fff;cursor:pointer;font-size:.9rem;padding:6px 10px;border-radius:6px;transition:all .2s;line-height:1;min-width:28px;min-height:28px" title="关闭">✕</button>
       </div>
     </div>
-    <div class="widget-body" style="padding:14px 16px;background:var(--card-bg);border:1px solid var(--border);border-top:none;border-radius:0 0 12px 12px;font-size:.82rem;line-height:1.6">
+    <div class="widget-body" style="padding:14px 16px;background:var(--card-bg,#fff);border:1px solid var(--border,rgba(0,0,0,.06));border-top:none;border-radius:0 0 12px 12px;font-size:.82rem;line-height:1.6">
       <div id="widgetTime" style="margin-bottom:10px;color:var(--text);font-weight:500"></div>
       <div id="widgetWeather" style="margin-bottom:10px;color:var(--text2)">🌤️ 加载天气…</div>
       <div id="widgetHoliday" style="margin-bottom:10px;color:var(--text2)"></div>
@@ -625,7 +625,7 @@ export function initUtilityWidget() {
 
   // Style the widget container
   Object.assign(widget.style, {
-    position: 'fixed', bottom: '100px', right: '20px', zIndex: '98',
+    position: 'fixed', bottom: '140px', right: '20px', zIndex: '98',
     width: '230px', borderRadius: '12px', boxShadow: '0 8px 32px rgba(0,0,0,.2), 0 0 0 1px rgba(0,0,0,.05)',
     transition: 'all .3s', userSelect: 'none', overflow: 'hidden'
   });

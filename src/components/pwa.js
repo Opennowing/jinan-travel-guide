@@ -83,9 +83,9 @@ export function initA2HS() {
       </div>
     `;
     card.style.cssText = `
-      position:fixed;bottom:80px;left:16px;right:16px;z-index:9999;
+      position:fixed;bottom:140px;left:16px;right:16px;z-index:9999;
       max-width:480px;margin:0 auto;
-      background:#fff;border-radius:16px;
+      background:var(--card-bg,#fff);border-radius:16px;
       box-shadow:0 8px 40px rgba(0,0,0,.18),0 0 0 1px rgba(201,169,110,.25);
       padding:22px 24px;animation:a2hsSlideUp .4s ease;
     `;
@@ -99,11 +99,11 @@ export function initA2HS() {
         .a2hs-inner{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-right:32px}
         .a2hs-icon{font-size:2.4rem;flex-shrink:0;line-height:1}
         .a2hs-text{flex:1;min-width:140px}
-        .a2hs-text strong{display:block;font-size:1rem;color:#1a1a1a;margin-bottom:4px}
-        .a2hs-text span{font-size:.82rem;color:#555;line-height:1.4}
+        .a2hs-text strong{display:block;font-size:1rem;color:var(--text,#1a1a1a);margin-bottom:4px}
+        .a2hs-text span{font-size:.82rem;color:var(--text2,#555);line-height:1.4}
         .a2hs-install{background:linear-gradient(135deg,#c9a96e,#b8963e);color:#fff;border:none;padding:10px 28px;border-radius:100px;font-size:.88rem;font-weight:700;cursor:pointer;transition:all .25s;white-space:nowrap;box-shadow:0 4px 12px rgba(201,169,110,.3)}
         .a2hs-install:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(201,169,110,.4)}
-        .a2hs-dismiss{background:none;border:none;cursor:pointer;font-size:1.1rem;color:#888;padding:6px;position:absolute;top:14px;right:14px;line-height:1;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s}
+        .a2hs-dismiss{background:none;border:none;cursor:pointer;font-size:1.1rem;color:var(--text3,#888);padding:6px;position:absolute;top:14px;right:14px;line-height:1;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:all .2s}
         .a2hs-dismiss:hover{background:rgba(0,0,0,.06);color:#555}
       `;
       document.head.appendChild(style);

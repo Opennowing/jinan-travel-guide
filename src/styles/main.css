@@ -66,10 +66,10 @@ body{animation:pageFadeIn .5s var(--ease) both}
 .dark-toggle:hover{transform:scale(1.08)}
 
 /* ─── MOBILE BOTTOM NAV ─── */
-.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:8px 0 env(safe-area-inset-bottom,8px);justify-content:space-around;align-items:center}
+.mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:8px 0 env(safe-area-inset-bottom,8px);justify-content:space-evenly;align-items:center}
 .burger{display:none;background:none;border:none;cursor:pointer;padding:8px}
 .burger span{display:block;width:20px;height:2px;background:var(--text);margin:4px 0;transition:all .3s}
-.mob-nav a{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.65rem;color:var(--nav-text2);padding:8px 12px;transition:all .3s var(--ease);min-width:44px;min-height:44px;position:relative}
+.mob-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:.68rem;color:var(--nav-text2);padding:8px 10px;transition:all .3s var(--ease);min-width:48px;min-height:48px;position:relative;text-align:center}
 .mob-nav a .icon{font-size:1.2rem;transition:transform .3s var(--ease)}
 .mob-nav a.active{color:var(--accent)}
 .mob-nav a.active .icon{transform:scale(1.15) translateY(-2px)}

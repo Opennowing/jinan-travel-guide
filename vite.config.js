@@ -14,6 +14,7 @@ export default defineConfig({
         itinerary: resolve(__dirname, 'itinerary.html'),
         guide: resolve(__dirname, 'guide.html'),
         culture: resolve(__dirname, 'culture.html'),
+        offline: resolve(__dirname, 'offline.html'),
       }
     }
   },

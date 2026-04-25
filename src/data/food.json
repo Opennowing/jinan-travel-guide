@@ -71,7 +71,11 @@
           "bestDish": "糖醋黄河鲤鱼",
           "wait": "周末约30分钟",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "地下停车场，消费满200免费2小时",
+          "wifi": true,
+          "privateRoom": "有，4-12人包间",
+          "bestTime": "工作日11:00前"
         },
         {
           "name": "燕喜堂",
@@ -82,7 +86,11 @@
           "bestDish": "糖醋鲤鱼、九转大肠",
           "wait": "工作日不排队",
           "lat": 36.662,
-          "lng": 117.001
+          "lng": 117.001,
+          "parking": "路边停车位，较紧张",
+          "wifi": true,
+          "privateRoom": "有，6-10人包间",
+          "bestTime": "工作日11:30前"
         },
         {
           "name": "会仙楼饭庄",
@@ -93,7 +101,11 @@
           "bestDish": "糖醋鲤鱼、爆炒腰花",
           "wait": "节假日约20分钟",
           "lat": 36.6695,
-          "lng": 117.025
+          "lng": 117.025,
+          "parking": "附近商场停车场",
+          "wifi": true,
+          "privateRoom": "有，4-8人包间",
+          "bestTime": "工作日不排队"
         }
       ],
       "price": "人均¥85",
@@ -101,6 +113,13 @@
       "where": "泉城路商圈（聚丰德、燕喜堂）",
       "district": [
         "泉城路"
+      ],
+      "cookTime": "25-30分钟",
+      "origin": "清代济南府",
+      "recommendedDishes": [
+        "糖醋黄河鲤鱼",
+        "糖醋里脊",
+        "松鼠桂鱼"
       ]
     },
     {
@@ -124,7 +143,11 @@
           "bestDish": "九转大肠、糖醋鲤鱼",
           "wait": "不排队",
           "lat": 36.635,
-          "lng": 117.05
+          "lng": 117.05,
+          "parking": "大型停车场，免费",
+          "wifi": true,
+          "privateRoom": "有，6-16人包间",
+          "bestTime": "任何时段"
         },
         {
           "name": "闫府私房菜",
@@ -135,7 +158,11 @@
           "bestDish": "九转大肠、葱烧海参",
           "wait": "需提前预约",
           "lat": 36.658,
-          "lng": 117.038
+          "lng": 117.038,
+          "parking": "专属停车场",
+          "wifi": true,
+          "privateRoom": "有，4-20人包间，需预约",
+          "bestTime": "需提前1天预约"
         }
       ],
       "price": "人均¥75",
@@ -143,6 +170,13 @@
       "where": "历山路（闫府私房菜）",
       "district": [
         "经十路"
+      ],
+      "cookTime": "40-50分钟",
+      "origin": "清光绪年间济南九华林饭庄",
+      "recommendedDishes": [
+        "九转大肠",
+        "红烧大肠",
+        "溜肥肠"
       ]
     },
     {
@@ -166,7 +200,11 @@
           "bestDish": "把子肉、四喜丸子",
           "wait": "中午高峰期约10分钟",
           "lat": 36.668,
-          "lng": 117.026
+          "lng": 117.026,
+          "parking": "部分门店有停车位",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "11:30前或13:00后"
         },
         {
           "name": "老城区把子肉店",
@@ -177,7 +215,11 @@
           "bestDish": "把子肉、豆腐卷",
           "wait": "排队约15分钟",
           "lat": 36.6695,
-          "lng": 117.0235
+          "lng": 117.0235,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "11:00前"
         }
       ],
       "price": "人均¥15",
@@ -190,6 +232,14 @@
         "回民小区",
         "大明湖",
         "经十路"
+      ],
+      "cookTime": "3-4小时慢炖",
+      "origin": "古代祭祀传统，蒲草捆扎炖煮",
+      "recommendedDishes": [
+        "把子肉",
+        "四喜丸子",
+        "豆腐卷",
+        "鸡蛋"
       ]
     },
     {
@@ -213,7 +263,11 @@
           "bestDish": "奶汤蒲菜、糖醋鲤鱼",
           "wait": "不排队",
           "lat": 36.677,
-          "lng": 117.02
+          "lng": 117.02,
+          "parking": "大明湖景区停车场",
+          "wifi": true,
+          "privateRoom": "有，4-10人包间",
+          "bestTime": "工作日11:00前"
         },
         {
           "name": "燕喜堂",
@@ -224,7 +278,11 @@
           "bestDish": "奶汤蒲菜、九转大肠",
           "wait": "工作日不排队",
           "lat": 36.662,
-          "lng": 117.001
+          "lng": 117.001,
+          "parking": "路边停车位，较紧张",
+          "wifi": true,
+          "privateRoom": "有，6-10人包间",
+          "bestTime": "工作日11:30前"
         }
       ],
       "price": "人均¥70",
@@ -233,6 +291,13 @@
       "district": [
         "泉城路",
         "大明湖"
+      ],
+      "cookTime": "15-20分钟",
+      "origin": "大明湖特产，清代袁枚《随园食单》有载",
+      "recommendedDishes": [
+        "奶汤蒲菜",
+        "鸡汤蒲菜",
+        "蒲菜水饺"
       ]
     },
     {
@@ -256,7 +321,11 @@
           "bestDish": "原味油旋、甜油旋",
           "wait": "周末排队20-30分钟",
           "lat": 36.669,
-          "lng": 117.0245
+          "lng": 117.0245,
+          "parking": "无，建议步行",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "工作日早上"
         },
         {
           "name": "大观园油旋",
@@ -267,7 +336,11 @@
           "bestDish": "葱油旋",
           "wait": "一般不排队",
           "lat": 36.658,
-          "lng": 117.015
+          "lng": 117.015,
+          "parking": "大观园商场停车场",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "任何时段"
         }
       ],
       "price": "人均¥8",
@@ -275,6 +348,13 @@
       "where": "泉城路（油旋张）",
       "district": [
         "泉城路"
+      ],
+      "cookTime": "8-10分钟/炉",
+      "origin": "清代济南独有面食",
+      "recommendedDishes": [
+        "原味油旋",
+        "甜油旋",
+        "葱油旋"
       ]
     },
     {
@@ -298,7 +378,11 @@
           "bestDish": "鲜肉包、三鲜包",
           "wait": "周末排队30-40分钟",
           "lat": 36.6692,
-          "lng": 117.0238
+          "lng": 117.0238,
+          "parking": "路边停车位",
+          "wifi": true,
+          "privateRoom": "有，6-8人包间",
+          "bestTime": "工作日11:00前"
         },
         {
           "name": "草包包子铺(大观园店)",
@@ -309,7 +393,11 @@
           "bestDish": "鲜肉包、素三鲜包",
           "wait": "比总店人少",
           "lat": 36.6585,
-          "lng": 117.0145
+          "lng": 117.0145,
+          "parking": "大观园商场停车场",
+          "wifi": true,
+          "privateRoom": "有，4-6人包间",
+          "bestTime": "比总店人少"
         }
       ],
       "price": "人均¥35",
@@ -317,6 +405,14 @@
       "where": "泉城路222号（草包包子铺总店）",
       "district": [
         "泉城路"
+      ],
+      "cookTime": "15-20分钟/笼",
+      "origin": "1937年创始人张文汉",
+      "recommendedDishes": [
+        "鲜肉包",
+        "三鲜包",
+        "素三鲜包",
+        "锅贴"
       ]
     },
     {
@@ -340,7 +436,11 @@
           "bestDish": "甜沫、油旋",
           "wait": "早上7-8点排队",
           "lat": 36.6695,
-          "lng": 117.0255
+          "lng": 117.0255,
+          "parking": "路边停车",
+          "wifi": true,
+          "privateRoom": "无",
+          "bestTime": "07:00前"
         },
         {
           "name": "超意兴",
@@ -351,7 +451,11 @@
           "bestDish": "甜沫、把子肉",
           "wait": "不排队",
           "lat": 36.668,
-          "lng": 117.026
+          "lng": 117.026,
+          "parking": "部分门店有停车位",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "11:30前或13:00后"
         }
       ],
       "price": "人均¥5",
@@ -364,6 +468,13 @@
         "回民小区",
         "大明湖",
         "经十路"
+      ],
+      "cookTime": "30-40分钟熬制",
+      "origin": "明末清初济南粥铺",
+      "recommendedDishes": [
+        "甜沫",
+        "油旋",
+        "烧饼"
       ]
     },
     {
@@ -387,7 +498,11 @@
           "bestDish": "泉水宴套餐",
           "wait": "需提前预订",
           "lat": 36.6698,
-          "lng": 117.0248
+          "lng": 117.0248,
+          "parking": "大型地下停车场，免费",
+          "wifi": true,
+          "privateRoom": "有，4-30人包间",
+          "bestTime": "需提前预订"
         },
         {
           "name": "舜耕山庄",
@@ -398,7 +513,11 @@
           "bestDish": "泉水鱼头、泉水豆腐",
           "wait": "需提前预订",
           "lat": 36.635,
-          "lng": 117.028
+          "lng": 117.028,
+          "parking": "大型停车场，免费",
+          "wifi": true,
+          "privateRoom": "有，6-20人包间",
+          "bestTime": "需提前预订"
         }
       ],
       "price": "人均¥120",
@@ -406,6 +525,14 @@
       "where": "泉城路（泉城大酒店、舜耕山庄）",
       "district": [
         "泉城路"
+      ],
+      "cookTime": "2-3小时",
+      "origin": "济南泉水文化复兴",
+      "recommendedDishes": [
+        "泉水豆腐",
+        "清炖活鱼",
+        "泉水煮茶",
+        "泉水宴套餐"
       ]
     },
     {
@@ -429,7 +556,11 @@
           "bestDish": "爆炒腰花、糖醋鲤鱼",
           "wait": "周末约30分钟",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "地下停车场，消费满200免费2小时",
+          "wifi": true,
+          "privateRoom": "有，4-12人包间",
+          "bestTime": "工作日11:00前"
         },
         {
           "name": "会仙楼饭庄",
@@ -440,7 +571,11 @@
           "bestDish": "爆炒腰花、糖醋鲤鱼",
           "wait": "节假日约20分钟",
           "lat": 36.6695,
-          "lng": 117.025
+          "lng": 117.025,
+          "parking": "附近商场停车场",
+          "wifi": true,
+          "privateRoom": "有，4-8人包间",
+          "bestTime": "工作日不排队"
         }
       ],
       "price": "人均¥65",
@@ -448,6 +583,13 @@
       "where": "泉城路（聚丰德、会仙楼）",
       "district": [
         "泉城路"
+      ],
+      "cookTime": "3-5分钟大火快炒",
+      "origin": "鲁菜传统技艺",
+      "recommendedDishes": [
+        "爆炒腰花",
+        "爆炒鸡胗",
+        "爆炒鱿鱼"
       ]
     },
     {
@@ -471,7 +613,11 @@
           "bestDish": "葱烧海参、九转大肠",
           "wait": "需提前预约",
           "lat": 36.658,
-          "lng": 117.038
+          "lng": 117.038,
+          "parking": "专属停车场",
+          "wifi": true,
+          "privateRoom": "有，4-20人包间，需预约",
+          "bestTime": "需提前1天预约"
         },
         {
           "name": "舜耕山庄",
@@ -482,7 +628,11 @@
           "bestDish": "葱烧海参、泉水鱼头",
           "wait": "需提前预订",
           "lat": 36.635,
-          "lng": 117.028
+          "lng": 117.028,
+          "parking": "大型停车场，免费",
+          "wifi": true,
+          "privateRoom": "有，6-20人包间",
+          "bestTime": "需提前预订"
         }
       ],
       "price": "人均¥168",
@@ -490,6 +640,13 @@
       "where": "历山路（闫府私房菜、舜耕山庄）",
       "district": [
         "经十路"
+      ],
+      "cookTime": "2-3小时慢烧",
+      "origin": "鲁菜高端代表，章丘大葱配辽参",
+      "recommendedDishes": [
+        "葱烧海参",
+        "葱烧蹄筋",
+        "葱烧鹿筋"
       ]
     },
     {
@@ -513,7 +670,11 @@
           "bestDish": "羊肉串、烤板筋",
           "wait": "夏天晚上排队30分钟+",
           "lat": 36.663,
-          "lng": 117.018
+          "lng": 117.018,
+          "parking": "路边停车，较紧张",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "18:00前到"
         },
         {
           "name": "老金烧烤",
@@ -524,7 +685,11 @@
           "bestDish": "羊肉串、烤蒜瓣肉",
           "wait": "周末约20分钟",
           "lat": 36.652,
-          "lng": 117.02
+          "lng": 117.02,
+          "parking": "路边停车位",
+          "wifi": true,
+          "privateRoom": "无",
+          "bestTime": "17:30前"
         }
       ],
       "price": "人均¥50",
@@ -533,6 +698,14 @@
       "district": [
         "回民小区",
         "经十路"
+      ],
+      "cookTime": "5-10分钟/串",
+      "origin": "济南民间烧烤文化",
+      "recommendedDishes": [
+        "羊肉串",
+        "烤板筋",
+        "烤蒜瓣肉",
+        "烤腰子"
       ]
     },
     {
@@ -556,7 +729,11 @@
           "bestDish": "泉水老酸奶",
           "wait": "不排队",
           "lat": 36.6638,
-          "lng": 116.9978
+          "lng": 116.9978,
+          "parking": "趵突泉景区停车场",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "任何时段"
         },
         {
           "name": "黑虎泉酸奶铺",
@@ -567,7 +744,11 @@
           "bestDish": "蜂蜜酸奶",
           "wait": "不排队",
           "lat": 36.66,
-          "lng": 117.0338
+          "lng": 117.0338,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "任何时段"
         }
       ],
       "price": "人均¥15",
@@ -576,6 +757,13 @@
       "district": [
         "泉城路",
         "宽厚里"
+      ],
+      "cookTime": "6-8小时发酵",
+      "origin": "济南泉水发酵工艺",
+      "recommendedDishes": [
+        "泉水老酸奶",
+        "蜂蜜酸奶",
+        "果酱酸奶"
       ]
     },
     {
@@ -599,7 +787,11 @@
           "bestDish": "泉水绿茶、泉水茉莉花茶",
           "wait": "不排队",
           "lat": 36.6635,
-          "lng": 116.9972
+          "lng": 116.9972,
+          "parking": "趵突泉景区停车场",
+          "wifi": true,
+          "privateRoom": "有，茶室包间",
+          "bestTime": "工作日早上"
         },
         {
           "name": "黑虎泉茶摊",
@@ -610,7 +802,11 @@
           "bestDish": "泉水大碗茶",
           "wait": "不排队",
           "lat": 36.6602,
-          "lng": 117.0342
+          "lng": 117.0342,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "早上打水人多"
         }
       ],
       "price": "人均¥10",
@@ -619,6 +815,13 @@
       "district": [
         "泉城路",
         "宽厚里"
+      ],
+      "cookTime": "3-5分钟",
+      "origin": "济南泉城文人雅事",
+      "recommendedDishes": [
+        "泉水绿茶",
+        "泉水茉莉花茶",
+        "泉水大碗茶"
       ]
     },
     {
@@ -642,7 +845,11 @@
           "bestDish": "整猪烤肉、烤猪蹄",
           "wait": "不排队",
           "lat": 36.718,
-          "lng": 117.528
+          "lng": 117.528,
+          "parking": "门前免费停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "任何时段"
         }
       ],
       "price": "人均¥60",
@@ -650,6 +857,13 @@
       "where": "章丘区明水街道（黄家烤肉总店）",
       "district": [
         "其他"
+      ],
+      "cookTime": "6-8小时",
+      "origin": "清末章丘黄家",
+      "recommendedDishes": [
+        "整猪烤肉",
+        "烤猪蹄",
+        "烤排骨"
       ]
     },
     {
@@ -673,7 +887,11 @@
           "bestDish": "招牌黄焖鸡",
           "wait": "不排队",
           "lat": 36.658,
-          "lng": 117.058
+          "lng": 117.058,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "任何时段"
         },
         {
           "name": "老济南黄焖鸡",
@@ -684,7 +902,11 @@
           "bestDish": "黄焖鸡米饭",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "任何时段"
         }
       ],
       "price": "人均¥25",
@@ -697,6 +919,13 @@
         "回民小区",
         "大明湖",
         "经十路"
+      ],
+      "cookTime": "20-30分钟",
+      "origin": "济南本土，后风靡全国",
+      "recommendedDishes": [
+        "招牌黄焖鸡",
+        "黄焖排骨",
+        "黄焖鸡米饭"
       ]
     },
     {
@@ -720,7 +949,11 @@
           "bestDish": "四喜丸子、把子肉",
           "wait": "不排队",
           "lat": 36.668,
-          "lng": 117.026
+          "lng": 117.026,
+          "parking": "部分门店有停车位",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "11:30前或13:00后"
         }
       ],
       "price": "人均¥12",
@@ -733,6 +966,13 @@
         "回民小区",
         "大明湖",
         "经十路"
+      ],
+      "cookTime": "40-50分钟",
+      "origin": "鲁菜传统宴席菜",
+      "recommendedDishes": [
+        "四喜丸子",
+        "红烧狮子头",
+        "清蒸丸子"
       ]
     },
     {
@@ -756,7 +996,11 @@
           "bestDish": "锅贴、包子",
           "wait": "周末排队",
           "lat": 36.6692,
-          "lng": 117.0238
+          "lng": 117.0238,
+          "parking": "路边停车位",
+          "wifi": true,
+          "privateRoom": "有，6-8人包间",
+          "bestTime": "工作日11:00前"
         }
       ],
       "price": "人均¥15",
@@ -764,6 +1008,13 @@
       "where": "泉城路（草包包子铺）",
       "district": [
         "泉城路"
+      ],
+      "cookTime": "10-15分钟",
+      "origin": "济南传统面食",
+      "recommendedDishes": [
+        "鲜肉锅贴",
+        "三鲜锅贴",
+        "素菜锅贴"
       ]
     },
     {
@@ -787,7 +1038,11 @@
           "bestDish": "老母鸡汤",
           "wait": "早高峰约10分钟",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "07:00前"
         }
       ],
       "price": "人均¥15",
@@ -795,6 +1050,13 @@
       "where": "老城区早餐店",
       "district": [
         "其他"
+      ],
+      "cookTime": "4-6小时慢炖",
+      "origin": "济南民间早餐传统",
+      "recommendedDishes": [
+        "老母鸡汤",
+        "鸡汤面",
+        "鸡汤泡饭"
       ]
     },
     {
@@ -818,7 +1080,11 @@
           "bestDish": "鸡汤蒲菜",
           "wait": "不排队",
           "lat": 36.677,
-          "lng": 117.02
+          "lng": 117.02,
+          "parking": "大明湖景区停车场",
+          "wifi": true,
+          "privateRoom": "有，4-10人包间",
+          "bestTime": "工作日11:00前"
         }
       ],
       "price": "人均¥65",
@@ -826,6 +1092,13 @@
       "where": "大明湖南门（明湖楼）",
       "district": [
         "大明湖"
+      ],
+      "cookTime": "20-25分钟",
+      "origin": "比奶汤蒲菜更家常的做法",
+      "recommendedDishes": [
+        "鸡汤蒲菜",
+        "鸡汤豆腐",
+        "鸡汤粉丝"
       ]
     },
     {
@@ -849,7 +1122,11 @@
           "bestDish": "烤肉拌面",
           "wait": "午餐高峰约15分钟",
           "lat": 36.663,
-          "lng": 117.018
+          "lng": 117.018,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "11:00前"
         }
       ],
       "price": "人均¥25",
@@ -857,6 +1134,13 @@
       "where": "回民小区",
       "district": [
         "回民小区"
+      ],
+      "cookTime": "15-20分钟",
+      "origin": "济南年轻人新宠",
+      "recommendedDishes": [
+        "烤肉拌面",
+        "烤肉炒饭",
+        "拌面"
       ]
     },
     {
@@ -880,7 +1164,11 @@
           "bestDish": "荷叶粥",
           "wait": "不排队",
           "lat": 36.677,
-          "lng": 117.02
+          "lng": 117.02,
+          "parking": "大明湖景区停车场",
+          "wifi": true,
+          "privateRoom": "有，4-10人包间",
+          "bestTime": "工作日11:00前"
         }
       ],
       "price": "人均¥15",
@@ -888,6 +1176,13 @@
       "where": "大明湖南门（明湖楼）",
       "district": [
         "大明湖"
+      ],
+      "cookTime": "30-40分钟",
+      "origin": "大明湖荷花文化",
+      "recommendedDishes": [
+        "荷叶粥",
+        "荷叶饭",
+        "荷叶鸡"
       ]
     },
     {
@@ -912,7 +1207,11 @@
           "bestDish": "周村烧饼",
           "wait": "一般不排队",
           "lat": 36.6695,
-          "lng": 117.023
+          "lng": 117.023,
+          "parking": "无，建议步行",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "任何时段"
         }
       ],
       "price": "人均¥5",
@@ -920,6 +1219,13 @@
       "where": "芙蓉街、各大超市",
       "district": [
         "芙蓉街"
+      ],
+      "cookTime": "5-8分钟/炉",
+      "origin": "淄博周村，百年历史",
+      "recommendedDishes": [
+        "芝麻烧饼",
+        "甜烧饼",
+        "咸烧饼"
       ]
     },
     {
@@ -944,7 +1250,11 @@
           "bestDish": "五香扒鸡",
           "wait": "不排队",
           "lat": 36.668,
-          "lng": 117.002
+          "lng": 117.002,
+          "parking": "火车站停车场",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "任何时段"
         }
       ],
       "price": "人均¥35",
@@ -952,6 +1262,13 @@
       "where": "济南火车站、各大超市",
       "district": [
         "其他"
+      ],
+      "cookTime": "6-8小时卤制",
+      "origin": "明代德州，300年历史",
+      "recommendedDishes": [
+        "五香扒鸡",
+        "麻辣扒鸡",
+        "原味扒鸡"
       ]
     },
     {
@@ -976,7 +1293,11 @@
           "bestDish": "棉纱包",
           "wait": "不排队",
           "lat": 36.6583,
-          "lng": 117.0148
+          "lng": 117.0148,
+          "parking": "大观园商场停车场",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "早上最新鲜"
         }
       ],
       "price": "人均¥3",
@@ -984,6 +1305,13 @@
       "where": "大观园老式糕点铺",
       "district": [
         "其他"
+      ],
+      "cookTime": "2-3小时",
+      "origin": "济南80年代流行面包",
+      "recommendedDishes": [
+        "棉纱包",
+        "老式蛋糕",
+        "桃酥"
       ]
     },
     {
@@ -1008,7 +1336,11 @@
           "bestDish": "鸡腿饭、把子肉",
           "wait": "中午高峰期约10分钟",
           "lat": 36.668,
-          "lng": 117.026
+          "lng": 117.026,
+          "parking": "部分门店有停车位",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "11:30前或13:00后"
         }
       ],
       "price": "人均¥12",
@@ -1021,6 +1353,13 @@
         "回民小区",
         "大明湖",
         "经十路"
+      ],
+      "cookTime": "10-15分钟",
+      "origin": "超意兴招牌套餐",
+      "recommendedDishes": [
+        "鸡腿饭",
+        "把子肉饭",
+        "四喜丸子饭"
       ]
     },
     {
@@ -1045,7 +1384,11 @@
           "bestDish": "酸醋藕片",
           "wait": "不排队",
           "lat": 36.677,
-          "lng": 117.02
+          "lng": 117.02,
+          "parking": "大明湖景区停车场",
+          "wifi": true,
+          "privateRoom": "有，4-10人包间",
+          "bestTime": "工作日11:00前"
         }
       ],
       "price": "人均¥18",
@@ -1053,6 +1396,13 @@
       "where": "大明湖畔餐馆",
       "district": [
         "大明湖"
+      ],
+      "cookTime": "5-8分钟",
+      "origin": "大明湖莲藕文化",
+      "recommendedDishes": [
+        "酸醋藕片",
+        "凉拌藕片",
+        "糖醋藕片"
       ]
     },
     {
@@ -1077,7 +1427,11 @@
           "bestDish": "猪肉水煎包",
           "wait": "早高峰约5分钟",
           "lat": 36.6695,
-          "lng": 117.025
+          "lng": 117.025,
+          "parking": "无，建议步行",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "07:00-08:00"
         }
       ],
       "price": "人均¥8",
@@ -1085,6 +1439,13 @@
       "where": "泉城路早餐摊",
       "district": [
         "泉城路"
+      ],
+      "cookTime": "10-15分钟",
+      "origin": "济南传统早餐",
+      "recommendedDishes": [
+        "猪肉水煎包",
+        "韭菜鸡蛋煎包",
+        "茴香煎包"
       ]
     },
     {
@@ -1109,7 +1470,11 @@
           "bestDish": "鲜藕汁",
           "wait": "不排队",
           "lat": 36.677,
-          "lng": 117.02
+          "lng": 117.02,
+          "parking": "大明湖景区停车场",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "任何时段"
         }
       ],
       "price": "人均¥15",
@@ -1117,6 +1482,13 @@
       "where": "大明湖畔饮品店",
       "district": [
         "大明湖"
+      ],
+      "cookTime": "5分钟",
+      "origin": "大明湖莲藕饮品",
+      "recommendedDishes": [
+        "鲜藕汁",
+        "蜂蜜藕汁",
+        "桂花藕汁"
       ]
     },
     {
@@ -1141,7 +1513,11 @@
           "bestDish": "黄河鲤鱼汤",
           "wait": "不排队",
           "lat": 36.677,
-          "lng": 117.02
+          "lng": 117.02,
+          "parking": "大明湖景区停车场",
+          "wifi": true,
+          "privateRoom": "有，4-10人包间",
+          "bestTime": "工作日11:00前"
         },
         {
           "name": "燕喜堂",
@@ -1153,7 +1529,11 @@
           "bestDish": "黄河鲤鱼汤",
           "wait": "工作日不排队",
           "lat": 36.662,
-          "lng": 117.001
+          "lng": 117.001,
+          "parking": "路边停车位，较紧张",
+          "wifi": true,
+          "privateRoom": "有，6-10人包间",
+          "bestTime": "工作日11:30前"
         }
       ],
       "price": "人均¥88",
@@ -1162,6 +1542,13 @@
       "district": [
         "泉城路",
         "大明湖"
+      ],
+      "cookTime": "40-60分钟",
+      "origin": "黄河鲤鱼传统食材",
+      "recommendedDishes": [
+        "黄河鲤鱼汤",
+        "清炖鲤鱼",
+        "豆腐鲤鱼汤"
       ]
     },
     {
@@ -1186,7 +1573,11 @@
           "bestDish": "老醋粉汤",
           "wait": "不排队",
           "lat": 36.6582,
-          "lng": 117.0148
+          "lng": 117.0148,
+          "parking": "大观园商场停车场",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "06:00-07:00"
         }
       ],
       "price": "人均¥6",
@@ -1194,6 +1585,13 @@
       "where": "大观园早点铺",
       "district": [
         "其他"
+      ],
+      "cookTime": "15-20分钟",
+      "origin": "济南传统早餐",
+      "recommendedDishes": [
+        "老醋粉汤",
+        "酸辣粉汤",
+        "鸡蛋粉汤"
       ]
     },
     {
@@ -1218,7 +1616,11 @@
           "bestDish": "炒边肉",
           "wait": "不排队",
           "lat": 36.663,
-          "lng": 117.018
+          "lng": 117.018,
+          "parking": "路边停车",
+          "wifi": true,
+          "privateRoom": "无",
+          "bestTime": "11:00前"
         }
       ],
       "price": "人均¥45",
@@ -1226,6 +1628,13 @@
       "where": "回民小区家常菜馆",
       "district": [
         "回民小区"
+      ],
+      "cookTime": "5-8分钟",
+      "origin": "济南回民家常菜",
+      "recommendedDishes": [
+        "炒边肉",
+        "炒牛肉",
+        "洋葱炒肉"
       ]
     },
     {
@@ -1250,7 +1659,11 @@
           "bestDish": "章丘大葱",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "超市停车场",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "任何时段"
         }
       ],
       "price": "人均¥10",
@@ -1258,6 +1671,13 @@
       "where": "各大超市、章丘特产店",
       "district": [
         "其他"
+      ],
+      "cookTime": "即食",
+      "origin": "章丘大葱，中国最著名品种",
+      "recommendedDishes": [
+        "大葱蘸酱",
+        "大葱卷饼",
+        "大葱炒蛋"
       ]
     },
     {
@@ -1282,7 +1702,11 @@
           "bestDish": "鸡蛋灌饼",
           "wait": "早高峰约5分钟",
           "lat": 36.6695,
-          "lng": 117.025
+          "lng": 117.025,
+          "parking": "无，建议步行",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "07:00-08:00"
         }
       ],
       "price": "人均¥6",
@@ -1295,6 +1719,13 @@
         "回民小区",
         "大明湖",
         "经十路"
+      ],
+      "cookTime": "3-5分钟/个",
+      "origin": "源自河南，济南早餐标配",
+      "recommendedDishes": [
+        "鸡蛋灌饼",
+        "加生菜版",
+        "加辣酱版"
       ]
     },
     {
@@ -1319,7 +1750,11 @@
           "bestDish": "腊汁肉夹馍",
           "wait": "周末约10分钟",
           "lat": 36.6695,
-          "lng": 117.023
+          "lng": 117.023,
+          "parking": "无，建议步行",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "工作日人少"
         }
       ],
       "price": "人均¥12",
@@ -1327,6 +1762,13 @@
       "where": "芙蓉街、各大美食街",
       "district": [
         "芙蓉街"
+      ],
+      "cookTime": "5-8分钟",
+      "origin": "源自陕西，济南本地化",
+      "recommendedDishes": [
+        "腊汁肉夹馍",
+        "牛肉夹馍",
+        "鸡肉夹馍"
       ]
     },
     {
@@ -1350,7 +1792,11 @@
           "bestDish": "东坡肉",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "地下停车场，消费满200免费2小时",
+          "wifi": true,
+          "privateRoom": "有，4-12人包间",
+          "bestTime": "工作日11:00前"
         }
       ],
       "price": "人均¥68",
@@ -1358,6 +1804,13 @@
       "where": "泉城路（聚丰德）",
       "district": [
         "泉城路"
+      ],
+      "cookTime": "2-3小时慢炖",
+      "origin": "源自苏轼，鲁菜做法",
+      "recommendedDishes": [
+        "东坡肉",
+        "东坡肘子",
+        "东坡豆腐"
       ]
     },
     {
@@ -1381,7 +1834,11 @@
           "bestDish": "脆皮鸡",
           "wait": "不排队",
           "lat": 36.6695,
-          "lng": 117.025
+          "lng": 117.025,
+          "parking": "附近商场停车场",
+          "wifi": true,
+          "privateRoom": "有，4-8人包间",
+          "bestTime": "工作日不排队"
         }
       ],
       "price": "人均¥78",
@@ -1389,6 +1846,13 @@
       "where": "泉城路（会仙楼）",
       "district": [
         "泉城路"
+      ],
+      "cookTime": "30-40分钟",
+      "origin": "鲁菜传统宴席菜",
+      "recommendedDishes": [
+        "脆皮鸡",
+        "脆皮鸭",
+        "炸鸡翅"
       ]
     },
     {
@@ -1412,7 +1876,11 @@
           "bestDish": "果木烤串",
           "wait": "周末约20分钟",
           "lat": 36.652,
-          "lng": 117.02
+          "lng": 117.02,
+          "parking": "路边停车位",
+          "wifi": true,
+          "privateRoom": "无",
+          "bestTime": "17:30前"
         }
       ],
       "price": "人均¥55",
@@ -1420,6 +1888,13 @@
       "where": "经七路（老金烧烤）",
       "district": [
         "经十路"
+      ],
+      "cookTime": "10-15分钟",
+      "origin": "济南传统果木炭火",
+      "recommendedDishes": [
+        "果木烤串",
+        "烤羊肉",
+        "烤鸡翅"
       ]
     },
     {
@@ -1443,7 +1918,11 @@
           "bestDish": "鸡汤面",
           "wait": "早高峰约10分钟",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "07:00前"
         }
       ],
       "price": "人均¥18",
@@ -1451,6 +1930,13 @@
       "where": "老城区早餐店",
       "district": [
         "其他"
+      ],
+      "cookTime": "15-20分钟",
+      "origin": "济南冬季早餐",
+      "recommendedDishes": [
+        "鸡汤面",
+        "鸡汤馄饨",
+        "鸡汤米线"
       ]
     },
     {
@@ -1482,6 +1968,13 @@
       "where": "回民小区",
       "district": [
         "回民小区"
+      ],
+      "cookTime": "15-20分钟",
+      "origin": "近十年从南方传入",
+      "recommendedDishes": [
+        "麻辣小龙虾",
+        "蒜蓉小龙虾",
+        "十三香小龙虾"
       ]
     },
     {
@@ -1505,7 +1998,11 @@
           "bestDish": "豆腐皮卷",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.023
+          "lng": 117.023,
+          "parking": "无，建议步行",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "工作日人少"
         }
       ],
       "price": "人均¥5",
@@ -1513,6 +2010,13 @@
       "where": "芙蓉街",
       "district": [
         "芙蓉街"
+      ],
+      "cookTime": "即食",
+      "origin": "济南街头小吃",
+      "recommendedDishes": [
+        "豆腐皮卷",
+        "豆腐皮卷大葱",
+        "豆腐皮卷黄瓜"
       ]
     },
     {
@@ -1536,7 +2040,11 @@
           "bestDish": "红烧肘子",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "地下停车场，消费满200免费2小时",
+          "wifi": true,
+          "privateRoom": "有，4-12人包间",
+          "bestTime": "工作日11:00前"
         }
       ],
       "price": "人均¥88",
@@ -1544,6 +2052,13 @@
       "where": "泉城路（聚丰德）",
       "district": [
         "泉城路"
+      ],
+      "cookTime": "2-3小时",
+      "origin": "鲁菜传统硬菜",
+      "recommendedDishes": [
+        "红烧肘子",
+        "红烧排骨",
+        "红烧肉"
       ]
     },
     {
@@ -1567,7 +2082,11 @@
           "bestDish": "清蒸鲈鱼",
           "wait": "不排队",
           "lat": 36.677,
-          "lng": 117.02
+          "lng": 117.02,
+          "parking": "大明湖景区停车场",
+          "wifi": true,
+          "privateRoom": "有，4-10人包间",
+          "bestTime": "工作日11:00前"
         }
       ],
       "price": "人均¥75",
@@ -1575,6 +2094,13 @@
       "where": "大明湖南门（明湖楼）",
       "district": [
         "大明湖"
+      ],
+      "cookTime": "12-15分钟",
+      "origin": "鲁菜清蒸代表",
+      "recommendedDishes": [
+        "清蒸鲈鱼",
+        "清蒸多宝鱼",
+        "清蒸鲤鱼"
       ]
     },
     {
@@ -1598,7 +2124,11 @@
           "bestDish": "卤牛肉、卤鸡爪",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "任何时段"
         }
       ],
       "price": "人均¥25",
@@ -1606,6 +2136,14 @@
       "where": "老城区",
       "district": [
         "其他"
+      ],
+      "cookTime": "2-4小时卤制",
+      "origin": "济南传统卤味",
+      "recommendedDishes": [
+        "卤牛肉",
+        "卤鸡爪",
+        "卤鸭脖",
+        "卤豆干"
       ]
     },
     {
@@ -1629,7 +2167,11 @@
           "bestDish": "黑芝麻汤圆",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "任何时段"
         }
       ],
       "price": "人均¥10",
@@ -1637,6 +2179,13 @@
       "where": "泉城路",
       "district": [
         "泉城路"
+      ],
+      "cookTime": "10-15分钟",
+      "origin": "元宵节传统",
+      "recommendedDishes": [
+        "黑芝麻汤圆",
+        "花生汤圆",
+        "豆沙汤圆"
       ]
     },
     {
@@ -1660,7 +2209,11 @@
           "bestDish": "红枣粽",
           "wait": "端午节排队",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "任何时段"
         }
       ],
       "price": "人均¥8",
@@ -1668,6 +2221,13 @@
       "where": "泉城路老字号",
       "district": [
         "泉城路"
+      ],
+      "cookTime": "2-3小时",
+      "origin": "端午节传统",
+      "recommendedDishes": [
+        "红枣粽",
+        "肉粽",
+        "豆沙粽"
       ]
     },
     {
@@ -1691,7 +2251,11 @@
           "bestDish": "面筋汤",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "06:00-07:00"
         }
       ],
       "price": "人均¥5",
@@ -1699,6 +2263,13 @@
       "where": "老城区早餐店",
       "district": [
         "其他"
+      ],
+      "cookTime": "15-20分钟",
+      "origin": "济南特色早餐",
+      "recommendedDishes": [
+        "面筋汤",
+        "鸡蛋面筋汤",
+        "面筋泡"
       ]
     },
     {
@@ -1722,7 +2293,11 @@
           "bestDish": "醋溜白菜",
           "wait": "不排队",
           "lat": 36.668,
-          "lng": 117.026
+          "lng": 117.026,
+          "parking": "部分门店有停车位",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "11:30前或13:00后"
         }
       ],
       "price": "人均¥12",
@@ -1735,6 +2310,13 @@
         "回民小区",
         "大明湖",
         "经十路"
+      ],
+      "cookTime": "3-5分钟",
+      "origin": "鲁菜家常",
+      "recommendedDishes": [
+        "醋溜白菜",
+        "白菜炖豆腐",
+        "白菜炖粉条"
       ]
     },
     {
@@ -1758,7 +2340,11 @@
           "bestDish": "酸辣土豆丝",
           "wait": "不排队",
           "lat": 36.668,
-          "lng": 117.026
+          "lng": 117.026,
+          "parking": "部分门店有停车位",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "11:30前或13:00后"
         }
       ],
       "price": "人均¥10",
@@ -1771,6 +2357,13 @@
         "回民小区",
         "大明湖",
         "经十路"
+      ],
+      "cookTime": "5-8分钟",
+      "origin": "鲁菜家常",
+      "recommendedDishes": [
+        "酸辣土豆丝",
+        "醋溜土豆丝",
+        "炝拌土豆丝"
       ]
     },
     {
@@ -1794,7 +2387,11 @@
           "bestDish": "番茄炒蛋",
           "wait": "不排队",
           "lat": 36.668,
-          "lng": 117.026
+          "lng": 117.026,
+          "parking": "部分门店有停车位",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "11:30前或13:00后"
         }
       ],
       "price": "人均¥10",
@@ -1807,6 +2404,13 @@
         "回民小区",
         "大明湖",
         "经十路"
+      ],
+      "cookTime": "5-8分钟",
+      "origin": "国民家常菜",
+      "recommendedDishes": [
+        "番茄炒蛋",
+        "番茄蛋汤",
+        "番茄炖牛腩"
       ]
     },
     {
@@ -1830,7 +2434,11 @@
           "bestDish": "把子肉盖饭",
           "wait": "中午约10分钟",
           "lat": 36.668,
-          "lng": 117.026
+          "lng": 117.026,
+          "parking": "部分门店有停车位",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "11:30前或13:00后"
         }
       ],
       "price": "人均¥18",
@@ -1843,6 +2451,13 @@
         "回民小区",
         "大明湖",
         "经十路"
+      ],
+      "cookTime": "10-15分钟",
+      "origin": "超意兴招牌",
+      "recommendedDishes": [
+        "把子肉盖饭",
+        "四喜丸子盖饭",
+        "鸡腿盖饭"
       ]
     },
     {
@@ -1866,7 +2481,11 @@
           "bestDish": "酱鸡腿",
           "wait": "不排队",
           "lat": 36.668,
-          "lng": 117.026
+          "lng": 117.026,
+          "parking": "部分门店有停车位",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "11:30前或13:00后"
         }
       ],
       "price": "人均¥15",
@@ -1879,6 +2498,13 @@
         "回民小区",
         "大明湖",
         "经十路"
+      ],
+      "cookTime": "30-40分钟",
+      "origin": "鲁菜酱卤",
+      "recommendedDishes": [
+        "酱鸡腿",
+        "酱鸡翅",
+        "酱鸡爪"
       ]
     },
     {
@@ -1902,7 +2528,11 @@
           "bestDish": "泉水豆腐",
           "wait": "不排队",
           "lat": 36.677,
-          "lng": 117.02
+          "lng": 117.02,
+          "parking": "大明湖景区停车场",
+          "wifi": true,
+          "privateRoom": "有，4-10人包间",
+          "bestTime": "工作日11:00前"
         }
       ],
       "price": "人均¥35",
@@ -1910,6 +2540,13 @@
       "where": "大明湖南门（明湖楼）",
       "district": [
         "大明湖"
+      ],
+      "cookTime": "即食/10分钟",
+      "origin": "济南泉水豆腐",
+      "recommendedDishes": [
+        "泉水豆腐",
+        "凉拌豆腐",
+        "红烧豆腐"
       ]
     },
     {
@@ -1933,7 +2570,11 @@
           "bestDish": "水煎包",
           "wait": "早高峰约10分钟",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "06:00-07:00"
         }
       ],
       "price": "人均¥8",
@@ -1941,6 +2582,13 @@
       "where": "老城区",
       "district": [
         "其他"
+      ],
+      "cookTime": "10-15分钟",
+      "origin": "济南早餐传统",
+      "recommendedDishes": [
+        "猪肉水煎包",
+        "韭菜煎包",
+        "茴香煎包"
       ]
     },
     {
@@ -1964,7 +2612,11 @@
           "bestDish": "驴打滚",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.023
+          "lng": 117.023,
+          "parking": "无，建议步行",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "工作日人少"
         }
       ],
       "price": "人均¥8",
@@ -1972,6 +2624,13 @@
       "where": "芙蓉街",
       "district": [
         "芙蓉街"
+      ],
+      "cookTime": "即食",
+      "origin": "北方传统甜品",
+      "recommendedDishes": [
+        "驴打滚",
+        "豆沙卷",
+        "糯米糍"
       ]
     },
     {
@@ -1995,7 +2654,11 @@
           "bestDish": "糖葫芦",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "无，建议步行",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "任何时段"
         }
       ],
       "price": "人均¥5",
@@ -2003,6 +2666,13 @@
       "where": "泉城路",
       "district": [
         "泉城路"
+      ],
+      "cookTime": "即食",
+      "origin": "北方冬季传统小吃",
+      "recommendedDishes": [
+        "山楂糖葫芦",
+        "草莓糖葫芦",
+        "橘子糖葫芦"
       ]
     },
     {
@@ -2026,7 +2696,11 @@
           "bestDish": "爆浆鸡排",
           "wait": "排队约5分钟",
           "lat": 36.669,
-          "lng": 117.023
+          "lng": 117.023,
+          "parking": "无，建议步行",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "工作日人少"
         }
       ],
       "price": "人均¥15",
@@ -2034,6 +2708,13 @@
       "where": "芙蓉街",
       "district": [
         "芙蓉街"
+      ],
+      "cookTime": "5-8分钟",
+      "origin": "近年网红小吃",
+      "recommendedDishes": [
+        "爆浆鸡排",
+        "芝士鸡排",
+        "香辣鸡排"
       ]
     },
     {
@@ -2057,7 +2738,11 @@
           "bestDish": "蒸碗",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "地下停车场，消费满200免费2小时",
+          "wifi": true,
+          "privateRoom": "有，4-12人包间",
+          "bestTime": "工作日11:00前"
         }
       ],
       "price": "人均¥88",
@@ -2065,6 +2750,14 @@
       "where": "泉城路（聚丰德）",
       "district": [
         "泉城路"
+      ],
+      "cookTime": "2-3小时",
+      "origin": "济南传统宴席",
+      "recommendedDishes": [
+        "蒸鸡",
+        "蒸鱼",
+        "蒸肉",
+        "蒸碗套餐"
       ]
     },
     {
@@ -2088,7 +2781,11 @@
           "bestDish": "肉夹馍",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.023
+          "lng": 117.023,
+          "parking": "无，建议步行",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "工作日人少"
         }
       ],
       "price": "人均¥10",
@@ -2096,6 +2793,13 @@
       "where": "芙蓉街",
       "district": [
         "芙蓉街"
+      ],
+      "cookTime": "5-8分钟",
+      "origin": "西安传入，济南改良",
+      "recommendedDishes": [
+        "肉夹馍",
+        "牛肉夹馍",
+        "鸡肉夹馍"
       ]
     },
     {
@@ -2116,7 +2820,11 @@
           "bestDish": "黄焖排骨",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "任何时段"
         }
       ],
       "price": "人均¥30",
@@ -2129,6 +2837,13 @@
         "回民小区",
         "大明湖",
         "经十路"
+      ],
+      "cookTime": "25-30分钟",
+      "origin": "黄焖鸡变体",
+      "recommendedDishes": [
+        "黄焖排骨",
+        "黄焖鸡",
+        "黄焖鸡腿"
       ]
     },
     {
@@ -2149,7 +2864,11 @@
           "bestDish": "白斩鸡",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "地下停车场，消费满200免费2小时",
+          "wifi": true,
+          "privateRoom": "有，4-12人包间",
+          "bestTime": "工作日11:00前"
         }
       ],
       "price": "人均¥58",
@@ -2157,6 +2876,13 @@
       "where": "泉城路（聚丰德）",
       "district": [
         "泉城路"
+      ],
+      "cookTime": "30-40分钟",
+      "origin": "鲁菜凉菜",
+      "recommendedDishes": [
+        "白斩鸡",
+        "白切鸡",
+        "口水鸡"
       ]
     },
     {
@@ -2177,7 +2903,11 @@
           "bestDish": "猪肉饼",
           "wait": "早高峰约5分钟",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "早上最新鲜"
         }
       ],
       "price": "人均¥10",
@@ -2185,6 +2915,13 @@
       "where": "老城区",
       "district": [
         "其他"
+      ],
+      "cookTime": "8-10分钟",
+      "origin": "济南传统面食",
+      "recommendedDishes": [
+        "猪肉饼",
+        "牛肉饼",
+        "韭菜饼"
       ]
     },
     {
@@ -2205,7 +2942,11 @@
           "bestDish": "小米粥",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "07:00-08:00"
         }
       ],
       "price": "人均¥8",
@@ -2218,6 +2959,13 @@
         "回民小区",
         "大明湖",
         "经十路"
+      ],
+      "cookTime": "30-60分钟",
+      "origin": "济南早餐养生",
+      "recommendedDishes": [
+        "小米粥",
+        "八宝粥",
+        "皮蛋瘦肉粥"
       ]
     },
     {
@@ -2238,7 +2986,11 @@
           "bestDish": "鲜肉馄饨",
           "wait": "早高峰约5分钟",
           "lat": 36.669,
-          "lng": 117.024
+          "lng": 117.024,
+          "parking": "路边停车",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "07:00-08:00"
         }
       ],
       "price": "人均¥10",
@@ -2246,6 +2998,13 @@
       "where": "老城区",
       "district": [
         "其他"
+      ],
+      "cookTime": "10-15分钟",
+      "origin": "济南冬季早餐",
+      "recommendedDishes": [
+        "鲜肉馄饨",
+        "虾仁馄饨",
+        "荠菜馄饨"
       ]
     },
     {
@@ -2266,7 +3025,11 @@
           "bestDish": "串串香",
           "wait": "周末约15分钟",
           "lat": 36.658,
-          "lng": 117.037
+          "lng": 117.037,
+          "parking": "宽厚里地下停车场",
+          "wifi": true,
+          "privateRoom": "无",
+          "bestTime": "17:30前"
         }
       ],
       "price": "人均¥40",
@@ -2274,6 +3037,13 @@
       "where": "宽厚里",
       "district": [
         "宽厚里"
+      ],
+      "cookTime": "5-10分钟",
+      "origin": "四川传入，济南本地化",
+      "recommendedDishes": [
+        "串串香",
+        "麻辣串",
+        "清汤串"
       ]
     },
     {
@@ -2294,7 +3064,11 @@
           "bestDish": "麻辣烫",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.023
+          "lng": 117.023,
+          "parking": "无，建议步行",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "工作日人少"
         }
       ],
       "price": "人均¥25",
@@ -2302,6 +3076,13 @@
       "where": "芙蓉街",
       "district": [
         "芙蓉街"
+      ],
+      "cookTime": "10-15分钟",
+      "origin": "全国流行，济南偏麻",
+      "recommendedDishes": [
+        "麻辣烫",
+        "清汤麻辣烫",
+        "番茄麻辣烫"
       ]
     },
     {
@@ -2322,7 +3103,11 @@
           "bestDish": "扎啤",
           "wait": "不排队",
           "lat": 36.663,
-          "lng": 117.018
+          "lng": 117.018,
+          "parking": "路边停车，较紧张",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "18:00前到"
         }
       ],
       "price": "人均¥15",
@@ -2330,6 +3115,13 @@
       "where": "回民小区",
       "district": [
         "回民小区"
+      ],
+      "cookTime": "即饮",
+      "origin": "济南夏日文化",
+      "recommendedDishes": [
+        "青岛扎啤",
+        "趵突泉扎啤",
+        "精酿扎啤"
       ]
     },
     {
@@ -2350,7 +3142,11 @@
           "bestDish": "酸梅汤",
           "wait": "不排队",
           "lat": 36.6636,
-          "lng": 116.9975
+          "lng": 116.9975,
+          "parking": "趵突泉景区停车场",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "任何时段"
         }
       ],
       "price": "人均¥8",
@@ -2358,6 +3154,13 @@
       "where": "各景区",
       "district": [
         "泉城路"
+      ],
+      "cookTime": "即饮",
+      "origin": "传统解暑饮品",
+      "recommendedDishes": [
+        "酸梅汤",
+        "冰镇酸梅汤",
+        "桂花酸梅汤"
       ]
     },
     {
@@ -2378,7 +3181,11 @@
           "bestDish": "糯米糍",
           "wait": "不排队",
           "lat": 36.669,
-          "lng": 117.023
+          "lng": 117.023,
+          "parking": "无，建议步行",
+          "wifi": false,
+          "privateRoom": "无",
+          "bestTime": "工作日人少"
         }
       ],
       "price": "人均¥5",
@@ -2386,6 +3193,13 @@
       "where": "芙蓉街",
       "district": [
         "芙蓉街"
+      ],
+      "cookTime": "即食",
+      "origin": "街头甜品",
+      "recommendedDishes": [
+        "糯米糍",
+        "芒果糯米糍",
+        "抹茶糯米糍"
       ]
     }
   ]

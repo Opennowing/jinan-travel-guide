@@ -309,4 +309,67 @@ export function initShopifyAnimations() {
   initSmoothScroll();
   initPageLoadSequence();
   initRippleEnhanced();
+  initSectionFade();
+  initStaggerChildren();
+  initSmoothFilter();
+}
+
+// ─── 13. SECTION FADE-IN ───
+// Smooth section entrance as user scrolls
+export function initSectionFade() {
+  const sections = document.querySelectorAll('.section, .section-alt');
+  if (!sections.length) return;
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+      io.unobserve(entry.target);
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -60px 0px' });
+
+  sections.forEach(section => {
+    section.style.opacity = '0';
+    section.style.transform = 'translateY(20px)';
+    section.style.transition = 'opacity 0.8s cubic-bezier(.23,1,.32,1), transform 0.8s cubic-bezier(.23,1,.32,1)';
+    io.observe(section);
+  });
+}
+
+// ─── 14. STAGGER CHILDREN ───
+// Auto-stagger direct children of elements with .stagger-parent class
+export function initStaggerChildren() {
+  const parents = document.querySelectorAll('.stagger-parent');
+  parents.forEach(parent => {
+    const children = parent.children;
+    Array.from(children).forEach((child, i) => {
+      child.style.transitionDelay = `${i * 60}ms`;
+    });
+  });
+}
+
+// ─── 15. SMOOTH FILTER ANIMATION ───
+// Animate card grid when filters change (Shopify collection filtering)
+export function initSmoothFilter() {
+  const grids = document.querySelectorAll('.card-grid');
+  grids.forEach(grid => {
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach(mutation => {
+        if (mutation.type === 'childList') {
+          const cards = grid.querySelectorAll('.card');
+          cards.forEach((card, i) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(16px) scale(0.96)';
+            setTimeout(() => {
+              card.style.transition = 'opacity 0.35s cubic-bezier(.23,1,.32,1), transform 0.35s cubic-bezier(.23,1,.32,1)';
+              card.style.opacity = '1';
+              card.style.transform = '';
+            }, i * 40);
+          });
+        }
+      });
+    });
+    observer.observe(grid, { childList: true });
+  });
 }

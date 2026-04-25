@@ -461,7 +461,7 @@ html {
 <div class="scroll-progress"></div>
 
 <!-- ─── SECTION NAV (floating dots) ─── -->
-<nav class="section-nav" id="sectionNav" aria-label="页面章节导航">
+<nav class="section-nav reveal" id="sectionNav" aria-label="页面章节导航">
   <a href="#history" data-label="历史长河" role="button" tabindex="0"></a>
   <a href="#springs" data-label="泉水文化" role="button" tabindex="0"></a>
   <a href="#springs-deep" data-label="泉水深度" role="button" tabindex="0"></a>
@@ -1332,6 +1332,7 @@ html {
 import { initAll } from '/src/components/shared.js';
 import { initPWA } from '/src/components/pwa.js';
 import { initSocialFeatures } from '/src/components/social.js';
+import { initShopifyAnimations } from '/src/components/shopify-animations.js';
 
     // Image fallback: generate colorful SVG by name
     window.imgFallback = function(name) {

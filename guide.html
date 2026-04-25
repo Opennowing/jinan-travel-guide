@@ -367,17 +367,18 @@
 
       <!-- ═══ TAB: 交通 ═══ -->
       <div class="tab-panel active" id="panel-transport">
+        <div class="section-divider reveal" aria-hidden="true">◈</div>
         <div class="guide-section">
           <h3>🛂 签证与入境</h3>
-          <div class="info-card">
+          <div class="info-card reveal">
             <h4>144小时过境免签</h4>
             <p>自2019年起，济南遥墙机场口岸实施144小时过境免签政策。持有效国际旅行证件和144小时内确定日期及座位的联程客票，可免签停留6天。适用54个国家（含美/英/日/韩/澳等）。需从济南遥墙机场入境和出境。</p>
           </div>
-          <div class="info-card">
+          <div class="info-card reveal">
             <h4>泉城通交通卡</h4>
             <p>济南公共交通IC卡"泉城通"，可在地铁、公交、出租车使用。在地铁站自助机购买，押金10元，支持支付宝/微信充值。也可直接用支付宝/微信乘车码扫码乘车，无需实体卡。</p>
           </div>
-          <div class="info-card">
+          <div class="info-card reveal">
             <h4>旅游年卡</h4>
             <p>济南公园年卡¥200/年，包含趵突泉、千佛山、大明湖超然楼等主要收费景点。在景区窗口或微信小程序办理。如果计划去3个以上收费景点，年卡更划算。</p>
           </div>
@@ -395,21 +396,21 @@
           </table>
 
           <h3>🚇 市内交通</h3>
-          <div class="info-card">
+          <div class="info-card reveal">
             <h4>地铁（推荐）</h4>
             <p>目前开通 1/2/3 号线，覆盖主要景点。票价 ¥2-7，运营时间 06:00-22:00。<br>
             <strong>1号线</strong>：济南西站→大明湖→泉城路<br>
             <strong>2号线</strong>：趵突泉→黑虎泉→芙蓉街<br>
             <strong>3号线</strong>：济南东站→奥体中心</p>
           </div>
-          <div class="info-card">
+          <div class="info-card reveal">
             <h4>公交</h4>
             <p>线路密集，票价 ¥1-2（空调车 ¥2）。推荐线路：<br>
             <strong>K51路</strong>：趵突泉→千佛山→省博物馆<br>
             <strong>K55路</strong>：泉城路→洪家楼<br>
             支持支付宝/微信乘车码</p>
           </div>
-          <div class="info-card">
+          <div class="info-card reveal">
             <h4>打车</h4>
             <p>起步价 ¥12（3km），超出 ¥2/km。市区内大部分景点打车 ¥15-30。<br>
             高峰期/雨天建议提前叫车。滴滴、高德打车均可。</p>
@@ -557,7 +558,7 @@
           </div>
 
           <h3>📞 紧急联系</h3>
-          <div class="emergency-grid">
+          <div class="emergency-grid reveal">
             <div class="emergency-card"><div class="icon">🚨</div><h4>报警</h4><div class="number">110</div><div class="note">公安报警电话</div></div>
             <div class="emergency-card"><div class="icon">🚑</div><h4>急救</h4><div class="number">120</div><div class="note">医疗急救电话</div></div>
             <div class="emergency-card"><div class="icon">🔥</div><h4>火警</h4><div class="number">119</div><div class="note">消防报警电话</div></div>
@@ -799,8 +800,10 @@
     };
 
     import { initSocialFeatures } from '/src/components/social.js';
+    import { initShopifyAnimations } from '/src/components/shopify-animations.js';
     initPWA();
     initAll();
+    initShopifyAnimations();
     initSocialFeatures();
 
     // ── Tab switching ──

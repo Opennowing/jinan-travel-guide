@@ -360,6 +360,7 @@
   </section>
 
   <!-- Route Tabs -->
+  <div class="section-divider reveal" aria-hidden="true">◈</div>
   <section class="section" aria-label="行程路线">
     <div class="section-inner">
       <div class="section-header reveal">
@@ -380,6 +381,7 @@
   </section>
 
   <!-- Seasonal Recommendations -->
+  <div class="section-divider reveal" aria-hidden="true">◈</div>
   <section class="section section-alt" aria-label="当季推荐">
     <div class="section-inner">
       <div class="section-header reveal">
@@ -388,16 +390,17 @@
         <p>不同季节来济南，有不同玩法</p>
       </div>
       <div class="season-tabs reveal" id="seasonTabs" role="tablist" aria-label="季节选择">
-        <button class="season-tab active" data-season="spring">🌸 春季</button>
-        <button class="season-tab" data-season="summer">☀️ 夏季</button>
-        <button class="season-tab" data-season="autumn">🍂 秋季</button>
-        <button class="season-tab" data-season="winter">❄️ 冬季</button>
+        <button class="season-tab active reveal" data-season="spring">🌸 春季</button>
+        <button class="season-tab reveal" data-season="summer">☀️ 夏季</button>
+        <button class="season-tab reveal" data-season="autumn">🍂 秋季</button>
+        <button class="season-tab reveal" data-season="winter">❄️ 冬季</button>
       </div>
       <div id="seasonContent"></div>
     </div>
   </section>
 
   <!-- My Trip -->
+  <div class="section-divider reveal" aria-hidden="true">◈</div>
   <section class="section" aria-label="我的行程">
     <div class="section-inner">
       <div class="section-header reveal">
@@ -424,6 +427,7 @@
   </section>
 
   <!-- Expense Tracker -->
+  <div class="section-divider reveal" aria-hidden="true">◈</div>
   <section class="section section-alt" id="expenseTracker" aria-label="花费追踪">
     <div class="section-inner">
       <div class="section-header reveal">
@@ -437,6 +441,7 @@
   </section>
 
   <!-- Weather Forecast -->
+  <div class="section-divider reveal" aria-hidden="true">◈</div>
   <section class="section" id="weatherSection" aria-label="行程天气">
     <div class="section-inner">
       <div class="section-header reveal">
@@ -491,8 +496,10 @@
     import { initPWA } from '/src/components/pwa.js';
     import { initSocialFeatures } from '/src/components/social.js';
     import { TripPlanner, Favorites, AccessibilityTools, OfflineManager } from '/src/components/interactive.js';
+    import { initShopifyAnimations } from '/src/components/shopify-animations.js';
     initPWA();
     initAll();
+    initShopifyAnimations();
     initSocialFeatures();
 
     // ── Interactive: Trip Planner + A11y ──

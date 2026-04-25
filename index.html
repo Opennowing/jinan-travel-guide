@@ -378,6 +378,7 @@
   </section>
 
   <!-- ═══ 🔥 当季必玩（合并：当季推荐 + 精选景点）═══ -->
+  <div class="section-divider reveal" aria-hidden="true">◈</div>
   <section class="section" aria-label="当季必玩">
     <div class="section-inner">
       <div class="section-header reveal">
@@ -407,6 +408,7 @@
   </section>
 
   <!-- ═══ 🗺️ 说走就走（精选路线）═══ -->
+  <div class="section-divider reveal" aria-hidden="true">◈</div>
   <section class="section" aria-label="说走就走">
     <div class="section-inner">
       <div class="section-header reveal">
@@ -477,7 +479,9 @@
     import { initPWA, initA2HS } from '/src/components/pwa.js';
     import { initSocialFeatures } from '/src/components/social.js';
     import { SmartSearch, Favorites, AccessibilityTools, WeatherWidget, OfflineManager } from '/src/components/interactive.js';
+    import { initShopifyAnimations } from '/src/components/shopify-animations.js';
     initAll();
+    initShopifyAnimations();
     initPWA();
     initSocialFeatures();
     initA2HS();

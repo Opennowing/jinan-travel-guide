@@ -251,17 +251,17 @@
   <section class="section" style="padding-top:0;padding-bottom:0" aria-label="景点筛选">
     <div class="section-inner">
       <div class="filter-container">
-        <div class="filter-section">
+        <div class="filter-section reveal">
           <div class="filter-group">
             <span class="filter-group-label">📌 分类</span>
             <div class="tabs" id="catFilters" role="group" aria-label="景点分类筛选">
-              <button class="filter-btn active" data-cat="all">全部</button>
-              <button class="filter-btn" data-cat="spring">⛲ 泉水</button>
-              <button class="filter-btn" data-cat="nature">🌿 自然</button>
-              <button class="filter-btn" data-cat="history">🏛️ 历史</button>
-              <button class="filter-btn" data-cat="culture">📚 文化</button>
-              <button class="filter-btn" data-cat="food">🍜 美食街</button>
-              <button class="filter-btn" data-cat="family">👨👩👧 亲子</button>
+              <button class="filter-btn active reveal" data-cat="all">全部</button>
+              <button class="filter-btn reveal" data-cat="spring">⛲ 泉水</button>
+              <button class="filter-btn reveal" data-cat="nature">🌿 自然</button>
+              <button class="filter-btn reveal" data-cat="history">🏛️ 历史</button>
+              <button class="filter-btn reveal" data-cat="culture">📚 文化</button>
+              <button class="filter-btn reveal" data-cat="food">🍜 美食街</button>
+              <button class="filter-btn reveal" data-cat="family">👨👩👧 亲子</button>
             </div>
           </div>
           <div class="sort-wrap">
@@ -310,6 +310,11 @@
 
   <section class="section" style="padding-top:0" aria-label="景点列表">
     <div class="section-inner">
+      <div class="section-header reveal" style="margin-bottom:24px">
+        <div class="eyebrow">全部景点</div>
+        <h2>探索泉城</h2>
+        <p>精选80+景点，发现济南之美</p>
+      </div>
       <div class="card-grid" id="spotGrid"></div>
       <div class="empty-state" id="emptyState" style="display:none">
         <div class="emoji">🔍</div>
@@ -318,6 +323,7 @@
     </div>
   </section>
 
+  <div class="section-divider reveal" aria-hidden="true">◈</div>
   <section class="section" aria-label="景点地图">
     <div class="section-inner">
       <div class="section-header reveal">
@@ -340,7 +346,7 @@
   </section>
 
   <!-- ═══ 打卡地图 ═══ -->
-  <section class="section section-alt" id="checkin-map-section" aria-label="打卡地图">
+  <section class="section section-alt reveal" id="checkin-map-section" aria-label="打卡地图">
   </section>
 
   </main>
@@ -382,6 +388,7 @@
     import { initAll, stars, openModal, closeModal } from '/src/components/shared.js';
     import { initPWA } from '/src/components/pwa.js';
     import { Favorites, CompareTool, SmartSearch, AccessibilityTools, OfflineManager } from '/src/components/interactive.js';
+    import { initShopifyAnimations } from '/src/components/shopify-animations.js';
 
     // ── Interactive: Favorites + Compare + A11y ──
     const favs = new Favorites();
@@ -814,6 +821,7 @@
     });
 
     initAll();
+    initShopifyAnimations();
     initSocialFeatures();
     loadSpots().then(() => {
       // Handle URL params: ?id=xxx or ?q=xxx

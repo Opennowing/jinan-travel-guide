@@ -100,7 +100,7 @@ body{animation:pageFadeIn .5s var(--ease) both}
 
 /* ─── CARDS ─── */
 .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
-.card{background:var(--card-bg);border-radius:var(--radius-lg);overflow:hidden;transition:all .35s var(--ease);cursor:pointer;border:none;position:relative;will-change:transform;box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.card{background:var(--card-bg);border-radius:var(--radius-lg);overflow:hidden;transition:all .35s var(--ease);cursor:pointer;border:none;position:relative;will-change:transform;box-shadow:0 4px 20px rgba(0,0,0,.06);display:flex;flex-direction:column}
 .card:hover{transform:translateY(-8px) scale(1.01);box-shadow:0 16px 48px rgba(0,0,0,.12)}
 .card-img{position:relative;overflow:hidden;aspect-ratio:16/10;background:var(--bg2)}
 .card-img::before{content:'';position:absolute;inset:0;background:var(--bg2);z-index:1;opacity:1;transition:opacity .4s}
@@ -533,6 +533,8 @@ h4, .h4 { font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 700; line-height: 1.
   position: relative;
   will-change: transform;
   box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.03);
+  display: flex;
+  flex-direction: column;
 }
 .card:hover {
   transform: translateY(-10px) scale(1.015);
@@ -569,6 +571,9 @@ h4, .h4 { font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 700; line-height: 1.
 .card-body {
   padding: 20px 24px 24px;
   position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 .card-body::before {
   content: '';

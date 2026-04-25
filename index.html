@@ -56,31 +56,24 @@
     @keyframes heroGlow1{0%{opacity:.5;transform:translate(0,0)}100%{opacity:1;transform:translate(-30px,20px)}}
     @keyframes heroGlow2{0%{opacity:.4;transform:translate(0,0)}100%{opacity:.9;transform:translate(20px,-15px)}}
 
-    /* ── Fountain Canvas ── */
-    .fountain-canvas{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.35}
+    /* ── Fountain Canvas (bottom only) ── */
+    .fountain-canvas{position:absolute;bottom:0;left:0;right:0;height:40%;z-index:1;pointer-events:none;opacity:.25}
 
     /* ── Water Ripples ── */
-    .water-ripple{position:absolute;border-radius:50%;border:2px solid rgba(42,157,143,.3);pointer-events:none;animation:rippleExpand 5s ease-out infinite;opacity:.2}
-    @keyframes rippleExpand{0%{transform:scale(0);opacity:.9}100%{transform:scale(3.5);opacity:0}}
+    .water-ripple{position:absolute;border-radius:50%;border:1.5px solid rgba(42,157,143,.2);pointer-events:none;animation:rippleExpand 6s ease-out infinite;opacity:.15}
+    @keyframes rippleExpand{0%{transform:scale(0);opacity:.6}100%{transform:scale(3);opacity:0}}
 
-    /* ── Central 泉 Character ── */
-    .fountain-char-wrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1;pointer-events:none;opacity:.2}
-    .fountain-char{font-size:clamp(8rem,22vw,16rem);font-weight:900;font-family:var(--serif);background:linear-gradient(180deg,rgba(42,157,143,.25) 0%,rgba(42,157,143,.06) 60%,transparent 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 60px rgba(42,157,143,.15));animation:qucharPulse 6s ease-in-out infinite;user-select:none;line-height:1}
-    @keyframes qucharPulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.45;transform:scale(1.02)}}
-    .fountain-char-glow{position:absolute;inset:-40%;background:radial-gradient(circle,rgba(42,157,143,.18) 0%,transparent 65%);animation:qucharGlow 5s ease-in-out infinite alternate}
-    @keyframes qucharGlow{0%{opacity:.3;transform:scale(.9)}100%{opacity:.7;transform:scale(1.1)}}
-
-    /* ── Water Columns ── */
-    .water-column{position:absolute;bottom:0;width:4px;background:linear-gradient(to top,rgba(42,157,143,.4),rgba(42,157,143,.15),transparent);border-radius:3px;transform-origin:bottom center;animation:columnRise 3s ease-out infinite;pointer-events:none}
-    @keyframes columnRise{0%{height:0;opacity:.8}40%{opacity:1}100%{height:var(--col-h,55vh);opacity:0}}
+    /* ── Water Columns (shorter, bottom only) ── */
+    .water-column{position:absolute;bottom:0;width:3px;background:linear-gradient(to top,rgba(42,157,143,.3),rgba(42,157,143,.1),transparent);border-radius:2px;transform-origin:bottom center;animation:columnRise 3.5s ease-out infinite;pointer-events:none}
+    @keyframes columnRise{0%{height:0;opacity:.6}40%{opacity:.8}100%{height:var(--col-h,25vh);opacity:0}}
 
     /* ── Water Particles ── */
-    .water-particle{position:absolute;width:var(--p-size,4px);height:var(--p-size,4px);border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.8),rgba(42,157,143,.4));pointer-events:none;animation:particleFly var(--p-dur,2.5s) ease-out forwards}
-    @keyframes particleFly{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--p-dx,30px),var(--p-dy,-120px)) scale(0);opacity:0}}
+    .water-particle{position:absolute;width:var(--p-size,3px);height:var(--p-size,3px);border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.6),rgba(42,157,143,.3));pointer-events:none;animation:particleFly var(--p-dur,2s) ease-out forwards}
+    @keyframes particleFly{0%{transform:translate(0,0) scale(1);opacity:.8}100%{transform:translate(var(--p-dx,20px),var(--p-dy,-80px)) scale(0);opacity:0}}
 
-    /* ── Mist ── */
-    .fountain-mist{position:absolute;bottom:5%;left:50%;transform:translateX(-50%);width:clamp(250px,55vw,550px);height:140px;background:radial-gradient(ellipse,rgba(42,157,143,.12) 0%,transparent 70%);filter:blur(25px);animation:mistDrift 10s ease-in-out infinite alternate;pointer-events:none;opacity:.25}
-    @keyframes mistDrift{0%{opacity:.4;transform:translateX(-50%) scaleX(.9)}100%{opacity:.7;transform:translateX(-50%) scaleX(1.15)}}
+    /* ── Mist (bottom only) ── */
+    .fountain-mist{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:clamp(200px,50vw,500px);height:100px;background:radial-gradient(ellipse,rgba(42,157,143,.1) 0%,transparent 70%);filter:blur(20px);animation:mistDrift 12s ease-in-out infinite alternate;pointer-events:none;opacity:.2}
+    @keyframes mistDrift{0%{opacity:.2;transform:translateX(-50%) scaleX(.9)}100%{opacity:.4;transform:translateX(-50%) scaleX(1.1)}}
 
     .hero h1{font:900 clamp(3rem,8vw,5.5rem)/1.1 var(--serif);margin-bottom:12px;position:relative;z-index:2}
     .hero h1 .accent{color:var(--accent)}
@@ -335,14 +328,8 @@
     <!-- Fountain Animation Layer -->
     <canvas class="fountain-canvas" id="fountainCanvas"></canvas>
 
-    <!-- Central 泉 Character -->
-    <div class="fountain-char-wrap">
-      <div class="fountain-char-glow"></div>
-      <div class="fountain-char" aria-hidden="true">泉</div>
-    </div>
-
     <!-- Water Ripples (generated by JS) -->
-    <div id="rippleContainer" style="position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden"></div>
+    <div id="rippleContainer" style="position:absolute;bottom:0;left:0;right:0;height:40%;z-index:1;pointer-events:none;overflow:hidden"></div>
 
     <!-- Mist -->
     <div class="fountain-mist"></div>
@@ -815,7 +802,7 @@
         W = canvas.width = canvas.offsetWidth;
         H = canvas.height = canvas.offsetHeight;
         centerX = W / 2;
-        baseY = H * 0.78;
+        baseY = H * 0.9;  // Near bottom of canvas
       }
       resize();
       window.addEventListener('resize', resize);
@@ -827,7 +814,7 @@
           this.x = centerX + (Math.random() - 0.5) * 160;
           this.baseY = baseY;
           this.height = 0;
-          this.maxHeight = H * (0.3 + Math.random() * 0.35);
+          this.maxHeight = H * (0.2 + Math.random() * 0.3);
           this.speed = 1.5 + Math.random() * 2;
           this.life = 0;
           this.maxLife = 60 + Math.random() * 40;
@@ -896,7 +883,7 @@
       }
 
       // Init columns
-      for (let i = 0; i < 6; i++) {
+      for (let i = 0; i < 4; i++) {
         const c = new Column();
         c.life = Math.floor(Math.random() * c.maxLife);
         columns.push(c);
@@ -911,7 +898,7 @@
         rippleContainer.appendChild(el);
         el.addEventListener('animationend', () => el.remove());
       }
-      setInterval(spawnRipple, 1200);
+      setInterval(spawnRipple, 2000);
       spawnRipple();
 
       // Animate
@@ -921,7 +908,7 @@
         frame++;
 
         // Spawn particles from column tops
-        if (frame % 4 === 0) {
+        if (frame % 6 === 0) {
           columns.forEach(c => {
             if (c.height > 20 && c.life < c.maxLife * 0.6) {
               const topY = c.baseY - c.height;

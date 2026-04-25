@@ -134,6 +134,8 @@
     .season-card h3{font:700 1.1rem/1.3 var(--serif);margin-bottom:8px}
     .season-card p{font-size:.85rem;color:var(--text2);line-height:1.6;margin-bottom:14px}
     .season-foods{display:flex;gap:6px;flex-wrap:wrap}
+    .season-food-tag{font-size:.7rem;padding:4px 12px;background:var(--accent2);border-radius:100px;color:var(--accent);font-weight:500}
+    .season-foods{display:flex;gap:6px;flex-wrap:wrap}
     .season-food-tag{font-size:.72rem;padding:4px 12px;border-radius:100px;font-weight:500;background:var(--accent2);color:var(--accent);transition:all .2s}
     .season-food-tag:hover{background:var(--accent);color:#fff}
 
@@ -218,7 +220,8 @@
     .food-loading{display:flex;justify-content:center;padding:60px 0;color:var(--text3)}
     .food-loading .spinner{width:36px;height:36px;border:3px solid var(--bg3);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
     @keyframes spin{to{transform:rotate(360deg)}}
-    .food-empty{text-align:center;padding:60px 0;color:var(--text3);font-size:.95rem}
+    .food-empty{text-align:center;padding:60px 20px;color:var(--text3);font-size:.95rem;line-height:1.8}
+    .food-empty .emoji{font-size:3rem;margin-bottom:12px;display:block}
 
     /* ── 商圈筛选 ── */
     .district-tabs{display:flex;gap:10px;padding:0;overflow-x:auto;justify-content:center;flex-wrap:wrap;background:none;margin-bottom:16px}
@@ -263,6 +266,8 @@
     .price-high{background:rgba(239,68,68,.1);color:#ef4444}
 
     /* ── 必吃榜增强 ── */
+    .section-divider{display:flex;align-items:center;justify-content:center;gap:16px;margin:48px auto;max-width:200px;color:var(--accent);opacity:.4;font-size:1.2rem;letter-spacing:8px}
+    .section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
     .must-banner{background:linear-gradient(135deg,rgba(201,169,110,.12),rgba(42,157,143,.08));border:1px solid var(--accent2);border-radius:16px;padding:20px 24px;display:flex;align-items:center;gap:16px;margin-bottom:28px}
     .must-banner-icon{font-size:2.5rem}
     .must-banner-text h3{font:700 1rem/1.3 var(--serif);margin-bottom:4px}
@@ -375,76 +380,81 @@
       </div>
     </section>
 
+    <div class="section-divider reveal" aria-hidden="true">◈</div>
     <!-- ── 必吃榜 TOP 5 ── -->
     <section class="section" style="background:var(--bg2)" aria-label="必吃榜TOP5">
       <div class="section-inner">
-        <div class="section-header">
+        <div class="section-header reveal">
           <p class="eyebrow">必吃榜</p>
           <h2>🏆 来济南必吃的 TOP 5</h2>
           <p>本地人认证，错过等于白来</p>
         </div>
-        <div class="must-banner">
+        <div class="must-banner reveal">
           <span class="must-banner-icon">🏆</span>
           <div class="must-banner-text">
             <h3>济南必吃榜 · 本地人精选</h3>
             <p>从百年老字号到街头巷尾的烟火气，这5道菜是济南美食的灵魂。没吃过等于白来！</p>
           </div>
         </div>
-        <div class="must-eat-grid" id="mustEatGrid">
+        <div class="must-eat-grid reveal" id="mustEatGrid">
           <!-- JS 渲染 -->
         </div>
       </div>
     </section>
 
+    <div class="section-divider reveal" aria-hidden="true">◈</div>
     <!-- ── 美食地图 ── -->
     <section class="section" aria-label="美食地图">
       <div class="section-inner">
-        <div class="section-header">
+        <div class="section-header reveal">
           <p class="eyebrow">互动地图</p>
           <h2>🗺️ 美食地图</h2>
           <p>跟着地图吃济南，不走回头路</p>
         </div>
-        <div class="food-map-container" id="foodMapContainer"></div>
+        <div class="food-map-container reveal" id="foodMapContainer"></div>
       </div>
     </section>
 
+    <div class="section-divider reveal" aria-hidden="true">◈</div>
     <!-- ── 每日美食时间线 ── -->
     <section class="section" aria-label="一日三餐路线">
       <div class="section-inner">
-        <div class="section-header">
+        <div class="section-header reveal">
           <p class="eyebrow">一日三餐</p>
           <h2>🌅 济南人的一天怎么吃</h2>
           <p>从早餐到夜宵，跟着时间吃遍泉城</p>
         </div>
-        <div class="daily-route" id="dailyRoute">
+        <div class="daily-route reveal" id="dailyRoute">
           <!-- JS 渲染 -->
         </div>
       </div>
     </section>
 
+    <div class="section-divider reveal" aria-hidden="true">◈</div>
     <!-- ── 美食路线 ── -->
     <section class="section" style="background:var(--bg2)" aria-label="美食路线">
       <div class="section-inner">
-        <div class="section-header">
+        <div class="section-header reveal">
           <p class="eyebrow">路线推荐</p>
           <h2>🗺️ 美食路线</h2>
           <p>跟着路线吃，不走冤枉路</p>
         </div>
-        <div class="routes-grid" id="routesGrid">
+        <div class="routes-grid reveal" id="routesGrid">
           <!-- JS 渲染 -->
         </div>
       </div>
     </section>
 
+    <div class="section-divider reveal" aria-hidden="true">◈</div>
     <!-- ── 时令美食 ── -->
     <section class="section" style="background:var(--bg2)" aria-label="时令美食">
       <div class="section-inner">
-        <div class="section-header">
+        <div class="section-header reveal">
           <p class="eyebrow">时令推荐</p>
           <h2>📅 时令美食</h2>
           <p>什么季节吃什么，济南人最懂</p>
         </div>
-        <div class="season-grid">
+        <div class="season-grid reveal">
           <div class="season-card rv">
             <div class="season-icon">🌸</div>
             <h3>春季（3-5月）</h3>
@@ -489,15 +499,16 @@
       </div>
     </section>
 
+    <div class="section-divider reveal" aria-hidden="true">◈</div>
     <!-- ── 美食Tips ── -->
     <section class="section" aria-label="美食攻略">
       <div class="section-inner">
-        <div class="section-header">
+        <div class="section-header reveal">
           <p class="eyebrow">实用攻略</p>
           <h2>💡 美食 Tips</h2>
           <p>点菜攻略、避坑指南、省钱秘籍</p>
         </div>
-        <div class="tips-grid">
+        <div class="tips-grid reveal">
           <div class="tip-card rv">
             <div class="tip-icon">🥢</div>
             <h3>点菜攻略</h3>
@@ -674,6 +685,7 @@
     function renderDailyRoute() {
       const el = document.getElementById('dailyRoute');
       if (!el) return;
+      if (!dailyRoute || !dailyRoute.stops) { el.innerHTML = '<div class="food-empty">暂无日程推荐 🌅</div>'; return; }
       el.innerHTML = `
         <div class="daily-route-title">${dailyRoute.title}</div>
         <div class="daily-route-desc">${dailyRoute.desc}</div>
@@ -1044,11 +1056,11 @@
         const data = await res.json();
         allFoods = data.foods || [];
         allCategories = data.categories || [];
-        renderMustEat();
-        renderFoods();
-        renderRoutes();
-        renderDailyRoute();
-        initMap();
+        try { renderMustEat(); } catch(e) { console.warn('Must-eat render failed:', e); }
+        try { renderFoods(); } catch(e) { console.warn('Foods render failed:', e); }
+        try { renderRoutes(); } catch(e) { console.warn('Routes render failed:', e); }
+        try { renderDailyRoute(); } catch(e) { console.warn('Daily route render failed:', e); }
+        try { initMap(); } catch(e) { console.warn('Map init failed:', e); }
         updateCompareUI();
         updateFoodFavCount();
         updateDistrictCounts();
@@ -1061,6 +1073,8 @@
     // ── Render Routes ──
     function renderRoutes() {
       const grid = document.getElementById('routesGrid');
+      if (!grid) return;
+      if (!foodRoutes || !foodRoutes.length) { grid.innerHTML = '<div class="food-empty">暂无路线推荐 🗺️</div>'; return; }
       grid.innerHTML = foodRoutes.map(route => {
         return '<div class="route-card rv">' +
           '<div class="route-header">' +
@@ -1091,7 +1105,9 @@
     // ── Must-Eat TOP 5 ──
     function renderMustEat() {
       const grid = document.getElementById('mustEatGrid');
+      if (!grid) return;
       const mustFoods = allFoods.filter(f => f.must).slice(0, 5);
+      if (!mustFoods.length) { grid.innerHTML = '<div class="food-empty">暂无必吃推荐 🍽️</div>'; return; }
       grid.innerHTML = mustFoods.map((food, i) =>
         '<div class="must-card rv">' +
           '<div class="must-card-rank">' + (i + 1) + '</div>' +
@@ -1300,6 +1316,8 @@
 
     // ── Leaflet + OpenStreetMap ──
     function initMap() {
+      const mapContainer = document.getElementById('foodMapContainer');
+      if (!mapContainer) return;
       const leafletScript = document.createElement('script');
       leafletScript.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
       leafletScript.onload = () => {

@@ -312,7 +312,7 @@
   <!-- Smart Itinerary Planner -->
   <section class="section section-alt" id="smartPlanner" aria-label="智能行程规划">
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header reveal">
         <div class="eyebrow">AI PLANNER</div>
         <h2>🤖 智能行程规划</h2>
         <p>告诉我你的需求，为你量身定制济南之旅</p>
@@ -362,12 +362,12 @@
   <!-- Route Tabs -->
   <section class="section" aria-label="行程路线">
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header reveal">
         <div class="eyebrow">ROUTES</div>
         <h2>🗺️ 精选路线</h2>
         <p>从 1 日打卡到 3 日深度，总有一款适合你</p>
       </div>
-      <div class="route-tabs" id="routeTabs" role="tablist" aria-label="行程路线选择">
+      <div class="route-tabs reveal" id="routeTabs" role="tablist" aria-label="行程路线选择">
         <button class="route-tab active" data-route="1day">⏰ 1日精华游</button>
         <button class="route-tab" data-route="2day">📅 2日深度游</button>
         <button class="route-tab" data-route="3day">🗓️ 3日全览游</button>
@@ -382,12 +382,12 @@
   <!-- Seasonal Recommendations -->
   <section class="section section-alt" aria-label="当季推荐">
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header reveal">
         <div class="eyebrow">SEASONAL</div>
         <h2>🗓️ 当季推荐</h2>
         <p>不同季节来济南，有不同玩法</p>
       </div>
-      <div class="season-tabs" id="seasonTabs" role="tablist" aria-label="季节选择">
+      <div class="season-tabs reveal" id="seasonTabs" role="tablist" aria-label="季节选择">
         <button class="season-tab active" data-season="spring">🌸 春季</button>
         <button class="season-tab" data-season="summer">☀️ 夏季</button>
         <button class="season-tab" data-season="autumn">🍂 秋季</button>
@@ -400,7 +400,7 @@
   <!-- My Trip -->
   <section class="section" aria-label="我的行程">
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header reveal">
         <div class="eyebrow">MY TRIP</div>
         <h2>📌 我的行程</h2>
         <p>从景点页面添加心仪的目的地</p>
@@ -426,7 +426,7 @@
   <!-- Expense Tracker -->
   <section class="section section-alt" id="expenseTracker" aria-label="花费追踪">
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header reveal">
         <div class="eyebrow">EXPENSE</div>
         <h2>💰 花费追踪</h2>
         <p>记录每笔开销，掌控旅行预算</p>
@@ -439,7 +439,7 @@
   <!-- Weather Forecast -->
   <section class="section" id="weatherSection" aria-label="行程天气">
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header reveal">
         <div class="eyebrow">WEATHER</div>
         <h2>🌤️ 行程天气</h2>
         <p>提前了解天气，做好出行准备</p>
@@ -455,7 +455,7 @@
   <!-- ═══ 我的收藏 ═══ -->
   <section class="section" aria-label="我的收藏">
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header reveal">
         <div class="eyebrow">FAVORITES</div>
         <h2>♥ 我的收藏</h2>
         <p>收藏的景点和美食</p>
@@ -735,7 +735,7 @@
         });
       });
       html += `
-        <div class="cost-summary">
+        <div class="cost-summary reveal">
           <div class="cost-card"><div class="label">🎫 门票</div><div class="amount">¥${catTickets}</div><div class="note">景点门票合计</div></div>
           <div class="cost-card"><div class="label">🍜 餐饮</div><div class="amount">¥${catFood}</div><div class="note">餐饮合计</div></div>
           <div class="cost-card"><div class="label">🚌 交通</div><div class="amount">¥${catTransport}</div><div class="note">交通合计</div></div>
@@ -1432,7 +1432,6 @@
       }
 
       // Expose for manual calls
-      window._shopifyAnims = { setupScrollReveal, setupTimelineStagger, setupWeatherStagger };
     })();
   </script>
 

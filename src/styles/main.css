@@ -1062,6 +1062,166 @@ html.dark .review-card .avatar {
   will-change: auto;
 }
 
+/* ══════════════════════════════════════
+   SHOPIFY-INSPIRED ANIMATION CLASSES
+   ══════════════════════════════════════ */
+
+/* ─── REVEAL DIRECTIONS ─── */
+.reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-fade {
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(.23,1,.32,1), transform 0.7s cubic-bezier(.23,1,.32,1);
+  will-change: opacity, transform;
+}
+.reveal { transform: translateY(32px); }
+.reveal-left { transform: translateX(-40px); }
+.reveal-right { transform: translateX(40px); }
+.reveal-scale { transform: scale(0.92); }
+.reveal-fade { transform: none; }
+
+.reveal.revealed, .reveal-left.revealed, .reveal-right.revealed,
+.reveal-scale.revealed, .reveal-fade.revealed {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+}
+
+/* ─── STAGGER GROUPS ─── */
+.stagger > * { transition-delay: calc(var(--stagger-i, 0) * 80ms); }
+
+/* ─── SMOOTH CARD INTERACTIONS ─── */
+.card {
+  transition: transform 0.45s cubic-bezier(.23,1,.32,1), box-shadow 0.45s cubic-bezier(.23,1,.32,1), border-color 0.3s;
+  backface-visibility: hidden;
+}
+.card:hover {
+  transform: translateY(-10px) scale(1.015);
+  box-shadow: 0 8px 24px rgba(0,0,0,.08), 0 20px 48px rgba(0,0,0,.06);
+  border-color: rgba(201,169,110,.2);
+}
+.card:active {
+  transform: translateY(-4px) scale(1.005);
+  transition-duration: 0.15s;
+}
+
+/* ─── IMAGE ZOOM ON HOVER ─── */
+.card-img img {
+  transition: transform 0.6s cubic-bezier(.23,1,.32,1), opacity 0.4s;
+}
+.card:hover .card-img img {
+  transform: scale(1.08);
+}
+
+/* ─── FILTER PILL ANIMATIONS ─── */
+.filter-btn, .audience-btn, .area-btn, .ticket-btn, .guide-tab, .route-tab, .season-tab {
+  transition: all 0.3s cubic-bezier(.23,1,.32,1);
+  position: relative;
+  overflow: hidden;
+}
+.filter-btn::after, .audience-btn::after, .area-btn::after, .ticket-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity 0.2s;
+  border-radius: inherit;
+}
+.filter-btn:active::after, .audience-btn:active::after, .area-btn:active::after, .ticket-btn:active::after {
+  opacity: 0.08;
+}
+
+/* ─── SMOOTH SECTION TRANSITIONS ─── */
+.section {
+  transition: opacity 0.3s;
+}
+
+/* ─── HERO TEXT SHIMMER ─── */
+.hero h1, .page-hero h1 {
+  position: relative;
+}
+
+/* ─── MAGNETIC BUTTON BASE ─── */
+.btn-magnetic, .btn-primary, .rec-btn {
+  transition: transform 0.3s cubic-bezier(.23,1,.32,1), box-shadow 0.3s, background 0.3s;
+  will-change: transform;
+}
+
+/* ─── STAT NUMBER GLOW ─── */
+.counter, [data-count] {
+  transition: text-shadow 0.3s;
+}
+.counter:hover, [data-count]:hover {
+  text-shadow: 0 0 20px rgba(201,169,110,.3);
+}
+
+/* ─── CARD HOVER GRADIENT LINE ─── */
+.card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--teal));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(.23,1,.32,1);
+  z-index: 2;
+}
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+/* ─── SMOOTH MODAL ENHANCEMENTS ─── */
+.modal-overlay {
+  transition: opacity 0.35s cubic-bezier(.23,1,.32,1);
+  backdrop-filter: blur(6px);
+}
+.modal {
+  transition: transform 0.4s cubic-bezier(.23,1,.32,1), opacity 0.3s;
+}
+.modal-overlay.open .modal {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* ─── SCROLL PROGRESS ENHANCED ─── */
+.scroll-progress {
+  transition: width 0.08s linear, background 0.3s;
+  background: linear-gradient(90deg, var(--accent), var(--teal));
+}
+
+/* ─── GALLERY SLIDE TRANSITIONS ─── */
+.gallery-track {
+  transition: transform 0.5s cubic-bezier(.23,1,.32,1);
+}
+.gallery-dot {
+  transition: all 0.3s cubic-bezier(.23,1,.32,1);
+}
+.gallery-dot.active {
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* ─── TOAST ENHANCED ─── */
+.toast, .jinan-toast {
+  transition: all 0.35s cubic-bezier(.23,1,.32,1);
+  backdrop-filter: blur(12px);
+}
+
+/* ─── REDUCED MOTION ─── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-left, .reveal-right, .reveal-scale, .reveal-fade {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .card:hover { transform: none; }
+  .card:hover .card-img img { transform: none; }
+  .btn-magnetic, .btn-primary, .rec-btn { transition: none; }
+  .counter, [data-count] { transition: none; }
+}
+
 /* ─── PAGE TRANSITION ─── */
 .page-transition-overlay {
   position: fixed;

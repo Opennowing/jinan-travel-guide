@@ -185,116 +185,31 @@
     .crowd-high{background:#ef4444}
     /* ── 区域标签 ── */
     .area-label{font-size:.65rem;padding:2px 8px;background:rgba(42,157,143,.08);color:var(--teal);border-radius:100px;display:inline-flex;align-items:center;gap:3px}
-  
-/* ═══ SHOPIFY-STYLE ANIMATIONS ═══ */
-
-/* 卡片入场动画 */
-@keyframes cardSlideUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* 卡片悬停效果增强 */
-.card {
-  transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
-}
-.card .card-img img {
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.card:hover .card-img img {
-  transform: scale(1.05);
-}
-
-/* 筛选按钮动效 */
-.filter-btn, .audience-btn, .area-btn, .ticket-btn {
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  position: relative;
-  overflow: hidden;
-}
-.filter-btn::after, .audience-btn::after, .area-btn::after, .ticket-btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: currentColor;
-  opacity: 0;
-  transition: opacity 0.2s;
-  border-radius: inherit;
-}
-.filter-btn:active::after, .audience-btn:active::after, .area-btn:active::after, .ticket-btn:active::after {
-  opacity: 0.1;
-}
-
-/* 按钮点击缩放 */
-.btn:active {
-  transform: scale(0.97);
-}
-
-/* 数字计数动画 */
-@keyframes countUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.count-badge {
-  animation: countUp 0.4s ease-out;
-}
-
-/* 页面英雄区视差 */
-.page-hero {
-  transform: translateZ(0);
-  will-change: transform;
-}
-
-/* 滚动渐显增强 */
-.rv {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-              transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.rv.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* 地图容器加载动画 */
-#map-container {
-  transition: opacity 0.5s ease;
-}
-
-/* 排序下拉框增强 */
-.sort-select {
-  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.sort-select:focus {
-  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.2);
-}
-
-/* 交错入场卡片 */
-.card.stagger-in {
-  animation: cardSlideUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-/* 骨架屏 */
-@keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-.skeleton {
-  background: linear-gradient(90deg, var(--bg2) 25%, var(--bg3) 50%, var(--bg2) 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: var(--radius);
-}
-.skeleton-card {
-  height: 320px;
-  border-radius: var(--radius-lg);
-}
-</style>
+    /* ── 拍照攻略 ── */
+    .modal-photo-guide { background: var(--bg2); border-radius: 12px; padding: 16px; margin: 16px 0; }
+    .modal-photo-guide h4 { font-size: .9rem; margin-bottom: 8px; }
+    .modal-photo-guide .best-photo { font-size: .85rem; color: var(--text2); line-height: 1.6; }
+    .modal-photo-guide .photo-list { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .modal-photo-guide .photo-tag-sm { padding: 4px 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 100px; font-size: .75rem; color: var(--text2); }
+    /* ── 周边联游 ── */
+    .modal-nearby { background: var(--bg2); border-radius: 12px; padding: 16px; margin: 16px 0; }
+    .modal-nearby h4 { font-size: .9rem; margin-bottom: 8px; }
+    .modal-nearby-list { display: flex; gap: 8px; flex-wrap: wrap; }
+    .modal-nearby-item { padding: 6px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 100px; font-size: .8rem; cursor: pointer; transition: all .3s; }
+    .modal-nearby-item:hover { border-color: var(--accent); color: var(--accent); }
+    /* ── 实用贴士 ── */
+    .modal-tips { background: linear-gradient(135deg, rgba(42,157,143,.08), rgba(201,169,110,.08)); border-radius: 12px; padding: 16px; margin: 16px 0; border-left: 3px solid var(--teal); }
+    .modal-tips h4 { font-size: .9rem; margin-bottom: 8px; }
+    .modal-tips p { font-size: .85rem; color: var(--text2); line-height: 1.6; }
+    /* ── 景点标签 ── */
+    .modal-tags-section { background: var(--bg2); border-radius: 12px; padding: 16px; margin: 16px 0; }
+    .modal-tags-section h4 { font-size: .9rem; margin-bottom: 10px; }
+    .modal-tags-list { display: flex; gap: 6px; flex-wrap: wrap; }
+    .modal-tag-item { padding: 5px 12px; border-radius: 100px; font-size: .78rem; border: 1px solid var(--border); background: var(--bg); color: var(--text2); transition: all .3s; }
+    .modal-tag-item.cat-tag { background: rgba(42,157,143,.08); color: var(--teal); border-color: rgba(42,157,143,.2); }
+    .modal-tag-item.aud-tag { background: rgba(201,169,110,.08); color: var(--accent); border-color: rgba(201,169,110,.2); }
+    .modal-tag-item.badge-tag { background: rgba(233,69,96,.08); color: #e94560; border-color: rgba(233,69,96,.2); }
+  </style>
 </head>
 <body>
   <a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:16px;z-index:999;background:var(--accent);color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-100%'">跳到主要内容</a>
@@ -405,12 +320,12 @@
 
   <section class="section" aria-label="景点地图">
     <div class="section-inner">
-      <div class="section-header">
+      <div class="section-header reveal">
         <div class="eyebrow">互动地图</div>
         <h2>景点分布</h2>
         <p>点击景点卡片查看详情，探索泉城济南</p>
       </div>
-      <div id="map-container"></div>
+      <div id="map-container" class="reveal-scale"></div>
       <div class="map-controls">
         <button class="map-legend-btn active" data-map-cat="all">全部</button>
         <button class="map-legend-btn" data-map-cat="spring"><span class="legend-dot" style="background:#3b82f6"></span> 泉水</button>
@@ -1250,7 +1165,49 @@
           <div class="review-text">${escapeHtml(r.text)}</div>
         </div>`).join('');
       const totalReviews = s.reviews + spotUserReviews.length;
-      const routeHint = s.nearby && s.nearby.length ? `<div style="margin-top:12px;padding:10px 14px;background:var(--bg2);border-radius:10px;font-size:.8rem"><strong>🗺️ 周边联游：</strong>${s.nearby.join(' → ')}</div>` : '';
+
+      // ── 拍照攻略模块 ──
+      const photoGuideHtml = (s.bestPhoto || (s.photos && s.photos.length)) ? `
+        <div class="modal-photo-guide">
+          <h4>📸 拍照攻略</h4>
+          ${s.bestPhoto ? `<div class="best-photo">🎯 最佳拍摄点：${escapeHtml(s.bestPhoto)}</div>` : ''}
+          ${s.photos && s.photos.length ? `<div class="photo-list">${s.photos.map(p => `<span class="photo-tag-sm">📷 ${escapeHtml(p)}</span>`).join('')}</div>` : ''}
+        </div>` : '';
+
+      // ── 周边联游模块 ──
+      const nearbyHtml = s.nearby && s.nearby.length ? `
+        <div class="modal-nearby">
+          <h4>🗺️ 周边联游</h4>
+          <div class="modal-nearby-list">
+            ${s.nearby.map(n => {
+              const nearSpot = allSpots.find(x => x.name === n);
+              return nearSpot
+                ? `<span class="modal-nearby-item" data-spot-id="${nearSpot.id}" onclick="document.querySelector('.modal-overlay')?.remove();openQuickView(allSpots.find(x=>x.id==='${nearSpot.id}'))">📍 ${escapeHtml(n)}</span>`
+                : `<span class="modal-nearby-item" style="cursor:default;opacity:.7">📍 ${escapeHtml(n)}</span>`;
+            }).join('')}
+          </div>
+        </div>` : '';
+
+      // ── 实用贴士模块 ──
+      const tipsHtml = s.tips ? `
+        <div class="modal-tips">
+          <h4>💡 实用贴士</h4>
+          <p>${escapeHtml(s.tips)}</p>
+        </div>` : '';
+
+      // ── 景点标签模块 ──
+      const catLabels = {spring:'⛲ 泉水',nature:'🌿 自然',history:'🏛️ 历史',food:'🍜 美食',culture:'🎭 文化',family:'👨‍👩‍👧 亲子'};
+      const badgeLabels = {must:'必去打卡',hot:'热门推荐',free:'免费开放',hidden:'小众秘境',kid:'亲子首选'};
+      const tagsHtml = `
+        <div class="modal-tags-section">
+          <h4>🏷️ 景点标签</h4>
+          <div class="modal-tags-list">
+            ${s.cat ? `<span class="modal-tag-item cat-tag">${catLabels[s.cat]||s.cat}</span>` : ''}
+            ${(s.audience||[]).map(a => `<span class="modal-tag-item aud-tag">${audienceLabels[a]||a}</span>`).join('')}
+            ${s.badge ? `<span class="modal-tag-item badge-tag">${badgeLabels[s.badge]||s.badge}</span>` : ''}
+            ${s.trust ? `<span class="modal-tag-item" style="background:rgba(42,157,143,.1);color:var(--teal);border-color:rgba(42,157,143,.2)">✓ ${escapeHtml(s.trust)}</span>` : ''}
+          </div>
+        </div>`;
 
       const html = `
         ${galleryHtml(s)}
@@ -1259,6 +1216,7 @@
           <div class="modal-rating"><span class="stars">${stars(s.rating)}</span><span class="score">${s.rating}</span><span class="count">${s.reviews} 条评价</span></div>
           <p class="modal-desc">${s.desc}</p>
           ${photosHtml ? `<div class="modal-photos">${photosHtml}</div>` : ''}
+          ${tagsHtml}
           <div class="modal-info-grid">
             <div class="modal-info-item"><div class="label">🎫 门票</div><div class="value">${priceHtml}</div></div>
             <div class="modal-info-item"><div class="label">⏱ 建议时长</div><div class="value">${s.dur}</div></div>
@@ -1271,10 +1229,9 @@
           </div>
           ${comboHtml}
           ${mapHtml}
-          <div class="card-tags" style="margin-bottom:16px">
-            ${(s.audience||[]).map(a => `<span class="tag">${audienceLabels[a]||a}</span>`).join('')}
-            <span class="tag" style="background:rgba(42,157,143,.1);color:var(--teal)">✓ ${s.trust}</span>
-          </div>
+          ${photoGuideHtml}
+          ${tipsHtml}
+          ${nearbyHtml}
           <div class="modal-actions" style="flex-wrap:wrap">
             <button class="btn btn-primary modal-add-trip" data-id="${s.id}">＋ 加入行程</button>
             <a href="${getCtripLink(s.name)}" target="_blank" rel="noopener" class="btn btn-outline" style="background:linear-gradient(135deg,#2681ff 0%,#1a6dff 100%);color:#fff;border:none">🐬 携程订票</a>
@@ -1282,7 +1239,6 @@
             <button class="btn btn-outline modal-share" data-name="${s.name}">📤 分享</button>
             <button class="tts-btn" data-id="${s.id}">🎧 语音导览</button>
           </div>
-          ${routeHint}
           <p style="font-size:.7rem;color:var(--text3);text-align:center;margin-top:8px">通过以上链接预订，本站可获得少量佣金，不影响你的价格 ❤️</p>
           <div class="modal-reviews">
             <h4>💬 游客评价 <span style="font-weight:400;font-size:.8rem;color:var(--text3)">(${totalReviews}条)</span></h4>

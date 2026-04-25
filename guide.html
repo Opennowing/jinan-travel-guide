@@ -345,7 +345,7 @@
     <h1>📖 出行指南</h1>
     <p>出发前你需要知道的一切</p>
     <p style="font-size:.9rem;color:var(--accent);margin-top:12px;font-weight:500">交通 · 住宿 · 天气 · 预算 · 一站式指南</p>
-    <button class="btn btn-outline btn-sm" style="margin-top:16px" data-share='{"title":"济南出行指南","subtitle":"交通·住宿·预算·天气","items":[{"name":"交通攻略","info":"高铁/飞机/地铁全覆盖"},{"name":"住宿推荐","info":"泉城路/大明湖周边"},{"name":"预算参考","info":"人均¥200-500/天"},{"name":"天气穿搭","info":"四季分明，春秋最宜"},{"name":"必备清单","info":"充电宝·舒适鞋·防晒"}],"page":"guide"}'>📤 分享指南</button>
+    <button class="btn btn-outline btn-sm" style="margin-top:16px" aria-label="分享页面" data-share='{"title":"济南出行指南","subtitle":"交通·住宿·预算·天气","items":[{"name":"交通攻略","info":"高铁/飞机/地铁全覆盖"},{"name":"住宿推荐","info":"泉城路/大明湖周边"},{"name":"预算参考","info":"人均¥200-500/天"},{"name":"天气穿搭","info":"四季分明，春秋最宜"},{"name":"必备清单","info":"充电宝·舒适鞋·防晒"}],"page":"guide"}'>📤 分享指南</button>
   </section>
 
   <section class="section" aria-label="出行指南内容">
@@ -522,9 +522,9 @@
             <button class="btn btn-sm btn-primary" id="addCustomItemBtn">＋ 添加</button>
           </div>
           <div class="checklist-toolbar">
-            <button id="checkAllBtn">✅ 全选</button>
-            <button id="uncheckAllBtn">⬜ 取消全选</button>
-            <button id="exportChecklistBtn">📋 导出清单</button>
+            <button id="checkAllBtn" aria-label="全选清单项目">✅ 全选</button>
+            <button id="uncheckAllBtn" aria-label="取消全选清单项目">⬜ 取消全选</button>
+            <button id="exportChecklistBtn" aria-label="导出清单为文本">📋 导出清单</button>
           </div>
           <div class="checklist" id="checklist"></div>
 

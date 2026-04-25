@@ -198,16 +198,164 @@ export function initStaggerReveal() {
   document.querySelectorAll('.rv').forEach(el => io.observe(el));
 }
 
+
+
+// ─── Image Lazy Load with Skeleton Screen ───
+export function initLazyImageSkeleton() {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const container = entry.target;
+      const img = container.querySelector('img');
+      if (!img) { io.unobserve(container); return; }
+      container.classList.add('img-loading');
+      container.classList.remove('img-loaded');
+      let skeleton = container.querySelector('.img-skeleton');
+      if (!skeleton) {
+        skeleton = document.createElement('div');
+        skeleton.className = 'img-skeleton';
+        skeleton.style.cssText = 'position:absolute;inset:0;z-index:2;background:var(--bg2);display:flex;align-items:center;justify-content:center;';
+        skeleton.innerHTML = '<div style="width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite"></div>';
+        container.appendChild(skeleton);
+      }
+      const onLoad = () => {
+        container.classList.remove('img-loading');
+        container.classList.add('img-loaded');
+        if (skeleton) { skeleton.style.opacity='0'; skeleton.style.transition='opacity .3s'; setTimeout(()=>skeleton.remove(),300); }
+      };
+      const onError = () => {
+        container.classList.remove('img-loading');
+        container.classList.add('img-loaded');
+        if (skeleton) skeleton.remove();
+        img.src = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="400" height="250"><rect fill="#e8dcc8" width="400" height="250"/><text x="200" y="120" text-anchor="middle" fill="#c9a96e" font-size="40">🏔️</text><text x="200" y="160" text-anchor="middle" fill="#999" font-size="14" font-family="sans-serif">图片加载中</text></svg>');
+      };
+      if (img.complete && img.naturalWidth > 0) { onLoad(); }
+      else { img.addEventListener('load', onLoad, {once:true}); img.addEventListener('error', onError, {once:true}); }
+      io.unobserve(container);
+    });
+  }, { rootMargin: '300px 0px' });
+  document.querySelectorAll('.card-img, .img-container').forEach(el => {
+    if (!el.querySelector('img')) return;
+    io.observe(el);
+  });
+}
+
+// ─── Back to Top with Progress Ring ───
+export function initBackToTopEnhanced() {
+  const btn = document.querySelector('.btt');
+  if (!btn) return;
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 48 48');
+  svg.style.cssText = 'position:absolute;inset:-4px;width:56px;height:56px;transform:rotate(-90deg);pointer-events:none;';
+  const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  circle.setAttribute('cx','24'); circle.setAttribute('cy','24'); circle.setAttribute('r','22');
+  circle.setAttribute('fill','none'); circle.setAttribute('stroke','rgba(255,255,255,.3)');
+  circle.setAttribute('stroke-width','2');
+  const circ = 2 * Math.PI * 22;
+  circle.setAttribute('stroke-dasharray', circ);
+  circle.setAttribute('stroke-dashoffset', circ);
+  circle.style.transition = 'stroke-dashoffset .15s linear';
+  svg.appendChild(circle);
+  btn.style.position = 'relative';
+  btn.appendChild(svg);
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const scrollH = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = Math.min(window.scrollY / scrollH, 1);
+      circle.setAttribute('stroke-dashoffset', `${circ * (1 - progress)}`);
+      btn.classList.toggle('vis', window.scrollY > 400);
+      ticking = false;
+    });
+  }, {passive:true});
+  btn.addEventListener('click', () => {
+    const start = window.scrollY;
+    const duration = 600;
+    const startTime = performance.now();
+    function easeOutCubic(t) { return 1 - Math.pow(1-t,3); }
+    function step(now) {
+      const elapsed = now - startTime;
+      const p = Math.min(elapsed/duration, 1);
+      window.scrollTo(0, start * (1 - easeOutCubic(p)));
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+}
+
+// ─── Page Transition ───
+export function initPageTransition() {
+  const overlay = document.createElement('div');
+  overlay.className = 'page-transition-overlay';
+  document.body.appendChild(overlay);
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href]');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+    if (href === location.pathname.replace(/.*\//,'')) return;
+    e.preventDefault();
+    overlay.classList.add('active');
+    setTimeout(() => { location.href = href; }, 300);
+  });
+  window.addEventListener('pageshow', (e) => { if (e.persisted) overlay.classList.remove('active'); });
+}
+
+// ─── Scroll Progress Enhanced ───
+export function initScrollProgressEnhanced() {
+  const bar = document.querySelector('.scroll-progress');
+  if (!bar) return;
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = window.scrollY / h;
+      bar.style.width = (progress * 100) + '%';
+      const hue = 40 + progress * 20;
+      bar.style.background = `linear-gradient(90deg, hsl(${hue},70%,55%), hsl(${hue+20},65%,50%))`;
+      ticking = false;
+    });
+  }, {passive:true});
+}
+
+// ─── Rating Stars Visual ───
+export function renderRatingStars(rating, count) {
+  const full = Math.floor(rating);
+  const hasHalf = rating - full >= 0.3;
+  let html = '<span class="rating-visual"><span class="star-bar">';
+  for (let i = 0; i < 5; i++) {
+    if (i < full) html += '<span style="color:#f59e0b">★</span>';
+    else if (i === full && hasHalf) html += '<span style="color:#f59e0b">★</span>';
+    else html += '<span style="color:var(--text3)">☆</span>';
+  }
+  html += '</span>';
+  html += `<span class="score">${rating}</span>`;
+  if (count) html += `<span class="count">(${count})</span>`;
+  html += '</span>';
+  return html;
+}
+
+// Add spin animation for skeleton loader
+const _spinStyle = document.createElement('style');
+_spinStyle.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
+document.head.appendChild(_spinStyle);
+
+
 // Init all
 export function initAll() {
   initDarkMode();
   initMobileMenu();
-  initScrollProgress();
-  initBackToTop();
+  initScrollProgressEnhanced();
+  initBackToTopEnhanced();
   initStaggerReveal();
   initMobNav();
   initNavScroll();
-  initLazyImages();
+  initLazyImageSkeleton();
   initRipple();
   initSwipeNav();
+  initPageTransition();
 }

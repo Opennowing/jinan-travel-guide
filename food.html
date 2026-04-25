@@ -306,7 +306,7 @@
   </nav>
 
   <!-- Hero -->
-  <header class="page-hero" style="position:relative;min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.7)),url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600&q=80') center/cover no-repeat">
+  <header class="page-hero" style="position:relative;min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.7)),url('https://images.unsplash.com/photo-1755742319537-449f661a3190?w=1600&q=80') center/cover no-repeat">
     <button class="btn btn-outline btn-sm" style="position:absolute;top:20px;right:20px;z-index:2;color:#fff;border-color:rgba(255,255,255,.4)" data-share='{"title":"济南美食攻略","subtitle":"鲁菜发源地 · 68道精选","items":[{"name":"糖醋鲤鱼","info":"鲁菜经典 · 聚丰德"},{"name":"把子肉","info":"济南灵魂美食 · 超意兴"},{"name":"油旋","info":"非遗小吃 · 弘春美斋"},{"name":"甜沫","info":"济南早餐必备"},{"name":"九转大肠","info":"鲁菜名菜 · 闫府私房菜"}],"page":"food"}'>📤 分享美食</button>
     <div class="eyebrow" style="font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:12px;display:inline-flex;align-items:center;gap:12px;position:relative;z-index:1"><span style="width:24px;height:1px;background:rgba(255,255,255,.4)"></span>JINAN FOOD<span style="width:24px;height:1px;background:rgba(255,255,255,.4)"></span></div>
     <h1 style="color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.4)">🍜 美食 · 探店</h1>
@@ -1075,7 +1075,7 @@
       grid.innerHTML = mustFoods.map((food, i) =>
         '<div class="must-card rv">' +
           '<div class="must-card-rank">' + (i + 1) + '</div>' +
-          '<img class="must-card-img" src="' + food.img + '" alt="' + food.name + '" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
+          '<img class="must-card-img" src="' + food.img + '" alt="' + food.name + '" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
           '<div class="must-card-body">' +
             '<div class="must-card-name">' + food.name + '</div>' +
             '<p class="must-card-desc">' + food.desc + '</p>' +
@@ -1113,7 +1113,7 @@
       grid.innerHTML = filtered.map(food => {
         const isFav = favs.isFavorite(food.id);
         return '<div class="food-card rv" style="position:relative">' +
-          '<img class="food-card-img" src="' + food.img + '" alt="' + food.name + '" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
+          '<img class="food-card-img" src="' + food.img + '" alt="' + food.name + '" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
           '<button class="fav-btn ' + (isFav ? 'active' : '') + '" data-id="' + food.id + '" aria-label="' + (isFav ? '取消收藏' : '收藏') + '" onclick="event.stopPropagation();window._toggleFoodFav(\'' + food.id + '\',this)">' + (isFav ? '♥' : '♡') + '</button>' +
           '<div class="food-card-body">' +
             '<div class="food-card-name">' +
@@ -1296,8 +1296,30 @@
         const spotsRes = await fetch('/jinan-travel-guide/data/spots.json');
         const spots = await spotsRes.json();
         const search = new SmartSearch(spots, allFoods);
-        const q = new URLSearchParams(window.location.search).get('q');
-        if (q) {
+        const params = new URLSearchParams(window.location.search);
+        const q = params.get('q');
+        const foodId = params.get('id');
+        if (foodId) {
+          // Find and scroll to specific food item
+          setTimeout(() => {
+            const food = allFoods.find(f => f.id === foodId);
+            if (food) {
+              searchQuery = food.name;
+              const searchInput = document.getElementById('foodSearch');
+              if (searchInput) searchInput.value = food.name;
+              renderFoods();
+              setTimeout(() => {
+                const card = document.querySelector('.food-card');
+                if (card) {
+                  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                  card.style.boxShadow = '0 0 0 3px var(--accent), 0 8px 32px rgba(201,169,110,.3)';
+                  card.style.transition = 'box-shadow .3s';
+                  setTimeout(() => card.style.boxShadow = '', 1500);
+                }
+              }, 300);
+            }
+          }, 500);
+        } else if (q) {
           searchQuery = q;
           const searchInput = document.getElementById('foodSearch');
           if (searchInput) searchInput.value = q;

@@ -469,8 +469,8 @@
         const priceHtml = s.price === 0 ? '<span class="free-tag">免费</span>' : `¥${s.price}`;
         return `
           <article class="card rv" data-id="${s.id}">
-            <div class="card-img img-loaded">
-              <img src="${s.img}" alt="${s.name}" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.parentElement.classList.add("img-loaded")" class="img-loaded">
+            <div class="card-img">
+              <img src="${s.img}" alt="${s.name}" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.parentElement.classList.add('img-loaded')">
               <span class="spot-badge badge ${s.badge}">${badgeLabels[s.badge] || s.badge}</span>
               <span class="spot-price">${priceHtml}</span>
               <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${s.id}" aria-label="${isFav ? '取消收藏' : '收藏'}" onclick="event.stopPropagation();window._toggleFav('${s.id}',this)">${isFav ? '♥' : '♡'}</button>
@@ -743,7 +743,50 @@
 
     initAll();
     initSocialFeatures();
-    loadSpots();
+    loadSpots().then(() => {
+      // Handle URL params: ?id=xxx or ?q=xxx
+      const params = new URLSearchParams(location.search);
+      const spotId = params.get('id');
+      const spotQuery = params.get('q');
+      if (spotId) {
+        // Scroll to and open specific spot
+        setTimeout(() => {
+          const card = document.querySelector(`.card[data-id="${spotId}"]`);
+          if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            card.style.boxShadow = '0 0 0 3px var(--accent), 0 8px 32px rgba(201,169,110,.3)';
+            card.style.transition = 'box-shadow .3s';
+            setTimeout(() => {
+              card.style.boxShadow = '';
+              const s = allSpots.find(x => x.id === spotId);
+              if (s) openQuickView(s);
+            }, 800);
+          }
+        }, 500);
+      } else if (spotQuery) {
+        // Filter spots by search query and re-render
+        const ql = spotQuery.toLowerCase();
+        const matches = allSpots.filter(s =>
+          s.name.toLowerCase().includes(ql) || s.desc.toLowerCase().includes(ql) ||
+          s.cat.toLowerCase().includes(ql) || (s.transport && s.transport.toLowerCase().includes(ql))
+        );
+        if (matches.length === 1) {
+          // Single match - scroll to it and open
+          setTimeout(() => {
+            const card = document.querySelector(`.card[data-id="${matches[0].id}"]`);
+            if (card) {
+              card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              card.style.boxShadow = '0 0 0 3px var(--accent), 0 8px 32px rgba(201,169,110,.3)';
+              card.style.transition = 'box-shadow .3s';
+              setTimeout(() => { card.style.boxShadow = ''; openQuickView(matches[0]); }, 800);
+            }
+          }, 500);
+        } else if (matches.length > 1) {
+          // Multiple matches - show toast
+          showToast(`🔍 找到 ${matches.length} 个 "${spotQuery}" 相关景点`);
+        }
+      }
+    });
 
     // ═══════════════════════════════════════════
     //  1. 收藏系统
@@ -956,8 +999,8 @@
         const priceHtml = s.price === 0 ? '<span class="free-tag">免费</span>' : `¥${s.price}`;
         return `
           <article class="card rv" data-id="${s.id}">
-            <div class="card-img img-loaded">
-              <img src="${s.img}" alt="${s.name}" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.parentElement.classList.add("img-loaded")" class="img-loaded">
+            <div class="card-img">
+              <img src="${s.img}" alt="${s.name}" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.parentElement.classList.add('img-loaded')">
               <span class="spot-badge badge ${s.badge}">${badgeLabels[s.badge] || s.badge}</span>
               <div class="spot-card-actions">
                 <button class="card-fav-btn ${isFav?'faved':''}" data-id="${s.id}" title="收藏">${isFav?'❤️':'🤍'}</button>

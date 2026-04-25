@@ -297,16 +297,16 @@
     <!-- Photo Carousel Background -->
     <div class="hero-slides">
       <div class="hero-slide active">
-        <img src="https://images.unsplash.com/photo-1599571234909-29ed5d1321d6?w=1600&q=80" alt="趵突泉">
+        <img src="https://images.unsplash.com/photo-1517587662384-26d954922c19?w=1600&q=80" alt="趵突泉">
       </div>
       <div class="hero-slide">
-        <img src="https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=1600&q=80" alt="大明湖">
+        <img src="https://images.unsplash.com/photo-1646896315397-4d6f5bd49e0e?w=1600&q=80" alt="大明湖">
       </div>
       <div class="hero-slide">
-        <img src="https://images.unsplash.com/photo-1518489913124-7299443c1605?w=1600&q=80" alt="千佛山">
+        <img src="https://images.unsplash.com/photo-1709964677263-f4f17b706322?w=1600&q=80" alt="千佛山">
       </div>
       <div class="hero-slide">
-        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600&q=80" alt="鲁菜美食">
+        <img src="https://images.unsplash.com/photo-1755742319537-449f661a3190?w=1600&q=80" alt="鲁菜美食">
       </div>
     </div>
     <button class="hero-arrow prev" id="heroPrev" aria-label="上一张">‹</button>
@@ -515,7 +515,7 @@
       if (spotResults.length) {
         html += '<div class="search-dropdown-section"><div class="search-dropdown-label">🏛️ 景点</div>';
         html += spotResults.map(s => `
-          <a href="spots.html" class="search-dropdown-item" data-type="spot">
+          <a href="spots.html?id=${encodeURIComponent(s.id)}" class="search-dropdown-item" data-type="spot">
             <span class="item-icon">⛲</span>
             <div style="flex:1;min-width:0">
               <div class="item-name">${escH(s.name)}</div>
@@ -528,7 +528,7 @@
       if (foodResults.length) {
         html += '<div class="search-dropdown-section"><div class="search-dropdown-label">🍜 美食</div>';
         html += foodResults.map(f => `
-          <a href="food.html" class="search-dropdown-item" data-type="food">
+          <a href="food.html?id=${encodeURIComponent(f.id)}" class="search-dropdown-item" data-type="food">
             <span class="item-icon">🍜</span>
             <div style="flex:1;min-width:0">
               <div class="item-name">${escH(f.name)}</div>
@@ -591,7 +591,7 @@
       if (spotResults.length) {
         html += '<div class="search-dropdown-section"><div class="search-dropdown-label">🏛️ 景点</div>';
         html += spotResults.map(s => `
-          <a href="spots.html" class="search-dropdown-item" data-type="spot">
+          <a href="spots.html?id=${encodeURIComponent(s.id)}" class="search-dropdown-item" data-type="spot">
             <span class="item-icon">⛲</span>
             <div style="flex:1;min-width:0">
               <div class="item-name">${escH(s.name)}</div>
@@ -604,7 +604,7 @@
       if (foodResults.length) {
         html += '<div class="search-dropdown-section"><div class="search-dropdown-label">🍜 美食</div>';
         html += foodResults.map(f => `
-          <a href="food.html" class="search-dropdown-item" data-type="food">
+          <a href="food.html?id=${encodeURIComponent(f.id)}" class="search-dropdown-item" data-type="food">
             <span class="item-icon">🍜</span>
             <div style="flex:1;min-width:0">
               <div class="item-name">${escH(f.name)}</div>
@@ -686,7 +686,7 @@
         const grid = document.getElementById('spots-grid');
         grid.innerHTML = featured.map(s => `
           <div class="card rv" onclick="location.href='spots.html'">
-            <div class="card-img img-loaded"><img src="${s.img}" alt="${s.name}" onerror="this.onerror=null;this.src=imgFallback('${s.name}');this.classList.add('img-loaded')" class="img-loaded"></div>
+            <div class="card-img"><img src="${s.img}" alt="${s.name}" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.parentElement.classList.add('img-loaded')" ></div>
             <div class="card-body">
               <h3>${s.name}${s.badge==='must'?'<span class="badge must">必去</span>':''}${s.badge==='hot'?'<span class="badge hot">热门</span>':''}${s.badge==='free'?'<span class="badge free">免费</span>':''}</h3>
               <p class="desc">${s.desc}</p>
@@ -710,7 +710,7 @@
         const grid = document.getElementById('food-grid');
         grid.innerHTML = topFoods.map(f => `
           <div class="card rv" onclick="location.href='food.html'">
-            <div class="card-img img-loaded"><img src="${f.img}" alt="${f.name}" onerror="this.onerror=null;this.src=imgFallback('${f.name}');this.classList.add('img-loaded')" class="img-loaded"></div>
+            <div class="card-img"><img src="${f.img}" alt="${f.name}" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.parentElement.classList.add('img-loaded')" ></div>
             <div class="card-body">
               <h3>${f.name}${f.must?'<span class="badge hot">🔥 必吃</span>':''}</h3>
               <div class="card-tags"><span class="tag">${f.tag}</span></div>

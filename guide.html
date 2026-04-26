@@ -378,6 +378,245 @@
       .modal-content{max-width:100%;margin:0 10px}
     }
   
+    /* ═══ Enhanced Interactive Checklist ═══ */
+    .prep-checklist-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      margin-bottom: 24px;
+    }
+    .prep-checklist-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .prep-checklist-header h3 {
+      font: 700 1.15rem/1.4 var(--serif);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prep-progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    .prep-progress-bar {
+      flex: 1;
+      height: 8px;
+      background: var(--bg2);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+    .prep-progress-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--accent, #c9a96e), #4ecdc4);
+      transition: width 0.5s cubic-bezier(.34,1.56,.64,1);
+      width: 0%;
+    }
+    .prep-progress-text {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--accent, #c9a96e);
+      white-space: nowrap;
+      min-width: 70px;
+      text-align: right;
+    }
+    .prep-toolbar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .prep-toolbar button {
+      padding: 6px 14px;
+      border: 1px solid var(--border2);
+      background: var(--bg);
+      border-radius: 8px;
+      font-size: .8rem;
+      cursor: pointer;
+      color: var(--text);
+      transition: all .2s;
+    }
+    .prep-toolbar button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .prep-category {
+      margin-bottom: 20px;
+    }
+    .prep-category:last-child {
+      margin-bottom: 0;
+    }
+    .prep-category-title {
+      font: 600 .9rem/1.4 var(--sans);
+      color: var(--accent, #c9a96e);
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .prep-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 4px;
+      cursor: pointer;
+      transition: opacity .3s ease, transform .3s ease;
+      border-radius: 6px;
+      position: relative;
+    }
+    .prep-item:hover {
+      background: var(--bg2);
+    }
+    .prep-item.checked {
+      opacity: .5;
+    }
+    .prep-item.checked .prep-item-text {
+      text-decoration: line-through;
+      color: var(--text3);
+    }
+    .prep-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent, #c9a96e);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .prep-item input[type="checkbox"]:checked {
+      animation: checkPop .4s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes checkPop {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.3); }
+      70% { transform: scale(.9); }
+      100% { transform: scale(1); }
+    }
+    .prep-item-text {
+      font-size: .88rem;
+      color: var(--text2);
+      transition: all .3s ease;
+    }
+    .prep-item .prep-check-icon {
+      position: absolute;
+      left: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: .75rem;
+      opacity: 0;
+      transition: opacity .3s ease;
+      pointer-events: none;
+    }
+    .prep-item.checked .prep-check-icon {
+      opacity: 1;
+      animation: checkSlideIn .3s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes checkSlideIn {
+      from { opacity: 0; transform: translateY(-50%) scale(0.5); }
+      to { opacity: 1; transform: translateY(-50%) scale(1); }
+    }
+    .prep-season-tag {
+      display: inline-block;
+      background: var(--accent2);
+      color: var(--accent);
+      font-size: .7rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 6px;
+      font-weight: 600;
+    }
+    .prep-complete-msg {
+      text-align: center;
+      padding: 16px;
+      font-size: .9rem;
+      color: var(--accent);
+      font-weight: 600;
+      display: none;
+    }
+    .prep-complete-msg.show {
+      display: block;
+      animation: fadeSlideIn .4s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ═══ Enhanced Weather Tips ═══ */
+    .weather-enhanced {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .weather-enhanced-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      text-align: center;
+      transition: transform .2s ease;
+    }
+    .weather-enhanced-card:hover {
+      transform: translateY(-2px);
+    }
+    .weather-enhanced-card .we-icon {
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+    .weather-enhanced-card .we-label {
+      font-size: .7rem;
+      color: var(--text3);
+      margin-bottom: 4px;
+    }
+    .weather-enhanced-card .we-value {
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .travel-index {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: .75rem;
+      font-weight: 700;
+    }
+    .travel-index.excellent {
+      background: #d4edda;
+      color: #155724;
+    }
+    .travel-index.good {
+      background: #fff3cd;
+      color: #856404;
+    }
+    .travel-index.fair {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .travel-index.excellent { background: #1a472a; color: #a3d9a5; }
+      .travel-index.good { background: #4a3f1a; color: #f0d78e; }
+      .travel-index.fair { background: #4a1a1a; color: #f0a3a3; }
+    }
+
+    @media(max-width:768px){
+      .prep-checklist-section { padding: 20px 16px; }
+      .prep-checklist-header { flex-direction: column; align-items: flex-start; }
+      .prep-toolbar { width: 100%; }
+      .prep-toolbar button { flex: 1; min-width: 0; font-size: .75rem; padding: 6px 8px; }
+      .weather-enhanced { grid-template-columns: repeat(2, 1fr); }
+    }
+
     /* ── prefers-reduced-motion: disable all inline animations ── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -642,6 +881,44 @@
           </div>
           <div class="weather-cards reveal" id="weatherCards"></div>
           <div class="weather-tip" id="weatherTip" style="display:none"></div>
+
+          <!-- Enhanced Weather Tips Cards -->
+          <div class="weather-enhanced" id="weatherEnhanced">
+            <div class="weather-enhanced-card">
+              <div class="we-icon">👔</div>
+              <div class="we-label">穿衣建议</div>
+              <div class="we-value" id="weClothing">加载中…</div>
+            </div>
+            <div class="weather-enhanced-card">
+              <div class="we-icon">☀️</div>
+              <div class="we-label">紫外线指数</div>
+              <div class="we-value" id="weUV">加载中…</div>
+            </div>
+            <div class="weather-enhanced-card">
+              <div class="we-icon">🎯</div>
+              <div class="we-label">出行指数</div>
+              <div class="we-value" id="weIndex">加载中…</div>
+            </div>
+          </div>
+
+          <!-- ═══ Interactive Pre-trip Checklist ═══ -->
+          <div class="prep-checklist-section reveal" id="prepChecklistSection">
+            <div class="prep-checklist-header">
+              <h3>✅ 行前准备清单</h3>
+              <span class="prep-progress-text" id="prepProgressText">已准备 0/0</span>
+            </div>
+            <div class="prep-progress">
+              <div class="prep-progress-bar">
+                <div class="prep-progress-fill" id="prepProgressFill"></div>
+              </div>
+            </div>
+            <div class="prep-toolbar">
+              <button id="prepCheckAll" aria-label="一键全选">✅ 一键全选</button>
+              <button id="prepReset" aria-label="全部重置">🔄 全部重置</button>
+            </div>
+            <div id="prepChecklistBody"></div>
+            <div class="prep-complete-msg" id="prepCompleteMsg">🎉 太棒了！所有物品已准备就绪，出发吧！</div>
+          </div>
 
           <h3>👕 季节穿搭指南</h3>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px">
@@ -1386,6 +1663,327 @@
         </div>
       </div>`);
     };
+
+    // ══════════════════════════════════════════════
+    // ── Enhanced Interactive Pre-trip Checklist ──
+    // ══════════════════════════════════════════════
+    (function() {
+      const STORAGE_KEY = 'jinan-prep-checklist';
+
+      // Base checklist categories
+      const baseCategories = [
+        {
+          title: '📄 证件类',
+          items: [
+            { id: 'id-card', text: '身份证' },
+            { id: 'student-card', text: '学生证（景点半价）' },
+            { id: 'driver-license', text: '驾照（如需租车）' },
+          ]
+        },
+        {
+          title: '👕 衣物类',
+          items: [
+            { id: 'season-clothes', text: '根据季节准备衣物', seasonHint: true },
+            { id: 'walking-shoes', text: '舒适步行鞋' },
+            { id: 'rain-gear', text: '雨具' },
+          ]
+        },
+        {
+          title: '📱 电子设备',
+          items: [
+            { id: 'power-bank', text: '充电宝' },
+            { id: 'charger', text: '充电器' },
+            { id: 'earphone', text: '耳机' },
+          ]
+        },
+        {
+          title: '⛲ 济南专属',
+          items: [
+            { id: 'metro-app', text: '下载济南地铁 APP' },
+            { id: 'wechat-acc', text: '关注"泉城攻略"公众号' },
+            { id: 'museum-book', text: '预约山东省博物馆' },
+            { id: 'water-bottle', text: '准备水壶（接泉水）' },
+          ]
+        }
+      ];
+
+      // Season-specific extras
+      const seasonExtras = {
+        spring: {
+          label: '🌸 春季特需',
+          items: [
+            { id: 'sp-sunscreen', text: '防晒霜' },
+            { id: 'sp-jacket', text: '薄外套' },
+            { id: 'sp-allergy', text: '花粉过敏药' },
+          ]
+        },
+        summer: {
+          label: '☀️ 夏季特需',
+          items: [
+            { id: 'su-sunscreen', text: '防晒霜 SPF50+' },
+            { id: 'su-hat', text: '遮阳帽' },
+            { id: 'su-repellent', text: '驱蚊液' },
+          ]
+        },
+        autumn: {
+          label: '🍂 秋季特需',
+          items: [
+            { id: 'au-jacket', text: '薄外套' },
+            { id: 'au-boots', text: '登山鞋' },
+          ]
+        },
+        winter: {
+          label: '❄️ 冬季特需',
+          items: [
+            { id: 'wi-down', text: '羽绒服' },
+            { id: 'wi-warmer', text: '暖宝宝' },
+            { id: 'wi-gloves', text: '手套' },
+          ]
+        }
+      };
+
+      function getCurrentSeason() {
+        const month = new Date().getMonth() + 1;
+        if (month >= 3 && month <= 5) return 'spring';
+        if (month >= 6 && month <= 8) return 'summer';
+        if (month >= 9 && month <= 11) return 'autumn';
+        return 'winter';
+      }
+
+      function getSeasonName(season) {
+        return { spring: '春季(3-5月)', summer: '夏季(6-8月)', autumn: '秋季(9-11月)', winter: '冬季(12-2月)' }[season] || '';
+      }
+
+      function getSeasonHint(season) {
+        return {
+          spring: '春季建议：薄外套、长袖T恤、防风衣',
+          summer: '夏季建议：短袖、短裤、防晒衣、凉鞋',
+          autumn: '秋季建议：卫衣、薄毛衣、风衣、长裤',
+          winter: '冬季建议：羽绒服、保暖内衣、围巾、帽子'
+        }[season] || '';
+      }
+
+      function loadState() {
+        try {
+          return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+        } catch { return {}; }
+      }
+
+      function saveState(state) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      function getAllItems(season) {
+        const all = [];
+        baseCategories.forEach(cat => {
+          all.push({ ...cat, source: 'base' });
+        });
+        const extra = seasonExtras[season];
+        if (extra) {
+          all.push({ title: extra.label, items: extra.items, source: 'season' });
+        }
+        return all;
+      }
+
+      function renderChecklist() {
+        const season = getCurrentSeason();
+        const categories = getAllItems(season);
+        const state = loadState();
+        const body = document.getElementById('prepChecklistBody');
+        if (!body) return;
+
+        let totalItems = 0;
+        let checkedItems = 0;
+        let html = '';
+
+        categories.forEach(cat => {
+          html += '<div class="prep-category">';
+          html += `<div class="prep-category-title">${cat.title}`;
+          if (cat.source === 'season') {
+            html += `<span class="prep-season-tag">${getSeasonName(season)}</span>`;
+          }
+          html += '</div>';
+
+          cat.items.forEach(item => {
+            const checked = !!state[item.id];
+            if (checked) checkedItems++;
+            totalItems++;
+            const hintHtml = item.seasonHint ? `<span class="prep-season-tag" title="${getSeasonHint(season)}">${getSeasonHint(season)}</span>` : '';
+            html += `<label class="prep-item ${checked ? 'checked' : ''}" data-id="${item.id}">
+              <span class="prep-check-icon">✓</span>
+              <input type="checkbox" data-id="${item.id}" ${checked ? 'checked' : ''}>
+              <span class="prep-item-text">${item.text}${hintHtml}</span>
+            </label>`;
+          });
+
+          html += '</div>';
+        });
+
+        body.innerHTML = html;
+        updateProgress(checkedItems, totalItems);
+
+        // Bind checkboxes
+        body.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+          cb.addEventListener('change', () => {
+            const st = loadState();
+            st[cb.dataset.id] = cb.checked;
+            saveState(st);
+            cb.closest('.prep-item').classList.toggle('checked', cb.checked);
+
+            // Recount
+            const allCbs = body.querySelectorAll('input[type="checkbox"]');
+            let checked = 0;
+            allCbs.forEach(c => { if (c.checked) checked++; });
+            updateProgress(checked, allCbs.length);
+          });
+        });
+      }
+
+      function updateProgress(checked, total) {
+        const fill = document.getElementById('prepProgressFill');
+        const text = document.getElementById('prepProgressText');
+        const msg = document.getElementById('prepCompleteMsg');
+        if (!fill || !text) return;
+
+        const pct = total > 0 ? (checked / total * 100) : 0;
+        fill.style.width = pct + '%';
+        text.textContent = `已准备 ${checked}/${total}`;
+
+        if (msg) {
+          msg.classList.toggle('show', checked === total && total > 0);
+        }
+      }
+
+      // Check all
+      document.getElementById('prepCheckAll')?.addEventListener('click', () => {
+        const body = document.getElementById('prepChecklistBody');
+        const state = loadState();
+        body.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+          cb.checked = true;
+          state[cb.dataset.id] = true;
+          cb.closest('.prep-item').classList.add('checked');
+        });
+        saveState(state);
+        const allCbs = body.querySelectorAll('input[type="checkbox"]');
+        updateProgress(allCbs.length, allCbs.length);
+      });
+
+      // Reset all
+      document.getElementById('prepReset')?.addEventListener('click', () => {
+        const body = document.getElementById('prepChecklistBody');
+        body.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+          cb.checked = false;
+          cb.closest('.prep-item').classList.remove('checked');
+        });
+        saveState({});
+        updateProgress(0, body.querySelectorAll('input[type="checkbox"]').length);
+      });
+
+      // Re-trigger check animation
+      document.getElementById('prepChecklistBody')?.addEventListener('change', function(e) {
+        if (e.target.type === 'checkbox' && e.target.checked) {
+          e.target.style.animation = 'none';
+          e.target.offsetHeight;
+          e.target.style.animation = '';
+        }
+      });
+
+      // Init
+      renderChecklist();
+    })();
+
+    // ══════════════════════════════════════════════
+    // ── Enhanced Weather Tips (UV, Clothing, Index) ──
+    // ══════════════════════════════════════════════
+    (function() {
+      function getClothingAdvice(temp) {
+        if (temp >= 33) return '🥵 短袖短裤+防晒';
+        if (temp >= 28) return '😎 短袖+薄防晒衣';
+        if (temp >= 22) return '🙂 T恤+薄外套';
+        if (temp >= 15) return '🧥 长袖+卫衣';
+        if (temp >= 8) return '🧣 厚外套+围巾';
+        return '🥶 羽绒服+保暖内衣';
+      }
+
+      function getUVAdvice(uvIndex) {
+        const uv = parseFloat(uvIndex) || 0;
+        if (uv >= 11) return { text: '🔴 极强 · 避免外出', level: 'fair' };
+        if (uv >= 8) return { text: '🟠 很强 · 必须防晒', level: 'fair' };
+        if (uv >= 6) return { text: '🟡 较强 · 注意防晒', level: 'good' };
+        if (uv >= 3) return { text: '🟢 中等 · 适当防护', level: 'good' };
+        return { text: '🔵 较弱 · 无需特别防护', level: 'excellent' };
+      }
+
+      function getTravelIndex(temp, desc, windKmph) {
+        const t = parseFloat(temp) || 20;
+        const w = parseFloat(windKmph) || 5;
+        let score = 100;
+        // Temperature penalty
+        if (t > 35) score -= 40;
+        else if (t > 32) score -= 20;
+        else if (t > 28) score -= 5;
+        else if (t < 0) score -= 30;
+        else if (t < 5) score -= 15;
+        else if (t < 10) score -= 5;
+        // Weather penalty
+        const descLower = (desc || '').toLowerCase();
+        if (descLower.includes('雨') || descLower.includes('rain')) score -= 25;
+        if (descLower.includes('雪') || descLower.includes('snow')) score -= 30;
+        if (descLower.includes('雾') || descLower.includes('fog') || descLower.includes('mist')) score -= 15;
+        if (descLower.includes('雷') || descLower.includes('thunder')) score -= 35;
+        // Wind penalty
+        if (w > 40) score -= 25;
+        else if (w > 25) score -= 10;
+        else if (w > 15) score -= 3;
+
+        score = Math.max(0, Math.min(100, score));
+        if (score >= 80) return { text: `🌟 ${score}分 · 非常适合出行`, level: 'excellent' };
+        if (score >= 60) return { text: `👍 ${score}分 · 适合出行`, level: 'good' };
+        if (score >= 40) return { text: `⚠️ ${score}分 · 一般`, level: 'good' };
+        return { text: `❌ ${score}分 · 不太适合`, level: 'fair' };
+      }
+
+      async function enhanceWeather() {
+        try {
+          const res = await fetch('https://wttr.in/Jinan?format=j1', { headers: { 'User-Agent': 'curl/8.0' } });
+          const data = await res.json();
+          const today = data.weather?.[0];
+          if (!today) return;
+
+          const hourly = today.hourly || [];
+          const noon = hourly[Math.floor(hourly.length / 2)] || hourly[0] || {};
+          const maxC = parseInt(today.maxtempC) || 25;
+          const minC = parseInt(today.mintempC) || 15;
+          const avgC = Math.round((maxC + minC) / 2);
+          const desc = (noon.lang_zh?.[0]?.value) || noon.weatherDesc?.[0]?.value || '';
+          const windKmph = parseInt(noon.windspeedKmph) || 10;
+          const uvIndex = noon.uvIndex || '5';
+
+          // Clothing advice
+          const clothingEl = document.getElementById('weClothing');
+          if (clothingEl) clothingEl.textContent = getClothingAdvice(avgC);
+
+          // UV advice
+          const uvEl = document.getElementById('weUV');
+          if (uvEl) {
+            const uv = getUVAdvice(uvIndex);
+            uvEl.innerHTML = `<span class="travel-index ${uv.level}">${uv.text}</span>`;
+          }
+
+          // Travel index
+          const indexEl = document.getElementById('weIndex');
+          if (indexEl) {
+            const idx = getTravelIndex(avgC, desc, windKmph);
+            indexEl.innerHTML = `<span class="travel-index ${idx.level}">${idx.text}</span>`;
+          }
+        } catch(e) {
+          // Silently fail - keep "加载中…" text
+          console.warn('Weather enhancement failed:', e);
+        }
+      }
+
+      enhanceWeather();
+    })();
 
     // ── FAQ accordion ──
     document.querySelectorAll('.faq-q').forEach((q, i) => {

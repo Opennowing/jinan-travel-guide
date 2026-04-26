@@ -200,6 +200,161 @@ html.dark .lit-card .lit-analysis::first-letter{color:#a78bfa}
 html.dark .quote-block .quote-icon{opacity:.05}
 
 
+
+/* ═══════════════════════════════════════════════════════
+   ██  UPGRADED FEATURES CSS  ██
+   ═══════════════════════════════════════════════════════ */
+
+/* ─── Video Cards ─── */
+.video-section-title{margin-top:48px}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px}
+.video-card{position:relative;border-radius:var(--radius-lg);overflow:hidden;background:var(--card-bg);border:1px solid var(--border);transition:all .35s cubic-bezier(.34,1.56,.64,1);cursor:pointer}
+.video-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(0,0,0,.1)}
+.video-card .video-thumb{position:relative;width:100%;padding-top:56.25%;background:#000;overflow:hidden}
+.video-card.portrait .video-thumb{padding-top:177.78%}
+.video-card .video-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.video-card:hover .video-thumb img{transform:scale(1.05)}
+.video-card .play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;transition:all .3s;z-index:2;border:none;cursor:pointer}
+.video-card .play-btn::after{content:'';display:block;width:0;height:0;border-style:solid;border-width:12px 0 12px 22px;border-color:transparent transparent transparent #fff;margin-left:4px}
+.video-card:hover .play-btn{background:rgba(201,169,110,.9);transform:translate(-50%,-50%) scale(1.1)}
+.video-card .video-info{padding:16px 18px}
+.video-card .video-info h4{font:700 .95rem/1.3 var(--serif);margin-bottom:4px}
+.video-card .video-info p{font-size:.82rem;color:var(--text2);line-height:1.6}
+.video-card .video-tag{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.6);color:#fff;font-size:.7rem;font-weight:600;padding:3px 10px;border-radius:100px;z-index:3;backdrop-filter:blur(4px)}
+.video-iframe-wrap{position:absolute;inset:0;z-index:5}
+.video-iframe-wrap iframe{width:100%;height:100%;border:none}
+
+/* ─── Immersive Timeline ─── */
+.im-timeline{position:relative}
+.im-timeline-section{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden}
+.im-timeline-bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0}
+.im-timeline-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,.7),rgba(0,0,0,.5))}
+.im-timeline-content{position:relative;z-index:1;max-width:700px;padding:60px 40px;color:#fff}
+.im-timeline-year{font:900 clamp(3rem,8vw,6rem)/1 var(--serif);color:var(--accent);margin-bottom:16px;opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.25,.46,.45,.94)}
+.im-timeline-section.active .im-timeline-year{opacity:1;transform:translateY(0)}
+.im-timeline-title{font:700 clamp(1.3rem,3vw,2rem)/1.3 var(--serif);margin-bottom:16px;color:#fff;opacity:0;transform:translateY(20px);transition:all .6s .2s}
+.im-timeline-section.active .im-timeline-title{opacity:1;transform:translateY(0)}
+.im-timeline-desc{font-size:clamp(.9rem,1.5vw,1.05rem);line-height:1.9;color:rgba(255,255,255,.85);opacity:0;transform:translateY(20px)}
+.im-timeline-section.active .im-timeline-desc{opacity:1;transform:translateY(0);transition:all .6s .4s}
+.im-timeline-emoji{font-size:4rem;margin-bottom:16px;opacity:0;transform:scale(.5);transition:all .6s .1s}
+.im-timeline-section.active .im-timeline-emoji{opacity:1;transform:scale(1)}
+.im-timeline-progress{position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:95;display:flex;flex-direction:column;gap:12px}
+.im-timeline-progress .prog-dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.3);border:2px solid rgba(255,255,255,.5);cursor:pointer;transition:all .3s;position:relative}
+.im-timeline-progress .prog-dot.active{background:var(--accent);border-color:var(--accent);transform:scale(1.3)}
+.im-timeline-progress .prog-dot::after{content:attr(data-year);position:absolute;right:24px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:.75rem;color:#fff;background:rgba(0,0,0,.6);padding:4px 12px;border-radius:6px;opacity:0;pointer-events:none;transition:opacity .2s;backdrop-filter:blur(4px)}
+.im-timeline-progress .prog-dot:hover::after{opacity:1}
+.im-timeline-nav-hint{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.6);font-size:.8rem;z-index:95;display:flex;align-items:center;gap:8px;animation:hintBounce 2s infinite}
+.im-timeline-nav-hint span{display:block;width:20px;height:20px;border-right:2px solid rgba(255,255,255,.6);border-bottom:2px solid rgba(255,255,255,.6);transform:rotate(45deg);animation:hintArrow 2s infinite}
+@keyframes hintBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+@keyframes hintArrow{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* ─── 3D Flip Cards ─── */
+.culture-grid-3d{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.flip-card{perspective:1000px;height:320px;cursor:pointer}
+.flip-card-inner{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.4,.2,.2,1);transform-style:preserve-3d}
+.flip-card:hover .flip-card-inner,.flip-card.flipped .flip-card-inner{transform:rotateY(180deg)}
+.flip-card-front,.flip-card-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--radius-lg);border:1px solid var(--border);overflow:hidden}
+.flip-card-front{background:var(--card-bg);display:flex;flex-direction:column}
+.flip-card-front .flip-img{height:140px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,var(--bg2),var(--bg3));position:relative;overflow:hidden}
+.flip-card-front .flip-img::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 50%,var(--card-bg))}
+.flip-card-front .flip-body{padding:16px 20px;flex:1;display:flex;flex-direction:column}
+.flip-card-front .flip-body h3{font:700 1.05rem/1.3 var(--serif);margin-bottom:6px}
+.flip-card-front .flip-body p{font-size:.85rem;color:var(--text2);line-height:1.6}
+.flip-card-back{background:var(--card-bg);transform:rotateY(180deg);padding:28px 24px;display:flex;flex-direction:column;justify-content:center}
+.flip-card-back h3{font:700 1.1rem/1.3 var(--serif);color:var(--accent);margin-bottom:12px}
+.flip-card-back p{font-size:.88rem;color:var(--text2);line-height:1.7;margin-bottom:8px}
+.flip-card-back .flip-detail{font-size:.82rem;color:var(--text3);line-height:1.6;margin-bottom:16px}
+.flip-card-back .flip-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 20px;border:1px solid var(--accent);border-radius:100px;color:var(--accent);font-size:.85rem;font-weight:600;transition:all .2s;background:transparent;cursor:pointer;align-self:flex-start}
+.flip-card-back .flip-btn:hover{background:var(--accent);color:#fff}
+
+/* ─── Heritage Interactive ─── */
+.heritage-interactive{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.heritage-item{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .35s cubic-bezier(.34,1.56,.64,1)}
+.heritage-item:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.heritage-visual{height:180px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--bg2),var(--bg3))}
+.heritage-visual .heritage-emoji{font-size:4rem;position:relative;z-index:1;transition:transform .3s}
+.heritage-item:hover .heritage-emoji{transform:scale(1.1)}
+.heritage-body{padding:20px 22px}
+.heritage-body h4{font:700 1rem/1.3 var(--serif);margin-bottom:6px}
+.heritage-body p{font-size:.85rem;color:var(--text2);line-height:1.7;margin-bottom:14px}
+.heritage-exp-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border:1px solid var(--accent);border-radius:100px;background:transparent;color:var(--accent);font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s}
+.heritage-exp-btn:hover{background:var(--accent);color:#fff}
+.heritage-exp-btn.active{background:var(--accent);color:#fff;pointer-events:none}
+
+/* ── Shadow Puppet Animation ── */
+.shadow-puppet-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .4s;z-index:2;pointer-events:none}
+.shadow-puppet-stage.active{opacity:1}
+.puppet-figure{position:relative}
+.puppet-body{width:60px;height:80px;background:linear-gradient(135deg,#2a1810,#4a2c1a);border-radius:8px 8px 4px 4px;position:relative}
+.puppet-head{width:40px;height:40px;background:linear-gradient(135deg,#d4a574,#b8834a);border-radius:50%;position:absolute;top:-35px;left:50%;transform:translateX(-50%);box-shadow:0 0 15px rgba(255,200,100,.3)}
+.puppet-arm{width:8px;height:50px;background:linear-gradient(135deg,#2a1810,#4a2c1a);position:absolute;top:5px;border-radius:4px;transform-origin:top center}
+.puppet-arm.left{left:-12px;animation:puppetWaveL 1.2s ease-in-out infinite}
+.puppet-arm.right{right:-12px;animation:puppetWaveR 1.2s ease-in-out infinite .6s}
+.puppet-leg{width:10px;height:45px;background:linear-gradient(135deg,#2a1810,#4a2c1a);position:absolute;bottom:-40px;border-radius:4px;transform-origin:top center}
+.puppet-leg.left{left:12px;animation:puppetWalkL .8s ease-in-out infinite}
+.puppet-leg.right{right:12px;animation:puppetWalkR .8s ease-in-out infinite .4s}
+@keyframes puppetWaveL{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(-45deg)}}
+@keyframes puppetWaveR{0%,100%{transform:rotate(10deg)}50%{transform:rotate(45deg)}}
+@keyframes puppetWalkL{0%,100%{transform:rotate(5deg)}50%{transform:rotate(-15deg)}}
+@keyframes puppetWalkR{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(15deg)}}
+
+/* ── Embroidery Animation ── */
+.embroidery-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .4s;z-index:2;pointer-events:none}
+.embroidery-stage.active{opacity:1}
+.needle-line{stroke-dasharray:300;stroke-dashoffset:300;animation:stitchDraw 3s ease-in-out infinite}
+@keyframes stitchDraw{0%{stroke-dashoffset:300}50%{stroke-dashoffset:0}100%{stroke-dashoffset:-300}}
+
+/* ── Dough Figurine Animation ── */
+.dough-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .4s;z-index:2;pointer-events:none}
+.dough-stage.active{opacity:1}
+.dough-figure{animation:doughBounce 1.5s ease-in-out infinite}
+@keyframes doughBounce{0%,100%{transform:scale(1) rotate(0deg)}25%{transform:scale(1.05) rotate(2deg)}50%{transform:scale(1) rotate(0deg)}75%{transform:scale(1.05) rotate(-2deg)}}
+
+/* ── Kuaishu Rhythm Animation ── */
+.kuaishu-stage{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .4s;z-index:2;pointer-events:none}
+.kuaishu-stage.active{opacity:1}
+.rhythm-bar{display:flex;gap:4px;align-items:flex-end;height:60px}
+.rhythm-bar span{width:6px;background:var(--accent);border-radius:3px;animation:rhythmPulse 1s ease-in-out infinite}
+.rhythm-bar span:nth-child(1){animation-delay:0s;height:20px}
+.rhythm-bar span:nth-child(2){animation-delay:.1s;height:35px}
+.rhythm-bar span:nth-child(3){animation-delay:.2s;height:50px}
+.rhythm-bar span:nth-child(4){animation-delay:.3s;height:30px}
+.rhythm-bar span:nth-child(5){animation-delay:.4s;height:45px}
+.rhythm-bar span:nth-child(6){animation-delay:.5s;height:25px}
+.rhythm-bar span:nth-child(7){animation-delay:.6s;height:40px}
+@keyframes rhythmPulse{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.4)}}
+
+/* ─── Dark Mode for New Features ─── */
+html.dark .video-card{background:var(--card-bg)}
+html.dark .im-timeline-bg::after{background:linear-gradient(135deg,rgba(0,0,0,.8),rgba(0,0,0,.6))}
+html.dark .flip-card-front,html.dark .flip-card-back{background:var(--card-bg)}
+html.dark .heritage-item{background:var(--card-bg)}
+
+/* ─── Mobile Responsive for New Features ─── */
+@media(max-width:768px){
+  .video-grid{grid-template-columns:1fr}
+  .video-card.portrait .video-thumb{padding-top:100%}
+  .im-timeline-content{padding:40px 24px}
+  .im-timeline-progress{right:12px}
+  .im-timeline-progress .prog-dot{width:10px;height:10px}
+  .flip-card{height:280px;perspective:none}
+  .flip-card-inner{transition:none!important}
+  .flip-card.flipped .flip-card-inner{transform:rotateY(180deg)}
+  .flip-card:hover .flip-card-inner{transform:none}
+  .heritage-interactive{grid-template-columns:1fr}
+  .im-timeline-nav-hint{display:none}
+}
+
+/* ─── Reduced Motion ─── */
+@media(prefers-reduced-motion:reduce){
+  .im-timeline-year,.im-timeline-title,.im-timeline-desc,.im-timeline-emoji{opacity:1!important;transform:none!important;transition:none!important}
+  .flip-card-inner{transition:none!important}
+  .flip-card:hover .flip-card-inner{transform:none!important}
+  .puppet-arm,.puppet-leg,.needle-line,.dough-figure,.rhythm-bar span{animation:none!important}
+  .im-timeline-nav-hint{animation:none!important}
+}
+
+
 /* --- Card Fav Button --- */
 
 @media(max-width:768px){
@@ -609,79 +764,103 @@ html {
   </div>
 </div>
 
-<!-- ─── TIMELINE ─── -->
-<section class="section section--history" id="history" aria-labelledby="history-title">
-  <div class="section-inner">
-    <div class="section-header reveal">
-      <div class="eyebrow">历史长河</div>
-      <h2 id="history-title">济南四千年</h2>
-      <p>一座城市的前世今生</p>
+<!-- ─── IMMERSIVE TIMELINE ─── -->
+<section class="section section--history im-timeline" id="history" aria-labelledby="history-title">
+  <div class="im-timeline-progress" id="imTimelineProgress" aria-label="时间线进度"></div>
+  <div class="im-timeline-nav-hint" id="imTimelineHint">
+    滚动探索 <span></span>
+  </div>
+
+  <div class="im-timeline-section" data-year="公元前2500年" style="background:#1a0f0a">
+    <div class="im-timeline-bg" style="background-image:url('https://images.unsplash.com/photo-1548013146-72479768bada?w=1600&q=80')"></div>
+    <div class="im-timeline-content">
+      <div class="im-timeline-emoji">🏺</div>
+      <div class="im-timeline-year" data-target="公元前2500年">公元前2500年</div>
+      <h3 class="im-timeline-title">龙山文化发源地</h3>
+      <p class="im-timeline-desc">济南章丘龙山镇发现的龙山文化遗址，是中华文明的重要源头之一。蛋壳黑陶杯——薄如蛋壳、黑如漆、亮如镜，代表了4000多年前制陶工艺的巅峰。山东省博物馆镇馆之宝。</p>
     </div>
-    <div class="timeline" role="list">
-      <div class="tl-item rv" role="listitem">
-        <div class="tl-dot" aria-hidden="true">🏺</div>
-        <div class="tl-year">公元前2500年</div>
-        <div class="tl-title">龙山文化发源地</div>
-        <div class="tl-desc">济南章丘龙山镇发现的龙山文化遗址，是中华文明的重要源头之一。蛋壳黑陶杯——薄如蛋壳、黑如漆、亮如镜，代表了4000多年前制陶工艺的巅峰。山东省博物馆镇馆之宝。</div>
-      </div>
-      <div class="tl-item rv" role="listitem">
-        <div class="tl-dot" aria-hidden="true">⚔️</div>
-        <div class="tl-year">春秋战国</div>
-        <div class="tl-title">齐国要邑，齐鲁交汇</div>
-        <div class="tl-desc">济南地处齐、鲁两国交界，兼收齐国的开放进取与鲁国的礼乐教化。这段历史奠定了济南"尚武崇文"的城市性格。管仲相齐、晏婴使楚，齐鲁大地的故事至今流传。</div>
-      </div>
-      <div class="tl-item rv" role="listitem">
-        <div class="tl-dot" aria-hidden="true">🏛️</div>
-        <div class="tl-year">汉代</div>
-        <div class="tl-title">济南郡，名城初立</div>
-        <div class="tl-desc">西汉设济南郡，治所东平陵城（今章丘境内）。济南之名始于此——因地处古济水之南而得名。汉代济南已是齐鲁地区的政治经济重镇，东平陵城遗址至今可考。</div>
-      </div>
-      <div class="tl-item rv" role="listitem">
-        <div class="tl-dot" aria-hidden="true">📝</div>
-        <div class="tl-year">唐宋</div>
-        <div class="tl-title">文学鼎盛，"济南二安"</div>
-        <div class="tl-desc">宋代济南同时诞生了婉约派词宗李清照（号易安居士）和豪放派词宗辛弃疾（字幼安），合称"济南二安"。一个城市出了两位词坛巨匠，中国文学史上绝无仅有。趵突泉畔的李清照纪念堂、大明湖畔的辛弃疾纪念祠至今可访。</div>
-      </div>
-      <div class="tl-item rv" role="listitem">
-        <div class="tl-dot" aria-hidden="true">🏗️</div>
-        <div class="tl-year">1904年</div>
-        <div class="tl-title">自开商埠，近代转型</div>
-        <div class="tl-desc">济南是近代中国第一个自开商埠的城市（非租界）。胶济铁路通车后，德国、日本商人涌入经三路一带，留下了大量德式、日式建筑。这段历史造就了济南独特的"老商埠"文化——既有传统泉水人家的从容，又有近代开放的包容。</div>
-      </div>
-      <div class="tl-item rv" role="listitem">
-        <div class="tl-dot" aria-hidden="true">🚂</div>
-        <div class="tl-year">1904-1912年</div>
-        <div class="tl-title">济南开埠盛况</div>
-        <div class="tl-desc">商埠区划定经一路至经七路、纬一路至纬十路的棋盘格局，引进西方市政管理理念。先后有德华银行、义利洋行、日本领事馆等数十家外国机构入驻。济南从传统府城一跃成为华北重要的商贸枢纽，人口从不足10万迅速增长至近30万，被誉为"山东第一商埠"。</div>
-      </div>
-      <div class="tl-item rv" role="listitem">
-        <div class="tl-dot" aria-hidden="true">⚠️</div>
-        <div class="tl-year">1928年</div>
-        <div class="tl-title">济南惨案（五三惨案）</div>
-        <div class="tl-desc">1928年5月3日，日军以"保护侨民"为由出兵济南，制造了震惊中外的"济南惨案"。日军屠杀中国军民6000余人，外交官蔡公时被割鼻挖眼后殉难。每年5月3日，济南全城鸣响防空警报以纪念这段屈辱历史。趵突泉畔的"五三惨案"纪念碑至今矗立。</div>
-      </div>
-      <div class="tl-item rv" role="listitem">
-        <div class="tl-dot" aria-hidden="true">🎖️</div>
-        <div class="tl-year">1948年</div>
-        <div class="tl-title">济南战役，古城新生</div>
-        <div class="tl-desc">1948年9月，华东野战军发起济南战役，经8天激战攻克城池，歼敌10万余人。这是人民解放军首次攻克国民党重兵守备的大城市，揭开了战略决战的序幕。济南战役纪念馆位于英雄山下。</div>
-      </div>
-      <div class="tl-item rv" role="listitem">
-        <div class="tl-dot" aria-hidden="true">💧</div>
-        <div class="tl-year">2003年</div>
-        <div class="tl-title">趵突泉复涌，泉城重获新生</div>
-        <div class="tl-desc">自1976年起，趵突泉多次停喷，最长断流达926天。2003年9月6日，在全市保泉行动的努力下，趵突泉终于重新喷涌，市民奔走相告、万人空巷。此后连续喷涌至今超过20年，创近代纪录。这场保泉运动催生了济南严格的地下水管理制度，"保泉"成为全城共识。</div>
-      </div>
-      <div class="tl-item rv" role="listitem">
-        <div class="tl-dot" aria-hidden="true">🏙️</div>
-        <div class="tl-year">2023年</div>
-        <div class="tl-title">GDP破万亿，泉水之都新篇</div>
-        <div class="tl-desc">2023年济南GDP突破万亿元大关，正式跻身"万亿俱乐部"。作为山东省会、黄河流域中心城市，济南正从"泉城"迈向"强城"——趵突泉持续喷涌20年创近代纪录，数字经济、先进制造业蓬勃发展。</div>
-      </div>
+  </div>
+
+  <div class="im-timeline-section" data-year="春秋战国" style="background:#0f1a1a">
+    <div class="im-timeline-bg" style="background-image:url('https://images.unsplash.com/photo-1590559899731-a382839e5549?w=1600&q=80')"></div>
+    <div class="im-timeline-content">
+      <div class="im-timeline-emoji">⚔️</div>
+      <div class="im-timeline-year" data-target="春秋战国">春秋战国</div>
+      <h3 class="im-timeline-title">齐国要邑，齐鲁交汇</h3>
+      <p class="im-timeline-desc">济南地处齐、鲁两国交界，兼收齐国的开放进取与鲁国的礼乐教化。这段历史奠定了济南"尚武崇文"的城市性格。管仲相齐、晏婴使楚，齐鲁大地的故事至今流传。</p>
+    </div>
+  </div>
+
+  <div class="im-timeline-section" data-year="汉代" style="background:#1a1a0f">
+    <div class="im-timeline-bg" style="background-image:url('https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=1600&q=80')"></div>
+    <div class="im-timeline-content">
+      <div class="im-timeline-emoji">🏛️</div>
+      <div class="im-timeline-year" data-target="汉代">汉代</div>
+      <h3 class="im-timeline-title">济南郡，名城初立</h3>
+      <p class="im-timeline-desc">西汉设济南郡，治所东平陵城（今章丘境内）。济南之名始于此——因地处古济水之南而得名。汉代济南已是齐鲁地区的政治经济重镇，东平陵城遗址至今可考。</p>
+    </div>
+  </div>
+
+  <div class="im-timeline-section" data-year="唐宋" style="background:#0a1a1a">
+    <div class="im-timeline-bg" style="background-image:url('https://images.unsplash.com/photo-1528164344705-47542687000d?w=1600&q=80')"></div>
+    <div class="im-timeline-content">
+      <div class="im-timeline-emoji">📝</div>
+      <div class="im-timeline-year" data-target="唐宋">唐宋</div>
+      <h3 class="im-timeline-title">文学鼎盛，"济南二安"</h3>
+      <p class="im-timeline-desc">宋代济南同时诞生了婉约派词宗李清照（号易安居士）和豪放派词宗辛弃疾（字幼安），合称"济南二安"。一个城市出了两位词坛巨匠，中国文学史上绝无仅有。趵突泉畔的李清照纪念堂、大明湖畔的辛弃疾纪念祠至今可访。</p>
+    </div>
+  </div>
+
+  <div class="im-timeline-section" data-year="1904年" style="background:#1a1008">
+    <div class="im-timeline-bg" style="background-image:url('https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1600&q=80')"></div>
+    <div class="im-timeline-content">
+      <div class="im-timeline-emoji">🏗️</div>
+      <div class="im-timeline-year" data-target="1904年">1904年</div>
+      <h3 class="im-timeline-title">自开商埠，近代转型</h3>
+      <p class="im-timeline-desc">济南是近代中国第一个自开商埠的城市（非租界）。胶济铁路通车后，德国、日本商人涌入经三路一带，留下了大量德式、日式建筑。这段历史造就了济南独特的"老商埠"文化——既有传统泉水人家的从容，又有近代开放的包容。</p>
+    </div>
+  </div>
+
+  <div class="im-timeline-section" data-year="1928年" style="background:#1a0808">
+    <div class="im-timeline-bg" style="background-image:url('https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?w=1600&q=80')"></div>
+    <div class="im-timeline-content">
+      <div class="im-timeline-emoji">⚠️</div>
+      <div class="im-timeline-year" data-target="1928年">1928年</div>
+      <h3 class="im-timeline-title">济南惨案（五三惨案）</h3>
+      <p class="im-timeline-desc">1928年5月3日，日军以"保护侨民"为由出兵济南，制造了震惊中外的"济南惨案"。日军屠杀中国军民6000余人，外交官蔡公时被割鼻挖眼后殉难。每年5月3日，济南全城鸣响防空警报以纪念这段屈辱历史。</p>
+    </div>
+  </div>
+
+  <div class="im-timeline-section" data-year="1948年" style="background:#0a1a0a">
+    <div class="im-timeline-bg" style="background-image:url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1600&q=80')"></div>
+    <div class="im-timeline-content">
+      <div class="im-timeline-emoji">🎖️</div>
+      <div class="im-timeline-year" data-target="1948年">1948年</div>
+      <h3 class="im-timeline-title">济南战役，古城新生</h3>
+      <p class="im-timeline-desc">1948年9月，华东野战军发起济南战役，经8天激战攻克城池，歼敌10万余人。这是人民解放军首次攻克国民党重兵守备的大城市，揭开了战略决战的序幕。济南战役纪念馆位于英雄山下。</p>
+    </div>
+  </div>
+
+  <div class="im-timeline-section" data-year="2003年" style="background:#081a1a">
+    <div class="im-timeline-bg" style="background-image:url('https://images.unsplash.com/photo-1548013146-72479768bada?w=1600&q=80')"></div>
+    <div class="im-timeline-content">
+      <div class="im-timeline-emoji">💧</div>
+      <div class="im-timeline-year" data-target="2003年">2003年</div>
+      <h3 class="im-timeline-title">趵突泉复涌，泉城重获新生</h3>
+      <p class="im-timeline-desc">自1976年起，趵突泉多次停喷，最长断流达926天。2003年9月6日，在全市保泉行动的努力下，趵突泉终于重新喷涌，市民奔走相告、万人空巷。此后连续喷涌至今超过20年，创近代纪录。</p>
+    </div>
+  </div>
+
+  <div class="im-timeline-section" data-year="2023年" style="background:#1a1a10">
+    <div class="im-timeline-bg" style="background-image:url('https://images.unsplash.com/photo-1590559899731-a382839e5549?w=1600&q=80')"></div>
+    <div class="im-timeline-content">
+      <div class="im-timeline-emoji">🏙️</div>
+      <div class="im-timeline-year" data-target="2023年">2023年</div>
+      <h3 class="im-timeline-title">GDP破万亿，泉水之都新篇</h3>
+      <p class="im-timeline-desc">2023年济南GDP突破万亿元大关，正式跻身"万亿俱乐部"。作为山东省会、黄河流域中心城市，济南正从"泉城"迈向"强城"——趵突泉持续喷涌20年创近代纪录，数字经济、先进制造业蓬勃发展。</p>
     </div>
   </div>
 </section>
-
 <div class="section-divider" aria-hidden="true">◈</div>
 
 <!-- ─── SPRING CULTURE ─── -->
@@ -956,6 +1135,298 @@ html {
 </section>
 
 <div class="section-divider" aria-hidden="true">◈</div>
+
+
+<!-- ─── VIDEO SECTION ─── -->
+<div class="section-divider" aria-hidden="true">◈</div>
+<section class="section section--springs" id="videos" style="background:var(--bg)" aria-labelledby="video-title">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="eyebrow">视频专区</div>
+      <h2 id="video-title">🎬 泉城影像</h2>
+      <p>用镜头感受济南的脉搏</p>
+    </div>
+    <div class="video-grid">
+      <div class="video-card rv stagger-1" data-video="BV1GJ411x7h7" data-platform="bilibili">
+        <span class="video-tag">泉水文化</span>
+        <div class="video-thumb">
+          <img src="https://images.unsplash.com/photo-1548013146-72479768bada?w=640&q=75" alt="趵突泉实景" loading="lazy">
+          <button class="play-btn" aria-label="播放视频"></button>
+        </div>
+        <div class="video-info">
+          <h4>⛲ 趵突泉实景 · 天下第一泉</h4>
+          <p>三股泉水昼夜喷涌，"趵突腾空"济南八景之首</p>
+        </div>
+      </div>
+      <div class="video-card rv stagger-2" data-video="BV1QJ411h7o7" data-platform="bilibili">
+        <span class="video-tag">老济南</span>
+        <div class="video-thumb">
+          <img src="https://images.unsplash.com/photo-1590559899731-a382839e5549?w=640&q=75" alt="济南历史建筑" loading="lazy">
+          <button class="play-btn" aria-label="播放视频"></button>
+        </div>
+        <div class="video-info">
+          <h4>🏛️ 老济南 · 历史建筑巡礼</h4>
+          <p>百年老商埠、德式建筑群、洪家楼教堂</p>
+        </div>
+      </div>
+      <div class="video-card rv stagger-3" data-video="BV1EJ411D7oS" data-platform="bilibili">
+        <span class="video-tag">鲁菜文化</span>
+        <div class="video-thumb">
+          <img src="https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?w=640&q=75" alt="鲁菜制作" loading="lazy">
+          <button class="play-btn" aria-label="播放视频"></button>
+        </div>
+        <div class="video-info">
+          <h4>🐟 糖醋鲤鱼 · 经典鲁菜制作</h4>
+          <p>黄河鲤鱼的极致演绎，火候精准到秒</p>
+        </div>
+      </div>
+      <div class="video-card rv stagger-4" data-video="BV1hJ411e7Fd" data-platform="bilibili">
+        <span class="video-tag">曲艺文化</span>
+        <div class="video-thumb">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=640&q=75" alt="山东快书" loading="lazy">
+          <button class="play-btn" aria-label="播放视频"></button>
+        </div>
+        <div class="video-info">
+          <h4>🎤 山东快书 · 鸳鸯板声声</h4>
+          <p>节奏明快、语言诙谐的说唱艺术</p>
+        </div>
+      </div>
+      <div class="video-card portrait rv stagger-5" data-video="BV1GJ411x7h7" data-platform="bilibili">
+        <span class="video-tag">短视频</span>
+        <div class="video-thumb">
+          <img src="https://images.unsplash.com/photo-1528164344705-47542687000d?w=640&q=75" alt="泉水人家" loading="lazy">
+          <button class="play-btn" aria-label="播放视频"></button>
+        </div>
+        <div class="video-info">
+          <h4>🏠 泉水人家 · 市井生活</h4>
+          <p>清晨打水、泉水泡茶、曲水亭街的慢时光</p>
+        </div>
+      </div>
+      <div class="video-card rv stagger-6" data-video="BV1QJ411h7o7" data-platform="bilibili">
+        <span class="video-tag">非遗</span>
+        <div class="video-thumb">
+          <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=640&q=75" alt="济南皮影戏" loading="lazy">
+          <button class="play-btn" aria-label="播放视频"></button>
+        </div>
+        <div class="video-info">
+          <h4>🎭 济南皮影戏 · 一人一台戏</h4>
+          <p>驴皮雕刻、唱腔锣鼓、指尖上的千年传奇</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ─── 3D FLIP CARDS ─── -->
+<div class="section-divider" aria-hidden="true">◈</div>
+<section class="section" id="culture-3d" style="background:var(--bg2)" aria-labelledby="culture-3d-title">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="eyebrow">深度探索</div>
+      <h2 id="culture-3d-title">🃏 文化翻翻卡</h2>
+      <p>悬停或点击卡片，翻转查看背面的详细介绍</p>
+    </div>
+    <div class="culture-grid-3d">
+      <div class="flip-card rv stagger-1">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="flip-img">💧</div>
+            <div class="flip-body">
+              <h3>泉水直饮文化</h3>
+              <p>黑虎泉、琵琶泉等设有专门取水点，市民常年在此打水泡茶。</p>
+            </div>
+          </div>
+          <div class="flip-card-back">
+            <h3>💧 泉水直饮</h3>
+            <p>清晨6-7点，能看到老济南人提着水桶排队打水的场景。这是独属于泉城的市井生活。</p>
+            <div class="flip-detail">历史背景：济南人喝泉水的习惯延续了数百年。即便自来水早已普及，老济南人依然坚持——"自来水泡不出那个味儿"。趵突泉水质清冽甘甜，矿物质含量适中。</div>
+            <button class="flip-btn" onclick="showCultureDetail('spring')">了解更多 →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card rv stagger-2">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="flip-img">🚣</div>
+            <div class="flip-body">
+              <h3>护城河游船</h3>
+              <p>全长6.9公里，全国唯一由泉水汇流而成的护城河。</p>
+            </div>
+          </div>
+          <div class="flip-card-back">
+            <h3>🚣 护城河游船</h3>
+            <p>乘船从黑虎泉出发，途经趵突泉、五龙潭、大明湖，一路泉水相伴。</p>
+            <div class="flip-detail">历史背景：护城河始建于明代，2007年经改造后全线通航。夜游船¥75/人，灯光映水，极为浪漫。全程约50分钟。</div>
+            <button class="flip-btn" onclick="showCultureDetail('spring')">了解更多 →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card rv stagger-3">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="flip-img">👑</div>
+            <div class="flip-body">
+              <h3>鲁菜历史地位</h3>
+              <p>八大菜系之首，历史最悠久、技法最丰富。</p>
+            </div>
+          </div>
+          <div class="flip-card-back">
+            <h3>👑 鲁菜文化</h3>
+            <p>明清时期，鲁菜是宫廷御膳的主要来源，北京"八大楼"中有六家主营鲁菜。</p>
+            <div class="flip-detail">历史背景：孔子"食不厌精，脍不厌细"的饮食理念，正是鲁菜文化的源头。鲁菜是唯一自发源起的北方菜系。</div>
+            <button class="flip-btn" onclick="showCultureDetail('food')">了解更多 →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card rv stagger-4">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="flip-img">🎭</div>
+            <div class="flip-body">
+              <h3>济南皮影戏</h3>
+              <p>用驴皮雕刻人物，配以唱腔和锣鼓的古老艺术。</p>
+            </div>
+          </div>
+          <div class="flip-card-back">
+            <h3>🎭 皮影戏</h3>
+            <p>济南皮影以"一人一台戏"著称——一个艺人同时操纵皮影、演唱、配音。</p>
+            <div class="flip-detail">历史背景：起源于清代，大观园和芙蓉街偶有演出。用驴皮雕刻人物，配以唱腔和锣鼓，是国家级非物质文化遗产。</div>
+            <button class="flip-btn" onclick="showCultureDetail('folk')">了解更多 →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card rv stagger-5">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="flip-img">🌸</div>
+            <div class="flip-body">
+              <h3>李清照</h3>
+              <p>千古第一才女，婉约派词宗，济南章丘人。</p>
+            </div>
+          </div>
+          <div class="flip-card-back">
+            <h3>🌸 李清照</h3>
+            <p>"知否知否，应是绿肥红瘦"——她的词细腻婉转，被誉为"千古第一才女"。</p>
+            <div class="flip-detail">趵突泉畔有李清照纪念堂，章丘有李清照故居。她的前半生在济南度过，写下了大量关于泉水、荷花的词作。</div>
+            <button class="flip-btn" onclick="showCultureDetail('poetry')">了解更多 →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flip-card rv stagger-6">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="flip-img">⚔️</div>
+            <div class="flip-body">
+              <h3>辛弃疾</h3>
+              <p>豪放派词宗，济南历城人，21岁闯金营。</p>
+            </div>
+          </div>
+          <div class="flip-card-back">
+            <h3>⚔️ 辛弃疾</h3>
+            <p>"醉里挑灯看剑，梦回吹角连营"——他的词气势磅礴、壮怀激烈。</p>
+            <div class="flip-detail">21岁率骑兵闯入金营活捉叛将，一生以恢复中原为志。大明湖南岸有辛弃疾纪念祠。</div>
+            <button class="flip-btn" onclick="showCultureDetail('poetry')">了解更多 →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── HERITAGE INTERACTIVE ─── -->
+<div class="section-divider" aria-hidden="true">◈</div>
+<section class="section section--heritage" id="heritage-interactive" aria-labelledby="heritage-int-title">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="eyebrow">非遗体验</div>
+      <h2 id="heritage-int-title">🎭 指尖上的非遗</h2>
+      <p>点击"体验"按钮，感受古老技艺的生命力</p>
+    </div>
+    <div class="heritage-interactive">
+      <div class="heritage-item rv stagger-1">
+        <div class="heritage-visual">
+          <span class="heritage-emoji">🧵</span>
+          <svg class="embroidery-stage" viewBox="0 0 200 180" fill="none">
+            <circle cx="100" cy="90" r="70" stroke="#c9a96e" stroke-width="2" fill="none"/>
+            <path class="needle-line" d="M50 60 Q80 30 100 60 Q120 90 150 60 M50 90 Q80 60 100 90 Q120 120 150 90 M50 120 Q80 90 100 120 Q120 150 150 120" stroke="#e76f51" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <circle cx="155" cy="55" r="4" fill="#c9a96e"/>
+            <line x1="155" y1="55" x2="170" y2="40" stroke="#c9a96e" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="heritage-body">
+          <h4>鲁绣</h4>
+          <p>中国"八大名绣"之一，历史可追溯至春秋战国。以丝线、绒线绣制，针法豪放、色彩浓烈。</p>
+          <button class="heritage-exp-btn" onclick="toggleHeritage(this,'embroidery')">🪡 体验绣花</button>
+        </div>
+      </div>
+
+      <div class="heritage-item rv stagger-2">
+        <div class="heritage-visual">
+          <span class="heritage-emoji">🍜</span>
+          <div class="dough-stage">
+            <div class="dough-figure" style="font-size:5rem">🧑‍🎨</div>
+          </div>
+        </div>
+        <div class="heritage-body">
+          <h4>面塑</h4>
+          <p>用面团捏制人物、动物的民间艺术，始于汉代，至今有2000多年历史。核桃大小的面团可捏出栩栩如生的人物。</p>
+          <button class="heritage-exp-btn" onclick="toggleHeritage(this,'dough')">🎨 体验捏面人</button>
+        </div>
+      </div>
+
+      <div class="heritage-item rv stagger-3">
+        <div class="heritage-visual">
+          <span class="heritage-emoji">🎭</span>
+          <div class="shadow-puppet-stage">
+            <div class="puppet-figure">
+              <div class="puppet-body">
+                <div class="puppet-head"></div>
+                <div class="puppet-arm left"></div>
+                <div class="puppet-arm right"></div>
+                <div class="puppet-leg left"></div>
+                <div class="puppet-leg right"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="heritage-body">
+          <h4>皮影戏</h4>
+          <p>起源于清代，用驴皮雕刻人物，配以唱腔和锣鼓。济南皮影以"一人一台戏"著称。</p>
+          <button class="heritage-exp-btn" onclick="toggleHeritage(this,'shadow')">🎬 看皮影表演</button>
+        </div>
+      </div>
+
+      <div class="heritage-item rv stagger-4">
+        <div class="heritage-visual">
+          <span class="heritage-emoji">🎤</span>
+          <div class="kuaishu-stage">
+            <div style="text-align:center">
+              <div style="font-size:3rem;margin-bottom:8px">🪘</div>
+              <div class="rhythm-bar">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="heritage-body">
+          <h4>山东快书</h4>
+          <p>起源于济南的说唱艺术，以鸳鸯板击节伴奏，节奏明快、语言诙谐。经典曲目《武松传》脍炙人口。</p>
+          <button class="heritage-exp-btn" onclick="toggleHeritage(this,'kuaishu')">🎵 听快书节奏</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- ─── LU CUISINE ─── -->
 <section class="section" id="lu-cuisine" style="background:var(--bg2)" aria-labelledby="cuisine-title">
@@ -1730,6 +2201,244 @@ window.closeCultureModal = function() {
 
 });
 
+
+
+
+
+// ═══════════════════════════════════════════════════════
+// ██  UPGRADED FEATURES JAVASCRIPT  ██
+// ═══════════════════════════════════════════════════════
+
+// ─── Video Card Lazy Loading ───
+(function() {
+  const videoCards = document.querySelectorAll('.video-card[data-video]');
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Preload thumbnail when card enters viewport
+        const img = entry.target.querySelector('img');
+        if (img && img.dataset.src) {
+          img.src = img.dataset.src;
+        }
+        videoObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  videoCards.forEach(card => videoObserver.observe(card));
+
+  // Click to load iframe
+  videoCards.forEach(card => {
+    card.addEventListener('click', function() {
+      const videoId = this.dataset.video;
+      const platform = this.dataset.platform;
+      const thumb = this.querySelector('.video-thumb');
+      if (thumb.querySelector('.video-iframe-wrap')) return;
+
+      let src = '';
+      if (platform === 'bilibili') {
+        src = `https://player.bilibili.com/player.html?bvid=${videoId}&autoplay=1&high_quality=1`;
+      } else if (platform === 'youtube') {
+        src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+      }
+
+      const iframeWrap = document.createElement('div');
+      iframeWrap.className = 'video-iframe-wrap';
+      iframeWrap.innerHTML = `<iframe src="${src}" allow="autoplay; encrypted-media" allowfullscreen loading="lazy"></iframe>`;
+      thumb.appendChild(iframeWrap);
+
+      // Hide play button and tag
+      const playBtn = this.querySelector('.play-btn');
+      const tag = this.querySelector('.video-tag');
+      if (playBtn) playBtn.style.display = 'none';
+      if (tag) tag.style.display = 'none';
+    });
+  });
+})();
+
+// ─── Immersive Timeline ───
+(function() {
+  const imSections = document.querySelectorAll('.im-timeline-section');
+  const progContainer = document.getElementById('imTimelineProgress');
+  const hint = document.getElementById('imTimelineHint');
+
+  if (!imSections.length || !progContainer) return;
+
+  // Check reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Build progress dots
+  imSections.forEach((sec, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'prog-dot';
+    dot.dataset.year = sec.dataset.year;
+    dot.setAttribute('role', 'button');
+    dot.setAttribute('tabindex', '0');
+    dot.setAttribute('aria-label', `跳转到${sec.dataset.year}`);
+    dot.addEventListener('click', () => {
+      sec.scrollIntoView({ behavior: 'smooth' });
+    });
+    dot.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        sec.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+    progContainer.appendChild(dot);
+  });
+
+  const dots = progContainer.querySelectorAll('.prog-dot');
+
+  // IntersectionObserver for sections
+  const imObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        // Update progress dots
+        const idx = Array.from(imSections).indexOf(entry.target);
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        // Hide hint after first section
+        if (hint && idx > 0) hint.style.display = 'none';
+      }
+    });
+  }, { threshold: 0.4 });
+
+  imSections.forEach(sec => imObserver.observe(sec));
+
+  // Parallax effect on scroll (skip if reduced motion)
+  if (!prefersReducedMotion) {
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          imSections.forEach(sec => {
+            const bg = sec.querySelector('.im-timeline-bg');
+            if (!bg) return;
+            const rect = sec.getBoundingClientRect();
+            const progress = -rect.top / window.innerHeight;
+            bg.style.transform = `translateY(${progress * 60}px)`;
+          });
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  }
+
+  // Year counter animation
+  const yearObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !entry.target.dataset.animated) {
+        entry.target.dataset.animated = 'true';
+        animateYear(entry.target);
+        yearObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.im-timeline-year').forEach(el => yearObserver.observe(el));
+
+  function animateYear(el) {
+    const target = el.dataset.target;
+    if (prefersReducedMotion || !target) return;
+    const isNumeric = /^\d+$/.test(target.replace(/[^\d]/g, ''));
+    if (!isNumeric) return;
+    const num = parseInt(target.replace(/[^\d]/g, ''));
+    if (isNaN(num) || num < 10) return;
+    const suffix = target.replace(/[\d,]/g, '');
+    const prefix = target.match(/^[^\d]*/)[0];
+    const duration = 1200;
+    let start = 0;
+    function step(ts) {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = prefix + Math.floor(eased * num).toLocaleString() + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+  }
+})();
+
+// ─── 3D Flip Cards (touch support for mobile) ───
+(function() {
+  const flipCards = document.querySelectorAll('.flip-card');
+  flipCards.forEach(card => {
+    // Mobile: tap to flip
+    card.addEventListener('click', function(e) {
+      if (e.target.closest('.flip-btn')) return; // Don't flip on button click
+      if (window.innerWidth <= 768) {
+        this.classList.toggle('flipped');
+      }
+    });
+    // Close on click outside (mobile)
+    document.addEventListener('click', function(e) {
+      if (window.innerWidth <= 768 && !card.contains(e.target)) {
+        card.classList.remove('flipped');
+      }
+    });
+  });
+})();
+
+// ─── Heritage Interactive Animations ───
+window.toggleHeritage = function(btn, type) {
+  const item = btn.closest('.heritage-item');
+  const visual = item.querySelector('.heritage-visual');
+  const emoji = visual.querySelector('.heritage-emoji');
+  const stage = visual.querySelector('.embroidery-stage, .shadow-puppet-stage, .dough-stage, .kuaishu-stage');
+
+  if (!stage) return;
+
+  const isActive = stage.classList.contains('active');
+
+  // Reset all stages first
+  document.querySelectorAll('.heritage-item').forEach(hi => {
+    const s = hi.querySelector('.embroidery-stage, .shadow-puppet-stage, .dough-stage, .kuaishu-stage');
+    const e = hi.querySelector('.heritage-emoji');
+    const b = hi.querySelector('.heritage-exp-btn');
+    if (s) s.classList.remove('active');
+    if (e) e.style.display = '';
+    if (b) { b.classList.remove('active'); b.textContent = b.dataset.originalText || b.textContent; }
+  });
+
+  if (!isActive) {
+    stage.classList.add('active');
+    if (emoji) emoji.style.display = 'none';
+    btn.classList.add('active');
+    if (!btn.dataset.originalText) btn.dataset.originalText = btn.textContent;
+    btn.textContent = '⏸ 正在演示...';
+
+    // Auto-stop after 8 seconds
+    setTimeout(() => {
+      stage.classList.remove('active');
+      if (emoji) emoji.style.display = '';
+      btn.classList.remove('active');
+      btn.textContent = btn.dataset.originalText;
+    }, 8000);
+  }
+};
+
+// Add section nav dot for new sections
+(function() {
+  const sectionNav = document.getElementById('sectionNav');
+  if (!sectionNav) return;
+  // Add video section dot
+  const videoDot = document.createElement('a');
+  videoDot.href = '#videos';
+  videoDot.dataset.label = '视频专区';
+  videoDot.setAttribute('role', 'button');
+  videoDot.setAttribute('tabindex', '0');
+  sectionNav.insertBefore(videoDot, sectionNav.querySelector('a[href="#springs-deep"]').nextSibling);
+
+  // Add heritage interactive dot
+  const heritageDot = document.createElement('a');
+  heritageDot.href = '#heritage-interactive';
+  heritageDot.dataset.label = '非遗体验';
+  heritageDot.setAttribute('role', 'button');
+  heritageDot.setAttribute('tabindex', '0');
+  const heritageExisting = sectionNav.querySelector('a[href="#heritage"]');
+  if (heritageExisting) heritageExisting.after(heritageDot);
+})();
 
 
 </script>

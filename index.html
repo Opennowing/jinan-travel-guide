@@ -254,6 +254,129 @@
     .season-spots-combo{display:flex;flex-direction:column;gap:40px}
     .season-spots-combo .card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 
+
+    /* ═══ HOMEPAGE UPGRADE: Smart Search + Dashboard + Recommendations ═══ */
+
+    /* ── Search: Hot Tags ── */
+    .search-hot-tags{display:flex;flex-wrap:wrap;gap:8px;padding:12px 20px}
+    .search-hot-tag{font-size:.78rem;padding:5px 14px;border-radius:100px;background:var(--bg2);border:1px solid var(--border);cursor:pointer;transition:all .2s;text-decoration:none;color:var(--text)}
+    .search-hot-tag:hover{border-color:var(--accent);background:var(--accent2);color:var(--accent)}
+    .search-hot-tag.hot{background:rgba(231,111,81,.08);border-color:rgba(231,111,81,.2);color:#e76f51}
+
+    /* ── Search: History ── */
+    .search-section-title{display:flex;align-items:center;justify-content:space-between;padding:8px 20px 4px}
+    .search-section-title span{font-size:.72rem;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em}
+    .search-section-title button{font-size:.68rem;color:var(--text3);background:none;border:none;cursor:pointer;transition:color .2s}
+    .search-section-title button:hover{color:var(--accent)}
+
+    /* ── Search: Voice Button ── */
+    .voice-btn{width:36px;height:36px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0}
+    .voice-btn:hover{border-color:var(--accent);background:var(--accent2)}
+    .voice-btn.listening{background:#e76f51;border-color:#e76f51;color:#fff;animation:voicePulse 1.5s ease-in-out infinite}
+    @keyframes voicePulse{0%,100%{box-shadow:0 0 0 0 rgba(231,111,81,.4)}50%{box-shadow:0 0 0 12px rgba(231,111,81,0)}}
+
+    /* ── Search: Result Page ── */
+    .search-results-section{padding:80px 0;display:none}
+    .search-results-section.active{display:block}
+    .search-results-header{display:flex;align-items:center;gap:12px;margin-bottom:32px}
+    .search-results-header h2{font:700 1.5rem/1.3 var(--serif)}
+    .search-results-header .count{font-size:.82rem;color:var(--text3)}
+    .search-results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+    .search-result-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all .3s}
+    .search-result-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+    .search-result-card img{width:100%;height:180px;object-fit:cover}
+    .search-result-card .sr-body{padding:16px}
+    .search-result-card .sr-type{font-size:.65rem;padding:2px 8px;border-radius:100px;font-weight:600;display:inline-block;margin-bottom:8px}
+    .search-result-card .sr-type.spot{background:var(--accent2);color:var(--accent)}
+    .search-result-card .sr-type.food{background:rgba(231,111,81,.1);color:#e76f51}
+    .search-result-card h3{font:700 .95rem/1.3 var(--serif);margin-bottom:6px}
+    .search-result-card p{font-size:.8rem;color:var(--text2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .search-result-card .sr-meta{display:flex;gap:12px;margin-top:10px;font-size:.72rem;color:var(--text3)}
+
+    /* ── Hero Search V2: Enhanced ── */
+    .hero-search-v2 .search-input-wrap{display:flex;align-items:center;gap:8px;position:relative}
+    .hero-search-v2 .voice-btn{position:absolute;right:54px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.7)}
+    .hero-search-v2 .voice-btn:hover{background:rgba(255,255,255,.2);border-color:var(--accent);color:#fff}
+    .hero-search-v2 .voice-btn.listening{background:#e76f51;border-color:#e76f51;color:#fff}
+
+    /* ── Search Overlay: Enhanced ── */
+    .search-overlay .voice-btn-overlay{width:40px;height:40px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0}
+    .search-overlay .voice-btn-overlay:hover{border-color:var(--accent);background:var(--accent2)}
+    .search-overlay .voice-btn-overlay.listening{background:#e76f51;border-color:#e76f51;color:#fff;animation:voicePulse 1.5s ease-in-out infinite}
+
+    /* ═══ 今日精选 ═══ */
+    .daily-pick{position:relative;border-radius:var(--radius-lg);overflow:hidden;min-height:320px;display:flex;align-items:flex-end;cursor:pointer;transition:transform .3s}
+    .daily-pick:hover{transform:scale(1.01)}
+    .daily-pick .dp-bg{position:absolute;inset:0;z-index:0}
+    .daily-pick .dp-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.45) saturate(1.2)}
+    .daily-pick .dp-gradient{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,rgba(0,0,0,.2) 50%,rgba(0,0,0,.1) 100%);z-index:1}
+    .daily-pick .dp-content{position:relative;z-index:2;padding:32px;width:100%}
+    .daily-pick .dp-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;background:rgba(201,169,110,.9);color:#fff;border-radius:100px;font-size:.78rem;font-weight:600;margin-bottom:16px;backdrop-filter:blur(8px)}
+    .daily-pick h3{font:800 clamp(1.5rem,4vw,2.2rem)/1.2 var(--serif);color:#fff;margin-bottom:8px;text-shadow:0 2px 12px rgba(0,0,0,.4)}
+    .daily-pick .dp-desc{font-size:.92rem;color:rgba(255,255,255,.8);line-height:1.6;max-width:600px;margin-bottom:16px}
+    .daily-pick .dp-meta{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+    .daily-pick .dp-meta span{font-size:.82rem;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:4px}
+    .daily-pick .dp-btn{margin-left:auto;padding:10px 24px;background:var(--accent);color:#fff;border:none;border-radius:100px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .25s}
+    .daily-pick .dp-btn:hover{background:var(--accent-hover);transform:translateY(-2px)}
+    @media(prefers-reduced-motion:no-preference){.daily-pick{animation:breathe 4s ease-in-out infinite}}
+    @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.015)}}
+    @media(max-width:768px){.daily-pick{min-height:240px}.daily-pick .dp-content{padding:20px}.daily-pick .dp-btn{margin-left:0;margin-top:8px}}
+
+    /* ═══ 济南速览 Dashboard ═══ */
+    .dashboard-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+    .dash-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;transition:all .3s;position:relative;overflow:hidden}
+    .dash-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+    .dash-card .dc-icon{font-size:2rem;margin-bottom:12px;display:block}
+    .dash-card .dc-label{font-size:.78rem;color:var(--text3);margin-bottom:4px;font-weight:500}
+    .dash-card .dc-value{font:900 1.8rem/1.2 var(--serif);color:var(--text);margin-bottom:4px}
+    .dash-card .dc-sub{font-size:.75rem;color:var(--text2);line-height:1.5}
+    .dash-card .dc-bar{height:4px;background:var(--bg3);border-radius:2px;margin-top:10px;overflow:hidden}
+    .dash-card .dc-bar-fill{height:100%;border-radius:2px;transition:width 1s ease}
+    .dash-card.weather-card .dc-value{font-size:1.4rem}
+    .dash-card.crowd-card .dc-bar-fill{background:linear-gradient(90deg,#2a9d8f,#f59e0b,#e76f51)}
+    .dash-card.free-card .dc-bar-fill{background:var(--accent)}
+    .dash-card.food-card{grid-column:span 1}
+    .dash-card .dc-list{list-style:none;padding:0;margin:8px 0 0}
+    .dash-card .dc-list li{font-size:.8rem;color:var(--text2);padding:3px 0;display:flex;align-items:center;gap:6px}
+    .dash-card .dc-list li .rank{font-weight:700;color:var(--accent);min-width:18px}
+    @media(max-width:1024px){.dashboard-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:480px){.dashboard-grid{grid-template-columns:1fr}}
+
+    /* ═══ 猜你喜欢 ═══ */
+    .guess-section{position:relative}
+    .guess-scroll-wrap{position:relative}
+    .guess-scroll{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px 0}
+    .guess-scroll::-webkit-scrollbar{display:none}
+    .guess-card{min-width:240px;max-width:260px;flex-shrink:0;scroll-snap-align:start;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all .3s}
+    .guess-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+    .guess-card .gc-img{height:150px;overflow:hidden;position:relative}
+    .guess-card .gc-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+    .guess-card:hover .gc-img img{transform:scale(1.05)}
+    .guess-card .gc-type{position:absolute;top:10px;left:10px;font-size:.65rem;padding:3px 10px;border-radius:100px;font-weight:600;backdrop-filter:blur(6px)}
+    .guess-card .gc-type.spot{background:rgba(42,157,143,.85);color:#fff}
+    .guess-card .gc-type.food{background:rgba(231,111,81,.85);color:#fff}
+    .guess-card .gc-body{padding:14px}
+    .guess-card h4{font:700 .9rem/1.3 var(--serif);margin-bottom:4px}
+    .guess-card .gc-desc{font-size:.75rem;color:var(--text2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:8px}
+    .guess-card .gc-meta{display:flex;justify-content:space-between;align-items:center;font-size:.75rem;color:var(--text3)}
+    .guess-card .gc-meta .gc-rating{color:#f59e0b}
+    .guess-refresh-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;font-size:.82rem;font-weight:500;color:var(--text);cursor:pointer;transition:all .25s}
+    .guess-refresh-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent2)}
+    .guess-refresh-btn .refresh-icon{display:inline-block;transition:transform .3s}
+    .guess-refresh-btn:hover .refresh-icon{transform:rotate(180deg)}
+
+    /* ═══ Counter Animation ═══ */
+    .counter-animate{display:inline-block}
+
+    /* ═══ Reduced Motion ═══ */
+    @media(prefers-reduced-motion:reduce){
+      .daily-pick{animation:none!important}
+      .daily-pick:hover{transform:none}
+      .dash-card:hover,.guess-card:hover,.search-result-card:hover{transform:none!important}
+      .guess-card .gc-img img{transition:none}
+      .voice-btn.listening{animation:none}
+    }
+
     /* ── Section spacing ── */
     .section{padding:80px 0}
 
@@ -440,6 +563,7 @@
     <div class="search-overlay-inner">
       <div class="search-overlay-header">
         <input type="text" id="heroSearch" placeholder="搜索景点、美食…" autocomplete="off" autofocus>
+        <button class="voice-btn-overlay" id="voiceSearchBtn" aria-label="语音搜索" title="语音搜索">🎤</button>
         <button id="searchBtn" aria-label="搜索">🔍</button>
         <button class="search-close" id="searchClose" aria-label="关闭搜索">✕</button>
       </div>
@@ -481,11 +605,14 @@
     <h1 style="position:relative;z-index:2;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.4)">济南 · <span class="accent" style="color:#c9a96e">泉城</span></h1>
     <p class="subtitle" style="position:relative;z-index:2;color:rgba(255,255,255,.65)">72 泉涌，千年文脉</p>
 
-    <!-- Search -->
+    <!-- Search (Enhanced) -->
     <div class="hero-search-v2" style="position:relative">
-      <span class="search-icon-left">🔍</span>
-      <input type="text" id="heroInlineSearch" placeholder="搜索景点、美食、路线…" autocomplete="off">
-      <button id="heroInlineSearchBtn" aria-label="搜索">→</button>
+      <div class="search-input-wrap" style="position:relative;width:100%">
+        <span class="search-icon-left">🔍</span>
+        <input type="text" id="heroInlineSearch" placeholder="搜索景点、美食、路线…" autocomplete="off" style="padding-right:100px">
+        <button class="voice-btn" id="heroVoiceBtn" aria-label="语音搜索" title="语音搜索">🎤</button>
+        <button id="heroInlineSearchBtn" aria-label="搜索">→</button>
+      </div>
       <div class="search-dropdown" id="heroInlineDropdown"></div>
     </div>
 
@@ -505,6 +632,88 @@
   </section>
 
   </main>
+
+
+  <!-- ═══ ⭐ 今日精选 ═══ -->
+  <section class="section" aria-label="今日精选" style="padding:40px 0 20px">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">DAILY PICK</div>
+        <h2>⭐ 今日精选</h2>
+        <p>每天推荐一个济南必去景点</p>
+      </div>
+      <div id="dailyPick" class="rv"></div>
+    </div>
+  </section>
+
+  <!-- ═══ 📊 济南速览 · 实时数据 ═══ -->
+  <section class="section section-alt" aria-label="济南速览">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">LIVE DASHBOARD</div>
+        <h2>📊 济南速览</h2>
+        <p>实时数据，助你决策</p>
+      </div>
+      <div class="dashboard-grid" id="dashboardGrid">
+        <div class="dash-card weather-card rv">
+          <span class="dc-icon">🌡️</span>
+          <div class="dc-label">实时天气</div>
+          <div class="dc-value" id="dashWeather">加载中…</div>
+          <div class="dc-sub" id="dashWeatherSub">济南 · 今日</div>
+        </div>
+        <div class="dash-card crowd-card rv">
+          <span class="dc-icon">👥</span>
+          <div class="dc-label">今日热门景点拥挤度</div>
+          <div class="dc-value" id="dashCrowd">--</div>
+          <div class="dc-sub" id="dashCrowdSub">基于时间预测</div>
+          <div class="dc-bar"><div class="dc-bar-fill" id="dashCrowdBar" style="width:0%"></div></div>
+        </div>
+        <div class="dash-card free-card rv">
+          <span class="dc-icon">🎫</span>
+          <div class="dc-label">免费景点</div>
+          <div class="dc-value" id="dashFree">--</div>
+          <div class="dc-sub" id="dashFreeSub">无需门票即可游玩</div>
+          <div class="dc-bar"><div class="dc-bar-fill" id="dashFreeBar" style="width:0%"></div></div>
+        </div>
+        <div class="dash-card food-card rv">
+          <span class="dc-icon">🍜</span>
+          <div class="dc-label">必吃美食 TOP5</div>
+          <ul class="dc-list" id="dashFoodList">
+            <li><span class="rank">1</span>加载中…</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 💡 猜你喜欢 ═══ -->
+  <section class="section guess-section" aria-label="猜你喜欢">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">FOR YOU</div>
+        <h2>💡 猜你喜欢</h2>
+        <p>基于你的浏览偏好，为你推荐</p>
+      </div>
+      <div class="guess-scroll-wrap">
+        <div class="guess-scroll" id="guessScroll"></div>
+      </div>
+      <div style="text-align:center;margin-top:20px">
+        <button class="guess-refresh-btn" id="guessRefreshBtn"><span class="refresh-icon">🔄</span> 换一批</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 🔍 搜索结果（隐藏，按需显示）═══ -->
+  <section class="search-results-section" id="searchResultsSection">
+    <div class="section-inner">
+      <div class="search-results-header">
+        <button onclick="hideSearchResults()" style="background:none;border:1px solid var(--border);border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1rem;color:var(--text2);transition:all .2s" aria-label="返回">←</button>
+        <h2 id="searchResultsTitle">搜索结果</h2>
+        <span class="count" id="searchResultsCount"></span>
+      </div>
+      <div class="search-results-grid" id="searchResultsGrid"></div>
+    </div>
+  </section>
 
   <!-- ═══ 📊 数据统计条 ═══ -->
   <section class="stats-bar" aria-label="数据统计">
@@ -1819,5 +2028,478 @@
     }
     renderHomeReviews();
   </script>
+
+  <script>
+  // ═══════════════════════════════════════
+  // HOMEPAGE UPGRADE MODULES
+  // ═══════════════════════════════════════
+
+  // ── Utility ──
+  function escH(s){return s?s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):'';}
+  function animateCounter(el, target, duration) {
+    if (typeof target !== 'number' || isNaN(target)) { el.textContent = target; return; }
+    const start = performance.now();
+    const isFloat = target % 1 !== 0;
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = eased * target;
+      el.textContent = isFloat ? current.toFixed(1) : Math.round(current);
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // ═══════════════════════════════════════
+  // 1. ENHANCED SEARCH
+  // ═══════════════════════════════════════
+  const SearchHistory = {
+    KEY: 'jinan_search_history',
+    MAX: 10,
+    getAll() { try { return JSON.parse(localStorage.getItem(this.KEY)) || []; } catch { return []; } },
+    add(q) {
+      q = q.trim(); if (!q) return;
+      let list = this.getAll().filter(h => h !== q);
+      list.unshift(q);
+      if (list.length > this.MAX) list = list.slice(0, this.MAX);
+      localStorage.setItem(this.KEY, JSON.stringify(list));
+    },
+    clear() { localStorage.removeItem(this.KEY); }
+  };
+
+  const BrowsingHistory = {
+    KEY: 'jinan_browsing_history',
+    MAX: 50,
+    getAll() { try { return JSON.parse(localStorage.getItem(this.KEY)) || []; } catch { return []; } },
+    add(item) {
+      let list = this.getAll().filter(h => h.id !== item.id);
+      list.unshift({ id: item.id, type: item.type, cat: item.cat, area: item.area, name: item.name, ts: Date.now() });
+      if (list.length > this.MAX) list = list.slice(0, this.MAX);
+      localStorage.setItem(this.KEY, JSON.stringify(list));
+    }
+  };
+
+  // Voice Search
+  const VoiceSearch = {
+    recognition: null,
+    supported: !!(window.SpeechRecognition || window.webkitSpeechRecognition),
+    init() {
+      if (!this.supported) return;
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      this.recognition = new SR();
+      this.recognition.lang = 'zh-CN';
+      this.recognition.interimResults = false;
+      this.recognition.maxAlternatives = 1;
+    },
+    start(onResult, onEnd) {
+      if (!this.recognition) this.init();
+      if (!this.recognition) return;
+      this.recognition.onresult = (e) => { const text = e.results[0][0].transcript; onResult(text); };
+      this.recognition.onend = () => { if (onEnd) onEnd(); };
+      this.recognition.onerror = () => { if (onEnd) onEnd(); };
+      try { this.recognition.start(); } catch {}
+    },
+    stop() { if (this.recognition) { try { this.recognition.stop(); } catch {} } }
+  };
+
+  // Enhanced search dropdown with history + hot tags
+  function renderSearchDropdown(dropdownEl, query) {
+    const history = SearchHistory.getAll();
+    const hotTags = ['趵突泉','大明湖','千佛山','把子肉','油旋','糖醋鲤鱼','五龙潭','黑虎泉','甜沫','芙蓉街'];
+    let html = '';
+
+    if (!query || query.length === 0) {
+      // Show history
+      if (history.length > 0) {
+        html += `<div class="search-section-title"><span>🕐 最近搜索</span><button onclick="event.stopPropagation();SearchHistory.clear();renderSearchDropdown(document.getElementById('${dropdownEl.id}'),'')">清空</button></div>`;
+        html += `<div class="search-hot-tags" style="padding-bottom:8px">`;
+        history.forEach(h => { html += `<span class="search-hot-tag" onclick="event.stopPropagation();doSearch('${escH(h)}')">${escH(h)}</span>`; });
+        html += `</div>`;
+      }
+      // Show hot tags
+      html += `<div class="search-section-title"><span>🔥 热门搜索</span></div>`;
+      html += `<div class="search-hot-tags">`;
+      hotTags.forEach((t, i) => { html += `<span class="search-hot-tag${i < 3 ? ' hot' : ''}" onclick="event.stopPropagation();doSearch('${escH(t)}')">${escH(t)}</span>`; });
+      html += `</div>`;
+      dropdownEl.innerHTML = html;
+      dropdownEl.classList.add('show');
+      return;
+    }
+
+    // Live suggestions
+    const q = query.toLowerCase();
+    const spotResults = (window._searchCache?.spots || []).filter(s => s.name.toLowerCase().includes(q) || (s.desc||'').toLowerCase().includes(q)).slice(0, 5);
+    const foodResults = (window._searchCache?.foods || []).filter(f => f.name.toLowerCase().includes(q) || (f.desc||'').toLowerCase().includes(q)).slice(0, 5);
+
+    if (!spotResults.length && !foodResults.length) {
+      html += `<div class="search-empty">没有找到"${escH(query)}"相关结果</div>`;
+    } else {
+      if (spotResults.length) {
+        html += `<div class="search-dropdown-section"><div class="search-dropdown-label">🏛️ 景点</div>`;
+        spotResults.forEach(s => {
+          html += `<a href="spots.html?id=${encodeURIComponent(s.id)}" class="search-dropdown-item" data-type="spot" onclick="SearchHistory.add('${escH(query)}')">
+            <span class="item-icon">🏛️</span>
+            <div><div class="item-name">${escH(s.name)}</div><div class="item-desc">${escH((s.desc||'').slice(0,40))}</div></div>
+            <span class="item-type">景点</span></a>`;
+        });
+        html += `</div>`;
+      }
+      if (foodResults.length) {
+        html += `<div class="search-dropdown-section"><div class="search-dropdown-label">🍜 美食</div>`;
+        foodResults.forEach(f => {
+          html += `<a href="food.html?id=${encodeURIComponent(f.id)}" class="search-dropdown-item" data-type="food" onclick="SearchHistory.add('${escH(query)}')">
+            <span class="item-icon">🍜</span>
+            <div><div class="item-name">${escH(f.name)}</div><div class="item-desc">${escH((f.desc||'').slice(0,40))}</div></div>
+            <span class="item-type">美食</span></a>`;
+        });
+        html += `</div>`;
+      }
+    }
+    html += `<div class="search-section-title" style="border-top:1px solid var(--border);margin-top:4px;padding-top:8px"><span>🔍 搜索"${escH(query)}"</span></div>`;
+    dropdownEl.innerHTML = html;
+    dropdownEl.classList.add('show');
+  }
+
+  function doSearch(query) {
+    SearchHistory.add(query);
+    showSearchResults(query);
+    // Close overlays/dropdowns
+    document.getElementById('searchOverlay')?.classList.remove('open');
+    document.querySelectorAll('.search-dropdown').forEach(d => d.classList.remove('show'));
+  }
+
+  function showSearchResults(query) {
+    const section = document.getElementById('searchResultsSection');
+    const grid = document.getElementById('searchResultsGrid');
+    const titleEl = document.getElementById('searchResultsTitle');
+    const countEl = document.getElementById('searchResultsCount');
+    if (!section || !grid) return;
+
+    const q = query.toLowerCase();
+    const spots = (window._searchCache?.spots || []).filter(s => s.name.toLowerCase().includes(q) || (s.desc||'').toLowerCase().includes(q) || (s.cat||'').toLowerCase().includes(q));
+    const foods = (window._searchCache?.foods || []).filter(f => f.name.toLowerCase().includes(q) || (f.desc||'').toLowerCase().includes(q));
+
+    titleEl.textContent = `"${query}" 的搜索结果`;
+    countEl.textContent = `共 ${spots.length + foods.length} 个结果`;
+
+    let html = '';
+    spots.forEach(s => {
+      html += `<div class="search-result-card" onclick="location.href='spots.html?id=${s.id}'">
+        <img src="${s.img}" alt="${escH(s.name)}" loading="lazy">
+        <div class="sr-body"><span class="sr-type spot">景点</span>
+          <h3>${escH(s.name)}</h3>
+          <p>${escH((s.desc||'').slice(0,80))}</p>
+          <div class="sr-meta"><span>★ ${s.rating||'--'}</span><span>${s.price===0?'免费':'¥'+s.price}</span><span>${s.dur||''}</span></div>
+        </div></div>`;
+    });
+    foods.forEach(f => {
+      html += `<div class="search-result-card" onclick="location.href='food.html?id=${f.id}'">
+        <img src="${f.img}" alt="${escH(f.name)}" loading="lazy">
+        <div class="sr-body"><span class="sr-type food">美食</span>
+          <h3>${escH(f.name)}</h3>
+          <p>${escH((f.desc||'').slice(0,80))}</p>
+          <div class="sr-meta"><span>${f.must?'🔥 必吃':''}</span><span>${f.shops?.[0]?.avg||''}</span></div>
+        </div></div>`;
+    });
+
+    if (!html) html = `<div style="text-align:center;padding:60px 0;color:var(--text3);font-size:1rem">没有找到"${escH(query)}"相关结果，换个关键词试试？</div>`;
+
+    grid.innerHTML = html;
+    section.classList.add('active');
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  window.hideSearchResults = function() {
+    document.getElementById('searchResultsSection')?.classList.remove('active');
+  };
+
+  // Init enhanced search on hero inline input
+  (function initEnhancedSearch() {
+    const inlineInput = document.getElementById('heroInlineSearch');
+    const inlineDropdown = document.getElementById('heroInlineDropdown');
+    const inlineBtn = document.getElementById('heroInlineSearchBtn');
+    const heroVoiceBtn = document.getElementById('heroVoiceBtn');
+    const overlayInput = document.getElementById('heroSearch');
+    const overlayDropdown = document.getElementById('searchDropdown');
+    const voiceBtn = document.getElementById('voiceSearchBtn');
+
+    // Wait for search data
+    async function ensureSearchData() {
+      if (window._searchCache) return;
+      try {
+        const [spots, foods] = await Promise.all([
+          typeof getSpotsData === 'function' ? getSpotsData() : fetch('/jinan-travel-guide/data/spots.json').then(r=>r.json()),
+          typeof getFoodsData === 'function' ? getFoodsData() : fetch('/jinan-travel-guide/data/food.json').then(r=>r.json()).then(d=>d.foods||d)
+        ]);
+        window._searchCache = { spots, foods };
+      } catch {}
+    }
+    ensureSearchData();
+
+    // Inline search
+    if (inlineInput && inlineDropdown) {
+      let debounceTimer;
+      inlineInput.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          ensureSearchData().then(() => renderSearchDropdown(inlineDropdown, inlineInput.value.trim()));
+        }, 200);
+      });
+      inlineInput.addEventListener('focus', () => {
+        ensureSearchData().then(() => renderSearchDropdown(inlineDropdown, inlineInput.value.trim()));
+      });
+      if (inlineBtn) {
+        inlineBtn.addEventListener('click', () => {
+          const q = inlineInput.value.trim();
+          if (q) doSearch(q);
+        });
+      }
+      inlineInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { const q = inlineInput.value.trim(); if (q) doSearch(q); }
+      });
+    }
+
+    // Overlay search
+    if (overlayInput && overlayDropdown) {
+      let debounceTimer2;
+      overlayInput.addEventListener('input', () => {
+        clearTimeout(debounceTimer2);
+        debounceTimer2 = setTimeout(() => {
+          ensureSearchData().then(() => renderSearchDropdown(overlayDropdown, overlayInput.value.trim()));
+        }, 200);
+      });
+      overlayInput.addEventListener('focus', () => {
+        ensureSearchData().then(() => renderSearchDropdown(overlayDropdown, overlayInput.value.trim()));
+      });
+    }
+
+    // Voice search
+    function setupVoice(btn, input) {
+      if (!btn || !VoiceSearch.supported) {
+        if (btn) btn.style.display = 'none';
+        return;
+      }
+      VoiceSearch.init();
+      btn.addEventListener('click', () => {
+        if (btn.classList.contains('listening')) {
+          VoiceSearch.stop();
+          btn.classList.remove('listening');
+          return;
+        }
+        btn.classList.add('listening');
+        VoiceSearch.start((text) => {
+          input.value = text;
+          btn.classList.remove('listening');
+          doSearch(text);
+        }, () => { btn.classList.remove('listening'); });
+      });
+    }
+    setupVoice(heroVoiceBtn, inlineInput);
+    setupVoice(voiceBtn, overlayInput);
+  })();
+
+  // ═══════════════════════════════════════
+  // 2. 今日精选
+  // ═══════════════════════════════════════
+  (async function initDailyPick() {
+    const container = document.getElementById('dailyPick');
+    if (!container) return;
+    try {
+      const spots = await getSpotsData();
+      if (!spots.length) return;
+      const today = Math.floor(Date.now() / 86400000);
+      const pick = spots[today % spots.length];
+      const priceText = pick.price === 0 ? '免费' : '¥' + pick.price;
+
+      container.innerHTML = `
+        <div class="daily-pick" onclick="location.href='spots.html?id=${pick.id}'">
+          <div class="dp-bg"><img src="${pick.img}" alt="${escH(pick.name)}"></div>
+          <div class="dp-gradient"></div>
+          <div class="dp-content">
+            <div class="dp-badge">⭐ 今日精选 · ${new Date().toLocaleDateString('zh-CN',{month:'long',day:'numeric'})}</div>
+            <h3>${escH(pick.name)}</h3>
+            <p class="dp-desc">${escH(pick.desc)}</p>
+            <div class="dp-meta">
+              <span>★ ${pick.rating}</span>
+              <span>🎫 ${priceText}</span>
+              <span>⏱ ${pick.dur||''}</span>
+              <span>💬 ${pick.reviews||0} 条评价</span>
+              <button class="dp-btn" onclick="event.stopPropagation();location.href='spots.html?id=${pick.id}'">查看详情 →</button>
+            </div>
+          </div>
+        </div>`;
+    } catch(e) { console.error('今日精选加载失败:', e); }
+  })();
+
+  // ═══════════════════════════════════════
+  // 3. 济南速览 Dashboard
+  // ═══════════════════════════════════════
+  (async function initDashboard() {
+    // Weather
+    (async function loadWeather() {
+      const el = document.getElementById('dashWeather');
+      const subEl = document.getElementById('dashWeatherSub');
+      try {
+        const res = await fetch('https://wttr.in/Jinan?format=j1');
+        const data = await res.json();
+        const cur = data.current_condition?.[0];
+        if (cur) {
+          const temp = cur.temp_C;
+          const desc = cur.lang_zh?.[0]?.value || cur.weatherDesc?.[0]?.value || '';
+          const humidity = cur.humidity;
+          el.textContent = `${temp}°C`;
+          subEl.textContent = `济南 · ${desc} · 湿度${humidity}%`;
+          animateCounter(el, parseFloat(temp), 1000);
+          el.textContent = `${temp}°C`;
+        }
+      } catch {
+        el.textContent = '暂无数据';
+        subEl.textContent = '天气服务暂时不可用';
+      }
+    })();
+
+    // Crowd simulation
+    (async function loadCrowd() {
+      const valEl = document.getElementById('dashCrowd');
+      const subEl = document.getElementById('dashCrowdSub');
+      const barEl = document.getElementById('dashCrowdBar');
+      try {
+        const spots = await getSpotsData();
+        const top = spots.sort((a,b)=>b.rating-a.rating)[0];
+        const now = new Date();
+        const day = now.getDay();
+        const hour = now.getHours();
+        let base = 40;
+        if (day === 0 || day === 6) base += 25;
+        if (hour >= 10 && hour <= 14) base += 20;
+        if (hour >= 15 && hour <= 17) base += 15;
+        const crowd = Math.min(95, base + Math.floor(Math.random() * 15));
+        const label = crowd < 50 ? '较为空闲' : crowd < 75 ? '适度拥挤' : '非常拥挤';
+        const color = crowd < 50 ? '#2a9d8f' : crowd < 75 ? '#f59e0b' : '#e76f51';
+        valEl.textContent = label;
+        valEl.style.color = color;
+        subEl.textContent = `${top?.name || '趵突泉'} · 预测拥挤度 ${crowd}%`;
+        barEl.style.width = crowd + '%';
+        barEl.style.background = `linear-gradient(90deg,#2a9d8f,${color})`;
+        animateCounter({textContent:''}, crowd, 1000);
+        setTimeout(() => { valEl.textContent = label; }, 1100);
+      } catch {}
+    })();
+
+    // Free spots
+    (async function loadFreeSpots() {
+      const valEl = document.getElementById('dashFree');
+      const subEl = document.getElementById('dashFreeSub');
+      const barEl = document.getElementById('dashFreeBar');
+      try {
+        const spots = await getSpotsData();
+        const free = spots.filter(s => s.price === 0).length;
+        const total = spots.length;
+        valEl.textContent = free;
+        subEl.textContent = `共 ${total} 个景点中，${free} 个免费`;
+        animateCounter(valEl, free, 1000);
+        barEl.style.width = Math.round(free/total*100) + '%';
+      } catch {}
+    })();
+
+    // Top 5 foods
+    (async function loadTopFoods() {
+      const listEl = document.getElementById('dashFoodList');
+      try {
+        const foods = await getFoodsData();
+        const top5 = foods.filter(f => f.must).slice(0, 5);
+        if (!top5.length) return;
+        listEl.innerHTML = top5.map((f, i) => `<li><span class="rank">${i+1}</span>${escH(f.name)}</li>`).join('');
+      } catch {}
+    })();
+  })();
+
+  // ═══════════════════════════════════════
+  // 4. 猜你喜欢
+  // ═══════════════════════════════════════
+  const GuessYouLike = {
+    pool: [],
+    async loadData() {
+      if (this.pool.length) return;
+      try {
+        const [spots, foods] = await Promise.all([getSpotsData(), getFoodsData()]);
+        spots.forEach(s => this.pool.push({ ...s, _type: 'spot' }));
+        foods.forEach(f => this.pool.push({ ...f, _type: 'food' }));
+      } catch {}
+    },
+    getRecommendations(count = 6) {
+      const history = BrowsingHistory.getAll();
+      const favs = JSON.parse(localStorage.getItem('jinan_favorites') || '[]');
+
+      // Score items based on browsing history and favorites
+      const scored = this.pool.map(item => {
+        let score = Math.random() * 3; // base random score
+        history.forEach(h => {
+          if (h.id === item.id) score -= 10; // already viewed
+          if (h.cat && h.cat === item.cat) score += 2;
+          if (h.area && h.area === item.area) score += 1.5;
+          if (h.type === item._type) score += 0.5;
+        });
+        favs.forEach(fid => {
+          const favItem = this.pool.find(p => p.id === fid);
+          if (favItem) {
+            if (favItem.cat === item.cat) score += 3;
+            if (favItem.area === item.area) score += 2;
+          }
+        });
+        return { item, score };
+      });
+
+      scored.sort((a, b) => b.score - a.score);
+      // Pick top items but add some randomness
+      const top = scored.slice(0, count * 3);
+      const shuffled = top.sort(() => Math.random() - 0.5);
+      return shuffled.slice(0, count).map(s => s.item);
+    },
+    render() {
+      const container = document.getElementById('guessScroll');
+      if (!container || !this.pool.length) return;
+      const picks = this.getRecommendations(8);
+
+      container.innerHTML = picks.map(item => {
+        const isSpot = item._type === 'spot';
+        const link = isSpot ? `spots.html?id=${item.id}` : `food.html?id=${item.id}`;
+        const priceText = isSpot ? (item.price === 0 ? '免费' : '¥' + item.price) : (item.shops?.[0]?.avg || '');
+        return `<div class="guess-card" onclick="location.href='${link}';BrowsingHistory.add({id:'${item.id}',type:'${item._type}',cat:'${item.cat||''}',area:'${item.area||''}',name:'${escH(item.name)}'})">
+          <div class="gc-img">
+            <img src="${item.img}" alt="${escH(item.name)}" loading="lazy">
+            <span class="gc-type ${isSpot?'spot':'food'}">${isSpot?'景点':'美食'}</span>
+          </div>
+          <div class="gc-body">
+            <h4>${escH(item.name)}</h4>
+            <p class="gc-desc">${escH((item.desc||'').slice(0,60))}</p>
+            <div class="gc-meta">
+              <span class="gc-rating">★ ${item.rating||'4.5'}</span>
+              <span>${priceText}</span>
+            </div>
+          </div></div>`;
+      }).join('');
+    },
+    async init() {
+      await this.loadData();
+      this.render();
+      document.getElementById('guessRefreshBtn')?.addEventListener('click', () => this.render());
+    }
+  };
+  GuessYouLike.init();
+
+  // Track spot/food card clicks for browsing history
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('[data-href*="spots.html?id="], [data-href*="food.html?id="]');
+    if (!card) return;
+    const href = card.dataset.href || '';
+    const type = href.includes('spots.html') ? 'spot' : 'food';
+    const idMatch = href.match(/id=([^&]+)/);
+    if (idMatch) {
+      BrowsingHistory.add({ id: idMatch[1], type, cat: '', area: '', name: card.querySelector('h3')?.textContent || '' });
+    }
+  });
+  </script>
+
 </body>
 </html>

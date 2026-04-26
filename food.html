@@ -487,6 +487,54 @@
       .enhanced-filters{gap:8px}
       .card-actions .btn{font-size:.72rem;padding:5px 10px}
     }
+
+    /* ─── DARK MODE 补充 ─── */
+    html.dark .food-card-pro{background:var(--card-bg);border-color:rgba(255,255,255,.06)}
+    html.dark .food-card-pro:hover{box-shadow:0 16px 48px rgba(0,0,0,.3)}
+    html.dark .food-card-pro-shop{background:var(--bg2)}
+    html.dark .food-card-pro-shop-name{color:var(--text)}
+    html.dark .food-card-pro-btn{background:var(--accent);color:#fff}
+    html.dark .must-eat-hero{background:linear-gradient(135deg,var(--bg2),var(--bg3));border-color:rgba(255,255,255,.08)}
+    html.dark .must-eat-hero-icon{filter:brightness(1.2)}
+    html.dark .must-banner{background:linear-gradient(135deg,var(--bg2),var(--bg3));border-color:rgba(255,255,255,.08)}
+    html.dark .season-card{background:var(--card-bg);border-color:rgba(255,255,255,.06)}
+    html.dark .season-card:hover{box-shadow:0 12px 32px rgba(0,0,0,.3)}
+    html.dark .season-food-tag{background:var(--bg2);border-color:rgba(255,255,255,.08);color:var(--text2)}
+    html.dark .tip-card{background:var(--card-bg);border-color:rgba(255,255,255,.06)}
+    html.dark .tip-card:hover{box-shadow:0 12px 32px rgba(0,0,0,.3)}
+    html.dark .daily-route-block{background:var(--card-bg);border-color:rgba(255,255,255,.06)}
+    html.dark .daily-route-block:hover{box-shadow:0 8px 24px rgba(0,0,0,.2)}
+    html.dark .route-card{background:var(--card-bg);border-color:rgba(255,255,255,.06)}
+    html.dark .route-card:hover{box-shadow:0 12px 32px rgba(0,0,0,.3)}
+    html.dark .must-eat-item{background:var(--card-bg);border-color:rgba(255,255,255,.06)}
+    html.dark .must-eat-item:hover{box-shadow:0 8px 24px rgba(0,0,0,.2)}
+    html.dark .food-map-prompt{background:linear-gradient(135deg,var(--accent2),rgba(42,157,143,.05));border-color:rgba(255,255,255,.08)}
+    html.dark .food-map-prompt:hover{box-shadow:0 8px 24px rgba(0,0,0,.2)}
+    html.dark .smart-recommend{background:var(--card-bg);border-color:rgba(255,255,255,.06)}
+    html.dark .location-prompt{background:var(--card-bg);border-color:rgba(255,255,255,.06)}
+    html.dark .food-search-hero input{background:rgba(255,255,255,.1);color:#fff;border-color:rgba(255,255,255,.2)}
+    html.dark .food-search-hero input::placeholder{color:rgba(255,255,255,.5)}
+    html.dark .food-search-hero .search-icon{color:rgba(255,255,255,.6)}
+    html.dark .guess-tag, html.dark .hot-tag{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.1)}
+    html.dark .guess-tag:hover, html.dark .hot-tag:hover{background:var(--accent2);color:var(--accent);border-color:var(--accent)}
+    html.dark .category-capsule{background:var(--bg2);border-color:rgba(255,255,255,.08);color:var(--text2)}
+    html.dark .category-capsule.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    html.dark .district-tab{background:var(--bg2);border-color:rgba(255,255,255,.08);color:var(--text2)}
+    html.dark .district-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    html.dark .filter-chip{background:var(--bg2);border-color:rgba(255,255,255,.08);color:var(--text2)}
+    html.dark .filter-chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    html.dark .food-count-bar{background:var(--card-bg);border-color:rgba(255,255,255,.06)}
+    html.dark .reset-filter-btn{background:var(--bg2);border-color:rgba(255,255,255,.08);color:var(--text2)}
+    html.dark .fav-filter-btn{background:var(--bg2);border-color:rgba(255,255,255,.08);color:var(--text2)}
+    html.dark .food-detail-panel{background:var(--card-bg)}
+    html.dark .food-detail-close button{background:rgba(255,255,255,.15)}
+    html.dark .detail-shop-card{background:var(--bg2);border-color:rgba(255,255,255,.06)}
+    html.dark .detail-shop-name{color:var(--text)}
+    html.dark .compare-panel{background:var(--card-bg)}
+    html.dark .compare-fab{background:var(--accent);color:#fff}
+    html.dark .food-empty{color:var(--text3)}
+    html.dark .quiz-opt{background:var(--bg2);border-color:rgba(255,255,255,.08);color:var(--text2)}
+    html.dark .food-card-history{background:var(--bg2);color:var(--text2)}
   </style>
 </head>
 <body>
@@ -903,18 +951,6 @@
       </div>
     </section>
 
-  </main>
-
-
-  <!-- Food Detail Modal -->
-  <div class="food-detail-overlay" id="foodDetailOverlay">
-    <div class="food-detail-panel" id="foodDetailPanel">
-      <div class="food-detail-close"><button id="foodDetailClose" aria-label="关闭">✕</button></div>
-      <div id="foodDetailContent"></div>
-    </div>
-  </div>
-
-
     <!-- ── 美食地图提示 ── -->
     <section class="section" aria-label="美食地图入口">
       <div class="section-inner">
@@ -925,6 +961,17 @@
         </a>
       </div>
     </section>
+
+  </main>
+
+
+  <!-- Food Detail Modal -->
+  <div class="food-detail-overlay" id="foodDetailOverlay">
+    <div class="food-detail-panel" id="foodDetailPanel">
+      <div class="food-detail-close"><button id="foodDetailClose" aria-label="关闭">✕</button></div>
+      <div id="foodDetailContent"></div>
+    </div>
+  </div>
 
   <!-- Compare FAB -->
   <button class="compare-fab" id="compareFab" aria-label="查看对比">
@@ -1740,7 +1787,7 @@
       try { renderRoutes(); } catch(e) { console.warn('Routes render failed:', e); }
       try { renderDailyRoute(); } catch(e) { console.warn('Daily route render failed:', e); }
       try { renderSmartSearch(); } catch(e) { console.warn('Smart search render failed:', e); }
-      try { initMap(); } catch(e) { console.warn('Map init failed:', e); }
+      // Map is static SVG, no init needed
       try { renderSmartRecommend(); } catch(e) { console.warn('Smart recommend failed:', e); }
       try { initLocation(); } catch(e) { console.warn('Location init failed:', e); }
       updateCompareUI();
@@ -2043,7 +2090,7 @@
               if (searchInput) searchInput.value = food.name;
               renderFoods();
               setTimeout(() => {
-                const card = document.querySelector('.food-card');
+                const card = document.querySelector('.food-card-pro[data-food-id="' + foodId + '"]') || document.querySelector('.food-card-pro');
                 if (card) {
                   card.scrollIntoView({ behavior: 'smooth', block: 'center' });
                   card.style.boxShadow = '0 0 0 3px var(--accent), 0 8px 32px rgba(201,169,110,.3)';

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <link rel="icon" href="/jinan-travel-guide/icons/icon-192.png" type="image/png">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>景点 · 玩乐 — 济南旅游攻略</title>
@@ -947,6 +949,16 @@ html.dark .card.meituan-card:hover {
     font-size: .72rem;
   }
 }
+  
+    /* ── prefers-reduced-motion: disable all inline animations ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
   <!-- Leaflet Map CDN -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -979,7 +991,7 @@ html.dark .card.meituan-card:hover {
     </div>
   </nav>
 
-  <main id="main-content">
+  <main role="main" id="main-content">
   <section class="page-hero" style="position:relative;min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(to bottom,rgba(0,0,0,.5),rgba(0,0,0,.7)),url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1600&q=80') center/cover no-repeat" aria-label="页面标题">
     <button class="btn btn-outline btn-sm" style="position:absolute;top:20px;right:20px;z-index:2;color:#fff;border-color:rgba(255,255,255,.4)" aria-label="分享页面" data-share='{"title":"济南景点攻略","subtitle":"30+精选景点","items":[{"name":"趵突泉","info":"天下第一泉 · ¥40"},{"name":"大明湖","info":"免费开放"},{"name":"千佛山","info":"¥30 · 登高望远"},{"name":"五龙潭","info":"¥0 · 小众秘境"},{"name":"黑虎泉","info":"免费 · 泉水直饮"}],"page":"spots"}'>📤 分享景点</button>
     <div class="eyebrow" style="font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:12px;display:inline-flex;align-items:center;gap:12px;position:relative;z-index:1"><span style="width:24px;height:1px;background:rgba(255,255,255,.5)"></span>JINAN SPOTS<span style="width:24px;height:1px;background:rgba(255,255,255,.5)"></span></div>
@@ -1010,13 +1022,13 @@ html.dark .card.meituan-card:hover {
               <span class="map-spot-count" id="mapSpotCount">0 个景点</span>
             </div>
             <div class="map-view-toggle" id="mapViewToggle">
-              <button class="map-toggle-btn active" data-view="list" title="列表视图">📋 列表</button>
-              <button class="map-toggle-btn" data-view="map" title="地图视图">🗺️ 地图</button>
+              <button class="map-toggle-btn active" data-view="list" title="列表视图" aria-label="列表视图" role="tab" aria-selected="true">📋 列表</button>
+              <button class="map-toggle-btn" data-view="map" title="地图视图" aria-label="地图视图" role="tab" aria-selected="false">🗺️ 地图</button>
             </div>
           </div>
           <div class="map-preview-body" id="mapPreviewBody">
             <div class="map-preview-svg" id="mapPreviewSvg"></div>
-            <button class="map-expand-btn" id="mapExpandBtn" title="展开全屏地图">
+            <button class="map-expand-btn" id="mapExpandBtn" title="展开全屏地图" aria-label="展开全屏地图">
               <span>⛶</span> 全屏查看
             </button>
           </div>
@@ -1042,14 +1054,14 @@ html.dark .card.meituan-card:hover {
         <div class="filter-section reveal">
           <div class="filter-group">
             <span class="filter-group-label">📌 分类</span>
-            <div class="tabs" id="catFilters" role="group" aria-label="景点分类筛选">
-              <button class="filter-btn active reveal" data-cat="all">全部</button>
-              <button class="filter-btn reveal" data-cat="spring">⛲ 泉水</button>
-              <button class="filter-btn reveal" data-cat="nature">🌿 自然</button>
-              <button class="filter-btn reveal" data-cat="history">🏛️ 历史</button>
-              <button class="filter-btn reveal" data-cat="culture">📚 文化</button>
-              <button class="filter-btn reveal" data-cat="food">🍜 美食街</button>
-              <button class="filter-btn reveal" data-cat="family">👨👩👧 亲子</button>
+            <div class="tabs" id="catFilters" role="group" aria-label="景点分类筛选" role="group" aria-label="景点分类筛选">
+              <button class="filter-btn active reveal" data-cat="all" aria-label="全部" role="tab" aria-selected="true">全部</button>
+              <button class="filter-btn reveal" data-cat="spring" aria-label="⛲ 泉水" role="tab" aria-selected="false">⛲ 泉水</button>
+              <button class="filter-btn reveal" data-cat="nature" aria-label="🌿 自然" role="tab" aria-selected="false">🌿 自然</button>
+              <button class="filter-btn reveal" data-cat="history" aria-label="🏛️ 历史" role="tab" aria-selected="false">🏛️ 历史</button>
+              <button class="filter-btn reveal" data-cat="culture" aria-label="📚 文化" role="tab" aria-selected="false">📚 文化</button>
+              <button class="filter-btn reveal" data-cat="food" aria-label="🍜 美食街" role="tab" aria-selected="false">🍜 美食街</button>
+              <button class="filter-btn reveal" data-cat="family" aria-label="👨👩👧 亲子" role="tab" aria-selected="false">👨👩👧 亲子</button>
             </div>
           </div>
           <div class="sort-wrap">
@@ -1069,38 +1081,38 @@ html.dark .card.meituan-card:hover {
           </button>
         </div>
         <div class="filter-collapsible" id="collapsibleFilters">
-        <div class="audience-bar" id="audienceFilters" role="group" aria-label="人群筛选">
+        <div class="audience-bar" id="audienceFilters" role="group" aria-label="人群筛选" role="group" aria-label="人群筛选">
           <span class="filter-group-label">👥 人群</span>
-          <button class="audience-btn active" data-aud="all">全部</button>
-          <button class="audience-btn" data-aud="family">👨👩👧 亲子</button>
-          <button class="audience-btn" data-aud="couple">💑 情侣</button>
-          <button class="audience-btn" data-aud="elder">👴 老人</button>
-          <button class="audience-btn" data-aud="solo">🎒 独行</button>
+          <button class="audience-btn active" data-aud="all" aria-label="全部" role="tab" aria-selected="true">全部</button>
+          <button class="audience-btn" data-aud="family" aria-label="👨👩👧 亲子" role="tab" aria-selected="false">👨👩👧 亲子</button>
+          <button class="audience-btn" data-aud="couple" aria-label="💑 情侣" role="tab" aria-selected="false">💑 情侣</button>
+          <button class="audience-btn" data-aud="elder" aria-label="👴 老人" role="tab" aria-selected="false">👴 老人</button>
+          <button class="audience-btn" data-aud="solo" aria-label="🎒 独行" role="tab" aria-selected="false">🎒 独行</button>
         </div>
-        <div class="area-filter-row" id="areaFilters" role="group" aria-label="区域筛选">
+        <div class="area-filter-row" id="areaFilters" role="group" aria-label="区域筛选" role="group" aria-label="区域筛选">
           <span class="filter-group-label">📍 区域</span>
-          <button class="area-btn active" data-area="all">全部</button>
-          <button class="area-btn" data-area="历下区">历下区</button>
-          <button class="area-btn" data-area="市中区">市中区</button>
-          <button class="area-btn" data-area="天桥区">天桥区</button>
-          <button class="area-btn" data-area="槐荫区">槐荫区</button>
-          <button class="area-btn" data-area="历城区">历城区</button>
+          <button class="area-btn active" data-area="all" aria-label="全部" role="tab" aria-selected="true">全部</button>
+          <button class="area-btn" data-area="历下区" aria-label="历下区" role="tab" aria-selected="false">历下区</button>
+          <button class="area-btn" data-area="市中区" aria-label="市中区" role="tab" aria-selected="false">市中区</button>
+          <button class="area-btn" data-area="天桥区" aria-label="天桥区" role="tab" aria-selected="false">天桥区</button>
+          <button class="area-btn" data-area="槐荫区" aria-label="槐荫区" role="tab" aria-selected="false">槐荫区</button>
+          <button class="area-btn" data-area="历城区" aria-label="历城区" role="tab" aria-selected="false">历城区</button>
         </div>
-        <div class="ticket-filter-row" id="ticketFilters" role="group" aria-label="门票筛选">
+        <div class="ticket-filter-row" id="ticketFilters" role="group" aria-label="门票筛选" role="group" aria-label="门票筛选">
           <span class="filter-group-label">🎫 门票</span>
-          <button class="ticket-btn active" data-ticket="all">全部</button>
-          <button class="ticket-btn" data-ticket="free">🆓 免费</button>
-          <button class="ticket-btn" data-ticket="under50">¥50以下</button>
-          <button class="ticket-btn" data-ticket="50to100">¥50-100</button>
-          <button class="ticket-btn" data-ticket="over100">¥100以上</button>
+          <button class="ticket-btn active" data-ticket="all" aria-label="全部" role="tab" aria-selected="true">全部</button>
+          <button class="ticket-btn" data-ticket="free" aria-label="🆓 免费" role="tab" aria-selected="false">🆓 免费</button>
+          <button class="ticket-btn" data-ticket="under50" aria-label="¥50以下" role="tab" aria-selected="false">¥50以下</button>
+          <button class="ticket-btn" data-ticket="50to100" aria-label="¥50-100" role="tab" aria-selected="false">¥50-100</button>
+          <button class="ticket-btn" data-ticket="over100" aria-label="¥100以上" role="tab" aria-selected="false">¥100以上</button>
         </div>
-        <div class="duration-filter-row" id="durationFilters" role="group" aria-label="时长筛选">
+        <div class="duration-filter-row" id="durationFilters" role="group" aria-label="时长筛选" role="group" aria-label="时长筛选">
           <span class="filter-group-label">⏱ 时长</span>
-          <button class="duration-btn active" data-dur="all">全部</button>
-          <button class="duration-btn" data-dur="1h">1小时内</button>
-          <button class="duration-btn" data-dur="1to3">1-3小时</button>
-          <button class="duration-btn" data-dur="half">半天</button>
-          <button class="duration-btn" data-dur="full">全天</button>
+          <button class="duration-btn active" data-dur="all" aria-label="全部" role="tab" aria-selected="true">全部</button>
+          <button class="duration-btn" data-dur="1h" aria-label="1小时内" role="tab" aria-selected="false">1小时内</button>
+          <button class="duration-btn" data-dur="1to3" aria-label="1-3小时" role="tab" aria-selected="false">1-3小时</button>
+          <button class="duration-btn" data-dur="half" aria-label="半天" role="tab" aria-selected="false">半天</button>
+          <button class="duration-btn" data-dur="full" aria-label="全天" role="tab" aria-selected="false">全天</button>
         </div>
         </div><!-- end filter-collapsible -->
         <div class="filter-bottom-row">
@@ -1108,7 +1120,7 @@ html.dark .card.meituan-card:hover {
             <span class="count-badge" id="spotCount"></span>
             <button class="fav-filter-btn" id="favFilterBtn">❤️ 我的收藏 <span class="fav-count" id="favCountBadge">0</span></button>
           </div>
-          <button class="reset-filters-btn" id="resetFiltersBtn" title="重置所有筛选条件">🔄 重置筛选</button>
+          <button class="reset-filters-btn" id="resetFiltersBtn" title="重置所有筛选条件" aria-label="重置所有筛选条件">🔄 重置筛选</button>
         </div>
       </div>
     </div>
@@ -1120,11 +1132,11 @@ html.dark .card.meituan-card:hover {
         <div class="sort-left">
           <span class="spot-count-label" id="spotCountLabel">共 <strong>0</strong> 个景点</span>
         </div>
-        <div class="sort-pills" id="sortPills">
-          <button class="sort-pill active" data-sort="recommend">综合推荐</button>
-          <button class="sort-pill" data-sort="rating">评分最高</button>
-          <button class="sort-pill" data-sort="price">价格最低</button>
-          <button class="sort-pill" data-sort="reviews">评价最多</button>
+        <div class="sort-pills" id="sortPills" role="group" aria-label="排序方式">
+          <button class="sort-pill active" data-sort="recommend" aria-label="综合推荐" role="tab" aria-selected="true">综合推荐</button>
+          <button class="sort-pill" data-sort="rating" aria-label="评分最高" role="tab" aria-selected="false">评分最高</button>
+          <button class="sort-pill" data-sort="price" aria-label="价格最低" role="tab" aria-selected="false">价格最低</button>
+          <button class="sort-pill" data-sort="reviews" aria-label="评价最多" role="tab" aria-selected="false">评价最多</button>
         </div>
       </div>
       <div class="card-grid" id="spotGrid"></div>
@@ -1145,24 +1157,24 @@ html.dark .card.meituan-card:hover {
     <div class="leaflet-map-container" id="leafletMapContainer" style="position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border,#e5e2dc);box-shadow:0 4px 24px rgba(0,0,0,.08)">
       <!-- Map controls bar -->
       <div class="leaflet-controls-bar" id="leafletControlsBar" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--card-bg,#fff);border-bottom:1px solid var(--border,#e5e2dc);flex-wrap:wrap">
-        <button id="leafletLocateBtn" class="leaflet-ctrl-btn" title="定位我的位置" style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:8px;font-size:.78rem;cursor:pointer;color:var(--text2,#555);transition:all .2s">
+        <button id="leafletLocateBtn" class="leaflet-ctrl-btn" title="定位我的位置" aria-label="定位我的位置" style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:8px;font-size:.78rem;cursor:pointer;color:var(--text2,#555);transition:all .2s">
           📌 定位
         </button>
-        <button id="leafletFullscreenBtn" class="leaflet-ctrl-btn" title="全屏" style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:8px;font-size:.78rem;cursor:pointer;color:var(--text2,#555);transition:all .2s">
+        <button id="leafletFullscreenBtn" class="leaflet-ctrl-btn" title="全屏" aria-label="全屏" style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:8px;font-size:.78rem;cursor:pointer;color:var(--text2,#555);transition:all .2s">
           ⛶ 全屏
         </button>
-        <button id="leafletResetBtn" class="leaflet-ctrl-btn" title="重置视图" style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:8px;font-size:.78rem;cursor:pointer;color:var(--text2,#555);transition:all .2s">
+        <button id="leafletResetBtn" class="leaflet-ctrl-btn" title="重置视图" aria-label="重置视图" style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:8px;font-size:.78rem;cursor:pointer;color:var(--text2,#555);transition:all .2s">
           🔄 重置
         </button>
         <div style="flex:1"></div>
         <div id="leafletCatFilter" style="display:flex;gap:4px;flex-wrap:wrap">
-          <button class="leaflet-cat-btn active" data-cat="all" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--accent2,rgba(201,169,110,.1));border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)">全部</button>
-          <button class="leaflet-cat-btn" data-cat="spring" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)">⛲ 泉水</button>
-          <button class="leaflet-cat-btn" data-cat="nature" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)">🌿 自然</button>
-          <button class="leaflet-cat-btn" data-cat="history" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)">🏛️ 历史</button>
-          <button class="leaflet-cat-btn" data-cat="culture" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)">📚 文化</button>
-          <button class="leaflet-cat-btn" data-cat="food" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)">🍜 美食</button>
-          <button class="leaflet-cat-btn" data-cat="landmark" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)">🏛️ 地标</button>
+          <button class="leaflet-cat-btn active" data-cat="all" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--accent2,rgba(201,169,110,.1));border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)" aria-label="全部" role="tab" aria-selected="true">全部</button>
+          <button class="leaflet-cat-btn" data-cat="spring" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)" aria-label="⛲ 泉水" role="tab" aria-selected="false">⛲ 泉水</button>
+          <button class="leaflet-cat-btn" data-cat="nature" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)" aria-label="🌿 自然" role="tab" aria-selected="false">🌿 自然</button>
+          <button class="leaflet-cat-btn" data-cat="history" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)" aria-label="🏛️ 历史" role="tab" aria-selected="false">🏛️ 历史</button>
+          <button class="leaflet-cat-btn" data-cat="culture" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)" aria-label="📚 文化" role="tab" aria-selected="false">📚 文化</button>
+          <button class="leaflet-cat-btn" data-cat="food" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)" aria-label="🍜 美食" role="tab" aria-selected="false">🍜 美食</button>
+          <button class="leaflet-cat-btn" data-cat="landmark" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)" aria-label="🏛️ 地标" role="tab" aria-selected="false">🏛️ 地标</button>
         </div>
       </div>
       <!-- Leaflet map -->
@@ -1755,7 +1767,7 @@ html.dark .card.meituan-card:hover {
             <span>📅 ${(pick.bestTime||'全年').slice(0,20)}</span>
           </div>
           ${nightTip ? `<div style="margin-top:10px;font-size:.8rem;opacity:.9">${nightTip}</div>` : ''}
-          <button class="rec-btn" data-id="${pick.id}">查看详情 →</button>
+          <button class="rec-btn" data-id="${pick.id}" aria-label="查看详情 →">查看详情 →</button>
         </div>`;
       area.querySelector('.rec-btn')?.addEventListener('click', () => {
         const s = allSpots.find(x => x.id === pick.id);
@@ -1880,7 +1892,7 @@ html.dark .card.meituan-card:hover {
             '<div class="img-spot-name">' + s.name + '</div>' +
             '<div class="card-badge">' + badgeHtml + '</div>' +
             priceTagHtml +
-            '<button class="card-fav-btn ' + (isFav ? 'faved' : '') + '" data-id="' + s.id + '" title="' + (isFav ? '取消收藏' : '收藏') + '">' +
+            '<button class="card-fav-btn ' + (isFav ? 'faved' : '') + '" data-id="' + s.id + '" title="' + (isFav ? '取消收藏' : '收藏') + '" aria-label="' + (isFav ? '取消收藏' : '收藏') + '" aria-pressed="true">' +
               '<span class="heart ' + (isFav ? 'heart-filled' : 'heart-outline') + '">' + (isFav ? '♥' : '♡') + '</span>' +
             '</button>' +
           '</div>' +
@@ -1897,8 +1909,8 @@ html.dark .card.meituan-card:hover {
             tagsHtml +
             (transportShort ? '<div class="card-transport-row">🚌 ' + transportShort + '</div>' : '') +
             '<div class="card-action-bar">' +
-              '<button class="action-btn btn-go" data-id="' + s.id + '">🗺️ 去这里</button>' +
-              '<button class="action-btn btn-share" data-name="' + s.name + '" title="分享">📤</button>' +
+              '<button class="action-btn btn-go" data-id="' + s.id + '" aria-label="🗺️ 去这里">🗺️ 去这里</button>' +
+              '<button class="action-btn btn-share" data-name="' + s.name + '" title="分享" aria-label="分享">📤</button>' +
             '</div>' +
           '</div>' +
         '</article>';
@@ -2199,9 +2211,9 @@ html.dark .card.meituan-card:hover {
           ${mapHtml}
           ${nearbyHtml}
           <div class="modal-floating-actions">
-            <button class="fav-action modal-fav-btn" data-id="${s.id}" title="收藏">${getFavs().includes(s.id)?"♥":"♡"}</button>
+            <button class="fav-action modal-fav-btn" data-id="${s.id}" title="收藏" aria-label="收藏" aria-pressed="false">${getFavs().includes(s.id)?"♥":"♡"}</button>
             <a href="${s.lat && s.lng ? 'https://uri.amap.com/marker?position='+s.lng+','+s.lat+'&name='+encodeURIComponent(s.name) : '#'}" target="_blank" rel="noopener" class="btn btn-primary" style="flex:1.2;justify-content:center;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent-hover,#b8956a));color:#fff;border:none">🗺️ 去这里</a>
-            <button class="btn btn-primary modal-add-trip" data-id="${s.id}" style="flex:1;justify-content:center">＋ 加入行程</button>
+            <button class="btn btn-primary modal-add-trip" data-id="${s.id}" style="flex:1;justify-content:center" aria-label="＋ 加入行程">＋ 加入行程</button>
             <a href="${getCtripLink(s.name)}" target="_blank" rel="noopener" class="btn btn-outline" style="background:linear-gradient(135deg,#2681ff 0%,#1a6dff 100%);color:#fff;border:none;flex:0.8;justify-content:center">🐬 携程</a>
           </div>
           <p style="font-size:.65rem;color:var(--text3);text-align:center;margin-top:6px">通过以上链接预订，本站可获得少量佣金 ❤️</p>
@@ -2211,7 +2223,7 @@ html.dark .card.meituan-card:hover {
               <h5>✍️ 写评价</h5>
               <div class="star-input" id="starInput">${[1,2,3,4,5].map(i => `<span data-val="${i}">☆</span>`).join('')}</div>
               <textarea class="review-input" id="reviewText" placeholder="分享你的游玩体验…" maxlength="500"></textarea>
-              <button class="btn btn-sm btn-primary review-submit" id="submitReview" data-spot="${s.id}">提交评价</button>
+              <button class="btn btn-sm btn-primary review-submit" id="submitReview" data-spot="${s.id}" aria-label="提交评价">提交评价</button>
             </div>
             ${reviewsHtml}
           </div>

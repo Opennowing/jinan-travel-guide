@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <link rel="icon" href="/jinan-travel-guide/icons/icon-192.png" type="image/png">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>出行指南 — 济南旅游攻略</title>
@@ -369,6 +371,16 @@
       .tools-grid{grid-template-columns:repeat(2,1fr)!important}
       .modal-content{max-width:100%;margin:0 10px}
     }
+  
+    /* ── prefers-reduced-motion: disable all inline animations ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -395,7 +407,7 @@
     </div>
   </nav>
 
-  <main id="main-content">
+  <main role="main" id="main-content">
   <section class="page-hero" style="position:relative;min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(to bottom,rgba(0,0,0,.5),rgba(0,0,0,.7)),url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1600&q=80') center/cover no-repeat" aria-label="页面标题">
     <div class="eyebrow" style="font-size:.8rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:12px;display:inline-flex;align-items:center;gap:12px;position:relative;z-index:1"><span style="width:24px;height:1px;background:rgba(255,255,255,.5)"></span>JINAN GUIDE<span style="width:24px;height:1px;background:rgba(255,255,255,.5)"></span></div>
     <h1 style="color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.5)">📖 出行指南</h1>
@@ -443,13 +455,13 @@
         <p>交通、住宿、天气、避坑……你想知道的都在这里</p>
       </div>
       <div class="guide-tabs reveal" id="guideTabs" role="tablist" aria-label="指南分类">
-        <button class="guide-tab active" data-tab="transport">🚗 交通</button>
-        <button class="guide-tab" data-tab="hotel">🏨 住宿</button>
-        <button class="guide-tab" data-tab="tools">🛠️ 工具</button>
-        <button class="guide-tab" data-tab="tips">⚠️ 避坑</button>
-        <button class="guide-tab" data-tab="dialect">🗣️ 方言</button>
-        <button class="guide-tab" data-tab="photo">📸 拍照</button>
-        <button class="guide-tab" data-tab="faq">❓ FAQ</button>
+        <button class="guide-tab active" data-tab="transport" aria-label="🚗 交通" role="tab" aria-selected="true">🚗 交通</button>
+        <button class="guide-tab" data-tab="hotel" aria-label="🏨 住宿" role="tab" aria-selected="false">🏨 住宿</button>
+        <button class="guide-tab" data-tab="tools" aria-label="🛠️ 工具" role="tab" aria-selected="false">🛠️ 工具</button>
+        <button class="guide-tab" data-tab="tips" aria-label="⚠️ 避坑" role="tab" aria-selected="false">⚠️ 避坑</button>
+        <button class="guide-tab" data-tab="dialect" aria-label="🗣️ 方言" role="tab" aria-selected="false">🗣️ 方言</button>
+        <button class="guide-tab" data-tab="photo" aria-label="📸 拍照" role="tab" aria-selected="false">📸 拍照</button>
+        <button class="guide-tab" data-tab="faq" aria-label="❓ FAQ" role="tab" aria-selected="false">❓ FAQ</button>
       </div>
 
       <!-- ═══ TAB: 交通 ═══ -->
@@ -585,28 +597,28 @@
                 <option value="premium">👑 高端</option>
               </select>
             </div>
-            <button class="btn btn-primary" id="calcBtn" style="width:100%">计算预算</button>
+            <button class="btn btn-primary" id="calcBtn" style="width:100%" aria-label="计算预算">计算预算</button>
             <div class="calc-result" id="calcResult" style="display:none">
               <div class="total" id="calcTotal"></div>
               <div class="breakdown" id="calcBreakdown"></div>
             </div>
             <div class="budget-bar-chart" id="budgetChart" style="display:none"></div>
             <div style="display:flex;gap:8px;margin-top:12px">
-              <button class="btn btn-sm btn-outline" id="saveBudgetBtn" style="flex:1">💾 保存预算</button>
-              <button class="btn btn-sm btn-outline" id="loadBudgetBtn" style="flex:1">📂 读取保存</button>
+              <button class="btn btn-sm btn-outline" id="saveBudgetBtn" style="flex:1" aria-label="💾 保存预算">💾 保存预算</button>
+              <button class="btn btn-sm btn-outline" id="loadBudgetBtn" style="flex:1" aria-label="📂 读取保存">📂 读取保存</button>
             </div>
           </div>
 
           <h3>📋 行李清单</h3>
           <div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap">
-            <button class="btn btn-sm btn-outline season-pick active" data-season="spring">🌸 春</button>
-            <button class="btn btn-sm btn-outline season-pick" data-season="summer">☀️ 夏</button>
-            <button class="btn btn-sm btn-outline season-pick" data-season="autumn">🍂 秋</button>
-            <button class="btn btn-sm btn-outline season-pick" data-season="winter">❄️ 冬</button>
+            <button class="btn btn-sm btn-outline season-pick active" data-season="spring" aria-label="🌸 春" role="tab" aria-selected="true">🌸 春</button>
+            <button class="btn btn-sm btn-outline season-pick" data-season="summer" aria-label="☀️ 夏" role="tab" aria-selected="false">☀️ 夏</button>
+            <button class="btn btn-sm btn-outline season-pick" data-season="autumn" aria-label="🍂 秋" role="tab" aria-selected="false">🍂 秋</button>
+            <button class="btn btn-sm btn-outline season-pick" data-season="winter" aria-label="❄️ 冬" role="tab" aria-selected="false">❄️ 冬</button>
           </div>
           <div class="custom-item-input">
             <input type="text" id="customItemInput" placeholder="添加自定义物品…">
-            <button class="btn btn-sm btn-primary" id="addCustomItemBtn">＋ 添加</button>
+            <button class="btn btn-sm btn-primary" id="addCustomItemBtn" aria-label="＋ 添加">＋ 添加</button>
           </div>
           <div class="checklist-toolbar">
             <button id="checkAllBtn" aria-label="全选清单项目">✅ 全选</button>
@@ -1070,7 +1082,7 @@
         ta.value = text;
         document.body.appendChild(ta);
         ta.select();
-        document.execCommand('copy');
+        navigator.clipboard ? navigator.clipboard.writeText(el.textContent || el.innerText) : document.execCommand('copy');
         document.body.removeChild(ta);
         alert('✅ 清单已复制到剪贴板！');
       });
@@ -1258,7 +1270,7 @@
               <option value="150">包车 ¥150/天</option>
             </select>
           </div>
-          <button class="btn btn-primary" onclick="calcModalBudget()" style="width:100%;justify-content:center;margin-top:16px">计算预算</button>
+          <button class="btn btn-primary" onclick="calcModalBudget()" style="width:100%;justify-content:center;margin-top:16px" aria-label="计算预算">计算预算</button>
           <div id="modalCalcResult" style="display:none;margin-top:16px"></div>
         </div>
       `);
@@ -1305,7 +1317,7 @@
         });
         html += '</div>';
       });
-      html += '<button class="btn btn-primary" onclick="closeModal()" style="width:100%;justify-content:center;margin-top:8px">完成</button></div>';
+      html += '<button class="btn btn-primary" onclick="closeModal()" style="width:100%;justify-content:center;margin-top:8px" aria-label="完成">完成</button></div>';
       openModal(html);
     };
 

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <link rel="icon" href="/jinan-travel-guide/icons/icon-192.png" type="image/png">
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🍜 美食 · 探店 — 济南旅游攻略</title>
@@ -563,6 +565,16 @@
     html.dark .food-empty{color:var(--text3)}
     html.dark .quiz-opt{background:var(--bg2);border-color:rgba(255,255,255,.08);color:var(--text2)}
     html.dark .food-card-history{background:var(--bg2);color:var(--text2)}
+  
+    /* ── prefers-reduced-motion: disable all inline animations ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -630,7 +642,7 @@
   </header>
 
   <!-- Main Content -->
-  <main id="main-content">
+  <main role="main" id="main-content">
 
 
     <!-- ── 必吃榜 Hero ── -->
@@ -658,13 +670,13 @@
         <!-- ── 分类 Tab ── -->
         <div class="food-tabs" id="foodTabs" role="tablist" aria-label="美食分类">
           <span class="filter-group-label">🍽️ 分类</span>
-          <button class="food-tab active" data-cat="全部">全部</button>
-          <button class="food-tab" data-cat="lucai">🍲 鲁菜经典</button>
-          <button class="food-tab" data-cat="xiaochi">🍢 市井小吃</button>
-          <button class="food-tab" data-cat="laozihao">🏮 老字号</button>
-          <button class="food-tab" data-cat="zaocan">🌅 早餐</button>
-          <button class="food-tab" data-cat="yexiao">🌙 夜宵</button>
-          <button class="food-tab" data-cat="yinpin">🍵 饮品</button>
+          <button class="food-tab active" data-cat="全部" aria-label="全部" role="tab" aria-selected="true">全部</button>
+          <button class="food-tab" data-cat="lucai" aria-label="🍲 鲁菜经典" role="tab" aria-selected="false">🍲 鲁菜经典</button>
+          <button class="food-tab" data-cat="xiaochi" aria-label="🍢 市井小吃" role="tab" aria-selected="false">🍢 市井小吃</button>
+          <button class="food-tab" data-cat="laozihao" aria-label="🏮 老字号" role="tab" aria-selected="false">🏮 老字号</button>
+          <button class="food-tab" data-cat="zaocan" aria-label="🌅 早餐" role="tab" aria-selected="false">🌅 早餐</button>
+          <button class="food-tab" data-cat="yexiao" aria-label="🌙 夜宵" role="tab" aria-selected="false">🌙 夜宵</button>
+          <button class="food-tab" data-cat="yinpin" aria-label="🍵 饮品" role="tab" aria-selected="false">🍵 饮品</button>
         </div>
 
         <!-- ── 商圈筛选 ── -->
@@ -675,8 +687,8 @@
           <button class="district-tab" data-district="芙蓉街" aria-label="筛选芙蓉街商圈">📍 芙蓉街</button>
           <button class="district-tab" data-district="宽厚里" aria-label="筛选宽厚里商圈">📍 宽厚里</button>
           <button class="district-tab" data-district="回民小区" aria-label="筛选回民小区商圈">📍 回民小区</button>
-          <button class="district-tab" data-district="大明湖">📍 大明湖</button>
-          <button class="district-tab" data-district="经十路">📍 经十路</button>
+          <button class="district-tab" data-district="大明湖" aria-label="📍 大明湖">📍 大明湖</button>
+          <button class="district-tab" data-district="经十路" aria-label="📍 经十路">📍 经十路</button>
         </div>
 
         <!-- ── 增强筛选 ── -->
@@ -684,44 +696,44 @@
           <!-- 人均价格 -->
           <div class="filter-row" id="priceFilterRow">
             <span class="filter-group-label">💰 人均</span>
-            <button class="filter-chip active" data-filter="price" data-value="全部">全部</button>
-            <button class="filter-chip" data-filter="price" data-value="20以下">20以下</button>
-            <button class="filter-chip" data-filter="price" data-value="20-50">20-50</button>
-            <button class="filter-chip" data-filter="price" data-value="50-100">50-100</button>
-            <button class="filter-chip" data-filter="price" data-value="100以上">100以上</button>
+            <button class="filter-chip active" data-filter="price" data-value="全部" aria-label="全部" role="tab" aria-selected="true">全部</button>
+            <button class="filter-chip" data-filter="price" data-value="20以下" aria-label="20以下" role="tab" aria-selected="false">20以下</button>
+            <button class="filter-chip" data-filter="price" data-value="20-50" aria-label="20-50" role="tab" aria-selected="false">20-50</button>
+            <button class="filter-chip" data-filter="price" data-value="50-100" aria-label="50-100" role="tab" aria-selected="false">50-100</button>
+            <button class="filter-chip" data-filter="price" data-value="100以上" aria-label="100以上" role="tab" aria-selected="false">100以上</button>
           </div>
           <!-- 餐厅类型 -->
           <div class="filter-row" id="typeFilterRow">
             <span class="filter-group-label">🏪 类型</span>
-            <button class="filter-chip active" data-filter="type" data-value="全部">全部</button>
-            <button class="filter-chip" data-filter="type" data-value="老字号">🏮 老字号</button>
-            <button class="filter-chip" data-filter="type" data-value="网红">🔥 网红</button>
-            <button class="filter-chip" data-filter="type" data-value="街边摊">🍢 街边摊</button>
-            <button class="filter-chip" data-filter="type" data-value="正餐">🍽️ 正餐</button>
+            <button class="filter-chip active" data-filter="type" data-value="全部" aria-label="全部" role="tab" aria-selected="true">全部</button>
+            <button class="filter-chip" data-filter="type" data-value="老字号" aria-label="🏮 老字号" role="tab" aria-selected="false">🏮 老字号</button>
+            <button class="filter-chip" data-filter="type" data-value="网红" aria-label="🔥 网红" role="tab" aria-selected="false">🔥 网红</button>
+            <button class="filter-chip" data-filter="type" data-value="街边摊" aria-label="🍢 街边摊" role="tab" aria-selected="false">🍢 街边摊</button>
+            <button class="filter-chip" data-filter="type" data-value="正餐" aria-label="🍽️ 正餐" role="tab" aria-selected="false">🍽️ 正餐</button>
           </div>
           <!-- 就餐时间 -->
           <div class="filter-row" id="mealFilterRow">
             <span class="filter-group-label">🕐 时段</span>
-            <button class="filter-chip active" data-filter="meal" data-value="全部">全部</button>
-            <button class="filter-chip" data-filter="meal" data-value="早餐">🌅 早餐</button>
-            <button class="filter-chip" data-filter="meal" data-value="午餐">☀️ 午餐</button>
-            <button class="filter-chip" data-filter="meal" data-value="晚餐">🌆 晚餐</button>
-            <button class="filter-chip" data-filter="meal" data-value="夜宵">🌙 夜宵</button>
+            <button class="filter-chip active" data-filter="meal" data-value="全部" aria-label="全部" role="tab" aria-selected="true">全部</button>
+            <button class="filter-chip" data-filter="meal" data-value="早餐" aria-label="🌅 早餐" role="tab" aria-selected="false">🌅 早餐</button>
+            <button class="filter-chip" data-filter="meal" data-value="午餐" aria-label="☀️ 午餐" role="tab" aria-selected="false">☀️ 午餐</button>
+            <button class="filter-chip" data-filter="meal" data-value="晚餐" aria-label="🌆 晚餐" role="tab" aria-selected="false">🌆 晚餐</button>
+            <button class="filter-chip" data-filter="meal" data-value="夜宵" aria-label="🌙 夜宵" role="tab" aria-selected="false">🌙 夜宵</button>
           </div>
           <!-- 适合场景 -->
           <div class="filter-row" id="sceneFilterRow">
             <span class="filter-group-label">🎯 场景</span>
-            <button class="filter-chip active" data-filter="scene" data-value="全部">全部</button>
-            <button class="filter-chip" data-filter="scene" data-value="一人食">🧑 一人食</button>
-            <button class="filter-chip" data-filter="scene" data-value="聚餐">👥 聚餐</button>
-            <button class="filter-chip" data-filter="scene" data-value="约会">💕 约会</button>
-            <button class="filter-chip" data-filter="scene" data-value="家庭">👨‍👩‍👧 家庭</button>
+            <button class="filter-chip active" data-filter="scene" data-value="全部" aria-label="全部" role="tab" aria-selected="true">全部</button>
+            <button class="filter-chip" data-filter="scene" data-value="一人食" aria-label="🧑 一人食" role="tab" aria-selected="false">🧑 一人食</button>
+            <button class="filter-chip" data-filter="scene" data-value="聚餐" aria-label="👥 聚餐" role="tab" aria-selected="false">👥 聚餐</button>
+            <button class="filter-chip" data-filter="scene" data-value="约会" aria-label="💕 约会" role="tab" aria-selected="false">💕 约会</button>
+            <button class="filter-chip" data-filter="scene" data-value="家庭" aria-label="👨‍👩‍👧 家庭" role="tab" aria-selected="false">👨‍👩‍👧 家庭</button>
           </div>
         </div>
 
         <div class="food-count-bar">
           <span class="food-count-badge" id="foodCountBadge"></span>
-          <button class="reset-filter-btn" id="resetFilterBtn" title="重置所有筛选条件">🔄 重置筛选</button>
+          <button class="reset-filter-btn" id="resetFilterBtn" title="重置所有筛选条件" aria-label="重置所有筛选条件">🔄 重置筛选</button>
           <button class="fav-filter-btn" id="foodFavFilterBtn">❤️ 我的收藏 <span class="fav-count" id="foodFavCountBadge">0</span></button>
         </div>
 
@@ -729,14 +741,14 @@
         <div class="location-prompt" id="locationPrompt">
           <span class="loc-icon">📍</span>
           <div class="loc-text">开启定位，为你推荐<span id="locStatus">附近美食</span></div>
-          <button class="loc-btn" id="locateBtn">开启定位</button>
+          <button class="loc-btn" id="locateBtn" aria-label="开启定位">开启定位</button>
         </div>
 
         <!-- 智能推荐 -->
         <div class="smart-recommend" id="smartRecommend">
           <div class="smart-recommend-header">
             <h3>✨ 为你推荐</h3>
-            <button class="refresh-btn" id="refreshRecommend">🔄 换一批</button>
+            <button class="refresh-btn" id="refreshRecommend" aria-label="🔄 换一批">🔄 换一批</button>
           </div>
           <div class="smart-recommend-list" id="smartRecommendList">
             <!-- JS渲染 -->
@@ -1012,7 +1024,7 @@
       <div class="compare-panel-header">
         <h3>📊 餐厅对比</h3>
         <div style="display:flex;gap:8px;align-items:center">
-          <button class="compare-clear" id="compareClear">清空对比</button>
+          <button class="compare-clear" id="compareClear" aria-label="清空对比">清空对比</button>
           <button class="compare-close" id="compareClose">✕</button>
         </div>
       </div>
@@ -1164,7 +1176,7 @@
             <div class="modal-actions" style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
               <a href="food.html?id=${food.id}" class="btn btn-primary" style="flex:1;justify-content:center">查看详情页 →</a>
               <button class="btn btn-outline" onclick="window._toggleFoodFav('${food.id}',this);this.textContent=this.classList.contains('active')?'♥ 已收藏':'♡ 收藏'">${isFav ? '♥ 已收藏' : '♡ 收藏'}</button>
-              <button class="btn btn-outline" onclick="addToFoodCompare('${food.id}')" style="white-space:nowrap">📊 加入对比</button>
+              <button class="btn btn-outline" onclick="addToFoodCompare('${food.id}')" style="white-space:nowrap" aria-label="📊 加入对比">📊 加入对比</button>
             </div>
           </div>
         </div>
@@ -1230,7 +1242,7 @@
         <div class="food-compare-header">
           <h4>🍜 美食对比 (${foods.length}/${MAX_FOOD_COMPARE})</h4>
           <div class="food-compare-header-actions">
-            <button onclick="clearFoodCompare()" style="background:none;border:1px solid var(--border2);padding:4px 12px;border-radius:100px;font-size:.75rem;cursor:pointer;color:var(--text2)">清空</button>
+            <button onclick="clearFoodCompare()" style="background:none;border:1px solid var(--border2);padding:4px 12px;border-radius:100px;font-size:.75rem;cursor:pointer;color:var(--text2)" aria-label="清空">清空</button>
             <button onclick="document.getElementById('foodComparePanel').classList.remove('open')" style="background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text2);padding:4px">✕</button>
           </div>
         </div>
@@ -1241,7 +1253,7 @@
               ${foods.map(f => `<th>
                 <img src="${f.img}" class="compare-thumb" alt="${f.name}">
                 <div class="compare-item-name">${f.name}</div>
-                <button class="compare-remove" onclick="removeFromFoodCompare('${f.id}')">✕ 移除</button>
+                <button class="compare-remove" onclick="removeFromFoodCompare('${f.id}')" aria-label="✕ 移除">✕ 移除</button>
               </th>`).join('')}
             </tr>
             <tr><td class="compare-field-label">分类</td>${foods.map(f => `<td>${f.tag}</td>`).join('')}</tr>
@@ -1922,7 +1934,7 @@
           '<div class="food-card-pro-img">' +
             '<img src="' + food.img + '" alt="' + food.name + '" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
             (food.must ? '<span class="badge-must-gold">🔥 必吃</span>' : '') +
-            '<button class="fav-btn-pro ' + (isFav ? 'active' : '') + '" data-id="' + food.id + '" data-type="food" aria-label="' + (isFav ? '取消收藏' : '收藏') + '" onclick="event.stopPropagation();window._toggleFoodFav(\'' + food.id + '\',this)">' + (isFav ? '♥' : '♡') + '</button>' +
+            '<button class="fav-btn-pro ' + (isFav ? 'active' : '') + '" data-id="' + food.id + '" data-type="food" aria-label="' + (isFav ? '取消收藏' : '收藏') + '" onclick="event.stopPropagation();window._toggleFoodFav(\'' + food.id + '\',this)" aria-pressed="true">' + (isFav ? '♥' : '♡') + '</button>' +
           '</div>' +
           '<div class="food-card-pro-body">' +
             '<div class="food-card-pro-header">' +
@@ -1943,7 +1955,7 @@
                 '<div class="price-label">人均</div>' +
               '</div>' +
             '</div>' : '') +
-            '<button class="food-card-pro-btn" data-food-id="' + food.id + '">查看详情 →</button>' +
+            '<button class="food-card-pro-btn" data-food-id="' + food.id + '" aria-label="查看详情 →">查看详情 →</button>' +
           '</div>' +
         '</div>';
       }).join('');
@@ -2436,7 +2448,7 @@
       // 从 food.json 的 categories 动态生成
       const cats = [{ id: '全部', name: '全部', icon: '🍽️' }, ...allCategories];
       container.innerHTML = cats.map(cat =>
-        '<button class="category-capsule' + (cat.id === '全部' && currentCat === '全部' ? ' active' : (currentCat === cat.id ? ' active' : '')) + '" data-cat="' + cat.id + '">' +
+        '<button class="category-capsule' + (cat.id === '全部' && currentCat === '全部' ? ' active' : (currentCat === cat.id ? ' active' : '')) + '" data-cat="' + cat.id + '" role="tab" aria-selected="true">' +
           '<span class="capsule-icon">' + cat.icon + '</span>' +
           '<span>' + cat.name + '</span>' +
         '</button>'

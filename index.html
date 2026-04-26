@@ -383,6 +383,16 @@
     @keyframes qnPulse{0%,100%{opacity:1}50%{opacity:.7}}
     @media(max-width:640px){.quick-nav-enhanced a{min-width:72px;padding:14px 12px}.quick-nav-enhanced a .qn-icon{font-size:1.5rem}.quick-nav-enhanced a .qn-label{font-size:.7rem}}
 
+  
+    /* ── prefers-reduced-motion: disable all inline animations ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -423,7 +433,7 @@
   </div>
 
   <!-- ═══ HERO ═══ -->
-  <main id="main-content">
+  <main role="main" id="main-content">
   <section class="hero" aria-label="济南欢迎页">
     <!-- Photo Carousel Background -->
     <div class="hero-slides">
@@ -1032,7 +1042,7 @@
               <img src="${s.img}" alt="${s.name}" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.parentElement.classList.add('img-loaded')">
               <div class="card-img-gradient"></div>
               <span class="spot-badge badge ${s.badge}">${s.badge==='must'?'必去':s.badge==='hot'?'🔥 热门':s.badge==='free'?'免费':'推荐'}</span>
-              <button class="card-fav-btn" data-id="${s.id}" data-type="spot" aria-label="收藏">♡</button>
+              <button class="card-fav-btn" data-id="${s.id}" data-type="spot" aria-label="收藏" aria-pressed="false">♡</button>
             </div>
             <div class="card-body">
               <h3>${s.name}</h3>
@@ -1061,7 +1071,7 @@
               <img src="${f.img}" alt="${f.name}" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.parentElement.classList.add('img-loaded')">
               <div class="card-img-gradient"></div>
               ${f.must?'<span class="food-badge badge hot">🔥 必吃</span>':''}
-              <button class="card-fav-btn" data-id="${f.id}" data-type="food" aria-label="收藏">♡</button>
+              <button class="card-fav-btn" data-id="${f.id}" data-type="food" aria-label="收藏" aria-pressed="false">♡</button>
             </div>
             <div class="card-body">
               <h3>${f.name}</h3>
@@ -1543,7 +1553,7 @@
                 <span>⏱ ${s.dur}</span>
                 <span>💬 ${s.reviews} 条评价</span>
               </div>
-              <button class="slide-btn" onclick="event.stopPropagation();location.href='spots.html?id=${s.id}'">查看详情 →</button>
+              <button class="slide-btn" onclick="event.stopPropagation();location.href='spots.html?id=${s.id}'" aria-label="查看详情 →">查看详情 →</button>
             </div>
           </div>`;
       }).join('');

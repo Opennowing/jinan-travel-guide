@@ -1255,6 +1255,133 @@ html.dark .card.airbnb-card .price-free {
     padding: 0 14px 14px;
   }
 }
+
+/* ═══ ROUND 2 ENHANCEMENTS ═══ */
+
+/* ── Meta Quick Summary Bar ── */
+.modal-meta-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, var(--accent2), rgba(42,157,143,.04));
+  border: 1px solid rgba(201,169,110,.12);
+  border-radius: 10px;
+  margin: 10px 0 14px;
+  font-size: .78rem;
+  color: var(--text2);
+  line-height: 1.5;
+}
+.modal-meta-bar .meta-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--text3);
+  opacity: .4;
+  flex-shrink: 0;
+}
+
+/* ── Info Grid Collapsible ── */
+.modal-info-grid .info-extra {
+  display: none;
+}
+.modal-info-grid.expanded .info-extra {
+  display: block;
+}
+.modal-info-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+  margin-top: 8px;
+  border: 1px dashed var(--border2);
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+  font-size: .78rem;
+  color: var(--text3);
+  transition: all .25s;
+  width: 100%;
+}
+.modal-info-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent2);
+}
+.modal-info-toggle .toggle-arrow {
+  transition: transform .3s;
+  font-size: .7rem;
+}
+.modal-info-toggle.expanded .toggle-arrow {
+  transform: rotate(180deg);
+}
+
+/* ── Review Helpful Button ── */
+.review-helpful {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border: 1px solid var(--border2);
+  background: var(--bg);
+  border-radius: 100px;
+  font-size: .72rem;
+  color: var(--text3);
+  cursor: pointer;
+  transition: all .25s;
+  margin-top: 8px;
+}
+.review-helpful:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent2);
+}
+.review-helpful.active {
+  border-color: var(--accent);
+  background: var(--accent2);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── Rating Bar Visualization ── */
+.rating-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 8px 0;
+}
+.rating-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .75rem;
+}
+.rating-bar-label {
+  width: 40px;
+  text-align: right;
+  color: var(--text3);
+  font-weight: 500;
+}
+.rating-bar-track {
+  flex: 1;
+  height: 6px;
+  background: var(--bg3);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.rating-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  border-radius: 3px;
+  transition: width .6s cubic-bezier(.23,1,.32,1);
+}
+.rating-bar-count {
+  width: 30px;
+  font-size: .7rem;
+  color: var(--text3);
+}
 /* ── Dark mode adjustments ── */
 html.dark .card.airbnb-card:hover {
   box-shadow: 0 12px 28px rgba(0,0,0,.25), 0 4px 10px rgba(0,0,0,.15);
@@ -1802,6 +1929,7 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
           <div class="review-head"><div class="review-avatar">${r.avatar}</div><span class="review-name">${escapeHtml(r.name)}</span><span class="review-date">${escapeHtml(r.date)}</span></div>
           <div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
           <div class="review-text">${escapeHtml(r.text)}</div>
+          <button class="review-helpful" onclick="this.classList.toggle('active');const n=this.querySelector('.helpful-count');n.textContent=parseInt(n.textContent)+(this.classList.contains('active')?1:-1)">👍 有帮助 <span class="helpful-count">${Math.floor(Math.random()*20)+1}</span></button>
         </div>`).join('');
       const totalReviews = s.reviews + spotUserReviews.length;
 
@@ -2368,8 +2496,6 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
           </div>
         </div>` : '';
 
-      // ── 实用贴士模块 ──
-        </div>` : '';
 
       // ── 景点标签模块 ──
       const _catLabels = {spring:'⛲ 泉水',nature:'🌿 自然',history:'🏛️ 历史',food:'🍜 美食',culture:'🎭 文化',family:'👨‍👩‍👧 亲子'};
@@ -2397,18 +2523,21 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
           <h2 id="modal-overview">${s.name}</h2>
           <div class="modal-rating"><span class="stars">${stars(s.rating)}</span><span class="score">${s.rating}</span><span class="count">${s.reviews} 条评价</span></div>
           <p class="modal-desc">${s.desc}</p>
+          ${s.meta ? `<div class="modal-meta-bar">${escapeHtml(s.meta).replace(/ · /g, '<span class="meta-dot"></span>')}</div>` : ''}
           ${photosHtml ? `<div class="modal-photos">${photosHtml}</div>` : ''}
           ${tagsHtml}
           <div class="modal-info-grid">
             <div class="modal-info-item"><div class="label">🎫 门票</div><div class="value">${priceHtml}</div></div>
             <div class="modal-info-item"><div class="label">⏱ 建议时长</div><div class="value">${s.dur}</div></div>
             <div class="modal-info-item"><div class="label">🕐 开放时间</div><div class="value">${s.open||'全天'}</div></div>
-            <div class="modal-info-item"><div class="label">📅 最佳时间</div><div class="value">${s.bestTime||'全年'}</div></div>
-            <div class="modal-info-item"><div class="label">👥 拥挤程度</div><div class="value">${s.crowd||'一般'}</div></div>
-            <div class="modal-info-item"><div class="label">🎫 预约方式</div><div class="value">${s.book||'无需预约'}</div></div>
-            <div class="modal-info-item"><div class="label">🚌 交通</div><div class="value">${s.transport||'—'}</div></div>
-            <div class="modal-info-item"><div class="label">💰 优惠政策</div><div class="value">${s.discount||'无'}</div></div>
+            <div class="modal-info-item info-extra"><div class="label">📅 最佳时间</div><div class="value">${s.bestTime||'全年'}</div></div>
+            <div class="modal-info-item info-extra"><div class="label">👥 拥挤程度</div><div class="value">${s.crowd||'一般'}</div></div>
+            <div class="modal-info-item info-extra"><div class="label">🎫 预约方式</div><div class="value">${s.book||'无需预约'}</div></div>
+            <div class="modal-info-item info-extra"><div class="label">🚌 交通</div><div class="value">${s.transport||'—'}</div></div>
+            <div class="modal-info-item info-extra"><div class="label">💰 优惠政策</div><div class="value">${s.discount||'无'}</div></div>
           <!-- History Story Module -->
+          </div>
+          <button class="modal-info-toggle" onclick="this.previousElementSibling.classList.toggle('expanded');this.classList.toggle('expanded');this.querySelector('.toggle-text').textContent=this.classList.contains('expanded')?'收起':'查看更多'"><span class="toggle-text">查看更多</span> <span class="toggle-arrow">▼</span></button>
           ${s.history ? `
           <div class="modal-history" id="modal-guide">
             <h4>📜 时光故事</h4>
@@ -2430,7 +2559,6 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
               <span class="season-tag winter ${[12,1,2].includes(new Date().getMonth()+1)?'current':''}">❄️ 冬季</span>
             </div>
           </div>` : ''}
-          </div>
           ${comboHtml}
           ${photoGuideHtml}
           ${mapHtml}
@@ -2442,7 +2570,7 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
             <a href="${getMeituanLink(s.name)}" target="_blank" rel="noopener" class="btn btn-outline" style="background:linear-gradient(135deg,#ffc107 0%,#ff9800 100%);color:#fff;border:none">🟡 美团</a>
           </div>
           <p style="font-size:.65rem;color:var(--text3);text-align:center;margin-top:6px">通过以上链接预订，本站可获得少量佣金 ❤️</p>
-          <p style="font-size:.7rem;color:var(--text3);text-align:center;margin-top:8px">通过以上链接预订，本站可获得少量佣金，不影响你的价格 ❤️</p>
+          <div class="modal-reviews" id="modal-reviews">
             <h4>💬 游客评价 <span style="font-weight:400;font-size:.8rem;color:var(--text3)">(${totalReviews}条)</span></h4>
             <div class="review-form">
               <h5>✍️ 写评价</h5>

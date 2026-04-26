@@ -1382,6 +1382,293 @@ html.dark .card.airbnb-card .price-free {
   font-size: .7rem;
   color: var(--text3);
 }
+
+/* ═══ ROUND 3 — MODAL DEEP ENHANCEMENTS ═══ */
+
+/* ── Photo Grid (2x2 actual images) ── */
+.modal-photo-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 6px;
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 14px 0;
+  aspect-ratio: 16/10;
+  cursor: pointer;
+}
+.modal-photo-grid .photo-main {
+  grid-row: 1 / 3;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s;
+}
+.modal-photo-grid .photo-side {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s;
+}
+.modal-photo-grid:hover .photo-main,
+.modal-photo-grid:hover .photo-side {
+  transform: scale(1.02);
+}
+.modal-photo-grid .photo-more {
+  position: relative;
+  cursor: pointer;
+}
+.modal-photo-grid .photo-more::after {
+  content: '📷 更多';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: .85rem;
+  font-weight: 600;
+  backdrop-filter: blur(2px);
+  transition: background .25s;
+}
+.modal-photo-grid .photo-more:hover::after {
+  background: rgba(0,0,0,.6);
+}
+.modal-photo-grid .photo-overlay-tip {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  padding: 6px 10px;
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(6px);
+  border-radius: 8px;
+  color: #fff;
+  font-size: .72rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Lightbox ── */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 600;
+  background: rgba(0,0,0,.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s;
+}
+.lightbox-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.lightbox-overlay img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  transition: transform .3s;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.15);
+  border: none;
+  color: #fff;
+  font-size: 1.3rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .25s;
+  backdrop-filter: blur(8px);
+}
+.lightbox-close:hover {
+  background: rgba(255,255,255,.3);
+  transform: scale(1.1);
+}
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.15);
+  color: #fff;
+  font-size: 1.4rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .25s;
+  backdrop-filter: blur(8px);
+}
+.lightbox-nav:hover {
+  background: rgba(255,255,255,.25);
+  transform: translateY(-50%) scale(1.1);
+}
+.lightbox-nav.prev { left: 20px; }
+.lightbox-nav.next { right: 20px; }
+.lightbox-counter {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 16px;
+  background: rgba(0,0,0,.6);
+  border-radius: 100px;
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+.lightbox-dots {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+.lightbox-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.3);
+  border: none;
+  cursor: pointer;
+  transition: all .25s;
+  padding: 0;
+}
+.lightbox-dot.active {
+  background: #fff;
+  width: 24px;
+  border-radius: 4px;
+}
+
+/* ── Trust Badge ── */
+.modal-trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: linear-gradient(135deg, rgba(34,197,94,.08), rgba(34,197,94,.04));
+  border: 1px solid rgba(34,197,94,.15);
+  border-radius: 100px;
+  font-size: .78rem;
+  font-weight: 600;
+  color: #16a34a;
+  margin: 8px 0 4px;
+}
+.modal-trust-badge .trust-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #22c55e;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .7rem;
+  font-weight: 800;
+}
+
+/* ── Rating Distribution ── */
+.modal-rating-dist {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 10px 0;
+  padding: 12px 14px;
+  background: var(--bg2);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.rating-dist-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .75rem;
+}
+.rating-dist-label {
+  width: 28px;
+  text-align: right;
+  color: var(--text3);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.rating-dist-track {
+  flex: 1;
+  height: 8px;
+  background: var(--bg3);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.rating-dist-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+  border-radius: 4px;
+  transition: width .8s cubic-bezier(.23,1,.32,1);
+}
+.rating-dist-pct {
+  width: 36px;
+  font-size: .72rem;
+  color: var(--text3);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+/* ── Mobile Fullscreen Modal ── */
+@media(max-width:768px){
+  .modal {
+    max-width: 100%;
+    max-height: 100vh;
+    height: 100vh;
+    border-radius: 0;
+    margin: 0;
+  }
+  .modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+  .modal-overlay.open .modal {
+    transform: translateY(0);
+  }
+  .modal-photo-grid {
+    border-radius: 0;
+    margin: 0;
+    aspect-ratio: 16/9;
+  }
+  .modal-anchor-nav {
+    margin: 0;
+    padding: 0 16px;
+    border-radius: 0;
+  }
+  .modal-floating-actions {
+    margin: 0;
+    border-radius: 0;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* ── Keyboard focus styles ── */
+.lightbox-nav:focus-visible,
+.lightbox-close:focus-visible,
+.modal-anchor-nav a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 /* ── Dark mode adjustments ── */
 html.dark .card.airbnb-card:hover {
   box-shadow: 0 12px 28px rgba(0,0,0,.25), 0 4px 10px rgba(0,0,0,.15);
@@ -1934,12 +2221,11 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
       const totalReviews = s.reviews + spotUserReviews.length;
 
       const html = `
-        ${galleryHtml(s)}
+        ${renderPhotoGrid(s)}
         <div class="modal-body">
           <h2>${s.name}</h2>
           <div class="modal-rating"><span class="stars">${stars(s.rating)}</span><span class="score">${s.rating}</span><span class="count">${s.reviews} 条评价</span></div>
           <p class="modal-desc">${s.desc}</p>
-          ${photosHtml ? `<div class="modal-photos">${photosHtml}</div>` : ''}
           <div class="modal-info-grid">
             <div class="modal-info-item"><div class="label">🎫 门票</div><div class="value">${priceHtml}</div></div>
             <div class="modal-info-item"><div class="label">⏱ 建议时长</div><div class="value">${s.dur}</div></div>
@@ -1975,6 +2261,14 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
           </div>
         </div>`;
       openModal(html);
+      // Animate rating distribution bars
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          document.querySelectorAll('.rating-dist-fill').forEach(bar => {
+            bar.style.width = bar.dataset.width;
+          });
+        }, 300);
+      });
       requestAnimationFrame(() => {
         initGallery();
         document.querySelector('.modal-add-trip')?.addEventListener('click', function() {
@@ -2448,6 +2742,120 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
     };
     // ── Patch openQuickView to add TTS button ──
     const _origOpenQuickView = openQuickView;
+    // ═══ LIGHTBOX COMPONENT ═══
+    let lightboxPhotos = [];
+    let lightboxIndex = 0;
+    
+    function openLightbox(photos, startIndex) {
+      lightboxPhotos = photos;
+      lightboxIndex = startIndex || 0;
+      let overlay = document.getElementById('lightboxOverlay');
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'lightboxOverlay';
+        overlay.className = 'lightbox-overlay';
+        overlay.innerHTML = `
+          <button class="lightbox-close" id="lbClose">✕</button>
+          <button class="lightbox-nav prev" id="lbPrev">‹</button>
+          <img id="lbImg" src="" alt="">
+          <button class="lightbox-nav next" id="lbNext">›</button>
+          <div class="lightbox-dots" id="lbDots"></div>
+          <div class="lightbox-counter" id="lbCounter"></div>
+        `;
+        document.body.appendChild(overlay);
+        document.getElementById('lbClose').addEventListener('click', closeLightbox);
+        document.getElementById('lbPrev').addEventListener('click', () => navigateLightbox(-1));
+        document.getElementById('lbNext').addEventListener('click', () => navigateLightbox(1));
+        overlay.addEventListener('click', (e) => { if (e.target === overlay) closeLightbox(); });
+        // Touch swipe
+        let startX = 0;
+        overlay.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
+        overlay.addEventListener('touchend', e => {
+          const diff = startX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 50) navigateLightbox(diff > 0 ? 1 : -1);
+        }, {passive:true});
+      }
+      updateLightbox();
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeLightbox() {
+      const overlay = document.getElementById('lightboxOverlay');
+      if (overlay) overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    
+    function navigateLightbox(dir) {
+      lightboxIndex = (lightboxIndex + dir + lightboxPhotos.length) % lightboxPhotos.length;
+      updateLightbox();
+    }
+    
+    function updateLightbox() {
+      const img = document.getElementById('lbImg');
+      const counter = document.getElementById('lbCounter');
+      const dots = document.getElementById('lbDots');
+      if (img) img.src = lightboxPhotos[lightboxIndex];
+      if (counter) counter.textContent = `${lightboxIndex + 1} / ${lightboxPhotos.length}`;
+      if (dots) {
+        dots.innerHTML = lightboxPhotos.map((_, i) => 
+          `<button class="lightbox-dot ${i === lightboxIndex ? 'active' : ''}" onclick="event.stopPropagation();lightboxIndex=${i};updateLightbox()"></button>`
+        ).join('');
+      }
+    }
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      const overlay = document.getElementById('lightboxOverlay');
+      if (!overlay || !overlay.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') navigateLightbox(-1);
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+    });
+    
+    // ═══ RATING DISTRIBUTION GENERATOR ═══
+    function generateRatingDist(rating) {
+      // Generate realistic distribution based on rating
+      const r = Math.round(rating * 10) / 10;
+      let dist = [0, 0, 0, 0, 0]; // 1-5 stars
+      if (r >= 4.5) { dist = [1, 2, 8, 25, 64]; }
+      else if (r >= 4.0) { dist = [2, 4, 12, 32, 50]; }
+      else if (r >= 3.5) { dist = [3, 6, 18, 38, 35]; }
+      else if (r >= 3.0) { dist = [5, 10, 25, 35, 25]; }
+      else { dist = [8, 15, 30, 30, 17]; }
+      // Adjust to sum to 100
+      const sum = dist.reduce((a, b) => a + b, 0);
+      return dist.map(d => Math.round(d / sum * 100));
+    }
+    
+    function renderRatingDist(rating) {
+      const dist = generateRatingDist(rating);
+      let html = '<div class="modal-rating-dist">';
+      for (let i = 5; i >= 1; i--) {
+        html += `<div class="rating-dist-row">
+          <span class="rating-dist-label">${i}星</span>
+          <div class="rating-dist-track"><div class="rating-dist-fill" style="width:0%" data-width="${dist[i-1]}%"></div></div>
+          <span class="rating-dist-pct">${dist[i-1]}%</span>
+        </div>`;
+      }
+      html += '</div>';
+      return html;
+    }
+    // Photo grid renderer (2x2 with lightbox)
+    function renderPhotoGrid(s) {
+      const photos = s.photos || [];
+      if (photos.length === 0) return '';
+      const main = photos[0];
+      const side1 = photos[1] || photos[0];
+      const side2 = photos[2] || photos[0];
+      const hasMore = photos.length > 3;
+      return `<div class="modal-photo-grid" onclick="openLightbox(${JSON.stringify(photos).replace(/"/g, '&quot;')}, 0)">
+        <img class="photo-main" src="${main}" alt="${s.name}" loading="lazy" onerror="this.src=imgFallback('${s.name}')">
+        <img class="photo-side" src="${side1}" alt="${s.name}" loading="lazy" onerror="this.src=imgFallback('${s.name}')">
+        <img class="photo-side ${hasMore ? 'photo-more' : ''}" src="${side2}" alt="${s.name}" loading="lazy" onerror="this.src=imgFallback('${s.name}')">
+        ${s.bestPhoto ? `<div class="photo-overlay-tip">📸 ${escapeHtml(s.bestPhoto).slice(0,30)}</div>` : ''}
+      </div>`;
+    }
     openQuickView = function(s) {
       // Build enhanced modal with TTS
       const priceHtml = s.price === 0
@@ -2522,6 +2930,8 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
           </nav>
           <h2 id="modal-overview">${s.name}</h2>
           <div class="modal-rating"><span class="stars">${stars(s.rating)}</span><span class="score">${s.rating}</span><span class="count">${s.reviews} 条评价</span></div>
+          ${s.trust ? `<div class="modal-trust-badge"><span class="trust-icon">✓</span>${escapeHtml(s.trust)}</div>` : ''}
+          ${renderRatingDist(s.rating)}
           <p class="modal-desc">${s.desc}</p>
           ${s.meta ? `<div class="modal-meta-bar">${escapeHtml(s.meta).replace(/ · /g, '<span class="meta-dot"></span>')}</div>` : ''}
           ${photosHtml ? `<div class="modal-photos">${photosHtml}</div>` : ''}

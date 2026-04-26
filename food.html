@@ -755,6 +755,16 @@
         <!-- 美食卡片列表 -->
         <div class="food-masonry" id="foodGrid">
           <div class="food-loading"><div class="spinner"></div></div>
+    <!-- guess-you-like -->
+    <div id="guessYouLike" style="display:none;margin:24px 0">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
+        <span style="font-size:1.2rem">💡</span>
+        <h3 style="font:700 1.1rem/1.2 var(--serif);margin:0">猜你喜欢</h3>
+        <span style="font-size:.75rem;color:var(--text3);margin-left:auto" id="guessHint"></span>
+      </div>
+      <div id="guessCards" style="display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch"></div>
+    </div>
+
         </div>
       </div>
     </section>
@@ -1071,6 +1081,19 @@
       return `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect fill="${bg}" width="600" height="400" rx="12"/><text x="300" y="180" text-anchor="middle" font-size="50">🏔️</text><text x="300" y="250" text-anchor="middle" fill="${fg}" font-size="22" font-family="sans-serif" font-weight="bold">${name}</text><text x="300" y="285" text-anchor="middle" fill="${fg}" font-size="13" font-family="sans-serif" opacity="0.6">济南旅游攻略</text></svg>`)}`;
     };
 
+    // -- Amap Navigation --
+    window.openAmapNavigation = function(lat, lng, name) {
+      if (!lat || !lng) { showToast('\u6682\u65e0\u5750\u6807\u4fe1\u606f'); return; }
+      const ua = navigator.userAgent;
+      let url;
+      if (/Android|iPhone|iPad|iPod/i.test(ua)) {
+        url = 'https://uri.amap.com/marker?position=' + lng + ',' + lat + '&name=' + encodeURIComponent(name);
+      } else {
+        url = 'https://ditu.amap.com/regeo?lng=' + lng + '&lat=' + lat;
+      }
+      window.open(url, '_blank');
+    };
+
     import { initSocialFeatures } from '/src/components/social.js';
     initPWA();
     initAll();
@@ -1091,6 +1114,9 @@
     let filterMeal = '全部';
     let filterScene = '全部';
 
+    // ── 快速预览弹窗 ──
+    function showFoodPreviewModal(food) {
+      const html = `
               ${food.must ? '<span class="badge-must">🔥 必吃</span>' : ''}
               ${food.season && food.season !== '四季皆宜' ? '<span class="badge-season">' + (getSeasonLabel(food.season) || food.season) + '</span>' : ''}
             </div>
@@ -1124,6 +1150,7 @@
                       <div style="flex:1">
                         <div style="font-weight:600;font-size:.88rem">${sh.name}</div>
                         <div style="font-size:.75rem;color:var(--text3);margin-top:2px">${sh.addr}</div>
+                        <button onclick="event.stopPropagation();openAmapNavigation(${sh.lat||'null'},${sh.lng||'null'},'${sh.name}')" style="display:inline-flex;align-items:center;gap:4px;margin-top:4px;padding:3px 10px;border:1px solid var(--border2);border-radius:100px;background:var(--bg1);font-size:.7rem;color:var(--accent);cursor:pointer" aria-label="🧭 导航到餐厅">🧭 导航</button>
                         <div style="font-size:.75rem;color:var(--text2);margin-top:4px">
                           ${stars(sh.rating)} ${sh.rating} · 人均${sh.avg} · ${sh.hours || ''}
                         </div>
@@ -1146,6 +1173,7 @@
           </div>
         </div>
       `;
+      modal.innerHTML = html;
       document.body.appendChild(modal);
       document.body.style.overflow = 'hidden';
       modal.addEventListener('click', e => {
@@ -2332,6 +2360,7 @@
             '<div class="detail-shop-info">' +
               '<span>💰 人均 ' + sh.avg + '</span>' +
               '<span>📍 ' + (sh.addr || '') + '</span>' +
+              '<button class="shop-nav-btn" data-lat="' + (sh.lat||'') + '" data-lng="' + (sh.lng||'') + '" data-name="' + sh.name.replace(/"/g,'&quot;') + '" style="display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border:1px solid var(--border2);border-radius:100px;background:var(--bg1);font-size:.7rem;color:var(--accent);cursor:pointer">🧭 导航</button>' +
               (sh.hours ? '<span>🕐 ' + sh.hours + '</span>' : '') +
             '</div>' +
             (extras ? '<div class="detail-shop-extras">' + extras + '</div>' : '') +
@@ -2406,7 +2435,106 @@
     // 初始化必吃榜Hero
     // (loadFoods内部已调用renderMustEatHero)
 
+
+    // -- Guess You Like --
+    function updateGuessYouLike() {
+      var container = document.getElementById('guessYouLike');
+      var cardsEl = document.getElementById('guessCards');
+      var hintEl = document.getElementById('guessHint');
+      if (!container || !cardsEl || !allFoods.length) return;
+
+      var favIds = [];
+      try {
+        var stored = JSON.parse(localStorage.getItem('jinan_favorites') || '[]');
+        for (var si = 0; si < stored.length; si++) {
+          if (stored[si].type === 'food') favIds.push(stored[si].id);
+        }
+      } catch(e) {}
+
+      var favFoods = [];
+      for (var fi = 0; fi < favIds.length; fi++) {
+        var found = allFoods.find(function(f) { return f.id === favIds[fi]; });
+        if (found) favFoods.push(found);
+      }
+      var favCats = [];
+      for (var ci = 0; ci < favFoods.length; ci++) {
+        if (favCats.indexOf(favFoods[ci].cat) === -1) favCats.push(favFoods[ci].cat);
+      }
+
+      var candidates = [];
+      if (favCats.length > 0) {
+        candidates = allFoods.filter(function(f) {
+          return favCats.indexOf(f.cat) !== -1 && favIds.indexOf(f.id) === -1;
+        });
+        var catNames = {lucai:'\u9c81\u83dc',xiaochi:'\u5c0f\u5403',laozihao:'\u8001\u5b57\u53f7',zaocan:'\u65e9\u9910',yexiao:'\u591c\u5b35',yinpin:'\u996e\u54c1'};
+        hintEl.textContent = '\u57fa\u4e8e\u4f60\u6536\u85cf\u7684' + favCats.map(function(c) { return catNames[c]||c; }).join('\u3001') + '\u63a8\u8350';
+      }
+
+      if (candidates.length < 4) {
+        var remaining = allFoods.filter(function(f) {
+          return favIds.indexOf(f.id) === -1 && candidates.indexOf(f) === -1;
+        });
+        remaining.sort(function() { return Math.random() - 0.5; });
+        candidates = candidates.concat(remaining);
+      }
+
+      candidates = candidates.slice(0, 4);
+      if (candidates.length === 0) { container.style.display = 'none'; return; }
+
+      container.style.display = 'block';
+      var catLabels = {lucai:'\u9c81\u83dc',xiaochi:'\u5c0f\u5403',laozihao:'\u8001\u5b57\u53f7',zaocan:'\u65e9\u9910',yexiao:'\u591c\u5b35',yinpin:'\u996e\u54c1'};
+      cardsEl.innerHTML = candidates.map(function(food) {
+        var shop = food.shops && food.shops[0];
+        var cl = catLabels[food.cat] || '\u7f8e\u98df';
+        var html = '<div onclick="showFoodDetail(\'' + food.id + '\')" style="min-width:200px;max-width:220px;flex-shrink:0;scroll-snap-align:start;background:var(--bg1);border:1px solid var(--border2);border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s">';
+        html += '<div style="position:relative;height:120px;overflow:hidden">';
+        html += '<img src="' + food.img + '" alt="' + food.name + '" style="width:100%;height:100%;object-fit:cover" onerror="this.onerror=null;this.src=imgFallback(this.alt)">';
+        html += '<div style="position:absolute;top:8px;left:8px;padding:2px 8px;border-radius:100px;background:rgba(0,0,0,.6);color:#fff;font-size:.65rem">' + cl + '</div>';
+        html += '</div>';
+        html += '<div style="padding:10px 12px">';
+        html += '<div style="font-weight:600;font-size:.88rem;margin-bottom:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + food.name + '</div>';
+        html += '<div style="font-size:.75rem;color:var(--text3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + food.tag + '</div>';
+        if (shop) {
+          html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-top:6px">';
+          html += '<span style="font-size:.7rem;color:var(--text2)">' + shop.name + '</span>';
+          html += '<span style="font-weight:700;color:var(--accent);font-size:.85rem">' + shop.avg + '</span>';
+          html += '</div>';
+        }
+        html += '</div></div>';
+        return html;
+      }).join('');
+    }
+
+    if (typeof favs !== 'undefined' && favs._updateBadge) {
+      var _origBadge = favs._updateBadge.bind(favs);
+      favs._updateBadge = function() {
+        _origBadge();
+        setTimeout(updateGuessYouLike, 100);
+      };
+    }
+
+
+    // -- Shop navigation via data attributes --
+    document.addEventListener('click', function(e) {
+      var btn = e.target.closest('.shop-nav-btn');
+      if (!btn) return;
+      e.stopPropagation();
+      var lat = parseFloat(btn.dataset.lat);
+      var lng = parseFloat(btn.dataset.lng);
+      var name = btn.dataset.name;
+      if (!lat || !lng) { showToast('\u6682\u65e0\u5750\u6807\u4fe1\u606f'); return; }
+      var ua = navigator.userAgent;
+      var url;
+      if (/Android|iPhone|iPad|iPod/i.test(ua)) {
+        url = 'https://uri.amap.com/marker?position=' + lng + ',' + lat + '&name=' + encodeURIComponent(name);
+      } else {
+        url = 'https://ditu.amap.com/regeo?lng=' + lng + '&lat=' + lat;
+      }
+      window.open(url, '_blank');
+    });
+
     loadFoods();
+    setTimeout(updateGuessYouLike, 1000);
   </script>
 
 </body>

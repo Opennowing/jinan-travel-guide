@@ -110,6 +110,7 @@
     .food-card-history{font-size:.8rem;color:var(--text3);line-height:1.5;margin-bottom:10px;padding:10px 12px;background:var(--bg2);border-radius:8px}
     .food-card-history::before{content:'📜 '}
     .food-card-desc{font-size:.85rem;color:var(--text2);line-height:1.65;margin-bottom:14px}
+    .card-body .desc{-webkit-line-clamp:3;line-clamp:3}
     .food-card-shops{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:auto}
     .food-card-shops li{padding:12px 16px;background:var(--bg2);border-radius:12px;border:none;transition:all .2s}
     .food-card-shops li:hover{background:var(--accent2);transform:translateX(4px)}
@@ -188,11 +189,40 @@
     /* ── Compare Add Button Active ── */
     .compare-add-btn.active{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important}
 
-    /* ── Card Quickview & Fav Buttons ── */
-    .card-quickview-btn{position:absolute;bottom:12px;right:12px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;z-index:3;transition:all .25s;backdrop-filter:blur(4px);opacity:0}
-    .card:hover .card-quickview-btn{opacity:1}
-    .card-quickview-btn:hover{background:rgba(42,157,143,.8);transform:scale(1.1)}
-    @media(max-width:768px){.card-quickview-btn{opacity:1}}
+    /* ── Card Overlay Buttons (unified row) ── */
+    .card-overlay-actions{position:absolute;top:12px;right:12px;z-index:3;display:flex;gap:6px}
+    .card-fav-btn,.card-quickview-btn,.card-compare-icon{width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .25s;backdrop-filter:blur(6px);background:rgba(0,0,0,.4);color:#fff;opacity:1;transform:none}
+    .card:hover .card-fav-btn,.card:hover .card-quickview-btn,.card:hover .card-compare-icon{transform:none}
+    .card-fav-btn:hover{background:rgba(239,68,68,.85);transform:scale(1.12)}
+    .card-fav-btn.active{background:rgba(239,68,68,.9)}
+    .card-quickview-btn:hover{background:rgba(42,157,143,.85);transform:scale(1.12)}
+    .card-compare-icon{font-size:.8rem}
+    .card-compare-icon:hover{background:rgba(59,130,246,.85);transform:scale(1.12)}
+    .card-compare-icon.active{background:rgba(59,130,246,.9)}
+    @media(max-width:768px){.card-fav-btn,.card-quickview-btn,.card-compare-icon{opacity:1;transform:none}}
+
+    /* ── Smart Recommend Section ── */
+    .smart-recommend{background:linear-gradient(135deg,rgba(201,169,110,.08),rgba(42,157,143,.06));border:1px solid var(--accent2);border-radius:16px;padding:20px 24px;margin-bottom:24px}
+    .smart-recommend-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+    .smart-recommend-header h3{font:700 1rem/1.3 var(--serif);display:flex;align-items:center;gap:8px;margin:0}
+    .smart-recommend-header .refresh-btn{padding:6px 14px;border:1px solid var(--accent);background:transparent;border-radius:100px;font-size:.75rem;cursor:pointer;color:var(--accent);font-weight:600;transition:all .2s}
+    .smart-recommend-header .refresh-btn:hover{background:var(--accent);color:#fff}
+    .smart-recommend-list{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px;scroll-snap-type:x mandatory}
+    .smart-recommend-card{flex:0 0 200px;scroll-snap-align:start;background:var(--card-bg);border-radius:14px;overflow:hidden;border:1px solid var(--border);transition:all .25s;cursor:pointer}
+    .smart-recommend-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.1)}
+    .smart-recommend-card img{width:100%;aspect-ratio:4/3;object-fit:cover}
+    .smart-recommend-card .sr-body{padding:10px 12px}
+    .smart-recommend-card .sr-name{font-weight:700;font-size:.85rem;margin-bottom:4px}
+    .smart-recommend-card .sr-meta{font-size:.72rem;color:var(--text3);display:flex;gap:6px;flex-wrap:wrap}
+    .smart-recommend-card .sr-reason{font-size:.68rem;color:var(--accent);margin-top:4px;font-weight:500}
+
+    /* ── Location Prompt ── */
+    .location-prompt{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;font-size:.82rem;color:var(--text2)}
+    .location-prompt .loc-icon{font-size:1.4rem}
+    .location-prompt .loc-text{flex:1}
+    .location-prompt .loc-btn{padding:6px 14px;border:none;background:var(--accent);color:#fff;border-radius:100px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
+    .location-prompt .loc-btn:hover{opacity:.85}
+    .location-prompt .loc-btn.located{background:var(--teal)}
 
     /* ── Enhanced Filter Tabs ── */
     .enhanced-filters{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
@@ -489,6 +519,25 @@
           <button class="reset-filter-btn" id="resetFilterBtn" title="重置所有筛选条件">🔄 重置筛选</button>
           <button class="fav-filter-btn" id="foodFavFilterBtn">❤️ 我的收藏 <span class="fav-count" id="foodFavCountBadge">0</span></button>
         </div>
+
+        <!-- 定位提示 -->
+        <div class="location-prompt" id="locationPrompt">
+          <span class="loc-icon">📍</span>
+          <div class="loc-text">开启定位，为你推荐<span id="locStatus">附近美食</span></div>
+          <button class="loc-btn" id="locateBtn">开启定位</button>
+        </div>
+
+        <!-- 智能推荐 -->
+        <div class="smart-recommend" id="smartRecommend">
+          <div class="smart-recommend-header">
+            <h3>✨ 为你推荐</h3>
+            <button class="refresh-btn" id="refreshRecommend">🔄 换一批</button>
+          </div>
+          <div class="smart-recommend-list" id="smartRecommendList">
+            <!-- JS渲染 -->
+          </div>
+        </div>
+
         <!-- 美食卡片列表 -->
         <div class="food-masonry" id="foodGrid">
           <div class="food-loading"><div class="spinner"></div></div>
@@ -860,11 +909,13 @@
         return;
       }
       if (foodCompareList.includes(foodId)) {
-        showToast('已在对比列表中');
+        // Remove if already in list
+        removeFromFoodCompare(foodId);
         return;
       }
       foodCompareList.push(foodId);
       updateFoodComparePanel();
+      renderFoods();
       showToast('已加入对比');
     }
 
@@ -1457,26 +1508,40 @@
       return false;
     }
 
-    // ── Fetch data ──
+    // ── Fetch data (with fallback paths) ──
     async function loadFoods() {
-      try {
-        const res = await fetch('/jinan-travel-guide/data/food.json');
-        const data = await res.json();
-        allFoods = data.foods || [];
-        allCategories = data.categories || [];
-        try { renderMustEat(); } catch(e) { console.warn('Must-eat render failed:', e); }
-        try { renderFoods(); } catch(e) { console.warn('Foods render failed:', e); }
-        try { renderRoutes(); } catch(e) { console.warn('Routes render failed:', e); }
-        try { renderDailyRoute(); } catch(e) { console.warn('Daily route render failed:', e); }
-        try { renderSmartSearch(); } catch(e) { console.warn('Smart search render failed:', e); }
-        try { initMap(); } catch(e) { console.warn('Map init failed:', e); }
-        updateCompareUI();
-        updateFoodFavCount();
-        updateDistrictCounts();
-      } catch (e) {
+      const paths = [
+        '/jinan-travel-guide/data/food.json',
+        '/data/food.json',
+        './data/food.json',
+        '../data/food.json',
+        '/src/data/food.json'
+      ];
+      let data = null;
+      for (const path of paths) {
+        try {
+          const res = await fetch(path);
+          if (res.ok) { data = await res.json(); break; }
+        } catch(e) { /* try next */ }
+      }
+      if (!data) {
         document.getElementById('foodGrid').innerHTML =
           '<div class="food-empty">加载美食数据失败，请刷新重试 😢</div>';
+        return;
       }
+      allFoods = data.foods || [];
+      allCategories = data.categories || [];
+      try { renderMustEat(); } catch(e) { console.warn('Must-eat render failed:', e); }
+      try { renderFoods(); } catch(e) { console.warn('Foods render failed:', e); }
+      try { renderRoutes(); } catch(e) { console.warn('Routes render failed:', e); }
+      try { renderDailyRoute(); } catch(e) { console.warn('Daily route render failed:', e); }
+      try { renderSmartSearch(); } catch(e) { console.warn('Smart search render failed:', e); }
+      try { initMap(); } catch(e) { console.warn('Map init failed:', e); }
+      try { renderSmartRecommend(); } catch(e) { console.warn('Smart recommend failed:', e); }
+      try { initLocation(); } catch(e) { console.warn('Location init failed:', e); }
+      updateCompareUI();
+      updateFoodFavCount();
+      updateDistrictCounts();
     }
 
     // ── Render Routes ──
@@ -1520,7 +1585,7 @@
       grid.innerHTML = mustFoods.map((food, i) =>
         '<div class="must-card rv">' +
           '<div class="must-card-rank">' + (i + 1) + '</div>' +
-          '<img class="must-card-img" src="' + food.img + '" alt="' + food.name + '" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
+          '<img class="must-card-img" src="' + food.img + '" alt="' + food.name + '" loading="lazy" onload="this.classList.add(\'img-loaded\');this.parentElement.classList.add(\'img-loaded\')" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.classList.add(\'img-loaded\');this.parentElement.classList.add(\'img-loaded\')">' +
           '<div class="must-card-body">' +
             '<div class="must-card-name">' + food.name + '</div>' +
             '<p class="must-card-desc">' + food.desc + '</p>' +
@@ -1577,10 +1642,13 @@
         const avgPrice = food.shops?.[0]?.avg || '';
         return '<div class="card rv" data-food-id="' + food.id + '" style="position:relative">' +
           '<div class="card-img">' +
-            '<img src="' + food.img + '" alt="' + food.name + '" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
+            '<img src="' + food.img + '" alt="' + food.name + '" loading="lazy" onload="this.classList.add(\'img-loaded\');this.parentElement.classList.add(\'img-loaded\')" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.classList.add(\'img-loaded\');this.parentElement.classList.add(\'img-loaded\')">' +
             (food.must ? '<span class="badge-must" style="position:absolute;top:12px;left:12px;z-index:2">🔥 必吃</span>' : '') +
-            '<button class="card-fav-btn ' + (isFav ? 'active' : '') + '" data-id="' + food.id + '" data-type="food" aria-label="' + (isFav ? '取消收藏' : '收藏') + '" onclick="event.stopPropagation();window._toggleFoodFav(\'' + food.id + '\',this)">' + (isFav ? '♥' : '♡') + '</button>' +
-            '<button class="card-quickview-btn" data-id="' + food.id + '" aria-label="快速预览" onclick="event.stopPropagation();showFoodQuickView(\'' + food.id + '\')">👁</button>' +
+            '<div class="card-overlay-actions">' +
+              '<button class="card-fav-btn ' + (isFav ? 'active' : '') + '" data-id="' + food.id + '" data-type="food" aria-label="' + (isFav ? '取消收藏' : '收藏') + '" onclick="event.stopPropagation();window._toggleFoodFav(\'' + food.id + '\',this)">' + (isFav ? '♥' : '♡') + '</button>' +
+              '<button class="card-compare-icon ' + (isCompare ? 'active' : '') + '" data-id="' + food.id + '" aria-label="' + (isCompare ? '取消对比' : '加入对比') + '" onclick="event.stopPropagation();addToFoodCompare(\'' + food.id + '\')">' + (isCompare ? '✓' : '⚖️') + '</button>' +
+              '<button class="card-quickview-btn" data-id="' + food.id + '" aria-label="快速预览" onclick="event.stopPropagation();showFoodQuickView(\'' + food.id + '\')">👁</button>' +
+            '</div>' +
           '</div>' +
           '<div class="card-body">' +
             '<h3>' + food.name + '</h3>' +
@@ -1606,8 +1674,7 @@
             ` : '') +
             (food.history ? '<div class="food-card-history">' + food.history + '</div>' : '') +
             '<div class="card-actions" style="display:flex;gap:8px;margin-top:12px">' +
-              '<a href="food.html?id=' + food.id + '" class="btn btn-primary btn-sm" style="flex:1;justify-content:center">查看详情</a>' +
-              '<button class="btn btn-outline btn-sm compare-add-btn ' + (isCompare ? 'active' : '') + '" data-id="' + food.id + '" data-type="food" onclick="event.stopPropagation();addToFoodCompare(\'' + food.id + '\')">' + (isCompare ? '✓ 已对比' : '对比') + '</button>' +
+              '<a href="food.html?id=' + food.id + '" class="btn btn-primary btn-sm" style="flex:1;justify-content:center" onclick="event.stopPropagation()">查看详情</a>' +
             '</div>' +
           '</div>' +
         '</div>';
@@ -1616,9 +1683,9 @@
       // Attach card click for navigation
       grid.querySelectorAll('.card').forEach(card => {
         card.addEventListener('click', e => {
-          if (e.target.closest('.card-fav-btn') || e.target.closest('.card-quickview-btn') || e.target.closest('.card-actions') || e.target.closest('.compare-add-btn')) return;
-          const href = card.dataset.href;
-          if (href) window.location.href = href;
+          if (e.target.closest('.card-fav-btn') || e.target.closest('.card-quickview-btn') || e.target.closest('.card-compare-icon') || e.target.closest('.card-actions')) return;
+          const foodId = card.dataset.foodId;
+          if (foodId) window.location.href = 'food.html?id=' + foodId;
         });
       });
 
@@ -1851,6 +1918,194 @@
     })();
 
     // ── Init ──
+
+    // ═══════════════════════════════════════════
+    //  智能推荐算法
+    // ═══════════════════════════════════════════
+    let userLocation = null;
+    let recommendSeed = Date.now();
+
+    function getTimeOfDay() {
+      const h = new Date().getHours();
+      if (h >= 5 && h < 10) return 'breakfast';
+      if (h >= 10 && h < 14) return 'lunch';
+      if (h >= 14 && h < 17) return 'afternoon';
+      if (h >= 17 && h < 21) return 'dinner';
+      return 'night';
+    }
+
+    function getTimeLabel(t) {
+      return { breakfast: '🌅 早餐时段', lunch: '☀️ 午餐时段', afternoon: '🍵 下午茶', dinner: '🌆 晚餐时段', night: '🌙 夜宵时段' }[t] || '';
+    }
+
+    function getSeason() {
+      const m = new Date().getMonth() + 1;
+      if (m >= 3 && m <= 5) return 'spring';
+      if (m >= 6 && m <= 8) return 'summer';
+      if (m >= 9 && m <= 11) return 'autumn';
+      return 'winter';
+    }
+
+    // 计算推荐得分
+    function scoreFood(food) {
+      let score = 0;
+      const time = getTimeOfDay();
+      const season = getSeason();
+
+      // 1. 时段匹配 (+30)
+      const catMap = {
+        breakfast: ['zaocan'],
+        lunch: ['lucai', 'laozihao'],
+        afternoon: ['yinpin'],
+        dinner: ['lucai', 'laozihao', 'xiaochi'],
+        night: ['yexiao']
+      };
+      if ((catMap[time] || []).includes(food.cat)) score += 30;
+
+      // 2. 季节匹配 (+20)
+      const seasonMap = {
+        spring: ['春', '蒲菜', '泉水'],
+        summer: ['夏', '烧烤', '冰', '凉', '酸'],
+        autumn: ['秋', '海参', '大葱', '进补'],
+        winter: ['冬', '热', '汤', '面', '炖']
+      };
+      const seasonHints = seasonMap[season] || [];
+      const foodText = [food.name, food.desc, food.tag, food.season || ''].join('');
+      for (const hint of seasonHints) {
+        if (foodText.includes(hint)) { score += 20; break; }
+      }
+
+      // 3. 必吃榜加权 (+25)
+      if (food.must) score += 25;
+
+      // 4. 评分加权 (+15)
+      const avgRating = food.shops?.reduce((sum, s) => sum + (s.rating || 0), 0) / (food.shops?.length || 1);
+      score += avgRating * 3;
+
+      // 5. 距离加权 (+0~20)
+      if (userLocation && food.shops) {
+        let minDist = Infinity;
+        for (const shop of food.shops) {
+          if (shop.lat && shop.lng) {
+            const d = haversine(userLocation.lat, userLocation.lng, shop.lat, shop.lng);
+            if (d < minDist) minDist = d;
+          }
+        }
+        if (minDist < 1) score += 20;
+        else if (minDist < 3) score += 15;
+        else if (minDist < 5) score += 10;
+        else if (minDist < 10) score += 5;
+      }
+
+      // 6. 随机因子 (防止每次一样)
+      score += ((recommendSeed * (food.id.charCodeAt(0) + 1)) % 10);
+
+      return score;
+    }
+
+    function haversine(lat1, lon1, lat2, lon2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(dLat/2)**2 + Math.cos(lat1*Math.PI/180) * Math.cos(lat2*Math.PI/180) * Math.sin(dLon/2)**2;
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    }
+
+    function renderSmartRecommend() {
+      if (!allFoods.length) return;
+      const scored = allFoods.map(f => ({ food: f, score: scoreFood(f) }));
+      scored.sort((a, b) => b.score - a.score);
+      const top = scored.slice(0, 8);
+
+      const time = getTimeOfDay();
+      const timeLabel = getTimeLabel(time);
+      const el = document.getElementById('smartRecommendList');
+      if (!el) return;
+
+      el.innerHTML = top.map(({ food, score }) => {
+        let reason = '';
+        if (food.must) reason = '🔥 必吃榜';
+        else if (score > 50) reason = timeLabel;
+        else if (score > 30) reason = '🌟 高评分';
+        else reason = '✨ 为你推荐';
+
+        const avgPrice = food.shops?.[0]?.avg || '';
+        return `<div class="smart-recommend-card" onclick="showFoodQuickView('${food.id}')">
+          <img src="${food.img}" alt="${food.name}" loading="lazy" onload="this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')">
+          <div class="sr-body">
+            <div class="sr-name">${food.name}</div>
+            <div class="sr-meta">
+              ${avgPrice ? '<span>' + avgPrice + '</span>' : ''}
+              <span>${food.shops?.length || 0}家店</span>
+            </div>
+            <div class="sr-reason">${reason}</div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    // ═══════════════════════════════════════════
+    //  定位功能
+    // ═══════════════════════════════════════════
+    function initLocation() {
+      const btn = document.getElementById('locateBtn');
+      const statusEl = document.getElementById('locStatus');
+      if (!btn) return;
+
+      // Check if already have location saved
+      const saved = localStorage.getItem('jinan-user-loc');
+      if (saved) {
+        try {
+          userLocation = JSON.parse(saved);
+          statusEl.textContent = '已定位 · 为你推荐附近美食';
+          btn.textContent = '已定位';
+          btn.classList.add('located');
+          renderSmartRecommend();
+        } catch(e) { /* ignore */ }
+      }
+
+      btn.addEventListener('click', () => {
+        if (userLocation) {
+          // Toggle off
+          userLocation = null;
+          localStorage.removeItem('jinan-user-loc');
+          statusEl.textContent = '附近美食';
+          btn.textContent = '开启定位';
+          btn.classList.remove('located');
+          renderSmartRecommend();
+          return;
+        }
+
+        if (!navigator.geolocation) {
+          showToast('浏览器不支持定位');
+          return;
+        }
+
+        btn.textContent = '定位中…';
+        showToast('正在获取位置…');
+
+        navigator.geolocation.getCurrentPosition(pos => {
+          userLocation = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+          localStorage.setItem('jinan-user-loc', JSON.stringify(userLocation));
+          statusEl.textContent = '已定位 · 为你推荐附近美食';
+          btn.textContent = '已定位';
+          btn.classList.add('located');
+          renderSmartRecommend();
+          showToast('✓ 定位成功，已更新推荐');
+        }, err => {
+          btn.textContent = '开启定位';
+          showToast('定位失败：' + (err.message || '请检查权限'));
+        }, { enableHighAccuracy: true, timeout: 10000 });
+      });
+    }
+
+    // Refresh recommend button
+    document.getElementById('refreshRecommend')?.addEventListener('click', () => {
+      recommendSeed = Date.now();
+      renderSmartRecommend();
+      showToast('已刷新推荐');
+    });
+
     loadFoods();
   </script>
 

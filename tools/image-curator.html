@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图片管理工具 · 济南旅游攻略</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #333; }
+    .header { background: linear-gradient(135deg, #c9a96e, #2a9d8f); color: #fff; padding: 32px 24px; text-align: center; }
+    .header h1 { font-size: 1.5rem; margin-bottom: 8px; }
+    .header p { opacity: .85; font-size: .9rem; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+    .stats { display: flex; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+    .stat-card { background: #fff; border-radius: 12px; padding: 16px 20px; flex: 1; min-width: 150px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+    .stat-card .num { font-size: 1.8rem; font-weight: 800; color: #c9a96e; }
+    .stat-card .label { font-size: .8rem; color: #888; margin-top: 4px; }
+    .tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .tab { padding: 8px 16px; border: 1px solid #ddd; background: #fff; border-radius: 100px; cursor: pointer; font-size: .85rem; transition: all .2s; }
+    .tab.active { background: #c9a96e; color: #fff; border-color: #c9a96e; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .item { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.06); transition: all .2s; }
+    .item:hover { box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+    .item-img { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: #f0f0f0; }
+    .item-body { padding: 14px 16px; }
+    .item-name { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+    .item-url { font-size: .72rem; color: #999; word-break: break-all; margin-bottom: 8px; max-height: 40px; overflow: hidden; }
+    .item-actions { display: flex; gap: 8px; }
+    .btn { padding: 6px 14px; border: 1px solid #ddd; background: #fff; border-radius: 8px; cursor: pointer; font-size: .8rem; transition: all .2s; }
+    .btn:hover { border-color: #c9a96e; color: #c9a96e; }
+    .btn-primary { background: #c9a96e; color: #fff; border-color: #c9a96e; }
+    .btn-primary:hover { background: #b8945d; }
+    .btn-danger { color: #e74c3c; border-color: #e74c3c33; }
+    .search-box { width: 100%; padding: 12px 16px; border: 1px solid #ddd; border-radius: 12px; font-size: .95rem; margin-bottom: 20px; background: #fff; }
+    .search-box:focus { outline: none; border-color: #c9a96e; }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 100; display: none; align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: #fff; border-radius: 16px; padding: 24px; max-width: 500px; width: 90%; max-height: 80vh; overflow-y: auto; }
+    .modal h3 { margin-bottom: 16px; }
+    .modal label { display: block; font-size: .85rem; font-weight: 600; margin-bottom: 4px; margin-top: 12px; }
+    .modal input, .modal textarea { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 8px; font-size: .9rem; }
+    .modal textarea { min-height: 80px; resize: vertical; }
+    .modal-actions { display: flex; gap: 8px; margin-top: 16px; justify-content: flex-end; }
+    .guide { background: #fff9f0; border: 1px solid #c9a96e33; border-radius: 12px; padding: 16px 20px; margin-bottom: 24px; }
+    .guide h3 { font-size: .95rem; color: #c9a96e; margin-bottom: 8px; }
+    .guide ol { padding-left: 20px; font-size: .85rem; color: #666; line-height: 1.8; }
+    .guide a { color: #2a9d8f; }
+    .badge-ok { display: inline-block; padding: 2px 8px; background: #22c55e22; color: #22c55e; border-radius: 100px; font-size: .7rem; font-weight: 600; }
+    .badge-need { display: inline-block; padding: 2px 8px; background: #ef444422; color: #ef4444; border-radius: 100px; font-size: .7rem; font-weight: 600; }
+    .batch-bar { display: flex; gap: 8px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+    .export-bar { background: #fff; border-radius: 12px; padding: 16px; margin-top: 24px; box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🖼️ 图片管理工具</h1>
+    <p>为济南旅游攻略网站管理真实匹配的图片</p>
+  </div>
+
+  <div class="container">
+    <div class="guide">
+      <h3>📋 使用说明</h3>
+      <ol>
+        <li>在百度图片 / 搜狗图片搜索每道菜/景点的真实照片</li>
+        <li>右键复制图片地址（必须是 <strong>直接图片链接</strong>，以 .jpg/.png/.webp 结尾）</li>
+        <li>点击下方「更换图片」粘贴新 URL</li>
+        <li>全部完成后点「导出 JSON」生成更新后的数据文件</li>
+        <li>推荐图片源：<a href="https://image.baidu.com" target="_blank">百度图片</a> · <a href="https://image.so.com" target="_blank">搜狗图片</a> · <a href="https://www.vcg.com" target="_blank">视觉中国</a></li>
+      </ol>
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <input type="text" class="search-box" id="searchBox" placeholder="🔍 搜索美食或景点名称...">
+
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-type="all">全部</button>
+      <button class="tab" data-type="food">🍜 美食</button>
+      <button class="tab" data-type="spot">🏛️ 景点</button>
+      <button class="tab" data-type="need">🔴 待更换</button>
+    </div>
+
+    <div class="batch-bar">
+      <button class="btn" id="exportBtn">📦 导出更新后的 JSON</button>
+      <button class="btn" id="exportSearchBtn">🔍 导出搜索关键词</button>
+      <span style="font-size:.8rem;color:#888">导出后替换 public/data/ 下的对应文件</span>
+    </div>
+
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <!-- Edit Modal -->
+  <div class="modal-overlay" id="editModal">
+    <div class="modal">
+      <h3 id="editTitle">更换图片</h3>
+      <label>名称</label>
+      <input type="text" id="editName" readonly>
+      <label>当前图片 URL</label>
+      <input type="text" id="editCurrentUrl" readonly style="color:#999">
+      <label>新图片 URL（粘贴真实图片链接）</label>
+      <input type="text" id="editNewUrl" placeholder="https://example.com/real-photo.jpg">
+      <label>搜索关键词（用于查找图片）</label>
+      <input type="text" id="editSearchKey" readonly>
+      <div class="modal-actions">
+        <button class="btn" onclick="closeEditModal()">取消</button>
+        <button class="btn btn-primary" onclick="saveEdit()">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let allItems = [];
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    async function loadData() {
+      const [foodRes, spotRes] = await Promise.all([
+        fetch('/jinan-travel-guide/data/food.json').catch(() => fetch('/data/food.json').catch(() => fetch('./data/food.json'))),
+        fetch('/jinan-travel-guide/data/spots.json').catch(() => fetch('/data/spots.json').catch(() => fetch('./data/spots.json')))
+      ]);
+
+      const foodData = await foodRes.json();
+      const spotData = await spotRes.json();
+
+      const foods = (foodData.foods || []).map(f => ({
+        id: f.id,
+        name: f.name,
+        type: 'food',
+        img: f.img,
+        searchKey: `${f.name} 济南 鲁菜 高清`,
+        cat: f.cat
+      }));
+
+      const spots = (spotData || []).map(s => ({
+        id: s.id,
+        name: s.name,
+        type: 'spot',
+        img: s.img,
+        searchKey: `${s.name} 济南 景点 高清`,
+        cat: s.cat
+      }));
+
+      allItems = [...foods, ...spots];
+      render();
+    }
+
+    function isUnsplash(url) {
+      return url && url.includes('unsplash.com');
+    }
+
+    function render() {
+      let filtered = allItems;
+      if (currentFilter === 'food') filtered = filtered.filter(i => i.type === 'food');
+      if (currentFilter === 'spot') filtered = filtered.filter(i => i.type === 'spot');
+      if (currentFilter === 'need') filtered = filtered.filter(i => isUnsplash(i.img));
+      if (searchQuery) {
+        const q = searchQuery.toLowerCase();
+        filtered = filtered.filter(i => i.name.toLowerCase().includes(q) || i.id.includes(q));
+      }
+
+      // Stats
+      const totalFood = allItems.filter(i => i.type === 'food').length;
+      const totalSpot = allItems.filter(i => i.type === 'spot').length;
+      const needReplace = allItems.filter(i => isUnsplash(i.img)).length;
+      const alreadyDone = allItems.length - needReplace;
+      document.getElementById('stats').innerHTML = `
+        <div class="stat-card"><div class="num">${allItems.length}</div><div class="label">总计</div></div>
+        <div class="stat-card"><div class="num">${totalFood}</div><div class="label">美食</div></div>
+        <div class="stat-card"><div class="num">${totalSpot}</div><div class="label">景点</div></div>
+        <div class="stat-card"><div class="num">${needReplace}</div><div class="label">🔴 待更换</div></div>
+        <div class="stat-card"><div class="num">${alreadyDone}</div><div class="label">✅ 已完成</div></div>
+      `;
+
+      document.getElementById('grid').innerHTML = filtered.map(item => `
+        <div class="item">
+          <img class="item-img" src="${item.img}" alt="${item.name}" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22><rect fill=%22%23f0f0f0%22 width=%22300%22 height=%22200%22/><text x=%22150%22 y=%22100%22 text-anchor=%22middle%22 fill=%22%23999%22 font-size=%2214%22>暂无图片</text></svg>'">
+          <div class="item-body">
+            <div class="item-name">${item.name} ${isUnsplash(item.img) ? '<span class="badge-need">待更换</span>' : '<span class="badge-ok">已更换</span>'}</div>
+            <div class="item-url">${item.img}</div>
+            <div class="item-actions">
+              <button class="btn btn-primary" onclick="openEdit('${item.id}','${item.type}')">更换图片</button>
+              <button class="btn" onclick="searchImage('${item.searchKey}')">🔍 搜索</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    let editItem = null;
+    function openEdit(id, type) {
+      editItem = allItems.find(i => i.id === id && i.type === type);
+      if (!editItem) return;
+      document.getElementById('editTitle').textContent = `更换图片 · ${editItem.name}`;
+      document.getElementById('editName').value = editItem.name;
+      document.getElementById('editCurrentUrl').value = editItem.img;
+      document.getElementById('editNewUrl').value = '';
+      document.getElementById('editSearchKey').value = editItem.searchKey;
+      document.getElementById('editModal').classList.add('open');
+    }
+
+    function closeEditModal() {
+      document.getElementById('editModal').classList.remove('open');
+      editItem = null;
+    }
+
+    function saveEdit() {
+      const newUrl = document.getElementById('editNewUrl').value.trim();
+      if (!newUrl) { alert('请输入新图片 URL'); return; }
+      if (editItem) {
+        editItem.img = newUrl;
+        render();
+        closeEditModal();
+      }
+    }
+
+    function searchImage(key) {
+      window.open(`https://image.baidu.com/search/index?tn=baiduimage&word=${encodeURIComponent(key)}`, '_blank');
+    }
+
+    function exportJSON() {
+      // Build updated food.json
+      fetch('/jinan-travel-guide/data/food.json')
+        .then(r => r.json())
+        .then(data => {
+          const foods = data.foods || [];
+          allItems.filter(i => i.type === 'food').forEach(item => {
+            const food = foods.find(f => f.id === item.id);
+            if (food) food.img = item.img;
+          });
+          downloadJSON(data, 'food.json');
+        })
+        .catch(() => alert('无法加载原始 food.json'));
+
+      // Build updated spots.json
+      fetch('/jinan-travel-guide/data/spots.json')
+        .then(r => r.json())
+        .then(data => {
+          allItems.filter(i => i.type === 'spot').forEach(item => {
+            const spot = data.find(s => s.id === item.id);
+            if (spot) spot.img = item.img;
+          });
+          downloadJSON(data, 'spots.json');
+        })
+        .catch(() => alert('无法加载原始 spots.json'));
+    }
+
+    function exportSearchKeys() {
+      const needItems = allItems.filter(i => isUnsplash(i.img));
+      const text = needItems.map(i => `${i.name}\t${i.searchKey}\t${i.img}`).join('\n');
+      const blob = new Blob([text], { type: 'text/plain' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'search-keys.txt';
+      a.click();
+    }
+
+    function downloadJSON(data, filename) {
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = filename;
+      a.click();
+    }
+
+    // Tabs
+    document.getElementById('tabs').addEventListener('click', e => {
+      const tab = e.target.closest('.tab');
+      if (!tab) return;
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentFilter = tab.dataset.type;
+      render();
+    });
+
+    // Search
+    document.getElementById('searchBox').addEventListener('input', e => {
+      searchQuery = e.target.value.trim();
+      render();
+    });
+
+    // Export
+    document.getElementById('exportBtn').addEventListener('click', exportJSON);
+    document.getElementById('exportSearchBtn').addEventListener('click', exportSearchKeys);
+
+    // Init
+    loadData();
+  </script>
+</body>
+</html>

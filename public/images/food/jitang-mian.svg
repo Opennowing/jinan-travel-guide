@@ -1,20 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#eab308"/>
-      <stop offset="100%" style="stop-color:#ca8a04"/>
+      <stop offset="0%" style="stop-color:#c9a96e;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#c9a96e88;stop-opacity:1"/>
     </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="rgba(0,0,0,0.3)"/>
+    </filter>
   </defs>
   <rect fill="url(#bg)" width="600" height="400" rx="16"/>
-  <!-- 装饰元素 -->
-  <circle cx="500" cy="80" r="120" fill="rgba(255,255,255,0.08)"/>
-  <circle cx="80" cy="350" r="80" fill="rgba(255,255,255,0.06)"/>
-  <!-- emoji -->
-  <text x="300" y="150" text-anchor="middle" font-size="72">🌅</text>
-  <!-- 美食名称 -->
-  <text x="300" y="225" text-anchor="middle" fill="white" font-size="36" font-weight="bold" font-family="PingFang SC, Microsoft YaHei, sans-serif">鸡汤面</text>
-  <!-- 标签 -->
-  <text x="300" y="265" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="16" font-family="PingFang SC, Microsoft YaHei, sans-serif">早餐 · 暖胃</text>
-  <!-- 底部标识 -->
-  <text x="300" y="370" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="12" font-family="sans-serif">济南美食攻略 · jinan-travel-guide</text>
+  <circle cx="300" cy="160" r="60" fill="rgba(255,255,255,0.15)"/>
+  <text x="300" y="180" text-anchor="middle" font-size="56" filter="url(#shadow)">🍜</text>
+  <text x="300" y="260" text-anchor="middle" fill="#fff" font-size="28" font-family="sans-serif" font-weight="bold">鸡汤面</text>
+  <text x="300" y="300" text-anchor="middle" fill="#fff" font-size="16" font-family="sans-serif" opacity="0.8">济南旅游攻略</text>
+  <rect x="200" y="330" width="200" height="3" rx="2" fill="rgba(255,255,255,0.3)"/>
 </svg>

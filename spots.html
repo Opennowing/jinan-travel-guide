@@ -61,6 +61,7 @@
     .spot-price{position:absolute;top:12px;right:12px;z-index:2;background:rgba(0,0,0,.6);color:#fff;padding:3px 10px;border-radius:100px;font-size:.7rem;font-weight:600;backdrop-filter:blur(4px)}
     .spot-price .free-tag{color:#5eead4}
     .card-body .card-stars{color:#f59e0b;font-size:.75rem;letter-spacing:1px}
+    .card-body .desc{-webkit-line-clamp:3;line-clamp:3}
     .card-actions{display:flex;gap:8px;margin-top:auto;padding-top:12px}
     .card-actions .btn{flex:1;justify-content:center}
     .count-badge{font-size:.75rem;color:var(--text3);font-weight:500}
@@ -106,12 +107,12 @@
     .fav-filter-btn .fav-count{background:var(--accent);color:#fff;font-size:.65rem;padding:1px 6px;border-radius:100px;font-weight:700}
     /* ── 卡片收藏/对比按钮 ── */
     .spot-card-actions{position:absolute;top:12px;right:12px;z-index:3;display:flex;gap:6px}
-    .card-fav-btn,.card-compare-btn{width:32px;height:32px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .25s;backdrop-filter:blur(4px);background:rgba(0,0,0,.45);color:#fff}
+    .card-fav-btn,.card-compare-btn{width:32px;height:32px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .25s;backdrop-filter:blur(4px);background:rgba(0,0,0,.45);color:#fff;opacity:1;transform:none}
     .card-fav-btn:hover{background:rgba(239,68,68,.8);transform:scale(1.1)}
     .card-fav-btn.faved{background:#ef4444;color:#fff}
     .card-compare-btn:hover{background:rgba(59,130,246,.8);transform:scale(1.1)}
     .card-compare-btn.compared{background:#3b82f6;color:#fff}
-    .card-quickview-btn{width:32px;height:32px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:all .25s;backdrop-filter:blur(4px);background:rgba(0,0,0,.45);color:#fff}
+    .card-quickview-btn{width:32px;height:32px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:all .25s;backdrop-filter:blur(4px);background:rgba(0,0,0,.45);color:#fff;opacity:1;transform:none}
     .card-quickview-btn:hover{background:rgba(42,157,143,.8);transform:scale(1.1)}
     /* ── 时长筛选 ── */
     .duration-filter-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:12px}
@@ -575,7 +576,7 @@
         return `
           <article class="card rv" data-id="${s.id}">
             <div class="card-img">
-              <img src="${s.img}" alt="${s.name}" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.parentElement.classList.add('img-loaded')">
+              <img src="${s.img}" alt="${s.name}" loading="lazy" onload="this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')">
               <span class="spot-badge badge ${s.badge}">${badgeLabels[s.badge] || s.badge}</span>
               <span class="spot-price">${priceHtml}</span>
               <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${s.id}" aria-label="${isFav ? '取消收藏' : '收藏'}" onclick="event.stopPropagation();window._toggleFav('${s.id}',this)">${isFav ? '♥' : '♡'}</button>
@@ -1140,7 +1141,7 @@
         return `
           <article class="card rv" data-id="${s.id}">
             <div class="card-img">
-              <img src="${s.img}" alt="${s.name}" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.parentElement.classList.add('img-loaded')">
+              <img src="${s.img}" alt="${s.name}" loading="lazy" onload="this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')">
               <span class="spot-badge badge ${s.badge}">${badgeLabels[s.badge] || s.badge}</span>
               <div class="spot-card-actions">
                 <button class="card-fav-btn ${isFav?'faved':''}" data-id="${s.id}" title="收藏">${isFav?'❤️':'🤍'}</button>

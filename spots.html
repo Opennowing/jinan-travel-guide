@@ -145,6 +145,52 @@
     .map-legend-btn .legend-dot{width:8px;height:8px;border-radius:50%}
     .locate-btn{padding:6px 14px;border:1px solid var(--teal);background:rgba(42,157,143,.08);border-radius:100px;font-size:.75rem;cursor:pointer;color:var(--teal);font-weight:600;transition:all .3s;display:flex;align-items:center;gap:4px}
     .locate-btn:hover{background:var(--teal);color:#fff}
+    /* ═══ Interactive Canvas Map ═══ */
+    .imap-container{position:relative;width:100%;height:420px;border-radius:16px;overflow:hidden;background:var(--bg2);touch-action:none;user-select:none}
+    .imap-container canvas{display:block;width:100%;height:100%;cursor:grab}
+    .imap-container canvas:active{cursor:grabbing}
+    .imap-zoom-ctrl{position:absolute;top:12px;right:12px;display:flex;flex-direction:column;gap:4px;z-index:10}
+    .imap-zoom-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .imap-zoom-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .imap-locate-btn{position:absolute;top:12px;left:12px;width:36px;height:36px;border-radius:10px;border:1px solid var(--teal);background:rgba(42,157,143,.1);color:var(--teal);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .imap-locate-btn:hover{background:var(--teal);color:#fff}
+    .imap-locate-btn.active{background:var(--teal);color:#fff;animation:imap-pulse-btn 2s infinite}
+    @keyframes imap-pulse-btn{0%,100%{box-shadow:0 0 0 0 rgba(42,157,143,.4)}50%{box-shadow:0 0 0 8px rgba(42,157,143,0)}}
+    .imap-legend{position:absolute;bottom:12px;right:12px;background:var(--bg);border:1px solid var(--border2);border-radius:12px;padding:8px 12px;z-index:10;display:flex;flex-direction:column;gap:4px;font-size:.7rem;color:var(--text2);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+    .imap-legend-item{display:flex;align-items:center;gap:6px;white-space:nowrap}
+    .imap-legend-dot{width:10px;height:10px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5);flex-shrink:0}
+    .imap-popup{position:absolute;z-index:20;background:var(--bg);border:1px solid var(--border2);border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,.15);width:260px;overflow:hidden;pointer-events:auto;transform-origin:bottom center;opacity:0;transform:scale(.6) translateY(10px);transition:all .35s cubic-bezier(.34,1.56,.64,1)}
+    .imap-popup.show{opacity:1;transform:scale(1) translateY(0)}
+    .imap-popup-img{width:100%;height:120px;object-fit:cover;display:block}
+    .imap-popup-body{padding:10px 14px}
+    .imap-popup-name{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+    .imap-popup-cat{font-size:.65rem;padding:2px 8px;border-radius:100px;font-weight:600}
+    .imap-popup-meta{display:flex;align-items:center;gap:10px;font-size:.75rem;color:var(--text3);margin-bottom:8px}
+    .imap-popup-rating{color:#f59e0b;font-weight:600}
+    .imap-popup-price{color:var(--accent);font-weight:600}
+    .imap-popup-actions{display:flex;gap:6px}
+    .imap-popup-btn{flex:1;padding:7px 0;border-radius:8px;border:none;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s}
+    .imap-popup-btn.primary{background:var(--accent);color:#fff}
+    .imap-popup-btn.primary:hover{background:var(--accent-hover)}
+    .imap-popup-btn.secondary{background:var(--bg2);color:var(--text2);border:1px solid var(--border2)}
+    .imap-popup-btn.secondary:hover{border-color:var(--accent);color:var(--accent)}
+    .imap-popup-close{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;border:none;background:rgba(0,0,0,.5);color:#fff;font-size:.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+    .imap-popup-close:hover{background:rgba(0,0,0,.8)}
+    .imap-cluster{position:absolute;z-index:5;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;border:2.5px solid var(--bg);box-shadow:0 2px 8px rgba(0,0,0,.2);cursor:pointer;transition:transform .2s;pointer-events:auto}
+    .imap-cluster:hover{transform:scale(1.15)}
+    .imap-route-info{position:absolute;bottom:12px;left:12px;background:var(--bg);border:1px solid var(--border2);border-radius:12px;padding:10px 14px;z-index:15;font-size:.8rem;color:var(--text);box-shadow:0 4px 16px rgba(0,0,0,.1);max-width:280px}
+    .imap-route-info .route-title{font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+    .imap-route-info .route-detail{display:flex;gap:12px;font-size:.75rem;color:var(--text3);margin-bottom:8px}
+    .imap-route-info .route-actions{display:flex;gap:6px}
+    .imap-route-close{position:absolute;top:6px;right:8px;background:none;border:none;font-size:.9rem;cursor:pointer;color:var(--text3)}
+    .imap-tooltip{position:absolute;z-index:25;background:var(--text);color:var(--bg);padding:4px 10px;border-radius:6px;font-size:.72rem;font-weight:500;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s;transform:translateX(-50%)}
+    .imap-tooltip.show{opacity:1}
+    @media(max-width:640px){
+      .imap-container{height:350px;border-radius:12px}
+      .imap-popup{width:220px}
+      .imap-popup-img{height:90px}
+      .imap-legend{padding:6px 8px;font-size:.65rem}
+    }
     /* ── 语音导览 ── */
     .tts-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border:1px solid var(--accent);background:rgba(42,157,143,.06);border-radius:100px;font-size:.85rem;cursor:pointer;color:var(--accent);font-weight:600;transition:all .3s}
     .tts-btn:hover{background:var(--accent);color:#fff}
@@ -152,15 +198,61 @@
     @keyframes pulse-tts{0%,100%{box-shadow:0 0 0 0 rgba(42,157,143,.4)}50%{box-shadow:0 0 0 8px rgba(42,157,143,0)}}
     .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);padding:10px 24px;border-radius:100px;font-size:.85rem;font-weight:500;z-index:500;opacity:0;transition:all .3s var(--ease-out);pointer-events:none}
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    /* ══ Review System Enhanced ══ */
+    .review-stats{background:var(--bg2);border-radius:12px;padding:16px;margin-bottom:16px;display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+    .review-stats-score{text-align:center;min-width:80px}
+    .review-stats-score .big-score{font-size:2rem;font-weight:800;color:var(--accent);line-height:1}
+    .review-stats-score .big-stars{color:#f59e0b;font-size:.85rem;margin-top:2px}
+    .review-stats-score .total-count{font-size:.75rem;color:var(--text3);margin-top:4px}
+    .review-stats-dist{flex:1;min-width:140px}
+    .review-dist-row{display:flex;align-items:center;gap:6px;margin-bottom:3px;font-size:.75rem}
+    .review-dist-row .dist-label{width:32px;text-align:right;color:var(--text3);flex-shrink:0}
+    .review-dist-bar{flex:1;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;min-width:60px}
+    .review-dist-bar .dist-fill{height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:4px;transition:width .5s var(--ease-out)}
+    .review-dist-row .dist-count{width:24px;font-size:.7rem;color:var(--text3);flex-shrink:0}
+    .review-sort-bar{display:flex;gap:8px;margin-bottom:14px}
+    .review-sort-btn{padding:5px 14px;border-radius:16px;border:1px solid var(--border2);background:var(--bg);font-size:.78rem;cursor:pointer;transition:all .2s;color:var(--text2)}
+    .review-sort-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
     .review-form{background:var(--bg2);border-radius:12px;padding:16px;margin-bottom:16px}
     .review-form h5{font-size:.85rem;font-weight:700;margin-bottom:12px}
     .star-input{display:flex;gap:4px;margin-bottom:10px}
     .star-input span{font-size:1.4rem;cursor:pointer;color:var(--text3);transition:color .2s}
     .star-input span.active,.star-input span:hover{color:#f59e0b}
+    .review-tags-quick{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+    .review-tag-btn{padding:4px 10px;border-radius:14px;border:1px solid var(--border2);background:var(--bg);font-size:.75rem;cursor:pointer;transition:all .2s;color:var(--text2)}
+    .review-tag-btn:hover,.review-tag-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .review-img-upload{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
+    .review-img-upload .img-upload-btn{width:64px;height:64px;border-radius:10px;border:2px dashed var(--border2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.5rem;color:var(--text3);transition:all .2s;position:relative;overflow:hidden}
+    .review-img-upload .img-upload-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .review-img-upload .img-upload-btn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+    .review-img-preview{width:64px;height:64px;border-radius:10px;object-fit:cover;border:1px solid var(--border2);position:relative}
+    .review-img-preview-wrap{position:relative;display:inline-block}
+    .review-img-preview-wrap .img-remove{position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:#ef4444;color:#fff;font-size:.65rem;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
     .review-input{width:100%;padding:10px 14px;border:1px solid var(--border2);background:var(--bg);border-radius:10px;font-size:.85rem;font-family:var(--sans);resize:vertical;min-height:60px;outline:none;transition:border-color .3s}
     .review-input:focus{border-color:var(--accent)}
     .review-submit{margin-top:10px}
     .user-review{border-left:3px solid var(--accent);padding-left:12px}
+    .review-card{background:var(--bg);border:1px solid var(--border2);border-radius:12px;padding:14px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);transition:box-shadow .2s}
+    .review-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.1)}
+    .review-card-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .review-card-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:#fff;flex-shrink:0}
+    .review-card-meta{flex:1;min-width:0}
+    .review-card-name{font-size:.85rem;font-weight:600;color:var(--text)}
+    .review-card-time{font-size:.72rem;color:var(--text3)}
+    .review-card-stars{color:#f59e0b;font-size:.8rem;margin-bottom:6px}
+    .review-card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+    .review-card-tags .r-tag{padding:2px 8px;border-radius:10px;background:rgba(42,157,143,.1);color:var(--teal,#2a9d8f);font-size:.7rem}
+    .review-card-text{font-size:.84rem;line-height:1.55;color:var(--text2);margin-bottom:8px}
+    .review-card-images{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+    .review-card-images img{width:72px;height:72px;border-radius:8px;object-fit:cover;cursor:pointer;border:1px solid var(--border2);transition:transform .2s}
+    .review-card-images img:hover{transform:scale(1.05)}
+    .review-card-actions{display:flex;gap:12px;align-items:center}
+    .review-helpful-btn{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:14px;border:1px solid var(--border2);background:var(--bg);font-size:.75rem;cursor:pointer;transition:all .2s;color:var(--text3)}
+    .review-helpful-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .review-helpful-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .review-img-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:600;display:flex;align-items:center;justify-content:center;cursor:pointer}
+    .review-img-lightbox img{max-width:90vw;max-height:85vh;border-radius:8px;object-fit:contain}
+    @media(prefers-reduced-motion:reduce){.review-card,.review-helpful-btn,.review-sort-btn,.review-tag-btn,.review-img-upload .img-upload-btn{transition:none}.review-card:hover{box-shadow:0 1px 3px rgba(0,0,0,.06)}}
     @media(max-width:768px){
       .filter-container{padding:16px}
       .filter-section{flex-direction:column;gap:12px}
@@ -1075,7 +1167,7 @@ html.dark .card.meituan-card:hover {
             </div>
           </div>
           <div class="map-preview-body" id="mapPreviewBody">
-            <div class="map-preview-svg" id="mapPreviewSvg"></div>
+            <div class="imap-container" id="imapContainer"><canvas id="imapCanvas"></canvas><div class="imap-zoom-ctrl"><button class="imap-zoom-btn" id="imapZoomIn" title="放大">+</button><button class="imap-zoom-btn" id="imapZoomOut" title="缩小">−</button></div><button class="imap-locate-btn" id="imapLocateBtn" title="我的位置">📍</button><div class="imap-legend" id="imapLegend"></div><div class="imap-tooltip" id="imapTooltip"></div></div>
             <button class="map-expand-btn" id="mapExpandBtn" title="展开全屏地图" aria-label="展开全屏地图">
               <span>⛶</span> 全屏查看
             </button>
@@ -1565,15 +1657,18 @@ html.dark .card.meituan-card:hover {
     initSocialFeatures();
     // Initialize compact map preview after spots load
     function initOfflineMap() {
-      const svgContainer = document.getElementById('mapPreviewSvg');
+      const container = document.getElementById('imapContainer');
       const scrollContainer = document.getElementById('mapTopSpotsScroll');
       const mapSpotCount = document.getElementById('mapSpotCount');
       const mapViewAllCount = document.getElementById('mapViewAllCount');
-      if (!svgContainer || !allSpots.length) return;
-      
-      // Render map SVG
-      svgContainer.innerHTML = generateOfflineMap(allSpots);
-      
+      if (!container || !allSpots.length) return;
+
+      // Destroy previous instance
+      if (window._imap) window._imap.destroy();
+
+      // Create interactive map
+      window._imap = new InteractiveMap(container, allSpots);
+
       // Render top spots horizontal scroll cards
       const topSpots = allSpots.filter(s => s.rating >= 4.6).sort((a, b) => b.rating - a.rating).slice(0, 8);
       if (scrollContainer) {
@@ -1592,14 +1687,14 @@ html.dark .card.meituan-card:hover {
             </div>`;
         }).join('');
       }
-      
+
       // Update counts
       if (mapSpotCount) mapSpotCount.textContent = allSpots.length + ' 个景点';
       if (mapViewAllCount) mapViewAllCount.textContent = allSpots.length;
-      
+
       // Bind expand button
       document.getElementById('mapExpandBtn')?.addEventListener('click', openMapFullscreen);
-      
+
       // Bind view toggle
       document.getElementById('mapViewToggle')?.addEventListener('click', e => {
         const btn = e.target.closest('.map-toggle-btn');
@@ -1613,13 +1708,13 @@ html.dark .card.meituan-card:hover {
           document.getElementById('mapPreviewBody').classList.remove('expanded');
         }
       });
-      
-      // Bind view all button - scroll to card grid
+
+      // Bind view all button
       document.getElementById('mapViewAllBtn')?.addEventListener('click', () => {
         document.getElementById('sortHeader')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     }
-    
+
     // ═══ Fullscreen Map ═══
     function openMapFullscreen() {
       let overlay = document.getElementById('mapFullscreenOverlay');
@@ -1634,13 +1729,21 @@ html.dark .card.meituan-card:hover {
             <button class="map-fullscreen-close" id="mapFullscreenClose">✕</button>
           </div>
           <div class="map-fullscreen-body">
-            <div class="map-preview-svg">${generateOfflineMap(allSpots)}</div>
+            <div class="imap-container" id="imapFullscreenContainer" style="height:60vh"><canvas id="imapFullscreenCanvas"></canvas><div class="imap-zoom-ctrl"><button class="imap-zoom-btn" onclick="window._imapFs&&window._imapFs._setZoom(window._imapFs.zoom*1.3,window._imapFs.cw/2,window._imapFs.ch/2)">+</button><button class="imap-zoom-btn" onclick="window._imapFs&&window._imapFs._setZoom(window._imapFs.zoom/1.3,window._imapFs.cw/2,window._imapFs.ch/2)">−</button></div><button class="imap-locate-btn" onclick="window._imapFs&&window._imapFs._locateUser()">📍</button><div class="imap-legend" id="imapFsLegend"></div></div>
             <div class="map-fullscreen-spots">
               ${topSpots.map(s => `<button class="map-fullscreen-spot-chip" onclick="scrollToSpot('${s.id}');closeMapFullscreen()">📍 ${s.name}</button>`).join('')}
             </div>
           </div>`;
         document.body.appendChild(overlay);
         document.getElementById('mapFullscreenClose').addEventListener('click', closeMapFullscreen);
+        // Init fullscreen interactive map
+        setTimeout(() => {
+          const fsContainer = document.getElementById('imapFullscreenContainer');
+          if (fsContainer && window.allSpots) {
+            if (window._imapFs) window._imapFs.destroy();
+            window._imapFs = new InteractiveMap(fsContainer, window.allSpots);
+          }
+        }, 100);
         overlay.addEventListener('click', e => { if (e.target === overlay) closeMapFullscreen(); });
       }
       overlay.classList.add('open');
@@ -1650,6 +1753,7 @@ html.dark .card.meituan-card:hover {
       const overlay = document.getElementById('mapFullscreenOverlay');
       if (overlay) overlay.classList.remove('open');
       document.body.style.overflow = '';
+      if (window._imapFs) { window._imapFs.destroy(); window._imapFs = null; }
     }
 
     loadSpots().then(() => {
@@ -2153,18 +2257,83 @@ html.dark .card.meituan-card:hover {
         {name:'小鱼儿',avatar:'鱼',date:'2026-04-10',stars:4,text:'景色不错，就是节假日人太多了，建议工作日去。'},
         {name:'背包客阿杰',avatar:'杰',date:'2026-03-28',stars:5,text:'济南之行最满意的一站，下次还会再来！'}
       ];
+      // ══ Enhanced Review System ══
       const userReviews = JSON.parse(localStorage.getItem('jinan-reviews') || '{}');
       const spotUserReviews = (userReviews[s.id] || []).map(r => ({
-        name: r.name || '我', avatar: '👤', date: r.date, stars: r.stars, text: r.text, isUser: true
+        name: r.user || '我', avatar: null, date: r.time ? new Date(r.time).toISOString().slice(0,10) : (r.date || ''), stars: r.rating || r.stars || 5, text: r.text || '', isUser: true, images: r.images || [], tags: r.tags || [], helpful: r.helpful || 0, unhelpful: r.unhelpful || 0, time: r.time || 0
       }));
-      const allReviews = [...spotUserReviews, ...defaultReviews];
-      const reviewsHtml = allReviews.map(r => `
-        <div class="review-item ${r.isUser ? 'user-review' : ''}">
-          <div class="review-head"><div class="review-avatar">${r.avatar}</div><span class="review-name">${escapeHtml(r.name)}</span><span class="review-date">${escapeHtml(r.date)}</span></div>
-          <div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
-          <div class="review-text">${escapeHtml(r.text)}</div>
-        </div>`).join('');
+      const allReviewsRaw = [...spotUserReviews, ...defaultReviews.map(d => ({...d, images:[], tags:[], helpful:0, unhelpful:0, time: new Date(d.date).getTime()||0}))];
       const totalReviews = s.reviews + spotUserReviews.length;
+
+      // Relative time helper
+      function relTime(ts) {
+        if (!ts) return '';
+        const diff = Date.now() - ts;
+        if (diff < 60000) return '刚刚';
+        if (diff < 3600000) return Math.floor(diff/60000) + '分钟前';
+        if (diff < 86400000) return Math.floor(diff/3600000) + '小时前';
+        if (diff < 604800000) return Math.floor(diff/86400000) + '天前';
+        if (diff < 2592000000) return Math.floor(diff/604800000) + '周前';
+        return new Date(ts).toISOString().slice(0,10);
+      }
+      // Avatar color from name
+      function avatarColor(name) {
+        let h = 0; for (let i = 0; i < name.length; i++) h = name.charCodeAt(i) + ((h << 5) - h);
+        return `hsl(${Math.abs(h) % 360}, 55%, 50%)`;
+      }
+      // Stats
+      const dist = [0,0,0,0,0];
+      allReviewsRaw.forEach(r => { if (r.stars >= 1 && r.stars <= 5) dist[r.stars-1]++; });
+      const avgRating = allReviewsRaw.length ? (allReviewsRaw.reduce((a,r)=>a+r.stars,0)/allReviewsRaw.length).toFixed(1) : '0.0';
+      const maxDist = Math.max(...dist, 1);
+
+      const reviewsStatsHtml = `
+        <div class="review-stats">
+          <div class="review-stats-score">
+            <div class="big-score">${avgRating}</div>
+            <div class="big-stars">${'★'.repeat(Math.round(parseFloat(avgRating)))}${'☆'.repeat(5-Math.round(parseFloat(avgRating)))}</div>
+            <div class="total-count">${allReviewsRaw.length} 条评价</div>
+          </div>
+          <div class="review-stats-dist">
+            ${[5,4,3,2,1].map(n => `<div class="review-dist-row"><span class="dist-label">${n}星</span><div class="review-dist-bar"><div class="dist-fill" style="width:${(dist[n-1]/maxDist*100).toFixed(0)}%"></div></div><span class="dist-count">${dist[n-1]}</span></div>`).join('')}
+          </div>
+        </div>`;
+
+      // Sort state
+      let currentReviewSort = 'latest';
+      function renderReviewList(sort) {
+        const sorted = [...allReviewsRaw];
+        if (sort === 'helpful') sorted.sort((a,b) => (b.helpful - b.unhelpful) - (a.helpful - a.unhelpful));
+        else sorted.sort((a,b) => (b.time||0) - (a.time||0));
+        return sorted.map(r => {
+          const initial = (r.name||'匿名')[0];
+          const bgColor = r.isUser ? 'var(--accent)' : avatarColor(r.name||'匿名');
+          const imgsHtml = (r.images||[]).length ? `<div class="review-card-images">${r.images.map(img => `<img src="${img}" alt="评论图片" loading="lazy" onclick="showReviewImgLightbox(this.src)">`).join('')}</div>` : '';
+          const tagsHtml = (r.tags||[]).length ? `<div class="review-card-tags">${r.tags.map(t => `<span class="r-tag">${escapeHtml(t)}</span>`).join('')}</div>` : '';
+          const timeStr = r.time ? relTime(r.time) : (r.date || '');
+          return `
+            <div class="review-card ${r.isUser ? 'user-review' : ''}">
+              <div class="review-card-head">
+                <div class="review-card-avatar" style="background:${bgColor}">${escapeHtml(initial)}</div>
+                <div class="review-card-meta">
+                  <div class="review-card-name">${escapeHtml(r.name||'匿名')}</div>
+                  <div class="review-card-time">${escapeHtml(timeStr)}</div>
+                </div>
+              </div>
+              <div class="review-card-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
+              ${tagsHtml}
+              <div class="review-card-text">${escapeHtml(r.text)}</div>
+              ${imgsHtml}
+              <div class="review-card-actions">
+                <button class="review-helpful-btn" data-type="helpful" data-review-id="${r.name}-${r.time||r.date}" onclick="voteReview(this,'helpful')">👍 有用 <span>${r.helpful||''}</span></button>
+                <button class="review-helpful-btn" data-type="unhelpful" data-review-id="${r.name}-${r.time||r.date}" onclick="voteReview(this,'unhelpful')">👎 没用 <span>${r.unhelpful||''}</span></button>
+              </div>
+            </div>`;
+        }).join('');
+      }
+
+      const reviewsSortHtml = `<div class="review-sort-bar"><button class="review-sort-btn active" data-sort="latest" onclick="switchReviewSort(this,'latest')">最新</button><button class="review-sort-btn" data-sort="helpful" onclick="switchReviewSort(this,'helpful')">最有用</button></div>`;
+      const reviewsHtml = reviewsStatsHtml + reviewsSortHtml + `<div id="reviewListContainer">${renderReviewList('latest')}</div>`;
 
       // ── 拍照攻略模块 ──
       const photoGuideHtml = (s.bestPhoto || (s.photos && s.photos.length)) ? `
@@ -2269,7 +2438,14 @@ html.dark .card.meituan-card:hover {
             <div class="review-form">
               <h5>✍️ 写评价</h5>
               <div class="star-input" id="starInput">${[1,2,3,4,5].map(i => `<span data-val="${i}">☆</span>`).join('')}</div>
+              <div class="review-tags-quick" id="reviewTagsQuick">
+                ${['值得去','性价比高','人少景美','需要排队','适合拍照','适合亲子','环境优美','交通方便'].map(t => `<button type="button" class="review-tag-btn" data-tag="${t}">${t}</button>`).join('')}
+              </div>
               <textarea class="review-input" id="reviewText" placeholder="分享你的游玩体验…" maxlength="500"></textarea>
+              <div class="review-img-upload" id="reviewImgUpload">
+                <label class="img-upload-btn" title="添加图片">📷<input type="file" accept="image/*" multiple id="reviewImgInput"></label>
+              </div>
+              <div style="font-size:.7rem;color:var(--text3);margin-bottom:8px">最多 3 张图片，每张自动压缩至 200KB 以内</div>
               <button class="btn btn-sm btn-primary review-submit" id="submitReview" data-spot="${s.id}" aria-label="提交评价">提交评价</button>
             </div>
             ${reviewsHtml}
@@ -2337,7 +2513,7 @@ html.dark .card.meituan-card:hover {
         document.querySelector('.tts-btn')?.addEventListener('click', function() {
           speakSpot(s);
         });
-        // Star rating input
+        // ══ Enhanced Star Rating Input ══
         let selectedStars = 0;
         document.querySelectorAll('#starInput span').forEach(star => {
           star.addEventListener('click', () => {
@@ -2358,17 +2534,136 @@ html.dark .card.meituan-card:hover {
             s.textContent = i < selectedStars ? '★' : '☆';
           });
         });
-        // Submit review
+
+        // ══ Tag Quick Select ══
+        let selectedTags = [];
+        document.querySelectorAll('#reviewTagsQuick .review-tag-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const tag = btn.dataset.tag;
+            btn.classList.toggle('active');
+            if (selectedTags.includes(tag)) selectedTags = selectedTags.filter(t => t !== tag);
+            else selectedTags.push(tag);
+          });
+        });
+
+        // ══ Image Upload with Compression ══
+        let uploadedImages = [];
+        function compressImage(file, maxKB) {
+          return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = e => {
+              const img = new Image();
+              img.onload = () => {
+                const canvas = document.createElement('canvas');
+                let w = img.width, h = img.height;
+                const maxDim = 1024;
+                if (w > maxDim || h > maxDim) {
+                  if (w > h) { h = Math.round(h * maxDim / w); w = maxDim; }
+                  else { w = Math.round(w * maxDim / h); h = maxDim; }
+                }
+                canvas.width = w; canvas.height = h;
+                canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                let quality = 0.8;
+                let dataUrl = canvas.toDataURL('image/jpeg', quality);
+                while (dataUrl.length > maxKB * 1024 * 4 / 3 && quality > 0.1) {
+                  quality -= 0.1;
+                  dataUrl = canvas.toDataURL('image/jpeg', quality);
+                }
+                resolve(dataUrl);
+              };
+              img.onerror = reject;
+              img.src = e.target.result;
+            };
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+          });
+        }
+        function refreshImgPreviews() {
+          const container = document.getElementById('reviewImgUpload');
+          if (!container) return;
+          const label = container.querySelector('label');
+          container.querySelectorAll('.review-img-preview-wrap').forEach(w => w.remove());
+          uploadedImages.forEach((src, idx) => {
+            const wrap = document.createElement('div');
+            wrap.className = 'review-img-preview-wrap';
+            wrap.innerHTML = `<img class="review-img-preview" src="${src}" alt="预览"><button class="img-remove" data-idx="${idx}" onclick="removeReviewImg(${idx})">✕</button>`;
+            container.insertBefore(wrap, label);
+          });
+          label.style.display = uploadedImages.length >= 3 ? 'none' : '';
+        }
+        window.removeReviewImg = function(idx) {
+          uploadedImages.splice(idx, 1);
+          refreshImgPreviews();
+        };
+        document.getElementById('reviewImgInput')?.addEventListener('change', async function() {
+          const files = Array.from(this.files || []);
+          for (const f of files) {
+            if (uploadedImages.length >= 3) { showToast('最多上传3张图片'); break; }
+            try {
+              const compressed = await compressImage(f, 200);
+              uploadedImages.push(compressed);
+            } catch(err) { showToast('图片处理失败'); }
+          }
+          refreshImgPreviews();
+          this.value = '';
+        });
+
+        // ══ Image Lightbox ══
+        window.showReviewImgLightbox = function(src) {
+          const lb = document.createElement('div');
+          lb.className = 'review-img-lightbox';
+          lb.innerHTML = `<img src="${src}" alt="评论图片">`;
+          lb.addEventListener('click', () => lb.remove());
+          document.body.appendChild(lb);
+        };
+
+        // ══ Vote Helpful ══
+        window.voteReview = function(btn, type) {
+          const reviewId = btn.dataset.reviewId;
+          const voteKey = 'jinan-review-votes';
+          const votes = JSON.parse(localStorage.getItem(voteKey) || '{}');
+          if (votes[reviewId]) { showToast('你已经投过票了'); return; }
+          votes[reviewId] = type;
+          localStorage.setItem(voteKey, JSON.stringify(votes));
+          btn.classList.add('active');
+          const countSpan = btn.querySelector('span');
+          const current = parseInt(countSpan.textContent) || 0;
+          countSpan.textContent = current + 1;
+          // Update data in localStorage
+          const allR = JSON.parse(localStorage.getItem('jinan-reviews') || '{}');
+          for (const spotId in allR) {
+            allR[spotId].forEach(r => {
+              const rid = (r.user||'我') + '-' + (r.time || '');
+              if (rid === reviewId) {
+                if (type === 'helpful') r.helpful = (r.helpful||0) + 1;
+                else r.unhelpful = (r.unhelpful||0) + 1;
+              }
+            });
+          }
+          localStorage.setItem('jinan-reviews', JSON.stringify(allR));
+          showToast(type === 'helpful' ? '👍 已标记有用' : '👎 已标记没用');
+        };
+
+        // ══ Sort Switch ══
+        window.switchReviewSort = function(btn, sort) {
+          document.querySelectorAll('.review-sort-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const container = document.getElementById('reviewListContainer');
+          if (container) container.innerHTML = renderReviewList(sort);
+        };
+
+        // ══ Submit Review Enhanced ══
         document.getElementById('submitReview')?.addEventListener('click', function() {
           const spotId = this.dataset.spot;
           const text = document.getElementById('reviewText').value.trim();
           if (!selectedStars) { showToast('请先选择评分'); return; }
-          if (!text) { showToast('请写点评价内容'); return; }
+          if (!text && selectedTags.length === 0) { showToast('请写点评价内容或选择标签'); return; }
           const allReviews = JSON.parse(localStorage.getItem('jinan-reviews') || '{}');
           if (!allReviews[spotId]) allReviews[spotId] = [];
           allReviews[spotId].push({
-            name: '我', stars: selectedStars, text: text,
-            date: new Date().toISOString().slice(0,10)
+            user: '我', rating: selectedStars, text: text,
+            images: [...uploadedImages], tags: [...selectedTags],
+            helpful: 0, unhelpful: 0, time: Date.now()
           });
           localStorage.setItem('jinan-reviews', JSON.stringify(allReviews));
           showToast('✓ 评价已提交');
@@ -2393,63 +2688,553 @@ html.dark .card.meituan-card:hover {
       return { x: Math.round(x), y: Math.round(y) };
     }
     
-    function generateOfflineMap(spots) {
-      const catEmoji = {spring:'⛲',nature:'🌿',history:'🏛️',culture:'📚',food:'🍜',family:'👨‍👩‍👧',landmark:'🏛️',amusement:'🎡'};
-      const catColor = {spring:'#3b82f6',nature:'#22c55e',history:'#a855f7',culture:'#6366f1',food:'#f59e0b',family:'#14b8a6',landmark:'#ec4899',amusement:'#f97316'};
-      
-      // Generate spot dots
-      const dots = spots.filter(s => s.lat && s.lng).map(s => {
-        const p = latLngToSvg(s.lat, s.lng);
-        const color = catColor[s.cat] || '#c9a96e';
-        const r = s.rating >= 4.7 ? 5 : s.rating >= 4.5 ? 4 : 3;
-        return `<circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${color}" opacity=".75" stroke="#fff" stroke-width="1" data-id="${s.id}" class="map-dot" style="cursor:pointer" onclick="scrollToSpot('${s.id}')">
-          <title>${s.name} ★${s.rating}</title>
-        </circle>`;
-      }).join('');
-      
-      // Generate area labels for major spots
-      const labels = spots.filter(s => s.lat && s.lng && s.rating >= 4.7).slice(0, 8).map(s => {
-        const p = latLngToSvg(s.lat, s.lng);
-        return `<text x="${p.x}" y="${p.y - 8}" text-anchor="middle" font-size="8" font-weight="700" fill="#111" font-family="system-ui" pointer-events="none" opacity=".8">${s.name}</text>`;
-      }).join('');
-      
-      // Grid lines
-      const grid = [];
-      for (let i = 0; i <= 7; i++) {
-        const x = (MAP_W / 7) * i;
-        grid.push(`<line x1="${x}" y1="0" x2="${x}" y2="${MAP_H}" stroke="rgba(201,169,110,.05)" stroke-width="1"/>`);
-      }
-      for (let i = 0; i <= 4; i++) {
-        const y = (MAP_H / 4) * i;
-        grid.push(`<line x1="0" y1="${y}" x2="${MAP_W}" y2="${y}" stroke="rgba(201,169,110,.05)" stroke-width="1"/>`);
-      }
-      
-      // Decorative elements
-      const decor = `
-        <rect x="280" y="120" width="80" height="50" rx="8" fill="rgba(59,130,246,.04)" stroke="rgba(59,130,246,.08)"/>
-        <text x="320" y="150" text-anchor="middle" font-size="9" fill="rgba(59,130,246,.25)" font-family="system-ui">💧 泉域</text>
-        <rect x="450" y="200" width="60" height="40" rx="8" fill="rgba(34,197,94,.04)" stroke="rgba(34,197,94,.08)"/>
-        <text x="480" y="224" text-anchor="middle" font-size="9" fill="rgba(34,197,94,.25)" font-family="system-ui">🌿 山区</text>
-      `;
-      
-      return `<svg viewBox="0 0 ${MAP_W} ${MAP_H}" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="display:block;background:linear-gradient(135deg,#f8f6f3,#f0ede8)">
-        <defs>
-          <radialGradient id="offlineMapBg" cx="50%" cy="40%">
-            <stop offset="0%" stop-color="rgba(42,157,143,.03)"/>
-            <stop offset="100%" stop-color="transparent"/>
-          </radialGradient>
-          <filter id="dotShadow" x="-50%" y="-50%" width="200%" height="200%">
-            <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity=".2"/>
-          </filter>
-        </defs>
-        <rect fill="url(#offlineMapBg)" width="${MAP_W}" height="${MAP_H}"/>
-        ${grid.join('')}
-        ${decor}
-        <g filter="url(#dotShadow)">${dots}</g>
-        ${labels}
-        <text x="10" y="${MAP_H - 10}" font-size="8" fill="rgba(0,0,0,.15)" font-family="system-ui">© 泉城攻略 · 离线地图</text>
-      </svg>`;
+    // ═══ INTERACTIVE CANVAS MAP ENGINE ═══
+    const IMAP_BOUNDS = { latMin: 36.37, latMax: 36.75, lngMin: 116.85, lngMax: 117.56 };
+    const IMAP_CAT_COLORS = { spring:'#3b82f6', nature:'#22c55e', history:'#a855f7', culture:'#6366f1', food:'#f59e0b', family:'#14b8a6', landmark:'#ec4899', amusement:'#f97316' };
+    const IMAP_CAT_NAMES = { spring:'泉水', nature:'自然', history:'历史', culture:'文化', food:'美食', family:'亲子', landmark:'地标', amusement:'游乐' };
+    const IMAP_CAT_EMOJI = { spring:'⛲', nature:'🌿', history:'🏛️', culture:'📚', food:'🍜', family:'👨‍👩‍👧', landmark:'🏛️', amusement:'🎡' };
+
+    function imapLatLngToCanvas(lat, lng, w, h) {
+      const x = ((lng - IMAP_BOUNDS.lngMin) / (IMAP_BOUNDS.lngMax - IMAP_BOUNDS.lngMin)) * w;
+      const y = ((IMAP_BOUNDS.latMax - lat) / (IMAP_BOUNDS.latMax - IMAP_BOUNDS.latMin)) * h;
+      return { x, y };
     }
+    function imapCanvasToLatLng(cx, cy, w, h) {
+      const lng = IMAP_BOUNDS.lngMin + (cx / w) * (IMAP_BOUNDS.lngMax - IMAP_BOUNDS.lngMin);
+      const lat = IMAP_BOUNDS.latMax - (cy / h) * (IMAP_BOUNDS.latMax - IMAP_BOUNDS.latMin);
+      return { lat, lng };
+    }
+    function imapHaversine(lat1,lng1,lat2,lng2){
+      const R=6371,dLat=(lat2-lat1)*Math.PI/180,dLng=(lng2-lng1)*Math.PI/180;
+      const a=Math.sin(dLat/2)**2+Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)**2;
+      return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
+    }
+
+    class InteractiveMap {
+      constructor(container, spots) {
+        this.container = container;
+        this.canvas = container.querySelector('canvas');
+        this.ctx = this.canvas.getContext('2d');
+        this.spots = spots.filter(s => s.lat && s.lng);
+        this.baseW = 700; this.baseH = 380;
+        this.zoom = 1; this.minZoom = 1; this.maxZoom = 5;
+        this.panX = 0; this.panY = 0;
+        this.isDragging = false; this.dragStart = { x: 0, y: 0 };
+        this.hoveredSpot = null; this.selectedSpot = null;
+        this.userPos = null; this.showRoute = false;
+        this.routeTarget = null;
+        this.markerScales = new Map();
+        this.pulsePhase = 0;
+        this.clusterGroups = [];
+        this.popupEl = null;
+        this.tooltipEl = container.querySelector('#imapTooltip') || container.querySelector('.imap-tooltip');
+        this.routeInfoEl = null;
+        this.dpr = window.devicePixelRatio || 1;
+        this._raf = null;
+        this._lastFrame = 0;
+        this._pinchStart = null;
+        this._pinchZoomStart = 1;
+        this._dragMoved = false;
+        this._init();
+      }
+      _init() {
+        this._resize();
+        window.addEventListener('resize', () => this._resize());
+        this._bindEvents();
+        this._buildLegend();
+        this._animateEntrance();
+        this._startLoop();
+      }
+      _resize() {
+        const rect = this.container.getBoundingClientRect();
+        this.canvas.width = rect.width * this.dpr;
+        this.canvas.height = rect.height * this.dpr;
+        this.canvas.style.width = rect.width + 'px';
+        this.canvas.style.height = rect.height + 'px';
+        this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+        this.cw = rect.width;
+        this.ch = rect.height;
+      }
+      _bindEvents() {
+        const c = this.canvas;
+        c.addEventListener('mousedown', e => this._onPointerDown(e.clientX, e.clientY, e));
+        c.addEventListener('mousemove', e => this._onPointerMove(e.clientX, e.clientY, e));
+        c.addEventListener('mouseup', () => this._onPointerUp());
+        c.addEventListener('mouseleave', () => { this._onPointerUp(); this._hideTooltip(); });
+        c.addEventListener('wheel', e => { e.preventDefault(); this._onWheel(e.deltaY, e.clientX, e.clientY); }, { passive: false });
+        c.addEventListener('click', e => this._onClick(e.clientX, e.clientY));
+        c.addEventListener('touchstart', e => {
+          if (e.touches.length === 1) {
+            this._onPointerDown(e.touches[0].clientX, e.touches[0].clientY, e);
+          } else if (e.touches.length === 2) {
+            this._pinchStart = this._getPinchDist(e.touches);
+            this._pinchZoomStart = this.zoom;
+          }
+        }, { passive: false });
+        c.addEventListener('touchmove', e => {
+          e.preventDefault();
+          if (e.touches.length === 1 && this.isDragging) {
+            this._onPointerMove(e.touches[0].clientX, e.touches[0].clientY, e);
+          } else if (e.touches.length === 2 && this._pinchStart) {
+            const dist = this._getPinchDist(e.touches);
+            const scale = dist / this._pinchStart;
+            const newZoom = Math.max(this.minZoom, Math.min(this.maxZoom, this._pinchZoomStart * scale));
+            const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+            const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+            this._setZoom(newZoom, cx, cy);
+          }
+        }, { passive: false });
+        c.addEventListener('touchend', e => {
+          if (e.touches.length < 2) this._pinchStart = null;
+          if (e.touches.length === 0) this._onPointerUp();
+        });
+        this.container.querySelector('#imapZoomIn')?.addEventListener('click', () => this._setZoom(this.zoom * 1.3, this.cw/2, this.ch/2));
+        this.container.querySelector('#imapZoomOut')?.addEventListener('click', () => this._setZoom(this.zoom / 1.3, this.cw/2, this.ch/2));
+        this.container.querySelector('#imapLocateBtn')?.addEventListener('click', () => this._locateUser());
+      }
+      _getPinchDist(touches) {
+        const dx = touches[0].clientX - touches[1].clientX;
+        const dy = touches[0].clientY - touches[1].clientY;
+        return Math.sqrt(dx*dx + dy*dy);
+      }
+      _onPointerDown(cx, cy, e) {
+        this.isDragging = true;
+        this.dragStart = { x: cx - this.panX, y: cy - this.panY };
+        this._dragMoved = false;
+      }
+      _onPointerMove(cx, cy, e) {
+        if (this.isDragging) {
+          this.panX = cx - this.dragStart.x;
+          this.panY = cy - this.dragStart.y;
+          this._clampPan();
+          this._dragMoved = true;
+        }
+        const spot = this._spotAtScreen(cx, cy);
+        if (spot !== this.hoveredSpot) {
+          this.hoveredSpot = spot;
+          this.canvas.style.cursor = spot ? 'pointer' : (this.isDragging ? 'grabbing' : 'grab');
+          if (spot) this._showTooltip(spot, cx, cy);
+          else this._hideTooltip();
+        }
+      }
+      _onPointerUp() {
+        this.isDragging = false;
+      }
+      _onWheel(delta, cx, cy) {
+        const factor = delta > 0 ? 0.85 : 1.18;
+        this._setZoom(this.zoom * factor, cx, cy);
+      }
+      _setZoom(newZoom, cx, cy) {
+        const oldZoom = this.zoom;
+        this.zoom = Math.max(this.minZoom, Math.min(this.maxZoom, newZoom));
+        const ratio = this.zoom / oldZoom;
+        this.panX = cx - (cx - this.panX) * ratio;
+        this.panY = cy - (cy - this.panY) * ratio;
+        this._clampPan();
+      }
+      _clampPan() {
+        const minPanX = this.cw - this.cw * this.zoom;
+        const minPanY = this.ch - this.ch * this.zoom;
+        this.panX = Math.max(minPanX, Math.min(0, this.panX));
+        this.panY = Math.max(minPanY, Math.min(0, this.panY));
+      }
+      _screenToWorld(sx, sy) {
+        return { x: (sx - this.panX) / this.zoom, y: (sy - this.panY) / this.zoom };
+      }
+      _worldToScreen(wx, wy) {
+        return { x: wx * this.zoom + this.panX, y: wy * this.zoom + this.panY };
+      }
+      _spotAtScreen(sx, sy) {
+        const w = this._screenToWorld(sx, sy);
+        const hitR = Math.max(12, 18 / this.zoom);
+        for (let i = this.spots.length - 1; i >= 0; i--) {
+          const s = this.spots[i];
+          const p = imapLatLngToCanvas(s.lat, s.lng, this.baseW, this.baseH);
+          const dx = w.x - p.x, dy = w.y - p.y;
+          if (dx*dx + dy*dy < hitR*hitR) return s;
+        }
+        return null;
+      }
+      _onClick(cx, cy) {
+        if (this._dragMoved) return;
+        const spot = this._spotAtScreen(cx, cy);
+        if (spot) {
+          this.selectedSpot = spot;
+          this._showPopup(spot, cx, cy);
+        } else {
+          this.selectedSpot = null;
+          this._hidePopup();
+          this._hideRoute();
+        }
+      }
+      _showTooltip(spot, sx, sy) {
+        if (!this.tooltipEl) return;
+        const rect = this.container.getBoundingClientRect();
+        this.tooltipEl.textContent = `${IMAP_CAT_EMOJI[spot.cat]||'📍'} ${spot.name} ★${spot.rating}`;
+        this.tooltipEl.style.left = (sx - rect.left) + 'px';
+        this.tooltipEl.style.top = (sy - rect.top - 36) + 'px';
+        this.tooltipEl.classList.add('show');
+      }
+      _hideTooltip() {
+        this.tooltipEl?.classList.remove('show');
+      }
+      _showPopup(spot, sx, sy) {
+        this._hidePopup();
+        const rect = this.container.getBoundingClientRect();
+        const priceStr = spot.price === 0 ? '免费' : '¥' + spot.price;
+        const catColor = IMAP_CAT_COLORS[spot.cat] || '#999';
+        const catName = IMAP_CAT_NAMES[spot.cat] || '其他';
+        const el = document.createElement('div');
+        el.className = 'imap-popup';
+        el.innerHTML = `
+          <button class="imap-popup-close" onclick="window._imap && window._imap._hidePopup()">✕</button>
+          <img class="imap-popup-img" src="${spot.img}" alt="${spot.name}" onerror="this.src=imgFallback('${spot.name}')">
+          <div class="imap-popup-body">
+            <div class="imap-popup-name">
+              ${spot.name}
+              <span class="imap-popup-cat" style="background:${catColor}22;color:${catColor}">${catName}</span>
+            </div>
+            <div class="imap-popup-meta">
+              <span class="imap-popup-rating">★ ${spot.rating}</span>
+              <span class="imap-popup-price">${priceStr}</span>
+              <span>${spot.dur||''}</span>
+            </div>
+            <div class="imap-popup-actions">
+              <button class="imap-popup-btn primary" onclick="window._imap._showRoute(${spot.lat},${spot.lng},'${spot.name.replace(/'/g,"\\'")}')">🧭 到这去</button>
+              <button class="imap-popup-btn secondary" onclick="scrollToSpot('${spot.id}');window._imap._hidePopup()">📋 详情</button>
+            </div>
+          </div>`;
+        let left = sx - rect.left - 130;
+        let top = sy - rect.top - 280;
+        left = Math.max(8, Math.min(rect.width - 268, left));
+        top = Math.max(8, top);
+        if (top < 8) top = sy - rect.top + 20;
+        el.style.left = left + 'px';
+        el.style.top = top + 'px';
+        this.container.appendChild(el);
+        requestAnimationFrame(() => el.classList.add('show'));
+        this.popupEl = el;
+      }
+      _hidePopup() {
+        if (this.popupEl) {
+          this.popupEl.classList.remove('show');
+          setTimeout(() => this.popupEl?.remove(), 300);
+          this.popupEl = null;
+        }
+      }
+      _showRoute(lat, lng, name) {
+        this._hidePopup();
+        this.showRoute = true;
+        this.routeTarget = { lat, lng, name };
+        this._hideRoute();
+        if (!this.userPos) {
+          this._locateUser(() => this._renderRouteInfo());
+          return;
+        }
+        this._renderRouteInfo();
+      }
+      _renderRouteInfo() {
+        if (!this.userPos || !this.routeTarget) return;
+        const d = imapHaversine(this.userPos.lat, this.userPos.lng, this.routeTarget.lat, this.routeTarget.lng);
+        const walkMin = Math.round(d / 5 * 60);
+        const driveMin = Math.max(1, Math.round(d / 40 * 60));
+        const el = document.createElement('div');
+        el.className = 'imap-route-info';
+        el.innerHTML = `
+          <button class="imap-route-close" onclick="window._imap._hideRoute()">✕</button>
+          <div class="route-title">📍 ${this.routeTarget.name}</div>
+          <div class="route-detail">
+            <span>📏 直线 ${d.toFixed(1)}km</span>
+            <span>🚶 步行约${walkMin}分钟</span>
+            <span>🚗 驾车约${driveMin}分钟</span>
+          </div>
+          <div class="route-actions">
+            <button class="imap-popup-btn primary" style="flex:1" onclick="window.open('https://uri.amap.com/navigation?to=${this.routeTarget.lng},${this.routeTarget.lat},${encodeURIComponent(this.routeTarget.name)}&mode=walk&coordinate=gaode','_blank')">🗺️ 高德导航</button>
+            <button class="imap-popup-btn secondary" style="flex:1" onclick="window.open('https://api.map.baidu.com/direction?destination=${this.routeTarget.lat},${this.routeTarget.lng}&mode=walking&coord_type=gcj02','_blank')">🅱️ 百度导航</button>
+          </div>`;
+        this.container.appendChild(el);
+        this.routeInfoEl = el;
+      }
+      _hideRoute() {
+        this.showRoute = false;
+        this.routeTarget = null;
+        if (this.routeInfoEl) {
+          this.routeInfoEl.remove();
+          this.routeInfoEl = null;
+        }
+      }
+      _locateUser(cb) {
+        if (!navigator.geolocation) { showToast('浏览器不支持定位'); return; }
+        const btn = this.container.querySelector('#imapLocateBtn');
+        btn?.classList.add('active');
+        navigator.geolocation.getCurrentPosition(pos => {
+          this.userPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+          btn?.classList.add('active');
+          showToast('已获取您的位置');
+          if (cb) cb();
+        }, err => {
+          btn?.classList.remove('active');
+          showToast('定位失败：' + err.message);
+        }, { enableHighAccuracy: true, timeout: 10000 });
+      }
+      _buildLegend() {
+        const legendEl = this.container.querySelector('#imapLegend') || this.container.querySelector('.imap-legend');
+        if (!legendEl) return;
+        const cats = [...new Set(this.spots.map(s => s.cat))];
+        legendEl.innerHTML = cats.map(c => {
+          const color = IMAP_CAT_COLORS[c] || '#999';
+          const name = IMAP_CAT_NAMES[c] || c;
+          return `<div class="imap-legend-item"><span class="imap-legend-dot" style="background:${color}"></span>${name}</div>`;
+        }).join('');
+      }
+      _animateEntrance() {
+        this.spots.forEach((s, i) => {
+          this.markerScales.set(s.id, { scale: 0, target: 1, delay: i * 50, startTime: performance.now() });
+        });
+      }
+      _computeClusters() {
+        if (this.zoom >= 2.5) { this.clusterGroups = []; return; }
+        const clusterR = 50 / this.zoom;
+        const used = new Set();
+        const groups = [];
+        for (const s of this.spots) {
+          if (used.has(s.id)) continue;
+          const p = imapLatLngToCanvas(s.lat, s.lng, this.baseW, this.baseH);
+          const group = [s];
+          used.add(s.id);
+          for (const s2 of this.spots) {
+            if (used.has(s2.id)) continue;
+            const p2 = imapLatLngToCanvas(s2.lat, s2.lng, this.baseW, this.baseH);
+            const dx = p.x - p2.x, dy = p.y - p2.y;
+            if (Math.sqrt(dx*dx+dy*dy) < clusterR) {
+              group.push(s2);
+              used.add(s2.id);
+            }
+          }
+          if (group.length > 1) {
+            const cx = group.reduce((a,s) => a + imapLatLngToCanvas(s.lat,s.lng,this.baseW,this.baseH).x, 0) / group.length;
+            const cy = group.reduce((a,s) => a + imapLatLngToCanvas(s.lat,s.lng,this.baseW,this.baseH).y, 0) / group.length;
+            groups.push({ x: cx, y: cy, count: group.length, spots: group });
+          }
+        }
+        this.clusterGroups = groups;
+      }
+      _startLoop() {
+        const loop = (t) => {
+          this._raf = requestAnimationFrame(loop);
+          this.pulsePhase = (t % 2000) / 2000;
+          this._draw(t);
+        };
+        this._raf = requestAnimationFrame(loop);
+      }
+      _draw(t) {
+        const ctx = this.ctx;
+        const cw = this.cw, ch = this.ch;
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark' || document.body.classList.contains('dark');
+        ctx.clearRect(0, 0, cw, ch);
+        ctx.save();
+        ctx.translate(this.panX, this.panY);
+        ctx.scale(this.zoom, this.zoom);
+        this._drawBackground(ctx, isDark);
+        this._drawGrid(ctx, isDark);
+        if (this.showRoute && this.userPos && this.routeTarget) {
+          this._drawRouteLine(ctx);
+        }
+        this._computeClusters();
+        const clusteredIds = new Set();
+        for (const g of this.clusterGroups) {
+          g.spots.forEach(s => clusteredIds.add(s.id));
+          this._drawCluster(ctx, g, isDark);
+        }
+        for (const s of this.spots) {
+          if (clusteredIds.has(s.id)) continue;
+          this._drawMarker(ctx, s, t, isDark);
+        }
+        if (this.userPos) {
+          this._drawUserPos(ctx);
+        }
+        ctx.restore();
+      }
+      _drawBackground(ctx, isDark) {
+        const grad = ctx.createLinearGradient(0, 0, this.baseW, this.baseH);
+        if (isDark) {
+          grad.addColorStop(0, '#1a1a2e');
+          grad.addColorStop(1, '#16213e');
+        } else {
+          grad.addColorStop(0, '#f8f6f3');
+          grad.addColorStop(1, '#f0ede8');
+        }
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, this.baseW, this.baseH);
+        ctx.globalAlpha = 0.04;
+        ctx.fillStyle = '#3b82f6';
+        ctx.beginPath(); ctx.roundRect(260, 100, 120, 70, 12); ctx.fill();
+        ctx.fillStyle = '#22c55e';
+        ctx.beginPath(); ctx.roundRect(430, 180, 100, 60, 12); ctx.fill();
+        ctx.globalAlpha = 1;
+        ctx.globalAlpha = isDark ? 0.15 : 0.2;
+        ctx.font = '10px system-ui';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#3b82f6';
+        ctx.fillText('💧 泉域', 320, 140);
+        ctx.fillStyle = '#22c55e';
+        ctx.fillText('🌿 山区', 480, 215);
+        ctx.globalAlpha = 1;
+      }
+      _drawGrid(ctx, isDark) {
+        ctx.strokeStyle = isDark ? 'rgba(255,255,255,.03)' : 'rgba(0,0,0,.04)';
+        ctx.lineWidth = 0.5;
+        for (let i = 0; i <= 7; i++) {
+          const x = (this.baseW / 7) * i;
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, this.baseH); ctx.stroke();
+        }
+        for (let i = 0; i <= 4; i++) {
+          const y = (this.baseH / 4) * i;
+          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(this.baseW, y); ctx.stroke();
+        }
+      }
+      _drawMarker(ctx, spot, t, isDark) {
+        const p = imapLatLngToCanvas(spot.lat, spot.lng, this.baseW, this.baseH);
+        const color = IMAP_CAT_COLORS[spot.cat] || '#999';
+        const baseR = spot.rating >= 4.7 ? 6 : spot.rating >= 4.5 ? 5 : 4;
+        const anim = this.markerScales.get(spot.id);
+        let scale = 1;
+        if (anim) {
+          const elapsed = t - anim.startTime - anim.delay;
+          if (elapsed < 0) { scale = 0; }
+          else if (elapsed < 400) {
+            const p2 = elapsed / 400;
+            scale = 1 - Math.pow(2, -10 * p2) * Math.cos((p2 * 10 - 0.75) * (2 * Math.PI) / 3);
+          } else { scale = 1; }
+          anim.scale = scale;
+        }
+        const r = baseR * scale;
+        if (r <= 0) return;
+        const isHovered = this.hoveredSpot === spot;
+        const isSelected = this.selectedSpot === spot;
+        const hoverScale = isHovered ? 1.4 : 1;
+        const finalR = r * hoverScale;
+        if (isSelected) {
+          const pulseR = finalR + 8 + Math.sin(this.pulsePhase * Math.PI * 2) * 6;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, pulseR, 0, Math.PI * 2);
+          ctx.fillStyle = color + '20';
+          ctx.fill();
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, finalR + 4, 0, Math.PI * 2);
+          ctx.fillStyle = color + '40';
+          ctx.fill();
+        }
+        ctx.shadowColor = 'rgba(0,0,0,.25)';
+        ctx.shadowBlur = 4;
+        ctx.shadowOffsetY = 2;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, finalR + 2, 0, Math.PI * 2);
+        ctx.fillStyle = isDark ? '#222' : '#fff';
+        ctx.fill();
+        ctx.shadowColor = 'transparent';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, finalR, 0, Math.PI * 2);
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(p.x - finalR*0.25, p.y - finalR*0.25, finalR*0.35, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,.35)';
+        ctx.fill();
+        if (isHovered && this.zoom >= 1.5) {
+          ctx.font = `bold ${10/this.zoom}px system-ui`;
+          ctx.textAlign = 'center';
+          ctx.fillStyle = isDark ? '#fff' : '#111';
+          ctx.globalAlpha = 0.85;
+          ctx.fillText(spot.name, p.x, p.y - finalR - 6);
+          ctx.globalAlpha = 1;
+        }
+      }
+      _drawCluster(ctx, group, isDark) {
+        const r = 16 + Math.min(group.count, 10) * 1.5;
+        ctx.beginPath();
+        ctx.arc(group.x, group.y, r + 4, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(201,169,110,.15)';
+        ctx.fill();
+        ctx.shadowColor = 'rgba(0,0,0,.2)';
+        ctx.shadowBlur = 6;
+        ctx.shadowOffsetY = 2;
+        ctx.beginPath();
+        ctx.arc(group.x, group.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = '#c9a96e';
+        ctx.fill();
+        ctx.shadowColor = 'transparent';
+        ctx.beginPath();
+        ctx.arc(group.x, group.y, r, 0, Math.PI * 2);
+        ctx.strokeStyle = isDark ? '#333' : '#fff';
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+        ctx.font = 'bold 11px system-ui';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#fff';
+        ctx.fillText(group.count.toString(), group.x, group.y);
+        ctx.textBaseline = 'alphabetic';
+      }
+      _drawUserPos(ctx) {
+        const p = imapLatLngToCanvas(this.userPos.lat, this.userPos.lng, this.baseW, this.baseH);
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 14, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(59,130,246,.12)';
+        ctx.fill();
+        const pulseR = 8 + Math.sin(this.pulsePhase * Math.PI * 2) * 3;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, pulseR, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(59,130,246,.3)';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 6, 0, Math.PI * 2);
+        ctx.fillStyle = '#3b82f6';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 6, 0, Math.PI * 2);
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#fff';
+        ctx.fill();
+      }
+      _drawRouteLine(ctx) {
+        const from = imapLatLngToCanvas(this.userPos.lat, this.userPos.lng, this.baseW, this.baseH);
+        const to = imapLatLngToCanvas(this.routeTarget.lat, this.routeTarget.lng, this.baseW, this.baseH);
+        ctx.setLineDash([8, 6]);
+        ctx.strokeStyle = '#3b82f6';
+        ctx.lineWidth = 2;
+        ctx.globalAlpha = 0.7;
+        ctx.beginPath();
+        ctx.moveTo(from.x, from.y);
+        ctx.lineTo(to.x, to.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.globalAlpha = 1;
+        ctx.beginPath();
+        ctx.arc(to.x, to.y, 10, 0, Math.PI * 2);
+        ctx.fillStyle = '#e76f51';
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(to.x, to.y, 10, 0, Math.PI * 2);
+        ctx.strokeStyle = '#fff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.font = 'bold 10px system-ui';
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#fff';
+        ctx.fillText('📍', to.x, to.y + 4);
+      }
+      destroy() {
+        if (this._raf) cancelAnimationFrame(this._raf);
+        this._hidePopup();
+        this._hideRoute();
+      }
+    }
+
     
     // ═══ STATIC MAP FOR MODAL ═══
     function generateStaticMap(lat, lng, name) {
@@ -2754,7 +3539,7 @@ html.dark .card.meituan-card:hover {
         document.getElementById('leafletFallback').style.display = 'block';
         var svgContainer = document.getElementById('fallbackMapSvg');
         if (svgContainer && window.allSpots && window.allSpots.length) {
-          svgContainer.innerHTML = generateOfflineMap(window.allSpots);
+          // Canvas map auto-refreshes via allSpots reference
         }
       }
 

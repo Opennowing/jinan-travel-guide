@@ -48,9 +48,6 @@
   <link rel="stylesheet" href="/src/styles/main.css">
   <link rel="manifest" href="/jinan-travel-guide/manifest.json">
   <meta name="theme-color" content="#c9a96e">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
   <style>
     .filter-section{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-bottom:20px}
     .filter-group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
@@ -76,7 +73,6 @@
     .empty-state .emoji{font-size:3rem;margin-bottom:12px}
     #map-container{width:100%;height:400px;border-radius:var(--radius-lg);overflow:hidden}
     .custom-marker{background:none!important;border:none!important}
-    .leaflet-div-icon{background:none!important;border:none!important}
     .map-legend{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:12px;font-size:.75rem;color:var(--text2)}
     .map-legend span{display:flex;align-items:center;gap:4px}
     .audience-bar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
@@ -299,15 +295,7 @@
       padding: 0;
       overflow: hidden;
     }
-    .leaflet-popup-content-wrapper {
-      padding: 0 !important;
-      border-radius: 10px !important;
-      overflow: hidden;
-    }
-    .leaflet-popup-content {
-      margin: 0 !important;
-      width: auto !important;
-    }
+
     /* ── 景点卡片高亮 ── */
     .card.highlighted {
       box-shadow: 0 0 0 3px var(--accent), 0 8px 32px rgba(201,169,110,.3) !important;
@@ -1952,6 +1940,130 @@ html.dark .card.airbnb-card .price-free {
     font-size: .9rem;
   }
 }
+
+/* ═══ OFFLINE MAP SECTION ═══ */
+.offline-map-section {
+  margin-bottom: 24px;
+}
+.offline-map-wrap {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.offline-map-svg {
+  position: relative;
+  min-height: 300px;
+  background: linear-gradient(135deg, var(--bg2), var(--bg3));
+  overflow: hidden;
+}
+.offline-map-svg svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.offline-map-svg .map-dot {
+  transition: all .2s;
+}
+.offline-map-svg .map-dot:hover {
+  r: 8;
+  opacity: 1;
+  stroke-width: 2;
+}
+.offline-map-panel {
+  padding: 12px;
+  overflow-y: auto;
+  max-height: 380px;
+  border-left: 1px solid var(--border);
+  background: var(--bg);
+}
+.offline-map-panel-title {
+  font-size: .78rem;
+  font-weight: 700;
+  color: var(--text2);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.top-spot-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all .25s;
+  margin-bottom: 4px;
+}
+.top-spot-item:hover {
+  background: var(--accent2);
+  transform: translateX(4px);
+}
+.top-spot-item img {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.top-spot-info {
+  min-width: 0;
+}
+.top-spot-name {
+  font-size: .82rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.top-spot-meta {
+  font-size: .72rem;
+  color: var(--text3);
+  margin-top: 2px;
+}
+.map-legend-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: var(--bg2);
+  border-radius: 8px;
+}
+.map-legend-bar .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: .72rem;
+  color: var(--text3);
+}
+.map-legend-bar .legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+@media(max-width:768px){
+  .offline-map-wrap {
+    grid-template-columns: 1fr;
+  }
+  .offline-map-panel {
+    border-left: none;
+    border-top: 1px solid var(--border);
+    max-height: 200px;
+  }
+  .offline-map-svg {
+    min-height: 220px;
+  }
+}
 /* ── Dark mode adjustments ── */
 html.dark .card.airbnb-card:hover {
   box-shadow: 0 12px 28px rgba(0,0,0,.25), 0 4px 10px rgba(0,0,0,.15);
@@ -2077,30 +2189,29 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
     </div>
   </section>
 
-  <!-- 景点地图（移到顶部） -->
-  <section class="section" style="padding-top:8px" aria-label="景点地图">
-    <div class="section-inner">
-      <div id="map-container" class="reveal-scale"></div>
-      <div class="map-controls">
-        <button class="map-legend-btn active" data-map-cat="all" aria-label="显示全部景点">全部</button>
-        <button class="map-legend-btn" data-map-cat="spring" aria-label="筛选泉水景点"><span class="legend-dot" style="background:#3b82f6"></span> 泉水</button>
-        <button class="map-legend-btn" data-map-cat="nature" aria-label="筛选自然景点"><span class="legend-dot" style="background:#22c55e"></span> 自然</button>
-        <button class="map-legend-btn" data-map-cat="history" aria-label="筛选历史景点"><span class="legend-dot" style="background:#a855f7"></span> 历史</button>
-        <button class="map-legend-btn" data-map-cat="culture" aria-label="筛选文化景点"><span class="legend-dot" style="background:#8b5cf6"></span> 文化</button>
-        <button class="map-legend-btn" data-map-cat="food" aria-label="筛选美食街"><span class="legend-dot" style="background:#f59e0b"></span> 美食街</button>
-        <button class="map-legend-btn" data-map-cat="family" aria-label="筛选亲子景点"><span class="legend-dot" style="background:#14b8a6"></span> 亲子</button>
-        <button class="locate-btn" id="locateMeBtn">📍 定位到我</button>
-      </div>
-    </div>
-  </section>
 
-  <div class="section-divider reveal" aria-hidden="true">◈</div>
   <section class="section" style="padding-top:0" aria-label="景点列表">
     <div class="section-inner">
       <div class="section-header reveal" style="margin-bottom:24px">
         <div class="eyebrow">全部景点</div>
         <h2>探索泉城</h2>
         <p>精选80+景点，发现济南之美</p>
+      </div>
+      <div class="offline-map-section reveal" id="offlineMapSection">
+        <div class="offline-map-wrap">
+          <div class="offline-map-svg" id="offlineMapSvg"></div>
+          <div class="offline-map-panel">
+            <div class="offline-map-panel-title">🏆 热门景点</div>
+            <div id="topSpotsPanel"></div>
+            <div class="map-legend-bar">
+              <span class="legend-item"><span class="legend-dot" style="background:#3b82f6"></span>泉水</span>
+              <span class="legend-item"><span class="legend-dot" style="background:#22c55e"></span>自然</span>
+              <span class="legend-item"><span class="legend-dot" style="background:#a855f7"></span>历史</span>
+              <span class="legend-item"><span class="legend-dot" style="background:#f59e0b"></span>美食</span>
+              <span class="legend-item"><span class="legend-dot" style="background:#14b8a6"></span>亲子</span>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="sort-header" id="sortHeader">
         <div class="sort-left">
@@ -2681,7 +2792,17 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
     initAll();
     initShopifyAnimations();
     initSocialFeatures();
+    // Initialize offline map after spots load
+    function initOfflineMap() {
+      const svgContainer = document.getElementById('offlineMapSvg');
+      const panelContainer = document.getElementById('topSpotsPanel');
+      if (!svgContainer || !allSpots.length) return;
+      svgContainer.innerHTML = generateOfflineMap(allSpots);
+      if (panelContainer) panelContainer.innerHTML = renderTopSpotsPanel(allSpots);
+    }
+
     loadSpots().then(() => {
+      initOfflineMap();
       // Handle URL params: ?id=xxx or ?q=xxx
       const params = new URLSearchParams(location.search);
       const spotId = params.get('id');
@@ -3378,136 +3499,101 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
     };
 
     // ── Enhanced Map with legend filtering + locate me ──
-    let leafletMap = null;
-    let mapMarkers = [];
-    let mapMarkerGroup = null;
 
     // ═══ MAP CATEGORY CONFIG ═══
     const catEmoji = {spring:'⛲',nature:'🌿',history:'🏛️',culture:'📚',food:'🍜',family:'👨‍👩‍👧',landmark:'🏛️',amusement:'🎡'};
     
-    function initLeafletMap() {
-      const container = document.getElementById('map-container');
-      if (!container || !allSpots.length) return;
-      
-      leafletMap = L.map('map-container', {
-        zoomControl: false
-      }).setView([36.67, 117.02], 12);
-      
-      // Add zoom control to top-left
-      L.control.zoom({ position: 'topleft' }).addTo(leafletMap);
-      
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        maxZoom: 18
-      }).addTo(leafletMap);
-
-      // Use marker cluster group
-      mapMarkerGroup = L.markerClusterGroup({
-        maxClusterRadius: 50,
-        spiderfyOnMaxZoom: true,
-        showCoverageOnHover: false,
-        zoomToBoundsOnClick: true,
-        iconCreateFunction: function(cluster) {
-          const count = cluster.getChildCount();
-          let size = 'small';
-          if (count > 20) size = 'large';
-          else if (count > 8) size = 'medium';
-          return L.divIcon({
-            html: '<div><span>' + count + '</span></div>',
-            className: 'marker-cluster marker-cluster-' + size,
-            iconSize: L.point(40, 40)
-          });
-        }
-      });
-      
-      renderMapMarkers('all');
-      leafletMap.addLayer(mapMarkerGroup);
-
-      // Fit bounds
-      const bounds = allSpots.filter(s => s.lat && s.lng).map(s => [s.lat, s.lng]);
-      if (bounds.length) leafletMap.fitBounds(bounds, { padding: [30, 30] });
-      
-      // Add fullscreen button
-      const fsBtn = document.createElement('button');
-      fsBtn.className = 'map-fullscreen-btn';
-      fsBtn.innerHTML = '⛶';
-      fsBtn.title = '全屏地图';
-      fsBtn.onclick = toggleMapFullscreen;
-      container.appendChild(fsBtn);
+    // ═══ OFFLINE STATIC MAP GENERATOR ═══
+    const MAP_BOUNDS = { latMin: 36.37, latMax: 36.75, lngMin: 116.85, lngMax: 117.56 };
+    const MAP_W = 700, MAP_H = 380;
+    
+    function latLngToSvg(lat, lng) {
+      const x = ((lng - MAP_BOUNDS.lngMin) / (MAP_BOUNDS.lngMax - MAP_BOUNDS.lngMin)) * MAP_W;
+      const y = ((MAP_BOUNDS.latMax - lat) / (MAP_BOUNDS.latMax - MAP_BOUNDS.latMin)) * MAP_H;
+      return { x: Math.round(x), y: Math.round(y) };
     }
     
-    function toggleMapFullscreen() {
-      const container = document.getElementById('map-container');
-      const btn = container.querySelector('.map-fullscreen-btn');
-      container.classList.toggle('map-fullscreen');
-      if (container.classList.contains('map-fullscreen')) {
-        btn.innerHTML = '✕';
-        btn.title = '退出全屏';
-        document.body.style.overflow = 'hidden';
-      } else {
-        btn.innerHTML = '⛶';
-        btn.title = '全屏地图';
-        document.body.style.overflow = '';
+    function generateOfflineMap(spots) {
+      const catEmoji = {spring:'⛲',nature:'🌿',history:'🏛️',culture:'📚',food:'🍜',family:'👨‍👩‍👧',landmark:'🏛️',amusement:'🎡'};
+      const catColor = {spring:'#3b82f6',nature:'#22c55e',history:'#a855f7',culture:'#6366f1',food:'#f59e0b',family:'#14b8a6',landmark:'#ec4899',amusement:'#f97316'};
+      
+      // Generate spot dots
+      const dots = spots.filter(s => s.lat && s.lng).map(s => {
+        const p = latLngToSvg(s.lat, s.lng);
+        const color = catColor[s.cat] || '#c9a96e';
+        const r = s.rating >= 4.7 ? 5 : s.rating >= 4.5 ? 4 : 3;
+        return `<circle cx="${p.x}" cy="${p.y}" r="${r}" fill="${color}" opacity=".75" stroke="#fff" stroke-width="1" data-id="${s.id}" class="map-dot" style="cursor:pointer" onclick="scrollToSpot('${s.id}')">
+          <title>${s.name} ★${s.rating}</title>
+        </circle>`;
+      }).join('');
+      
+      // Generate area labels for major spots
+      const labels = spots.filter(s => s.lat && s.lng && s.rating >= 4.7).slice(0, 8).map(s => {
+        const p = latLngToSvg(s.lat, s.lng);
+        return `<text x="${p.x}" y="${p.y - 8}" text-anchor="middle" font-size="8" font-weight="700" fill="var(--text,#111)" font-family="system-ui" pointer-events="none" opacity=".8">${s.name}</text>`;
+      }).join('');
+      
+      // Grid lines
+      const grid = [];
+      for (let i = 0; i <= 7; i++) {
+        const x = (MAP_W / 7) * i;
+        grid.push(`<line x1="${x}" y1="0" x2="${x}" y2="${MAP_H}" stroke="rgba(201,169,110,.05)" stroke-width="1"/>`);
       }
-      // Invalidate map size after transition
-      setTimeout(() => { if (leafletMap) leafletMap.invalidateSize(); }, 350);
+      for (let i = 0; i <= 4; i++) {
+        const y = (MAP_H / 4) * i;
+        grid.push(`<line x1="0" y1="${y}" x2="${MAP_W}" y2="${y}" stroke="rgba(201,169,110,.05)" stroke-width="1"/>`);
+      }
+      
+      // Decorative elements
+      const decor = `
+        <rect x="280" y="120" width="80" height="50" rx="8" fill="rgba(59,130,246,.04)" stroke="rgba(59,130,246,.08)"/>
+        <text x="320" y="150" text-anchor="middle" font-size="9" fill="rgba(59,130,246,.25)" font-family="system-ui">💧 泉域</text>
+        <rect x="450" y="200" width="60" height="40" rx="8" fill="rgba(34,197,94,.04)" stroke="rgba(34,197,94,.08)"/>
+        <text x="480" y="224" text-anchor="middle" font-size="9" fill="rgba(34,197,94,.25)" font-family="system-ui">🌿 山区</text>
+      `;
+      
+      return `<svg viewBox="0 0 ${MAP_W} ${MAP_H}" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="display:block;background:linear-gradient(135deg,#f8f6f3,#f0ede8)">
+        <defs>
+          <radialGradient id="offlineMapBg" cx="50%" cy="40%">
+            <stop offset="0%" stop-color="rgba(42,157,143,.03)"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </radialGradient>
+          <filter id="dotShadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity=".2"/>
+          </filter>
+        </defs>
+        <rect fill="url(#offlineMapBg)" width="${MAP_W}" height="${MAP_H}"/>
+        ${grid.join('')}
+        ${decor}
+        <g filter="url(#dotShadow)">${dots}</g>
+        ${labels}
+        <text x="10" y="${MAP_H - 10}" font-size="8" fill="rgba(0,0,0,.15)" font-family="system-ui">© 泉城攻略 · 离线地图</text>
+      </svg>`;
     }
     
-    // ESC to exit fullscreen
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        const container = document.getElementById('map-container');
-        if (container && container.classList.contains('map-fullscreen')) {
-          toggleMapFullscreen();
-        }
-      }
-    });
-
-    function renderMapMarkers(filterCat) {
-      if (!mapMarkerGroup || !leafletMap) return;
-      mapMarkerGroup.clearLayers();
-      const filtered = filterCat === 'all' ? allSpots : allSpots.filter(s => s.cat === filterCat);
-      filtered.forEach(s => {
-        if (!s.lat || !s.lng) return;
-        const emoji = catEmoji[s.cat] || '📍';
-        const catClass = 'cat-' + (s.cat || 'landmark');
-        const icon = L.divIcon({
-          className: 'leaflet-div-icon',
-          html: '<div class="map-marker ' + catClass + '">' +
-                  '<span class="marker-emoji">' + emoji + '</span>' +
-                  '<div class="map-marker-label">' + escapeHtml(s.name) + '</div>' +
-                '</div>',
-          iconSize: [36, 44],
-          iconAnchor: [18, 44],
-          popupAnchor: [0, -44]
-        });
-        const marker = L.marker([s.lat, s.lng], { icon });
-        
-        // Rich popup
-        const priceStr = s.price === 0 ? '<span style="color:#22c55e;font-weight:700">免费</span>' : '<span style="font-weight:700">¥' + s.price + '</span>';
-        const popupHtml = '<div class="map-popup">' +
-          getMapPopupImg(s) +
-          '<div class="map-popup-body">' +
-            '<div class="map-popup-name">' + escapeHtml(s.name) + '</div>' +
-            '<div class="map-popup-meta">' +
-              '<span class="popup-rating">★ ' + s.rating + '</span>' +
-              '<span>·</span>' +
-              '<span>' + priceStr + '</span>' +
-              '<span>·</span>' +
-              '<span>⏱ ' + s.dur + '</span>' +
-            '</div>' +
-            '<div class="map-popup-desc">' + escapeHtml(s.desc).slice(0, 60) + '…</div>' +
-            '<button class="map-popup-btn" onclick="document.querySelector(\'.modal-overlay\')?.remove();openQuickView(allSpots.find(x=>x.id===\'' + s.id + '\'))">查看详情 →</button>' +
-          '</div>' +
-        '</div>';
-        marker.bindPopup(popupHtml, { maxWidth: 260, closeButton: true, className: 'custom-popup' });
-        marker.on('click', () => { highlightCard(s.id); });
-        mapMarkerGroup.addLayer(marker);
-      });
+    function renderTopSpotsPanel(spots) {
+      const top = spots.filter(s => s.rating >= 4.6).sort((a, b) => b.rating - a.rating).slice(0, 6);
+      return top.map(s => `
+        <div class="top-spot-item" onclick="scrollToSpot('${s.id}')">
+          <img src="${s.img}" alt="${s.name}" loading="lazy" onerror="this.src=imgFallback('${s.name}')">
+          <div class="top-spot-info">
+            <div class="top-spot-name">${s.name}</div>
+            <div class="top-spot-meta">★ ${s.rating} · ${s.price === 0 ? '免费' : '¥' + s.price}</div>
+          </div>
+        </div>
+      `).join('');
     }
-
-
-        function highlightCard(spotId) {
+    
+    function scrollToSpot(id) {
+      const card = document.querySelector(`.card[data-id="${id}"]`);
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.style.boxShadow = '0 0 0 3px var(--accent), 0 8px 32px rgba(201,169,110,.3)';
+        card.style.transition = 'box-shadow .3s';
+        setTimeout(() => { card.style.boxShadow = ''; }, 2000);
+      }
+    }
+    function highlightCard(spotId) {
       document.querySelectorAll('.card.highlighted').forEach(c => c.classList.remove('highlighted'));
       const card = document.querySelector('.card[data-id="' + spotId + '"]');
       if (card) {
@@ -3517,45 +3603,9 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
       }
     }
 
-    // Map legend filter buttons - sync with main filter
-    document.querySelectorAll('.map-legend-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.map-legend-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const cat = btn.dataset.mapCat;
-        renderMapMarkers(cat);
-        if (cat !== 'all') {
-          activeCat = cat;
-          document.querySelectorAll('#catFilters .filter-btn').forEach(b => b.classList.remove('active'));
-          const catBtn = document.querySelector('#catFilters .filter-btn[data-cat="' + cat + '"]');
-          if (catBtn) catBtn.classList.add('active');
-          render();
-        }
-      });
-    });
 
-    // Locate me button
-    document.getElementById('locateMeBtn')?.addEventListener('click', () => {
-      if (!navigator.geolocation) { showToast('浏览器不支持定位'); return; }
-      showToast('正在定位…');
-      navigator.geolocation.getCurrentPosition(pos => {
-        const { latitude, longitude } = pos.coords;
-        if (leafletMap) {
-          leafletMap.setView([latitude, longitude], 15);
-          L.marker([latitude, longitude], {
-            icon: L.divIcon({
-              className: 'leaflet-div-icon custom-marker',
-              html: '<div style="background:#ef4444;color:#fff;padding:6px 12px;border-radius:100px;font-size:12px;font-weight:700;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,.3);border:3px solid #fff">📍 我的位置</div>',
-              iconSize: [0, 0],
-              iconAnchor: [0, 0]
-            })
-          }).addTo(leafletMap);
-          showToast('✓ 已定位到您的位置');
-        }
-      }, err => {
-        showToast('定位失败：' + (err.message || '请检查权限'));
-      }, { enableHighAccuracy: true, timeout: 10000 });
-    });
+
+
 
 
     // ── Filter Collapse Toggle ──
@@ -3598,24 +3648,6 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
 
     
     // Load Leaflet JS
-    const leafletScript = document.createElement('script');
-    leafletScript.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-    leafletScript.onload = () => {
-      // Load markercluster after leaflet
-      const mcScript = document.createElement('script');
-      mcScript.src = 'https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js';
-      mcScript.onload = () => {
-        const tryInit = () => {
-          if (allSpots.length) { initLeafletMap(); renderRecommend(); }
-          else setTimeout(tryInit, 200);
-        };
-        tryInit();
-      };
-      document.head.appendChild(mcScript);
-      // Pre-load voices for TTS
-      if ('speechSynthesis' in window) speechSynthesis.getVoices();
-    };
-    document.head.appendChild(leafletScript);
   
     // ═══ SHOPIFY-STYLE: 数字计数动画 ═══
     function animateCount(elId, target) {

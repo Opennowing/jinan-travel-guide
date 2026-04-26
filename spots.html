@@ -959,6 +959,12 @@ html.dark .card.meituan-card:hover {
         scroll-behavior: auto !important;
       }
     }
+  
+    /* Scroll reveal fallback: ensure cards visible without IntersectionObserver */
+    .card-grid .rv, .must-eat-grid .rv, .route-card.rv,
+    .timeline-item.rv, .guide-card.rv, .culture-card.rv {
+      opacity: 1; transform: none;
+    }
   </style>
   <!-- Leaflet Map CDN -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />

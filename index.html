@@ -393,6 +393,12 @@
         scroll-behavior: auto !important;
       }
     }
+  
+    /* Scroll reveal fallback: ensure cards visible without IntersectionObserver */
+    .card-grid .rv, .must-eat-grid .rv, .route-card.rv,
+    .timeline-item.rv, .guide-card.rv, .culture-card.rv {
+      opacity: 1; transform: none;
+    }
   </style>
 </head>
 <body>

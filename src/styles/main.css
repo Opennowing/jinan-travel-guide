@@ -15,7 +15,7 @@
   --serif:'Noto Serif SC',"Source Han Serif SC","Songti SC",Georgia,serif;
   --ease:cubic-bezier(.25,.46,.45,.94);
   --ease-out:cubic-bezier(.16,1,.3,1);
-  --section:clamp(80px,10vw,120px);
+  --section:clamp(40px,6vw,72px);
   --gutter:clamp(20px,4vw,48px);
   --max:1200px;--radius:16px;--radius-lg:20px;
 }
@@ -78,7 +78,7 @@ body{animation:pageFadeIn .5s var(--ease) both}
 .mob-nav-center{position:relative;top:-16px;width:52px;height:52px;border-radius:50%;background:var(--accent);color:#fff;font-size:1.3rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(201,169,110,.4);border:none;cursor:pointer}
 
 /* ─── PAGE HEADER ─── */
-.page-hero{padding:120px var(--gutter) 80px;text-align:center;background:linear-gradient(170deg,var(--bg2) 0%,var(--bg3) 100%);position:relative;overflow:hidden}
+.page-hero{padding:100px var(--gutter) 60px;text-align:center;background:linear-gradient(170deg,var(--bg2) 0%,var(--bg3) 100%);position:relative;overflow:hidden}
 .page-hero::before{content:'';position:absolute;top:-30%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(201,169,110,.1) 0%,transparent 70%);pointer-events:none;animation:heroFloat1 12s ease-in-out infinite alternate}
 .page-hero::after{content:'';position:absolute;bottom:-20%;left:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(42,157,143,.08) 0%,transparent 70%);pointer-events:none;animation:heroFloat2 14s ease-in-out infinite alternate}
 @keyframes heroFloat1{0%{opacity:.5;transform:translate(0,0)}100%{opacity:1;transform:translate(-20px,15px)}}
@@ -92,7 +92,7 @@ body{animation:pageFadeIn .5s var(--ease) both}
 /* ─── SECTIONS ─── */
 .section{padding:var(--section) var(--gutter)}
 .section-inner{max-width:var(--max);margin:0 auto}
-.section-header{text-align:center;margin-bottom:56px}
+.section-header{text-align:center;margin-bottom:32px}
 .section-header .eyebrow{font-size:.8rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;display:inline-flex;align-items:center;gap:12px}
 .section-header .eyebrow::before,.section-header .eyebrow::after{content:'';width:24px;height:1px;background:var(--accent);opacity:.6}
 .section-header h2{font:900 clamp(2rem,4vw,3rem)/1.2 var(--serif)}
@@ -172,7 +172,7 @@ body{animation:pageFadeIn .5s var(--ease) both}
 .filter-btn.active{border-color:var(--accent);background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(201,169,110,.25)}
 
 /* ─── FOOTER ─── */
-.footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px var(--gutter) 32px;text-align:center}
+.footer{background:var(--bg2);border-top:1px solid var(--border);padding:32px var(--gutter) 24px;text-align:center}
 .footer p{font-size:.75rem;color:var(--text3);margin:0}
 .footer .footer-tagline{font-size:.8rem;color:var(--text2);margin-bottom:8px;font-style:italic}
 
@@ -224,7 +224,7 @@ body{animation:pageFadeIn .5s var(--ease) both}
 .rv.revealed{opacity:1;transform:translateY(0);will-change:auto}
 
 /* ─── PERFORMANCE OPTIMIZATIONS ─── */
-.section{content-visibility:auto;contain-intrinsic-size:auto 600px}
+/* content-visibility removed — caused IntersectionObserver issues */
 .btn{will-change:transform}
 .btt{will-change:transform,opacity}
 .modal-overlay{will-change:opacity}

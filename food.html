@@ -203,7 +203,7 @@
     /* ══════════════════════════════════════════════
        必吃榜增强 — 大众点评风格
        ══════════════════════════════════════════════ */
-    .must-eat-hero{position:relative;overflow:hidden;border-radius:24px;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);padding:40px 36px 36px;margin-bottom:32px}
+    .must-eat-hero{margin-bottom:0;position:relative;overflow:hidden;border-radius:24px;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);padding:40px 36px 36px;margin-bottom:32px}
     .must-eat-hero::before{content:'';position:absolute;top:-50%;right:-20%;width:60%;height:200%;background:radial-gradient(circle,rgba(201,169,110,.15) 0%,transparent 70%);pointer-events:none}
     .must-eat-hero-header{display:flex;align-items:center;gap:16px;margin-bottom:28px;position:relative;z-index:1}
     .must-eat-hero-icon{width:56px;height:56px;background:linear-gradient(135deg,#d4a843,#f0d78c);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;box-shadow:0 4px 20px rgba(212,168,67,.4)}
@@ -384,10 +384,10 @@
     .search-history-clear{padding:8px 18px;font-size:.72rem;color:var(--accent);cursor:pointer;text-align:right;font-weight:500}
 
     /* ── Loading & Empty ── */
-    .food-loading{display:flex;justify-content:center;padding:60px 0;color:var(--text3)}
+    .food-loading{display:flex;justify-content:center;padding:40px 0;color:var(--text3)}
     .food-loading .spinner{width:36px;height:36px;border:3px solid var(--bg3);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
     @keyframes spin{to{transform:rotate(360deg)}}
-    .food-empty{text-align:center;padding:60px 20px;color:var(--text3);font-size:.95rem;line-height:1.8}
+    .food-empty{text-align:center;padding:40px 20px;color:var(--text3);font-size:.95rem;line-height:1.8}
     .food-empty .emoji{font-size:3rem;margin-bottom:12px;display:block}
 
     /* ── 商圈筛选 ── */
@@ -468,7 +468,7 @@
     .price-high{background:rgba(239,68,68,.1);color:#ef4444}
 
     /* ── 必吃榜增强 ── */
-    .section-divider{display:flex;align-items:center;justify-content:center;gap:16px;margin:48px auto;max-width:200px;color:var(--accent);opacity:.4;font-size:1.2rem;letter-spacing:8px}
+    .section-divider{display:flex;align-items:center;justify-content:center;gap:16px;margin:24px auto;max-width:200px;color:var(--accent);opacity:.4;font-size:1.2rem;letter-spacing:8px}
     .section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent)}
     .must-banner{background:linear-gradient(135deg,rgba(201,169,110,.12),rgba(42,157,143,.08));border:1px solid var(--accent2);border-radius:16px;padding:20px 24px;display:flex;align-items:center;gap:16px;margin-bottom:28px}
     .must-banner-icon{font-size:2.5rem}
@@ -492,14 +492,14 @@
 
     /* ─── 紧凑布局：减少空白 ─── */
     .page-hero{min-height:40vh!important;padding:100px var(--gutter) 48px!important}
-    .section{padding:36px var(--gutter)!important}
-    .section-header{margin-bottom:20px!important}
+    .section{padding:28px var(--gutter)!important}
+    .section-header{margin-bottom:14px!important}
     .section-header h2{font-size:clamp(1.4rem,3vw,1.8rem)!important}
-    .section-header p{margin-top:8px!important;font-size:.85rem!important}
-    .section-divider{display:none!important}
-    .food-masonry{gap:16px!important}
+    .section-header p{margin-top:4px!important;font-size:.85rem!important}
+    .section-divider{margin:16px auto!important}
+    .food-masonry{gap:12px!important}
     .food-card-pro-body{padding:14px 16px 16px!important}
-    .must-eat-hero{padding:20px!important}
+    .must-eat-hero{margin-bottom:0;padding:20px!important}
     .must-eat-hero-grid{gap:12px!important}
     .must-eat-item{padding:14px!important}
     .season-grid{gap:16px!important}
@@ -524,7 +524,7 @@
     html.dark .food-card-pro-shop{background:var(--bg2)}
     html.dark .food-card-pro-shop-name{color:var(--text)}
     html.dark .food-card-pro-btn{background:var(--accent);color:#fff}
-    html.dark .must-eat-hero{background:linear-gradient(135deg,var(--bg2),var(--bg3));border-color:rgba(255,255,255,.08)}
+    html.dark .must-eat-hero{margin-bottom:0;background:linear-gradient(135deg,var(--bg2),var(--bg3));border-color:rgba(255,255,255,.08)}
     html.dark .must-eat-hero-icon{filter:brightness(1.2)}
     html.dark .must-banner{background:linear-gradient(135deg,var(--bg2),var(--bg3));border-color:rgba(255,255,255,.08)}
     html.dark .season-card{background:var(--card-bg);border-color:rgba(255,255,255,.06)}
@@ -575,6 +575,12 @@
         scroll-behavior: auto !important;
       }
     }
+  
+    /* Food cards: always visible (IntersectionObserver fallback) */
+    .food-masonry .rv { opacity: 1; transform: none; }
+    .food-masonry .food-card-pro { opacity: 1; transform: none; }
+    .must-eat-hero .rv { opacity: 1; transform: none; }
+    .smart-recommend .rv { opacity: 1; transform: none; }
   </style>
 </head>
 <body>
@@ -616,7 +622,7 @@
   </nav>
 
   <!-- Hero -->
-  <header class="page-hero" style="position:relative;min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.7)),url('https://images.unsplash.com/photo-1755742319537-449f661a3190?w=1600&q=80') center/cover no-repeat">
+  <header class="page-hero" style="position:relative;min-height:45vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.7)),url('https://images.unsplash.com/photo-1755742319537-449f661a3190?w=1600&q=80') center/cover no-repeat">
     <button class="btn btn-outline btn-sm" style="position:absolute;top:20px;right:20px;z-index:2;color:#fff;border-color:rgba(255,255,255,.4)" aria-label="分享页面" data-share='{"title":"济南美食攻略","subtitle":"鲁菜发源地 · 68道精选","items":[{"name":"糖醋鲤鱼","info":"鲁菜经典 · 聚丰德"},{"name":"把子肉","info":"济南灵魂美食 · 超意兴"},{"name":"油旋","info":"非遗小吃 · 弘春美斋"},{"name":"甜沫","info":"济南早餐必备"},{"name":"九转大肠","info":"鲁菜名菜 · 闫府私房菜"}],"page":"food"}'>📤 分享美食</button>
     <div class="eyebrow" style="font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:12px;display:inline-flex;align-items:center;gap:12px;position:relative;z-index:1"><span style="width:24px;height:1px;background:rgba(255,255,255,.4)"></span>JINAN FOOD<span style="width:24px;height:1px;background:rgba(255,255,255,.4)"></span></div>
     <h1 style="color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.4)">🍜 美食 · 探店</h1>

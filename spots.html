@@ -1213,7 +1213,7 @@ html.dark .card.meituan-card:hover {
   <div id="comparePanel"></div>
 
   <script type="module">
-    import { initAll, stars, openModal, closeModal } from '/src/components/shared.js';
+    import { initAll, stars, openModal } from '/src/components/shared.js';
     import { initPWA } from '/src/components/pwa.js';
     import { Favorites, CompareTool, SmartSearch, AccessibilityTools, OfflineManager } from '/src/components/interactive.js';
     import { initShopifyAnimations } from '/src/components/shopify-animations.js';
@@ -1348,6 +1348,7 @@ html.dark .card.meituan-card:hover {
       try {
         const res = await fetch("/jinan-travel-guide/data/spots.json");
         allSpots = await res.json();
+        window.allSpots = allSpots;
         render();
       } catch (e) {
         console.error("加载景点数据失败:", e);
@@ -1384,109 +1385,8 @@ html.dark .card.meituan-card:hover {
       return list;
     }
 
-    function render() {
-      const list = getFiltered();
-      const grid = document.getElementById('spotGrid');
-      const empty = document.getElementById('emptyState');
-      animateCount('spotCount', list.length);
-      const itineraries = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
-
-      if (!list.length) { grid.innerHTML = ''; empty.style.display = 'block'; return; }
-      empty.style.display = 'none';
-
-      grid.innerHTML = list.map(s => {
-        const inIt = itineraries.includes(s.id);
-        const isFav = favs.isFavorite(s.id);
-        const inCompare = compare.has(s.id);
-        const priceHtml = s.price === 0 ? '<span class="free-tag">免费</span>' : `¥${s.price}`;
-        return `
-          <article class="card rv" data-id="${s.id}">
-            <div class="card-img">
-              <img src="${s.img}" alt="${s.name}" loading="lazy" onload="this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')">
-              <span class="spot-badge badge ${s.badge}">${badgeLabels[s.badge] || s.badge}</span>
-              <span class="spot-price">${priceHtml}</span>
-              <button class="fav-btn ${isFav ? 'active' : ''}" data-id="${s.id}" aria-label="${isFav ? '取消收藏' : '收藏'}" onclick="event.stopPropagation();window._toggleFav('${s.id}',this)">${isFav ? '♥' : '♡'}</button>
-              <button class="compare-btn ${inCompare ? 'active' : ''}" data-id="${s.id}" aria-label="${inCompare ? '取消对比' : '加入对比'}" onclick="event.stopPropagation();window._toggleCompare('${s.id}',this)">${inCompare ? '✓' : '⚖️'}</button>
-            </div>
-            <div class="card-body">
-              <h3>${s.name} <span class="card-stars">${stars(s.rating)}</span></h3>
-              <p class="desc">${s.desc}</p>
-              <div class="card-meta"><span>⏱ ${s.dur}</span><span>💬 ${s.reviews} 条评价</span></div>
-              <div class="card-meta" style="margin-top:4px"><span>🕐 ${(s.open||'全天').split('(')[0].split('·')[0].trim()}</span><span>📅 ${(s.bestTime||'全年').slice(0,12)}</span></div>
-              ${s.transport ? `<div class="card-meta" style="margin-top:4px"><span>🚌 ${s.transport.slice(0,20)}</span></div>` : ''}
-              <div class="card-tags">${s.audience.map(a => `<span class="tag">${audienceLabels[a]||a}</span>`).join('')}</div>
-              <div class="card-actions">
-                <a href="${getCtripLink(s.name)}" target="_blank" rel="noopener" class="btn btn-sm btn-outline" style="color:#2681ff;border-color:#2681ff" onclick="event.stopPropagation()">🐬 订票</a>
-                <button class="btn btn-sm ${inIt?'btn-outline':'btn-primary'} add-trip" data-id="${s.id}" ${inIt?'disabled':''}>${inIt?'✓ 已加入':'＋ 行程'}</button>
-                <button class="btn btn-sm btn-outline detail-btn" data-id="${s.id}">详情</button>
-              </div>
-            </div>
-          </article>`;
-      }).join('');
-
-      // Reveal with staggered animation
-      initRevealObserver();
-
-      // Card click → Quick View
-      document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('click', e => {
-          if (e.target.closest('.add-trip') || e.target.closest('.detail-btn')) return;
-          const s = allSpots.find(x => x.id === card.dataset.id);
-          if (s) openQuickView(s);
-        });
-      });
-
-      // Add trip
-      document.querySelectorAll('.add-trip:not([disabled])').forEach(btn => {
-        btn.addEventListener('click', e => {
-          e.stopPropagation();
-          addToTrip(btn.dataset.id);
-          btn.textContent = '✓ 已加入'; btn.classList.remove('btn-primary'); btn.classList.add('btn-outline'); btn.disabled = true;
-        });
-      });
-
-      // Detail
-      document.querySelectorAll('.detail-btn').forEach(btn => {
-        btn.addEventListener('click', e => {
-          e.stopPropagation();
-          const s = allSpots.find(x => x.id === btn.dataset.id);
-          if (s) openQuickView(s);
-        });
-      });
-    }
 
     // ── Favorites & Compare toggles ──
-    window._toggleFav = function(id, btn) {
-      const isFav = favs.toggle(id);
-      btn.classList.toggle('active', isFav);
-      btn.innerHTML = isFav ? '♥' : '♡';
-      btn.setAttribute('aria-label', isFav ? '取消收藏' : '收藏');
-    };
-    window._toggleCompare = function(id, btn) {
-      const spot = allSpots.find(s => s.id === id);
-      if (!spot) return;
-      if (compare.has(id)) {
-        compare.remove(id);
-        btn.classList.remove('active');
-        btn.innerHTML = '⚖️';
-        btn.setAttribute('aria-label', '加入对比');
-      } else {
-        compare.add(spot);
-        btn.classList.add('active');
-        btn.innerHTML = '✓';
-        btn.setAttribute('aria-label', '取消对比');
-      }
-      updateComparePanel();
-    };
-    function updateComparePanel() {
-      const container = document.getElementById('comparePanel');
-      if (!container) return;
-      container.innerHTML = compare.renderPanel();
-      if (compare.count() > 0) {
-        container.querySelector('.compare-panel')?.classList.add('open');
-        compare.bindPanel(container);
-      }
-    }
 
     function addToTrip(id) {
       const list = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
@@ -1527,134 +1427,6 @@ html.dark .card.meituan-card:hover {
       gallery.addEventListener('touchend', e => { if(!moved) return; const diff=startX-e.changedTouches[0].clientX; if(Math.abs(diff)>50) goTo(currentGalleryIndex+(diff>0?1:-1)); });
     }
 
-    function openQuickView(s) {
-      const priceHtml = s.price === 0
-        ? '<span style="color:var(--teal);font-weight:700">免费</span>'
-        : `<span style="font-weight:700">¥${s.price}</span>${s.priceOld ? `<span style="text-decoration:line-through;color:var(--text3);margin-left:6px">¥${s.priceOld}</span>` : ''}/人`;
-      const photosHtml = (s.photos||[]).map(p => `<span class="photo-tag">📷 ${p}</span>`).join('');
-      const comboHtml = s.combo ? `<div class="modal-combo"><h4>${s.combo.title}</h4><p>${s.combo.desc}</p></div>` : '';
-      const mapHtml = s.lat && s.lng ? `<div class="modal-map"><iframe src="https://www.openstreetmap.org/export/embed.html?bbox=${s.lng-0.01}%2C${s.lat-0.005}%2C${s.lng+0.01}%2C${s.lat+0.005}&layer=mapnik&marker=${s.lat}%2C${s.lng}" loading="lazy"></iframe></div>` : '';
-      const defaultReviews = [
-        {name:'旅行达人',avatar:'旅',date:'2026-04-15',stars:5,text:'非常值得一去！泉水清澈见底，环境优美。'},
-        {name:'小鱼儿',avatar:'鱼',date:'2026-04-10',stars:4,text:'景色不错，就是节假日人太多了，建议工作日去。'},
-        {name:'背包客阿杰',avatar:'杰',date:'2026-03-28',stars:5,text:'济南之行最满意的一站，下次还会再来！'}
-      ];
-      // Load user reviews from localStorage
-      const userReviews = JSON.parse(localStorage.getItem('jinan-reviews') || '{}');
-      const spotUserReviews = (userReviews[s.id] || []).map(r => ({
-        name: r.name || '我', avatar: '👤', date: r.date, stars: r.stars, text: r.text, isUser: true
-      }));
-      const allReviews = [...spotUserReviews, ...defaultReviews];
-      const reviewsHtml = allReviews.map(r => `
-        <div class="review-item ${r.isUser ? 'user-review' : ''}">
-          <div class="review-head"><div class="review-avatar">${r.avatar}</div><span class="review-name">${escapeHtml(r.name)}</span><span class="review-date">${escapeHtml(r.date)}</span></div>
-          <div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
-          <div class="review-text">${escapeHtml(r.text)}</div>
-          <button class="review-helpful" onclick="this.classList.toggle('active');const n=this.querySelector('.helpful-count');n.textContent=parseInt(n.textContent)+(this.classList.contains('active')?1:-1)">👍 有帮助 <span class="helpful-count">${Math.floor(Math.random()*20)+1}</span></button>
-        </div>`).join('');
-      const totalReviews = s.reviews + spotUserReviews.length;
-
-      const html = `
-        ${renderPhotoGrid(s)}
-        <div class="modal-body">
-          <h2>${s.name}</h2>
-          <div class="modal-rating"><span class="stars">${stars(s.rating)}</span><span class="score">${s.rating}</span><span class="count">${s.reviews} 条评价</span></div>
-          <p class="modal-desc">${s.desc}</p>
-          <div class="modal-info-grid">
-            <div class="modal-info-item"><div class="label">🎫 门票</div><div class="value">${priceHtml}</div></div>
-            <div class="modal-info-item"><div class="label">⏱ 建议时长</div><div class="value">${s.dur}</div></div>
-            <div class="modal-info-item"><div class="label">🕐 开放时间</div><div class="value">${s.open||'全天'}</div></div>
-            <div class="modal-info-item"><div class="label">📅 最佳时间</div><div class="value">${s.bestTime||'全年'}</div></div>
-            <div class="modal-info-item"><div class="label">👥 拥挤程度</div><div class="value">${s.crowd||'一般'}</div></div>
-            <div class="modal-info-item"><div class="label">🎫 预约方式</div><div class="value">${s.book||'无需预约'}</div></div>
-            <div class="modal-info-item"><div class="label">🚌 交通</div><div class="value">${s.transport||'—'}</div></div>
-            <div class="modal-info-item"><div class="label">💰 优惠政策</div><div class="value">${s.discount||'无'}</div></div>
-          </div>
-          ${comboHtml}
-          ${mapHtml}
-          <div class="card-tags" style="margin-bottom:16px">
-            ${(s.audience||[]).map(a => `<span class="tag">${audienceLabels[a]||a}</span>`).join('')}
-            <span class="tag" style="background:rgba(42,157,143,.1);color:var(--teal)">✓ ${s.trust}</span>
-          </div>
-          <div class="modal-actions" style="flex-wrap:wrap;gap:10px">
-            <button class="btn btn-primary modal-add-trip" data-id="${s.id}" style="flex:1;min-width:120px">＋ 加入行程</button>
-            <a href="${getCtripLink(s.name)}" target="_blank" rel="noopener" class="btn btn-outline" style="flex:1;min-width:120px;background:linear-gradient(135deg,#2681ff 0%,#1a6dff 100%);color:#fff;border:none">🐬 携程订票</a>
-            <a href="${getMeituanLink(s.name)}" target="_blank" rel="noopener" class="btn btn-outline" style="flex:1;min-width:120px;background:linear-gradient(135deg,#ffc107 0%,#ff9800 100%);color:#fff;border:none">🟡 美团预订</a>
-            <button class="btn btn-outline modal-share" data-name="${s.name}" style="flex:0 0 auto">📤 分享</button>
-          </div>
-          <p style="font-size:.7rem;color:var(--text3);text-align:center;margin-top:8px">通过以上链接预订，本站可获得少量佣金，不影响你的价格 ❤️</p>
-          <div class="modal-reviews">
-            <h4>💬 游客评价 <span style="font-weight:400;font-size:.8rem;color:var(--text3)">(${totalReviews}条)</span></h4>
-            <div class="review-form">
-              <h5>✍️ 写评价</h5>
-              <div class="star-input" id="starInput">${[1,2,3,4,5].map(i => `<span data-val="${i}">☆</span>`).join('')}</div>
-              <textarea class="review-input" id="reviewText" placeholder="分享你的游玩体验…" maxlength="500"></textarea>
-              <button class="btn btn-sm btn-primary review-submit" id="submitReview" data-spot="${s.id}">提交评价</button>
-            </div>
-            ${reviewsHtml}
-          </div>
-        </div>`;
-      openModal(html);
-      // Animate rating distribution bars
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          document.querySelectorAll('.rating-dist-fill').forEach(bar => {
-            bar.style.width = bar.dataset.width;
-          });
-        }, 300);
-      });
-      requestAnimationFrame(() => {
-        initGallery();
-        document.querySelector('.modal-add-trip')?.addEventListener('click', function() {
-          addToTrip(this.dataset.id);
-          this.textContent='✓ 已加入'; this.classList.remove('btn-primary'); this.classList.add('btn-outline'); this.disabled=true;
-        });
-        document.querySelector('.modal-share')?.addEventListener('click', function() {
-          const name = this.dataset.name;
-          if (navigator.share) navigator.share({title:`济南旅游 - ${name}`,text:`推荐你去济南的${name}！`,url:location.href});
-          else { navigator.clipboard?.writeText(`推荐你去济南的${name}！${location.href}`); showToast('链接已复制'); }
-        });
-        // Star rating input
-        let selectedStars = 0;
-        document.querySelectorAll('#starInput span').forEach(star => {
-          star.addEventListener('click', () => {
-            selectedStars = parseInt(star.dataset.val);
-            document.querySelectorAll('#starInput span').forEach((s,i) => {
-              s.textContent = i < selectedStars ? '★' : '☆';
-              s.classList.toggle('active', i < selectedStars);
-            });
-          });
-          star.addEventListener('mouseenter', () => {
-            document.querySelectorAll('#starInput span').forEach((s,i) => {
-              s.textContent = i < parseInt(star.dataset.val) ? '★' : '☆';
-            });
-          });
-        });
-        document.getElementById('starInput')?.addEventListener('mouseleave', () => {
-          document.querySelectorAll('#starInput span').forEach((s,i) => {
-            s.textContent = i < selectedStars ? '★' : '☆';
-          });
-        });
-        // Submit review
-        document.getElementById('submitReview')?.addEventListener('click', function() {
-          const spotId = this.dataset.spot;
-          const text = document.getElementById('reviewText').value.trim();
-          if (!selectedStars) { showToast('请先选择评分'); return; }
-          if (!text) { showToast('请写点评价内容'); return; }
-          const allReviews = JSON.parse(localStorage.getItem('jinan-reviews') || '{}');
-          if (!allReviews[spotId]) allReviews[spotId] = [];
-          allReviews[spotId].push({
-            name: '我', stars: selectedStars, text: text,
-            date: new Date().toISOString().slice(0,10)
-          });
-          localStorage.setItem('jinan-reviews', JSON.stringify(allReviews));
-          showToast('✓ 评价已提交');
-          // Refresh modal
-          const spot = allSpots.find(x => x.id === spotId);
-          if (spot) setTimeout(() => openQuickView(spot), 300);
-        });
-      });
-    }
 
     document.getElementById('catFilters').addEventListener('click', e => {
       const btn = e.target.closest('.filter-btn'); if(!btn) return;
@@ -1872,14 +1644,6 @@ html.dark .card.meituan-card:hover {
     // ═══════════════════════════════════════════
     let showFavOnly = false;
     function getFavs() { return JSON.parse(localStorage.getItem('jinan-favs') || '[]'); }
-    function toggleFav(id) {
-      let favs = getFavs();
-      if (favs.includes(id)) { favs = favs.filter(f => f !== id); showToast('💔 已取消收藏'); }
-      else { favs.push(id); showToast('❤️ 已收藏'); }
-      localStorage.setItem('jinan-favs', JSON.stringify(favs));
-      updateFavCount();
-      render();
-    }
     function updateFavCount() {
       const count = getFavs().length;
       const badge = document.getElementById('favCountBadge');
@@ -1896,20 +1660,6 @@ html.dark .card.meituan-card:hover {
     //  2. 景点对比系统
     // ═══════════════════════════════════════════
     function getCompareList() { return JSON.parse(localStorage.getItem('jinan-compare') || '[]'); }
-    function toggleCompare(id) {
-      let list = getCompareList();
-      if (list.includes(id)) {
-        list = list.filter(c => c !== id);
-        showToast('已移出对比');
-      } else {
-        if (list.length >= 3) { showToast('最多对比 3 个景点'); return; }
-        list.push(id);
-        showToast('✓ 已加入对比');
-      }
-      localStorage.setItem('jinan-compare', JSON.stringify(list));
-      updateCompareUI();
-      render();
-    }
     function updateCompareUI() {
       const list = getCompareList();
       const btn = document.getElementById('compareOpenBtn');
@@ -2049,7 +1799,6 @@ html.dark .card.meituan-card:hover {
     }
 
     // ── Patch render() to include fav/compare buttons ──
-    const _origRender = render;
     const catLabels = {spring:'⛲ 泉水',nature:'🌿 自然',history:'🏛️ 历史',food:'🍜 美食街',culture:'🎭 文化',family:'👨👩👧 亲子',landmark:'🏛️ 地标',amusement:'🎡 游乐'};
 
     render = function() {
@@ -2218,7 +1967,6 @@ html.dark .card.meituan-card:hover {
       });
     };
 // ── Patch openQuickView to add TTS button ──
-    const _origOpenQuickView = openQuickView;
     // ═══ LIGHTBOX COMPONENT ═══
     let lightboxPhotos = [];
     let lightboxIndex = 0;
@@ -2644,6 +2392,23 @@ html.dark .card.meituan-card:hover {
       </svg>`;
     }
     
+    // ═══ STATIC MAP FOR MODAL ═══
+    function generateStaticMap(lat, lng, name) {
+      const p = latLngToSvg(lat, lng);
+      const catColorLocal = {spring:'#3b82f6',nature:'#22c55e',history:'#a855f7',culture:'#6366f1',food:'#f59e0b',family:'#14b8a6',landmark:'#ec4899',amusement:'#f97316'};
+      const spot = allSpots.find(s => s.lat === lat && s.lng === lng);
+      const color = spot ? (catColorLocal[spot.cat] || '#c9a96e') : '#c9a96e';
+      return `<svg viewBox="0 0 ${MAP_W} ${MAP_H}" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" style="display:block;border-radius:12px;background:linear-gradient(135deg,#f8f6f3,#f0ede8)">
+        <rect fill="rgba(42,157,143,.03)" width="${MAP_W}" height="${MAP_H}"/>
+        <line x1="${p.x}" y1="0" x2="${p.x}" y2="${MAP_H}" stroke="rgba(201,169,110,.1)" stroke-dasharray="4,4"/>
+        <line x1="0" y1="${p.y}" x2="${MAP_W}" y2="${p.y}" stroke="rgba(201,169,110,.1)" stroke-dasharray="4,4"/>
+        <circle cx="${p.x}" cy="${p.y}" r="12" fill="${color}" opacity=".2"/>
+        <circle cx="${p.x}" cy="${p.y}" r="6" fill="${color}" stroke="#fff" stroke-width="2"/>
+        <text x="${p.x}" y="${p.y - 16}" text-anchor="middle" font-size="11" font-weight="700" fill="#111" font-family="system-ui">${name}</text>
+        <text x="10" y="${MAP_H - 8}" font-size="8" fill="rgba(0,0,0,.2)" font-family="system-ui">📍 ${lat.toFixed(4)}, ${lng.toFixed(4)}</text>
+      </svg>`;
+    }
+
     function renderTopSpotsPanel(spots) {
       const top = spots.filter(s => s.rating >= 4.6).sort((a, b) => b.rating - a.rating).slice(0, 6);
       return top.map(s => `

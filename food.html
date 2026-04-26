@@ -659,7 +659,7 @@
             <div class="must-eat-hero-icon">🏆</div>
             <div class="must-eat-hero-title">
               <h2>济南必吃榜 · 本地人精选</h2>
-              <p>从百年老字号到街头巷尾的烟火气，这5道菜是济南美食的灵魂</p>
+              <p>从百年老字号到街头巷尾的烟火气，这11道菜是济南美食的灵魂</p>
             </div>
           </div>
           <div class="must-eat-hero-grid" id="mustEatHeroGrid">
@@ -774,8 +774,8 @@
       <div class="section-inner">
         <div class="section-header reveal">
           <p class="eyebrow">必吃榜</p>
-          <h2>🏆 来济南必吃的 TOP 5</h2>
-          <p>本地人认证，错过等于白来</p>
+          <h2>🏆 济南必吃榜 · 全部推荐</h2>
+          <p>本地人认证的 11 道必吃美食，错过等于白来</p>
         </div>
         <div class="must-banner reveal">
           <span class="must-banner-icon">🏆</span>
@@ -798,7 +798,7 @@
           <h2>🗺️ 美食地图</h2>
           <p>跟着地图吃济南，不走回头路</p>
         </div>
-        <div class="food-static-map reveal" style="position:relative;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid var(--border);box-shadow:var(--shadow-lg)">
+        <div class="food-static-map reveal rv" style="position:relative;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid var(--border);box-shadow:var(--shadow-lg)">
           <svg viewBox="0 0 800 400" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="display:block">
             <defs>
               <radialGradient id="fmapBg" cx="50%" cy="40%"><stop offset="0%" stop-color="rgba(245,158,11,.03)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
@@ -1877,10 +1877,10 @@
     function renderMustEat() {
       const grid = document.getElementById('mustEatGrid');
       if (!grid) return;
-      const mustFoods = allFoods.filter(f => f.must).slice(0, 5);
+      const mustFoods = allFoods.filter(f => f.must);
       if (!mustFoods.length) { grid.innerHTML = '<div class="food-empty">暂无必吃推荐 🍽️</div>'; return; }
       grid.innerHTML = mustFoods.map((food, i) =>
-        '<div class="must-card rv">' +
+        '<div class="must-card rv" data-food-id="' + food.id + '" onclick="showFoodDetail(\'' + food.id + '\')" style="cursor:pointer">' +
           '<div class="must-card-rank">' + (i + 1) + '</div>' +
           '<img class="must-card-img" src="' + food.img + '" alt="' + food.name + '" loading="lazy" onload="this.classList.add(\'img-loaded\');this.parentElement.classList.add(\'img-loaded\')" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.classList.add(\'img-loaded\');this.parentElement.classList.add(\'img-loaded\')">' +
           '<div class="must-card-body">' +
@@ -2357,7 +2357,7 @@
       grid.innerHTML = mustFoods.map((food, i) => {
         const rankClass = i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : 'rank-other';
         const shop = food.shops?.[0];
-        return '<div class="must-eat-hero-card" data-food-id="' + food.id + '">' +
+        return '<div class="must-eat-hero-card" data-food-id="' + food.id + '" onclick="showFoodDetail(\'' + food.id + '\')">' +
           '<div class="rank-badge ' + rankClass + '">' + (i + 1) + '</div>' +
           '<img class="must-eat-hero-card-img" src="' + food.img + '" alt="' + food.name + '" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
           '<div class="must-eat-hero-card-body">' +
@@ -2369,6 +2369,8 @@
           '</div>' +
         '</div>';
       }).join('');
+      // Add hover cursor hint
+      grid.querySelectorAll('.must-eat-hero-card').forEach(c => c.style.cursor = 'pointer');
     }
 
     // ═══════════════════════════════════════════

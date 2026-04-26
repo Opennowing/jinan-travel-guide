@@ -41,8 +41,8 @@ html.dark{
 body{animation:pageFadeIn .5s var(--ease) both}
 
 /* ─── STAGGER REVEAL ─── */
-.rv{opacity:0;transform:translateY(24px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
-.rv.revealed{opacity:1;transform:translateY(0)}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .5s var(--ease),transform .5s var(--ease);will-change:opacity,transform}
+.rv.revealed{opacity:1;transform:translateY(0);will-change:auto}
 
 /* ─── NAV ─── */
 .top-nav{position:fixed;top:0;left:0;right:0;z-index:100;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,3vw,32px);background:var(--nav-bg);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid var(--border);transition:all .3s}
@@ -172,9 +172,7 @@ body{animation:pageFadeIn .5s var(--ease) both}
 .filter-btn.active{border-color:var(--accent);background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(201,169,110,.25)}
 
 /* ─── FOOTER ─── */
-.footer{background:var(--bg2);border-top:1px solid var(--border);padding:32px var(--gutter) 24px;text-align:center}
-.footer p{font-size:.75rem;color:var(--text3);margin:0}
-.footer .footer-tagline{font-size:.8rem;color:var(--text2);margin-bottom:8px;font-style:italic}
+/* ─── FOOTER — merged into enhanced footer below ─── */
 
 /* ─── SKELETON ─── */
 @keyframes shimmer{0%{background-position:400% 0}100%{background-position:-400% 0}}
@@ -219,9 +217,7 @@ body{animation:pageFadeIn .5s var(--ease) both}
 .review-stars{color:#f59e0b;font-size:.82rem;margin-bottom:6px;letter-spacing:2px}
 .review-text{font-size:.85rem;color:var(--text2);line-height:1.7}
 
-/* ─── SCROLL REVEAL ─── */
-.rv{opacity:0;transform:translateY(24px);transition:opacity .5s var(--ease),transform .5s var(--ease);will-change:opacity,transform}
-.rv.revealed{opacity:1;transform:translateY(0);will-change:auto}
+/* ─── SCROLL REVEAL — merged into base ─── */
 
 /* ─── PERFORMANCE OPTIMIZATIONS ─── */
 /* content-visibility removed — caused IntersectionObserver issues */
@@ -583,87 +579,7 @@ h4, .h4 { font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 700; line-height: 1.
   max-width: 560px;
 }
 
-/* ─── ENHANCED CARD SYSTEM ─── */
-.card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  transition: all .4s cubic-bezier(.23,1,.32,1);
-  cursor: pointer;
-  position: relative;
-  will-change: transform;
-  box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 4px 12px rgba(0,0,0,.03);
-  display: flex;
-  flex-direction: column;
-}
-.card:hover {
-  transform: translateY(-10px) scale(1.015);
-  box-shadow: 0 8px 24px rgba(0,0,0,.08), 0 20px 48px rgba(0,0,0,.06);
-  border-color: rgba(201,169,110,.2);
-}
-.card:active {
-  transform: translateY(-4px) scale(1.005);
-  transition-duration: .15s;
-}
-
-.card-img {
-  position: relative;
-  overflow: hidden;
-  aspect-ratio: 16/10;
-  background: var(--bg2);
-}
-.card-img::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 40%;
-  background: linear-gradient(to top, rgba(0,0,0,.15), transparent);
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity .3s;
-}
-.card:hover .card-img::after { opacity: 1; }
-.card:hover .card-img img { transform: scale(1.08); }
-
-.card-body {
-  padding: 20px 24px 24px;
-  position: relative;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-.card-body::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 24px;
-  right: 24px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border2), transparent);
-  opacity: 0;
-  transition: opacity .3s;
-}
-.card:hover .card-body::before { opacity: 1; }
-
-.card-body h3 {
-  font: 700 1.05rem/1.4 var(--serif);
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: color .3s;
-}
-.card:hover .card-body h3 { color: var(--accent); }
-
-.card-body .desc {
-  font-size: .85rem;
-  color: var(--text2);
-  line-height: 1.7;
-}
+/* ─── ENHANCED CARD SYSTEM — merged into base ─── */
 
 /* ─── RATING STARS VISUAL ─── */
 .rating-visual {
@@ -1155,18 +1071,7 @@ html.dark .review-card .avatar {
   .highlight-grid { grid-template-columns: 1fr; }
 }
 
-/* ─── SCROLL REVEAL ENHANCED ─── */
-.rv {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity .6s cubic-bezier(.23,1,.32,1), transform .6s cubic-bezier(.23,1,.32,1);
-  will-change: opacity, transform;
-}
-.rv.revealed {
-  opacity: 1;
-  transform: translateY(0);
-  will-change: auto;
-}
+/* ─── SCROLL REVEAL ENHANCED — merged into base ─── */
 
 /* ══════════════════════════════════════
    SHOPIFY-INSPIRED ANIMATION CLASSES
@@ -1194,28 +1099,7 @@ html.dark .review-card .avatar {
 /* ─── STAGGER GROUPS ─── */
 .stagger > * { transition-delay: calc(var(--stagger-i, 0) * 80ms); }
 
-/* ─── SMOOTH CARD INTERACTIONS ─── */
-.card {
-  transition: transform 0.45s cubic-bezier(.23,1,.32,1), box-shadow 0.45s cubic-bezier(.23,1,.32,1), border-color 0.3s;
-  backface-visibility: hidden;
-}
-.card:hover {
-  transform: translateY(-10px) scale(1.015);
-  box-shadow: 0 8px 24px rgba(0,0,0,.08), 0 20px 48px rgba(0,0,0,.06);
-  border-color: rgba(201,169,110,.2);
-}
-.card:active {
-  transform: translateY(-4px) scale(1.005);
-  transition-duration: 0.15s;
-}
-
-/* ─── IMAGE ZOOM ON HOVER ─── */
-.card-img img {
-  transition: transform 0.6s cubic-bezier(.23,1,.32,1), opacity 0.4s;
-}
-.card:hover .card-img img {
-  transform: scale(1.08);
-}
+/* ─── SMOOTH CARD INTERACTIONS — merged into base ─── */
 
 /* ─── FILTER PILL ANIMATIONS ─── */
 .filter-btn, .audience-btn, .area-btn, .ticket-btn, .guide-tab, .route-tab, .season-tab {
@@ -1260,23 +1144,7 @@ html.dark .review-card .avatar {
   text-shadow: 0 0 20px rgba(201,169,110,.3);
 }
 
-/* ─── CARD HOVER GRADIENT LINE ─── */
-.card::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), var(--teal));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.45s cubic-bezier(.23,1,.32,1);
-  z-index: 2;
-}
-.card:hover::before {
-  transform: scaleX(1);
-}
+/* ─── CARD HOVER GRADIENT LINE — merged into base card ─── */
 
 /* ─── SMOOTH MODAL ENHANCEMENTS ─── */
 .modal-overlay {
@@ -1435,6 +1303,15 @@ html.dark .review-card .avatar {
 .footer-links a:hover { color: var(--accent); background: var(--accent2); }
 .footer p { font-size: .78rem; color: var(--text2); margin: 0; }
 .footer .footer-tagline { font-size: .82rem; color: var(--text2); margin-bottom: 8px; font-style: italic; }
+.footer-stats{display:flex;justify-content:center;gap:24px;margin:12px 0;font-size:.75rem;color:var(--text3);flex-wrap:wrap}
+.footer-stats span{display:inline-flex;align-items:center;gap:4px}
+
+/* ─── STATS BAR (homepage) ─── */
+.stats-bar{background:linear-gradient(135deg,var(--bg2),var(--bg3));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px var(--gutter)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.stat-item .stat-num{font:900 clamp(2rem,4vw,3rem)/1 var(--serif);color:var(--accent);display:block}
+.stat-item .stat-label{font-size:.82rem;color:var(--text2);margin-top:6px;display:block}
+@media(max-width:768px){.stats-grid{grid-template-columns:repeat(2,1fr);gap:16px}}
 
 @media (max-width: 768px) {
   .footer-links { gap: 16px; }
@@ -2328,37 +2205,9 @@ html.dark .fact-num {
   transform: scale(0.97);
 }
 
-/* ─── Card Global Effects ─── */
-.card {
-  transition: transform 0.4s var(--ease-out-expo),
-              box-shadow 0.4s var(--ease-out-expo);
-  will-change: transform;
-}
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.12);
-}
+/* ─── Card Global Effects — merged into base ─── */
 
-/* ─── Card Image Zoom ─── */
-.card .card-img {
-  overflow: hidden;
-}
-.card .card-img img {
-  transition: transform 0.6s var(--ease-out-expo);
-}
-.card:hover .card-img img {
-  transform: scale(1.05);
-}
-
-/* ─── Scroll Reveal Enhancement ─── */
-.rv {
-  transition: opacity 0.7s var(--ease-out-expo),
-              transform 0.7s var(--ease-out-expo);
-}
-.rv.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* ─── Scroll Reveal Enhancement — merged into base ─── */
 
 /* ─── Back-to-Top Button ─── */
 .btt {

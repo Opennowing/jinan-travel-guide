@@ -203,14 +203,14 @@
     /* ══════════════════════════════════════════════
        必吃榜增强 — 大众点评风格
        ══════════════════════════════════════════════ */
-    .must-eat-hero{margin-bottom:0;position:relative;overflow:hidden;border-radius:16px;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);padding:20px 20px 16px;margin-bottom:16px}
+    .must-eat-hero{margin-bottom:0;position:relative;overflow:hidden;border-radius:24px;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);padding:40px 36px 36px;margin-bottom:32px}
     .must-eat-hero::before{content:'';position:absolute;top:-50%;right:-20%;width:60%;height:200%;background:radial-gradient(circle,rgba(201,169,110,.15) 0%,transparent 70%);pointer-events:none}
-    .must-eat-hero-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;position:relative;z-index:1}
-    .must-eat-hero-icon{width:40px;height:40px;background:linear-gradient(135deg,#d4a843,#f0d78c);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:0 4px 20px rgba(212,168,67,.4)}
+    .must-eat-hero-header{display:flex;align-items:center;gap:16px;margin-bottom:28px;position:relative;z-index:1}
+    .must-eat-hero-icon{width:56px;height:56px;background:linear-gradient(135deg,#d4a843,#f0d78c);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;box-shadow:0 4px 20px rgba(212,168,67,.4)}
     .must-eat-hero-title{color:#fff}
-    .must-eat-hero-title h2{font:800 1.15rem/1.3 var(--serif);margin:0;background:linear-gradient(135deg,#f0d78c,#d4a843);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .must-eat-hero-title p{font-size:.72rem;color:rgba(255,255,255,.6);margin-top:2px}
-    .must-eat-hero-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;position:relative;z-index:1}
+    .must-eat-hero-title h2{font:800 1.5rem/1.3 var(--serif);margin:0;background:linear-gradient(135deg,#f0d78c,#d4a843);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .must-eat-hero-title p{font-size:.82rem;color:rgba(255,255,255,.6);margin-top:4px}
+    .must-eat-hero-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;position:relative;z-index:1}
     .must-eat-hero-card{background:rgba(255,255,255,.06);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;cursor:pointer;transition:all .35s var(--ease);position:relative}
     .must-eat-hero-card:hover{transform:translateY(-4px);background:rgba(255,255,255,.1);box-shadow:0 12px 40px rgba(0,0,0,.3)}
     .must-eat-hero-card .rank-badge{position:absolute;top:12px;left:12px;width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font:900 .9rem/1 var(--serif);z-index:2;color:#fff}
@@ -353,7 +353,7 @@
     .food-compare-body{overflow-x:auto;overflow-y:auto;flex:1}
 
     /* ── Compare ── */
-    .compare-fab{position:fixed;bottom:24px;right:24px;z-index:150;padding:14px 22px;background:var(--accent);color:#fff;border:none;border-radius:50px;font-size:.85rem;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(231,111,81,.35);transition:all .3s;display:none;gap:8px;align-items:center}
+    .compare-fab{position:fixed;bottom:24px;right:24px;z-index:100;padding:14px 22px;background:var(--accent);color:#fff;border:none;border-radius:50px;font-size:.85rem;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(231,111,81,.35);transition:all .3s;display:none;gap:8px;align-items:center}
     .compare-fab.visible{display:flex}
     .compare-fab:hover{transform:scale(1.05);box-shadow:0 6px 24px rgba(231,111,81,.45)}
     .compare-fab .count{background:#fff;color:var(--accent);width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700}
@@ -482,7 +482,7 @@
       .food-map-container{height:300px}
       .daily-timeline{padding-left:28px}
       .must-banner{flex-direction:column;text-align:center}
-      .page-hero{min-height:25vh!important}
+      .page-hero{min-height:40vh!important}
       .food-search-hero{max-width:90%;margin-top:16px}
       .filter-row{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}
       .filter-chip{padding:5px 10px;font-size:.72rem}
@@ -491,12 +491,12 @@
     }
 
     /* ─── 紧凑布局：减少空白 ─── */
-    .page-hero{min-height:25vh!important;padding:80px var(--gutter) 32px!important}
-    .section{padding:20px var(--gutter)!important}
+    .page-hero{min-height:40vh!important;padding:100px var(--gutter) 48px!important}
+    .section{padding:28px var(--gutter)!important}
     .section-header{margin-bottom:14px!important}
     .section-header h2{font-size:clamp(1.4rem,3vw,1.8rem)!important}
     .section-header p{margin-top:4px!important;font-size:.85rem!important}
-    .section-divider{margin:8px auto!important}
+    .section-divider{margin:16px auto!important}
     .food-masonry{gap:12px!important}
     .food-card-pro-body{padding:14px 16px 16px!important}
     .must-eat-hero{margin-bottom:0;padding:20px!important}
@@ -626,7 +626,7 @@
   </nav>
 
   <!-- Hero -->
-  <header class="page-hero" style="position:relative;min-height:30vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.7)),url('https://images.unsplash.com/photo-1755742319537-449f661a3190?w=1600&q=80') center/cover no-repeat">
+  <header class="page-hero" style="position:relative;min-height:45vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,.7)),url('https://images.unsplash.com/photo-1755742319537-449f661a3190?w=1600&q=80') center/cover no-repeat">
     <button class="btn btn-outline btn-sm" style="position:absolute;top:20px;right:20px;z-index:2;color:#fff;border-color:rgba(255,255,255,.4)" aria-label="分享页面" data-share='{"title":"济南美食攻略","subtitle":"鲁菜发源地 · 68道精选","items":[{"name":"糖醋鲤鱼","info":"鲁菜经典 · 聚丰德"},{"name":"把子肉","info":"济南灵魂美食 · 超意兴"},{"name":"油旋","info":"非遗小吃 · 弘春美斋"},{"name":"甜沫","info":"济南早餐必备"},{"name":"九转大肠","info":"鲁菜名菜 · 闫府私房菜"}],"page":"food"}'>📤 分享美食</button>
     <div class="eyebrow" style="font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:12px;display:inline-flex;align-items:center;gap:12px;position:relative;z-index:1"><span style="width:24px;height:1px;background:rgba(255,255,255,.4)"></span>JINAN FOOD<span style="width:24px;height:1px;background:rgba(255,255,255,.4)"></span></div>
     <h1 style="color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.4)">🍜 美食 · 探店</h1>
@@ -656,6 +656,24 @@
 
 
     <!-- ── 搜索与列表（必吃榜已合并到卡片徽章中） ── -->
+
+    <!-- ── 必吃榜 Hero ── -->
+    <section class="section" aria-label="济南必吃榜">
+      <div class="section-inner">
+        <div class="must-eat-hero reveal" id="mustEatHero">
+          <div class="must-eat-hero-header">
+            <div class="must-eat-hero-icon">🏆</div>
+            <div class="must-eat-hero-title">
+              <h2>济南必吃榜 · 本地人精选</h2>
+              <p>从百年老字号到街头巷尾的烟火气，这5道菜是济南美食的灵魂</p>
+            </div>
+          </div>
+          <div class="must-eat-hero-grid" id="mustEatHeroGrid">
+            <!-- JS 动态渲染 -->
+          </div>
+        </div>
+      </div>
+    </section>
     <section class="section" aria-label="美食搜索与列表">
       <div class="section-inner">
 
@@ -754,6 +772,28 @@
       </div>
     </section>
 
+
+    <div class="section-divider reveal" aria-hidden="true">◈</div>
+    <!-- ── 必吃榜 TOP 5 ── -->
+    <section class="section" style="background:var(--bg2)" aria-label="必吃榜TOP5">
+      <div class="section-inner">
+        <div class="section-header reveal">
+          <p class="eyebrow">必吃榜</p>
+          <h2>🏆 来济南必吃的 TOP 5</h2>
+          <p>本地人认证，错过等于白来</p>
+        </div>
+        <div class="must-banner reveal">
+          <span class="must-banner-icon">🏆</span>
+          <div class="must-banner-text">
+            <h3>济南必吃榜 · 本地人精选</h3>
+            <p>从百年老字号到街头巷尾的烟火气，这5道菜是济南美食的灵魂。没吃过等于白来！</p>
+          </div>
+        </div>
+        <div class="must-eat-grid reveal" id="mustEatGrid">
+          <!-- JS 渲染 -->
+        </div>
+      </div>
+    </section>
     <!-- ── 美食地图 ── -->
     <section class="section" aria-label="美食地图">
       <div class="section-inner">
@@ -1019,7 +1059,7 @@
   <button class="btt" aria-label="回到顶部">↑</button>
 
   <script type="module">
-    import { initAll, stars } from '/src/components/shared.js';
+    import { initAll, stars, showToast } from '/src/components/shared.js';
     import { initPWA } from '/src/components/pwa.js';
     import { Favorites, SmartSearch, AccessibilityTools, OfflineManager } from '/src/components/interactive.js';
 
@@ -1061,41 +1101,6 @@
     let filterMeal = '全部';
     let filterScene = '全部';
 
-    // ── Toast helper ──
-    function showToast(msg, duration = 2000) {
-      let toast = document.getElementById('foodToast');
-      if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'foodToast';
-        toast.style.cssText = 'position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-20px);background:var(--card-bg,#fff);color:var(--text,#333);padding:12px 24px;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.15);z-index:9999;font-size:.88rem;font-weight:600;opacity:0;transition:all .3s;pointer-events:none;border:1px solid var(--border,#eee)';
-        document.body.appendChild(toast);
-      }
-      toast.textContent = msg;
-      toast.style.opacity = '1';
-      toast.style.transform = 'translateX(-50%) translateY(0)';
-      clearTimeout(toast._timer);
-      toast._timer = setTimeout(() => {
-        toast.style.opacity = '0';
-        toast.style.transform = 'translateX(-50%) translateY(-20px)';
-      }, duration);
-    }
-
-    // ── 美食快速预览 ──
-    function showFoodQuickView(foodId) {
-      const food = allFoods.find(f => f.id === foodId);
-      if (!food) return;
-      const isFav = favs.isFavorite(food.id);
-      const modal = document.createElement('div');
-      modal.className = 'modal-overlay open';
-      modal.innerHTML = `
-        <div class="modal" style="max-width:700px">
-          <button class="modal-close" onclick="this.closest('.modal-overlay').remove();document.body.style.overflow=''">✕</button>
-          <div class="modal-img" style="aspect-ratio:16/9">
-            <img src="${food.img}" alt="${food.name}" style="width:100%;height:100%;object-fit:cover" onerror="this.onerror=null;this.src=imgFallback(this.alt)">
-          </div>
-          <div class="modal-body">
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
-              <h2 style="margin:0">${food.name}</h2>
               ${food.must ? '<span class="badge-must">🔥 必吃</span>' : ''}
               ${food.season && food.season !== '四季皆宜' ? '<span class="badge-season">' + (getSeasonLabel(food.season) || food.season) + '</span>' : ''}
             </div>
@@ -1763,8 +1768,8 @@
       }
       allFoods = data.foods || [];
       allCategories = data.categories || [];
-      // renderMustEat removed — must-eat shown via badge on cards
-      // renderMustEatHero removed — must-eat foods shown via badge on cards
+      try { renderMustEat(); } catch(e) { console.warn('Must-eat render failed:', e); }
+      try { renderMustEatHero(); } catch(e) { console.warn('Must-eat hero render failed:', e); }
       try { renderCategoryCapsules(); } catch(e) { console.warn('Category capsules render failed:', e); }
       try { renderFoods(); } catch(e) { console.warn('Foods render failed:', e); }
       try { renderRoutes(); } catch(e) { console.warn('Routes render failed:', e); }

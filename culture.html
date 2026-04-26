@@ -199,18 +199,10 @@ html.dark .fact-num{color:#a78bfa}
 html.dark .lit-card .lit-analysis::first-letter{color:#a78bfa}
 html.dark .quote-block .quote-icon{opacity:.05}
 
-/* --- Toast --- */
-.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);padding:10px 24px;border-radius:100px;font-size:.85rem;font-weight:500;z-index:600;opacity:0;transition:all .3s ease;pointer-events:none;white-space:nowrap}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* --- Card Fav Button --- */
-.card-fav-btn{position:absolute;top:12px;right:12px;z-index:3;width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .25s;backdrop-filter:blur(6px);background:rgba(0,0,0,.35);color:#fff;opacity:0;transform:scale(.8)}
-.culture-card:hover .card-fav-btn,.arch-card:hover .card-fav-btn,.people-card:hover .card-fav-btn,.festival-card:hover .card-fav-btn,.lit-card:hover .card-fav-btn,.culture-explore-card:hover .card-fav-btn,.spring-item:hover .card-fav-btn{opacity:1;transform:none}
-.card-fav-btn:hover{background:rgba(239,68,68,.85);transform:scale(1.12)}
-.card-fav-btn.active{background:rgba(239,68,68,.9);opacity:1;transform:none}
 
 @media(max-width:768px){
-  .card-fav-btn{opacity:1;transform:none}
   .timeline::before{left:16px}
   .tl-item{padding-left:52px}
   .tl-dot{left:6px}
@@ -509,15 +501,8 @@ html {
 .culture-detail-section ul li{font-size:.88rem;color:var(--text2);padding:4px 0;padding-left:20px;position:relative}
 .culture-detail-section ul li::before{content:'•';position:absolute;left:0;color:var(--accent);font-weight:700}
 
-/* --- Toast --- */
-.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);padding:10px 24px;border-radius:100px;font-size:.85rem;font-weight:500;z-index:600;opacity:0;transition:all .3s ease;pointer-events:none;white-space:nowrap}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* --- Card Fav Button --- */
-.card-fav-btn{position:absolute;top:12px;right:12px;z-index:3;width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .25s;backdrop-filter:blur(6px);background:rgba(0,0,0,.35);color:#fff;opacity:0;transform:scale(.8)}
-.culture-card:hover .card-fav-btn,.arch-card:hover .card-fav-btn,.people-card:hover .card-fav-btn,.festival-card:hover .card-fav-btn,.lit-card:hover .card-fav-btn,.culture-explore-card:hover .card-fav-btn,.spring-item:hover .card-fav-btn{opacity:1;transform:none}
-.card-fav-btn:hover{background:rgba(239,68,68,.85);transform:scale(1.12)}
-.card-fav-btn.active{background:rgba(239,68,68,.9);opacity:1;transform:none}
 
 @media(max-width:768px){
   .culture-explore-grid{grid-template-columns:1fr!important}
@@ -709,25 +694,21 @@ html {
     <div class="culture-grid">
       <div class="culture-card rv stagger-1">
         <div class="culture-icon">💧</div>
-        <button class="card-fav-btn" data-fav-id="spring-drink" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>泉水直饮文化</h3>
         <p>黑虎泉、琵琶泉等设有专门取水点，水质经检测达标，市民常年在此打水泡茶。清晨6-7点，能看到老济南人提着水桶排队打水的场景。这是独属于泉城的市井生活。</p>
       </div>
       <div class="culture-card rv stagger-2">
         <div class="culture-icon">🚣</div>
-        <button class="card-fav-btn" data-fav-id="spring-boat" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>护城河游船</h3>
         <p>全长6.9公里的护城河是全国唯一由泉水汇流而成的护城河。乘船从黑虎泉出发，途经趵突泉、五龙潭、大明湖，一路泉水相伴。夜游船¥75/人，灯光映水，极为浪漫。</p>
       </div>
       <div class="culture-card rv stagger-3">
         <div class="culture-icon">🏊</div>
-        <button class="card-fav-btn" data-fav-id="spring-bath" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>泉水浴场</h3>
         <p>五龙潭公园内有天然泉水浴场，夏天济南人在此消暑。泉水常年恒温18°C，夏天清凉刺骨，冬天温暖如春。本地人叫"泡泉水"，是一种独特的社交方式。</p>
       </div>
       <div class="culture-card rv stagger-4">
         <div class="culture-icon">🫖</div>
-        <button class="card-fav-btn" data-fav-id="spring-tea" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>泉水泡茶</h3>
         <p>济南人讲究用泉水泡茶。趵突泉、黑虎泉的泉水水质清冽甘甜，泡出的茶香气更浓。老舍在《济南的冬天》里写道："设若单单是有阳光，那也算不了出奇。请闭上眼睛想……"</p>
       </div>
@@ -743,7 +724,6 @@ html {
       <div class="spring-item featured rv stagger-1">
         <div class="sp-icon">💦</div>
         <div class="sp-info">
-          <button class="card-fav-btn" data-fav-id="72nian-botu" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h4>趵突泉<span class="sp-badge">天下第一泉</span></h4>
           <div class="sp-loc">📍 趵突泉公园内</div>
           <p>三股泉水昼夜喷涌，最大涌水量达16.2万m³/日。"趵突腾空"为济南八景之首。</p>
@@ -752,7 +732,6 @@ html {
       <div class="spring-item featured rv stagger-2">
         <div class="sp-icon">🐯</div>
         <div class="sp-info">
-          <button class="card-fav-btn" data-fav-id="72nian-heihu" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h4>黑虎泉<span class="sp-badge">流量第二</span></h4>
           <div class="sp-loc">📍 护城河南岸</div>
           <p>泉水从三个石雕虎头喷涌而出，声如虎啸。泉群流量仅次于趵突泉，是市民取水首选。</p>
@@ -761,7 +740,6 @@ html {
       <div class="spring-item rv stagger-3">
         <div class="sp-icon">🐉</div>
         <div class="sp-info">
-          <button class="card-fav-btn" data-fav-id="72nian-wulong" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h4>五龙潭</h4>
           <div class="sp-loc">📍 五龙潭公园</div>
           <p>济南最深的泉池，深达6米。传说潭中有五条龙镇守，故名。秦琼故宅旧址所在。</p>
@@ -770,7 +748,6 @@ html {
       <div class="spring-item rv stagger-4">
         <div class="sp-icon">🎵</div>
         <div class="sp-info">
-          <button class="card-fav-btn" data-fav-id="72nian-pipa" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h4>琵琶泉</h4>
           <div class="sp-loc">📍 护城河畔</div>
           <p>泉水涌出时如琵琶弹奏，叮咚作响。泉池呈琵琶形，水质清冽，常有市民在此取水。</p>
@@ -779,7 +756,6 @@ html {
       <div class="spring-item rv stagger-5">
         <div class="sp-icon">🌿</div>
         <div class="sp-info">
-          <button class="card-fav-btn" data-fav-id="72nian-zhenzhu" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h4>珍珠泉</h4>
           <div class="sp-loc">📍 珍珠泉大院内</div>
           <p>泉底涌出串串水泡如珍珠，晶莹剔透。明清时期为山东巡抚衙门，现为省人大常委会驻地。</p>
@@ -788,7 +764,6 @@ html {
       <div class="spring-item rv stagger-6">
         <div class="sp-icon">💧</div>
         <div class="sp-info">
-          <button class="card-fav-btn" data-fav-id="72nian-zhuoying" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h4>濯缨泉</h4>
           <div class="sp-loc">📍 王府池子街</div>
           <p>古称"王府池子"，取《孟子》"沧浪之水清兮，可以濯吾缨"之意。泉水汇入曲水亭街。</p>
@@ -797,7 +772,6 @@ html {
       <div class="spring-item rv stagger-7">
         <div class="sp-icon">🌺</div>
         <div class="sp-info">
-          <button class="card-fav-btn" data-fav-id="72nian-furong" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h4>芙蓉泉</h4>
           <div class="sp-loc">📍 芙蓉街中段</div>
           <p>因泉边遍植木芙蓉而得名。位于济南最繁华的芙蓉街上，闹中取静，是古城区标志性名泉。</p>
@@ -806,7 +780,6 @@ html {
       <div class="spring-item rv stagger-8">
         <div class="sp-icon">🪷</div>
         <div class="sp-info">
-          <button class="card-fav-btn" data-fav-id="72nian-baishi" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h4>白石泉</h4>
           <div class="sp-loc">📍 大明湖南岸</div>
           <p>泉池以白石砌成，泉水清澈见底。因靠近大明湖，水位随湖水涨落，与湖景融为一体。</p>
@@ -815,7 +788,6 @@ html {
       <div class="spring-item rv stagger-9">
         <div class="sp-icon">🌙</div>
         <div class="sp-info">
-          <button class="card-fav-btn" data-fav-id="72nian-yueya" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h4>月牙泉</h4>
           <div class="sp-loc">📍 大明湖南门附近</div>
           <p>泉池形如新月，故名。是72名泉中水位最高的泉之一，只有地下水位极高时才会喷涌。</p>
@@ -824,7 +796,6 @@ html {
       <div class="spring-item rv stagger-10">
         <div class="sp-icon">🦁</div>
         <div class="sp-info">
-          <button class="card-fav-btn" data-fav-id="72nian-jinxian" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h4>金线泉</h4>
           <div class="sp-loc">📍 趵突泉公园内</div>
           <p>泉底有一道天然石缝，水流交汇时形成一条若隐若现的金线，故名。曾巩、赵孟頫均有题咏。</p>
@@ -833,7 +804,6 @@ html {
       <div class="spring-item rv stagger-11">
         <div class="sp-icon">🌧️</div>
         <div class="sp-info">
-          <button class="card-fav-btn" data-fav-id="72nian-manao" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h4>玛瑙泉</h4>
           <div class="sp-loc">📍 环城公园内</div>
           <p>泉水涌出时水面呈彩色波纹，如玛瑙般绚丽。泉池小巧精致，周围绿树环绕，极富诗意。</p>
@@ -842,7 +812,6 @@ html {
       <div class="spring-item featured rv stagger-12">
         <div class="sp-icon">🫧</div>
         <div class="sp-info">
-          <button class="card-fav-btn" data-fav-id="72nian-baimai" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h4>百脉泉<span class="sp-badge">东有百脉</span></h4>
           <div class="sp-loc">📍 章丘百脉泉公园</div>
           <p>泉水从池底无数细孔涌出，如百脉沸腾。与趵突泉齐名，素有"西趵突、东百脉"之说。</p>
@@ -867,19 +836,16 @@ html {
     <div class="culture-grid">
       <div class="culture-card rv stagger-1">
         <div class="culture-icon">🪣</div>
-        <button class="card-fav-btn" data-fav-id="spring-morning" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>清晨打水人</h3>
         <p>每天清晨五六点钟，黑虎泉、琵琶泉畔便排起长队。老济南人骑着自行车，车后座绑着两只白色塑料桶，打满泉水带回家。这个习惯延续了数百年，即便自来水早已普及，济南人依然坚持喝泉水——"自来水泡不出那个味儿"。</p>
       </div>
       <div class="culture-card rv stagger-2">
         <div class="culture-icon">🫖</div>
-        <button class="card-fav-btn" data-fav-id="spring-tea-culture" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>泉水泡茶的讲究</h3>
         <p>济南人喝茶，首推泉水。趵突泉水质清冽甘甜，矿物质含量适中，泡出的绿茶汤色明亮、香气悠长。老茶客们有一套标准：烧水用铜壶，水开后稍晾片刻，注水时"悬壶高冲"。泉水茶馆至今仍在曲水亭街、百花洲一带营业，一壶茶、一碟花生，能坐一下午。</p>
       </div>
       <div class="culture-card rv stagger-3">
         <div class="culture-icon">🧺</div>
-        <button class="card-fav-btn" data-fav-id="spring-laundry" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>泉水边的洗衣声</h3>
         <p>老城区的泉水溪流旁，至今还能看到妇女在石板上洗衣的场景。护城河、曲水亭街的水渠里，棒槌声声、水花四溅。泉水冬暖夏凉，冬天洗衣不冻手，这是大自然对济南人的馈赠。虽然洗衣机早已普及，但老一辈人仍喜欢在泉水边"捶两下"。</p>
       </div>
@@ -893,13 +859,11 @@ html {
     <div class="culture-grid">
       <div class="culture-card rv stagger-4">
         <div class="culture-icon">📊</div>
-        <button class="card-fav-btn" data-fav-id="spring-monitor" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>水位监测与预警</h3>
         <p>济南设有专业泉水水位监测系统，趵突泉地下水位实时数据每日公开。当水位降至28.15米红线以下时，启动应急预案：限制工业用水、关闭自备井、呼吁市民节水。"泉城人保泉"不只是口号，是刻在骨子里的责任。</p>
       </div>
       <div class="culture-card rv stagger-5">
         <div class="culture-icon">🚰</div>
-        <button class="card-fav-btn" data-fav-id="spring-protect" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>封井保泉行动</h3>
         <p>20世纪80年代起，大量自备井导致地下水位骤降，趵突泉多次停喷。济南痛下决心，累计封填自备井2000余眼，实施"采外补内"水源置换工程。2003年趵突泉复涌后，连续喷涌超20年，保泉行动被联合国评为"水资源管理最佳实践"。</p>
       </div>
@@ -913,25 +877,21 @@ html {
     <div class="culture-grid">
       <div class="culture-card rv stagger-6">
         <div class="culture-icon">🐉</div>
-        <button class="card-fav-btn" data-fav-id="spring-dragon" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>五龙潭的龙王传说</h3>
         <p>相传古时济南大旱，五条神龙从东海飞来，潜入潭中化为五股清泉拯救百姓。人们为感念龙恩，在潭边建了五龙宫。据说每逢暴雨前夕，潭水深处会传来低沉的龙吟声，老济南人至今深信不疑。</p>
       </div>
       <div class="culture-card rv stagger-7">
         <div class="culture-icon">👩‍🦰</div>
-        <button class="card-fav-btn" data-fav-id="spring-shun" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>娥英河与舜的传说</h3>
         <p>传说舜帝的两位妻子娥皇、女英南下寻夫途中经过济南，泪水滴落化为泉水。趵突泉畔的"娥英河"便因此得名。《水经注》记载："泺水出历城县故城西南，泉源上奋，水涌若轮。"古人将泉水与圣王传说相连，赋予泉水神圣的意味。</p>
       </div>
       <div class="culture-card rv stagger-8">
         <div class="culture-icon">🌸</div>
-        <button class="card-fav-btn" data-fav-id="spring-3water" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>趵突泉的"三股水"之谜</h3>
         <p>民间传说趵突泉下藏着一座地下龙宫，三股泉水是龙宫的三根柱子撑开的出口。古人认为泉水终年不竭是因为有神灵守护。科学家解释是岩溶地下水承压上升所致，但济南人更愿意相信那个关于龙宫的美丽传说。</p>
       </div>
       <div class="culture-card rv stagger-9">
         <div class="culture-icon">👴</div>
-        <button class="card-fav-btn" data-fav-id="spring-goldline" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>金线泉的"金线"奇观</h3>
         <p>传说金线泉底住着一位金鲤仙子，她每日在水中织出一条金线。曾巩到济南任知府时，亲眼见到泉底一道若隐若现的金线，惊叹不已，写下"玉轮菌蠢骇深渊"的诗句。如今金线泉仍在趵突泉公园内，有缘人才能看到那道传说中的金线。</p>
       </div>
@@ -952,49 +912,41 @@ html {
     <div class="culture-grid">
       <div class="culture-card rv stagger-1">
         <div class="culture-icon">🧵</div>
-        <button class="card-fav-btn" data-fav-id="heritage-luxiu" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>鲁绣</h3>
         <p>中国"八大名绣"之一，历史可追溯至春秋战国。鲁绣以丝线、绒线绣制，针法豪放、色彩浓烈，题材多为花鸟人物。山东省博物馆藏有大量鲁绣精品。</p>
       </div>
       <div class="culture-card rv stagger-2">
         <div class="culture-icon">🎭</div>
-        <button class="card-fav-btn" data-fav-id="heritage-shadow" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>济南皮影戏</h3>
         <p>起源于清代，用驴皮雕刻人物，配以唱腔和锣鼓。济南皮影以"一人一台戏"著称——一个艺人同时操纵皮影、演唱、配音。大观园和芙蓉街偶有演出。</p>
       </div>
       <div class="culture-card rv stagger-3">
         <div class="culture-icon">🍜</div>
-        <button class="card-fav-btn" data-fav-id="heritage-dough" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>济南面塑</h3>
         <p>用面团捏制人物、动物、花鸟的民间艺术。济南面塑始于汉代，至今有2000多年历史。非遗传承人能在核桃大小的面团上捏出栩栩如生的人物。</p>
       </div>
       <div class="culture-card rv stagger-4">
         <div class="culture-icon">🍳</div>
-        <button class="card-fav-btn" data-fav-id="heritage-iron" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>章丘铁锅</h3>
         <p>章丘铁锅因《舌尖上的中国》走红。需经36000次手工锻打，锅面光滑如镜，不粘锅、省油。正宗章丘铁锅在章丘区相公庄镇可参观制作过程并购买。</p>
       </div>
       <div class="culture-card rv stagger-5">
         <div class="culture-icon">🎵</div>
-        <button class="card-fav-btn" data-fav-id="heritage-lvju" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>济南吕剧</h3>
         <p>山东地方戏曲代表剧种，源于济南一带的民间小曲"坐腔扬琴"。唱腔质朴优美，语言通俗易懂，代表剧目有《李二嫂改嫁》《姊妹易嫁》等。济南市吕剧院常有惠民演出。</p>
       </div>
       <div class="culture-card rv stagger-6">
         <div class="culture-icon">🎤</div>
-        <button class="card-fav-btn" data-fav-id="heritage-kuaishu" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>山东快书</h3>
         <p>起源于济南的说唱艺术，以鸳鸯板击节伴奏，节奏明快、语言诙谐。经典曲目《武松传》《鲁达除霸》脍炙人口。高元钧、杨派快书皆发源于济南。</p>
       </div>
       <div class="culture-card rv stagger-7">
         <div class="culture-icon">🥁</div>
-        <button class="card-fav-btn" data-fav-id="heritage-yangge" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>商河鼓子秧歌</h3>
         <p>济南商河县的传统舞蹈，始于秦汉，兴于唐宋。舞者持鼓、伞、棒表演，气势恢宏、粗犷豪放。被誉为"北方汉民族舞蹈的代表"，入选国家级非物质文化遗产名录。</p>
       </div>
       <div class="culture-card rv stagger-8">
         <div class="culture-icon">🏺</div>
-        <button class="card-fav-btn" data-fav-id="heritage-pottery" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>章丘黑陶</h3>
         <p>承袭4000年前龙山文化蛋壳黑陶技艺，以"黑如漆、明如镜、薄如纸、硬如瓷"著称。现代章丘黑陶在传承古法基础上融入创新设计，是济南最具文化代表性的工艺品。</p>
       </div>
@@ -1016,31 +968,26 @@ html {
     <div class="culture-grid">
       <div class="culture-card rv stagger-1">
         <div class="culture-icon">👑</div>
-        <button class="card-fav-btn" data-fav-id="food-history" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>鲁菜的历史地位</h3>
         <p>鲁菜是八大菜系之首，历史最悠久、技法最丰富、影响力最广。明清时期，鲁菜是宫廷御膳的主要来源，北京"八大楼"中有六家主营鲁菜。孔子"食不厌精，脍不厌细"的饮食理念，正是鲁菜文化的源头。</p>
       </div>
       <div class="culture-card rv stagger-2">
         <div class="culture-icon">🔥</div>
-        <button class="card-fav-btn" data-fav-id="food-fire" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>济南菜的火候之道</h3>
         <p>济南菜是鲁菜的重要分支，以"爆、炒、烧、塌"见长，讲究火候精准到秒。一道"爆炒腰花"需大火快炒15秒出锅，多一秒则老、少一秒则生。济南厨师有句行话："旺火速成，一锅定味"，这种对火候的极致追求是济南菜的灵魂。</p>
       </div>
       <div class="culture-card rv stagger-3">
         <div class="culture-icon">🫕</div>
-        <button class="card-fav-btn" data-fav-id="food-philosophy" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>注重原味的烹饪哲学</h3>
         <p>鲁菜不靠辣椒花椒调味，而是用高汤提鲜、用刀工塑形、用火候定味。济南菜的"奶汤蒲菜"用老母鸡、猪骨熬制的奶白浓汤，配上大明湖特产蒲菜，鲜美至极却不加一滴味精。"大味必淡"是济南菜的最高境界。</p>
       </div>
       <div class="culture-card rv stagger-4">
         <div class="culture-icon">👨‍🍳</div>
-        <button class="card-fav-btn" data-fav-id="food-chef-yan" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>名厨颜景祥</h3>
         <p>颜景祥（1927-2019），鲁菜泰斗，国家级非遗鲁菜传承人。从业70余年，精通鲁菜300余道，尤以"糖醋鲤鱼""九转大肠"闻名。他坚持"做菜先做人"的信条，培养了数百名鲁菜弟子，被誉为"中国烹饪界的活化石"。</p>
       </div>
       <div class="culture-card rv stagger-5">
         <div class="culture-icon">👨‍🍳</div>
-        <button class="card-fav-btn" data-fav-id="food-chef-wang" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>名厨王兴兰</h3>
         <p>王兴兰，济南"汇泉楼"第四代传人，省级非遗鲁菜传承人。她将传统鲁菜与现代营养学结合，复原了多道失传的宫廷鲁菜。她的"葱烧海参"选料严苛——只用胶东刺参、章丘大葱，文火慢炖四小时，被称为"鲁菜教科书级作品"。</p>
       </div>
@@ -1068,31 +1015,26 @@ html {
     <div class="culture-grid">
       <div class="culture-card rv stagger-1">
         <div class="culture-icon">🌅</div>
-        <button class="card-fav-btn" data-fav-id="folk-day" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>泉水人家的一天</h3>
         <p>清晨6点，提桶去黑虎泉打水；上午在家泡一壶泉水茶；午后去曲水亭街的茶馆坐坐；傍晚沿护城河散步，看夕阳洒在泉水上。济南人的一天不紧不慢，和泉水一样从容。老话说："济南人不着急，因为泉水不着急。"</p>
       </div>
       <div class="culture-card rv stagger-2">
         <div class="culture-icon">🗣️</div>
-        <button class="card-fav-btn" data-fav-id="folk-dialect" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>济南话：最接近普通话的方言</h3>
         <p>济南话属于北方官话-石济片，是全国最接近普通话的方言之一。声调比普通话略平，语速偏慢，尾音上扬，听起来亲切随和。济南话最有特色的词是"么"（什么）、"杠赛来"（很好）、"滋拉"（厉害），外地人听几遍就能学会。</p>
       </div>
       <div class="culture-card rv stagger-3">
         <div class="culture-icon">🤝</div>
-        <button class="card-fav-btn" data-fav-id="folk-character" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>济南人的性格</h3>
         <p>济南人出了名的"实在"——说话直来直去，不绕弯子；待客热情大方，去济南人家做客，菜一定摆满桌。济南也是全国最不排外的省会城市之一，方言和普通话无缝切换，外地人在这里从不会有"异乡人"的感觉。有人说："济南是一座来了就不想走的城市。"</p>
       </div>
       <div class="culture-card rv stagger-4">
         <div class="culture-icon">🏮</div>
-        <button class="card-fav-btn" data-fav-id="folk-lantern" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>春节趵突泉灯会</h3>
         <p>每年正月初一至正月十五，趵突泉公园举办花灯会。万盏花灯沿泉水排列，水面映出流光溢彩。灯会始于1965年，至今已有60年历史，是济南年味的标志。老济南人说："不看趵突泉的灯，这年就算白过了。"</p>
       </div>
       <div class="culture-card rv stagger-5">
         <div class="culture-icon">🚣</div>
-        <button class="card-fav-btn" data-fav-id="folk-dragon" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>端午护城河龙舟赛</h3>
         <p>每年端午节，护城河上举办龙舟竞渡。十几支队伍在6.9公里的泉水河道上劈波斩浪，两岸万人呐喊助威。济南的龙舟赛独一份——划的是泉水，喝的也是泉水。赛后还有包粽子、挂艾草、佩香囊等民俗体验活动。</p>
       </div>
@@ -1117,7 +1059,6 @@ html {
           <span class="arch-emoji">🏛️</span>
         </div>
         <div class="arch-body">
-          <button class="card-fav-btn" data-fav-id="arch-german" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h3>老商埠德式建筑群</h3>
           <div class="arch-loc">📍 经三路—纬二路一带</div>
           <p>1904年开埠后德国商人修建的洋行、银行、邮局等建筑。红砖拱廊、老虎窗、坡屋顶，典型的德式殖民风格。现经改造成为"老商埠"文创街区，咖啡馆、书店、艺术空间林立。</p>
@@ -1129,7 +1070,6 @@ html {
           <span class="arch-emoji">⛪</span>
         </div>
         <div class="arch-body">
-          <button class="card-fav-btn" data-fav-id="arch-church" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h3>洪家楼天主教堂</h3>
           <div class="arch-loc">📍 洪家楼广场</div>
           <p>1901年建成，哥特式建筑，高55米的双塔钟楼是济南的地标之一。由中国工匠用传统砌筑工艺建造，被誉为"中国最美天主教堂"之一。内部穹顶彩窗精美绝伦，免费参观。</p>
@@ -1141,7 +1081,6 @@ html {
           <span class="arch-emoji">🏯</span>
         </div>
         <div class="arch-body">
-          <button class="card-fav-btn" data-fav-id="arch-confucius" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h3>府学文庙</h3>
           <div class="arch-loc">📍 大明湖路214号</div>
           <p>始建于北宋熙宁年间，是济南古代最高学府所在地。现存大成殿、泮池、棂星门等建筑，古柏参天。每年高考前，常有家长来此祈福。门票免费。</p>
@@ -1153,7 +1092,6 @@ html {
           <span class="arch-emoji">🏮</span>
         </div>
         <div class="arch-body">
-          <button class="card-fav-btn" data-fav-id="arch-furong" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h3>芙蓉街历史街区</h3>
           <div class="arch-loc">📍 芙蓉街—曲水亭街</div>
           <p>济南最古老的商业街之一，因芙蓉泉得名。青石板路两侧是明清风格的老建筑，泉水从脚下流过。串联起府学文庙、百花洲、大明湖，是体验"家家泉水、户户垂杨"的最佳路线。</p>
@@ -1178,7 +1116,6 @@ html {
       <div class="lit-header">
         <div class="lit-icon">🌸</div>
         <div>
-          <button class="card-fav-btn" data-fav-id="lit-rumeng" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h3>如梦令</h3>
           <div class="lit-author">李清照（宋代）</div>
         </div>
@@ -1197,7 +1134,6 @@ html {
       <div class="lit-header">
         <div class="lit-icon">⚔️</div>
         <div>
-          <button class="card-fav-btn" data-fav-id="lit-pozhenzi" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h3>破阵子·为陈同甫赋壮词以寄之</h3>
           <div class="lit-author">辛弃疾（宋代）</div>
         </div>
@@ -1217,7 +1153,6 @@ html {
       <div class="lit-header">
         <div class="lit-icon">✍️</div>
         <div>
-          <button class="card-fav-btn" data-fav-id="lit-jinan-winter" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h3>济南的冬天（节选）</h3>
           <div class="lit-author">老舍（现代）</div>
         </div>
@@ -1259,7 +1194,6 @@ html {
       <div class="card people-card rv stagger-1" style="border:none">
         <div class="people-avatar">🌸</div>
         <div class="people-info">
-          <button class="card-fav-btn" data-fav-id="people-liqingzhao" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h3>李清照</h3>
           <div class="period">宋代 · 婉约派词宗</div>
           <p>号易安居士，济南章丘人。"知否知否，应是绿肥红瘦"——她的词细腻婉转，被誉为"千古第一才女"。趵突泉畔有李清照纪念堂。</p>
@@ -1268,7 +1202,6 @@ html {
       <div class="card people-card rv stagger-2" style="border:none">
         <div class="people-avatar">⚔️</div>
         <div class="people-info">
-          <button class="card-fav-btn" data-fav-id="people-xinqiji" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h3>辛弃疾</h3>
           <div class="period">宋代 · 豪放派词宗</div>
           <p>字幼安，济南历城人。"醉里挑灯看剑，梦回吹角连营"——他的词气势磅礴、壮怀激烈。大明湖南岸有辛弃疾纪念祠。</p>
@@ -1277,7 +1210,6 @@ html {
       <div class="card people-card rv stagger-3" style="border:none">
         <div class="people-avatar">✍️</div>
         <div class="people-info">
-          <button class="card-fav-btn" data-fav-id="people-laoshe" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h3>老舍</h3>
           <div class="period">现代 · 人民艺术家</div>
           <p>虽非济南人，却在济南生活多年，写下《济南的冬天》《趵突泉》等名篇。"上帝把夏天的艺术赐给瑞士，把秋天的赐给西湖，冬和春的全赐给了济南。"</p>
@@ -1286,7 +1218,6 @@ html {
       <div class="card people-card rv stagger-4" style="border:none">
         <div class="people-avatar">⚔️</div>
         <div class="people-info">
-          <button class="card-fav-btn" data-fav-id="people-qinqiong" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h3>秦琼</h3>
           <div class="period">唐代 · 凌烟阁功臣</div>
           <p>字叔宝，济南历城人。唐朝开国名将，凌烟阁二十四功臣之一。民间尊为门神，五龙潭公园内有秦琼故宅遗址。</p>
@@ -1295,7 +1226,6 @@ html {
       <div class="card people-card rv stagger-5" style="border:none">
         <div class="people-avatar">🏥</div>
         <div class="people-info">
-          <button class="card-fav-btn" data-fav-id="people-bianque" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h3>扁鹊</h3>
           <div class="period">春秋战国 · 医学始祖</div>
           <p>原名秦越人，齐国卢邑（今济南长清）人。中医望闻问切四诊法创始人，被尊为"医祖"。《史记》有《扁鹊仓公列传》。</p>
@@ -1304,7 +1234,6 @@ html {
       <div class="card people-card rv stagger-6" style="border:none">
         <div class="people-avatar">📜</div>
         <div class="people-info">
-          <button class="card-fav-btn" data-fav-id="people-fangxuanling" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h3>房玄龄</h3>
           <div class="period">唐代 · 贤相典范</div>
           <p>齐州临淄（今济南章丘）人。唐朝宰相，"房谋杜断"中的"房"。辅佐唐太宗开创贞观之治，是历史上最著名的贤相之一。</p>
@@ -1313,7 +1242,6 @@ html {
       <div class="card people-card rv stagger-7" style="border:none">
         <div class="people-avatar">🎖️</div>
         <div class="people-info">
-          <button class="card-fav-btn" data-fav-id="people-minziqian" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
           <h3>闵子骞</h3>
           <div class="period">春秋 · 孔门十哲</div>
           <p>名损，济南历城人。孔子弟子，以孝道著称，"鞭打芦花"的故事流传千古。位列孔门十哲，济南闵子骞路即以其命名。</p>
@@ -1336,73 +1264,61 @@ html {
     <div class="festival-grid">
       <div class="festival-card rv stagger-1">
         <div class="festival-month">1月</div>
-        <button class="card-fav-btn" data-fav-id="festival-lantern" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <div class="festival-name">🏮 趵突泉花灯会</div>
         <div class="festival-desc">始于1965年，每年春节期间举办。趵突泉公园内万盏花灯，泉水映灯、灯映水，是济南年味最浓的地方。</div>
       </div>
       <div class="festival-card rv stagger-2">
         <div class="festival-month">2月</div>
-        <button class="card-fav-btn" data-fav-id="festival-temple" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <div class="festival-name">🧧 大明湖春节庙会</div>
         <div class="festival-desc">春节期间大明湖畔的传统庙会，有民俗表演、非遗市集、传统小吃。免费入园，是济南人过年必去之地。</div>
       </div>
       <div class="festival-card rv stagger-3">
         <div class="festival-month">3月</div>
-        <button class="card-fav-btn" data-fav-id="festival-spring" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <div class="festival-name">🌿 泉水人家踏春节</div>
         <div class="festival-desc">春暖花开时节，护城河畔柳绿花红。市民沿泉水步道踏青，五龙潭、趵突泉畔春花烂漫，适合慢行赏春。</div>
       </div>
       <div class="festival-card rv stagger-4">
         <div class="festival-month">4月</div>
-        <button class="card-fav-btn" data-fav-id="festival-cherry" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <div class="festival-name">🌸 五龙潭樱花节</div>
         <div class="festival-desc">五龙潭公园200余株樱花盛开，是济南最美的赏樱地。免费开放，花期约2周。</div>
       </div>
       <div class="festival-card rv stagger-5">
         <div class="festival-month">5月</div>
-        <button class="card-fav-btn" data-fav-id="festival-water" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <div class="festival-name">💧 济南泉水节</div>
         <div class="festival-desc">以泉水为主题的城市嘉年华。泉水取水仪式、龙舟赛、泉水美食节、护城河游船嘉年华，全城联动。</div>
       </div>
       <div class="festival-card rv stagger-6">
         <div class="festival-month">6月</div>
-        <button class="card-fav-btn" data-fav-id="festival-dragon" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <div class="festival-name">🐉 端午龙舟赛</div>
         <div class="festival-desc">护城河与大明湖上的龙舟竞渡，是济南夏季最热闹的水上赛事。岸边还有包粽子、挂艾草等民俗体验。</div>
       </div>
       <div class="festival-card rv stagger-7">
         <div class="festival-month">7月</div>
-        <button class="card-fav-btn" data-fav-id="festival-swim" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <div class="festival-name">🏊 泉水浴场开放季</div>
         <div class="festival-desc">五龙潭天然泉水浴场进入最佳季节。泉水恒温18°C，酷暑中清凉宜人。夜晚护城河沿岸灯光璀璨。</div>
       </div>
       <div class="festival-card rv stagger-8">
         <div class="festival-month">8月</div>
-        <button class="card-fav-btn" data-fav-id="festival-lotus" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <div class="festival-name">🎶 大明湖荷花音乐节</div>
         <div class="festival-desc">大明湖荷花盛放之际，湖畔举办露天音乐会。荷塘月色、琴声悠扬，是济南夏夜最浪漫的文化活动。</div>
       </div>
       <div class="festival-card rv stagger-9">
         <div class="festival-month">9月</div>
-        <button class="card-fav-btn" data-fav-id="festival-mountain" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <div class="festival-name">⛰️ 千佛山山会</div>
         <div class="festival-desc">始于元代，每年农历九月九重阳节前后举办。登山祈福、民俗表演、山货大集，是济南最古老的民俗活动。</div>
       </div>
       <div class="festival-card rv stagger-10">
         <div class="festival-month">10月</div>
-        <button class="card-fav-btn" data-fav-id="festival-autumn" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <div class="festival-name">🍁 红叶谷赏红叶</div>
         <div class="festival-desc">红叶谷4000亩黄栌林漫山红遍。景区举办摄影大赛、红叶诗会，是北方赏红叶的最佳目的地之一。</div>
       </div>
       <div class="festival-card rv stagger-11">
         <div class="festival-month">11月</div>
-        <button class="card-fav-btn" data-fav-id="festival-book" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <div class="festival-name">📚 泉城读书月</div>
         <div class="festival-desc">济南市图书馆联动各区举办阅读推广活动。名人讲座、书展、亲子阅读，营造书香泉城氛围。</div>
       </div>
       <div class="festival-card rv stagger-12">
         <div class="festival-month">12月</div>
-        <button class="card-fav-btn" data-fav-id="festival-winter" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <div class="festival-name">❄️ 趵突泉冬季观泉</div>
         <div class="festival-desc">冬日趵突泉水雾氤氲、云蒸霞蔚，恒温18°C的泉水在寒气中形成独特雾景。"趵突腾空"是济南八景之首。</div>
       </div>
@@ -1437,25 +1353,21 @@ html {
     <div class="culture-explore-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px">
       <div class="culture-explore-card" onclick="showCultureDetail('spring')">
         <div style="font-size:3rem;margin-bottom:12px">⛲</div>
-        <button class="card-fav-btn" data-fav-id="explore-spring" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>泉水文化</h3>
         <p>72名泉的故事</p>
       </div>
       <div class="culture-explore-card" onclick="showCultureDetail('poetry')">
         <div style="font-size:3rem;margin-bottom:12px">📝</div>
-        <button class="card-fav-btn" data-fav-id="explore-poetry" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>诗词济南</h3>
         <p>李清照、辛弃疾的故里</p>
       </div>
       <div class="culture-explore-card" onclick="showCultureDetail('food')">
         <div style="font-size:3rem;margin-bottom:12px">🍜</div>
-        <button class="card-fav-btn" data-fav-id="explore-food" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>鲁菜文化</h3>
         <p>八大菜系之首的传承</p>
       </div>
       <div class="culture-explore-card" onclick="showCultureDetail('folk')">
         <div style="font-size:3rem;margin-bottom:12px">🎪</div>
-        <button class="card-fav-btn" data-fav-id="explore-folk" aria-label="收藏" onclick="event.stopPropagation();window._toggleFav(this)">♡</button>
         <h3>民俗非遗</h3>
         <p>曲山艺海的底蕴</p>
       </div>
@@ -1529,7 +1441,7 @@ html {
 <button class="btt" aria-label="回到顶部">↑</button>
 
 <script type="module">
-import { initAll } from '/src/components/shared.js';
+import { initAll, showToast } from '/src/components/shared.js';
 import { initPWA } from '/src/components/pwa.js';
 import { initSocialFeatures } from '/src/components/social.js';
 import { initShopifyAnimations } from '/src/components/shopify-animations.js';
@@ -1815,63 +1727,7 @@ window.closeCultureModal = function() {
 });
 
 
-// === Toast Notification System ===
-function showToast(msg) {
-  let toast = document.getElementById('toast');
-  if (!toast) {
-    toast = document.createElement('div');
-    toast.id = 'toast';
-    toast.className = 'toast';
-    document.body.appendChild(toast);
-  }
-  toast.textContent = msg;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2500);
-}
 
-// === Favorites System ===
-var FAV_KEY = 'jinan-culture-favs';
-
-function getFavs() {
-  try { return JSON.parse(localStorage.getItem(FAV_KEY)) || []; }
-  catch(e) { return []; }
-}
-
-function saveFavs(favs) {
-  localStorage.setItem(FAV_KEY, JSON.stringify(favs));
-}
-
-window._toggleFav = function(btn) {
-  var id = btn.dataset.favId;
-  if (!id) return;
-  var favs = getFavs();
-  if (favs.includes(id)) {
-    favs = favs.filter(function(f) { return f !== id; });
-    btn.classList.remove('active');
-    btn.textContent = '\u2661';
-    btn.setAttribute('aria-label', '收藏');
-    showToast('\u{1f494} 已取消收藏');
-  } else {
-    favs.push(id);
-    btn.classList.add('active');
-    btn.textContent = '\u2665';
-    btn.setAttribute('aria-label', '取消收藏');
-    showToast('\u2764\ufe0f 已收藏');
-  }
-  saveFavs(favs);
-};
-
-// Restore fav states on load
-(function restoreFavs() {
-  var favs = getFavs();
-  document.querySelectorAll('.card-fav-btn[data-fav-id]').forEach(function(btn) {
-    if (favs.includes(btn.dataset.favId)) {
-      btn.classList.add('active');
-      btn.textContent = '\u2665';
-      btn.setAttribute('aria-label', '取消收藏');
-    }
-  });
-})();
 </script>
 
 </body>

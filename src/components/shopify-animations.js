@@ -298,6 +298,8 @@ export function initRippleEnhanced() {
 
 // ═══ INIT ALL ═══
 export function initShopifyAnimations() {
+  // Respect user motion preferences
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   initScrollReveals();
   initParallax();
   initCounters();

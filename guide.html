@@ -339,14 +339,9 @@
     .tool-card p{font-size:.82rem;color:var(--text2)}
 
     /* ═══ Toast Notification ═══ */
-    .toast-notification{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text,#333);color:var(--bg,#fff);padding:10px 24px;border-radius:100px;font-size:.85rem;font-weight:500;z-index:9999;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.15)}
-    .toast-notification.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
     /* ═══ Tool Card Favorite Button ═══ */
-    .tool-card-fav{position:absolute;top:10px;right:10px;z-index:3;width:30px;height:30px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:all .25s;backdrop-filter:blur(6px);background:rgba(0,0,0,.15);color:var(--text2,#999);opacity:0}
-    .tool-card:hover .tool-card-fav{opacity:1}
-    .tool-card-fav:hover{background:rgba(239,68,68,.85);color:#fff;transform:scale(1.12)}
-    .tool-card-fav.active{background:rgba(239,68,68,.9);color:#fff;opacity:1}
+    .tool-card:hover
 
     /* ═══ Modal ═══ */
     .modal-overlay{
@@ -435,25 +430,21 @@
       </div>
       <div class="tools-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px">
         <div class="tool-card" onclick="showBudgetCalc()">
-          <button class="tool-card-fav" data-id="guide-budget-calc" onclick="event.stopPropagation();toggleGuideFav('guide-budget-calc',this)" aria-label="收藏">♡</button>
           <span class="icon">💰</span>
           <h4>预算计算器</h4>
           <p>快速估算旅行费用</p>
         </div>
         <div class="tool-card" onclick="showPackingList()">
-          <button class="tool-card-fav" data-id="guide-packing-list" onclick="event.stopPropagation();toggleGuideFav('guide-packing-list',this)" aria-label="收藏">♡</button>
           <span class="icon">🎒</span>
           <h4>行李清单</h4>
           <p>一键生成打包列表</p>
         </div>
         <div class="tool-card" onclick="showWeather()">
-          <button class="tool-card-fav" data-id="guide-weather" onclick="event.stopPropagation();toggleGuideFav('guide-weather',this)" aria-label="收藏">♡</button>
           <span class="icon">🌤️</span>
           <h4>天气查询</h4>
           <p>实时济南天气</p>
         </div>
         <div class="tool-card" onclick="showEmergency()">
-          <button class="tool-card-fav" data-id="guide-emergency" onclick="event.stopPropagation();toggleGuideFav('guide-emergency',this)" aria-label="收藏">♡</button>
           <span class="icon">🆘</span>
           <h4>紧急联系</h4>
           <p>一键拨打急救电话</p>
@@ -893,7 +884,7 @@
   </nav>
 
   <script type="module">
-    import { initAll } from '/src/components/shared.js';
+    import { initAll, showToast } from '/src/components/shared.js';
     import { initPWA } from '/src/components/pwa.js';
     import { BudgetCalculator, WeatherWidget, AccessibilityTools, OfflineManager } from '/src/components/interactive.js';
 
@@ -922,55 +913,8 @@
     initSocialFeatures();
 
     // ═══ Toast Notification ═══
-    window.showToast = function(msg) {
-      let toast = document.getElementById('guideToast');
-      if (!toast) {
-        toast = document.createElement('div');
-        toast.id = 'guideToast';
-        toast.className = 'toast-notification';
-        document.body.appendChild(toast);
-      }
-      toast.textContent = msg;
-      toast.classList.add('show');
-      clearTimeout(toast._timer);
-      toast._timer = setTimeout(() => toast.classList.remove('show'), 2500);
-    };
 
     // ═══ Guide Favorites ═══
-    const GUIDE_FAV_KEY = 'jinan-guide-favs';
-    function getGuideFavs() {
-      try { return JSON.parse(localStorage.getItem(GUIDE_FAV_KEY) || '[]'); } catch(e) { return []; }
-    }
-    function saveGuideFavs(favs) {
-      localStorage.setItem(GUIDE_FAV_KEY, JSON.stringify(favs));
-    }
-    window.toggleGuideFav = function(id, btn) {
-      let favs = getGuideFavs();
-      const idx = favs.indexOf(id);
-      if (idx > -1) {
-        favs.splice(idx, 1);
-        btn.classList.remove('active');
-        btn.textContent = '♡';
-        btn.setAttribute('aria-label', '收藏');
-        showToast('已取消收藏');
-      } else {
-        favs.push(id);
-        btn.classList.add('active');
-        btn.textContent = '♥';
-        btn.setAttribute('aria-label', '取消收藏');
-        showToast('已收藏 ♥');
-      }
-      saveGuideFavs(favs);
-    };
-
-    // Initialize fav button states from localStorage
-    document.querySelectorAll('.tool-card-fav').forEach(btn => {
-      const id = btn.dataset.id;
-      if (getGuideFavs().includes(id)) {
-        btn.classList.add('active');
-        btn.textContent = '♥';
-      }
-    });
 
     // ── Tab switching ──
     document.getElementById('guideTabs').addEventListener('click', e => {

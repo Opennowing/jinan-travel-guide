@@ -398,17 +398,20 @@ function initFavStates() {
   });
 }
 
-export function showToast(msg) {
-  let toast = document.querySelector('.jinan-toast');
+export function showToast(msg, duration = 2000) {
+  let toast = document.getElementById('jinan-toast');
   if (!toast) {
     toast = document.createElement('div');
+    toast.id = 'jinan-toast';
     toast.className = 'jinan-toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
     document.body.appendChild(toast);
   }
   toast.textContent = msg;
   toast.classList.add('show');
   clearTimeout(toast._timer);
-  toast._timer = setTimeout(() => toast.classList.remove('show'), 2000);
+  toast._timer = setTimeout(() => toast.classList.remove('show'), duration);
 }
 
 // ─── Enhanced Lazy Image Skeleton with WebP + Priority ───

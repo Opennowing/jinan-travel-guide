@@ -712,3 +712,77 @@ export function logPerformance() {
     console.log(`[Perf] Load: ${Math.round(nav.loadEventEnd)}ms`);
   }
 }
+
+// ═══ SECTION ANCHOR NAV ═══
+export function initSectionAnchorNav() {
+  const nav = document.querySelector('.section-anchor-nav');
+  if (!nav) return;
+  const links = nav.querySelectorAll('a');
+  const sections = [];
+  links.forEach(link => {
+    const id = link.getAttribute('href')?.replace('#', '');
+    const section = document.getElementById(id);
+    if (section) sections.push({ el: section, link });
+  });
+  if (!sections.length) return;
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const match = sections.find(s => s.el === entry.target);
+        if (match) match.link.classList.add('active');
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-72px 0px -50% 0px' });
+  sections.forEach(s => observer.observe(s.el));
+}
+
+// ═══ BREADCRUMB GENERATOR ═══
+export function initBreadcrumb() {
+  const bc = document.querySelector('.breadcrumb');
+  if (!bc) return;
+  const path = window.location.pathname;
+  const page = path.split('/').pop() || 'index.html';
+  const pageNames = {
+    'index.html': '首页', 'spots.html': '景点', 'food.html': '美食',
+    'itinerary.html': '行程', 'guide.html': '指南', 'culture.html': '文化'
+  };
+  const current = pageNames[page] || '首页';
+  bc.innerHTML = `<a href="index.html">首页</a><span class="sep">›</span><span class="current">${current}</span>`;
+}
+
+// ═══ LAZY IMAGE OBSERVER ═══
+export function initLazyImages() {
+  const imgs = document.querySelectorAll('img[loading="lazy"]');
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (img.dataset.src) img.src = img.dataset.src;
+          observer.unobserve(img);
+        }
+      });
+    }, { rootMargin: '200px' });
+    imgs.forEach(img => observer.observe(img));
+  }
+}
+
+// ═══ KEYBOARD NAVIGATION ═══
+export function initKeyboardNav() {
+  document.addEventListener('keydown', e => {
+    // Press '/' to focus search
+    if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+      e.preventDefault();
+      const search = document.querySelector('#heroInlineSearch, .food-search, input[type="search"]');
+      if (search) search.focus();
+    }
+    // Press 'Escape' to close modals
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.open, .bottom-sheet-overlay.open, .lightbox-overlay.open').forEach(m => {
+        m.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+}

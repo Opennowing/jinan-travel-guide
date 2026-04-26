@@ -188,6 +188,46 @@
 
     .section-alt{background:var(--bg2)}
 
+    /* ── Trending Tags ── */
+    .trending-tag{
+      display:flex;align-items:center;gap:6px;
+      padding:10px 20px;
+      background:var(--card-bg);
+      border:1px solid var(--border);
+      border-radius:100px;
+      font-size:.85rem;
+      color:var(--text);
+      text-decoration:none;
+      transition:all .25s;
+      position:relative;
+      overflow:hidden;
+    }
+    .trending-tag::before{
+      content:'';
+      position:absolute;inset:0;
+      background:linear-gradient(135deg,transparent,rgba(201,169,110,.05));
+      opacity:0;
+      transition:opacity .3s;
+    }
+    .trending-tag:hover{
+      border-color:var(--accent);
+      transform:translateY(-2px);
+      box-shadow:var(--shadow);
+    }
+    .trending-tag:hover::before{opacity:1}
+    .trending-tag.hot{
+      border-color:rgba(231,111,81,.3);
+      background:rgba(231,111,81,.05);
+    }
+    .trending-tag.hot:hover{
+      border-color:var(--coral);
+      background:rgba(231,111,81,.1);
+    }
+    .trending-tag.warn{
+      border-color:rgba(245,158,11,.3);
+      background:rgba(245,158,11,.05);
+    }
+
     /* ── Stats Bar ── */
     .stats-bar{background:linear-gradient(135deg,var(--accent2),var(--bg2));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px 0}
     .stats-grid{display:flex;justify-content:center;gap:60px;flex-wrap:wrap}
@@ -196,7 +236,7 @@
     .stat-label{font-size:.85rem;color:var(--text2);margin-top:6px;display:block}
 
     /* ── Review Cards (Home) ── */
-    .review-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+    .review-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
     .review-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all .3s}
     .review-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
     .review-card .head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
@@ -222,8 +262,9 @@
       .hero-icons a .hi-icon{font-size:1.7rem}
       .hero-search-v2{max-width:90%}
       .section{padding:60px 0}
-      .review-grid{grid-template-columns:1fr}
+      .review-grid{grid-template-columns:repeat(2,1fr)}
       .stats-grid{gap:32px}
+      .guides-grid{grid-template-columns:repeat(2,1fr)!important}
     }
     @media(max-width:480px){
       .season-spots-combo .card-grid{grid-template-columns:1fr}
@@ -232,6 +273,10 @@
       .hero-icons a .hi-icon{font-size:1.4rem}
       .hero-icons a .hi-label{font-size:.7rem}
       .section{padding:48px 0}
+      .review-grid{grid-template-columns:1fr}
+      .guides-grid{grid-template-columns:1fr!important}
+      .recommend-card{flex-direction:column;text-align:center}
+      .recommend-card>div:first-child{flex:0 0 auto!important}
     }
 
     /* ═══ PREMIUM NAV ═══ */
@@ -375,6 +420,13 @@
     </div>
   </section>
 
+  <!-- ═══ 🎯 今日推荐 ═══ -->
+  <section class="section" aria-label="今日推荐" style="padding:40px 0">
+    <div class="section-inner">
+      <div id="dailyRecommend"></div>
+    </div>
+  </section>
+
   <!-- ═══ 🔥 当季必玩（合并：当季推荐 + 精选景点）═══ -->
   <div class="section-divider reveal" aria-hidden="true">◈</div>
   <section class="section" aria-label="当季必玩">
@@ -405,6 +457,18 @@
     </div>
   </section>
 
+  <!-- ═══ 🌸 季节限定 ═══ -->
+  <section class="section section-alt" aria-label="季节限定">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">SEASONAL</div>
+        <h2>🌸 当季限定体验</h2>
+        <p>错过等一年的济南限定</p>
+      </div>
+      <div id="seasonalContent"></div>
+    </div>
+  </section>
+
   <!-- ═══ 🔍 大家都在搜 ═══ -->
   <section class="section" aria-label="大家都在搜">
     <div class="section-inner">
@@ -414,16 +478,18 @@
         <p>近期游客最关注的济南关键词</p>
       </div>
       <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center" class="rv">
-        <a href="spots.html?q=趵突泉" style="display:flex;align-items:center;gap:6px;padding:10px 20px;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;font-size:.85rem;color:var(--text);text-decoration:none;transition:all .25s" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='';this.style.boxShadow=''">🔥 趵突泉攻略</a>
-        <a href="spots.html?q=大明湖" style="display:flex;align-items:center;gap:6px;padding:10px 20px;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;font-size:.85rem;color:var(--text);text-decoration:none;transition:all .25s" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='';this.style.boxShadow=''">📸 大明湖拍照点</a>
-        <a href="food.html?q=把子肉" style="display:flex;align-items:center;gap:6px;padding:10px 20px;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;font-size:.85rem;color:var(--text);text-decoration:none;transition:all .25s" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='';this.style.boxShadow=''">🍜 把子肉哪家好</a>
-        <a href="itinerary.html" style="display:flex;align-items:center;gap:6px;padding:10px 20px;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;font-size:.85rem;color:var(--text);text-decoration:none;transition:all .25s" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='';this.style.boxShadow=''">🗺️ 两日游路线</a>
-        <a href="spots.html?q=千佛山" style="display:flex;align-items:center;gap:6px;padding:10px 20px;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;font-size:.85rem;color:var(--text);text-decoration:none;transition:all .25s" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='';this.style.boxShadow=''">⛰️ 千佛山日出</a>
-        <a href="guide.html" style="display:flex;align-items:center;gap:6px;padding:10px 20px;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;font-size:.85rem;color:var(--text);text-decoration:none;transition:all .25s" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='';this.style.boxShadow=''">🏨 住哪里方便</a>
-        <a href="spots.html?q=灵岩寺" style="display:flex;align-items:center;gap:6px;padding:10px 20px;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;font-size:.85rem;color:var(--text);text-decoration:none;transition:all .25s" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='';this.style.boxShadow=''">🏛️ 灵岩寺值不值得去</a>
-        <a href="food.html?q=油旋" style="display:flex;align-items:center;gap:6px;padding:10px 20px;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;font-size:.85rem;color:var(--text);text-decoration:none;transition:all .25s" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='';this.style.boxShadow=''">🫓 油旋推荐</a>
-        <a href="spots.html?q=芙蓉街" style="display:flex;align-items:center;gap:6px;padding:10px 20px;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;font-size:.85rem;color:var(--text);text-decoration:none;transition:all .25s" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='';this.style.boxShadow=''">🛍️ 芙蓉街避坑</a>
-        <a href="culture.html" style="display:flex;align-items:center;gap:6px;padding:10px 20px;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;font-size:.85rem;color:var(--text);text-decoration:none;transition:all .25s" onmouseover="this.style.borderColor='var(--accent)';this.style.transform='translateY(-2px)';this.style.boxShadow='var(--shadow)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='';this.style.boxShadow=''">📚 济南历史故事</a>
+        <a href="spots.html?q=趵突泉" class="trending-tag hot">🔥 趵突泉攻略</a>
+        <a href="spots.html?q=大明湖" class="trending-tag">📸 大明湖拍照点</a>
+        <a href="food.html?q=把子肉" class="trending-tag hot">🍜 把子肉哪家好</a>
+        <a href="itinerary.html" class="trending-tag">🗺️ 两日游路线</a>
+        <a href="spots.html?q=千佛山" class="trending-tag">⛰️ 千佛山日出</a>
+        <a href="guide.html" class="trending-tag">🏨 住哪里方便</a>
+        <a href="spots.html?q=灵岩寺" class="trending-tag">🏛️ 灵岩寺值不值得去</a>
+        <a href="food.html?q=油旋" class="trending-tag">🫓 油旋推荐</a>
+        <a href="spots.html?q=芙蓉街" class="trending-tag warn">🛍️ 芙蓉街避坑</a>
+        <a href="culture.html" class="trending-tag">📚 济南历史故事</a>
+        <a href="guide.html" class="trending-tag">💰 省钱攻略</a>
+        <a href="food.html?q=甜沫" class="trending-tag">🥣 甜沫是什么</a>
       </div>
     </div>
   </section>
@@ -526,6 +592,51 @@
         </div>
       </div>
       <div class="review-grid" id="homeReviews"></div>
+    </div>
+  </section>
+
+  <!-- ═══ 📖 热门攻略 ═══ -->
+  <section class="section" aria-label="热门攻略">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">GUIDES</div>
+        <h2>📖 热门攻略</h2>
+        <p>精选实用攻略，助你玩转济南</p>
+      </div>
+      <div class="guides-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px">
+        <a href="guide.html" class="card rv" style="text-decoration:none">
+          <div class="card-body" style="padding:24px">
+            <div style="font-size:2rem;margin-bottom:12px">🚇</div>
+            <h3 style="font-size:1rem">济南交通全攻略</h3>
+            <p class="desc">地铁、公交、打车全覆盖，附线路图</p>
+            <div style="margin-top:12px;font-size:.75rem;color:var(--accent)">阅读攻略 →</div>
+          </div>
+        </a>
+        <a href="itinerary.html" class="card rv" style="text-decoration:none">
+          <div class="card-body" style="padding:24px">
+            <div style="font-size:2rem;margin-bottom:12px">📋</div>
+            <h3 style="font-size:1rem">2日游完美行程</h3>
+            <p class="desc">精心规划的路线，拿来即用</p>
+            <div style="margin-top:12px;font-size:.75rem;color:var(--accent)">查看行程 →</div>
+          </div>
+        </a>
+        <a href="food.html" class="card rv" style="text-decoration:none">
+          <div class="card-body" style="padding:24px">
+            <div style="font-size:2rem;margin-bottom:12px">🍜</div>
+            <h3 style="font-size:1rem">济南必吃清单</h3>
+            <p class="desc">10道必吃美食+推荐餐厅</p>
+            <div style="margin-top:12px;font-size:.75rem;color:var(--accent)">查看清单 →</div>
+          </div>
+        </a>
+        <a href="culture.html" class="card rv" style="text-decoration:none">
+          <div class="card-body" style="padding:24px">
+            <div style="font-size:2rem;margin-bottom:12px">📚</div>
+            <h3 style="font-size:1rem">济南文化简史</h3>
+            <p class="desc">从龙山文化到近代开埠</p>
+            <div style="margin-top:12px;font-size:.75rem;color:var(--accent)">了解历史 →</div>
+          </div>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -815,10 +926,15 @@
         if (featured.length < 4) { const rest = data.filter(s => !featured.includes(s)).slice(0, 4-featured.length); featured.push(...rest); }
         const grid = document.getElementById('spots-grid');
         grid.innerHTML = featured.map(s => `
-          <div class="card rv" onclick="location.href='spots.html?id=${s.id}'">
-            <div class="card-img"><img src="${s.img}" alt="${s.name}" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.parentElement.classList.add('img-loaded')" ></div>
+          <div class="card rv" data-href="spots.html?id=${s.id}">
+            <div class="card-img">
+              <img src="${s.img}" alt="${s.name}" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.parentElement.classList.add('img-loaded')">
+              <div class="card-img-gradient"></div>
+              <span class="spot-badge badge ${s.badge}">${s.badge==='must'?'必去':s.badge==='hot'?'🔥 热门':s.badge==='free'?'免费':'推荐'}</span>
+              <button class="card-fav-btn" data-id="${s.id}" data-type="spot" aria-label="收藏">♡</button>
+            </div>
             <div class="card-body">
-              <h3>${s.name}${s.badge==='must'?'<span class="badge must">必去</span>':''}${s.badge==='hot'?'<span class="badge hot">热门</span>':''}${s.badge==='free'?'<span class="badge free">免费</span>':''}</h3>
+              <h3>${s.name}</h3>
               <p class="desc">${s.desc}</p>
               <div class="card-meta"><span>${stars(s.rating)} ${s.rating}</span><span>· ${s.reviews} 条评价</span></div>
               <div class="card-price">${s.price===0?'<span class="free">免费</span>':'¥'+s.price}</div>
@@ -839,10 +955,15 @@
         if (topFoods.length < 4) { const rest = foods.filter(f => !topFoods.includes(f)).slice(0, 4-topFoods.length); topFoods.push(...rest); }
         const grid = document.getElementById('food-grid');
         grid.innerHTML = topFoods.map(f => `
-          <div class="card rv" onclick="location.href='food.html?id=${f.id}'">
-            <div class="card-img"><img src="${f.img}" alt="${f.name}" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.parentElement.classList.add('img-loaded')" ></div>
+          <div class="card rv" data-href="food.html?id=${f.id}">
+            <div class="card-img">
+              <img src="${f.img}" alt="${f.name}" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.parentElement.classList.add('img-loaded')">
+              <div class="card-img-gradient"></div>
+              ${f.must?'<span class="food-badge badge hot">🔥 必吃</span>':''}
+              <button class="card-fav-btn" data-id="${f.id}" data-type="food" aria-label="收藏">♡</button>
+            </div>
             <div class="card-body">
-              <h3>${f.name}${f.must?'<span class="badge hot">🔥 必吃</span>':''}</h3>
+              <h3>${f.name}</h3>
               <div class="card-tags"><span class="tag">${f.tag}</span></div>
               <p class="desc">${f.desc}</p>
               <div class="card-meta"><span>${f.cat}</span>${f.shops?.length?`<span>· 人均 ${f.shops[0].avg}</span>`:''}</div>
@@ -1111,12 +1232,105 @@
     loadFood();
     loadWeather();
 
+    // ── 今日推荐（每天根据日期轮换）──
+    function renderDailyRecommend() {
+      const allItems = [
+        { type: 'spot', name: '趵突泉', desc: '天下第一泉，三窟并发水涌若轮。冬日雾气氤氲如仙境。', img: 'https://images.unsplash.com/photo-1509803874385-db7c23652552?w=600&h=400&fit=crop', link: 'spots.html?id=baotu', meta: '🎫 ¥40 · ⏱ 2-3h', badge: '今日必去' },
+        { type: 'food', name: '糖醋黄河鲤鱼', desc: '鲁菜经典，先炸后浇糖醋汁，头尾翘起形似龙门。', img: 'https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=600&h=400&fit=crop', link: 'food.html?id=tangcu', meta: '🍲 鲁菜 · 人均¥85', badge: '今日必吃' },
+        { type: 'spot', name: '大明湖', desc: '四面荷花三面柳，一城山色半城湖。超然楼亮灯绝美。', img: 'https://images.unsplash.com/photo-1646896315397-4d6f5bd49e0e?w=600&h=400&fit=crop', link: 'spots.html?id=daminghu', meta: '🎫 免费 · ⏱ 半天', badge: '今日推荐' },
+        { type: 'food', name: '把子肉', desc: '济南灵魂快餐，肥瘦相间浇汤汁配米饭，一口满足。', img: 'https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600&h=400&fit=crop', link: 'food.html?id=bazirou', meta: '🍢 市井小吃 · 人均¥15', badge: '本地最爱' },
+      ];
+      const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+      const item = allItems[dayOfYear % allItems.length];
+      const el = document.getElementById('dailyRecommend');
+      if (!el) return;
+      el.innerHTML = `
+        <div class="recommend-card rv" style="background:linear-gradient(135deg,rgba(201,169,110,.15),rgba(42,157,143,.1));border:1px solid var(--accent);border-radius:var(--radius-lg);padding:32px;display:flex;align-items:center;gap:28px;flex-wrap:wrap;cursor:pointer" onclick="location.href='${item.link}'">
+          <div style="flex:0 0 200px">
+            <img src="${item.img}" alt="${item.name}" style="width:200px;height:140px;object-fit:cover;border-radius:var(--radius);box-shadow:var(--shadow-lg)">
+          </div>
+          <div style="flex:1;min-width:200px">
+            <div style="font-size:.7rem;font-weight:700;letter-spacing:.1em;color:var(--accent);margin-bottom:8px">🎯 ${item.badge}</div>
+            <h3 style="font:800 1.4rem/1.3 var(--serif);margin-bottom:8px">${item.name}</h3>
+            <p style="font-size:.9rem;color:var(--text2);line-height:1.7;margin-bottom:12px">${item.desc}</p>
+            <div style="font-size:.8rem;color:var(--text3)">${item.meta}</div>
+          </div>
+          <div style="flex:0 0 auto">
+            <span class="btn btn-primary">去看看 →</span>
+          </div>
+        </div>
+      `;
+      observeNewRv(el);
+    }
+    renderDailyRecommend();
+
+    // ── 季节限定内容 ──
+    function renderSeasonalContent() {
+      const smonth = new Date().getMonth() + 1;
+      const seasonal = {
+        spring: {
+          items: [
+            { name: '五龙潭樱花', desc: '3月底-4月中旬，200余株樱花盛开，免费观赏', img: 'https://images.unsplash.com/photo-1522383225653-ed111181a951?w=400&h=300&fit=crop', link: 'spots.html?id=wulongtan' },
+            { name: '大明湖荷花', desc: '4月起荷花初开，湖畔散步超惬意', img: 'https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=400&h=300&fit=crop', link: 'spots.html?id=daminghu' },
+            { name: '千佛山踏青', desc: '山花烂漫，登高望远，气温宜人', img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=400&h=300&fit=crop', link: 'spots.html?id=qianfo' },
+          ]
+        },
+        summer: {
+          items: [
+            { name: '护城河夜游', desc: '夏夜乘船，凉风习习，灯光璀璨', img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop', link: 'guide.html' },
+            { name: '泉水浴场', desc: '天然泉水泳池，恒温18°C的清凉', img: 'https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=400&h=300&fit=crop', link: 'spots.html?id=quanshui' },
+            { name: '省博物馆', desc: '空调充足，文化底蕴深厚', img: 'https://images.unsplash.com/photo-1554907984-15263bfd63bd?w=400&h=300&fit=crop', link: 'spots.html?id=museum' },
+          ]
+        },
+        autumn: {
+          items: [
+            { name: '红叶谷', desc: '10月中-11月中，漫山红遍，层林尽染', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop', link: 'spots.html?id=hongye' },
+            { name: '千佛山红叶', desc: '市区赏红叶最方便的地方', img: 'https://images.unsplash.com/photo-1541789094913-f3809a8f3ba5?w=400&h=300&fit=crop', link: 'spots.html?id=qianfo' },
+            { name: '灵岩寺银杏', desc: '千年银杏金黄，古刹秋色', img: 'https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=400&h=300&fit=crop', link: 'spots.html?id=lingyan' },
+          ]
+        },
+        winter: {
+          items: [
+            { name: '趵突泉雾气', desc: '冬日清晨，泉水雾气氤氲如仙境', img: 'https://images.unsplash.com/photo-1517587662384-26d954922c19?w=400&h=300&fit=crop', link: 'spots.html?id=baotu' },
+            { name: '大明湖雪景', desc: '雪后大明湖，银装素裹', img: 'https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=400&h=300&fit=crop', link: 'spots.html?id=daminghu' },
+            { name: '温泉体验', desc: '冬日泡温泉，暖身又养生', img: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&h=300&fit=crop', link: 'guide.html' },
+          ]
+        }
+      };
+      const season = smonth >= 3 && smonth <= 5 ? 'spring' : smonth >= 6 && smonth <= 8 ? 'summer' : smonth >= 9 && smonth <= 11 ? 'autumn' : 'winter';
+      const data = seasonal[season];
+      const el = document.getElementById('seasonalContent');
+      if (!el) return;
+      el.innerHTML = `
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px">
+          ${data.items.map(item => `
+            <div class="card rv" onclick="location.href='${item.link}'" style="cursor:pointer">
+              <div class="card-img">
+                <img src="${item.img}" alt="${item.name}" loading="lazy">
+                <span class="badge" style="position:absolute;top:12px;left:12px;z-index:2;background:rgba(201,169,110,.9);color:#fff">🌸 季节限定</span>
+              </div>
+              <div class="card-body">
+                <h3>${item.name}</h3>
+                <p class="desc">${item.desc}</p>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      observeNewRv(el);
+    }
+    renderSeasonalContent();
+
     // ── Home Reviews ──
     const homeReviews = [
-      { name: '北京小王', avatar: '京', date: '2026-04-20', stars: 5, text: '趵突泉真的太震撼了！三股水涌出来的那一刻，理解了什么叫"泉城"。冬天去的，水雾氤氲如仙境，照片都不用修。', spot: '趵突泉' },
-      { name: '上海旅行家', avatar: '沪', date: '2026-04-15', stars: 5, text: '大明湖免费区域就逛了半天，超然楼亮灯瞬间太美了！建议5点半就去南岸占位。芙蓉街的小吃也很棒，油旋和甜沫绝配。', spot: '大明湖' },
-      { name: '广州美食控', avatar: '粤', date: '2026-04-10', stars: 4, text: '为了鲁菜来的济南，没失望！糖醋鲤鱼、九转大肠、把子肉，每一道都让人回味。老商埠区的咖啡馆也很有调性。', spot: '美食之旅' },
-      { name: '成都背包客', avatar: '蓉', date: '2026-03-28', stars: 5, text: '千佛山登顶俯瞰全城的感觉太棒了，秋天红叶漫山。灵岩寺的宋代彩塑罗汉栩栩如生，不愧四大名刹之首。济南人很热情，问路都特别耐心。', spot: '千佛山' }
+      { name: '北京小王', avatar: '京', avatarClass: 'avatar-coral', date: '2026-04-20', stars: 5, text: '趵突泉真的太震撼了！三股水涌出来的那一刻，理解了什么叫"泉城"。冬天去的，水雾氤氲如仙境，照片都不用修。', spot: '趵突泉', helpful: 42 },
+      { name: '上海旅行家', avatar: '沪', avatarClass: 'avatar-teal', date: '2026-04-15', stars: 5, text: '大明湖免费区域就逛了半天，超然楼亮灯瞬间太美了！建议5点半就去南岸占位。芙蓉街的小吃也很棒，油旋和甜沫绝配。', spot: '大明湖', helpful: 38 },
+      { name: '广州美食控', avatar: '粤', avatarClass: 'avatar-purple', date: '2026-04-10', stars: 4, text: '为了鲁菜来的济南，没失望！糖醋鲤鱼、九转大肠、把子肉，每一道都让人回味。老商埠区的咖啡馆也很有调性。', spot: '美食之旅', helpful: 27 },
+      { name: '成都背包客', avatar: '蓉', avatarClass: 'avatar-blue', date: '2026-03-28', stars: 5, text: '千佛山登顶俯瞰全城的感觉太棒了，秋天红叶漫山。灵岩寺的宋代彩塑罗汉栩栩如生，不愧四大名刹之首。济南人很热情，问路都特别耐心。', spot: '千佛山', helpful: 35 },
+      { name: '杭州小陈', avatar: '杭', avatarClass: 'avatar-pink', date: '2026-04-05', stars: 5, text: '带父母来的，老人家特别喜欢趵突泉和大明湖。节奏不快，两天刚好。把子肉和甜沫是爸妈的最爱，说比杭州菜有味道。', spot: '家庭游', helpful: 31 },
+      { name: '深圳程序员', avatar: '深', avatarClass: '', date: '2026-03-20', stars: 4, text: '周末两天特种兵式打卡，趵突泉→五龙潭→大明湖→芙蓉街→黑虎泉→宽厚里，步行就够了。唯一遗憾是没约上省博物馆。', spot: '周末游', helpful: 24 },
+      { name: '南京文青', avatar: '宁', avatarClass: 'avatar-teal', date: '2026-04-18', stars: 5, text: '李清照纪念堂太美了，"常记溪亭日暮"的意境在这里都能找到。护城河夜游强烈推荐，灯光映在水面上，很有诗意。', spot: '文化之旅', helpful: 33 },
+      { name: '重庆辣妹', avatar: '渝', avatarClass: 'avatar-coral', date: '2026-04-01', stars: 4, text: '本以为济南菜会很清淡，结果把子肉和烧烤都很对味！济南人说话太有意思了，问路大爷给我讲了半小时泉水故事。超爱这座城市。', spot: '美食探店', helpful: 22 }
     ];
 
     function renderHomeReviews() {
@@ -1125,13 +1339,32 @@
       grid.innerHTML = homeReviews.map(r => `
         <div class="review-card rv">
           <div class="head">
-            <div class="avatar">${r.avatar}</div>
+            <div class="avatar ${r.avatarClass||''}">${r.avatar}</div>
             <div><div class="name">${r.name}</div><div class="date">${r.date} · ${r.spot}</div></div>
           </div>
           <div class="stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
           <div class="text">${r.text}</div>
+          <button class="helpful-btn" data-count="${r.helpful}">👍 有用 (${r.helpful})</button>
         </div>
       `).join('');
+
+      // Bind helpful button clicks
+      grid.querySelectorAll('.helpful-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const count = parseInt(btn.dataset.count);
+          if (btn.classList.contains('active')) {
+            btn.classList.remove('active');
+            btn.dataset.count = count - 1;
+            btn.textContent = `👍 有用 (${count - 1})`;
+          } else {
+            btn.classList.add('active');
+            btn.dataset.count = count + 1;
+            btn.textContent = `👍 有用 (${count + 1})`;
+          }
+        });
+      });
+
       observeNewRv(grid);
     }
     renderHomeReviews();

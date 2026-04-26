@@ -185,6 +185,31 @@
     .nutrition-tag.vegan{background:rgba(76,175,80,.1);color:#4caf50}
     .nutrition-tag.low-cal{background:rgba(100,181,246,.1);color:#42a5f5}
 
+    /* ── Compare Add Button Active ── */
+    .compare-add-btn.active{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important}
+
+    /* ── Card Quickview & Fav Buttons ── */
+    .card-quickview-btn{position:absolute;bottom:12px;right:12px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;z-index:3;transition:all .25s;backdrop-filter:blur(4px);opacity:0}
+    .card:hover .card-quickview-btn{opacity:1}
+    .card-quickview-btn:hover{background:rgba(42,157,143,.8);transform:scale(1.1)}
+    @media(max-width:768px){.card-quickview-btn{opacity:1}}
+
+    /* ── Enhanced Filter Tabs ── */
+    .enhanced-filters{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+    .filter-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:center}
+    .filter-row .filter-group-label{font-size:.78rem;font-weight:700;color:var(--accent);margin-right:4px;white-space:nowrap;display:flex;align-items:center;gap:4px}
+    .filter-chip{padding:6px 14px;border:1px solid var(--border);background:var(--card-bg);font-size:.78rem;font-weight:500;color:var(--text);cursor:pointer;border-radius:100px;transition:all .25s;white-space:nowrap}
+    .filter-chip:hover{border-color:var(--accent);color:var(--accent)}
+    .filter-chip.active{background:linear-gradient(135deg,var(--accent),var(--accent-hover));color:#fff;border-color:var(--accent);box-shadow:0 2px 8px rgba(201,169,110,.25)}
+
+    /* ── Food Compare Panel ── */
+    .food-compare-panel{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--bg);border-top:2px solid var(--accent);box-shadow:0 -8px 32px rgba(0,0,0,.15);transform:translateY(100%);transition:transform .35s var(--ease-out);max-height:50vh;display:flex;flex-direction:column}
+    .food-compare-panel.open{transform:translateY(0)}
+    .food-compare-header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border);flex-shrink:0}
+    .food-compare-header h4{font-size:.9rem;font-weight:700;margin:0}
+    .food-compare-header-actions{display:flex;gap:8px;align-items:center}
+    .food-compare-body{overflow-x:auto;overflow-y:auto;flex:1}
+
     /* ── Compare ── */
     .compare-fab{position:fixed;bottom:24px;right:24px;z-index:100;padding:14px 22px;background:var(--accent);color:#fff;border:none;border-radius:50px;font-size:.85rem;font-weight:600;cursor:pointer;box-shadow:0 4px 20px rgba(231,111,81,.35);transition:all .3s;display:none;gap:8px;align-items:center}
     .compare-fab.visible{display:flex}
@@ -317,6 +342,10 @@
       .must-banner{flex-direction:column;text-align:center}
       .page-hero{min-height:40vh!important}
       .food-search-hero{max-width:90%;margin-top:16px}
+      .filter-row{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}
+      .filter-chip{padding:5px 10px;font-size:.72rem}
+      .enhanced-filters{gap:8px}
+      .card-actions .btn{font-size:.72rem;padding:5px 10px}
     }
   </style>
 </head>
@@ -413,6 +442,46 @@
           <button class="district-tab" data-district="回民小区" aria-label="筛选回民小区商圈">📍 回民小区</button>
           <button class="district-tab" data-district="大明湖">📍 大明湖</button>
           <button class="district-tab" data-district="经十路">📍 经十路</button>
+        </div>
+
+        <!-- ── 增强筛选 ── -->
+        <div class="enhanced-filters" id="enhancedFilters">
+          <!-- 人均价格 -->
+          <div class="filter-row" id="priceFilterRow">
+            <span class="filter-group-label">💰 人均</span>
+            <button class="filter-chip active" data-filter="price" data-value="全部">全部</button>
+            <button class="filter-chip" data-filter="price" data-value="20以下">20以下</button>
+            <button class="filter-chip" data-filter="price" data-value="20-50">20-50</button>
+            <button class="filter-chip" data-filter="price" data-value="50-100">50-100</button>
+            <button class="filter-chip" data-filter="price" data-value="100以上">100以上</button>
+          </div>
+          <!-- 餐厅类型 -->
+          <div class="filter-row" id="typeFilterRow">
+            <span class="filter-group-label">🏪 类型</span>
+            <button class="filter-chip active" data-filter="type" data-value="全部">全部</button>
+            <button class="filter-chip" data-filter="type" data-value="老字号">🏮 老字号</button>
+            <button class="filter-chip" data-filter="type" data-value="网红">🔥 网红</button>
+            <button class="filter-chip" data-filter="type" data-value="街边摊">🍢 街边摊</button>
+            <button class="filter-chip" data-filter="type" data-value="正餐">🍽️ 正餐</button>
+          </div>
+          <!-- 就餐时间 -->
+          <div class="filter-row" id="mealFilterRow">
+            <span class="filter-group-label">🕐 时段</span>
+            <button class="filter-chip active" data-filter="meal" data-value="全部">全部</button>
+            <button class="filter-chip" data-filter="meal" data-value="早餐">🌅 早餐</button>
+            <button class="filter-chip" data-filter="meal" data-value="午餐">☀️ 午餐</button>
+            <button class="filter-chip" data-filter="meal" data-value="晚餐">🌆 晚餐</button>
+            <button class="filter-chip" data-filter="meal" data-value="夜宵">🌙 夜宵</button>
+          </div>
+          <!-- 适合场景 -->
+          <div class="filter-row" id="sceneFilterRow">
+            <span class="filter-group-label">🎯 场景</span>
+            <button class="filter-chip active" data-filter="scene" data-value="全部">全部</button>
+            <button class="filter-chip" data-filter="scene" data-value="一人食">🧑 一人食</button>
+            <button class="filter-chip" data-filter="scene" data-value="聚餐">👥 聚餐</button>
+            <button class="filter-chip" data-filter="scene" data-value="约会">💕 约会</button>
+            <button class="filter-chip" data-filter="scene" data-value="家庭">👨‍👩‍👧 家庭</button>
+          </div>
         </div>
 
         <div class="food-count-bar">
@@ -677,6 +746,238 @@
     let activeDistrict = '全部';
     let searchQuery = '';
     let foodObserver = null;
+
+    // ── Enhanced filter state ──
+    let filterPrice = '全部';
+    let filterType = '全部';
+    let filterMeal = '全部';
+    let filterScene = '全部';
+
+    // ── Toast helper ──
+    function showToast(msg, duration = 2000) {
+      let toast = document.getElementById('foodToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'foodToast';
+        toast.style.cssText = 'position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-20px);background:var(--card-bg,#fff);color:var(--text,#333);padding:12px 24px;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.15);z-index:9999;font-size:.88rem;font-weight:600;opacity:0;transition:all .3s;pointer-events:none;border:1px solid var(--border,#eee)';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(-50%) translateY(0)';
+      clearTimeout(toast._timer);
+      toast._timer = setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(-20px)';
+      }, duration);
+    }
+
+    // ── 美食快速预览 ──
+    function showFoodQuickView(foodId) {
+      const food = allFoods.find(f => f.id === foodId);
+      if (!food) return;
+      const isFav = favs.isFavorite(food.id);
+      const modal = document.createElement('div');
+      modal.className = 'modal-overlay open';
+      modal.innerHTML = `
+        <div class="modal" style="max-width:700px">
+          <button class="modal-close" onclick="this.closest('.modal-overlay').remove();document.body.style.overflow=''">✕</button>
+          <div class="modal-img" style="aspect-ratio:16/9">
+            <img src="${food.img}" alt="${food.name}" style="width:100%;height:100%;object-fit:cover" onerror="this.onerror=null;this.src=imgFallback(this.alt)">
+          </div>
+          <div class="modal-body">
+            <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+              <h2 style="margin:0">${food.name}</h2>
+              ${food.must ? '<span class="badge-must">🔥 必吃</span>' : ''}
+              ${food.season && food.season !== '四季皆宜' ? '<span class="badge-season">' + (getSeasonLabel(food.season) || food.season) + '</span>' : ''}
+            </div>
+            <div style="display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap">
+              <span class="food-card-tag">${food.tag}</span>
+              <span class="food-card-tag">${food.cat === 'lucai' ? '鲁菜经典' : food.cat === 'xiaochi' ? '市井小吃' : food.cat === 'laozihao' ? '老字号' : food.cat === 'zaocan' ? '早餐' : food.cat === 'yexiao' ? '夜宵' : food.cat === 'yinpin' ? '饮品' : food.cat}</span>
+              ${food.price ? '<span class="price-tag price-' + getPriceLevel(food.price) + '">' + food.price + '</span>' : ''}
+            </div>
+            <p class="food-card-desc" style="margin-bottom:16px">${food.desc}</p>
+
+            ${food.history ? `
+              <div style="background:var(--bg2);border-radius:12px;padding:16px;margin-bottom:16px">
+                <div style="font-size:.8rem;font-weight:700;margin-bottom:6px">📜 历史渊源</div>
+                <div style="font-size:.85rem;color:var(--text2);line-height:1.7">${food.history}</div>
+              </div>
+            ` : ''}
+
+            ${food.tips ? `
+              <div style="background:var(--bg2);border-radius:12px;padding:16px;margin-bottom:16px">
+                <div style="font-size:.8rem;font-weight:700;margin-bottom:6px">💡 点菜贴士</div>
+                <div style="font-size:.85rem;color:var(--text2);line-height:1.7">${food.tips}</div>
+              </div>
+            ` : ''}
+
+            ${food.shops?.length ? `
+              <div style="margin-bottom:16px">
+                <div style="font-size:.85rem;font-weight:700;margin-bottom:12px">🏪 推荐餐厅 (${food.shops.length}家)</div>
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  ${food.shops.slice(0, 3).map(sh => `
+                    <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--bg2);border-radius:10px">
+                      <div style="flex:1">
+                        <div style="font-weight:600;font-size:.88rem">${sh.name}</div>
+                        <div style="font-size:.75rem;color:var(--text3);margin-top:2px">${sh.addr}</div>
+                        <div style="font-size:.75rem;color:var(--text2);margin-top:4px">
+                          ${stars(sh.rating)} ${sh.rating} · 人均${sh.avg} · ${sh.hours || ''}
+                        </div>
+                      </div>
+                      <div style="text-align:center">
+                        <div style="font:700 1.1rem/1 var(--serif);color:var(--accent)">${sh.avg}</div>
+                        <div style="font-size:.65rem;color:var(--text3)">人均</div>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            ` : ''}
+
+            <div class="modal-actions" style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+              <a href="food.html?id=${food.id}" class="btn btn-primary" style="flex:1;justify-content:center">查看详情页 →</a>
+              <button class="btn btn-outline" onclick="window._toggleFoodFav('${food.id}',this);this.textContent=this.classList.contains('active')?'♥ 已收藏':'♡ 收藏'">${isFav ? '♥ 已收藏' : '♡ 收藏'}</button>
+              <button class="btn btn-outline" onclick="addToFoodCompare('${food.id}')" style="white-space:nowrap">📊 加入对比</button>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      document.body.style.overflow = 'hidden';
+      modal.addEventListener('click', e => {
+        if (e.target === modal) { modal.remove(); document.body.style.overflow = ''; }
+      });
+    }
+
+    // ── 美食对比 ──
+    const foodCompareList = [];
+    const MAX_FOOD_COMPARE = 3;
+
+    function addToFoodCompare(foodId) {
+      if (foodCompareList.length >= MAX_FOOD_COMPARE) {
+        showToast(`最多对比${MAX_FOOD_COMPARE}个美食`);
+        return;
+      }
+      if (foodCompareList.includes(foodId)) {
+        showToast('已在对比列表中');
+        return;
+      }
+      foodCompareList.push(foodId);
+      updateFoodComparePanel();
+      showToast('已加入对比');
+    }
+
+    function removeFromFoodCompare(foodId) {
+      const idx = foodCompareList.indexOf(foodId);
+      if (idx >= 0) foodCompareList.splice(idx, 1);
+      updateFoodComparePanel();
+      renderFoods();
+    }
+
+    function clearFoodCompare() {
+      foodCompareList.length = 0;
+      updateFoodComparePanel();
+      renderFoods();
+    }
+
+    function updateFoodComparePanel() {
+      let panel = document.getElementById('foodComparePanel');
+      if (!panel) {
+        panel = document.createElement('div');
+        panel.id = 'foodComparePanel';
+        panel.className = 'food-compare-panel';
+        document.body.appendChild(panel);
+      }
+
+      if (foodCompareList.length === 0) {
+        panel.classList.remove('open');
+        return;
+      }
+
+      panel.classList.add('open');
+      const foods = foodCompareList.map(id => allFoods.find(f => f.id === id)).filter(Boolean);
+
+      panel.innerHTML = `
+        <div class="food-compare-header">
+          <h4>🍜 美食对比 (${foods.length}/${MAX_FOOD_COMPARE})</h4>
+          <div class="food-compare-header-actions">
+            <button onclick="clearFoodCompare()" style="background:none;border:1px solid var(--border2);padding:4px 12px;border-radius:100px;font-size:.75rem;cursor:pointer;color:var(--text2)">清空</button>
+            <button onclick="document.getElementById('foodComparePanel').classList.remove('open')" style="background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text2);padding:4px">✕</button>
+          </div>
+        </div>
+        <div class="food-compare-body">
+          <table class="compare-table">
+            <tr>
+              <th></th>
+              ${foods.map(f => `<th>
+                <img src="${f.img}" class="compare-thumb" alt="${f.name}">
+                <div class="compare-item-name">${f.name}</div>
+                <button class="compare-remove" onclick="removeFromFoodCompare('${f.id}')">✕ 移除</button>
+              </th>`).join('')}
+            </tr>
+            <tr><td class="compare-field-label">分类</td>${foods.map(f => `<td>${f.tag}</td>`).join('')}</tr>
+            <tr><td class="compare-field-label">人均</td>${foods.map(f => `<td style="font-weight:600;color:var(--accent)">${f.shops?.[0]?.avg || '—'}</td>`).join('')}</tr>
+            <tr><td class="compare-field-label">推荐餐厅</td>${foods.map(f => `<td style="font-size:.7rem">${f.shops?.[0]?.name || '—'}</td>`).join('')}</tr>
+            <tr><td class="compare-field-label">季节</td>${foods.map(f => `<td>${f.season || '四季'}</td>`).join('')}</tr>
+            <tr><td class="compare-field-label">必吃</td>${foods.map(f => `<td>${f.must ? '🔥 是' : '—'}</td>`).join('')}</tr>
+            <tr><td class="compare-field-label">餐厅数</td>${foods.map(f => `<td>${f.shops?.length || 0}家</td>`).join('')}</tr>
+          </table>
+        </div>
+      `;
+    }
+
+    // ── Enhanced filter matching ──
+    function matchPriceFilter(food, priceFilter) {
+      if (priceFilter === '全部') return true;
+      const avgStr = food.shops?.[0]?.avg || food.price || '';
+      const match = avgStr.match(/(\d+)/);
+      if (!match) return true;
+      const price = parseInt(match[1]);
+      switch (priceFilter) {
+        case '20以下': return price < 20;
+        case '20-50': return price >= 20 && price <= 50;
+        case '50-100': return price >= 50 && price <= 100;
+        case '100以上': return price > 100;
+        default: return true;
+      }
+    }
+
+    function matchTypeFilter(food, typeFilter) {
+      if (typeFilter === '全部') return true;
+      const text = [food.name, food.tag, food.cat, food.desc, ...(food.shops||[]).map(s => s.name + ' ' + (s.tag||''))].join(' ');
+      switch (typeFilter) {
+        case '老字号': return food.cat === 'laozihao' || text.includes('老字号') || text.includes('百年');
+        case '网红': return text.includes('网红') || text.includes('打卡');
+        case '街边摊': return food.cat === 'xiaochi' || text.includes('街边') || text.includes('摊');
+        case '正餐': return food.cat === 'lucai' || text.includes('正餐') || text.includes('宴');
+        default: return true;
+      }
+    }
+
+    function matchMealFilter(food, mealFilter) {
+      if (mealFilter === '全部') return true;
+      const text = [food.name, food.tag, food.cat, food.desc].join(' ');
+      switch (mealFilter) {
+        case '早餐': return food.cat === 'zaocan' || text.includes('早餐') || text.includes('早茶');
+        case '午餐': return food.cat === 'lucai' || text.includes('午餐') || text.includes('正餐');
+        case '晚餐': return food.cat === 'lucai' || text.includes('晚餐');
+        case '夜宵': return food.cat === 'yexiao' || text.includes('夜宵') || text.includes('烧烤');
+        default: return true;
+      }
+    }
+
+    function matchSceneFilter(food, sceneFilter) {
+      if (sceneFilter === '全部') return true;
+      const text = [food.name, food.tag, food.cat, food.desc].join(' ');
+      switch (sceneFilter) {
+        case '一人食': return text.includes('快餐') || text.includes('小吃') || food.cat === 'xiaochi' || text.includes('盖饭') || text.includes('面');
+        case '聚餐': return text.includes('聚餐') || text.includes('宴') || food.cat === 'lucai' || text.includes('聚会');
+        case '约会': return text.includes('约会') || text.includes('精致') || text.includes('氛围');
+        case '家庭': return text.includes('家庭') || text.includes('全家') || text.includes('老少');
+        default: return true;
+      }
+    }
 
     // ── 商圈匹配 ──
     function matchDistrict(food, district) {
@@ -1253,6 +1554,12 @@
         filtered = filtered.filter(f => favs.isFavorite(f.id));
       }
 
+      // Enhanced filters
+      filtered = filtered.filter(f => matchPriceFilter(f, filterPrice));
+      filtered = filtered.filter(f => matchTypeFilter(f, filterType));
+      filtered = filtered.filter(f => matchMealFilter(f, filterMeal));
+      filtered = filtered.filter(f => matchSceneFilter(f, filterScene));
+
       // Update count badge
       const countBadge = document.getElementById('foodCountBadge');
       if (countBadge) countBadge.textContent = '共 ' + filtered.length + ' 道美食';
@@ -1265,97 +1572,53 @@
       grid.innerHTML = filtered.map(food => {
         const isFav = favs.isFavorite(food.id);
         const nearby = getNearbyFoods(food);
-        const mainDish = food.shops[0]?.bestDish?.split('、')[0] || food.name;
-        return '<div class="food-card rv" style="position:relative">' +
-          '<img class="food-card-img" src="' + food.img + '" alt="' + food.name + '" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
-          '<button class="fav-btn ' + (isFav ? 'active' : '') + '" data-id="' + food.id + '" aria-label="' + (isFav ? '取消收藏' : '收藏') + '" onclick="event.stopPropagation();window._toggleFoodFav(\'' + food.id + '\',this)">' + (isFav ? '♥' : '♡') + '</button>' +
-          '<div class="food-card-body">' +
-            '<div class="food-card-name">' +
-              food.name +
-              '<span class="food-card-tag">' + food.tag + '</span>' +
-              (food.must ? '<span class="badge-must">🔥 必吃</span>' : '') +
-              (food.season && food.season !== '四季皆宜' ? '<span class="badge-season">' + (getSeasonLabel(food.season) || food.season) + '</span>' : '') +
-              (food.price ? '<span class="price-tag price-' + getPriceLevel(food.price) + '">' + food.price + '</span>' : '') +
+        const isCompare = foodCompareList.includes(food.id);
+        const shopCount = food.shops?.length || 0;
+        const avgPrice = food.shops?.[0]?.avg || '';
+        return '<div class="card rv" data-food-id="' + food.id + '" style="position:relative">' +
+          '<div class="card-img">' +
+            '<img src="' + food.img + '" alt="' + food.name + '" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
+            (food.must ? '<span class="badge-must" style="position:absolute;top:12px;left:12px;z-index:2">🔥 必吃</span>' : '') +
+            '<button class="card-fav-btn ' + (isFav ? 'active' : '') + '" data-id="' + food.id + '" data-type="food" aria-label="' + (isFav ? '取消收藏' : '收藏') + '" onclick="event.stopPropagation();window._toggleFoodFav(\'' + food.id + '\',this)">' + (isFav ? '♥' : '♡') + '</button>' +
+            '<button class="card-quickview-btn" data-id="' + food.id + '" aria-label="快速预览" onclick="event.stopPropagation();showFoodQuickView(\'' + food.id + '\')">👁</button>' +
+          '</div>' +
+          '<div class="card-body">' +
+            '<h3>' + food.name + '</h3>' +
+            '<div class="card-tags">' +
+              '<span class="tag">' + food.tag + '</span>' +
+              (shopCount ? '<span class="tag" style="background:rgba(42,157,143,.1);color:#2a9d8f">🏪 ' + shopCount + '家餐厅</span>' : '') +
             '</div>' +
-            '<p class="food-card-desc">' + food.desc + '</p>' +
+            '<p class="desc">' + food.desc + '</p>' +
+            '<div class="card-meta">' +
+              '<span>' + (food.cat === 'lucai' ? '鲁菜经典' : food.cat === 'xiaochi' ? '市井小吃' : food.cat === 'laozihao' ? '老字号' : food.cat === 'zaocan' ? '早餐' : food.cat === 'yexiao' ? '夜宵' : food.cat === 'yinpin' ? '饮品' : food.cat) + '</span>' +
+              (avgPrice ? '<span style="color:var(--accent);font-weight:700">· 人均 ' + avgPrice + '</span>' : '') +
+            '</div>' +
+            (food.shops?.length ? `
+              <div style="margin-top:10px;padding:10px 12px;background:var(--bg2);border-radius:8px;font-size:.75rem">
+                <div style="font-weight:600;color:var(--text);margin-bottom:4px">🏪 推荐餐厅</div>
+                ${food.shops.slice(0, 2).map(sh => `
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;color:var(--text2)">
+                    <span>${sh.name}</span>
+                    <span style="color:var(--accent);font-weight:600">${sh.avg}</span>
+                  </div>
+                `).join('')}
+              </div>
+            ` : '') +
             (food.history ? '<div class="food-card-history">' + food.history + '</div>' : '') +
-            // 制作时长 & 发源地
-            (food.cookTime || food.origin ? '<div class="food-meta-extra">' +
-              (food.cookTime ? '<span>⏱️ 制作: ' + food.cookTime + '</span>' : '') +
-              (food.origin ? '<span>📍 发源: ' + food.origin + '</span>' : '') +
-            '</div>' : '') +
-            // 推荐菜品
-            (food.recommendedDishes && food.recommendedDishes.length ? '<div class="recommended-dishes">' +
-              food.recommendedDishes.map((d, i) => '<span class="dish-tag' + (i === 0 ? ' main' : '') + '">' + d + '</span>').join('') +
-            '</div>' : '') +
-            '<ul class="food-card-shops">' +
-              food.shops.map(s => {
-                const isCompared = compareList.some(c => c.shop === s.name);
-                return '<li>' +
-                  '<div class="shop-name">' +
-                    s.name +
-                    '<span class="shop-rating">' + stars(s.rating) + ' ' + s.rating + '</span>' +
-                  '</div>' +
-                  '<div class="shop-info">' +
-                    '<span>💰 ' + s.avg + '</span>' +
-                    '<span>📍 ' + s.addr + '</span>' +
-                  '</div>' +
-                  '<div class="shop-extras">' +
-                    (s.hours ? '<span>🕐 ' + s.hours + '</span>' : '') +
-                    (s.wait ? '<span>⏳ ' + s.wait + '</span>' : '') +
-                    (s.bestDish ? '<span>⭐ ' + s.bestDish + '</span>' : '') +
-                  '</div>' +
-                  // 餐厅详情增强
-                  '<div class="shop-detail-row">' +
-                    (s.wifi ? '<span class="shop-detail-badge badge-wifi">📶 WiFi</span>' : '') +
-                    (s.parking ? '<span class="shop-detail-badge badge-parking">🅿️ ' + s.parking + '</span>' : '') +
-                    (s.privateRoom && s.privateRoom !== '无' ? '<span class="shop-detail-badge badge-room">🚪 ' + s.privateRoom + '</span>' : '') +
-                    (s.bestTime ? '<span class="shop-detail-badge badge-besttime">⏰ 最佳: ' + s.bestTime + '</span>' : '') +
-                  '</div>' +
-                  '<button class="compare-btn ' + (isCompared ? 'active' : '') + '" data-shop="' + s.name + '" data-food="' + food.name + '">' +
-                    (isCompared ? '✓ 已对比' : '📊 对比') +
-                  '</button>' +
-                '</li>';
-              }).join('') +
-            '</ul>' +
-            renderNutrition(food) +
-            // 附近美食推荐
-            (nearby.length > 0 ? '<div class="nearby-section">' +
-              '<div class="nearby-title">📍 附近还有这些</div>' +
-              '<div class="nearby-list">' +
-                nearby.map(n => '<a class="nearby-chip" href="javascript:void(0)" data-food-id="' + n.id + '">' + n.name + '</a>').join('') +
-              '</div>' +
-            '</div>' : '') +
+            '<div class="card-actions" style="display:flex;gap:8px;margin-top:12px">' +
+              '<a href="food.html?id=' + food.id + '" class="btn btn-primary btn-sm" style="flex:1;justify-content:center">查看详情</a>' +
+              '<button class="btn btn-outline btn-sm compare-add-btn ' + (isCompare ? 'active' : '') + '" data-id="' + food.id + '" data-type="food" onclick="event.stopPropagation();addToFoodCompare(\'' + food.id + '\')">' + (isCompare ? '✓ 已对比' : '对比') + '</button>' +
+            '</div>' +
           '</div>' +
         '</div>';
       }).join('');
 
-      // Attach compare button events
-      grid.querySelectorAll('.compare-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          toggleCompare(btn.dataset.shop, btn.dataset.food);
-        });
-      });
-
-      // Attach nearby chip click events
-      grid.querySelectorAll('.nearby-chip').forEach(chip => {
-        chip.addEventListener('click', () => {
-          const foodId = chip.dataset.foodId;
-          const food = allFoods.find(f => f.id === foodId);
-          if (food) {
-            searchQuery = food.name;
-            document.getElementById('foodSearch').value = food.name;
-            renderFoods();
-            setTimeout(() => {
-              const card = document.querySelector('.food-card');
-              if (card) {
-                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                card.style.boxShadow = '0 0 0 3px var(--accent), 0 8px 32px rgba(201,169,110,.3)';
-                card.style.transition = 'box-shadow .3s';
-                setTimeout(() => card.style.boxShadow = '', 1500);
-              }
-            }, 200);
-          }
+      // Attach card click for navigation
+      grid.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', e => {
+          if (e.target.closest('.card-fav-btn') || e.target.closest('.card-quickview-btn') || e.target.closest('.card-actions') || e.target.closest('.compare-add-btn')) return;
+          const href = card.dataset.href;
+          if (href) window.location.href = href;
         });
       });
 
@@ -1393,17 +1656,42 @@
     });
 
 
+    // ── Enhanced Filter Chips ──
+    document.getElementById('enhancedFilters').addEventListener('click', e => {
+      const chip = e.target.closest('.filter-chip');
+      if (!chip) return;
+      const fKind = chip.dataset.filter;
+      const value = chip.dataset.value;
+      // Deactivate siblings
+      chip.parentElement.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      // Update state
+      switch (fKind) {
+        case 'price': filterPrice = value; break;
+        case 'type': filterType = value; break;
+        case 'meal': filterMeal = value; break;
+        case 'scene': filterScene = value; break;
+      }
+      renderFoods();
+    });
+
     // ── Reset Filter ──
     document.getElementById('resetFilterBtn').addEventListener('click', () => {
       currentCat = '全部';
       activeDistrict = '全部';
       searchQuery = '';
+      filterPrice = '全部';
+      filterType = '全部';
+      filterMeal = '全部';
+      filterScene = '全部';
       const searchInput = document.getElementById('foodSearch');
       if (searchInput) searchInput.value = '';
       document.querySelectorAll('.food-tab').forEach(b => b.classList.remove('active'));
       document.querySelector('.food-tab[data-cat="全部"]').classList.add('active');
       document.querySelectorAll('.district-tab').forEach(b => b.classList.remove('active'));
       document.querySelector('.district-tab[data-district="全部"]').classList.add('active');
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.filter-chip[data-value="全部"]').forEach(c => c.classList.add('active'));
       showFavOnly = false;
       document.getElementById('foodFavFilterBtn').classList.remove('active');
       renderFoods();

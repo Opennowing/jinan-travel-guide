@@ -443,6 +443,65 @@ html {
   outline-offset: 2px;
 }
 
+/* ═══ Culture Explore Cards ═══ */
+.culture-explore-card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:32px 24px;
+  text-align:center;
+  cursor:pointer;
+  transition:all .35s cubic-bezier(0.34,1.56,0.64,1);
+}
+.culture-explore-card:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow:0 20px 40px rgba(0,0,0,.08);
+  border-color:var(--accent);
+}
+.culture-explore-card:active{transform:scale(.97)}
+.culture-explore-card h3{
+  font:700 1.1rem/1.3 var(--serif);
+  margin-bottom:8px;
+}
+.culture-explore-card p{
+  font-size:.85rem;
+  color:var(--text2);
+}
+
+/* ═══ Culture Detail Modal ═══ */
+.culture-modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+  padding:20px;
+}
+.culture-modal-overlay.active{opacity:1;pointer-events:auto}
+.culture-modal-content{
+  background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);
+  max-width:600px;width:100%;max-height:85vh;overflow-y:auto;
+  transform:translateY(20px) scale(.95);transition:transform .35s cubic-bezier(0.34,1.56,0.64,1);
+  position:relative;padding:32px 28px;
+}
+.culture-modal-overlay.active .culture-modal-content{transform:translateY(0) scale(1)}
+.culture-modal-close{
+  position:absolute;top:12px;right:12px;width:32px;height:32px;
+  border:1px solid var(--border);border-radius:50%;background:var(--bg);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:1rem;color:var(--text2);transition:all .2s;z-index:1;
+}
+.culture-modal-close:hover{border-color:var(--coral);color:var(--coral)}
+.culture-detail-section{margin-bottom:20px}
+.culture-detail-section h4{font:700 1rem/1.3 var(--serif);color:var(--accent);margin-bottom:8px}
+.culture-detail-section p{font-size:.88rem;color:var(--text2);line-height:1.7}
+.culture-detail-section ul{list-style:none;padding:0}
+.culture-detail-section ul li{font-size:.88rem;color:var(--text2);padding:4px 0;padding-left:20px;position:relative}
+.culture-detail-section ul li::before{content:'•';position:absolute;left:0;color:var(--accent);font-weight:700}
+
+@media(max-width:768px){
+  .culture-explore-grid{grid-template-columns:1fr!important}
+  .culture-modal-content{padding:24px 20px}
+}
+
 /* ─── Reduce motion for accessibility ─── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -477,6 +536,7 @@ html {
   <a href="#people" data-label="名人" role="button" tabindex="0"></a>
   <a href="#festivals" data-label="活动日历" role="button" tabindex="0"></a>
   <a href="#quiz" data-label="文化测试" role="button" tabindex="0"></a>
+  <a href="#culture-explore" data-label="文化探索" role="button" tabindex="0"></a>
 </nav>
 
 <!-- ─── NAV ─── -->
@@ -1269,6 +1329,41 @@ html {
 
 <div class="section-divider" aria-hidden="true">◈</div>
 
+<!-- ─── CULTURE EXPLORE ─── -->
+<section class="section" id="culture-explore" aria-label="文化探索">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="eyebrow">EXPLORE</div>
+      <h2>🎭 文化探索</h2>
+      <p>点击卡片，发现济南的文化密码</p>
+    </div>
+    <div class="culture-explore-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px">
+      <div class="culture-explore-card" onclick="showCultureDetail('spring')">
+        <div style="font-size:3rem;margin-bottom:12px">⛲</div>
+        <h3>泉水文化</h3>
+        <p>72名泉的故事</p>
+      </div>
+      <div class="culture-explore-card" onclick="showCultureDetail('poetry')">
+        <div style="font-size:3rem;margin-bottom:12px">📝</div>
+        <h3>诗词济南</h3>
+        <p>李清照、辛弃疾的故里</p>
+      </div>
+      <div class="culture-explore-card" onclick="showCultureDetail('food')">
+        <div style="font-size:3rem;margin-bottom:12px">🍜</div>
+        <h3>鲁菜文化</h3>
+        <p>八大菜系之首的传承</p>
+      </div>
+      <div class="culture-explore-card" onclick="showCultureDetail('folk')">
+        <div style="font-size:3rem;margin-bottom:12px">🎪</div>
+        <h3>民俗非遗</h3>
+        <p>曲山艺海的底蕴</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider" aria-hidden="true">◈</div>
+
 <!-- ─── EXPLORE MORE ─── -->
 <section class="section" style="background:var(--bg2)" aria-labelledby="explore-title">
   <div class="section-inner">
@@ -1523,6 +1618,99 @@ function renderQuiz() {
 }
 
 renderQuiz();
+
+// ═══ Timeline Click-to-Expand ═══
+document.querySelectorAll('.tl-item').forEach(item => {
+  item.style.cursor = 'pointer';
+  item.addEventListener('click', () => {
+    const detail = item.querySelector('.tl-detail');
+    if (detail) {
+      const isVisible = detail.style.display !== 'none';
+      detail.style.display = isVisible ? 'none' : 'block';
+      if (!isVisible) {
+        detail.style.animation = 'fadeIn .3s ease';
+      }
+    }
+  });
+});
+
+// ═══ Culture Detail Modal ═══
+const cultureDetails = {
+  spring: {
+    title: '⛲ 泉水文化',
+    intro: '济南的泉水不仅是自然奇观，更是一种生活方式。72名泉散布全城，泉水融入了济南人的衣食住行。',
+    sections: [
+      { title: '💧 泉水的形成', content: '济南南部为石灰岩山区，北部为火成岩。南部山区的大气降水渗入地下，沿石灰岩裂隙向北流动，遇到北部火成岩阻隔后承压上升，形成涌泉。趵突泉地下水位需达到28.15米以上才会喷涌。' },
+      { title: '🫖 泉水与生活', content: '济南人用泉水泡茶、做饭、洗衣。黑虎泉、琵琶泉等设有取水点，清晨排队打水是老济南的日常。泉水常年恒温18°C，冬暖夏凉。护城河是全国唯一由泉水汇流而成的护城河，全长6.9公里。' },
+      { title: '📊 保泉行动', content: '20世纪80年代起，大量自备井导致地下水位骤降，趵突泉多次停喷。济南累计封填自备井2000余眼，2003年趵突泉复涌后连续喷涌至今超20年。"泉城人保泉"是刻在骨子里的责任。' }
+    ]
+  },
+  poetry: {
+    title: '📝 诗词济南',
+    intro: '一个城市同时诞生了婉约派和豪放派两位词坛巨匠——李清照和辛弃疾，合称"济南二安"。这在中国文学史上绝无仅有。',
+    sections: [
+      { title: '🌸 李清照（1084-1155）', content: '号易安居士，济南章丘人。"知否知否，应是绿肥红瘦"——她的词细腻婉转，被誉为"千古第一才女"。趵突泉畔有李清照纪念堂，章丘有李清照故居。她的前半生在济南度过，写下了大量关于泉水、荷花的词作。' },
+      { title: '⚔️ 辛弃疾（1140-1207）', content: '字幼安，济南历城人。"醉里挑灯看剑，梦回吹角连营"——他的词气势磅礴、壮怀激烈。21岁率骑兵闯入金营活捉叛将，一生以恢复中原为志。大明湖南岸有辛弃疾纪念祠。' },
+      { title: '✍️ 老舍与济南', content: '老舍在济南生活多年，写下《济南的冬天》《趵突泉》等名篇。"上帝把夏天的艺术赐给瑞士，把秋天的赐给西湖，冬和春的全赐给了济南。"这篇文章入选中国中学语文课本，影响了几代人对济南的想象。' }
+    ]
+  },
+  food: {
+    title: '🍜 鲁菜文化',
+    intro: '鲁菜是八大菜系之首，历史最悠久、技法最丰富、影响力最广。明清时期，鲁菜是宫廷御膳的主要来源。',
+    sections: [
+      { title: '👑 鲁菜的地位', content: '鲁菜是唯一自发源起的北方菜系，也是宫廷菜的根基。北京"八大楼"中有六家主营鲁菜。孔子"食不厌精，脍不厌细"的饮食理念，正是鲁菜文化的源头。' },
+      { title: '🔥 济南菜的精髓', content: '济南菜以"爆、炒、烧、塌"见长，讲究火候精准到秒。一道"爆炒腰花"需大火快炒15秒出锅，多一秒则老、少一秒则生。"旺火速成，一锅定味"是济南厨师的行话。' },
+      { title: '🍽️ 必吃经典', content: '糖醋黄河鲤鱼、九转大肠、爆炒腰花、奶汤蒲菜、葱烧海参——这五道菜代表了济南鲁菜的最高水准。老字号推荐：聚丰德、燕喜堂、闫府私房菜。' }
+    ]
+  },
+  folk: {
+    title: '🎪 民俗非遗',
+    intro: '济南的非遗技艺活在当下——从4000年前的龙山黑陶到今天的章丘铁锅，从皮影戏到吕剧，古老的手艺从未断代。',
+    sections: [
+      { title: '🧵 鲁绣与面塑', content: '鲁绣是中国"八大名绣"之一，历史可追溯至春秋战国。济南面塑始于汉代，非遗传承人能在核桃大小的面团上捏出栩栩如生的人物。' },
+      { title: '🎭 曲山艺海', content: '济南素有"曲山艺海"之称。济南皮影戏以"一人一台戏"著称，山东快书以鸳鸯板击节伴奏、节奏明快。济南吕剧是山东地方戏曲代表剧种，唱腔质朴优美。' },
+      { title: '🍳 章丘铁锅', content: '因《舌尖上的中国》走红，需经36000次手工锻打，锅面光滑如镜。商河鼓子秧歌始于秦汉，被誉为"北方汉民族舞蹈的代表"，入选国家级非遗名录。' }
+    ]
+  }
+};
+
+window.showCultureDetail = function(key) {
+  const data = cultureDetails[key];
+  if (!data) return;
+
+  let overlay = document.getElementById('cultureModalOverlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'cultureModalOverlay';
+    overlay.className = 'culture-modal-overlay';
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeCultureModal(); });
+    document.body.appendChild(overlay);
+  }
+
+  let sectionsHtml = data.sections.map(s =>
+    `<div class="culture-detail-section">
+      <h4>${s.title}</h4>
+      <p>${s.content}</p>
+    </div>`
+  ).join('');
+
+  overlay.innerHTML = `
+    <div class="culture-modal-content">
+      <button class="culture-modal-close" onclick="closeCultureModal()">✕</button>
+      <h3 style="font:700 1.3rem/1.3 var(--serif);margin-bottom:12px">${data.title}</h3>
+      <p style="font-size:.9rem;color:var(--text2);line-height:1.7;margin-bottom:24px">${data.intro}</p>
+      ${sectionsHtml}
+      <button class="btn btn-primary" onclick="closeCultureModal()" style="width:100%;justify-content:center;margin-top:8px">了解了</button>
+    </div>
+  `;
+  requestAnimationFrame(() => overlay.classList.add('active'));
+};
+
+window.closeCultureModal = function() {
+  const overlay = document.getElementById('cultureModalOverlay');
+  if (overlay) overlay.classList.remove('active');
+};
+
 });
 </script>
 

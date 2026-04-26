@@ -274,6 +274,29 @@
                   transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
+    /* 智能行程推荐 Quiz */
+    .itinerary-quiz{max-width:600px;margin:0 auto;text-align:center}
+    .quiz-step{display:none}
+    .quiz-step.active{display:block;animation:fadeIn .3s var(--ease)}
+    .quiz-step h3{font:700 1.2rem/1.4 var(--serif);margin-bottom:24px}
+    .quiz-options{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+    .quiz-opt{padding:14px 28px;border:2px solid var(--border);background:var(--card-bg);border-radius:var(--radius);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .3s;min-width:120px}
+    .quiz-opt:hover{border-color:var(--accent);background:var(--accent2);transform:translateY(-2px)}
+    .quiz-opt.selected{border-color:var(--accent);background:var(--accent);color:#fff;box-shadow:0 4px 16px rgba(201,169,110,.3)}
+    .quiz-result-card{background:linear-gradient(135deg,var(--accent2),var(--bg2));border:1px solid var(--accent);border-radius:var(--radius-lg);padding:32px;text-align:left;animation:fadeIn .5s var(--ease)}
+    .quiz-result-card h3{font:700 1.3rem/1.3 var(--serif);margin-bottom:12px}
+    .quiz-result-card .route{margin:16px 0}
+    .quiz-result-card .route-step{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px dashed var(--border)}
+    .quiz-result-card .route-step:last-child{border-bottom:none}
+    .quiz-result-card .step-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .quiz-result-card .step-name{font-weight:600;font-size:.9rem}
+    .quiz-result-card .step-detail{font-size:.75rem;color:var(--text2)}
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
   </style>
 </head>
 <body>
@@ -307,6 +330,46 @@
     <p style="color:rgba(255,255,255,.85);text-shadow:0 1px 10px rgba(0,0,0,.4)">精心规划的路线，让每一分钟都值得</p>
     <p style="font-size:.9rem;color:rgba(255,255,255,.7);margin-top:12px;font-weight:500">5 条精选路线 · 1-3 天行程 · 智能规划</p>
     <button class="btn btn-outline btn-sm" style="margin-top:16px;color:#fff;border-color:rgba(255,255,255,.4)" aria-label="分享页面" data-share='{"title":"济南行程攻略","subtitle":"1-3天精选路线","items":[{"name":"1日精华游","info":"趵突泉→五龙潭→大明湖→芙蓉街"},{"name":"2日深度游","info":"泉水线+文化线，覆盖主要景点"},{"name":"3日全览游","info":"市区精华+灵岩寺/红叶谷"},{"name":"亲子专线","info":"动物园+科技馆+泉水体验"},{"name":"文艺专线","info":"曲水亭街+省博+老城巷弄"}],"page":"itinerary"}'>📤 分享行程</button>
+  </section>
+
+  <!-- Smart Itinerary Quiz -->
+  <section class="section" aria-label="智能推荐">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">AI RECOMMEND</div>
+        <h2>🤖 智能行程推荐</h2>
+        <p>告诉我你的情况，我帮你规划</p>
+      </div>
+      <div class="itinerary-quiz" id="itineraryQuiz">
+        <div class="quiz-step active" data-step="1">
+          <h3>你有几天时间？</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-val="1">1天</button>
+            <button class="quiz-opt" data-val="2">2天</button>
+            <button class="quiz-opt" data-val="3">3天+</button>
+          </div>
+        </div>
+        <div class="quiz-step" data-step="2">
+          <h3>和谁一起来？</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-val="solo">独自一人</button>
+            <button class="quiz-opt" data-val="couple">情侣</button>
+            <button class="quiz-opt" data-val="family">家庭亲子</button>
+            <button class="quiz-opt" data-val="friends">朋友</button>
+          </div>
+        </div>
+        <div class="quiz-step" data-step="3">
+          <h3>偏好什么类型？</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-val="nature">自然风光</button>
+            <button class="quiz-opt" data-val="culture">历史文化</button>
+            <button class="quiz-opt" data-val="food">美食探店</button>
+            <button class="quiz-opt" data-val="relax">休闲放松</button>
+          </div>
+        </div>
+      </div>
+      <div id="quizResult" style="display:none"></div>
+    </div>
   </section>
 
   <!-- Smart Itinerary Planner -->
@@ -502,6 +565,100 @@
     initAll();
     initShopifyAnimations();
     initSocialFeatures();
+
+    // ═══ 智能行程推荐 Quiz ═══
+    const quizState = {};
+    document.querySelectorAll('.itinerary-quiz .quiz-opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const step = btn.closest('.quiz-step');
+        step.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        quizState[step.dataset.step] = btn.dataset.val;
+
+        setTimeout(() => {
+          step.classList.remove('active');
+          const next = step.nextElementSibling;
+          if (next && next.classList.contains('quiz-step')) {
+            next.classList.add('active');
+          } else {
+            showQuizResult();
+          }
+        }, 300);
+      });
+    });
+
+    function showQuizResult() {
+      const days = parseInt(quizState[1]) || 2;
+      const companion = quizState[2] || 'solo';
+      const type = quizState[3] || 'culture';
+
+      const routes = {
+        '1-culture': { name: '一日文化速览', steps: ['趵突泉', '大明湖', '芙蓉街午餐', '千佛山', '宽厚里晚餐'] },
+        '1-food': { name: '一日美食暴走', steps: ['甜沫油旋早餐', '趵突泉', '草包包子午餐', '大明湖', '把子肉晚餐'] },
+        '1-nature': { name: '一日自然之旅', steps: ['趵突泉', '五龙潭', '大明湖', '护城河步道', '千佛山日落'] },
+        '1-relax': { name: '一日休闲漫步', steps: ['曲水亭街', '百花洲', '大明湖泛舟', '芙蓉街下午茶', '宽厚里夜游'] },
+        '2-culture': { name: '两日深度文化', day1: ['趵突泉', '五龙潭', '大明湖'], day2: ['千佛山', '省博物馆', '老商埠'] },
+        '2-food': { name: '两日美食之旅', day1: ['糖醋鲤鱼', '把子肉', '油旋甜沫'], day2: ['九转大肠', '草包包子', '烧烤夜宵'] },
+        '2-nature': { name: '两日山水行', day1: ['趵突泉', '护城河游船', '大明湖'], day2: ['千佛山', '红叶谷', '灵岩寺'] },
+        '2-relax': { name: '两日慢生活', day1: ['曲水亭街', '百花洲', '泉水茶馆'], day2: ['省博物馆', '老商埠咖啡', '护城河夜游'] },
+        '3-culture': { name: '三日全览', day1: ['泉水线'], day2: ['文化线'], day3: ['灵岩寺/红叶谷'] },
+        '3-food': { name: '三日美食全览', day1: ['早餐甜沫油旋', '午餐草包包子', '晚餐宽厚里'], day2: ['早餐把子肉', '午餐聚丰德', '晚餐泉水宴'], day3: ['早餐糁汤', '午餐农家菜', '晚餐烧烤'] },
+        '3-nature': { name: '三日山水全览', day1: ['趵突泉', '护城河', '大明湖'], day2: ['千佛山', '红叶谷'], day3: ['灵岩寺', '百脉泉'] },
+        '3-relax': { name: '三日悠享', day1: ['曲水亭街漫步', '百花洲', '泉水茶馆'], day2: ['省博物馆', '洪家楼教堂', '老商埠'], day3: ['大明湖泛舟', '宽厚里下午茶', '护城河夜游'] },
+      };
+
+      const key = `${days}-${type}`;
+      const route = routes[key] || routes['2-culture'];
+
+      document.getElementById('itineraryQuiz').style.display = 'none';
+      const result = document.getElementById('quizResult');
+      result.style.display = 'block';
+
+      const companionLabel = companion === 'couple' ? '情侣' : companion === 'family' ? '亲子' : companion === 'friends' ? '朋友' : '独自';
+      const typeLabel = type === 'food' ? '美食' : type === 'nature' ? '自然' : type === 'relax' ? '休闲' : '文化';
+
+      let routeHtml = '';
+      if (route.day1) {
+        routeHtml += `<div style="font-weight:700;margin:12px 0 8px;color:var(--accent)">Day 1</div>`;
+        routeHtml += route.day1.map((s, i) => `<div class="route-step"><span class="step-num">${i+1}</span><div><div class="step-name">${s}</div></div></div>`).join('');
+        if (route.day2) {
+          routeHtml += `<div style="font-weight:700;margin:12px 0 8px;color:var(--accent)">Day 2</div>`;
+          routeHtml += route.day2.map((s, i) => `<div class="route-step"><span class="step-num">${i+1}</span><div><div class="step-name">${s}</div></div></div>`).join('');
+        }
+        if (route.day3) {
+          routeHtml += `<div style="font-weight:700;margin:12px 0 8px;color:var(--accent)">Day 3</div>`;
+          routeHtml += route.day3.map((s, i) => `<div class="route-step"><span class="step-num">${i+1}</span><div><div class="step-name">${s}</div></div></div>`).join('');
+        }
+      } else {
+        routeHtml = route.steps.map((s, i) => `<div class="route-step"><span class="step-num">${i+1}</span><div><div class="step-name">${s}</div></div></div>`).join('');
+      }
+
+      result.innerHTML = `
+        <div class="quiz-result-card">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+            <span style="font-size:2rem">🎯</span>
+            <div>
+              <h3 style="margin:0">${route.name}</h3>
+              <div style="font-size:.85rem;color:var(--text2)">${days}天 · ${companionLabel} · ${typeLabel}</div>
+            </div>
+          </div>
+          <div class="route">${routeHtml}</div>
+          <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
+            <button class="btn btn-primary" onclick="document.getElementById('smartPlanner').scrollIntoView({behavior:'smooth'})">查看完整行程 →</button>
+            <button class="btn btn-outline" onclick="resetQuiz()">重新选择</button>
+          </div>
+        </div>
+      `;
+    }
+
+    window.resetQuiz = function() {
+      document.getElementById('itineraryQuiz').style.display = 'block';
+      document.getElementById('quizResult').style.display = 'none';
+      document.querySelectorAll('.itinerary-quiz .quiz-step').forEach((s, i) => {
+        s.classList.toggle('active', i === 0);
+        s.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
+      });
+    };
 
     // ── Interactive: Trip Planner + A11y ──
     const a11y = new AccessibilityTools();

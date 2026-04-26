@@ -313,6 +313,62 @@
     .budget-bar .bar {
       transition: height .6s cubic-bezier(.34,1.56,.64,1);
     }
+
+    /* ═══ Tool Cards ═══ */
+    .tool-card{
+      background:var(--card-bg);
+      border:1px solid var(--border);
+      border-radius:var(--radius-lg);
+      padding:28px 24px;
+      text-align:center;
+      cursor:pointer;
+      transition:all .35s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .tool-card:hover{
+      transform:translateY(-6px) scale(1.02);
+      box-shadow:0 16px 32px rgba(0,0,0,.08);
+      border-color:var(--accent);
+    }
+    .tool-card:active{transform:scale(.97)}
+    .tool-card .icon{font-size:2.4rem;margin-bottom:12px;display:block;transition:transform .35s cubic-bezier(0.34,1.56,0.64,1)}
+    .tool-card:hover .icon{transform:scale(1.15) rotate(-3deg)}
+    .tool-card h4{font:700 1rem/1.3 var(--serif);margin-bottom:6px}
+    .tool-card p{font-size:.82rem;color:var(--text2)}
+
+    /* ═══ Modal ═══ */
+    .modal-overlay{
+      position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;
+      display:flex;align-items:center;justify-content:center;
+      opacity:0;pointer-events:none;transition:opacity .3s;
+      padding:20px;
+    }
+    .modal-overlay.active{opacity:1;pointer-events:auto}
+    .modal-content{
+      background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);
+      max-width:500px;width:100%;max-height:85vh;overflow-y:auto;
+      transform:translateY(20px) scale(.95);transition:transform .35s cubic-bezier(0.34,1.56,0.64,1);
+      position:relative;
+    }
+    .modal-overlay.active .modal-content{transform:translateY(0) scale(1)}
+    .modal-close{
+      position:absolute;top:12px;right:12px;width:32px;height:32px;
+      border:1px solid var(--border);border-radius:50%;background:var(--bg);
+      cursor:pointer;display:flex;align-items:center;justify-content:center;
+      font-size:1rem;color:var(--text2);transition:all .2s;z-index:1;
+    }
+    .modal-close:hover{border-color:var(--coral);color:var(--coral)}
+    .calc-row{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+    .calc-row label{font-size:.85rem;font-weight:600;min-width:80px;color:var(--text)}
+    .calc-row input,.calc-row select{padding:8px 14px;border:1px solid var(--border2);background:var(--bg);border-radius:8px;font-size:.85rem;outline:none;transition:border-color .3s,box-shadow .3s}
+    .calc-row input:focus,.calc-row select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(201,169,110,.15)}
+    .calc-result{background:linear-gradient(135deg,var(--accent2),var(--bg2));border-radius:12px;padding:20px;margin-top:16px;text-align:center}
+    .calc-result .total{font:900 2rem/1 var(--serif);color:var(--accent)}
+    .calc-result .breakdown{font-size:.8rem;color:var(--text2);margin-top:8px}
+
+    @media(max-width:768px){
+      .tools-grid{grid-template-columns:repeat(2,1fr)!important}
+      .modal-content{max-width:100%;margin:0 10px}
+    }
   </style>
 </head>
 <body>
@@ -346,6 +402,37 @@
     <p style="color:rgba(255,255,255,.85);text-shadow:0 1px 10px rgba(0,0,0,.4)">出发前你需要知道的一切</p>
     <p style="font-size:.9rem;color:rgba(255,255,255,.7);margin-top:12px;font-weight:500">交通 · 住宿 · 天气 · 预算 · 一站式指南</p>
     <button class="btn btn-outline btn-sm" style="margin-top:16px;color:#fff;border-color:rgba(255,255,255,.4)" aria-label="分享页面" data-share='{"title":"济南出行指南","subtitle":"交通·住宿·预算·天气","items":[{"name":"交通攻略","info":"高铁/飞机/地铁全覆盖"},{"name":"住宿推荐","info":"泉城路/大明湖周边"},{"name":"预算参考","info":"人均¥200-500/天"},{"name":"天气穿搭","info":"四季分明，春秋最宜"},{"name":"必备清单","info":"充电宝·舒适鞋·防晒"}],"page":"guide"}'>📤 分享指南</button>
+  </section>
+
+  <section class="section" aria-label="实用工具">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">TOOLS</div>
+        <h2>🧰 实用工具</h2>
+      </div>
+      <div class="tools-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px">
+        <div class="tool-card" onclick="showBudgetCalc()">
+          <span class="icon">💰</span>
+          <h4>预算计算器</h4>
+          <p>快速估算旅行费用</p>
+        </div>
+        <div class="tool-card" onclick="showPackingList()">
+          <span class="icon">🎒</span>
+          <h4>行李清单</h4>
+          <p>一键生成打包列表</p>
+        </div>
+        <div class="tool-card" onclick="showWeather()">
+          <span class="icon">🌤️</span>
+          <h4>天气查询</h4>
+          <p>实时济南天气</p>
+        </div>
+        <div class="tool-card" onclick="showEmergency()">
+          <span class="icon">🆘</span>
+          <h4>紧急联系</h4>
+          <p>一键拨打急救电话</p>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="section" aria-label="出行指南内容">
@@ -1117,6 +1204,162 @@
     });
 
     loadWeather();
+
+    // ═══ Modal System ═══
+    function openModal(html) {
+      let overlay = document.getElementById('modalOverlay');
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'modalOverlay';
+        overlay.className = 'modal-overlay';
+        overlay.innerHTML = `<div class="modal-content"><button class="modal-close" onclick="closeModal()">✕</button><div class="modal-body"></div></div>`;
+        overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+        document.body.appendChild(overlay);
+      }
+      overlay.querySelector('.modal-body').innerHTML = html;
+      requestAnimationFrame(() => overlay.classList.add('active'));
+    }
+    window.closeModal = function() {
+      const overlay = document.getElementById('modalOverlay');
+      if (overlay) overlay.classList.remove('active');
+    };
+
+    // ═══ Tool: Budget Calculator ═══
+    window.showBudgetCalc = function() {
+      openModal(`
+        <div style="padding:24px">
+          <h3 style="font:700 1.2rem/1.3 var(--serif);margin-bottom:20px">💰 旅行预算计算器</h3>
+          <div class="calc-row">
+            <label>游玩天数</label>
+            <input type="number" id="modalCalcDays" value="2" min="1" max="10" style="width:80px">
+          </div>
+          <div class="calc-row">
+            <label>住宿标准</label>
+            <select id="modalCalcHotel">
+              <option value="100">经济型 ¥100/晚</option>
+              <option value="200" selected>舒适型 ¥200/晚</option>
+              <option value="400">高档型 ¥400/晚</option>
+              <option value="800">豪华型 ¥800/晚</option>
+            </select>
+          </div>
+          <div class="calc-row">
+            <label>餐饮标准</label>
+            <select id="modalCalcFood">
+              <option value="50">简朴 ¥50/天</option>
+              <option value="100" selected>适中 ¥100/天</option>
+              <option value="200">丰盛 ¥200/天</option>
+            </select>
+          </div>
+          <div class="calc-row">
+            <label>交通方式</label>
+            <select id="modalCalcTransport">
+              <option value="30" selected>公交地铁 ¥30/天</option>
+              <option value="80">打车为主 ¥80/天</option>
+              <option value="150">包车 ¥150/天</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick="calcModalBudget()" style="width:100%;justify-content:center;margin-top:16px">计算预算</button>
+          <div id="modalCalcResult" style="display:none;margin-top:16px"></div>
+        </div>
+      `);
+    };
+
+    window.calcModalBudget = function() {
+      const days = parseInt(document.getElementById('modalCalcDays').value);
+      const hotel = parseInt(document.getElementById('modalCalcHotel').value);
+      const food = parseInt(document.getElementById('modalCalcFood').value);
+      const transport = parseInt(document.getElementById('modalCalcTransport').value);
+      const tickets = 100;
+      const total = (hotel * (days-1)) + (food * days) + (transport * days) + (tickets * days/2);
+
+      document.getElementById('modalCalcResult').style.display = 'block';
+      document.getElementById('modalCalcResult').innerHTML = `
+        <div class="calc-result">
+          <div class="total">¥${Math.round(total)}</div>
+          <div class="breakdown">
+            住宿 ¥${hotel*(days-1)} + 餐饮 ¥${food*days} + 交通 ¥${transport*days} + 门票约¥${Math.round(tickets*days/2)}
+          </div>
+          <div style="margin-top:8px;font-size:.75rem;color:var(--text3)">
+            ${days}天${days-1}晚 · 人均约¥${Math.round(total/days)}/天
+          </div>
+        </div>
+      `;
+    };
+
+    // ═══ Tool: Packing List ═══
+    window.showPackingList = function() {
+      const items = [
+        { cat: '📄 证件', items: ['身份证', '学生证(半价)', '现金/银行卡'] },
+        { cat: '👕 衣物', items: ['舒适步行鞋', '薄外套/风衣', '换洗衣物'] },
+        { cat: '🧴 日用', items: ['防晒霜', '充电宝', '雨伞', '纸巾/湿巾'] },
+        { cat: '💊 药品', items: ['感冒药', '创可贴', '肠胃药'] },
+        { cat: '📱 电子', items: ['手机+充电线', '耳机', '相机(可选)'] },
+      ];
+      let html = '<div style="padding:24px"><h3 style="font:700 1.2rem/1.3 var(--serif);margin-bottom:20px">🎒 济南出行行李清单</h3>';
+      items.forEach(cat => {
+        html += `<div style="margin-bottom:16px"><div style="font-weight:700;font-size:.9rem;margin-bottom:8px;color:var(--accent)">${cat.cat}</div>`;
+        cat.items.forEach(item => {
+          html += `<label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:.85rem;color:var(--text2);cursor:pointer">
+            <input type="checkbox" style="width:18px;height:18px;accent-color:var(--accent)"> ${item}
+          </label>`;
+        });
+        html += '</div>';
+      });
+      html += '<button class="btn btn-primary" onclick="closeModal()" style="width:100%;justify-content:center;margin-top:8px">完成</button></div>';
+      openModal(html);
+    };
+
+    // ═══ Tool: Weather ═══
+    window.showWeather = function() {
+      openModal(`<div style="padding:24px;text-align:center">
+        <h3 style="font:700 1.2rem/1.3 var(--serif);margin-bottom:16px">🌤️ 济南实时天气</h3>
+        <div id="modalWeather" style="min-height:100px;display:flex;align-items:center;justify-content:center;color:var(--text3)">加载中…</div>
+      </div>`);
+      fetch('https://wttr.in/Jinan?format=%t|%C|%h|%w&lang=zh', { headers: { 'User-Agent': 'curl/8.0' } })
+        .then(r => r.text())
+        .then(text => {
+          if (text.includes('<!DOCTYPE')) throw new Error('HTML');
+          const [temp, desc, humidity, wind] = text.trim().split('|');
+          document.getElementById('modalWeather').innerHTML = `
+            <div style="font-size:3rem;margin-bottom:8px">🌡️</div>
+            <div style="font:900 2.5rem/1 var(--serif);color:var(--accent)">${temp}</div>
+            <div style="font-size:1rem;color:var(--text);margin:8px 0">${desc}</div>
+            <div style="font-size:.85rem;color:var(--text2)">💧 ${humidity} · 🌬️ ${wind}</div>
+          `;
+        })
+        .catch(() => {
+          document.getElementById('modalWeather').innerHTML = '<div style="color:var(--text3)">天气数据暂时无法获取</div>';
+        });
+    };
+
+    // ═══ Tool: Emergency ═══
+    window.showEmergency = function() {
+      openModal(`<div style="padding:24px">
+        <h3 style="font:700 1.2rem/1.3 var(--serif);margin-bottom:20px">🆘 紧急联系方式</h3>
+        <div style="display:grid;gap:12px">
+          <a href="tel:110" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg2);border-radius:var(--radius);text-decoration:none;color:var(--text);border:1px solid var(--border)">
+            <span style="font-size:1.5rem">🚨</span>
+            <div><div style="font-weight:700">报警 110</div><div style="font-size:.8rem;color:var(--text2)">公安报警电话</div></div>
+          </a>
+          <a href="tel:120" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg2);border-radius:var(--radius);text-decoration:none;color:var(--text);border:1px solid var(--border)">
+            <span style="font-size:1.5rem">🚑</span>
+            <div><div style="font-weight:700">急救 120</div><div style="font-size:.8rem;color:var(--text2)">医疗急救电话</div></div>
+          </a>
+          <a href="tel:119" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg2);border-radius:var(--radius);text-decoration:none;color:var(--text);border:1px solid var(--border)">
+            <span style="font-size:1.5rem">🔥</span>
+            <div><div style="font-weight:700">火警 119</div><div style="font-size:.8rem;color:var(--text2)">消防报警电话</div></div>
+          </a>
+          <a href="tel:12345" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg2);border-radius:var(--radius);text-decoration:none;color:var(--text);border:1px solid var(--border)">
+            <span style="font-size:1.5rem">📞</span>
+            <div><div style="font-weight:700">旅游投诉 12345</div><div style="font-size:.8rem;color:var(--text2)">市民服务热线</div></div>
+          </a>
+          <a href="tel:053187938911" style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--bg2);border-radius:var(--radius);text-decoration:none;color:var(--text);border:1px solid var(--border)">
+            <span style="font-size:1.5rem">🏥</span>
+            <div><div style="font-weight:700">省立医院</div><div style="font-size:.8rem;color:var(--text2)">0531-87938911 · 三甲</div></div>
+          </a>
+        </div>
+      </div>`);
+    };
 
     // ── FAQ accordion ──
     document.querySelectorAll('.faq-q').forEach((q, i) => {

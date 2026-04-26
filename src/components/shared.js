@@ -344,6 +344,136 @@ const _spinStyle = document.createElement('style');
 _spinStyle.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
 document.head.appendChild(_spinStyle);
 
+// ─── Card Interactions (favorites + card click) ───
+export function initCardInteractions() {
+  // 收藏按钮点击事件
+  document.addEventListener('click', e => {
+    const favBtn = e.target.closest('.card-fav-btn');
+    if (!favBtn) return;
+    e.stopPropagation();
+    const id = favBtn.dataset.id;
+    const type = favBtn.dataset.type; // 'spot' or 'food'
+    toggleFavorite(id, type, favBtn);
+  });
+
+  // 卡片点击跳转（排除按钮点击）
+  document.addEventListener('click', e => {
+    const card = e.target.closest('.card[data-href]');
+    if (!card || e.target.closest('.card-fav-btn')) return;
+    location.href = card.dataset.href;
+  });
+
+  // 初始化已收藏状态
+  initFavStates();
+}
+
+function toggleFavorite(id, type, btn) {
+  const key = `jinan-fav-${type}`;
+  const favs = JSON.parse(localStorage.getItem(key) || '[]');
+  const idx = favs.indexOf(id);
+  if (idx >= 0) {
+    favs.splice(idx, 1);
+    btn.classList.remove('active');
+    btn.textContent = '♡';
+    showToast('已取消收藏');
+  } else {
+    favs.push(id);
+    btn.classList.add('active');
+    btn.textContent = '♥';
+    showToast('已收藏');
+  }
+  localStorage.setItem(key, JSON.stringify(favs));
+}
+
+function initFavStates() {
+  ['spot', 'food'].forEach(type => {
+    const key = `jinan-fav-${type}`;
+    const favs = JSON.parse(localStorage.getItem(key) || '[]');
+    document.querySelectorAll(`.card-fav-btn[data-type="${type}"]`).forEach(btn => {
+      if (favs.includes(btn.dataset.id)) {
+        btn.classList.add('active');
+        btn.textContent = '♥';
+      }
+    });
+  });
+}
+
+export function showToast(msg) {
+  let toast = document.querySelector('.jinan-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.className = 'jinan-toast';
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+// ─── Enhanced Lazy Image Skeleton with WebP + Priority ───
+export function initLazyImageSkeletonEnhanced() {
+  // WebP detection
+  let webpSupported = false;
+  const webpTest = new Image();
+  webpTest.onload = () => { webpSupported = true; };
+  webpTest.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const container = entry.target;
+      const img = container.querySelector('img');
+      if (!img) { io.unobserve(container); return; }
+      container.classList.add('img-loading');
+      container.classList.remove('img-loaded');
+
+      let skeleton = container.querySelector('.img-skeleton');
+      if (!skeleton) {
+        skeleton = document.createElement('div');
+        skeleton.className = 'img-skeleton';
+        skeleton.style.cssText = 'position:absolute;inset:0;z-index:2;background:var(--bg3);display:flex;align-items:center;justify-content:center;';
+        skeleton.innerHTML = '<div style="width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite"></div>';
+        container.appendChild(skeleton);
+      }
+
+      const onLoad = () => {
+        container.classList.remove('img-loading');
+        container.classList.add('img-loaded');
+        if (skeleton) { skeleton.style.opacity='0'; skeleton.style.transition='opacity .3s'; setTimeout(()=>skeleton.remove(),300); }
+      };
+      const onError = () => {
+        container.classList.remove('img-loading');
+        container.classList.add('img-loaded');
+        if (skeleton) skeleton.remove();
+        // Generate a nicer SVG fallback
+        const name = img.alt || '济南';
+        const colors = [['#c9a96e','#e8dcc8'],['#2a9d8f','#d4f1ed'],['#e76f51','#fce4de'],['#8b5cf6','#ede9fe']];
+        const ci = Math.abs([...name].reduce((a,c)=>a+c.charCodeAt(0),0)) % colors.length;
+        const [bg,fg] = colors[ci];
+        img.src = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect fill="${bg}" width="600" height="400" rx="12"/><text x="300" y="180" text-anchor="middle" font-size="50">🏔️</text><text x="300" y="240" text-anchor="middle" fill="${fg}" font-size="20" font-family="sans-serif" font-weight="bold">${name}</text></svg>`)}`;
+      };
+
+      if (img.complete && img.naturalWidth > 0) { onLoad(); }
+      else { img.addEventListener('load', onLoad, {once:true}); img.addEventListener('error', onError, {once:true}); }
+
+      // Priority: first 4 images load eagerly
+      const allCards = document.querySelectorAll('.card-img, .img-container');
+      const idx = [...allCards].indexOf(container);
+      if (idx < 4) {
+        img.loading = 'eager';
+      }
+
+      io.unobserve(container);
+    });
+  }, { rootMargin: '300px 0px' });
+
+  document.querySelectorAll('.card-img, .img-container').forEach(el => {
+    if (!el.querySelector('img')) return;
+    io.observe(el);
+  });
+}
+
 
 // Init all
 export function initAll() {
@@ -358,4 +488,5 @@ export function initAll() {
   initRipple();
   initSwipeNav();
   initPageTransition();
+  initCardInteractions();
 }

@@ -111,6 +111,13 @@
     .card-fav-btn.faved{background:#ef4444;color:#fff}
     .card-compare-btn:hover{background:rgba(59,130,246,.8);transform:scale(1.1)}
     .card-compare-btn.compared{background:#3b82f6;color:#fff}
+    .card-quickview-btn{width:32px;height:32px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:all .25s;backdrop-filter:blur(4px);background:rgba(0,0,0,.45);color:#fff}
+    .card-quickview-btn:hover{background:rgba(42,157,143,.8);transform:scale(1.1)}
+    /* ── 时长筛选 ── */
+    .duration-filter-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:12px}
+    .duration-btn{padding:4px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.7rem;cursor:pointer;transition:all .3s;color:var(--text3)}
+    .duration-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.1)}
+    .duration-btn.active{border-color:var(--accent);background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(201,169,110,.25)}
     /* ── 对比面板 ── */
     .compare-bar{position:fixed;bottom:0;left:0;right:0;z-index:400;background:var(--bg);border-top:2px solid var(--accent);box-shadow:0 -4px 24px rgba(0,0,0,.15);transform:translateY(100%);transition:transform .35s var(--ease-out);padding:16px 24px;max-height:50vh;overflow-y:auto}
     .compare-bar.open{transform:translateY(0)}
@@ -295,7 +302,17 @@
           <span class="filter-group-label">🎫 门票</span>
           <button class="ticket-btn active" data-ticket="all">全部</button>
           <button class="ticket-btn" data-ticket="free">🆓 免费</button>
-          <button class="ticket-btn" data-ticket="paid">🎫 收费</button>
+          <button class="ticket-btn" data-ticket="under50">¥50以下</button>
+          <button class="ticket-btn" data-ticket="50to100">¥50-100</button>
+          <button class="ticket-btn" data-ticket="over100">¥100以上</button>
+        </div>
+        <div class="duration-filter-row" id="durationFilters" role="group" aria-label="时长筛选">
+          <span class="filter-group-label">⏱ 时长</span>
+          <button class="duration-btn active" data-dur="all">全部</button>
+          <button class="duration-btn" data-dur="1h">1小时内</button>
+          <button class="duration-btn" data-dur="1to3">1-3小时</button>
+          <button class="duration-btn" data-dur="half">半天</button>
+          <button class="duration-btn" data-dur="full">全天</button>
         </div>
         <div class="filter-bottom-row">
           <div style="display:flex;align-items:center;gap:12px">
@@ -438,7 +455,25 @@
     function getMeituanLink(spotName) {
       return `${CPS.meituan.baseUrl}${encodeURIComponent(spotName)}?ci=111&f=${CPS.meituan.affId}`;
     }
-    let allSpots = [], activeCat = 'all', activeAud = 'all', activeArea = 'all', activeTicket = 'all', sortBy = 'recommend', currentGalleryIndex = 0;
+    let allSpots = [], activeCat = 'all', activeAud = 'all', activeArea = 'all', activeTicket = 'all', activeDur = 'all', sortBy = 'recommend', currentGalleryIndex = 0;
+
+    // ── 解析时长字符串为分钟 ──
+    function parseDurMinutes(dur) {
+      if (!dur) return 60;
+      dur = dur.toLowerCase();
+      // "半天" → 240, "全天" → 480
+      if (dur.includes('全天')) return 480;
+      if (dur.includes('半天')) return 240;
+      // "2-3小时" → 180, "1.5小时" → 90
+      const hMatch = dur.match(/([\d.]+)\s*[~\-到至]\s*([\d.]+)\s*小时/);
+      if (hMatch) return parseFloat(hMatch[2]) * 60;
+      const hSingle = dur.match(/([\d.]+)\s*小时/);
+      if (hSingle) return parseFloat(hSingle[1]) * 60;
+      // "30分钟" → 30
+      const mMatch = dur.match(/([\d]+)\s*分钟/);
+      if (mMatch) return parseInt(mMatch[1]);
+      return 60;
+    }
 
     // ── 区域分类（基于经纬度） ──
     function getArea(spot) {
@@ -498,7 +533,22 @@
       if (activeAud !== 'all') list = list.filter(s => s.audience.includes(activeAud));
       if (activeArea !== 'all') list = list.filter(s => getArea(s) === activeArea);
       if (activeTicket === 'free') list = list.filter(s => s.price === 0);
-      if (activeTicket === 'paid') list = list.filter(s => s.price > 0);
+      else if (activeTicket === 'paid') list = list.filter(s => s.price > 0);
+      else if (activeTicket === 'under50') list = list.filter(s => s.price > 0 && s.price < 50);
+      else if (activeTicket === '50to100') list = list.filter(s => s.price >= 50 && s.price <= 100);
+      else if (activeTicket === 'over100') list = list.filter(s => s.price > 100);
+      // Duration filter
+      if (activeDur !== 'all') {
+        list = list.filter(s => {
+          const dur = (s.dur || '').toLowerCase();
+          const mins = parseDurMinutes(dur);
+          if (activeDur === '1h') return mins <= 60;
+          if (activeDur === '1to3') return mins > 60 && mins <= 180;
+          if (activeDur === 'half') return mins > 120 && mins <= 300;
+          if (activeDur === 'full') return mins > 300;
+          return true;
+        });
+      }
       switch (sortBy) {
         case 'rating': list.sort((a, b) => b.rating - a.rating); break;
         case 'price': list.sort((a, b) => a.price - b.price); break;
@@ -792,6 +842,11 @@
       document.querySelectorAll('#ticketFilters .ticket-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active'); activeTicket = btn.dataset.ticket; render();
     });
+    document.getElementById('durationFilters')?.addEventListener('click', e => {
+      const btn = e.target.closest('.duration-btn'); if(!btn) return;
+      document.querySelectorAll('#durationFilters .duration-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active'); activeDur = btn.dataset.dur; render();
+    });
 
     // ── 重置筛选 ──
     document.getElementById('resetFiltersBtn')?.addEventListener('click', () => {
@@ -811,6 +866,10 @@
       activeTicket = 'all';
       document.querySelectorAll('#ticketFilters .ticket-btn').forEach(b => b.classList.remove('active'));
       document.querySelector('#ticketFilters .ticket-btn[data-ticket="all"]')?.classList.add('active');
+      // Reset duration
+      activeDur = 'all';
+      document.querySelectorAll('#durationFilters .duration-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('#durationFilters .duration-btn[data-dur="all"]')?.classList.add('active');
       // Reset favorites filter
       showFavOnly = false;
       document.getElementById('favFilterBtn')?.classList.remove('active');
@@ -1086,6 +1145,7 @@
               <div class="spot-card-actions">
                 <button class="card-fav-btn ${isFav?'faved':''}" data-id="${s.id}" title="收藏">${isFav?'❤️':'🤍'}</button>
                 <button class="card-compare-btn ${isComp?'compared':''}" data-id="${s.id}" title="对比">⚖️</button>
+                <button class="card-quickview-btn" data-id="${s.id}" title="快速预览">👁</button>
               </div>
               <span class="spot-price">${priceHtml}</span>
               ${isSeasonalRecommended(s) ? '<span class="seasonal-rec-tag">🌟 当季推荐</span>' : ''}
@@ -1144,6 +1204,15 @@
       // Compare buttons
       document.querySelectorAll('.card-compare-btn').forEach(btn => {
         btn.addEventListener('click', e => { e.stopPropagation(); toggleCompare(btn.dataset.id); });
+      });
+
+      // Quickview buttons
+      document.querySelectorAll('.card-quickview-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          const s = allSpots.find(x => x.id === btn.dataset.id);
+          if (s) openQuickView(s);
+        });
       });
     };
 

@@ -399,6 +399,12 @@
     .timeline-item.rv, .guide-card.rv, .culture-card.rv {
       opacity: 1; transform: none;
     }
+  
+    /* ── Hot Search Tags (replaces inline styles) ── */
+    .hot-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px;position:relative;z-index:2}
+    .hot-tag{font-size:.78rem;padding:5px 14px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.65);text-decoration:none;transition:all .25s;backdrop-filter:blur(6px)}
+    .hot-tag:hover{background:rgba(201,169,110,.2);border-color:rgba(201,169,110,.4);color:#fff}
+    .hot-tag .tag-icon{margin-right:2px}
   </style>
 </head>
 <body>
@@ -481,14 +487,14 @@
     </div>
 
     <!-- Hot Search Tags -->
-    <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px;position:relative;z-index:2">
-      <a href="spots.html?q=趵突泉" style="font-size:.78rem;padding:5px 14px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.65);text-decoration:none;transition:all .25s;backdrop-filter:blur(6px)" onmouseover="this.style.background='rgba(201,169,110,.2)';this.style.borderColor='rgba(201,169,110,.4)';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(255,255,255,.12)';this.style.color='rgba(255,255,255,.65)'">🔥 趵突泉</a>
-      <a href="spots.html?q=大明湖" style="font-size:.78rem;padding:5px 14px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.65);text-decoration:none;transition:all .25s;backdrop-filter:blur(6px)" onmouseover="this.style.background='rgba(201,169,110,.2)';this.style.borderColor='rgba(201,169,110,.4)';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(255,255,255,.12)';this.style.color='rgba(255,255,255,.65)'">大明湖</a>
-      <a href="spots.html?q=千佛山" style="font-size:.78rem;padding:5px 14px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.65);text-decoration:none;transition:all .25s;backdrop-filter:blur(6px)" onmouseover="this.style.background='rgba(201,169,110,.2)';this.style.borderColor='rgba(201,169,110,.4)';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(255,255,255,.12)';this.style.color='rgba(255,255,255,.65)'">千佛山</a>
-      <a href="food.html?q=把子肉" style="font-size:.78rem;padding:5px 14px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.65);text-decoration:none;transition:all .25s;backdrop-filter:blur(6px)" onmouseover="this.style.background='rgba(201,169,110,.2)';this.style.borderColor='rgba(201,169,110,.4)';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(255,255,255,.12)';this.style.color='rgba(255,255,255,.65)'">把子肉</a>
-      <a href="spots.html?q=五龙潭" style="font-size:.78rem;padding:5px 14px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.65);text-decoration:none;transition:all .25s;backdrop-filter:blur(6px)" onmouseover="this.style.background='rgba(201,169,110,.2)';this.style.borderColor='rgba(201,169,110,.4)';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(255,255,255,.12)';this.style.color='rgba(255,255,255,.65)'">五龙潭</a>
-      <a href="food.html?q=糖醋鲤鱼" style="font-size:.78rem;padding:5px 14px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.65);text-decoration:none;transition:all .25s;backdrop-filter:blur(6px)" onmouseover="this.style.background='rgba(201,169,110,.2)';this.style.borderColor='rgba(201,169,110,.4)';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(255,255,255,.12)';this.style.color='rgba(255,255,255,.65)'">糖醋鲤鱼</a>
-      <a href="spots.html?q=黑虎泉" style="font-size:.78rem;padding:5px 14px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.65);text-decoration:none;transition:all .25s;backdrop-filter:blur(6px)" onmouseover="this.style.background='rgba(201,169,110,.2)';this.style.borderColor='rgba(201,169,110,.4)';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,.08)';this.style.borderColor='rgba(255,255,255,.12)';this.style.color='rgba(255,255,255,.65)'">黑虎泉</a>
+    <div class="hot-tags">
+      <a href="spots.html?q=趵突泉" class="hot-tag">🔥 趵突泉</a>
+      <a href="spots.html?q=大明湖" class="hot-tag">大明湖</a>
+      <a href="spots.html?q=千佛山" class="hot-tag">千佛山</a>
+      <a href="food.html?q=把子肉" class="hot-tag">把子肉</a>
+      <a href="spots.html?q=五龙潭" class="hot-tag">五龙潭</a>
+      <a href="food.html?q=糖醋鲤鱼" class="hot-tag">糖醋鲤鱼</a>
+      <a href="spots.html?q=黑虎泉" class="hot-tag">黑虎泉</a>
     </div>
 
     <!-- Weather hint -->
@@ -720,35 +726,43 @@
         <h2>📖 热门攻略</h2>
         <p>精选实用攻略，助你玩转济南</p>
       </div>
-      <div class="guides-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px">
+      <div class="guides-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px">
         <a href="guide.html" class="card rv" style="text-decoration:none">
-          <div class="card-body" style="padding:24px">
-            <div style="font-size:2rem;margin-bottom:12px">🚇</div>
-            <h3 style="font-size:1rem">济南交通全攻略</h3>
+          <div class="card-img" style="aspect-ratio:16/9">
+            <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&q=75" alt="济南交通" loading="lazy" onload="this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')">
+          </div>
+          <div class="card-body">
+            <h3>🚇 济南交通全攻略</h3>
             <p class="desc">地铁、公交、打车全覆盖，附线路图</p>
             <div style="margin-top:12px;font-size:.75rem;color:var(--accent)">阅读攻略 →</div>
           </div>
         </a>
         <a href="itinerary.html" class="card rv" style="text-decoration:none">
-          <div class="card-body" style="padding:24px">
-            <div style="font-size:2rem;margin-bottom:12px">📋</div>
-            <h3 style="font-size:1rem">2日游完美行程</h3>
+          <div class="card-img" style="aspect-ratio:16/9">
+            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=75" alt="行程规划" loading="lazy" onload="this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')">
+          </div>
+          <div class="card-body">
+            <h3>📋 2日游完美行程</h3>
             <p class="desc">精心规划的路线，拿来即用</p>
             <div style="margin-top:12px;font-size:.75rem;color:var(--accent)">查看行程 →</div>
           </div>
         </a>
         <a href="food.html" class="card rv" style="text-decoration:none">
-          <div class="card-body" style="padding:24px">
-            <div style="font-size:2rem;margin-bottom:12px">🍜</div>
-            <h3 style="font-size:1rem">济南必吃清单</h3>
+          <div class="card-img" style="aspect-ratio:16/9">
+            <img src="https://images.unsplash.com/photo-1755742319537-449f661a3190?w=600&q=75" alt="济南美食" loading="lazy" onload="this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')">
+          </div>
+          <div class="card-body">
+            <h3>🍜 济南必吃清单</h3>
             <p class="desc">10道必吃美食+推荐餐厅</p>
             <div style="margin-top:12px;font-size:.75rem;color:var(--accent)">查看清单 →</div>
           </div>
         </a>
         <a href="culture.html" class="card rv" style="text-decoration:none">
-          <div class="card-body" style="padding:24px">
-            <div style="font-size:2rem;margin-bottom:12px">📚</div>
-            <h3 style="font-size:1rem">济南文化简史</h3>
+          <div class="card-img" style="aspect-ratio:16/9">
+            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=75" alt="济南文化" loading="lazy" onload="this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')">
+          </div>
+          <div class="card-body">
+            <h3>📚 济南文化简史</h3>
             <p class="desc">从龙山文化到近代开埠</p>
             <div style="margin-top:12px;font-size:.75rem;color:var(--accent)">了解历史 →</div>
           </div>
@@ -767,7 +781,13 @@
       <a href="guide.html">指南</a>
       <a href="culture.html">文化</a>
     </nav>
-    <p style="margin-top:4px">© 2026 济南旅游攻略 · 泉城 · 数据来源于公开信息，仅供参考</p>
+    <p class="footer-tagline">72 泉涌，千年文脉 — 你的泉城深度游指南</p>
+    <div class="footer-stats" style="display:flex;justify-content:center;gap:24px;margin:12px 0;font-size:.75rem;color:var(--text3)">
+      <span>📍 80+ 精选景点</span>
+      <span>🍜 68 道必吃美食</span>
+      <span>📋 5 条精选路线</span>
+    </div>
+    <p>© 2026 济南旅游攻略 · 泉城 · 数据来源于公开信息，仅供参考</p>
   </footer>
 
   <button class="btt" aria-label="返回顶部">↑</button>

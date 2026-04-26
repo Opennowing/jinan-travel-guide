@@ -109,15 +109,13 @@
     .fav-filter-btn{padding:6px 14px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.75rem;cursor:pointer;transition:all .3s;color:var(--text3);display:flex;align-items:center;gap:4px}
     .fav-filter-btn:hover,.fav-filter-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.08)}
     .fav-filter-btn .fav-count{background:var(--accent);color:#fff;font-size:.65rem;padding:1px 6px;border-radius:100px;font-weight:700}
-    /* ── 卡片收藏/对比按钮 ── */
-    .spot-card-actions{position:absolute;top:12px;right:12px;z-index:3;display:flex;gap:6px}
-    .card-fav-btn,.card-compare-btn{width:32px;height:32px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .25s;backdrop-filter:blur(4px);background:rgba(0,0,0,.45);color:#fff;opacity:1;transform:none}
-    .card-fav-btn:hover{background:rgba(239,68,68,.8);transform:scale(1.1)}
-    .card-fav-btn.faved{background:#ef4444;color:#fff}
-    .card-compare-btn:hover{background:rgba(59,130,246,.8);transform:scale(1.1)}
-    .card-compare-btn.compared{background:#3b82f6;color:#fff}
-    .card-quickview-btn{width:32px;height:32px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:all .25s;backdrop-filter:blur(4px);background:rgba(0,0,0,.45);color:#fff;opacity:1;transform:none}
-    .card-quickview-btn:hover{background:rgba(42,157,143,.8);transform:scale(1.1)}
+    /* ── 卡片按钮 ── */
+    .card-fav-btn{position:absolute;top:12px;right:12px;z-index:3;width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .25s;backdrop-filter:blur(6px);background:rgba(0,0,0,.35);color:#fff;opacity:1;transform:none}
+    .card-fav-btn:hover{background:rgba(239,68,68,.85);transform:scale(1.1)}
+    .card-fav-btn.faved{background:rgba(239,68,68,.9)}
+    .card-action-icon{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--border2);background:var(--bg);border-radius:8px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text3);font-weight:500}
+    .card-action-icon:hover{border-color:var(--accent);color:var(--accent);background:var(--accent2)}
+    .card-action-icon.active{border-color:var(--teal);color:var(--teal);background:rgba(42,157,143,.08)}
     /* ── 时长筛选 ── */
     .duration-filter-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:12px}
     .duration-btn{padding:4px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.7rem;cursor:pointer;transition:all .3s;color:var(--text3)}
@@ -1147,11 +1145,7 @@
             <div class="card-img">
               <img src="${s.img}" alt="${s.name}" loading="lazy" onload="this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')">
               <span class="spot-badge badge ${s.badge}">${badgeLabels[s.badge] || s.badge}</span>
-              <div class="spot-card-actions">
-                <button class="card-fav-btn ${isFav?'faved':''}" data-id="${s.id}" title="收藏">${isFav?'❤️':'🤍'}</button>
-                <button class="card-compare-btn ${isComp?'compared':''}" data-id="${s.id}" title="对比">⚖️</button>
-                <button class="card-quickview-btn" data-id="${s.id}" title="快速预览">👁</button>
-              </div>
+              <button class="card-fav-btn ${isFav?'faved':''}" data-id="${s.id}" title="收藏">${isFav?'❤️':'🤍'}</button>
               <span class="spot-price">${priceHtml}</span>
               ${isSeasonalRecommended(s) ? '<span class="seasonal-rec-tag">🌟 当季推荐</span>' : ''}
             </div>
@@ -1171,7 +1165,7 @@
               <div class="card-actions">
                 <a href="${getCtripLink(s.name)}" target="_blank" rel="noopener" class="btn btn-sm btn-outline" style="color:#2681ff;border-color:#2681ff" onclick="event.stopPropagation()">🐬 订票</a>
                 <button class="btn btn-sm ${inIt?'btn-outline':'btn-primary'} add-trip" data-id="${s.id}" ${inIt?'disabled':''}>${inIt?'✓ 已加入':'＋ 行程'}</button>
-                <button class="btn btn-sm btn-outline detail-btn" data-id="${s.id}">详情</button>
+                <button class="card-action-icon compare-trigger ${isComp?'active':''}" data-id="${s.id}" title="对比">${isComp?'✓ 已对比':'⚖️ 对比'}</button>
               </div>
             </div>
           </article>`;
@@ -1183,7 +1177,7 @@
       // Card click → Quick View
       document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('click', e => {
-          if (e.target.closest('.add-trip') || e.target.closest('.detail-btn') || e.target.closest('.card-fav-btn') || e.target.closest('.card-compare-btn')) return;
+          if (e.target.closest('.add-trip') || e.target.closest('.detail-btn') || e.target.closest('.card-fav-btn') || e.target.closest('.card-action-icon')) return;
           const s = allSpots.find(x => x.id === card.dataset.id);
           if (s) openQuickView(s);
         });
@@ -1213,12 +1207,12 @@
       });
 
       // Compare buttons
-      document.querySelectorAll('.card-compare-btn').forEach(btn => {
+      document.querySelectorAll('.compare-trigger').forEach(btn => {
         btn.addEventListener('click', e => { e.stopPropagation(); toggleCompare(btn.dataset.id); });
       });
 
       // Quickview buttons
-      document.querySelectorAll('.card-quickview-btn').forEach(btn => {
+      document.querySelectorAll('.quickview-trigger').forEach(btn => {
         btn.addEventListener('click', e => {
           e.stopPropagation();
           const s = allSpots.find(x => x.id === btn.dataset.id);

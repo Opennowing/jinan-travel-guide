@@ -192,17 +192,14 @@
     /* ── Compare Add Button Active ── */
     .compare-add-btn.active{background:var(--accent)!important;color:#fff!important;border-color:var(--accent)!important}
 
-    /* ── Card Overlay Buttons (unified row) ── */
-    .card-overlay-actions{position:absolute;top:12px;right:12px;z-index:3;display:flex;gap:6px}
-    .card-fav-btn,.card-quickview-btn,.card-compare-icon{width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .25s;backdrop-filter:blur(6px);background:rgba(0,0,0,.4);color:#fff;opacity:1;transform:none}
-    .card:hover .card-fav-btn,.card:hover .card-quickview-btn,.card:hover .card-compare-icon{transform:none}
+    /* ── Card Buttons ── */
+    .card-fav-btn{position:absolute;top:12px;right:12px;z-index:3;width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .25s;backdrop-filter:blur(6px);background:rgba(0,0,0,.35);color:#fff;opacity:1;transform:none}
     .card-fav-btn:hover{background:rgba(239,68,68,.85);transform:scale(1.12)}
     .card-fav-btn.active{background:rgba(239,68,68,.9)}
-    .card-quickview-btn:hover{background:rgba(42,157,143,.85);transform:scale(1.12)}
-    .card-compare-icon{font-size:.8rem}
-    .card-compare-icon:hover{background:rgba(59,130,246,.85);transform:scale(1.12)}
-    .card-compare-icon.active{background:rgba(59,130,246,.9)}
-    @media(max-width:768px){.card-fav-btn,.card-quickview-btn,.card-compare-icon{opacity:1;transform:none}}
+    .card-action-icon{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--border2);background:var(--bg);border-radius:8px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text3);font-weight:500}
+    .card-action-icon:hover{border-color:var(--accent);color:var(--accent);background:var(--accent2)}
+    .card-action-icon.active{border-color:var(--teal);color:var(--teal);background:rgba(42,157,143,.08)}
+    @media(max-width:768px){.card-fav-btn{opacity:1;transform:none}}
 
     /* ── Smart Recommend Section ── */
     .smart-recommend{background:linear-gradient(135deg,rgba(201,169,110,.08),rgba(42,157,143,.06));border:1px solid var(--accent2);border-radius:16px;padding:20px 24px;margin-bottom:24px}
@@ -1647,11 +1644,7 @@
           '<div class="card-img">' +
             '<img src="' + food.img + '" alt="' + food.name + '" loading="lazy" onload="this.classList.add(\'img-loaded\');this.parentElement.classList.add(\'img-loaded\')" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.classList.add(\'img-loaded\');this.parentElement.classList.add(\'img-loaded\')">' +
             (food.must ? '<span class="badge-must" style="position:absolute;top:12px;left:12px;z-index:2">🔥 必吃</span>' : '') +
-            '<div class="card-overlay-actions">' +
-              '<button class="card-fav-btn ' + (isFav ? 'active' : '') + '" data-id="' + food.id + '" data-type="food" aria-label="' + (isFav ? '取消收藏' : '收藏') + '" onclick="event.stopPropagation();window._toggleFoodFav(\'' + food.id + '\',this)">' + (isFav ? '♥' : '♡') + '</button>' +
-              '<button class="card-compare-icon ' + (isCompare ? 'active' : '') + '" data-id="' + food.id + '" aria-label="' + (isCompare ? '取消对比' : '加入对比') + '" onclick="event.stopPropagation();addToFoodCompare(\'' + food.id + '\')">' + (isCompare ? '✓' : '⚖️') + '</button>' +
-              '<button class="card-quickview-btn" data-id="' + food.id + '" aria-label="快速预览" onclick="event.stopPropagation();showFoodQuickView(\'' + food.id + '\')">👁</button>' +
-            '</div>' +
+            '<button class="card-fav-btn ' + (isFav ? 'active' : '') + '" data-id="' + food.id + '" data-type="food" aria-label="' + (isFav ? '取消收藏' : '收藏') + '" onclick="event.stopPropagation();window._toggleFoodFav(\'' + food.id + '\',this)">' + (isFav ? '♥' : '♡') + '</button>' +
           '</div>' +
           '<div class="card-body">' +
             '<h3>' + food.name + '</h3>' +
@@ -1676,6 +1669,7 @@
             ` : '') +
             '<div class="card-actions" style="display:flex;gap:6px;margin-top:auto;padding-top:10px">' +
               '<a href="food.html?id=' + food.id + '" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;font-size:.78rem;padding:6px 8px" onclick="event.stopPropagation()">查看详情</a>' +
+              '<button class="card-action-icon ' + (isCompare ? 'active' : '') + '" data-id="' + food.id + '" onclick="event.stopPropagation();addToFoodCompare(\'' + food.id + '\')">' + (isCompare ? '✓ 已对比' : '⚖️ 对比') + '</button>' +
             '</div>' +
           '</div>' +
         '</div>';
@@ -1684,7 +1678,7 @@
       // Attach card click for navigation
       grid.querySelectorAll('.card').forEach(card => {
         card.addEventListener('click', e => {
-          if (e.target.closest('.card-fav-btn') || e.target.closest('.card-quickview-btn') || e.target.closest('.card-compare-icon') || e.target.closest('.card-actions')) return;
+          if (e.target.closest('.card-fav-btn') || e.target.closest('.card-action-icon') || e.target.closest('.card-actions')) return;
           const foodId = card.dataset.foodId;
           if (foodId) window.location.href = 'food.html?id=' + foodId;
         });

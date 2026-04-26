@@ -2942,6 +2942,114 @@ html, body, .card, .top-nav, .footer {
   100% { transform: translateY(0); }
 }
 
+/* ═══════════════════════════════════════
+   MISSING COMPONENT STYLES — 补全
+   ═══════════════════════════════════════ */
+
+/* ─── Skip Link (Accessibility) ─── */
+.skip-link{position:absolute;top:-100%;left:16px;z-index:999;background:var(--accent);color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;transition:top .2s;font-size:.9rem}
+.skip-link:focus{top:8px}
+
+/* ─── Leaflet Map Container ─── */
+.leaflet-map-container{position:relative;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow-lg)}
+.leaflet-controls-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--card-bg);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.leaflet-ctrl-btn{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:8px;font-size:.78rem;cursor:pointer;color:var(--text2);transition:all .2s}
+.leaflet-ctrl-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent2)}
+.leaflet-cat-btn{padding:4px 10px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2)}
+.leaflet-cat-btn:hover{border-color:var(--accent);color:var(--accent)}
+.leaflet-cat-btn.active{background:var(--accent2);border-color:var(--accent);color:var(--accent);font-weight:600}
+
+/* ─── Lightbox ─── */
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;border:none;cursor:pointer;font-size:1.3rem;display:flex;align-items:center;justify-content:center;z-index:10;transition:all .2s;backdrop-filter:blur(4px)}
+.lightbox-nav:hover{background:rgba(0,0,0,.8);transform:translateY(-50%) scale(1.1)}
+.lightbox-nav.prev{left:16px}
+.lightbox-nav.next{right:16px}
+.lightbox-close{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;z-index:10;transition:all .2s;backdrop-filter:blur(4px)}
+.lightbox-close:hover{background:rgba(0,0,0,.8);transform:scale(1.1)}
+.lightbox-counter{position:absolute;top:16px;left:16px;background:rgba(0,0,0,.6);color:#fff;padding:4px 12px;border-radius:100px;font-size:.75rem;font-weight:600;z-index:10;backdrop-filter:blur(4px)}
+.lightbox-dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:10}
+.lightbox-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);border:none;cursor:pointer;transition:all .3s}
+.lightbox-dot.active{background:#fff;width:20px;border-radius:4px}
+
+/* ─── Map Fullscreen ─── */
+.map-fullscreen-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border);background:var(--card-bg)}
+.map-fullscreen-body{flex:1;position:relative;overflow:hidden}
+.map-fullscreen-close{width:36px;height:36px;border-radius:50%;background:var(--bg3);border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .2s;color:var(--text2)}
+.map-fullscreen-close:hover{background:var(--accent);color:#fff}
+.map-fullscreen-spots{display:flex;gap:8px;padding:12px 16px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.map-fullscreen-spot-chip{display:flex;align-items:center;gap:6px;padding:6px 12px;background:var(--bg);border:1px solid var(--border);border-radius:100px;font-size:.75rem;cursor:pointer;transition:all .2s;flex-shrink:0;white-space:nowrap}
+.map-fullscreen-spot-chip:hover{border-color:var(--accent);background:var(--accent2)}
+.map-dot{cursor:pointer;transition:r .2s}
+.map-dot:hover{r:8}
+.map-spot-mini-price{font-size:.68rem;color:var(--accent);font-weight:600}
+
+/* ─── Modal Enhancements ─── */
+.modal-meta-bar{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;font-size:.8rem;color:var(--text2)}
+.modal-info-toggle{display:flex;align-items:center;gap:4px;padding:8px 0;cursor:pointer;color:var(--accent);font-size:.85rem;font-weight:500;border:none;background:none;transition:all .2s}
+.modal-info-toggle:hover{color:var(--accent-hover)}
+.modal-anchor-nav{display:flex;gap:4px;padding:8px 0;border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.modal-fav-btn{width:40px;height:40px;border-radius:50%;background:var(--bg);border:1px solid var(--border);cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all .25s;color:var(--text2)}
+.modal-fav-btn:hover,.modal-fav-btn.faved{color:#e74c3c;border-color:#e74c3c;background:rgba(231,76,60,.1)}
+.modal-floating-actions{position:sticky;bottom:0;display:flex;gap:8px;padding:12px 0;background:var(--card-bg);border-top:1px solid var(--border);z-index:5}
+.modal-add-trip{flex:1;justify-content:center;font-weight:600}
+.modal-share{flex:0 0 auto}
+.modal-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin:12px 0}
+.modal-history{padding:16px 0;border-top:1px solid var(--border)}
+.modal-season{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.modal-trust-badge{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;background:rgba(42,157,143,.1);color:var(--teal);border-radius:100px;font-size:.72rem;font-weight:500}
+
+/* ─── Photo Grid ─── */
+.photo-main{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--radius);cursor:pointer;transition:transform .3s}
+.photo-main:hover{transform:scale(1.02)}
+.photo-side{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.photo-overlay-tip{position:absolute;bottom:12px;right:12px;background:rgba(0,0,0,.6);color:#fff;padding:4px 10px;border-radius:100px;font-size:.7rem;backdrop-filter:blur(4px);pointer-events:none}
+
+/* ─── Rating Distribution ─── */
+.rating-dist-row{display:flex;align-items:center;gap:8px;margin:4px 0}
+.rating-dist-label{font-size:.75rem;color:var(--text3);min-width:24px;text-align:right}
+.rating-dist-track{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.rating-dist-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .6s var(--ease)}
+.rating-dist-pct{font-size:.72rem;color:var(--text3);min-width:32px}
+
+/* ─── Top Spots ─── */
+.top-spot-item{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all .25s}
+.top-spot-item:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:var(--shadow)}
+.top-spot-info{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.top-spot-name{font-size:.85rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top-spot-meta{font-size:.72rem;color:var(--text3);display:flex;align-items:center;gap:6px}
+
+/* ─── Season Tags ─── */
+.season-tags{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}
+.season-tag{padding:4px 10px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.72rem;color:var(--text3);transition:all .2s}
+.season-tag:hover{border-color:var(--accent);color:var(--accent)}
+.season-tag.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.season-pick{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:100px;font-size:.72rem;font-weight:500}
+.season-text{font-size:.85rem;color:var(--text2);line-height:1.6}
+
+/* ─── Toggle ─── */
+.toggle-arrow{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--bg3);font-size:.75rem;transition:transform .25s;color:var(--text3)}
+.toggle-arrow.open{transform:rotate(180deg)}
+.toggle-text{font-size:.85rem;color:var(--text2);cursor:pointer;transition:color .2s}
+.toggle-text:hover{color:var(--accent)}
+
+/* ─── Misc Components ─── */
+.copy-route-btn{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:8px;font-size:.78rem;cursor:pointer;color:var(--text2);transition:all .2s}
+.copy-route-btn:hover{border-color:var(--accent);color:var(--accent)}
+.detail-btn{padding:8px 16px;background:var(--accent);color:#fff;border:none;border-radius:100px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .25s}
+.detail-btn:hover{background:var(--accent-hover);transform:translateY(-1px)}
+.fav-action{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--bg);cursor:pointer;font-size:1rem;transition:all .25s;color:var(--text2)}
+.fav-action:hover,.fav-action.faved{color:#e74c3c;border-color:#e74c3c;background:rgba(231,76,60,.1)}
+.food-static-map{position:relative;border-radius:var(--radius-lg);overflow:hidden;background:linear-gradient(135deg,var(--bg2),var(--bg3));box-shadow:var(--shadow)}
+.helpful-count{font-size:.72rem;color:var(--text3);display:flex;align-items:center;gap:4px}
+.info-extra{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:.8rem;color:var(--text2)}
+.meta-dot{width:4px;height:4px;border-radius:50%;background:var(--text3);opacity:.4;display:inline-block}
+.review-helpful{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text3)}
+.review-helpful:hover{border-color:var(--accent);color:var(--accent)}
+.trust-icon{display:inline-flex;align-items:center;gap:4px;font-size:.75rem;color:var(--teal)}
+.history-quote{font-family:var(--serif);font-style:italic;color:var(--text2);border-left:3px solid var(--accent);padding-left:16px;margin:16px 0;line-height:1.8}
+.history-text{font-size:.9rem;line-height:1.8;color:var(--text2)}
+.category-capsule{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:var(--accent2);color:var(--accent);border-radius:100px;font-size:.75rem;font-weight:500}
+
 /* ─── DARK MODE 补充 ─── */
 html.dark .card .ripple {
   background: radial-gradient(circle, rgba(212,168,83,.25) 0%, rgba(212,168,83,.05) 60%, transparent 100%);
@@ -2962,6 +3070,21 @@ html.dark .btn-primary {
 html.dark .btn-primary:hover {
   box-shadow: 0 6px 24px rgba(212,168,83,.3);
 }
+html.dark .leaflet-map-container{border-color:rgba(255,255,255,.08)}
+html.dark .leaflet-controls-bar{background:var(--card-bg);border-color:rgba(255,255,255,.08)}
+html.dark .leaflet-ctrl-btn{background:var(--bg2);border-color:rgba(255,255,255,.1);color:var(--text2)}
+html.dark .leaflet-cat-btn{background:var(--bg2);border-color:rgba(255,255,255,.1);color:var(--text2)}
+html.dark .lightbox-nav{background:rgba(255,255,255,.15)}
+html.dark .lightbox-close{background:rgba(255,255,255,.15)}
+html.dark .map-fullscreen-close{background:var(--bg3);color:var(--text2)}
+html.dark .modal-fav-btn{background:var(--bg2);border-color:rgba(255,255,255,.1)}
+html.dark .top-spot-item{background:var(--card-bg);border-color:rgba(255,255,255,.08)}
+html.dark .top-spot-item:hover{border-color:var(--accent)}
+html.dark .season-tag{background:var(--bg2);border-color:rgba(255,255,255,.1);color:var(--text2)}
+html.dark .copy-route-btn{background:var(--bg2);border-color:rgba(255,255,255,.1)}
+html.dark .fav-action{background:var(--bg2);border-color:rgba(255,255,255,.1)}
+html.dark .review-helpful{background:var(--bg2);border-color:rgba(255,255,255,.1)}
+html.dark .map-fullscreen-spot-chip{background:var(--bg2);border-color:rgba(255,255,255,.1)}
 
 /* ─── REDUCED MOTION — 新增动效同样遵守 ─── */
 @media (prefers-reduced-motion: reduce) {

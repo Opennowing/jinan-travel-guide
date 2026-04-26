@@ -1888,15 +1888,15 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
         </div>` : '';
 
       // ── 景点标签模块 ──
-      const catLabels = {spring:'⛲ 泉水',nature:'🌿 自然',history:'🏛️ 历史',food:'🍜 美食',culture:'🎭 文化',family:'👨‍👩‍👧 亲子'};
-      const badgeLabels = {must:'必去打卡',hot:'热门推荐',free:'免费开放',hidden:'小众秘境',kid:'亲子首选'};
+      const _catLabels = {spring:'⛲ 泉水',nature:'🌿 自然',history:'🏛️ 历史',food:'🍜 美食',culture:'🎭 文化',family:'👨‍👩‍👧 亲子'};
+      const _badgeLabels = {must:'必去打卡',hot:'热门推荐',free:'免费开放',hidden:'小众秘境',kid:'亲子首选'};
       const tagsHtml = `
         <div class="modal-tags-section">
           <h4>🏷️ 景点标签</h4>
           <div class="modal-tags-list">
-            ${s.cat ? `<span class="modal-tag-item cat-tag">${catLabels[s.cat]||s.cat}</span>` : ''}
+            ${s.cat ? `<span class="modal-tag-item cat-tag">${_catLabels[s.cat]||s.cat}</span>` : ''}
             ${(s.audience||[]).map(a => `<span class="modal-tag-item aud-tag">${audienceLabels[a]||a}</span>`).join('')}
-            ${s.badge ? `<span class="modal-tag-item badge-tag">${badgeLabels[s.badge]||s.badge}</span>` : ''}
+            ${s.badge ? `<span class="modal-tag-item badge-tag">${_badgeLabels[s.badge]||s.badge}</span>` : ''}
             ${s.trust ? `<span class="modal-tag-item" style="background:rgba(42,157,143,.1);color:var(--teal);border-color:rgba(42,157,143,.2)">✓ ${escapeHtml(s.trust)}</span>` : ''}
           </div>
         </div>`;

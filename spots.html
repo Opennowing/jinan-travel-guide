@@ -135,7 +135,7 @@
     .compare-table td{padding:8px 12px;border-bottom:1px solid var(--border2);vertical-align:top}
     .compare-table .compare-name{font-weight:700;font-size:.9rem;color:var(--text)}
     .compare-table .compare-remove{color:#ef4444;cursor:pointer;font-size:.75rem;margin-left:4px}
-    .compare-open-btn{position:fixed;bottom:20px;right:20px;z-index:350;padding:10px 20px;border-radius:100px;border:none;cursor:pointer;font-size:.85rem;font-weight:600;background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;box-shadow:0 4px 16px rgba(59,130,246,.35);transition:all .3s;display:none;align-items:center;gap:6px}
+    .compare-open-btn{position:fixed;bottom:20px;right:20px;z-index:450;padding:10px 20px;border-radius:100px;border:none;cursor:pointer;font-size:.85rem;font-weight:600;background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;box-shadow:0 4px 16px rgba(59,130,246,.35);transition:all .3s;display:none;align-items:center;gap:6px}
     .compare-open-btn.show{display:flex}
     .compare-open-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(59,130,246,.45)}
     /* ── 地图增强 ── */
@@ -964,6 +964,10 @@ html.dark .card.meituan-card:hover {
     .card-grid .rv, .must-eat-grid .rv, .route-card.rv,
     .timeline-item.rv, .guide-card.rv, .culture-card.rv {
       opacity: 1; transform: none;
+    }
+  
+    @media(max-width:768px){
+      .compare-open-btn{bottom:80px!important;right:16px!important;padding:8px 16px!important;font-size:.8rem!important}
     }
   </style>
   <!-- Leaflet Map CDN -->

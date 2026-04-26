@@ -60,7 +60,6 @@
   <link rel="stylesheet" href="/src/styles/main.css">
   <link rel="manifest" href="/jinan-travel-guide/manifest.json">
   <meta name="theme-color" content="#c9a96e">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
     /* ── Search (hero) ── */
     .food-search-wrap{max-width:480px;margin:0 auto 28px;position:relative}
@@ -126,7 +125,6 @@
     /* ── Map ── */
     .food-map-container{width:100%;height:420px;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--border);background:var(--bg2)}
     .custom-marker{background:none!important;border:none!important}
-    .leaflet-div-icon{background:none!important;border:none!important}
 
     /* ── Season ── */
     .season-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
@@ -698,7 +696,6 @@
       </div>
     </section>
 
-    <div class="section-divider reveal" aria-hidden="true">◈</div>
     <!-- ── 美食地图 ── -->
     <section class="section" aria-label="美食地图">
       <div class="section-inner">
@@ -707,7 +704,61 @@
           <h2>🗺️ 美食地图</h2>
           <p>跟着地图吃济南，不走回头路</p>
         </div>
-        <div class="food-map-container reveal" id="foodMapContainer"></div>
+        <div class="food-static-map reveal" style="position:relative;border-radius:16px;overflow:hidden;background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid var(--border);box-shadow:var(--shadow-lg)">
+          <svg viewBox="0 0 800 400" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="display:block">
+            <defs>
+              <radialGradient id="fmapBg" cx="50%" cy="40%"><stop offset="0%" stop-color="rgba(245,158,11,.03)"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+            </defs>
+            <rect fill="url(#fmapBg)" width="800" height="400"/>
+            <!-- Grid -->
+            <g stroke="rgba(201,169,110,.06)" stroke-width="1"><line x1="0" y1="100" x2="800" y2="100"/><line x1="0" y1="200" x2="800" y2="200"/><line x1="0" y1="300" x2="800" y2="300"/><line x1="200" y1="0" x2="200" y2="400"/><line x1="400" y1="0" x2="400" y2="400"/><line x1="600" y1="0" x2="600" y2="400"/></g>
+            <!-- Roads -->
+            <g stroke="rgba(201,169,110,.12)" stroke-width="2" stroke-dasharray="6,3"><line x1="100" y1="0" x2="100" y2="400"/><line x1="350" y1="0" x2="350" y2="400"/><line x1="550" y1="0" x2="550" y2="400"/><line x1="0" y1="150" x2="800" y2="150"/><line x1="0" y1="280" x2="800" y2="280"/></g>
+            <!-- 泉城路美食区 -->
+            <g transform="translate(300,120)">
+              <circle r="35" fill="rgba(245,158,11,.1)" stroke="rgba(245,158,11,.2)" stroke-width="2"/>
+              <text y="-2" text-anchor="middle" font-size="20">🍜</text>
+              <text y="16" text-anchor="middle" font-size="11" font-weight="700" fill="var(--text,#111)" font-family="system-ui">泉城路</text>
+              <text y="30" text-anchor="middle" font-size="9" fill="var(--text3,#999)" font-family="system-ui">鲁菜·老字号</text>
+            </g>
+            <!-- 芙蓉街 -->
+            <g transform="translate(450,100)">
+              <circle r="30" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.15)" stroke-width="2"/>
+              <text y="-2" text-anchor="middle" font-size="18">🍢</text>
+              <text y="14" text-anchor="middle" font-size="10" font-weight="700" fill="var(--text,#111)" font-family="system-ui">芙蓉街</text>
+              <text y="26" text-anchor="middle" font-size="8" fill="var(--text3,#999)" font-family="system-ui">小吃一条街</text>
+            </g>
+            <!-- 宽厚里 -->
+            <g transform="translate(550,180)">
+              <circle r="30" fill="rgba(139,92,246,.08)" stroke="rgba(139,92,246,.15)" stroke-width="2"/>
+              <text y="-2" text-anchor="middle" font-size="18">🏮</text>
+              <text y="14" text-anchor="middle" font-size="10" font-weight="700" fill="var(--text,#111)" font-family="system-ui">宽厚里</text>
+              <text y="26" text-anchor="middle" font-size="8" fill="var(--text3,#999)" font-family="system-ui">网红餐厅</text>
+            </g>
+            <!-- 回民小区 -->
+            <g transform="translate(200,200)">
+              <circle r="28" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.15)" stroke-width="2"/>
+              <text y="-2" text-anchor="middle" font-size="18">🥩</text>
+              <text y="14" text-anchor="middle" font-size="10" font-weight="700" fill="var(--text,#111)" font-family="system-ui">回民小区</text>
+              <text y="26" text-anchor="middle" font-size="8" fill="var(--text3,#999)" font-family="system-ui">烧烤·牛肉</text>
+            </g>
+            <!-- 大明湖 -->
+            <g transform="translate(400,250)">
+              <circle r="25" fill="rgba(59,130,246,.06)" stroke="rgba(59,130,246,.12)" stroke-width="2"/>
+              <text y="-2" text-anchor="middle" font-size="16">🌅</text>
+              <text y="12" text-anchor="middle" font-size="9" font-weight="700" fill="var(--text,#111)" font-family="system-ui">大明湖</text>
+              <text y="22" text-anchor="middle" font-size="8" fill="var(--text3,#999)" font-family="system-ui">湖畔美食</text>
+            </g>
+            <!-- 经十路 -->
+            <g transform="translate(650,300)">
+              <circle r="25" fill="rgba(236,72,153,.06)" stroke="rgba(236,72,153,.12)" stroke-width="2"/>
+              <text y="-2" text-anchor="middle" font-size="16">🍜</text>
+              <text y="12" text-anchor="middle" font-size="9" font-weight="700" fill="var(--text,#111)" font-family="system-ui">经十路</text>
+              <text y="22" text-anchor="middle" font-size="8" fill="var(--text3,#999)" font-family="system-ui">连锁餐饮</text>
+            </g>
+          </svg>
+          <a href="spots.html#map" style="position:absolute;bottom:12px;right:12px;padding:8px 16px;background:var(--accent);color:#fff;border-radius:100px;font-size:.8rem;font-weight:600;text-decoration:none;box-shadow:0 2px 8px rgba(201,169,110,.3);transition:all .25s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">🗺️ 查看完整地图</a>
+        </div>
       </div>
     </section>
 
@@ -741,7 +792,6 @@
       </div>
     </section>
 
-    <div class="section-divider reveal" aria-hidden="true">◈</div>
     <!-- ── 时令美食 ── -->
     <section class="section" style="background:var(--bg2)" aria-label="时令美食">
       <div class="section-inner">
@@ -1962,49 +2012,7 @@
     });
 
     // ── Leaflet + OpenStreetMap ──
-    function initMap() {
-      const mapContainer = document.getElementById('foodMapContainer');
-      if (!mapContainer) return;
-      const leafletScript = document.createElement('script');
-      leafletScript.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-      leafletScript.onload = () => {
-        const map = L.map('foodMapContainer').setView([36.668, 117.024], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-          maxZoom: 18
-        }).addTo(map);
 
-        const seen = new Set();
-        allFoods.forEach(food => {
-          food.shops.forEach(s => {
-            if (s.lat && s.lng && !seen.has(s.name)) {
-              seen.add(s.name);
-              const icon = L.divIcon({
-                className: 'leaflet-div-icon custom-marker',
-                html: '<div style="background:#e76f51;color:#fff;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.25);cursor:pointer;border:2px solid #fff">' + s.name + '</div>',
-                iconSize: [0, 0],
-                iconAnchor: [0, 0]
-              });
-              const marker = L.marker([s.lat, s.lng], { icon }).addTo(map);
-              marker.bindPopup('<b>' + s.name + '</b><br>' + food.name + ' · ' + s.avg + '<br>📍 ' + s.addr);
-            }
-          });
-        });
-
-        const bounds = [];
-        seen.clear();
-        allFoods.forEach(food => {
-          food.shops.forEach(s => {
-            if (s.lat && s.lng && !seen.has(s.name)) {
-              seen.add(s.name);
-              bounds.push([s.lat, s.lng]);
-            }
-          });
-        });
-        if (bounds.length) map.fitBounds(bounds, { padding: [30, 30] });
-      };
-      document.head.appendChild(leafletScript);
-    }
 
     // ── Food Favorites toggle ──
     window._toggleFoodFav = function(id, btn) {

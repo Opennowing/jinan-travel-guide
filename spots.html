@@ -49,6 +49,8 @@
   <link rel="manifest" href="/jinan-travel-guide/manifest.json">
   <meta name="theme-color" content="#c9a96e">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
   <style>
     .filter-section{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-bottom:20px}
     .filter-group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
@@ -1669,6 +1671,287 @@ html.dark .card.airbnb-card .price-free {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
+
+/* ═══ MAP ENHANCEMENT ═══ */
+
+/* ── Map Container ── */
+#map-container {
+  height: 500px !important;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+/* ── Fullscreen Mode ── */
+#map-container.map-fullscreen {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 500 !important;
+  height: 100vh !important;
+  width: 100vw !important;
+  border-radius: 0 !important;
+  border: none !important;
+  margin: 0 !important;
+}
+
+/* ── Fullscreen Button ── */
+.map-fullscreen-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1000;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(0,0,0,.12);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: all .25s;
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  backdrop-filter: blur(8px);
+}
+.map-fullscreen-btn:hover {
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0,0,0,.2);
+  transform: scale(1.05);
+}
+
+/* ── Bubble Marker ── */
+.map-marker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  box-shadow: 0 3px 12px rgba(0,0,0,.25), 0 0 0 2px #fff;
+  transition: all .25s cubic-bezier(.23,1,.32,1);
+  cursor: pointer;
+  z-index: 10;
+}
+.map-marker::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 8px solid currentColor;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,.15));
+}
+.map-marker:hover {
+  transform: scale(1.3) translateY(-4px);
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(0,0,0,.35), 0 0 0 3px #fff;
+}
+.map-marker .marker-emoji {
+  font-size: 1.1rem;
+  line-height: 1;
+  filter: drop-shadow(0 1px 1px rgba(0,0,0,.2));
+}
+
+/* ── Marker Colors by Category ── */
+.map-marker.cat-spring { background: linear-gradient(135deg, #3b82f6, #2563eb); color: #fff; }
+.map-marker.cat-nature { background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; }
+.map-marker.cat-history { background: linear-gradient(135deg, #a855f7, #7c3aed); color: #fff; }
+.map-marker.cat-culture { background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; }
+.map-marker.cat-food { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; }
+.map-marker.cat-family { background: linear-gradient(135deg, #14b8a6, #0d9488); color: #fff; }
+.map-marker.cat-landmark { background: linear-gradient(135deg, #ec4899, #db2777); color: #fff; }
+.map-marker.cat-amusement { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; }
+
+/* ── Marker Name Label ── */
+.map-marker-label {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--text);
+  background: rgba(255,255,255,.92);
+  padding: 2px 8px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  pointer-events: none;
+  opacity: 0;
+  transition: all .25s;
+  backdrop-filter: blur(6px);
+}
+.map-marker:hover .map-marker-label {
+  opacity: 1;
+  top: -32px;
+}
+
+/* ── Rich Popup ── */
+.map-popup {
+  min-width: 220px;
+  padding: 0;
+  font-family: var(--sans);
+}
+.map-popup-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px 8px 0 0;
+}
+.map-popup-body {
+  padding: 10px 12px;
+}
+.map-popup-name {
+  font: 700 .95rem/1.3 var(--serif);
+  margin-bottom: 4px;
+}
+.map-popup-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .78rem;
+  color: var(--text2);
+  margin-bottom: 6px;
+}
+.map-popup-meta .popup-rating {
+  color: #f59e0b;
+  font-weight: 700;
+}
+.map-popup-desc {
+  font-size: .78rem;
+  color: var(--text3);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.map-popup-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 12px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  font-size: .75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .25s;
+}
+.map-popup-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+/* ── Leaflet Popup Override ── */
+.leaflet-popup-content-wrapper {
+  border-radius: 12px !important;
+  padding: 0 !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,.18) !important;
+  border: 1px solid rgba(0,0,0,.06) !important;
+}
+.leaflet-popup-content {
+  margin: 0 !important;
+  min-width: 220px !important;
+}
+.leaflet-popup-tip {
+  box-shadow: 0 4px 12px rgba(0,0,0,.1) !important;
+}
+
+/* ── Marker Cluster ── */
+.marker-cluster-small,
+.marker-cluster-medium,
+.marker-cluster-large {
+  background: rgba(201,169,110,.25) !important;
+  border: 2px solid rgba(201,169,110,.5) !important;
+  border-radius: 50% !important;
+}
+.marker-cluster-small div,
+.marker-cluster-medium div,
+.marker-cluster-large div {
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover)) !important;
+  color: #fff !important;
+  border-radius: 50% !important;
+  font-weight: 700 !important;
+  font-size: .85rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* ── Map Legend Enhanced ── */
+.map-legend {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 16px;
+  margin-top: 12px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.map-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .75rem;
+  color: var(--text2);
+  cursor: pointer;
+  padding: 3px 8px;
+  border-radius: 100px;
+  transition: all .25s;
+  border: 1px solid transparent;
+}
+.map-legend-item:hover {
+  background: var(--accent2);
+  border-color: var(--border);
+}
+.map-legend-item.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.map-legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Mobile Map ── */
+@media(max-width:768px){
+  #map-container {
+    height: 350px !important;
+    border-radius: 12px;
+  }
+  #map-container.map-fullscreen {
+    height: 100vh !important;
+  }
+  .map-marker {
+    width: 30px;
+    height: 30px;
+    font-size: .85rem;
+  }
+  .map-marker .marker-emoji {
+    font-size: .9rem;
+  }
+}
 /* ── Dark mode adjustments ── */
 html.dark .card.airbnb-card:hover {
   box-shadow: 0 12px 28px rgba(0,0,0,.25), 0 4px 10px rgba(0,0,0,.15);
@@ -1797,7 +2080,7 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
   <!-- 景点地图（移到顶部） -->
   <section class="section" style="padding-top:8px" aria-label="景点地图">
     <div class="section-inner">
-      <div id="map-container" class="reveal-scale" style="height:320px"></div>
+      <div id="map-container" class="reveal-scale"></div>
       <div class="map-controls">
         <button class="map-legend-btn active" data-map-cat="all" aria-label="显示全部景点">全部</button>
         <button class="map-legend-btn" data-map-cat="spring" aria-label="筛选泉水景点"><span class="legend-dot" style="background:#3b82f6"></span> 泉水</button>
@@ -3099,88 +3382,86 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
     let mapMarkers = [];
     let mapMarkerGroup = null;
 
+    // ═══ MAP CATEGORY CONFIG ═══
+    const catEmoji = {spring:'⛲',nature:'🌿',history:'🏛️',culture:'📚',food:'🍜',family:'👨‍👩‍👧',landmark:'🏛️',amusement:'🎡'};
+    
     function initLeafletMap() {
       const container = document.getElementById('map-container');
       if (!container || !allSpots.length) return;
-      leafletMap = L.map('map-container').setView([36.67, 117.02], 12);
+      
+      leafletMap = L.map('map-container', {
+        zoomControl: false
+      }).setView([36.67, 117.02], 12);
+      
+      // Add zoom control to top-left
+      L.control.zoom({ position: 'topleft' }).addTo(leafletMap);
+      
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 18
       }).addTo(leafletMap);
 
-      mapMarkerGroup = L.layerGroup().addTo(leafletMap);
+      // Use marker cluster group
+      mapMarkerGroup = L.markerClusterGroup({
+        maxClusterRadius: 50,
+        spiderfyOnMaxZoom: true,
+        showCoverageOnHover: false,
+        zoomToBoundsOnClick: true,
+        iconCreateFunction: function(cluster) {
+          const count = cluster.getChildCount();
+          let size = 'small';
+          if (count > 20) size = 'large';
+          else if (count > 8) size = 'medium';
+          return L.divIcon({
+            html: '<div><span>' + count + '</span></div>',
+            className: 'marker-cluster marker-cluster-' + size,
+            iconSize: L.point(40, 40)
+          });
+        }
+      });
+      
       renderMapMarkers('all');
+      leafletMap.addLayer(mapMarkerGroup);
 
       // Fit bounds
       const bounds = allSpots.filter(s => s.lat && s.lng).map(s => [s.lat, s.lng]);
       if (bounds.length) leafletMap.fitBounds(bounds, { padding: [30, 30] });
-    }
-
-    // Generate offline static SVG map with marker
-    function generateStaticMap(lat, lng, name) {
-      // Create a simple but attractive SVG map representation
-      const gridLines = [];
-      for (let i = 0; i < 12; i++) {
-        gridLines.push(`<line x1="${i*50}" y1="0" x2="${i*50}" y2="300" stroke="rgba(42,157,143,.08)" stroke-width="1"/>`);
-        gridLines.push(`<line x1="0" y1="${i*25}" x2="600" y2="${i*25}" stroke="rgba(42,157,143,.08)" stroke-width="1"/>`);
-      }
-      // Grid roads
-      const roads = [];
-      for (let i = 1; i < 6; i++) {
-        roads.push(`<line x1="${i*100+20}" y1="0" x2="${i*100+20}" y2="300" stroke="rgba(201,169,110,.15)" stroke-width="2" stroke-dasharray="4,4"/>`);
-      }
-      for (let i = 1; i < 4; i++) {
-        roads.push(`<line x1="0" y1="${i*75+10}" x2="600" y2="${i*75+10}" stroke="rgba(201,169,110,.15)" stroke-width="2" stroke-dasharray="4,4"/>`);
-      }
-      // Location marker
-      const marker = `
-        <g transform="translate(300,130)">
-          <circle r="24" fill="rgba(239,68,68,.15)" cx="0" cy="0">
-            <animate attributeName="r" values="24;32;24" dur="2s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values=".4;.1;.4" dur="2s" repeatCount="indefinite"/>
-          </circle>
-          <circle r="12" fill="#ef4444" cx="0" cy="0" stroke="#fff" stroke-width="3"/>
-          <circle r="4" fill="#fff" cx="0" cy="0"/>
-        </g>
-        <text x="300" y="170" text-anchor="middle" font-size="14" font-weight="700" fill="var(--text,#111)" font-family="system-ui,sans-serif">${name}</text>
-        <text x="300" y="190" text-anchor="middle" font-size="11" fill="var(--text3,#999)" font-family="system-ui,sans-serif">📍 ${lat.toFixed(4)}°N, ${lng.toFixed(4)}°E</text>
-      `;
-      // Decorative elements (parks, water)
-      const decor = `
-        <rect x="420" y="40" width="80" height="60" rx="8" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.15)"/>
-        <text x="460" y="75" text-anchor="middle" font-size="10" fill="rgba(34,197,94,.4)">🌿 公园</text>
-        <rect x="60" y="200" width="120" height="50" rx="8" fill="rgba(59,130,246,.06)" stroke="rgba(59,130,246,.1)"/>
-        <text x="120" y="230" text-anchor="middle" font-size="10" fill="rgba(59,130,246,.35)">💧 泉域</text>
-      `;
-      // Navigation link
-      const navLink = `https://uri.amap.com/marker?position=${lng},${lat}&name=${encodeURIComponent(name)}`;
       
-      return `<div class="static-map" style="position:relative;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px solid var(--border);">
-        <svg viewBox="0 0 600 300" width="100%" height="200" xmlns="http://www.w3.org/2000/svg" style="display:block;">
-          <defs>
-            <radialGradient id="mapBg" cx="50%" cy="40%">
-              <stop offset="0%" stop-color="rgba(42,157,143,.04)"/>
-              <stop offset="100%" stop-color="transparent"/>
-            </radialGradient>
-          </defs>
-          <rect fill="url(#mapBg)" width="600" height="300"/>
-          ${gridLines.join('')}
-          ${roads.join('')}
-          ${decor}
-          ${marker}
-        </svg>
-        <a href="${navLink}" target="_blank" rel="noopener" style="position:absolute;bottom:10px;right:10px;padding:6px 14px;background:var(--accent);color:#fff;border-radius:100px;font-size:.75rem;font-weight:600;text-decoration:none;box-shadow:0 2px 8px rgba(201,169,110,.3);transition:all .25s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">🗺️ 导航去这里</a>
-      </div>`;
+      // Add fullscreen button
+      const fsBtn = document.createElement('button');
+      fsBtn.className = 'map-fullscreen-btn';
+      fsBtn.innerHTML = '⛶';
+      fsBtn.title = '全屏地图';
+      fsBtn.onclick = toggleMapFullscreen;
+      container.appendChild(fsBtn);
     }
-    function getMapPopupImg(s) {
-      const imgSrc = s.img || '';
-      const name = s.name || '济南';
-      const colors = [['#c9a96e','#e8dcc8'],['#2a9d8f','#d4f1ed'],['#e76f51','#fce4de'],['#8b5cf6','#ede9fe'],['#3b82f6','#dbeafe']];
-      const ci = Math.abs([...name].reduce((a,c)=>a+c.charCodeAt(0),0)) % colors.length;
-      const [bg,fg] = colors[ci];
-      const fb = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="220" height="100"><rect fill="' + bg + '" width="220" height="100"/><text x="110" y="45" text-anchor="middle" font-size="24">🏔️</text><text x="110" y="70" text-anchor="middle" fill="' + fg + '" font-size="11" font-family="sans-serif">' + name + '</text></svg>');
-      return '<img class="map-popup-img" src="' + imgSrc + '" alt="' + name + '" onerror="this.onerror=null;this.src=\'' + fb + '\'" loading="lazy">';
+    
+    function toggleMapFullscreen() {
+      const container = document.getElementById('map-container');
+      const btn = container.querySelector('.map-fullscreen-btn');
+      container.classList.toggle('map-fullscreen');
+      if (container.classList.contains('map-fullscreen')) {
+        btn.innerHTML = '✕';
+        btn.title = '退出全屏';
+        document.body.style.overflow = 'hidden';
+      } else {
+        btn.innerHTML = '⛶';
+        btn.title = '全屏地图';
+        document.body.style.overflow = '';
+      }
+      // Invalidate map size after transition
+      setTimeout(() => { if (leafletMap) leafletMap.invalidateSize(); }, 350);
     }
+    
+    // ESC to exit fullscreen
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const container = document.getElementById('map-container');
+        if (container && container.classList.contains('map-fullscreen')) {
+          toggleMapFullscreen();
+        }
+      }
+    });
 
     function renderMapMarkers(filterCat) {
       if (!mapMarkerGroup || !leafletMap) return;
@@ -3188,36 +3469,45 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
       const filtered = filterCat === 'all' ? allSpots : allSpots.filter(s => s.cat === filterCat);
       filtered.forEach(s => {
         if (!s.lat || !s.lng) return;
-        const color = catColors[s.cat] || '#c9a96e';
+        const emoji = catEmoji[s.cat] || '📍';
+        const catClass = 'cat-' + (s.cat || 'landmark');
         const icon = L.divIcon({
-          className: 'leaflet-div-icon custom-marker',
-          html: `<div style="background:${color};color:#fff;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.25);cursor:pointer;border:2px solid #fff;transition:transform .2s">${s.name}</div>`,
-          iconSize: [0, 0],
-          iconAnchor: [0, 0]
+          className: 'leaflet-div-icon',
+          html: '<div class="map-marker ' + catClass + '">' +
+                  '<span class="marker-emoji">' + emoji + '</span>' +
+                  '<div class="map-marker-label">' + escapeHtml(s.name) + '</div>' +
+                '</div>',
+          iconSize: [36, 44],
+          iconAnchor: [18, 44],
+          popupAnchor: [0, -44]
         });
         const marker = L.marker([s.lat, s.lng], { icon });
-        const ratingStars = '★'.repeat(Math.floor(s.rating)) + '☆'.repeat(5 - Math.floor(s.rating));
-        const priceStr = s.price === 0 ? '<span style="color:#22c55e;font-weight:600">免费</span>' : '¥' + s.price;
-        const popupHtml = '<div class="map-popup-container">' +
+        
+        // Rich popup
+        const priceStr = s.price === 0 ? '<span style="color:#22c55e;font-weight:700">免费</span>' : '<span style="font-weight:700">¥' + s.price + '</span>';
+        const popupHtml = '<div class="map-popup">' +
           getMapPopupImg(s) +
           '<div class="map-popup-body">' +
-            '<div class="map-popup-name">' + s.name + '</div>' +
+            '<div class="map-popup-name">' + escapeHtml(s.name) + '</div>' +
             '<div class="map-popup-meta">' +
-              '<span class="map-popup-rating">' + ratingStars + ' ' + s.rating + '</span>' +
+              '<span class="popup-rating">★ ' + s.rating + '</span>' +
               '<span>·</span>' +
               '<span>' + priceStr + '</span>' +
               '<span>·</span>' +
-              '<span>⏱' + s.dur + '</span>' +
+              '<span>⏱ ' + s.dur + '</span>' +
             '</div>' +
+            '<div class="map-popup-desc">' + escapeHtml(s.desc).slice(0, 60) + '…</div>' +
+            '<button class="map-popup-btn" onclick="document.querySelector(\'.modal-overlay\')?.remove();openQuickView(allSpots.find(x=>x.id===\'' + s.id + '\'))">查看详情 →</button>' +
           '</div>' +
         '</div>';
-        marker.bindPopup(popupHtml, { maxWidth: 240, closeButton: true });
+        marker.bindPopup(popupHtml, { maxWidth: 260, closeButton: true, className: 'custom-popup' });
         marker.on('click', () => { highlightCard(s.id); });
         mapMarkerGroup.addLayer(marker);
       });
     }
 
-    function highlightCard(spotId) {
+
+        function highlightCard(spotId) {
       document.querySelectorAll('.card.highlighted').forEach(c => c.classList.remove('highlighted'));
       const card = document.querySelector('.card[data-id="' + spotId + '"]');
       if (card) {
@@ -3311,11 +3601,17 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
     const leafletScript = document.createElement('script');
     leafletScript.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
     leafletScript.onload = () => {
-      const tryInit = () => {
-        if (allSpots.length) { initLeafletMap(); renderRecommend(); }
-        else setTimeout(tryInit, 200);
+      // Load markercluster after leaflet
+      const mcScript = document.createElement('script');
+      mcScript.src = 'https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js';
+      mcScript.onload = () => {
+        const tryInit = () => {
+          if (allSpots.length) { initLeafletMap(); renderRecommend(); }
+          else setTimeout(tryInit, 200);
+        };
+        tryInit();
       };
-      tryInit();
+      document.head.appendChild(mcScript);
       // Pre-load voices for TTS
       if ('speechSynthesis' in window) speechSynthesis.getVoices();
     };

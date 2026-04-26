@@ -15,7 +15,7 @@
   --serif:'Noto Serif SC',"Source Han Serif SC","Songti SC",Georgia,serif;
   --ease:cubic-bezier(.25,.46,.45,.94);
   --ease-out:cubic-bezier(.16,1,.3,1);
-  --section:clamp(40px,6vw,72px);
+  --section:clamp(24px,4vw,48px);
   --gutter:clamp(20px,4vw,48px);
   --max:1200px;--radius:16px;--radius-lg:20px;
 }

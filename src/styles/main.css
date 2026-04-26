@@ -1345,6 +1345,57 @@ html.dark .review-card .avatar {
   100% { left: 100%; }
 }
 
+
+/* ══════════════════════════════════════
+   SKELETON LOADING — Premium shimmer effect
+   ══════════════════════════════════════ */
+.skeleton-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.skeleton-card .skeleton-img {
+  aspect-ratio: 16/10;
+  background: linear-gradient(90deg, var(--bg2) 25%, var(--bg3) 37%, rgba(201,169,110,.06) 50%, var(--bg3) 63%, var(--bg2) 75%);
+  background-size: 400% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+.skeleton-card .skeleton-body {
+  padding: 20px 24px 24px;
+}
+.skeleton-card .skeleton-line {
+  height: 14px;
+  background: var(--bg3);
+  border-radius: 6px;
+  margin-bottom: 10px;
+  animation: skeletonPulse 1.8s ease-in-out infinite;
+}
+.skeleton-card .skeleton-line.short { width: 60%; }
+.skeleton-card .skeleton-line.xshort { width: 40%; }
+.skeleton-card .skeleton-line:last-child { margin-bottom: 0; }
+
+/* Card image loading state */
+.card-img.img-loading::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--bg2) 25%, var(--bg3) 37%, rgba(201,169,110,.06) 50%, var(--bg3) 63%, var(--bg2) 75%);
+  background-size: 400% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+  z-index: 2;
+}
+.card-img.img-loaded::before { opacity: 0; pointer-events: none; }
+
+/* Smooth image fade-in */
+.card-img img {
+  opacity: 0;
+  transition: opacity .5s ease, transform .6s cubic-bezier(.23,1,.32,1);
+}
+.card-img img.img-loaded {
+  opacity: 1;
+}
+
 /* ══════════════════════════════════════
    PAGE-SPECIFIC DESIGN ENHANCEMENTS
    景点 / 行程 / 指南 / 文化
@@ -2795,6 +2846,66 @@ html, body, .card, .top-nav, .footer {
    MISSING COMPONENT STYLES — 补全
    ═══════════════════════════════════════ */
 
+
+/* ══════════════════════════════════════
+   PAGE TRANSITIONS — Smooth navigation
+   ══════════════════════════════════════ */
+
+/* Page enter animation */
+@keyframes pageEnter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+main {
+  animation: pageEnter .5s var(--ease-out-expo);
+}
+
+/* Section stagger reveal */
+.section .reveal {
+  transition-delay: calc(var(--stagger-i, 0) * 60ms);
+}
+
+/* Loading bar at top */
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 10000;
+  background: transparent;
+  pointer-events: none;
+}
+.page-loader::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: loaderSlide 1.2s ease-in-out infinite;
+}
+@keyframes loaderSlide {
+  0% { left: -30%; }
+  100% { left: 100%; }
+}
+
+/* Smooth page transition overlay */
+.page-transition {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+.page-transition.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
 /* ─── Skip Link (Accessibility) ─── */
 .skip-link{position:absolute;top:-100%;left:16px;z-index:999;background:var(--accent);color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;transition:top .2s;font-size:.9rem}
 .skip-link:focus{top:8px}
@@ -2934,6 +3045,19 @@ html.dark .copy-route-btn{background:var(--bg2);border-color:rgba(255,255,255,.1
 html.dark .fav-action{background:var(--bg2);border-color:rgba(255,255,255,.1)}
 html.dark .review-helpful{background:var(--bg2);border-color:rgba(255,255,255,.1)}
 html.dark .map-fullscreen-spot-chip{background:var(--bg2);border-color:rgba(255,255,255,.1)}
+
+
+/* ─── Dark Mode for New Components ─── */
+html.dark .skeleton-card { background: var(--card-bg); border-color: rgba(255,255,255,.06); }
+html.dark .skeleton-card .skeleton-img { background: linear-gradient(90deg, var(--bg2) 25%, var(--bg3) 37%, rgba(212,168,83,.04) 50%, var(--bg3) 63%, var(--bg2) 75%); }
+html.dark .skeleton-card .skeleton-line { background: var(--bg3); }
+html.dark .pull-indicator { background: var(--card-bg); border-color: rgba(255,255,255,.1); }
+html.dark .swipe-dot { background: rgba(255,255,255,.15); }
+html.dark .page-transition { background: var(--bg); }
+html.dark .hot-tag { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.1); color: rgba(255,255,255,.6); }
+html.dark .hot-tag:hover { background: rgba(212,168,83,.15); border-color: rgba(212,168,83,.3); color: #fff; }
+html.dark .footer-stats { color: var(--text3); }
+html.dark .stats-bar { background: linear-gradient(135deg, var(--bg2), var(--bg3)); }
 
 /* ─── REDUCED MOTION — 新增动效同样遵守 ─── */
 @media (prefers-reduced-motion: reduce) {

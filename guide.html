@@ -911,6 +911,7 @@
     import { initShopifyAnimations } from '/src/components/shopify-animations.js';
     initPWA();
     initAll();
+    import('/src/components/shared.js').then(m => { m.initPageTransition(); m.initStaggerReveal(); });
     initShopifyAnimations();
     initSocialFeatures();
 

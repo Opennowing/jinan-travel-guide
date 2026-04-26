@@ -1073,6 +1073,7 @@
     import { initSocialFeatures } from '/src/components/social.js';
     initPWA();
     initAll();
+    import('/src/components/shared.js').then(m => { m.initPageTransition(); m.initStaggerReveal(); });
     initSocialFeatures();
 
     // ── State ──

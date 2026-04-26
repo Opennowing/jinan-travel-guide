@@ -493,3 +493,99 @@ export function initAll() {
   initPageTransition();
   initCardInteractions();
 }
+
+
+// ═══ TOUCH SWIPE SUPPORT ═══
+export function initTouchSwipe(container, { onSwipeLeft, onSwipeRight, threshold = 50 } = {}) {
+  if (!container) return;
+  let startX = 0, startY = 0, distX = 0;
+  container.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+  }, { passive: true });
+  container.addEventListener('touchend', e => {
+    distX = e.changedTouches[0].clientX - startX;
+    const distY = Math.abs(e.changedTouches[0].clientY - startY);
+    if (Math.abs(distX) > threshold && distY < Math.abs(distX)) {
+      if (distX > 0 && onSwipeRight) onSwipeRight();
+      else if (distX < 0 && onSwipeLeft) onSwipeLeft();
+    }
+  }, { passive: true });
+}
+
+// ═══ PAGE TRANSITION ═══
+export function initPageTransition() {
+  document.querySelectorAll('a[href]').forEach(a => {
+    const href = a.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:')) return;
+    if (href.endsWith('.html') || href.endsWith('.html#')) {
+      a.addEventListener('click', e => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+        e.preventDefault();
+        const overlay = document.createElement('div');
+        overlay.className = 'page-transition active';
+        document.body.appendChild(overlay);
+        setTimeout(() => { window.location.href = href; }, 250);
+      });
+    }
+  });
+}
+
+// ═══ SKELETON CARD GENERATOR ═══
+export function createSkeletonCard() {
+  return '<div class="skeleton-card">' +
+    '<div class="skeleton-img"></div>' +
+    '<div class="skeleton-body">' +
+    '<div class="skeleton-line" style="width:70%"></div>' +
+    '<div class="skeleton-line short"></div>' +
+    '<div class="skeleton-line xshort"></div>' +
+    '</div></div>';
+}
+
+export function showSkeletons(container, count = 4) {
+  if (!container) return;
+  container.innerHTML = Array(count).fill(createSkeletonCard()).join('');
+}
+
+// ═══ INTERSECTION OBSERVER STAGGER ═══
+export function initStaggerReveal() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal, .rv').forEach((el, i) => {
+    el.style.setProperty('--stagger-i', i % 8);
+    observer.observe(el);
+  });
+}
+
+// ═══ SMOOTH SCROLL TO ELEMENT ═══
+export function smoothScrollTo(selector, offset = 80) {
+  const el = document.querySelector(selector);
+  if (el) {
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+}
+
+// ═══ COUNTER ANIMATION ═══
+export function animateCounters() {
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count, 10);
+    const duration = 1500;
+    const start = performance.now();
+    const initial = 0;
+    function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.round(initial + (target - initial) * eased);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  });
+}

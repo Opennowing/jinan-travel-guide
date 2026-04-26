@@ -969,6 +969,44 @@ html.dark .card.meituan-card:hover {
     @media(max-width:768px){
       .compare-open-btn{bottom:80px!important;right:16px!important;padding:8px 16px!important;font-size:.8rem!important}
     }
+  
+    /* ── Enhanced Map Popup ── */
+    .map-popup{min-width:260px;max-width:320px;font-family:system-ui,-apple-system,sans-serif;border-radius:12px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.15)}
+    .map-popup-img{width:100%;height:140px;object-fit:cover;display:block}
+    .map-popup-body{padding:12px 14px}
+    .map-popup-name{font-weight:700;font-size:1rem;margin-bottom:6px;color:#111;display:flex;align-items:center;gap:6px}
+    .map-popup-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+    .map-popup-cat{padding:2px 8px;border-radius:100px;font-size:.68rem;font-weight:600;color:#fff}
+    .map-popup-rating{font-size:.78rem;color:#f59e0b;font-weight:600}
+    .map-popup-price{font-size:.78rem;font-weight:600;color:var(--accent,#c9a96e)}
+    .map-popup-distance{font-size:.72rem;color:#3b82f6;font-weight:500}
+    .map-popup-desc{font-size:.78rem;color:#666;line-height:1.5;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .map-popup-actions{display:flex;gap:6px}
+    .map-popup-btn{flex:1;padding:7px 0;border:none;border-radius:8px;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:4px}
+    .map-popup-btn-primary{background:linear-gradient(135deg,var(--accent,#c9a96e),#b8956a);color:#fff}
+    .map-popup-btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(201,169,110,.3)}
+    .map-popup-btn-outline{background:transparent;color:var(--accent,#c9a96e);border:1px solid var(--accent,#c9a96e)}
+    .map-popup-btn-outline:hover{background:rgba(201,169,110,.08)}
+    .map-popup-btn-nav{background:#3b82f6;color:#fff}
+    .map-popup-btn-nav:hover{background:#2563eb}
+    /* ── Search This Area ── */
+    .map-search-area{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:500;padding:8px 20px;background:#fff;border-radius:100px;font-size:.8rem;font-weight:600;color:#111;box-shadow:0 4px 20px rgba(0,0,0,.15);cursor:pointer;border:1px solid var(--border);transition:all .25s;display:none;align-items:center;gap:6px}
+    .map-search-area:hover{transform:translateX(-50%) translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.2)}
+    .map-search-area.visible{display:flex}
+    /* ── Map Stats Bar ── */
+    .map-stats{display:flex;gap:16px;justify-content:center;padding:10px 0;font-size:.78rem;color:var(--text2)}
+    .map-stats span{display:inline-flex;align-items:center;gap:4px}
+    /* ── Spot Bottom Cards ── */
+    .map-spot-cards{display:flex;gap:10px;overflow-x:auto;padding:12px 0;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .map-spot-cards::-webkit-scrollbar{display:none}
+    .map-spot-card{flex:0 0 200px;scroll-snap-align:start;background:var(--card-bg,#fff);border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);cursor:pointer;transition:all .25s;border:1px solid var(--border,#e5e2dc)}
+    .map-spot-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+    .map-spot-card-img{width:100%;height:100px;object-fit:cover}
+    .map-spot-card-body{padding:8px 10px}
+    .map-spot-card-name{font-weight:700;font-size:.82rem;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .map-spot-card-meta{font-size:.72rem;color:var(--text3);display:flex;gap:6px;align-items:center}
+    .map-spot-card-dist{color:#3b82f6;font-weight:500}
+
   </style>
   <!-- Leaflet Map CDN -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -1187,6 +1225,8 @@ html.dark .card.meituan-card:hover {
           <button class="leaflet-cat-btn" data-cat="landmark" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)" aria-label="🏛️ 地标" role="tab" aria-selected="false">🏛️ 地标</button>
         </div>
       </div>
+      <!-- Search this area button -->
+      <button class="map-search-area" id="mapSearchArea">🔍 搜索此区域</button>
       <!-- Leaflet map -->
       <div id="leafletMap" style="height:480px;width:100%;background:var(--bg2,#f0ede8)"></div>
       <!-- Fallback: offline SVG map -->
@@ -2528,26 +2568,43 @@ html.dark .card.meituan-card:hover {
         });
       }
 
+      // ── Distance calculator ──
+      var userLat = null, userLng = null;
+      function calcDist(lat1, lng1, lat2, lng2) {
+        var R = 6371;
+        var dLat = (lat2-lat1)*Math.PI/180;
+        var dLng = (lng2-lng1)*Math.PI/180;
+        var a = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.cos(lat1*Math.PI/180)*Math.cos(lat2*Math.PI/180)*Math.sin(dLng/2)*Math.sin(dLng/2);
+        return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      }
+      function formatDist(d) {
+        return d < 1 ? Math.round(d*1000)+'m' : d.toFixed(1)+'km';
+      }
+
       function buildPopupContent(s) {
-        const imgHtml = s.img ? '<img src="'+s.img+'" alt="'+s.name+'" style="width:100%;height:120px;object-fit:cover;border-radius:8px 8px 0 0">' : '';
-        const priceText = s.price === 0 || s.price === '免费' ? '免费' : '¥'+s.price;
-        const catColorVal = catColor[s.cat] || '#c9a96e';
-        const catEmojiVal = catEmoji[s.cat] || '📍';
-        return '<div style="min-width:220px;max-width:280px">'
-          + imgHtml
-          + '<div style="padding:10px 12px">'
-          + '<div style="font-weight:700;font-size:.92rem;margin-bottom:4px;color:#111">'+s.name+'</div>'
-          + '<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">'
-          + '<span style="background:'+catColorVal+';color:#fff;padding:2px 8px;border-radius:100px;font-size:.68rem">'+catEmojiVal+' '+(catLabel[s.cat]||s.cat)+'</span>'
-          + '<span style="font-size:.78rem;color:#f59e0b">★ '+s.rating+'</span>'
+        var priceText = s.price === 0 ? '免费' : '¥'+s.price;
+        var catColorVal = catColor[s.cat] || '#c9a96e';
+        var catEmojiVal = catEmoji[s.cat] || '📍';
+        var distHtml = '';
+        if (userLat && userLng && s.lat && s.lng) {
+          var d = calcDist(userLat, userLng, s.lat, s.lng);
+          distHtml = '<span class="map-popup-distance">📍 '+formatDist(d)+'</span>';
+        }
+        return '<div class="map-popup">'
+          + (s.img ? '<img class="map-popup-img" src="'+s.img+'" alt="'+s.name+'" onerror="this.src=imgFallback(\''+s.name+'\')">' : '')
+          + '<div class="map-popup-body">'
+          + '<div class="map-popup-name">'+s.name+'</div>'
+          + '<div class="map-popup-meta">'
+          + '<span class="map-popup-cat" style="background:'+catColorVal+'">'+catEmojiVal+' '+(catLabel[s.cat]||s.cat)+'</span>'
+          + '<span class="map-popup-rating">★ '+s.rating+'</span>'
+          + '<span class="map-popup-price">'+priceText+'</span>'
+          + distHtml
           + '</div>'
-          + '<div style="display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:#666">'
-          + '<span>💰 '+priceText+'</span>'
-          + (s.duration ? '<span>⏱ '+s.duration+'</span>' : '')
-          + '</div>'
-          + (s.desc ? '<p style="font-size:.75rem;color:#888;margin:6px 0 0;line-height:1.5;max-height:3em;overflow:hidden;text-overflow:ellipsis">'+s.desc+'</p>' : '')
-          + '<a href="spots.html?id='+s.id+'" style="display:inline-block;margin-top:8px;font-size:.75rem;color:#c9a96e;text-decoration:none;font-weight:600">查看详情 →</a>'
-          + '</div></div>';
+          + (s.desc ? '<div class="map-popup-desc">'+s.desc+'</div>' : '')
+          + '<div class="map-popup-actions">'
+          + '<a href="spots.html?id='+s.id+'" class="map-popup-btn map-popup-btn-primary">查看详情</a>'
+          + (s.lat && s.lng ? '<a href="https://uri.amap.com/marker?position='+s.lng+','+s.lat+'&name='+encodeURIComponent(s.name)+'" target="_blank" class="map-popup-btn map-popup-btn-nav">🧭 导航</a>' : '')
+          + '</div></div></div>';
       }
 
       function initLeafletMap() {
@@ -2589,7 +2646,8 @@ html.dark .card.meituan-card:hover {
             var color = catColor[s.cat] || '#c9a96e';
             var size = s.rating >= 4.7 ? 14 : s.rating >= 4.5 ? 12 : 10;
             var marker = L.marker([s.lat, s.lng], { icon: createCircleIcon(color, size) });
-            marker.bindPopup(buildPopupContent(s), { maxWidth: 300, closeButton: true });
+            marker.bindPopup(buildPopupContent(s), { maxWidth: 320, closeButton: true, className: 'enhanced-popup' });
+            marker.on('click', function() { onMarkerClick(s); });
             marker._spotCat = s.cat;
             marker._spotId = s.id;
             allMarkers.push(marker);
@@ -2598,6 +2656,15 @@ html.dark .card.meituan-card:hover {
 
           leafletMap.addLayer(markerClusterGroup);
           addMapControls();
+          initSearchArea();
+          initZoomDisplay();
+          // Store spot data on markers for search-area
+          allMarkers.forEach(function(m) { m._spotData = (window.allSpots||[]).find(function(s){return s.id===m._spotId;}); });
+          // Initial spot cards
+          renderMapSpotCards((window.allSpots||[]).filter(function(s){return s.lat&&s.lng;}).sort(function(a,b){return b.rating-a.rating;}).slice(0,12));
+          // Update stats
+          var countEl = document.getElementById('mapSpotCount2');
+          if (countEl) countEl.textContent = '📍 ' + allMarkers.length + ' 个景点';
         } catch (e) {
           console.warn('Leaflet init failed:', e);
           showFallback();

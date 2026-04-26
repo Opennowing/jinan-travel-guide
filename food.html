@@ -496,7 +496,7 @@
     .section-header{margin-bottom:14px!important}
     .section-header h2{font-size:clamp(1.4rem,3vw,1.8rem)!important}
     .section-header p{margin-top:4px!important;font-size:.85rem!important}
-    .section-divider{margin:16px auto!important}
+    .section-divider{margin:8px auto!important}
     .food-masonry{gap:12px!important}
     .food-card-pro-body{padding:14px 16px 16px!important}
     .must-eat-hero{margin-bottom:0;padding:20px!important}
@@ -746,28 +746,6 @@
         <!-- 美食卡片列表 -->
         <div class="food-masonry" id="foodGrid">
           <div class="food-loading"><div class="spinner"></div></div>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-divider reveal" aria-hidden="true">◈</div>
-    <!-- ── 必吃榜 TOP 5 ── -->
-    <section class="section" style="background:var(--bg2)" aria-label="必吃榜TOP5">
-      <div class="section-inner">
-        <div class="section-header reveal">
-          <p class="eyebrow">必吃榜</p>
-          <h2>🏆 济南必吃榜 · 全部推荐</h2>
-          <p>本地人认证的 11 道必吃美食，错过等于白来</p>
-        </div>
-        <div class="must-banner reveal">
-          <span class="must-banner-icon">🏆</span>
-          <div class="must-banner-text">
-            <h3>济南必吃榜 · 本地人精选</h3>
-            <p>从百年老字号到街头巷尾的烟火气，这5道菜是济南美食的灵魂。没吃过等于白来！</p>
-          </div>
-        </div>
-        <div class="must-eat-grid reveal" id="mustEatGrid">
-          <!-- JS 渲染 -->
         </div>
       </div>
     </section>
@@ -1781,7 +1759,7 @@
       }
       allFoods = data.foods || [];
       allCategories = data.categories || [];
-      try { renderMustEat(); } catch(e) { console.warn('Must-eat render failed:', e); }
+      // renderMustEat removed — must-eat shown via badge on cards
       // renderMustEatHero removed — must-eat foods shown via badge on cards
       try { renderCategoryCapsules(); } catch(e) { console.warn('Category capsules render failed:', e); }
       try { renderFoods(); } catch(e) { console.warn('Foods render failed:', e); }

@@ -589,3 +589,126 @@ export function animateCounters() {
     requestAnimationFrame(step);
   });
 }
+
+// ═══ LIGHTBOX COMPONENT ═══
+export class Lightbox {
+  constructor() {
+    this.overlay = null;
+    this.currentIndex = 0;
+    this.images = [];
+    this._init();
+  }
+  _init() {
+    this.overlay = document.createElement('div');
+    this.overlay.className = 'lightbox-overlay';
+    this.overlay.innerHTML = `
+      <button class="lightbox-close" aria-label="关闭">✕</button>
+      <button class="lightbox-nav prev" aria-label="上一张">‹</button>
+      <button class="lightbox-nav next" aria-label="下一张">›</button>
+      <div class="lightbox-content"><img src="" alt=""></div>
+      <div class="lightbox-counter"><span class="lb-current">1</span> / <span class="lb-total">1</span></div>
+      <div class="lightbox-dots"></div>
+    `;
+    document.body.appendChild(this.overlay);
+    this._bindEvents();
+  }
+  _bindEvents() {
+    this.overlay.querySelector('.lightbox-close').addEventListener('click', () => this.close());
+    this.overlay.querySelector('.lightbox-nav.prev').addEventListener('click', () => this.prev());
+    this.overlay.querySelector('.lightbox-nav.next').addEventListener('click', () => this.next());
+    this.overlay.addEventListener('click', e => { if (e.target === this.overlay) this.close(); });
+    document.addEventListener('keydown', e => {
+      if (!this.overlay.classList.contains('open')) return;
+      if (e.key === 'Escape') this.close();
+      if (e.key === 'ArrowLeft') this.prev();
+      if (e.key === 'ArrowRight') this.next();
+    });
+  }
+  open(images, index = 0) {
+    this.images = images;
+    this.currentIndex = index;
+    this.overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    this._render();
+  }
+  close() {
+    this.overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  prev() { this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length; this._render(); }
+  next() { this.currentIndex = (this.currentIndex + 1) % this.images.length; this._render(); }
+  _render() {
+    const img = this.overlay.querySelector('.lightbox-content img');
+    img.src = this.images[this.currentIndex].src;
+    img.alt = this.images[this.currentIndex].alt || '';
+    this.overlay.querySelector('.lb-current').textContent = this.currentIndex + 1;
+    this.overlay.querySelector('.lb-total').textContent = this.images.length;
+    const dots = this.overlay.querySelector('.lightbox-dots');
+    dots.innerHTML = this.images.map((_, i) =>
+      `<button class="lightbox-dot${i === this.currentIndex ? ' active' : ''}" data-i="${i}" aria-label="第${i+1}张"></button>`
+    ).join('');
+    dots.querySelectorAll('.lightbox-dot').forEach(d => d.addEventListener('click', () => {
+      this.currentIndex = parseInt(d.dataset.i); this._render();
+    }));
+  }
+}
+
+// ═══ MOBILE BOTTOM SHEET ═══
+export class BottomSheet {
+  constructor(content, { title = '', onClose = null } = {}) {
+    this.el = document.createElement('div');
+    this.el.className = 'bottom-sheet-overlay';
+    this.el.innerHTML = `
+      <div class="bottom-sheet">
+        <div class="bottom-sheet-handle"></div>
+        <div class="bottom-sheet-header">
+          <h3>${title}</h3>
+          <button class="bottom-sheet-close" aria-label="关闭">✕</button>
+        </div>
+        <div class="bottom-sheet-body">${content}</div>
+      </div>
+    `;
+    document.body.appendChild(this.el);
+    this.el.querySelector('.bottom-sheet-close').addEventListener('click', () => this.close());
+    this.el.addEventListener('click', e => { if (e.target === this.el) this.close(); });
+    this.onClose = onClose;
+    requestAnimationFrame(() => this.el.classList.add('open'));
+  }
+  close() {
+    this.el.classList.remove('open');
+    setTimeout(() => { this.el.remove(); if (this.onClose) this.onClose(); }, 300);
+  }
+}
+
+// ═══ NATIVE SHARE API ═══
+export async function nativeShare({ title, text, url }) {
+  if (navigator.share) {
+    try { await navigator.share({ title, text, url }); return true; } catch { return false; }
+  }
+  // Fallback: copy to clipboard
+  try {
+    await navigator.clipboard.writeText(`${title}\n${text}\n${url}`);
+    return true;
+  } catch { return false; }
+}
+
+// ═══ IMAGE PRELOADER ═══
+export function preloadImages(urls) {
+  urls.forEach(url => {
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = url;
+    document.head.appendChild(link);
+  });
+}
+
+// ═══ PERFORMANCE MONITOR ═══
+export function logPerformance() {
+  if (!window.performance) return;
+  const nav = performance.getEntriesByType('navigation')[0];
+  if (nav) {
+    console.log(`[Perf] DOMContentLoaded: ${Math.round(nav.domContentLoadedEventEnd)}ms`);
+    console.log(`[Perf] Load: ${Math.round(nav.loadEventEnd)}ms`);
+  }
+}

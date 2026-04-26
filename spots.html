@@ -62,8 +62,12 @@
     .spot-price .free-tag{color:#5eead4}
     .card-body .card-stars{color:#f59e0b;font-size:.75rem;letter-spacing:1px}
     .card-body .desc{-webkit-line-clamp:3;line-clamp:3}
-    .card-actions{display:flex;gap:8px;margin-top:auto;padding-top:12px}
-    .card-actions .btn{flex:1;justify-content:center}
+    .card-info{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:8px;font-size:.75rem;color:var(--text3);align-items:center}
+    .card-info .info-item{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+    .card-info .info-dot{width:3px;height:3px;border-radius:50%;background:var(--text3);opacity:.4}
+    .card-tags{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+    .card-actions{display:flex;gap:6px;margin-top:auto;padding-top:10px}
+    .card-actions .btn{flex:1;justify-content:center;font-size:.78rem;padding:6px 8px}
     .count-badge{font-size:.75rem;color:var(--text3);font-weight:500}
     .count-badge strong{color:var(--text);font-weight:700;font-size:.85rem}
     .empty-state{text-align:center;padding:80px 20px;color:var(--text3)}
@@ -1152,11 +1156,17 @@
               ${isSeasonalRecommended(s) ? '<span class="seasonal-rec-tag">🌟 当季推荐</span>' : ''}
             </div>
             <div class="card-body">
-              <h3>${s.name} <span class="card-stars">${stars(s.rating)}</span></h3>
+              <h3>${s.name} <span class="card-stars">${stars(s.rating)} ${s.rating}</span></h3>
               <p class="desc">${s.desc}</p>
-              <div class="card-meta"><span>⏱ ${s.dur}</span><span>💬 ${s.reviews} 条评价</span><span><span class="crowd-dot crowd-${getCrowdLevel(s)}"></span>${(s.crowd||'一般').split('·')[0].trim().slice(0,8)}</span></div>
-              <div class="card-meta" style="margin-top:4px"><span>🕐 ${(s.open||'全天').split('(')[0].split('·')[0].trim()}</span><span>📅 ${(s.bestTime||'全年').slice(0,12)}</span><span class="area-label">📍 ${getArea(s)}</span></div>
-              ${s.transport ? `<div class="card-meta" style="margin-top:4px"><span>🚌 ${s.transport.slice(0,20)}</span></div>` : ''}
+              <div class="card-info">
+                <span class="info-item">⏱ ${s.dur}</span>
+                <span class="info-dot"></span>
+                <span class="info-item">💬 ${s.reviews}条</span>
+                <span class="info-dot"></span>
+                <span class="info-item">${s.price === 0 ? '🆓 免费' : '¥' + s.price + '/人'}</span>
+                <span class="info-dot"></span>
+                <span class="info-item">📍 ${getArea(s)}</span>
+              </div>
               <div class="card-tags">${s.audience.map(a => `<span class="tag">${audienceLabels[a]||a}</span>`).join('')}</div>
               <div class="card-actions">
                 <a href="${getCtripLink(s.name)}" target="_blank" rel="noopener" class="btn btn-sm btn-outline" style="color:#2681ff;border-color:#2681ff" onclick="event.stopPropagation()">🐬 订票</a>

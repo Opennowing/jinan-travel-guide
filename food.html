@@ -111,6 +111,9 @@
     .food-card-history::before{content:'📜 '}
     .food-card-desc{font-size:.85rem;color:var(--text2);line-height:1.65;margin-bottom:14px}
     .card-body .desc{-webkit-line-clamp:3;line-clamp:3}
+    .card-info{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:6px;font-size:.75rem;color:var(--text3);align-items:center}
+    .card-info .info-item{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+    .card-info .info-dot{width:3px;height:3px;border-radius:50%;background:var(--text3);opacity:.4}
     .food-card-shops{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:auto}
     .food-card-shops li{padding:12px 16px;background:var(--bg2);border-radius:12px;border:none;transition:all .2s}
     .food-card-shops li:hover{background:var(--accent2);transform:translateX(4px)}
@@ -1652,29 +1655,27 @@
           '</div>' +
           '<div class="card-body">' +
             '<h3>' + food.name + '</h3>' +
-            '<div class="card-tags">' +
-              '<span class="tag">' + food.tag + '</span>' +
-              (shopCount ? '<span class="tag" style="background:rgba(42,157,143,.1);color:#2a9d8f">🏪 ' + shopCount + '家餐厅</span>' : '') +
+            '<div class="card-info">' +
+              '<span class="info-item">' + (food.cat === 'lucai' ? '🍲 鲁菜' : food.cat === 'xiaochi' ? '🍢 小吃' : food.cat === 'laozihao' ? '🏮 老字号' : food.cat === 'zaocan' ? '🌅 早餐' : food.cat === 'yexiao' ? '🌙 夜宵' : food.cat === 'yinpin' ? '🍵 饮品' : food.tag) + '</span>' +
+              '<span class="info-dot"></span>' +
+              (avgPrice ? '<span class="info-item" style="color:var(--accent);font-weight:600">💰 ' + avgPrice + '</span>' : '') +
+              (avgPrice ? '<span class="info-dot"></span>' : '') +
+              (shopCount ? '<span class="info-item">🏪 ' + shopCount + '家</span>' : '') +
+              (food.must ? '<span class="info-dot"></span><span class="info-item">🔥 必吃</span>' : '') +
             '</div>' +
             '<p class="desc">' + food.desc + '</p>' +
-            '<div class="card-meta">' +
-              '<span>' + (food.cat === 'lucai' ? '鲁菜经典' : food.cat === 'xiaochi' ? '市井小吃' : food.cat === 'laozihao' ? '老字号' : food.cat === 'zaocan' ? '早餐' : food.cat === 'yexiao' ? '夜宵' : food.cat === 'yinpin' ? '饮品' : food.cat) + '</span>' +
-              (avgPrice ? '<span style="color:var(--accent);font-weight:700">· 人均 ' + avgPrice + '</span>' : '') +
-            '</div>' +
             (food.shops?.length ? `
-              <div style="margin-top:10px;padding:10px 12px;background:var(--bg2);border-radius:8px;font-size:.75rem">
-                <div style="font-weight:600;color:var(--text);margin-bottom:4px">🏪 推荐餐厅</div>
+              <div style="margin-top:8px;padding:8px 10px;background:var(--bg2);border-radius:8px;font-size:.75rem">
                 ${food.shops.slice(0, 2).map(sh => `
-                  <div style="display:flex;justify-content:space-between;align-items:center;padding:3px 0;color:var(--text2)">
+                  <div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;color:var(--text2)">
                     <span>${sh.name}</span>
                     <span style="color:var(--accent);font-weight:600">${sh.avg}</span>
                   </div>
                 `).join('')}
               </div>
             ` : '') +
-            (food.history ? '<div class="food-card-history">' + food.history + '</div>' : '') +
-            '<div class="card-actions" style="display:flex;gap:8px;margin-top:12px">' +
-              '<a href="food.html?id=' + food.id + '" class="btn btn-primary btn-sm" style="flex:1;justify-content:center" onclick="event.stopPropagation()">查看详情</a>' +
+            '<div class="card-actions" style="display:flex;gap:6px;margin-top:auto;padding-top:10px">' +
+              '<a href="food.html?id=' + food.id + '" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;font-size:.78rem;padding:6px 8px" onclick="event.stopPropagation()">查看详情</a>' +
             '</div>' +
           '</div>' +
         '</div>';

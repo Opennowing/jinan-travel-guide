@@ -651,25 +651,7 @@
   <main role="main" id="main-content">
 
 
-    <!-- ── 必吃榜 Hero ── -->
-    <section class="section" aria-label="济南必吃榜">
-      <div class="section-inner">
-        <div class="must-eat-hero reveal" id="mustEatHero">
-          <div class="must-eat-hero-header">
-            <div class="must-eat-hero-icon">🏆</div>
-            <div class="must-eat-hero-title">
-              <h2>济南必吃榜 · 本地人精选</h2>
-              <p>从百年老字号到街头巷尾的烟火气，这11道菜是济南美食的灵魂</p>
-            </div>
-          </div>
-          <div class="must-eat-hero-grid" id="mustEatHeroGrid">
-            <!-- JS 动态渲染 -->
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── 搜索 ── -->
+    <!-- ── 搜索与列表（必吃榜已合并到卡片徽章中） ── -->
     <section class="section" aria-label="美食搜索与列表">
       <div class="section-inner">
 
@@ -1800,7 +1782,7 @@
       allFoods = data.foods || [];
       allCategories = data.categories || [];
       try { renderMustEat(); } catch(e) { console.warn('Must-eat render failed:', e); }
-      try { renderMustEatHero(); } catch(e) { console.warn('Must-eat hero render failed:', e); }
+      // renderMustEatHero removed — must-eat foods shown via badge on cards
       try { renderCategoryCapsules(); } catch(e) { console.warn('Category capsules render failed:', e); }
       try { renderFoods(); } catch(e) { console.warn('Foods render failed:', e); }
       try { renderRoutes(); } catch(e) { console.warn('Routes render failed:', e); }

@@ -767,6 +767,192 @@
 /* ── Filter container spacing fix ── */
 .filter-container { margin-bottom: 16px; }
 
+
+/* ═══ AIRBNB CARD IMPROVEMENTS ═══ */
+
+/* ── Fix: Touch target size (44px min) ── */
+.card.airbnb-card .card-fav-btn {
+  width: 36px;
+  height: 36px;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* ── Fix: Card body info hierarchy ── */
+.card.airbnb-card .card-body {
+  padding: 12px 14px 14px;
+  gap: 4px;
+}
+
+/* ── Enhancement: Better price styling ── */
+.card.airbnb-card .price-current {
+  font-size: .95rem;
+  font-weight: 800;
+  letter-spacing: -.01em;
+}
+.card.airbnb-card .price-free {
+  color: #059669;
+  background: linear-gradient(135deg, rgba(5,150,105,.08), rgba(5,150,105,.04));
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+/* ── Enhancement: Rating row refinement ── */
+.card.airbnb-card .card-rating-row {
+  gap: 4px;
+  font-size: .8rem;
+}
+
+/* ── Enhancement: Better description truncation ── */
+.card.airbnb-card .card-desc {
+  font-size: .8rem;
+  line-height: 1.45;
+  color: var(--text3);
+  -webkit-line-clamp: 2;
+  margin-top: 0;
+}
+
+/* ── Enhancement: Bottom section polish ── */
+.card.airbnb-card .card-bottom {
+  padding-top: 8px;
+  gap: 6px;
+}
+.card.airbnb-card .card-transport {
+  font-size: .68rem;
+  color: var(--text3);
+  opacity: .8;
+}
+.card.airbnb-card .card-detail-btn {
+  font-size: .7rem;
+  padding: 3px 10px;
+  border-width: 1.5px;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+/* ── Enhancement: Card hover refinement ── */
+.card.airbnb-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.1), 0 2px 8px rgba(0,0,0,.06);
+}
+
+/* ── Enhancement: Image overlay on hover ── */
+.card.airbnb-card .card-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,.08) 100%);
+  opacity: 0;
+  transition: opacity .3s;
+  z-index: 0;
+  pointer-events: none;
+}
+.card.airbnb-card:hover .card-img::after {
+  opacity: 1;
+}
+
+/* ── Enhancement: Category tag refinement ── */
+.card.airbnb-card .card-cat-tag {
+  font-size: .6rem;
+  padding: 1px 6px;
+  letter-spacing: .02em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ── Enhancement: Name row spacing ── */
+.card.airbnb-card .card-name-row {
+  gap: 6px;
+  margin-bottom: 2px;
+}
+.card.airbnb-card .card-name {
+  font-size: .92rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+}
+
+/* ── Fix: Mobile responsive ── */
+@media(max-width:520px){
+  .card.airbnb-card .card-body {
+    padding: 14px 16px 16px;
+  }
+  .card.airbnb-card .card-name {
+    font-size: 1rem;
+  }
+  .card.airbnb-card .card-detail-btn {
+    padding: 5px 14px;
+    font-size: .75rem;
+  }
+}
+
+/* ── Enhancement: Sort header mobile ── */
+@media(max-width:768px){
+  .sort-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .sort-header .sort-pills {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sort-header .sort-pill {
+    flex-shrink: 0;
+  }
+}
+
+/* ── Enhancement: Skeleton card refinement ── */
+.skeleton-spot-card .skel-img {
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+/* ── Enhancement: Card grid gap consistency ── */
+.card-grid {
+  gap: 20px;
+}
+
+/* ── Enhancement: Better dark mode card ── */
+html.dark .card.airbnb-card {
+  background: var(--card-bg);
+  border-color: rgba(255,255,255,.06);
+}
+html.dark .card.airbnb-card:hover {
+  border-color: rgba(212,168,83,.12);
+  box-shadow: 0 8px 24px rgba(0,0,0,.25), 0 2px 8px rgba(0,0,0,.15);
+}
+html.dark .card.airbnb-card .price-free {
+  background: linear-gradient(135deg, rgba(5,150,105,.12), rgba(5,150,105,.06));
+}
+
+/* ── Enhancement: Badge refinement ── */
+.card.airbnb-card .spot-badge {
+  font-size: .62rem;
+  padding: 2px 8px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.15);
+}
+
+/* ── Enhancement: Card bottom border accent on hover ── */
+.card.airbnb-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--teal));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s cubic-bezier(.23,1,.32,1);
+  z-index: 2;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+.card.airbnb-card:hover::before {
+  transform: scaleX(1);
+}
 /* ── Dark mode adjustments ── */
 html.dark .card.airbnb-card:hover {
   box-shadow: 0 12px 28px rgba(0,0,0,.25), 0 4px 10px rgba(0,0,0,.15);

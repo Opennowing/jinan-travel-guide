@@ -79,7 +79,7 @@
     .audience-btn{padding:4px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.7rem;cursor:pointer;transition:all .3s;color:var(--text3)}
     .audience-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.1)}
     .audience-btn.active{border-color:var(--accent);background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(201,169,110,.25)}
-    .modal-gallery{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#000}
+    .modal-gallery{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:#000}
     .gallery-track{display:flex;transition:transform .4s cubic-bezier(.25,.46,.45,.94);height:100%}
     .gallery-slide{flex:0 0 100%;height:100%}
     .gallery-slide img{width:100%;height:100%;object-fit:cover}
@@ -374,93 +374,189 @@
     .modal-tag-item.badge-tag { background: rgba(233,69,96,.08); color: #e94560; border-color: rgba(233,69,96,.2); }
 
 /* ══════════════════════════════════════
-   AIRBNB-STYLE SPOT CARD REDESIGN
+   MEITUAN/DIANPING-STYLE SPOT CARD
    ══════════════════════════════════════ */
 
 /* ── Card Grid Responsive ── */
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  align-items:start;
+}
+@media(min-width:1200px){
+  .card-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:900px){
+  .card-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+}
 @media(max-width:520px){
-  .card-grid{grid-template-columns:1fr!important}
+  .card-grid{grid-template-columns:1fr!important;gap:12px}
 }
 
-/* ── Card Base (Airbnb style) ── */
-.card.airbnb-card {
-  border-radius: var(--radius-lg);
+/* ── Card Base ── */
+.card.meituan-card {
+  border-radius: 14px;
   border: 1px solid var(--border);
   background: var(--card-bg);
   overflow: hidden;
-  transition: transform .35s cubic-bezier(.23,1,.32,1), box-shadow .35s cubic-bezier(.23,1,.32,1);
+  transition: transform .3s cubic-bezier(.23,1,.32,1), box-shadow .3s cubic-bezier(.23,1,.32,1);
   cursor: pointer;
   position: relative;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 1px 2px rgba(0,0,0,.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
 }
-.card.airbnb-card:hover {
+.card.meituan-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 12px 28px rgba(0,0,0,.12), 0 4px 10px rgba(0,0,0,.06);
-  border-color: rgba(201,169,110,.15);
+  box-shadow: 0 16px 40px rgba(0,0,0,.12), 0 4px 12px rgba(0,0,0,.06);
+  border-color: rgba(201,169,110,.2);
+}
+html.dark .card.meituan-card {
+  background: var(--card-bg);
+  border-color: rgba(255,255,255,.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+html.dark .card.meituan-card:hover {
+  border-color: rgba(212,168,83,.15);
+  box-shadow: 0 16px 40px rgba(0,0,0,.3), 0 4px 12px rgba(0,0,0,.15);
 }
 
-/* ── Image Area (4:3) ── */
-.card.airbnb-card .card-img {
-  aspect-ratio: 4/3;
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  background: var(--bg3);
-}
-.card.airbnb-card .card-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .5s cubic-bezier(.23,1,.32,1);
-  opacity: 0;
-}
-.card.airbnb-card .card-img img.img-loaded {
-  opacity: 1;
-}
-.card.airbnb-card:hover .card-img img {
-  transform: scale(1.05);
-}
-
-/* ── Gradient Overlay ── */
-.card.airbnb-card .card-img .img-gradient {
+/* ── Card Bottom Accent ── */
+.card.meituan-card::after {
+  content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 50%;
-  background: linear-gradient(to top, rgba(0,0,0,.65) 0%, rgba(0,0,0,.25) 50%, transparent 100%);
+  height: 3px;
+  background: linear-gradient(90deg, #ff6b35, #ffc107, #22c55e);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s cubic-bezier(.23,1,.32,1);
+  z-index: 5;
+  border-radius: 0 0 14px 14px;
+}
+.card.meituan-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Image Area (16:10, more cinematic) ── */
+.card.meituan-card .card-img {
+  aspect-ratio: 16/10;
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0;
+  background: var(--bg3);
+}
+.card.meituan-card .card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s cubic-bezier(.23,1,.32,1);
+  opacity: 0;
+}
+.card.meituan-card .card-img img.img-loaded {
+  opacity: 1;
+}
+.card.meituan-card:hover .card-img img {
+  transform: scale(1.08);
+}
+
+/* ── Image Gradient Overlay ── */
+.card.meituan-card .card-img .img-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0,0,0,.7) 0%, rgba(0,0,0,.3) 40%, transparent 100%);
   z-index: 1;
   pointer-events: none;
 }
 
 /* ── Spot Name on Image ── */
-.card.airbnb-card .card-img .img-spot-name {
+.card.meituan-card .card-img .img-spot-name {
   position: absolute;
-  bottom: 12px;
-  left: 14px;
-  right: 14px;
+  bottom: 10px;
+  left: 12px;
+  right: 70px;
   z-index: 2;
   color: #fff;
-  font: 700 1.05rem/1.3 var(--serif);
-  text-shadow: 0 1px 4px rgba(0,0,0,.4);
+  font: 700 .95rem/1.3 var(--serif);
+  text-shadow: 0 1px 6px rgba(0,0,0,.5);
   pointer-events: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ── Badge (top-left) ── */
-.card.airbnb-card .spot-badge {
+.card.meituan-card .card-badge {
   position: absolute;
-  top: 12px;
-  left: 12px;
+  top: 10px;
+  left: 10px;
   z-index: 3;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.card.meituan-card .card-badge .badge-tag {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.15);
+  white-space: nowrap;
+}
+.badge-tag.badge-must { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; }
+.badge-tag.badge-hot { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; }
+.badge-tag.badge-free { background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; }
+.badge-tag.badge-hidden { background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: #fff; }
+.badge-tag.badge-kid { background: linear-gradient(135deg, #3b82f6, #2563eb); color: #fff; }
+.badge-tag.badge-night { background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; }
+.badge-tag.badge-new { background: linear-gradient(135deg, #ec4899, #db2777); color: #fff; }
+
+/* ── Price Tag (top-right) ── */
+.card.meituan-card .card-price-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: .72rem;
+  font-weight: 800;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.card-price-tag.price-free {
+  background: rgba(34,197,94,.9);
+  color: #fff;
+  border: 1px solid rgba(34,197,94,.3);
+}
+.card-price-tag.price-paid {
+  background: rgba(0,0,0,.6);
+  color: #ffc107;
+  border: 1px solid rgba(255,255,255,.1);
+}
+.card-price-tag .price-old-tag {
+  color: rgba(255,255,255,.5);
+  text-decoration: line-through;
+  font-weight: 400;
+  font-size: .6rem;
+  margin-left: 3px;
 }
 
-/* ── Favorite Button (top-right, Airbnb style) ── */
-.card.airbnb-card .card-fav-btn {
+/* ── Favorite Button ── */
+.card.meituan-card .card-fav-btn {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 40px;
+  right: 10px;
   width: 32px;
   height: 32px;
   border-radius: 50%;
@@ -470,38 +566,40 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
   transition: all .25s cubic-bezier(.23,1,.32,1);
-  background: none;
-  filter: drop-shadow(0 1px 4px rgba(0,0,0,.3));
+  background: rgba(0,0,0,.35);
+  color: #fff;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   opacity: 0;
   transform: scale(.8);
   padding: 0;
   line-height: 1;
 }
-.card.airbnb-card:hover .card-fav-btn,
-.card.airbnb-card .card-fav-btn.faved {
+.card.meituan-card:hover .card-fav-btn,
+.card.meituan-card .card-fav-btn.faved {
   opacity: 1;
   transform: scale(1);
 }
 @media(hover:none){
-  .card.airbnb-card .card-fav-btn{opacity:1;transform:scale(1)}
+  .card.meituan-card .card-fav-btn{opacity:1;transform:scale(1)}
 }
-.card.airbnb-card .card-fav-btn:hover {
-  transform: scale(1.2);
+.card.meituan-card .card-fav-btn:hover {
+  transform: scale(1.15);
+  background: rgba(239,68,68,.85);
 }
-.card.airbnb-card .card-fav-btn .heart {
-  font-size: 1.25rem;
+.card.meituan-card .card-fav-btn.faved {
+  background: rgba(239,68,68,.9);
+  opacity: 1;
+  transform: scale(1);
+}
+.card.meituan-card .card-fav-btn .heart {
+  font-size: 1.1rem;
   transition: all .25s;
 }
-.card.airbnb-card .card-fav-btn .heart-outline {
-  color: #fff;
-  text-shadow: 0 1px 6px rgba(0,0,0,.4);
-}
-.card.airbnb-card .card-fav-btn .heart-filled {
-  color: #ff385c;
-  filter: drop-shadow(0 1px 4px rgba(255,56,92,.4));
-}
+.card.meituan-card .card-fav-btn .heart-outline { color: #fff; }
+.card.meituan-card .card-fav-btn .heart-filled { color: #ff385c; }
 
 /* ── Heart Beat Animation ── */
 @keyframes heartBeat {
@@ -512,151 +610,198 @@
   60% { transform: scale(.95); }
   100% { transform: scale(1); }
 }
-.card.airbnb-card .card-fav-btn.heart-anim .heart {
+.card.meituan-card .card-fav-btn.heart-anim .heart {
   animation: heartBeat .6s cubic-bezier(.23,1,.32,1);
 }
 
 /* ── Card Body ── */
-.card.airbnb-card .card-body {
-  padding: 14px 16px 16px;
+.card.meituan-card .card-body {
+  padding: 12px 14px 14px;
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-/* ── Name + Category Tag ── */
-.card.airbnb-card .card-name-row {
+/* ── Name Row ── */
+.card.meituan-card .card-name-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  gap: 6px;
 }
-.card.airbnb-card .card-name {
-  font: 700 .95rem/1.3 var(--serif);
+.card.meituan-card .card-name {
+  font: 700 .92rem/1.3 var(--serif);
   color: var(--text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   flex: 1;
   min-width: 0;
-}
-.card.airbnb-card .card-cat-tag {
-  font-size: .65rem;
-  padding: 2px 8px;
-  border-radius: 100px;
-  background: rgba(42,157,143,.08);
-  color: var(--teal);
-  font-weight: 600;
-  white-space: nowrap;
-  flex-shrink: 0;
+  letter-spacing: -.01em;
 }
 
-/* ── Rating + Reviews + Duration ── */
-.card.airbnb-card .card-rating-row {
+/* ── Rating Row (Meituan style: yellow badge) ── */
+.card.meituan-card .card-rating-row {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: .78rem;
-  color: var(--text2);
   flex-wrap: wrap;
 }
-.card.airbnb-card .card-rating-row .rating-star {
-  color: #f59e0b;
-  font-weight: 700;
+.card.meituan-card .rating-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 800;
+  line-height: 1.6;
 }
-.card.airbnb-card .card-rating-row .rating-num {
-  font-weight: 700;
-  color: var(--text);
-}
-.card.airbnb-card .card-rating-row .rating-reviews {
+.card.meituan-card .rating-badge .star-icon { font-size: .6rem; }
+.card.meituan-card .rating-reviews {
+  font-size: .7rem;
   color: var(--text3);
 }
-.card.airbnb-card .card-rating-row .rating-dot {
+.card.meituan-card .rating-dot {
   width: 3px;
   height: 3px;
   border-radius: 50%;
   background: var(--text3);
-  opacity: .5;
+  opacity: .4;
+}
+.card.meituan-card .card-duration {
+  font-size: .7rem;
+  color: var(--text3);
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
 }
 
-/* ── Price ── */
-.card.airbnb-card .card-price-row {
+/* ── Price Row ── */
+.card.meituan-card .card-price-row {
   display: flex;
   align-items: baseline;
-  gap: 6px;
-  margin-top: 2px;
+  gap: 4px;
+  margin-top: 1px;
 }
-.card.airbnb-card .price-current {
-  font: 700 .9rem/1 var(--serif);
+.card.meituan-card .price-current {
+  font: 800 .95rem/1 var(--serif);
 }
-.card.airbnb-card .price-free {
-  color: #22c55e;
+.card.meituan-card .price-free {
+  color: #059669;
 }
-.card.airbnb-card .price-paid {
-  color: var(--text);
+.card.meituan-card .price-paid {
+  color: #ef4444;
 }
-.card.airbnb-card .price-old {
-  font-size: .75rem;
+.card.meituan-card .price-old {
+  font-size: .7rem;
   color: var(--text3);
   text-decoration: line-through;
   font-weight: 400;
 }
-.card.airbnb-card .price-unit {
-  font-size: .72rem;
+.card.meituan-card .price-unit {
+  font-size: .68rem;
   color: var(--text3);
+  font-weight: 400;
 }
 
-/* ── Description (2 lines) ── */
-.card.airbnb-card .card-desc {
-  font-size: .82rem;
-  color: var(--text2);
-  line-height: 1.5;
+/* ── Description (1-2 lines) ── */
+.card.meituan-card .card-desc {
+  font-size: .78rem;
+  color: var(--text3);
+  line-height: 1.45;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  margin-top: 2px;
 }
 
-/* ── Bottom: Transport + Detail Button ── */
-.card.airbnb-card .card-bottom {
+/* ── Tags Row (Meituan colored tags) ── */
+.card.meituan-card .card-tags-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+.card.meituan-card .card-tags-row .ctag {
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: .6rem;
+  font-weight: 600;
+  border: 1px solid;
+  white-space: nowrap;
+}
+.ctag.ctag-must { background: rgba(239,68,68,.08); color: #ef4444; border-color: rgba(239,68,68,.2); }
+.ctag.ctag-hot { background: rgba(249,115,22,.08); color: #f97316; border-color: rgba(249,115,22,.2); }
+.ctag.ctag-free { background: rgba(34,197,94,.08); color: #22c55e; border-color: rgba(34,197,94,.2); }
+.ctag.ctag-hidden { background: rgba(139,92,246,.08); color: #8b5cf6; border-color: rgba(139,92,246,.2); }
+.ctag.ctag-cat { background: rgba(42,157,143,.08); color: var(--teal); border-color: rgba(42,157,143,.2); }
+.ctag.ctag-aud { background: rgba(201,169,110,.08); color: var(--accent); border-color: rgba(201,169,110,.2); }
+
+/* ── Transport Row ── */
+.card.meituan-card .card-transport-row {
+  font-size: .68rem;
+  color: var(--text3);
+  opacity: .85;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  gap: 3px;
+}
+
+/* ── Bottom Action Bar ── */
+.card.meituan-card .card-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   margin-top: auto;
   padding-top: 10px;
   border-top: 1px solid var(--border);
 }
-.card.airbnb-card .card-transport {
-  font-size: .7rem;
-  color: var(--text3);
-  flex: 1;
-  min-width: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.card.airbnb-card .card-detail-btn {
-  font-size: .72rem;
+.card.meituan-card .card-action-bar .action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: .68rem;
   font-weight: 600;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  background: none;
-  padding: 4px 12px;
-  border-radius: 100px;
   cursor: pointer;
   transition: all .25s;
+  border: 1px solid var(--border2);
+  background: var(--bg);
+  color: var(--text3);
   white-space: nowrap;
+}
+.card.meituan-card .card-action-bar .action-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent2);
+}
+.card.meituan-card .card-action-bar .action-btn.btn-go {
+  flex: 1;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover, #b8956a));
+  color: #fff;
+  border: none;
+  font-weight: 700;
+}
+.card.meituan-card .card-action-bar .action-btn.btn-go:hover {
+  opacity: .9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(201,169,110,.3);
+}
+.card.meituan-card .card-action-bar .action-btn.btn-share {
+  width: 32px;
+  padding: 5px;
   flex-shrink: 0;
 }
-.card.airbnb-card .card-detail-btn:hover {
-  background: var(--accent);
-  color: #fff;
-}
 
-/* ── Sort Header (Airbnb style) ── */
+/* ── Sort Header ── */
 .sort-header {
   display: flex;
   align-items: center;
@@ -709,20 +854,20 @@
   box-shadow: 0 2px 8px rgba(201,169,110,.25);
 }
 
-/* ── Skeleton Cards (Airbnb style) ── */
+/* ── Skeleton Cards ── */
 .skeleton-spot-card {
-  border-radius: var(--radius-lg);
+  border-radius: 14px;
   overflow: hidden;
   border: 1px solid var(--border);
   background: var(--card-bg);
 }
 .skeleton-spot-card .skel-img {
-  aspect-ratio: 4/3;
+  aspect-ratio: 16/10;
   background: var(--bg3);
   animation: skeletonPulse 1.8s ease-in-out infinite;
 }
 .skeleton-spot-card .skel-body {
-  padding: 14px 16px 16px;
+  padding: 12px 14px 14px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -760,125 +905,7 @@
 /* ── Filter container spacing fix ── */
 .filter-container { margin-bottom: 16px; }
 
-
-/* ═══ AIRBNB CARD IMPROVEMENTS ═══ */
-
-/* ── Fix: Touch target size (44px min) ── */
-.card.airbnb-card .card-fav-btn {
-  width: 36px;
-  height: 36px;
-  min-width: 44px;
-  min-height: 44px;
-}
-
-/* ── Fix: Card body info hierarchy ── */
-.card.airbnb-card .card-body {
-  padding: 12px 14px 14px;
-  gap: 4px;
-}
-
-/* ── Enhancement: Better price styling ── */
-.card.airbnb-card .price-current {
-  font-size: .95rem;
-  font-weight: 800;
-  letter-spacing: -.01em;
-}
-.card.airbnb-card .price-free {
-  color: #059669;
-  background: linear-gradient(135deg, rgba(5,150,105,.08), rgba(5,150,105,.04));
-  padding: 2px 8px;
-  border-radius: 6px;
-}
-
-/* ── Enhancement: Rating row refinement ── */
-.card.airbnb-card .card-rating-row {
-  gap: 4px;
-  font-size: .8rem;
-}
-
-/* ── Enhancement: Better description truncation ── */
-.card.airbnb-card .card-desc {
-  font-size: .8rem;
-  line-height: 1.45;
-  color: var(--text3);
-  -webkit-line-clamp: 2;
-  margin-top: 0;
-}
-
-/* ── Enhancement: Bottom section polish ── */
-.card.airbnb-card .card-bottom {
-  padding-top: 8px;
-  gap: 6px;
-}
-.card.airbnb-card .card-transport {
-  font-size: .68rem;
-  color: var(--text3);
-  opacity: .8;
-}
-.card.airbnb-card .card-detail-btn {
-  font-size: .7rem;
-  padding: 3px 10px;
-  border-width: 1.5px;
-  font-weight: 700;
-  letter-spacing: .02em;
-}
-
-/* ── Enhancement: Card hover refinement ── */
-.card.airbnb-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,.1), 0 2px 8px rgba(0,0,0,.06);
-}
-
-/* ── Enhancement: Image overlay on hover ── */
-.card.airbnb-card .card-img::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,.08) 100%);
-  opacity: 0;
-  transition: opacity .3s;
-  z-index: 0;
-  pointer-events: none;
-}
-.card.airbnb-card:hover .card-img::after {
-  opacity: 1;
-}
-
-/* ── Enhancement: Category tag refinement ── */
-.card.airbnb-card .card-cat-tag {
-  font-size: .6rem;
-  padding: 1px 6px;
-  letter-spacing: .02em;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-/* ── Enhancement: Name row spacing ── */
-.card.airbnb-card .card-name-row {
-  gap: 6px;
-  margin-bottom: 2px;
-}
-.card.airbnb-card .card-name {
-  font-size: .92rem;
-  font-weight: 700;
-  letter-spacing: -.01em;
-}
-
-/* ── Fix: Mobile responsive ── */
-@media(max-width:520px){
-  .card.airbnb-card .card-body {
-    padding: 14px 16px 16px;
-  }
-  .card.airbnb-card .card-name {
-    font-size: 1rem;
-  }
-  .card.airbnb-card .card-detail-btn {
-    padding: 5px 14px;
-    font-size: .75rem;
-  }
-}
-
-/* ── Enhancement: Sort header mobile ── */
+/* ── Sort header mobile ── */
 @media(max-width:768px){
   .sort-header {
     flex-direction: column;
@@ -896,1183 +923,37 @@
   }
 }
 
-/* ── Enhancement: Skeleton card refinement ── */
-.skeleton-spot-card .skel-img {
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-}
-
-/* ── Enhancement: Card grid gap consistency ── */
+/* ── Card grid gap consistency ── */
 .card-grid {
-  gap: 20px;
+  gap: 18px;
 }
 
-/* ── Enhancement: Better dark mode card ── */
-html.dark .card.airbnb-card {
-  background: var(--card-bg);
-  border-color: rgba(255,255,255,.06);
-}
-html.dark .card.airbnb-card:hover {
-  border-color: rgba(212,168,83,.12);
-  box-shadow: 0 8px 24px rgba(0,0,0,.25), 0 2px 8px rgba(0,0,0,.15);
-}
-html.dark .card.airbnb-card .price-free {
-  background: linear-gradient(135deg, rgba(5,150,105,.12), rgba(5,150,105,.06));
+/* ── Touch target size ── */
+.card.meituan-card .card-fav-btn {
+  min-width: 36px;
+  min-height: 36px;
 }
 
-/* ── Enhancement: Badge refinement ── */
-.card.airbnb-card .spot-badge {
-  font-size: .62rem;
-  padding: 2px 8px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,.15);
-}
-
-/* ── Enhancement: Card bottom border accent on hover ── */
-.card.airbnb-card::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--teal));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .4s cubic-bezier(.23,1,.32,1);
-  z-index: 2;
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
-}
-.card.airbnb-card:hover::before {
-  transform: scaleX(1);
-}
-
-/* ═══ MODAL ENHANCEMENT - P0 IMPROVEMENTS ═══ */
-
-/* ── Anchor Navigation Bar ── */
-.modal-anchor-nav {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  display: flex;
-  gap: 0;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-  margin: 0 -32px;
-  padding: 0 32px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.modal-anchor-nav::-webkit-scrollbar { display: none; }
-.modal-anchor-nav a {
-  flex-shrink: 0;
-  padding: 12px 16px;
-  font-size: .8rem;
-  font-weight: 600;
-  color: var(--text3);
-  text-decoration: none;
-  border-bottom: 2px solid transparent;
-  transition: all .25s;
-  white-space: nowrap;
-}
-.modal-anchor-nav a:hover { color: var(--text); }
-.modal-anchor-nav a.active {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
-}
-
-/* ── History Story Module ── */
-.modal-history {
-  background: linear-gradient(135deg, rgba(139,92,246,.06), rgba(201,169,110,.04));
-  border: 1px solid rgba(139,92,246,.12);
-  border-radius: 14px;
-  padding: 20px 24px;
-  margin: 20px 0;
-  position: relative;
-  overflow: hidden;
-}
-.modal-history::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(180deg, #8b5cf6, var(--accent));
-  border-radius: 4px 0 0 4px;
-}
-.modal-history h4 {
-  font-size: .95rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text);
-}
-.modal-history .history-text {
-  font-size: .88rem;
-  line-height: 1.8;
-  color: var(--text2);
-  font-family: var(--serif);
-  position: relative;
-  padding-left: 4px;
-}
-.modal-history .history-quote {
-  position: absolute;
-  top: -8px;
-  left: -4px;
-  font-size: 3rem;
-  color: var(--accent);
-  opacity: .08;
-  font-family: Georgia, serif;
-  line-height: 1;
-  pointer-events: none;
-}
-
-/* ── Season Recommendation Module ── */
-.modal-season {
-  background: linear-gradient(135deg, rgba(42,157,143,.06), rgba(201,169,110,.04));
-  border: 1px solid rgba(42,157,143,.12);
-  border-radius: 14px;
-  padding: 20px 24px;
-  margin: 20px 0;
-  position: relative;
-}
-.modal-season::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: linear-gradient(180deg, var(--teal), #f59e0b);
-  border-radius: 4px 0 0 4px;
-}
-.modal-season h4 {
-  font-size: .95rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.modal-season .season-text {
-  font-size: .88rem;
-  line-height: 1.7;
-  color: var(--text2);
-}
-.modal-season .season-tags {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-.modal-season .season-tag {
-  padding: 4px 12px;
-  border-radius: 100px;
-  font-size: .75rem;
-  font-weight: 600;
-  border: 1px solid;
-  transition: all .25s;
-}
-.modal-season .season-tag.spring {
-  background: rgba(236,72,153,.08);
-  color: #ec4899;
-  border-color: rgba(236,72,153,.2);
-}
-.modal-season .season-tag.summer {
-  background: rgba(34,197,94,.08);
-  color: #22c55e;
-  border-color: rgba(34,197,94,.2);
-}
-.modal-season .season-tag.autumn {
-  background: rgba(245,158,11,.08);
-  color: #f59e0b;
-  border-color: rgba(245,158,11,.2);
-}
-.modal-season .season-tag.winter {
-  background: rgba(59,130,246,.08);
-  color: #3b82f6;
-  border-color: rgba(59,130,246,.2);
-}
-.modal-season .season-tag.current {
-  box-shadow: 0 0 0 2px var(--accent);
-  font-weight: 700;
-}
-
-/* ── Collapsible Sections ── */
-.modal-section {
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  margin: 16px 0;
-  overflow: hidden;
-  background: var(--card-bg);
-}
-.modal-section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 18px;
-  cursor: pointer;
-  transition: background .2s;
-  -webkit-user-select: none;
-  user-select: none;
-}
-.modal-section-header:hover {
-  background: var(--accent2);
-}
-.modal-section-header h4 {
-  font-size: .9rem;
-  font-weight: 700;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.modal-section-header .section-toggle {
-  font-size: .8rem;
-  color: var(--text3);
-  transition: transform .3s;
-  flex-shrink: 0;
-}
-.modal-section-header.open .section-toggle {
-  transform: rotate(180deg);
-}
-.modal-section-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .4s cubic-bezier(.23,1,.32,1);
-}
-.modal-section-body.open {
-  max-height: 2000px;
-}
-.modal-section-body-inner {
-  padding: 0 18px 18px;
-}
-
-/* ── Info Grid Compact ── */
-.modal-info-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-.modal-info-item {
-  padding: 12px 14px;
-  background: var(--bg2);
-  border-radius: 10px;
-  border: 1px solid var(--border);
-}
-.modal-info-item .label {
-  font-size: .68rem;
-  font-weight: 700;
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: .06em;
-  margin-bottom: 4px;
-}
-.modal-info-item .value {
-  font-size: .82rem;
-  font-weight: 500;
-  color: var(--text);
-}
-
-/* ── Floating Action Bar ── */
-.modal-floating-actions {
-  position: sticky;
-  bottom: 0;
-  z-index: 10;
-  background: var(--bg);
-  border-top: 1px solid var(--border);
-  padding: 12px 18px;
-  margin: 20px -32px -32px;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-.modal-floating-actions .btn {
-  flex: 1;
-  justify-content: center;
-  font-size: .82rem;
-  padding: 10px 12px;
-}
-.modal-floating-actions .fav-action {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  transition: all .25s;
-  flex-shrink: 0;
-}
-.modal-floating-actions .fav-action:hover {
-  border-color: #ef4444;
-  background: rgba(239,68,68,.08);
-}
-.modal-floating-actions .fav-action.faved {
-  background: #ef4444;
-  border-color: #ef4444;
-  color: #fff;
-}
-
-/* ── Mobile Responsive ── */
-@media(max-width:768px){
-  .modal-anchor-nav {
-    margin: 0 -20px;
-    padding: 0 20px;
+/* ── Mobile responsive ── */
+@media(max-width:520px){
+  .card.meituan-card .card-body {
+    padding: 10px 12px 12px;
   }
-  .modal-floating-actions {
-    margin: 20px -20px -20px;
-    padding: 10px 16px;
-    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  .card.meituan-card .card-name {
+    font-size: .88rem;
   }
-  .modal-history, .modal-season {
-    padding: 16px 18px;
-    margin: 14px 0;
+  .card.meituan-card .card-action-bar .action-btn.btn-go {
+    padding: 6px 12px;
+    font-size: .72rem;
   }
-  .modal-section-header {
-    padding: 12px 14px;
-  }
-  .modal-section-body-inner {
-    padding: 0 14px 14px;
-  }
-}
-
-/* ═══ ROUND 2 ENHANCEMENTS ═══ */
-
-/* ── Meta Quick Summary Bar ── */
-.modal-meta-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  padding: 10px 14px;
-  background: linear-gradient(135deg, var(--accent2), rgba(42,157,143,.04));
-  border: 1px solid rgba(201,169,110,.12);
-  border-radius: 10px;
-  margin: 10px 0 14px;
-  font-size: .78rem;
-  color: var(--text2);
-  line-height: 1.5;
-}
-.modal-meta-bar .meta-dot {
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: var(--text3);
-  opacity: .4;
-  flex-shrink: 0;
-}
-
-/* ── Info Grid Collapsible ── */
-.modal-info-grid .info-extra {
-  display: none;
-}
-.modal-info-grid.expanded .info-extra {
-  display: block;
-}
-.modal-info-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 8px;
-  margin-top: 8px;
-  border: 1px dashed var(--border2);
-  border-radius: 8px;
-  background: none;
-  cursor: pointer;
-  font-size: .78rem;
-  color: var(--text3);
-  transition: all .25s;
-  width: 100%;
-}
-.modal-info-toggle:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent2);
-}
-.modal-info-toggle .toggle-arrow {
-  transition: transform .3s;
-  font-size: .7rem;
-}
-.modal-info-toggle.expanded .toggle-arrow {
-  transform: rotate(180deg);
-}
-
-/* ── Review Helpful Button ── */
-.review-helpful {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 3px 10px;
-  border: 1px solid var(--border2);
-  background: var(--bg);
-  border-radius: 100px;
-  font-size: .72rem;
-  color: var(--text3);
-  cursor: pointer;
-  transition: all .25s;
-  margin-top: 8px;
-}
-.review-helpful:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent2);
-}
-.review-helpful.active {
-  border-color: var(--accent);
-  background: var(--accent2);
-  color: var(--accent);
-  font-weight: 600;
-}
-
-/* ── Rating Bar Visualization ── */
-.rating-bars {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin: 8px 0;
-}
-.rating-bar-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: .75rem;
-}
-.rating-bar-label {
-  width: 40px;
-  text-align: right;
-  color: var(--text3);
-  font-weight: 500;
-}
-.rating-bar-track {
-  flex: 1;
-  height: 6px;
-  background: var(--bg3);
-  border-radius: 3px;
-  overflow: hidden;
-}
-.rating-bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #f59e0b, #fbbf24);
-  border-radius: 3px;
-  transition: width .6s cubic-bezier(.23,1,.32,1);
-}
-.rating-bar-count {
-  width: 30px;
-  font-size: .7rem;
-  color: var(--text3);
-}
-
-/* ═══ ROUND 3 — MODAL DEEP ENHANCEMENTS ═══ */
-
-/* ── Photo Grid (2x2 actual images) ── */
-.modal-photo-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 6px;
-  border-radius: 14px;
-  overflow: hidden;
-  margin: 14px 0;
-  aspect-ratio: 16/10;
-  cursor: pointer;
-}
-.modal-photo-grid .photo-main {
-  grid-row: 1 / 3;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .4s;
-}
-.modal-photo-grid .photo-side {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .4s;
-}
-.modal-photo-grid:hover .photo-main,
-.modal-photo-grid:hover .photo-side {
-  transform: scale(1.02);
-}
-.modal-photo-grid .photo-more {
-  position: relative;
-  cursor: pointer;
-}
-.modal-photo-grid .photo-more::after {
-  content: '📷 更多';
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: .85rem;
-  font-weight: 600;
-  backdrop-filter: blur(2px);
-  transition: background .25s;
-}
-.modal-photo-grid .photo-more:hover::after {
-  background: rgba(0,0,0,.6);
-}
-.modal-photo-grid .photo-overlay-tip {
-  position: absolute;
-  bottom: 8px;
-  left: 8px;
-  right: 8px;
-  padding: 6px 10px;
-  background: rgba(0,0,0,.6);
-  backdrop-filter: blur(6px);
-  border-radius: 8px;
-  color: #fff;
-  font-size: .72rem;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* ── Lightbox ── */
-.lightbox-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 600;
-  background: rgba(0,0,0,.95);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .3s;
-}
-.lightbox-overlay.open {
-  opacity: 1;
-  pointer-events: all;
-}
-.lightbox-overlay img {
-  max-width: 90vw;
-  max-height: 85vh;
-  object-fit: contain;
-  border-radius: 8px;
-  transition: transform .3s;
-}
-.lightbox-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.15);
-  border: none;
-  color: #fff;
-  font-size: 1.3rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all .25s;
-  backdrop-filter: blur(8px);
-}
-.lightbox-close:hover {
-  background: rgba(255,255,255,.3);
-  transform: scale(1.1);
-}
-.lightbox-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.12);
-  border: 1px solid rgba(255,255,255,.15);
-  color: #fff;
-  font-size: 1.4rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all .25s;
-  backdrop-filter: blur(8px);
-}
-.lightbox-nav:hover {
-  background: rgba(255,255,255,.25);
-  transform: translateY(-50%) scale(1.1);
-}
-.lightbox-nav.prev { left: 20px; }
-.lightbox-nav.next { right: 20px; }
-.lightbox-counter {
-  position: absolute;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 6px 16px;
-  background: rgba(0,0,0,.6);
-  border-radius: 100px;
-  color: #fff;
-  font-size: .8rem;
-  font-weight: 600;
-  backdrop-filter: blur(8px);
-}
-.lightbox-dots {
-  position: absolute;
-  bottom: 60px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 8px;
-}
-.lightbox-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255,255,255,.3);
-  border: none;
-  cursor: pointer;
-  transition: all .25s;
-  padding: 0;
-}
-.lightbox-dot.active {
-  background: #fff;
-  width: 24px;
-  border-radius: 4px;
-}
-
-/* ── Trust Badge ── */
-.modal-trust-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  background: linear-gradient(135deg, rgba(34,197,94,.08), rgba(34,197,94,.04));
-  border: 1px solid rgba(34,197,94,.15);
-  border-radius: 100px;
-  font-size: .78rem;
-  font-weight: 600;
-  color: #16a34a;
-  margin: 8px 0 4px;
-}
-.modal-trust-badge .trust-icon {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #22c55e;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: .7rem;
-  font-weight: 800;
-}
-
-/* ── Rating Distribution ── */
-.modal-rating-dist {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin: 10px 0;
-  padding: 12px 14px;
-  background: var(--bg2);
-  border-radius: 10px;
-  border: 1px solid var(--border);
-}
-.rating-dist-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: .75rem;
-}
-.rating-dist-label {
-  width: 28px;
-  text-align: right;
-  color: var(--text3);
-  font-weight: 500;
-  flex-shrink: 0;
-}
-.rating-dist-track {
-  flex: 1;
-  height: 8px;
-  background: var(--bg3);
-  border-radius: 4px;
-  overflow: hidden;
-}
-.rating-dist-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #f59e0b, #fbbf24);
-  border-radius: 4px;
-  transition: width .8s cubic-bezier(.23,1,.32,1);
-}
-.rating-dist-pct {
-  width: 36px;
-  font-size: .72rem;
-  color: var(--text3);
-  font-weight: 500;
-  flex-shrink: 0;
-}
-
-/* ── Mobile Fullscreen Modal ── */
-@media(max-width:768px){
-  .modal {
-    max-width: 100%;
-    max-height: 100vh;
-    height: 100vh;
-    border-radius: 0;
-    margin: 0;
-  }
-  .modal-overlay {
-    padding: 0;
-    align-items: flex-end;
-  }
-  .modal-overlay.open .modal {
-    transform: translateY(0);
-  }
-  .modal-photo-grid {
-    border-radius: 0;
-    margin: 0;
-    aspect-ratio: 16/9;
-  }
-  .modal-anchor-nav {
-    margin: 0;
-    padding: 0 16px;
-    border-radius: 0;
-  }
-  .modal-floating-actions {
-    margin: 0;
-    border-radius: 0;
-    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-  }
-}
-
-/* ── Keyboard focus styles ── */
-.lightbox-nav:focus-visible,
-.lightbox-close:focus-visible,
-.modal-anchor-nav a:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-/* ═══ MAP ENHANCEMENT ═══ */
-
-/* ── Map Container ── */
-#map-container {
-  height: 500px !important;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  border: 2px solid var(--border);
-  box-shadow: var(--shadow-lg);
-  position: relative;
-}
-
-/* ── Fullscreen Mode ── */
-#map-container.map-fullscreen {
-  position: fixed !important;
-  inset: 0 !important;
-  z-index: 500 !important;
-  height: 100vh !important;
-  width: 100vw !important;
-  border-radius: 0 !important;
-  border: none !important;
-  margin: 0 !important;
-}
-
-/* ── Fullscreen Button ── */
-.map-fullscreen-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 1000;
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  background: rgba(255,255,255,.92);
-  border: 1px solid rgba(0,0,0,.12);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  transition: all .25s;
-  box-shadow: 0 2px 8px rgba(0,0,0,.15);
-  backdrop-filter: blur(8px);
-}
-.map-fullscreen-btn:hover {
-  background: #fff;
-  box-shadow: 0 4px 16px rgba(0,0,0,.2);
-  transform: scale(1.05);
-}
-
-/* ── Bubble Marker ── */
-.map-marker {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 700;
-  box-shadow: 0 3px 12px rgba(0,0,0,.25), 0 0 0 2px #fff;
-  transition: all .25s cubic-bezier(.23,1,.32,1);
-  cursor: pointer;
-  z-index: 10;
-}
-.map-marker::after {
-  content: '';
-  position: absolute;
-  bottom: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 8px solid currentColor;
-  filter: drop-shadow(0 2px 2px rgba(0,0,0,.15));
-}
-.map-marker:hover {
-  transform: scale(1.3) translateY(-4px);
-  z-index: 100;
-  box-shadow: 0 8px 24px rgba(0,0,0,.35), 0 0 0 3px #fff;
-}
-.map-marker .marker-emoji {
-  font-size: 1.1rem;
-  line-height: 1;
-  filter: drop-shadow(0 1px 1px rgba(0,0,0,.2));
-}
-
-/* ── Marker Colors by Category ── */
-.map-marker.cat-spring { background: linear-gradient(135deg, #3b82f6, #2563eb); color: #fff; }
-.map-marker.cat-nature { background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; }
-.map-marker.cat-history { background: linear-gradient(135deg, #a855f7, #7c3aed); color: #fff; }
-.map-marker.cat-culture { background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; }
-.map-marker.cat-food { background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; }
-.map-marker.cat-family { background: linear-gradient(135deg, #14b8a6, #0d9488); color: #fff; }
-.map-marker.cat-landmark { background: linear-gradient(135deg, #ec4899, #db2777); color: #fff; }
-.map-marker.cat-amusement { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; }
-
-/* ── Marker Name Label ── */
-.map-marker-label {
-  position: absolute;
-  top: -28px;
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  font-size: .72rem;
-  font-weight: 700;
-  color: var(--text);
-  background: rgba(255,255,255,.92);
-  padding: 2px 8px;
-  border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,.12);
-  pointer-events: none;
-  opacity: 0;
-  transition: all .25s;
-  backdrop-filter: blur(6px);
-}
-.map-marker:hover .map-marker-label {
-  opacity: 1;
-  top: -32px;
-}
-
-/* ── Rich Popup ── */
-.map-popup {
-  min-width: 220px;
-  padding: 0;
-  font-family: var(--sans);
-}
-.map-popup-img {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 8px 8px 0 0;
-}
-.map-popup-body {
-  padding: 10px 12px;
-}
-.map-popup-name {
-  font: 700 .95rem/1.3 var(--serif);
-  margin-bottom: 4px;
-}
-.map-popup-meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: .78rem;
-  color: var(--text2);
-  margin-bottom: 6px;
-}
-.map-popup-meta .popup-rating {
-  color: #f59e0b;
-  font-weight: 700;
-}
-.map-popup-desc {
-  font-size: .78rem;
-  color: var(--text3);
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin-bottom: 8px;
-}
-.map-popup-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 5px 12px;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 100px;
-  font-size: .75rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all .25s;
-}
-.map-popup-btn:hover {
-  background: var(--accent-hover);
-  transform: translateY(-1px);
-}
-
-/* ── Leaflet Popup Override ── */
-.leaflet-popup-content-wrapper {
-  border-radius: 12px !important;
-  padding: 0 !important;
-  box-shadow: 0 8px 32px rgba(0,0,0,.18) !important;
-  border: 1px solid rgba(0,0,0,.06) !important;
-}
-.leaflet-popup-content {
-  margin: 0 !important;
-  min-width: 220px !important;
-}
-.leaflet-popup-tip {
-  box-shadow: 0 4px 12px rgba(0,0,0,.1) !important;
-}
-
-/* ── Marker Cluster ── */
-.marker-cluster-small,
-.marker-cluster-medium,
-.marker-cluster-large {
-  background: rgba(201,169,110,.25) !important;
-  border: 2px solid rgba(201,169,110,.5) !important;
-  border-radius: 50% !important;
-}
-.marker-cluster-small div,
-.marker-cluster-medium div,
-.marker-cluster-large div {
-  background: linear-gradient(135deg, var(--accent), var(--accent-hover)) !important;
-  color: #fff !important;
-  border-radius: 50% !important;
-  font-weight: 700 !important;
-  font-size: .85rem !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-/* ── Map Legend Enhanced ── */
-.map-legend {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 10px 16px;
-  margin-top: 12px;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-.map-legend-item {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-size: .75rem;
-  color: var(--text2);
-  cursor: pointer;
-  padding: 3px 8px;
-  border-radius: 100px;
-  transition: all .25s;
-  border: 1px solid transparent;
-}
-.map-legend-item:hover {
-  background: var(--accent2);
-  border-color: var(--border);
-}
-.map-legend-item.active {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-}
-.map-legend-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-/* ── Mobile Map ── */
-@media(max-width:768px){
-  #map-container {
-    height: 350px !important;
-    border-radius: 12px;
-  }
-  #map-container.map-fullscreen {
-    height: 100vh !important;
-  }
-  .map-marker {
-    width: 30px;
-    height: 30px;
-    font-size: .85rem;
-  }
-  .map-marker .marker-emoji {
-    font-size: .9rem;
-  }
-}
-
-/* ═══ OFFLINE MAP SECTION ═══ */
-.offline-map-section {
-  margin-bottom: 24px;
-}
-.offline-map-wrap {
-  display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 16px;
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-.offline-map-svg {
-  position: relative;
-  min-height: 300px;
-  background: linear-gradient(135deg, var(--bg2), var(--bg3));
-  overflow: hidden;
-}
-.offline-map-svg svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-.offline-map-svg .map-dot {
-  transition: all .2s;
-}
-.offline-map-svg .map-dot:hover {
-  r: 8;
-  opacity: 1;
-  stroke-width: 2;
-}
-.offline-map-panel {
-  padding: 12px;
-  overflow-y: auto;
-  max-height: 380px;
-  border-left: 1px solid var(--border);
-  background: var(--bg);
-}
-.offline-map-panel-title {
-  font-size: .78rem;
-  font-weight: 700;
-  color: var(--text2);
-  margin-bottom: 10px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.top-spot-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all .25s;
-  margin-bottom: 4px;
-}
-.top-spot-item:hover {
-  background: var(--accent2);
-  transform: translateX(4px);
-}
-.top-spot-item img {
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-.top-spot-info {
-  min-width: 0;
-}
-.top-spot-name {
-  font-size: .82rem;
-  font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.top-spot-meta {
-  font-size: .72rem;
-  color: var(--text3);
-  margin-top: 2px;
-}
-.map-legend-bar {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-  padding: 8px 12px;
-  background: var(--bg2);
-  border-radius: 8px;
-}
-.map-legend-bar .legend-item {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: .72rem;
-  color: var(--text3);
-}
-.map-legend-bar .legend-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-@media(max-width:768px){
-  .offline-map-wrap {
-    grid-template-columns: 1fr;
-  }
-  .offline-map-panel {
-    border-left: none;
-    border-top: 1px solid var(--border);
-    max-height: 200px;
-  }
-  .offline-map-svg {
-    min-height: 220px;
-  }
-}
-/* ── Dark mode adjustments ── */
-html.dark .card.airbnb-card:hover {
-  box-shadow: 0 12px 28px rgba(0,0,0,.25), 0 4px 10px rgba(0,0,0,.15);
-  border-color: rgba(212,168,83,.15);
-}
-html.dark .card.airbnb-card .card-fav-btn .heart-outline {
-  text-shadow: 0 1px 6px rgba(0,0,0,.6);
 }
   </style>
+  <!-- Leaflet Map CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 </head>
 <body>
   <a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:16px;z-index:999;background:var(--accent);color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-100%'">跳到主要内容</a>
@@ -2192,24 +1073,42 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
 
   <section class="section" style="padding-top:0" aria-label="景点列表">
     <div class="section-inner">
-      <div class="section-header reveal" style="margin-bottom:24px">
+      <div class="section-header reveal" style="margin-bottom:16px">
         <div class="eyebrow">全部景点</div>
         <h2>探索泉城</h2>
         <p>精选80+景点，发现济南之美</p>
       </div>
-      <div class="offline-map-section reveal" id="offlineMapSection">
-        <div class="offline-map-wrap">
-          <div class="offline-map-svg" id="offlineMapSvg"></div>
-          <div class="offline-map-panel">
-            <div class="offline-map-panel-title">🏆 热门景点</div>
-            <div id="topSpotsPanel"></div>
-            <div class="map-legend-bar">
-              <span class="legend-item"><span class="legend-dot" style="background:#3b82f6"></span>泉水</span>
-              <span class="legend-item"><span class="legend-dot" style="background:#22c55e"></span>自然</span>
-              <span class="legend-item"><span class="legend-dot" style="background:#a855f7"></span>历史</span>
-              <span class="legend-item"><span class="legend-dot" style="background:#f59e0b"></span>美食</span>
-              <span class="legend-item"><span class="legend-dot" style="background:#14b8a6"></span>亲子</span>
+
+      <!-- ═══ 紧凑型地图模块（美团/大众点评风格） ═══ -->
+      <div class="map-preview-section reveal" id="mapPreviewSection">
+        <div class="map-preview-card">
+          <div class="map-preview-header">
+            <div class="map-preview-title">
+              <span class="map-icon">🗺️</span>
+              <span>景点地图</span>
+              <span class="map-spot-count" id="mapSpotCount">0 个景点</span>
             </div>
+            <div class="map-view-toggle" id="mapViewToggle">
+              <button class="map-toggle-btn active" data-view="list" title="列表视图">📋 列表</button>
+              <button class="map-toggle-btn" data-view="map" title="地图视图">🗺️ 地图</button>
+            </div>
+          </div>
+          <div class="map-preview-body" id="mapPreviewBody">
+            <div class="map-preview-svg" id="mapPreviewSvg"></div>
+            <button class="map-expand-btn" id="mapExpandBtn" title="展开全屏地图">
+              <span>⛶</span> 全屏查看
+            </button>
+          </div>
+          <div class="map-top-spots-scroll" id="mapTopSpotsScroll"></div>
+          <div class="map-preview-footer">
+            <div class="map-legend-mini">
+              <span class="legend-dot-mini" style="background:#3b82f6" title="泉水"></span>
+              <span class="legend-dot-mini" style="background:#22c55e" title="自然"></span>
+              <span class="legend-dot-mini" style="background:#a855f7" title="历史"></span>
+              <span class="legend-dot-mini" style="background:#f59e0b" title="美食"></span>
+              <span class="legend-dot-mini" style="background:#14b8a6" title="亲子"></span>
+            </div>
+            <button class="map-view-all-btn" id="mapViewAllBtn">查看全部 <span id="mapViewAllCount">0</span> 个景点 →</button>
           </div>
         </div>
       </div>
@@ -2232,9 +1131,46 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
     </div>
   </section>
 
-  <!-- ═══ 打卡地图 ═══ -->
+<!-- ═══ 打卡地图 ═══ -->
   <section class="section section-alt reveal" id="checkin-map-section" aria-label="打卡地图">
+    <div class="section-header" style="text-align:center;margin-bottom:20px">
+      <div class="eyebrow">互动地图</div>
+      <h2>📍 打卡地图</h2>
+      <p>点击标记查看景点详情，支持定位和筛选</p>
+    </div>
+    <div class="leaflet-map-container" id="leafletMapContainer" style="position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border,#e5e2dc);box-shadow:0 4px 24px rgba(0,0,0,.08)">
+      <!-- Map controls bar -->
+      <div class="leaflet-controls-bar" id="leafletControlsBar" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--card-bg,#fff);border-bottom:1px solid var(--border,#e5e2dc);flex-wrap:wrap">
+        <button id="leafletLocateBtn" class="leaflet-ctrl-btn" title="定位我的位置" style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:8px;font-size:.78rem;cursor:pointer;color:var(--text2,#555);transition:all .2s">
+          📌 定位
+        </button>
+        <button id="leafletFullscreenBtn" class="leaflet-ctrl-btn" title="全屏" style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:8px;font-size:.78rem;cursor:pointer;color:var(--text2,#555);transition:all .2s">
+          ⛶ 全屏
+        </button>
+        <button id="leafletResetBtn" class="leaflet-ctrl-btn" title="重置视图" style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:8px;font-size:.78rem;cursor:pointer;color:var(--text2,#555);transition:all .2s">
+          🔄 重置
+        </button>
+        <div style="flex:1"></div>
+        <div id="leafletCatFilter" style="display:flex;gap:4px;flex-wrap:wrap">
+          <button class="leaflet-cat-btn active" data-cat="all" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--accent2,rgba(201,169,110,.1));border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)">全部</button>
+          <button class="leaflet-cat-btn" data-cat="spring" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)">⛲ 泉水</button>
+          <button class="leaflet-cat-btn" data-cat="nature" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)">🌿 自然</button>
+          <button class="leaflet-cat-btn" data-cat="history" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)">🏛️ 历史</button>
+          <button class="leaflet-cat-btn" data-cat="culture" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)">📚 文化</button>
+          <button class="leaflet-cat-btn" data-cat="food" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)">🍜 美食</button>
+          <button class="leaflet-cat-btn" data-cat="landmark" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)">🏛️ 地标</button>
+        </div>
+      </div>
+      <!-- Leaflet map -->
+      <div id="leafletMap" style="height:480px;width:100%;background:var(--bg2,#f0ede8)"></div>
+      <!-- Fallback: offline SVG map -->
+      <div id="leafletFallback" style="display:none;padding:20px;text-align:center">
+        <p style="color:var(--text3,#888);font-size:.85rem;margin-bottom:12px">⚠️ 在线地图加载失败，显示离线地图</p>
+        <div id="fallbackMapSvg" style="border-radius:12px;overflow:hidden;border:1px solid var(--border,#e5e2dc)"></div>
+      </div>
+    </div>
   </section>
+
 
   </main>
 
@@ -2792,13 +1728,93 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
     initAll();
     initShopifyAnimations();
     initSocialFeatures();
-    // Initialize offline map after spots load
+    // Initialize compact map preview after spots load
     function initOfflineMap() {
-      const svgContainer = document.getElementById('offlineMapSvg');
-      const panelContainer = document.getElementById('topSpotsPanel');
+      const svgContainer = document.getElementById('mapPreviewSvg');
+      const scrollContainer = document.getElementById('mapTopSpotsScroll');
+      const mapSpotCount = document.getElementById('mapSpotCount');
+      const mapViewAllCount = document.getElementById('mapViewAllCount');
       if (!svgContainer || !allSpots.length) return;
+      
+      // Render map SVG
       svgContainer.innerHTML = generateOfflineMap(allSpots);
-      if (panelContainer) panelContainer.innerHTML = renderTopSpotsPanel(allSpots);
+      
+      // Render top spots horizontal scroll cards
+      const topSpots = allSpots.filter(s => s.rating >= 4.6).sort((a, b) => b.rating - a.rating).slice(0, 8);
+      if (scrollContainer) {
+        scrollContainer.innerHTML = topSpots.map(s => {
+          const priceStr = s.price === 0 ? '免费' : '¥' + s.price;
+          return `
+            <div class="map-spot-mini" data-id="${s.id}" onclick="scrollToSpot('${s.id}')">
+              <img class="map-spot-mini-img" src="${s.img}" alt="${s.name}" loading="lazy" onerror="this.src=imgFallback('${s.name}')">
+              <div class="map-spot-mini-info">
+                <div class="map-spot-mini-name">${s.name}</div>
+                <div class="map-spot-mini-meta">
+                  <span class="map-spot-mini-rating">★ ${s.rating}</span>
+                  <span class="map-spot-mini-price">${priceStr}</span>
+                </div>
+              </div>
+            </div>`;
+        }).join('');
+      }
+      
+      // Update counts
+      if (mapSpotCount) mapSpotCount.textContent = allSpots.length + ' 个景点';
+      if (mapViewAllCount) mapViewAllCount.textContent = allSpots.length;
+      
+      // Bind expand button
+      document.getElementById('mapExpandBtn')?.addEventListener('click', openMapFullscreen);
+      
+      // Bind view toggle
+      document.getElementById('mapViewToggle')?.addEventListener('click', e => {
+        const btn = e.target.closest('.map-toggle-btn');
+        if (!btn) return;
+        document.querySelectorAll('.map-toggle-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const view = btn.dataset.view;
+        if (view === 'map') {
+          document.getElementById('mapPreviewBody').classList.add('expanded');
+        } else {
+          document.getElementById('mapPreviewBody').classList.remove('expanded');
+        }
+      });
+      
+      // Bind view all button - scroll to card grid
+      document.getElementById('mapViewAllBtn')?.addEventListener('click', () => {
+        document.getElementById('sortHeader')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+    
+    // ═══ Fullscreen Map ═══
+    function openMapFullscreen() {
+      let overlay = document.getElementById('mapFullscreenOverlay');
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'mapFullscreenOverlay';
+        overlay.className = 'map-fullscreen-overlay';
+        const topSpots = allSpots.filter(s => s.rating >= 4.6).sort((a, b) => b.rating - a.rating).slice(0, 10);
+        overlay.innerHTML = `
+          <div class="map-fullscreen-header">
+            <h3>🗺️ 济南景点地图</h3>
+            <button class="map-fullscreen-close" id="mapFullscreenClose">✕</button>
+          </div>
+          <div class="map-fullscreen-body">
+            <div class="map-preview-svg">${generateOfflineMap(allSpots)}</div>
+            <div class="map-fullscreen-spots">
+              ${topSpots.map(s => `<button class="map-fullscreen-spot-chip" onclick="scrollToSpot('${s.id}');closeMapFullscreen()">📍 ${s.name}</button>`).join('')}
+            </div>
+          </div>`;
+        document.body.appendChild(overlay);
+        document.getElementById('mapFullscreenClose').addEventListener('click', closeMapFullscreen);
+        overlay.addEventListener('click', e => { if (e.target === overlay) closeMapFullscreen(); });
+      }
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMapFullscreen() {
+      const overlay = document.getElementById('mapFullscreenOverlay');
+      if (overlay) overlay.classList.remove('open');
+      document.body.style.overflow = '';
     }
 
     loadSpots().then(() => {
@@ -3042,7 +2058,7 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
       const grid = document.getElementById('spotGrid');
       const empty = document.getElementById('emptyState');
       const countLabel = document.getElementById('spotCountLabel');
-      if (countLabel) countLabel.innerHTML = `共 <strong>${filteredList.length}</strong> 个景点`;
+      if (countLabel) countLabel.innerHTML = '共 <strong>' + filteredList.length + '</strong> 个景点';
       animateCount('spotCount', filteredList.length);
       const itineraries = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
 
@@ -3055,96 +2071,149 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
       }
       empty.style.display = 'none';
 
-      grid.innerHTML = filteredList.map(s => {
-        const isFav = favs.includes(s.id);
-        const isComp = compareList.includes(s.id);
-        const inIt = itineraries.includes(s.id);
-        const catLabel = catLabels[s.cat] || s.cat;
-        const transportShort = s.transport ? s.transport.slice(0, 24) : '';
-        const priceHtml = s.price === 0
-          ? '<span class="price-current price-free">免费</span>'
-          : `<span class="price-current price-paid">¥${s.price}</span>${s.priceOld ? '<span class="price-old">¥'+s.priceOld+'</span>' : ''}<span class="price-unit">/人</span>`;
-        return `
-          <article class="card airbnb-card rv" data-id="${s.id}">
-            <div class="card-img">
-              <img src="${s.img}" alt="${s.name}" loading="lazy" onload="this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')">
-              <div class="img-gradient"></div>
-              <div class="img-spot-name">${s.name}</div>
-              <span class="spot-badge badge ${s.badge}">${badgeLabels[s.badge] || s.badge}</span>
-              <button class="card-fav-btn ${isFav?'faved':''}" data-id="${s.id}" title="${isFav?'取消收藏':'收藏'}">
-                <span class="heart ${isFav?'heart-filled':'heart-outline'}">${isFav?'♥':'♡'}</span>
-              </button>
-            </div>
-            <div class="card-body">
-              <div class="card-name-row">
-                <span class="card-name">${s.name}</span>
-                <span class="card-cat-tag">${catLabel}</span>
-              </div>
-              <div class="card-rating-row">
-                <span class="rating-star">★</span>
-                <span class="rating-num">${s.rating}</span>
-                <span class="rating-reviews">(${s.reviews}条)</span>
-                <span class="rating-dot"></span>
-                <span>${s.dur}</span>
-              </div>
-              <div class="card-price-row">${priceHtml}</div>
-              <p class="card-desc">${s.desc}</p>
-              <div class="card-bottom">
-                <span class="card-transport">${transportShort ? '🚌 '+transportShort : ''}</span>
-                <button class="card-detail-btn" data-id="${s.id}">查看详情</button>
-              </div>
-            </div>
-          </article>`;
+      grid.innerHTML = filteredList.map(function(s) {
+        var isFav = favs.includes(s.id);
+        var inIt = itineraries.includes(s.id);
+        var catLabel = catLabels[s.cat] || s.cat;
+        var transportShort = s.transport ? s.transport.slice(0, 28) : '';
+
+        // Price HTML (body)
+        var priceHtml = '';
+        if (s.price === 0) {
+          priceHtml = '<span class="price-current price-free">免费</span>';
+        } else {
+          priceHtml = '<span class="price-current price-paid">\u00A5' + s.price + '</span>';
+          if (s.priceOld && s.priceOld > s.price) {
+            priceHtml += '<span class="price-old">\u00A5' + s.priceOld + '</span>';
+          }
+          priceHtml += '<span class="price-unit">/人</span>';
+        }
+
+        // Badge tags
+        var badgeHtml = '';
+        if (s.badge) {
+          var badgeClass = 'badge-' + s.badge;
+          badgeHtml = '<span class="badge-tag ' + badgeClass + '">' + (badgeLabels[s.badge] || s.badge) + '</span>';
+        }
+
+        // Price tag on image
+        var priceTagHtml = '';
+        if (s.price === 0) {
+          priceTagHtml = '<div class="card-price-tag price-free">免费</div>';
+        } else {
+          priceTagHtml = '<div class="card-price-tag price-paid">\u00A5' + s.price;
+          if (s.priceOld && s.priceOld > s.price) {
+            priceTagHtml += '<span class="price-old-tag">\u00A5' + s.priceOld + '</span>';
+          }
+          priceTagHtml += '</div>';
+        }
+
+        // Colored tags
+        var tagsHtml = '<div class="card-tags-row">';
+        if (s.badge === 'must') tagsHtml += '<span class="ctag ctag-must">必去</span>';
+        if (s.badge === 'hot') tagsHtml += '<span class="ctag ctag-hot">热门</span>';
+        if (s.price === 0) tagsHtml += '<span class="ctag ctag-free">免费</span>';
+        if (s.badge === 'hidden') tagsHtml += '<span class="ctag ctag-hidden">小众</span>';
+        tagsHtml += '<span class="ctag ctag-cat">' + catLabel + '</span>';
+        (s.audience || []).slice(0, 2).forEach(function(a) {
+          tagsHtml += '<span class="ctag ctag-aud">' + (audienceLabels[a] || a) + '</span>';
+        });
+        tagsHtml += '</div>';
+
+        return '<article class="card meituan-card rv" data-id="' + s.id + '">' +
+          '<div class="card-img">' +
+            '<img src="' + s.img + '" alt="' + s.name + '" loading="lazy" onload="this.classList.add(\'img-loaded\');this.parentElement.classList.add(\'img-loaded\')" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.classList.add(\'img-loaded\');this.parentElement.classList.add(\'img-loaded\')">' +
+            '<div class="img-gradient"></div>' +
+            '<div class="img-spot-name">' + s.name + '</div>' +
+            '<div class="card-badge">' + badgeHtml + '</div>' +
+            priceTagHtml +
+            '<button class="card-fav-btn ' + (isFav ? 'faved' : '') + '" data-id="' + s.id + '" title="' + (isFav ? '取消收藏' : '收藏') + '">' +
+              '<span class="heart ' + (isFav ? 'heart-filled' : 'heart-outline') + '">' + (isFav ? '♥' : '♡') + '</span>' +
+            '</button>' +
+          '</div>' +
+          '<div class="card-body">' +
+            '<div class="card-name-row"><span class="card-name">' + s.name + '</span></div>' +
+            '<div class="card-rating-row">' +
+              '<span class="rating-badge"><span class="star-icon">★</span> ' + s.rating + '</span>' +
+              '<span class="rating-reviews">' + s.reviews + '条评价</span>' +
+              '<span class="rating-dot"></span>' +
+              '<span class="card-duration">⏱ ' + s.dur + '</span>' +
+            '</div>' +
+            '<div class="card-price-row">' + priceHtml + '</div>' +
+            '<p class="card-desc">' + s.desc + '</p>' +
+            tagsHtml +
+            (transportShort ? '<div class="card-transport-row">🚌 ' + transportShort + '</div>' : '') +
+            '<div class="card-action-bar">' +
+              '<button class="action-btn btn-go" data-id="' + s.id + '">🗺️ 去这里</button>' +
+              '<button class="action-btn btn-share" data-name="' + s.name + '" title="分享">📤</button>' +
+            '</div>' +
+          '</div>' +
+        '</article>';
       }).join('');
 
       // Reveal with staggered animation
       initRevealObserver();
 
       // Card click → Quick View
-      document.querySelectorAll('.card.airbnb-card').forEach(card => {
-        card.addEventListener('click', e => {
-          if (e.target.closest('.card-fav-btn') || e.target.closest('.card-detail-btn') || e.target.closest('.card-action-icon')) return;
-          const s = allSpots.find(x => x.id === card.dataset.id);
+      document.querySelectorAll('.card.meituan-card').forEach(function(card) {
+        card.addEventListener('click', function(e) {
+          if (e.target.closest('.card-fav-btn') || e.target.closest('.action-btn')) return;
+          var s = allSpots.find(function(x) { return x.id === card.dataset.id; });
           if (s) openQuickView(s);
         });
       });
 
-      // Detail buttons
-      document.querySelectorAll('.card-detail-btn').forEach(btn => {
-        btn.addEventListener('click', e => {
+      // "Go here" buttons - open Amap navigation
+      document.querySelectorAll('.btn-go').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
           e.stopPropagation();
-          const s = allSpots.find(x => x.id === btn.dataset.id);
-          if (s) openQuickView(s);
+          var s = allSpots.find(function(x) { return x.id === btn.dataset.id; });
+          if (s && s.lat && s.lng) {
+            window.open('https://uri.amap.com/marker?position=' + s.lng + ',' + s.lat + '&name=' + encodeURIComponent(s.name), '_blank');
+          } else {
+            showToast('正在打开导航…');
+          }
+        });
+      });
+
+      // Share buttons
+      document.querySelectorAll('.btn-share').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var name = btn.dataset.name;
+          if (navigator.share) {
+            navigator.share({ title: '济南旅游 - ' + name, text: '推荐你去济南的' + name + '！', url: location.href });
+          } else {
+            if (navigator.clipboard) navigator.clipboard.writeText('推荐你去济南的' + name + '！' + location.href);
+            showToast('链接已复制');
+          }
         });
       });
 
       // Fav buttons with heart animation
-      document.querySelectorAll('.card-fav-btn').forEach(btn => {
-        btn.addEventListener("click", e => {
+      document.querySelectorAll('.card-fav-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
           e.stopPropagation();
-          const id = btn.dataset.id;
-          let currentFavs = getFavs();
+          var id = btn.dataset.id;
+          var currentFavs = getFavs();
           if (currentFavs.includes(id)) {
-            currentFavs = currentFavs.filter(f => f !== id);
-            localStorage.setItem("jinan-favs", JSON.stringify(currentFavs));
+            currentFavs = currentFavs.filter(function(f) { return f !== id; });
+            localStorage.setItem('jinan-favs', JSON.stringify(currentFavs));
             updateFavCount();
-            showToast("💔 已取消收藏");
+            showToast('💔 已取消收藏');
           } else {
             currentFavs.push(id);
-            localStorage.setItem("jinan-favs", JSON.stringify(currentFavs));
+            localStorage.setItem('jinan-favs', JSON.stringify(currentFavs));
             updateFavCount();
-            showToast("❤️ 已收藏");
+            showToast('❤️ 已收藏');
+            btn.classList.add('heart-anim');
+            setTimeout(function() { btn.classList.remove('heart-anim'); }, 700);
           }
           render();
         });
       });
-
-      // Compare buttons
-      document.querySelectorAll('.compare-trigger').forEach(btn => {
-        btn.addEventListener('click', e => { e.stopPropagation(); toggleCompare(btn.dataset.id); });
-      });
     };
-    // ── Patch openQuickView to add TTS button ──
+// ── Patch openQuickView to add TTS button ──
     const _origOpenQuickView = openQuickView;
     // ═══ LIGHTBOX COMPONENT ═══
     let lightboxPhotos = [];
@@ -3379,9 +2448,9 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
           ${nearbyHtml}
           <div class="modal-floating-actions">
             <button class="fav-action modal-fav-btn" data-id="${s.id}" title="收藏">${getFavs().includes(s.id)?"♥":"♡"}</button>
-            <button class="btn btn-primary modal-add-trip" data-id="${s.id}">＋ 加入行程</button>
-            <a href="${getCtripLink(s.name)}" target="_blank" rel="noopener" class="btn btn-outline" style="background:linear-gradient(135deg,#2681ff 0%,#1a6dff 100%);color:#fff;border:none">🐬 携程</a>
-            <a href="${getMeituanLink(s.name)}" target="_blank" rel="noopener" class="btn btn-outline" style="background:linear-gradient(135deg,#ffc107 0%,#ff9800 100%);color:#fff;border:none">🟡 美团</a>
+            <a href="${s.lat && s.lng ? 'https://uri.amap.com/marker?position='+s.lng+','+s.lat+'&name='+encodeURIComponent(s.name) : '#'}" target="_blank" rel="noopener" class="btn btn-primary" style="flex:1.2;justify-content:center;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent-hover,#b8956a));color:#fff;border:none">🗺️ 去这里</a>
+            <button class="btn btn-primary modal-add-trip" data-id="${s.id}" style="flex:1;justify-content:center">＋ 加入行程</button>
+            <a href="${getCtripLink(s.name)}" target="_blank" rel="noopener" class="btn btn-outline" style="background:linear-gradient(135deg,#2681ff 0%,#1a6dff 100%);color:#fff;border:none;flex:0.8;justify-content:center">🐬 携程</a>
           </div>
           <p style="font-size:.65rem;color:var(--text3);text-align:center;margin-top:6px">通过以上链接预订，本站可获得少量佣金 ❤️</p>
           <div class="modal-reviews" id="modal-reviews">
@@ -3530,7 +2599,7 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
       // Generate area labels for major spots
       const labels = spots.filter(s => s.lat && s.lng && s.rating >= 4.7).slice(0, 8).map(s => {
         const p = latLngToSvg(s.lat, s.lng);
-        return `<text x="${p.x}" y="${p.y - 8}" text-anchor="middle" font-size="8" font-weight="700" fill="var(--text,#111)" font-family="system-ui" pointer-events="none" opacity=".8">${s.name}</text>`;
+        return `<text x="${p.x}" y="${p.y - 8}" text-anchor="middle" font-size="8" font-weight="700" fill="#111" font-family="system-ui" pointer-events="none" opacity=".8">${s.name}</text>`;
       }).join('');
       
       // Grid lines
@@ -3647,7 +2716,214 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
     });
 
     
-    // Load Leaflet JS
+    // ═══ LEAFLET INTERACTIVE MAP ═══
+    (function() {
+      const catColor = {spring:'#3b82f6',nature:'#22c55e',history:'#a855f7',culture:'#6366f1',food:'#f59e0b',family:'#14b8a6',landmark:'#ec4899',amusement:'#f97316'};
+      const catEmoji = {spring:'⛲',nature:'🌿',history:'🏛️',culture:'📚',food:'🍜',family:'👨👩👧',landmark:'🏛️',amusement:'🎡'};
+      const catLabel = {spring:'泉水',nature:'自然',history:'历史',culture:'文化',food:'美食',family:'亲子',landmark:'地标',amusement:'游乐'};
+      let leafletMap = null;
+      let markerClusterGroup = null;
+      let allMarkers = [];
+      let currentCatFilter = 'all';
+      let userMarker = null;
+
+      function createCircleIcon(color, size) {
+        return L.divIcon({
+          className: 'custom-marker',
+          html: '<div style="width:'+size+'px;height:'+size+'px;background:'+color+';border:2px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.3);transition:all .2s"></div>',
+          iconSize: [size, size],
+          iconAnchor: [size/2, size/2],
+          popupAnchor: [0, -size/2]
+        });
+      }
+
+      function buildPopupContent(s) {
+        const imgHtml = s.img ? '<img src="'+s.img+'" alt="'+s.name+'" style="width:100%;height:120px;object-fit:cover;border-radius:8px 8px 0 0">' : '';
+        const priceText = s.price === 0 || s.price === '免费' ? '免费' : '¥'+s.price;
+        const catColorVal = catColor[s.cat] || '#c9a96e';
+        const catEmojiVal = catEmoji[s.cat] || '📍';
+        return '<div style="min-width:220px;max-width:280px">'
+          + imgHtml
+          + '<div style="padding:10px 12px">'
+          + '<div style="font-weight:700;font-size:.92rem;margin-bottom:4px;color:#111">'+s.name+'</div>'
+          + '<div style="display:flex;align-items:center;gap:6px;margin-bottom:6px">'
+          + '<span style="background:'+catColorVal+';color:#fff;padding:2px 8px;border-radius:100px;font-size:.68rem">'+catEmojiVal+' '+(catLabel[s.cat]||s.cat)+'</span>'
+          + '<span style="font-size:.78rem;color:#f59e0b">★ '+s.rating+'</span>'
+          + '</div>'
+          + '<div style="display:flex;justify-content:space-between;align-items:center;font-size:.78rem;color:#666">'
+          + '<span>💰 '+priceText+'</span>'
+          + (s.duration ? '<span>⏱ '+s.duration+'</span>' : '')
+          + '</div>'
+          + (s.desc ? '<p style="font-size:.75rem;color:#888;margin:6px 0 0;line-height:1.5;max-height:3em;overflow:hidden;text-overflow:ellipsis">'+s.desc+'</p>' : '')
+          + '<a href="spots.html?id='+s.id+'" style="display:inline-block;margin-top:8px;font-size:.75rem;color:#c9a96e;text-decoration:none;font-weight:600">查看详情 →</a>'
+          + '</div></div>';
+      }
+
+      function initLeafletMap() {
+        if (typeof L === 'undefined') {
+          showFallback();
+          return;
+        }
+        try {
+          leafletMap = L.map('leafletMap', {
+            center: [36.651, 117.12],
+            zoom: 12,
+            zoomControl: true,
+            attributionControl: true
+          });
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxZoom: 18
+          }).addTo(leafletMap);
+
+          markerClusterGroup = L.markerClusterGroup({
+            maxClusterRadius: 50,
+            spiderfyOnMaxZoom: true,
+            showCoverageOnHover: false,
+            zoomToBoundsOnClick: true,
+            iconCreateFunction: function(cluster) {
+              var count = cluster.getChildCount();
+              var size = count < 10 ? 36 : count < 30 ? 44 : 52;
+              return L.divIcon({
+                html: '<div style="width:'+size+'px;height:'+size+'px;background:rgba(201,169,110,.85);border:3px solid #fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:'+(size < 40 ? '.8rem' : '.9rem')+';color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.25)">'+count+'</div>',
+                className: 'custom-cluster',
+                iconSize: [size, size]
+              });
+            }
+          });
+
+          allMarkers = [];
+          (window.allSpots || []).forEach(function(s) {
+            if (!s.lat || !s.lng) return;
+            var color = catColor[s.cat] || '#c9a96e';
+            var size = s.rating >= 4.7 ? 14 : s.rating >= 4.5 ? 12 : 10;
+            var marker = L.marker([s.lat, s.lng], { icon: createCircleIcon(color, size) });
+            marker.bindPopup(buildPopupContent(s), { maxWidth: 300, closeButton: true });
+            marker._spotCat = s.cat;
+            marker._spotId = s.id;
+            allMarkers.push(marker);
+            markerClusterGroup.addLayer(marker);
+          });
+
+          leafletMap.addLayer(markerClusterGroup);
+          addMapControls();
+        } catch (e) {
+          console.warn('Leaflet init failed:', e);
+          showFallback();
+        }
+      }
+
+      function addMapControls() {
+        // Locate button
+        document.getElementById('leafletLocateBtn')?.addEventListener('click', function() {
+          if (!leafletMap) return;
+          if (!navigator.geolocation) {
+            showToast('浏览器不支持定位功能');
+            return;
+          }
+          this.textContent = '⏳ 定位中...';
+          navigator.geolocation.getCurrentPosition(function(pos) {
+            var lat = pos.coords.latitude, lng = pos.coords.longitude;
+            leafletMap.setView([lat, lng], 14, { animate: true });
+            if (userMarker) leafletMap.removeLayer(userMarker);
+            userMarker = L.marker([lat, lng], {
+              icon: L.divIcon({
+                className: 'user-loc-marker',
+                html: '<div style="width:18px;height:18px;background:#3b82f6;border:3px solid #fff;border-radius:50%;box-shadow:0 0 12px rgba(59,130,246,.5);animation:pulse 1.5s infinite"></div>',
+                iconSize: [18, 18],
+                iconAnchor: [9, 9]
+              })
+            }).addTo(leafletMap).bindPopup('📍 我的位置');
+            document.getElementById('leafletLocateBtn').innerHTML = '📌 定位';
+          }, function(err) {
+            showToast('定位失败: ' + err.message);
+            document.getElementById('leafletLocateBtn').innerHTML = '📌 定位';
+          }, { enableHighAccuracy: true, timeout: 10000 });
+        });
+
+        // Fullscreen button
+        document.getElementById('leafletFullscreenBtn')?.addEventListener('click', function() {
+          var container = document.getElementById('leafletMapContainer');
+          if (!document.fullscreenElement) {
+            (container.requestFullscreen || container.webkitRequestFullscreen || container.msRequestFullscreen).call(container);
+            this.innerHTML = '⛶ 退出全屏';
+          } else {
+            (document.exitFullscreen || document.webkitExitFullscreen || document.msExitFullscreen).call(document);
+            this.innerHTML = '⛶ 全屏';
+          }
+        });
+        document.addEventListener('fullscreenchange', function() {
+          var btn = document.getElementById('leafletFullscreenBtn');
+          if (btn) btn.innerHTML = document.fullscreenElement ? '⛶ 退出全屏' : '⛶ 全屏';
+          setTimeout(function() { if (leafletMap) leafletMap.invalidateSize(); }, 200);
+        });
+
+        // Reset view
+        document.getElementById('leafletResetBtn')?.addEventListener('click', function() {
+          if (!leafletMap) return;
+          leafletMap.setView([36.651, 117.12], 12, { animate: true });
+          currentCatFilter = 'all';
+          filterMarkers('all');
+          document.querySelectorAll('.leaflet-cat-btn').forEach(function(b) {
+            b.classList.toggle('active', b.dataset.cat === 'all');
+            b.style.background = b.dataset.cat === 'all' ? 'var(--accent2,rgba(201,169,110,.1))' : 'var(--bg,#f8f6f3)';
+          });
+        });
+
+        // Category filter
+        document.getElementById('leafletCatFilter')?.addEventListener('click', function(e) {
+          var btn = e.target.closest('.leaflet-cat-btn');
+          if (!btn) return;
+          var cat = btn.dataset.cat;
+          currentCatFilter = cat;
+          document.querySelectorAll('.leaflet-cat-btn').forEach(function(b) {
+            b.classList.toggle('active', b === btn);
+            b.style.background = b === btn ? 'var(--accent2,rgba(201,169,110,.1))' : 'var(--bg,#f8f6f3)';
+          });
+          filterMarkers(cat);
+        });
+      }
+
+      function filterMarkers(cat) {
+        if (!markerClusterGroup) return;
+        markerClusterGroup.clearLayers();
+        allMarkers.forEach(function(m) {
+          if (cat === 'all' || m._spotCat === cat) {
+            markerClusterGroup.addLayer(m);
+          }
+        });
+      }
+
+      function showFallback() {
+        document.getElementById('leafletMap').style.display = 'none';
+        document.getElementById('leafletFallback').style.display = 'block';
+        var svgContainer = document.getElementById('fallbackMapSvg');
+        if (svgContainer && window.allSpots && window.allSpots.length) {
+          svgContainer.innerHTML = generateOfflineMap(window.allSpots);
+        }
+      }
+
+      // Init after spots are loaded
+      function waitForSpotsAndInit() {
+        if (window.allSpots && window.allSpots.length) {
+          setTimeout(initLeafletMap, 300);
+        } else {
+          setTimeout(waitForSpotsAndInit, 500);
+        }
+      }
+
+      // Add pulse animation
+      var style = document.createElement('style');
+      style.textContent = '@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(59,130,246,.5)}70%{box-shadow:0 0 0 12px rgba(59,130,246,0)}100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}}.leaflet-cat-btn.active{background:var(--accent2,rgba(201,169,110,.1))!important;font-weight:700}.leaflet-ctrl-btn:hover{background:var(--accent2,rgba(201,169,110,.1))!important;border-color:var(--accent,#c9a96e)!important}';
+      document.head.appendChild(style);
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', waitForSpotsAndInit);
+      } else {
+        waitForSpotsAndInit();
+      }
+    })();
+
   
     // ═══ SHOPIFY-STYLE: 数字计数动画 ═══
     function animateCount(elId, target) {

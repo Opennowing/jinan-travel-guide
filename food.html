@@ -199,6 +199,118 @@
     .card-action-icon{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--border2);background:var(--bg);border-radius:8px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text3);font-weight:500}
     .card-action-icon:hover{border-color:var(--accent);color:var(--accent);background:var(--accent2)}
     .card-action-icon.active{border-color:var(--teal);color:var(--teal);background:rgba(42,157,143,.08)}
+
+    /* ══════════════════════════════════════════════
+       必吃榜增强 — 大众点评风格
+       ══════════════════════════════════════════════ */
+    .must-eat-hero{position:relative;overflow:hidden;border-radius:24px;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);padding:40px 36px 36px;margin-bottom:32px}
+    .must-eat-hero::before{content:'';position:absolute;top:-50%;right:-20%;width:60%;height:200%;background:radial-gradient(circle,rgba(201,169,110,.15) 0%,transparent 70%);pointer-events:none}
+    .must-eat-hero-header{display:flex;align-items:center;gap:16px;margin-bottom:28px;position:relative;z-index:1}
+    .must-eat-hero-icon{width:56px;height:56px;background:linear-gradient(135deg,#d4a843,#f0d78c);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;box-shadow:0 4px 20px rgba(212,168,67,.4)}
+    .must-eat-hero-title{color:#fff}
+    .must-eat-hero-title h2{font:800 1.5rem/1.3 var(--serif);margin:0;background:linear-gradient(135deg,#f0d78c,#d4a843);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .must-eat-hero-title p{font-size:.82rem;color:rgba(255,255,255,.6);margin-top:4px}
+    .must-eat-hero-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;position:relative;z-index:1}
+    .must-eat-hero-card{background:rgba(255,255,255,.06);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;cursor:pointer;transition:all .35s var(--ease);position:relative}
+    .must-eat-hero-card:hover{transform:translateY(-4px);background:rgba(255,255,255,.1);box-shadow:0 12px 40px rgba(0,0,0,.3)}
+    .must-eat-hero-card .rank-badge{position:absolute;top:12px;left:12px;width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;font:900 .9rem/1 var(--serif);z-index:2;color:#fff}
+    .must-eat-hero-card .rank-badge.rank-1{background:linear-gradient(135deg,#d4a843,#f0d78c);box-shadow:0 2px 8px rgba(212,168,67,.5)}
+    .must-eat-hero-card .rank-badge.rank-2{background:linear-gradient(135deg,#c0c0c0,#e8e8e8);color:#333}
+    .must-eat-hero-card .rank-badge.rank-3{background:linear-gradient(135deg,#cd7f32,#e8a860)}
+    .must-eat-hero-card .rank-badge.rank-other{background:rgba(255,255,255,.2)}
+    .must-eat-hero-card-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+    .must-eat-hero-card-body{padding:14px 16px 16px}
+    .must-eat-hero-card-name{font:700 .95rem/1.3 var(--serif);color:#fff;margin-bottom:6px}
+    .must-eat-hero-card-meta{display:flex;gap:8px;flex-wrap:wrap;font-size:.7rem;color:rgba(255,255,255,.5)}
+    .must-eat-hero-card-meta span{display:inline-flex;align-items:center;gap:3px}
+    .must-eat-hero-card-price{color:#f0d78c !important;font-weight:600 !important}
+
+    /* ══════════════════════════════════════════════
+       分类筛选胶囊增强
+       ══════════════════════════════════════════════ */
+    .category-capsules{display:flex;gap:8px;padding:0;overflow-x:auto;justify-content:center;flex-wrap:wrap;background:none;margin-bottom:20px;scrollbar-width:none;-ms-overflow-style:none}
+    .category-capsules::-webkit-scrollbar{display:none}
+    .category-capsule{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border:1.5px solid var(--border);background:var(--card-bg);font-size:.82rem;font-weight:600;color:var(--text);cursor:pointer;border-radius:100px;transition:all .3s;white-space:nowrap;user-select:none}
+    .category-capsule .capsule-icon{font-size:1rem;line-height:1}
+    .category-capsule:hover:not(.active){border-color:var(--accent);color:var(--accent);background:var(--accent2)}
+    .category-capsule.active{background:linear-gradient(135deg,var(--accent),var(--accent-hover));color:#fff;border-color:var(--accent);box-shadow:0 4px 16px rgba(201,169,110,.3)}
+
+    /* ══════════════════════════════════════════════
+       美食卡片升级 — 大众点评风格
+       ══════════════════════════════════════════════ */
+    .food-card-pro{background:var(--card-bg);border-radius:16px;overflow:hidden;border:none;box-shadow:0 2px 12px rgba(0,0,0,.06);transition:all .35s var(--ease);cursor:pointer;position:relative}
+    .food-card-pro:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(0,0,0,.14)}
+    .food-card-pro:hover .food-card-pro-img img{transform:scale(1.05)}
+    .food-card-pro-img{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:var(--bg2)}
+    .food-card-pro-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
+    .food-card-pro-img .badge-must-gold{position:absolute;top:12px;left:12px;z-index:2;padding:4px 12px;background:linear-gradient(135deg,#d4a843,#f0d78c);color:#fff;font-size:.7rem;font-weight:700;border-radius:100px;box-shadow:0 2px 8px rgba(212,168,67,.4);display:inline-flex;align-items:center;gap:4px}
+    .food-card-pro-img .fav-btn-pro{position:absolute;top:12px;right:12px;z-index:3;width:32px;height:32px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .25s;backdrop-filter:blur(6px);background:rgba(0,0,0,.3);color:#fff}
+    .food-card-pro-img .fav-btn-pro:hover{background:rgba(239,68,68,.85);transform:scale(1.1)}
+    .food-card-pro-img .fav-btn-pro.active{background:rgba(239,68,68,.9)}
+    .food-card-pro-body{padding:16px 18px 18px}
+    .food-card-pro-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;margin-bottom:8px}
+    .food-card-pro-name{font:700 1.05rem/1.3 var(--serif);margin:0;flex:1}
+    .food-card-pro-tag{font-size:.65rem;padding:3px 10px;background:linear-gradient(135deg,var(--accent2),rgba(201,169,110,.15));border-radius:100px;color:var(--accent);font-weight:600;white-space:nowrap;flex-shrink:0}
+    .food-card-pro-desc{font-size:.82rem;color:var(--text2);line-height:1.6;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:3;line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .food-card-pro-shop{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--bg2);border-radius:10px;margin-bottom:12px;gap:8px}
+    .food-card-pro-shop-info{flex:1;min-width:0}
+    .food-card-pro-shop-name{font-weight:600;font-size:.82rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .food-card-pro-shop-meta{font-size:.72rem;color:var(--text3);display:flex;gap:8px;margin-top:2px}
+    .food-card-pro-shop-meta span{display:inline-flex;align-items:center;gap:2px}
+    .food-card-pro-shop-price{text-align:center;flex-shrink:0}
+    .food-card-pro-shop-price .price-num{font:700 1rem/1 var(--serif);color:var(--accent)}
+    .food-card-pro-shop-price .price-label{font-size:.6rem;color:var(--text3)}
+    .food-card-pro-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:10px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);border-radius:10px;font-size:.82rem;font-weight:600;cursor:pointer;transition:all .25s}
+    .food-card-pro-btn:hover{background:var(--accent);color:#fff}
+
+    /* ══════════════════════════════════════════════
+       美食详情弹窗
+       ══════════════════════════════════════════════ */
+    .food-detail-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px}
+    .food-detail-overlay.open{display:flex}
+    .food-detail-panel{background:var(--card-bg);border-radius:20px;max-width:720px;width:100%;max-height:90vh;overflow-y:auto;animation:modalSlideUp .35s var(--ease);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+    @keyframes modalSlideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    .food-detail-close{position:sticky;top:0;z-index:10;display:flex;justify-content:flex-end;padding:12px 16px}
+    .food-detail-close button{width:36px;height:36px;border-radius:50%;border:none;background:rgba(0,0,0,.5);color:#fff;font-size:1.1rem;cursor:pointer;transition:all .2s;backdrop-filter:blur(6px)}
+    .food-detail-close button:hover{background:rgba(0,0,0,.7);transform:scale(1.1)}
+    .food-detail-hero{position:relative;margin-top:-48px}
+    .food-detail-hero img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+    .food-detail-hero .detail-badges{position:absolute;bottom:16px;left:16px;display:flex;gap:8px;flex-wrap:wrap}
+    .food-detail-hero .detail-badge{padding:4px 12px;border-radius:100px;font-size:.72rem;font-weight:600;backdrop-filter:blur(8px)}
+    .detail-badge-must{background:linear-gradient(135deg,#d4a843,#f0d78c);color:#fff}
+    .detail-badge-cat{background:rgba(255,255,255,.85);color:var(--text)}
+    .detail-badge-season{background:rgba(42,157,143,.85);color:#fff}
+    .food-detail-content{padding:24px 28px 28px}
+    .food-detail-title{font:800 1.5rem/1.3 var(--serif);margin-bottom:8px}
+    .food-detail-tagline{font-size:.85rem;color:var(--accent);font-weight:500;margin-bottom:16px}
+    .food-detail-desc{font-size:.9rem;color:var(--text2);line-height:1.75;margin-bottom:20px}
+    .food-detail-section{margin-bottom:20px}
+    .food-detail-section-title{font:700 .9rem/1.3 var(--serif);margin-bottom:10px;display:flex;align-items:center;gap:8px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+    .food-detail-history{padding:14px 16px;background:var(--bg2);border-radius:12px;font-size:.85rem;color:var(--text2);line-height:1.7}
+    .food-detail-tips{padding:14px 16px;background:linear-gradient(135deg,rgba(201,169,110,.08),rgba(42,157,143,.06));border:1px solid var(--accent2);border-radius:12px;font-size:.85rem;color:var(--text2);line-height:1.7}
+    .food-detail-shops{display:flex;flex-direction:column;gap:12px}
+    .detail-shop-card{padding:16px;background:var(--bg2);border-radius:14px;border:1px solid var(--border);transition:all .2s}
+    .detail-shop-card:hover{border-color:var(--accent);background:var(--accent2)}
+    .detail-shop-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .detail-shop-name{font:700 .95rem/1.3 var(--serif)}
+    .detail-shop-rating{display:flex;align-items:center;gap:4px;font-size:.82rem;color:var(--accent);font-weight:600}
+    .detail-shop-info{display:flex;gap:12px;flex-wrap:wrap;font-size:.78rem;color:var(--text3);margin-bottom:6px}
+    .detail-shop-info span{display:inline-flex;align-items:center;gap:4px}
+    .detail-shop-extras{display:flex;gap:8px;flex-wrap:wrap;font-size:.72rem;color:var(--text3)}
+    .detail-shop-extras span{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;background:var(--card-bg);border-radius:6px}
+    .detail-shop-dish{margin-top:8px;font-size:.78rem;color:var(--accent);font-weight:500}
+
+    /* ══════════════════════════════════════════════
+       美食地图提示
+       ══════════════════════════════════════════════ */
+    .food-map-prompt{display:flex;align-items:center;justify-content:center;gap:12px;padding:20px 28px;background:linear-gradient(135deg,var(--accent2),rgba(42,157,143,.08));border:1px solid var(--accent2);border-radius:16px;margin-top:32px;cursor:pointer;text-decoration:none;transition:all .3s;color:var(--text)}
+    .food-map-prompt:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08);border-color:var(--accent)}
+    .food-map-prompt-icon{font-size:1.8rem}
+    .food-map-prompt-text{font-size:.9rem;font-weight:600}
+    .food-map-prompt-text span{color:var(--accent)}
+    .food-map-prompt-arrow{font-size:1.2rem;color:var(--accent);transition:transform .2s}
+    .food-map-prompt:hover .food-map-prompt-arrow{transform:translateX(4px)}
+
     @media(max-width:768px){.card-fav-btn{opacity:1;transform:none}}
 
     /* ── Smart Recommend Section ── */
@@ -445,6 +557,25 @@
 
   <!-- Main Content -->
   <main id="main-content">
+
+
+    <!-- ── 必吃榜 Hero ── -->
+    <section class="section" aria-label="济南必吃榜">
+      <div class="section-inner">
+        <div class="must-eat-hero reveal" id="mustEatHero">
+          <div class="must-eat-hero-header">
+            <div class="must-eat-hero-icon">🏆</div>
+            <div class="must-eat-hero-title">
+              <h2>济南必吃榜 · 本地人精选</h2>
+              <p>从百年老字号到街头巷尾的烟火气，这5道菜是济南美食的灵魂</p>
+            </div>
+          </div>
+          <div class="must-eat-hero-grid" id="mustEatHeroGrid">
+            <!-- JS 动态渲染 -->
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- ── 搜索 ── -->
     <section class="section" aria-label="美食搜索与列表">
@@ -723,6 +854,27 @@
     </section>
 
   </main>
+
+
+  <!-- Food Detail Modal -->
+  <div class="food-detail-overlay" id="foodDetailOverlay">
+    <div class="food-detail-panel" id="foodDetailPanel">
+      <div class="food-detail-close"><button id="foodDetailClose" aria-label="关闭">✕</button></div>
+      <div id="foodDetailContent"></div>
+    </div>
+  </div>
+
+
+    <!-- ── 美食地图提示 ── -->
+    <section class="section" aria-label="美食地图入口">
+      <div class="section-inner">
+        <a href="spots.html#map" class="food-map-prompt reveal">
+          <span class="food-map-prompt-icon">📍</span>
+          <span class="food-map-prompt-text">想知道这些美食在哪里？<span>查看美食地图 →</span></span>
+          <span class="food-map-prompt-arrow">→</span>
+        </a>
+      </div>
+    </section>
 
   <!-- Compare FAB -->
   <button class="compare-fab" id="compareFab" aria-label="查看对比">
@@ -1532,6 +1684,8 @@
       allFoods = data.foods || [];
       allCategories = data.categories || [];
       try { renderMustEat(); } catch(e) { console.warn('Must-eat render failed:', e); }
+      try { renderMustEatHero(); } catch(e) { console.warn('Must-eat hero render failed:', e); }
+      try { renderCategoryCapsules(); } catch(e) { console.warn('Category capsules render failed:', e); }
       try { renderFoods(); } catch(e) { console.warn('Foods render failed:', e); }
       try { renderRoutes(); } catch(e) { console.warn('Routes render failed:', e); }
       try { renderDailyRoute(); } catch(e) { console.warn('Daily route render failed:', e); }
@@ -1636,51 +1790,45 @@
 
       grid.innerHTML = filtered.map(food => {
         const isFav = favs.isFavorite(food.id);
-        const nearby = getNearbyFoods(food);
         const isCompare = foodCompareList.includes(food.id);
-        const shopCount = food.shops?.length || 0;
-        const avgPrice = food.shops?.[0]?.avg || '';
-        return '<div class="card rv" data-food-id="' + food.id + '" style="position:relative">' +
-          '<div class="card-img">' +
-            '<img src="' + food.img + '" alt="' + food.name + '" loading="lazy" onload="this.classList.add(\'img-loaded\');this.parentElement.classList.add(\'img-loaded\')" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.classList.add(\'img-loaded\');this.parentElement.classList.add(\'img-loaded\')">' +
-            (food.must ? '<span class="badge-must" style="position:absolute;top:12px;left:12px;z-index:2">🔥 必吃</span>' : '') +
-            '<button class="card-fav-btn ' + (isFav ? 'active' : '') + '" data-id="' + food.id + '" data-type="food" aria-label="' + (isFav ? '取消收藏' : '收藏') + '" onclick="event.stopPropagation();window._toggleFoodFav(\'' + food.id + '\',this)">' + (isFav ? '♥' : '♡') + '</button>' +
+        const shop = food.shops?.[0];
+        const catLabel = food.cat === 'lucai' ? '鲁菜经典' : food.cat === 'xiaochi' ? '市井小吃' : food.cat === 'laozihao' ? '老字号' : food.cat === 'zaocan' ? '早餐' : food.cat === 'yexiao' ? '夜宵' : food.cat === 'yinpin' ? '饮品' : food.tag;
+        return '<div class="food-card-pro rv" data-food-id="' + food.id + '">' +
+          '<div class="food-card-pro-img">' +
+            '<img src="' + food.img + '" alt="' + food.name + '" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
+            (food.must ? '<span class="badge-must-gold">🔥 必吃</span>' : '') +
+            '<button class="fav-btn-pro ' + (isFav ? 'active' : '') + '" data-id="' + food.id + '" data-type="food" aria-label="' + (isFav ? '取消收藏' : '收藏') + '" onclick="event.stopPropagation();window._toggleFoodFav(\'' + food.id + '\',this)">' + (isFav ? '♥' : '♡') + '</button>' +
           '</div>' +
-          '<div class="card-body">' +
-            '<h3>' + food.name + '</h3>' +
-            '<div class="card-info">' +
-              '<span class="info-item">' + (food.cat === 'lucai' ? '🍲 鲁菜' : food.cat === 'xiaochi' ? '🍢 小吃' : food.cat === 'laozihao' ? '🏮 老字号' : food.cat === 'zaocan' ? '🌅 早餐' : food.cat === 'yexiao' ? '🌙 夜宵' : food.cat === 'yinpin' ? '🍵 饮品' : food.tag) + '</span>' +
-              '<span class="info-dot"></span>' +
-              (avgPrice ? '<span class="info-item" style="color:var(--accent);font-weight:600">💰 ' + avgPrice + '</span>' : '') +
-              (avgPrice ? '<span class="info-dot"></span>' : '') +
-              (shopCount ? '<span class="info-item">🏪 ' + shopCount + '家</span>' : '') +
-              (food.must ? '<span class="info-dot"></span><span class="info-item">🔥 必吃</span>' : '') +
+          '<div class="food-card-pro-body">' +
+            '<div class="food-card-pro-header">' +
+              '<div class="food-card-pro-name">' + food.name + '</div>' +
+              '<span class="food-card-pro-tag">' + catLabel + '</span>' +
             '</div>' +
-            '<p class="desc">' + food.desc + '</p>' +
-            (food.shops?.length ? `
-              <div style="margin-top:8px;padding:8px 10px;background:var(--bg2);border-radius:8px;font-size:.75rem">
-                ${food.shops.slice(0, 2).map(sh => `
-                  <div style="display:flex;justify-content:space-between;align-items:center;padding:2px 0;color:var(--text2)">
-                    <span>${sh.name}</span>
-                    <span style="color:var(--accent);font-weight:600">${sh.avg}</span>
-                  </div>
-                `).join('')}
-              </div>
-            ` : '') +
-            '<div class="card-actions" style="display:flex;gap:6px;margin-top:auto;padding-top:10px">' +
-              '<a href="food.html?id=' + food.id + '" class="btn btn-primary btn-sm" style="flex:1;justify-content:center;font-size:.78rem;padding:6px 8px" onclick="event.stopPropagation()">查看详情</a>' +
-              '<button class="card-action-icon ' + (isCompare ? 'active' : '') + '" data-id="' + food.id + '" onclick="event.stopPropagation();addToFoodCompare(\'' + food.id + '\')">' + (isCompare ? '✓ 已对比' : '⚖️ 对比') + '</button>' +
-            '</div>' +
+            '<div class="food-card-pro-desc">' + food.desc + '</div>' +
+            (shop ? '<div class="food-card-pro-shop">' +
+              '<div class="food-card-pro-shop-info">' +
+                '<div class="food-card-pro-shop-name">' + shop.name + '</div>' +
+                '<div class="food-card-pro-shop-meta">' +
+                  '<span>' + stars(shop.rating) + ' ' + shop.rating + '</span>' +
+                  (shop.addr ? '<span>📍 ' + (shop.addr.length > 10 ? shop.addr.substring(0, 10) + '…' : shop.addr) + '</span>' : '') +
+                '</div>' +
+              '</div>' +
+              '<div class="food-card-pro-shop-price">' +
+                '<div class="price-num">' + shop.avg + '</div>' +
+                '<div class="price-label">人均</div>' +
+              '</div>' +
+            '</div>' : '') +
+            '<button class="food-card-pro-btn" data-food-id="' + food.id + '">查看详情 →</button>' +
           '</div>' +
         '</div>';
       }).join('');
 
-      // Attach card click for navigation
-      grid.querySelectorAll('.card').forEach(card => {
+      // Attach card click for detail modal
+      grid.querySelectorAll('.food-card-pro').forEach(card => {
         card.addEventListener('click', e => {
-          if (e.target.closest('.card-fav-btn') || e.target.closest('.card-action-icon') || e.target.closest('.card-actions')) return;
+          if (e.target.closest('.fav-btn-pro') || e.target.closest('.food-card-pro-btn')) return;
           const foodId = card.dataset.foodId;
-          if (foodId) window.location.href = 'food.html?id=' + foodId;
+          if (foodId) showFoodDetail(foodId);
         });
       });
 
@@ -1699,14 +1847,7 @@
     }
 
     // ── Tab switching ──
-    document.getElementById('foodTabs').addEventListener('click', e => {
-      const btn = e.target.closest('.food-tab');
-      if (!btn) return;
-      document.querySelectorAll('.food-tab').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentCat = btn.dataset.cat;
-      renderFoods();
-    });
+    // Category capsule click handler is in renderCategoryCapsules()
 
     document.getElementById('districtTabs').addEventListener('click', e => {
       const btn = e.target.closest('.district-tab');
@@ -1748,8 +1889,9 @@
       filterScene = '全部';
       const searchInput = document.getElementById('foodSearch');
       if (searchInput) searchInput.value = '';
-      document.querySelectorAll('.food-tab').forEach(b => b.classList.remove('active'));
-      document.querySelector('.food-tab[data-cat="全部"]').classList.add('active');
+      document.querySelectorAll('.category-capsule').forEach(b => b.classList.remove('active'));
+      const allCapsule = document.querySelector('.category-capsule[data-cat="全部"]');
+      if (allCapsule) allCapsule.classList.add('active');
       document.querySelectorAll('.district-tab').forEach(b => b.classList.remove('active'));
       document.querySelector('.district-tab[data-district="全部"]').classList.add('active');
       document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
@@ -2100,6 +2242,136 @@
       renderSmartRecommend();
       showToast('已刷新推荐');
     });
+
+
+    // ═══════════════════════════════════════════
+    //  必吃榜 Hero 渲染
+    // ═══════════════════════════════════════════
+    function renderMustEatHero() {
+      const grid = document.getElementById('mustEatHeroGrid');
+      if (!grid) return;
+      const mustFoods = allFoods.filter(f => f.must).slice(0, 6);
+      if (!mustFoods.length) return;
+
+      grid.innerHTML = mustFoods.map((food, i) => {
+        const rankClass = i === 0 ? 'rank-1' : i === 1 ? 'rank-2' : i === 2 ? 'rank-3' : 'rank-other';
+        const shop = food.shops?.[0];
+        return '<div class="must-eat-hero-card" data-food-id="' + food.id + '">' +
+          '<div class="rank-badge ' + rankClass + '">' + (i + 1) + '</div>' +
+          '<img class="must-eat-hero-card-img" src="' + food.img + '" alt="' + food.name + '" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
+          '<div class="must-eat-hero-card-body">' +
+            '<div class="must-eat-hero-card-name">' + food.name + '</div>' +
+            '<div class="must-eat-hero-card-meta">' +
+              '<span class="must-eat-hero-card-price">💰 ' + (shop?.avg || '') + '</span>' +
+              '<span>📍 ' + (shop?.name || '') + '</span>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    // ═══════════════════════════════════════════
+    //  美食详情弹窗
+    // ═══════════════════════════════════════════
+    function showFoodDetail(foodId) {
+      const food = allFoods.find(f => f.id === foodId);
+      if (!food) return;
+
+      const overlay = document.getElementById('foodDetailOverlay');
+      const content = document.getElementById('foodDetailContent');
+      const catLabel = food.cat === 'lucai' ? '鲁菜经典' : food.cat === 'xiaochi' ? '市井小吃' : food.cat === 'laozihao' ? '老字号' : food.cat === 'zaocan' ? '早餐' : food.cat === 'yexiao' ? '夜宵' : food.cat === 'yinpin' ? '饮品' : food.cat;
+      const seasonLabel = getSeasonLabel(food.season) || food.season || '';
+
+      let shopsHtml = '';
+      if (food.shops && food.shops.length) {
+        shopsHtml = food.shops.map(sh => {
+          let extras = '';
+          if (sh.wifi) extras += '<span>📶 WiFi</span>';
+          if (sh.privateRoom && sh.privateRoom !== '无') extras += '<span>🚪 ' + sh.privateRoom + '</span>';
+          if (sh.parking) extras += '<span>🅿️ 停车</span>';
+          if (sh.bestTime) extras += '<span>⏰ ' + sh.bestTime + '</span>';
+
+          return '<div class="detail-shop-card">' +
+            '<div class="detail-shop-header">' +
+              '<div class="detail-shop-name">' + sh.name + '</div>' +
+              '<div class="detail-shop-rating">' + stars(sh.rating) + ' ' + sh.rating + '</div>' +
+            '</div>' +
+            '<div class="detail-shop-info">' +
+              '<span>💰 人均 ' + sh.avg + '</span>' +
+              '<span>📍 ' + (sh.addr || '') + '</span>' +
+              (sh.hours ? '<span>🕐 ' + sh.hours + '</span>' : '') +
+            '</div>' +
+            (extras ? '<div class="detail-shop-extras">' + extras + '</div>' : '') +
+            (sh.bestDish ? '<div class="detail-shop-dish">🍽️ 推荐：' + sh.bestDish + '</div>' : '') +
+            (sh.wait ? '<div class="detail-shop-dish">⏳ 等位：' + sh.wait + '</div>' : '') +
+          '</div>';
+        }).join('');
+      }
+
+      content.innerHTML =
+        '<div class="food-detail-hero">' +
+          '<img src="' + food.img + '" alt="' + food.name + '" onerror="this.onerror=null;this.src=imgFallback(this.alt)">' +
+          '<div class="detail-badges">' +
+            (food.must ? '<span class="detail-badge detail-badge-must">🔥 必吃</span>' : '') +
+            '<span class="detail-badge detail-badge-cat">' + catLabel + '</span>' +
+            (seasonLabel ? '<span class="detail-badge detail-badge-season">' + seasonLabel + '</span>' : '') +
+          '</div>' +
+        '</div>' +
+        '<div class="food-detail-content">' +
+          '<div class="food-detail-title">' + food.name + '</div>' +
+          '<div class="food-detail-tagline">' + food.tag + '</div>' +
+          '<div class="food-detail-desc">' + food.desc + '</div>' +
+          (food.history ? '<div class="food-detail-section"><div class="food-detail-section-title">📜 历史典故</div><div class="food-detail-history">' + food.history + '</div></div>' : '') +
+          (food.season ? '<div class="food-detail-section"><div class="food-detail-section-title">📅 最佳季节</div><div class="food-detail-tips">' + food.season + '</div></div>' : '') +
+          (food.tips ? '<div class="food-detail-section"><div class="food-detail-section-title">💡 实用 Tips</div><div class="food-detail-tips">' + food.tips + '</div></div>' : '') +
+          (shopsHtml ? '<div class="food-detail-section"><div class="food-detail-section-title">🏪 推荐餐厅 (' + food.shops.length + '家)</div><div class="food-detail-shops">' + shopsHtml + '</div></div>' : '') +
+        '</div>';
+
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // 关闭详情弹窗
+    document.getElementById('foodDetailClose').addEventListener('click', () => {
+      document.getElementById('foodDetailOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    });
+    document.getElementById('foodDetailOverlay').addEventListener('click', e => {
+      if (e.target === document.getElementById('foodDetailOverlay')) {
+        document.getElementById('foodDetailOverlay').classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // ═══════════════════════════════════════════
+    //  分类筛选胶囊渲染
+    // ═══════════════════════════════════════════
+    function renderCategoryCapsules() {
+      const container = document.getElementById('foodTabs');
+      if (!container) return;
+
+      // 从 food.json 的 categories 动态生成
+      const cats = [{ id: '全部', name: '全部', icon: '🍽️' }, ...allCategories];
+      container.innerHTML = cats.map(cat =>
+        '<button class="category-capsule' + (cat.id === '全部' && currentCat === '全部' ? ' active' : (currentCat === cat.id ? ' active' : '')) + '" data-cat="' + cat.id + '">' +
+          '<span class="capsule-icon">' + cat.icon + '</span>' +
+          '<span>' + cat.name + '</span>' +
+        '</button>'
+      ).join('');
+
+      container.addEventListener('click', e => {
+        const btn = e.target.closest('.category-capsule');
+        if (!btn) return;
+        container.querySelectorAll('.category-capsule').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCat = btn.dataset.cat;
+        renderFoods();
+      });
+    }
+
+
+    // 初始化必吃榜Hero
+    // (loadFoods内部已调用renderMustEatHero)
 
     loadFoods();
   </script>

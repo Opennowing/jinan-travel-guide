@@ -186,6 +186,166 @@
     .ticket-btn{padding:4px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.7rem;cursor:pointer;transition:all .3s;color:var(--text3)}
     .ticket-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.1)}
     .ticket-btn.active{border-color:var(--accent);background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(201,169,110,.25)}
+
+    /* ── 筛选区折叠 ── */
+    .filter-collapsible {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.3s ease;
+      opacity: 0;
+      padding: 0 0;
+    }
+    .filter-collapsible.expanded {
+      max-height: 500px;
+      opacity: 1;
+      padding: 8px 0 0 0;
+    }
+    .more-filters-btn {
+      padding: 6px 16px;
+      border: 1px solid var(--border2);
+      background: var(--bg);
+      border-radius: 100px;
+      font-size: .75rem;
+      cursor: pointer;
+      transition: all .3s;
+      color: var(--text3);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+    .more-filters-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(201,169,110,.08);
+    }
+    .more-filters-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(201,169,110,.1);
+    }
+    .more-filters-btn .arrow {
+      display: inline-block;
+      transition: transform .3s;
+      font-size: .6rem;
+    }
+    .more-filters-btn.active .arrow {
+      transform: rotate(180deg);
+    }
+    .filter-active-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 100px;
+      font-size: .6rem;
+      font-weight: 700;
+      transition: all .3s;
+    }
+    .audience-btn, .area-btn, .ticket-btn, .duration-btn, .filter-btn {
+      transition: all .25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .audience-btn:active, .area-btn:active, .ticket-btn:active, .duration-btn:active, .filter-btn:active {
+      transform: scale(0.92);
+    }
+    .audience-btn.active, .area-btn.active, .ticket-btn.active, .duration-btn.active {
+      transform: scale(1);
+    }
+    .filter-core-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    /* ── 地图 Marker 弹出窗口增强 ── */
+    .map-popup-img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px 8px 0 0;
+      display: block;
+    }
+    .map-popup-body {
+      padding: 8px 10px;
+    }
+    .map-popup-name {
+      font-weight: 700;
+      font-size: 13px;
+      color: #1a1a1a;
+      margin-bottom: 2px;
+    }
+    .map-popup-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #666;
+    }
+    .map-popup-rating {
+      color: #f59e0b;
+      font-weight: 600;
+    }
+    .map-popup-container {
+      width: 220px;
+      padding: 0;
+      overflow: hidden;
+    }
+    .leaflet-popup-content-wrapper {
+      padding: 0 !important;
+      border-radius: 10px !important;
+      overflow: hidden;
+    }
+    .leaflet-popup-content {
+      margin: 0 !important;
+      width: auto !important;
+    }
+    /* ── 景点卡片高亮 ── */
+    .card.highlighted {
+      box-shadow: 0 0 0 3px var(--accent), 0 8px 32px rgba(201,169,110,.3) !important;
+      transform: translateY(-4px);
+      transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .card.highlighted .card-img::after {
+      content: '\1F4CD';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      z-index: 10;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,.3));
+      animation: bounce-marker 0.6s ease;
+    }
+    @keyframes bounce-marker {
+      0% { transform: translate(-50%, -50%) scale(0); }
+      50% { transform: translate(-50%, -50%) scale(1.3); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+    .filter-bottom-row {
+      border-top: 1px solid var(--border2);
+      padding-top: 12px;
+      margin-top: 4px;
+    }
+    @media(max-width:768px){
+      .filter-core-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .filter-collapsible.expanded {
+        max-height: 600px;
+      }
+      .map-popup-container {
+        width: 180px;
+      }
+      .map-popup-img {
+        height: 80px;
+      }
+    }
+
     /* ── 当季推荐标签 ── */
     .seasonal-rec-tag{position:absolute;bottom:12px;left:12px;z-index:2;background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;padding:3px 10px;border-radius:100px;font-size:.65rem;font-weight:600;backdrop-filter:blur(4px);pointer-events:none}
     /* ── 拥挤度指示器 ── */
@@ -219,6 +379,402 @@
     .modal-tag-item.cat-tag { background: rgba(42,157,143,.08); color: var(--teal); border-color: rgba(42,157,143,.2); }
     .modal-tag-item.aud-tag { background: rgba(201,169,110,.08); color: var(--accent); border-color: rgba(201,169,110,.2); }
     .modal-tag-item.badge-tag { background: rgba(233,69,96,.08); color: #e94560; border-color: rgba(233,69,96,.2); }
+
+/* ══════════════════════════════════════
+   AIRBNB-STYLE SPOT CARD REDESIGN
+   ══════════════════════════════════════ */
+
+/* ── Card Grid Responsive ── */
+@media(max-width:520px){
+  .card-grid{grid-template-columns:1fr!important}
+}
+
+/* ── Card Base (Airbnb style) ── */
+.card.airbnb-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  overflow: hidden;
+  transition: transform .35s cubic-bezier(.23,1,.32,1), box-shadow .35s cubic-bezier(.23,1,.32,1);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 2px rgba(0,0,0,.06);
+}
+.card.airbnb-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.12), 0 4px 10px rgba(0,0,0,.06);
+  border-color: rgba(201,169,110,.15);
+}
+
+/* ── Image Area (4:3) ── */
+.card.airbnb-card .card-img {
+  aspect-ratio: 4/3;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: var(--bg3);
+}
+.card.airbnb-card .card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .5s cubic-bezier(.23,1,.32,1);
+  opacity: 0;
+}
+.card.airbnb-card .card-img img.img-loaded {
+  opacity: 1;
+}
+.card.airbnb-card:hover .card-img img {
+  transform: scale(1.05);
+}
+
+/* ── Gradient Overlay ── */
+.card.airbnb-card .card-img .img-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0,0,0,.65) 0%, rgba(0,0,0,.25) 50%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Spot Name on Image ── */
+.card.airbnb-card .card-img .img-spot-name {
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  right: 14px;
+  z-index: 2;
+  color: #fff;
+  font: 700 1.05rem/1.3 var(--serif);
+  text-shadow: 0 1px 4px rgba(0,0,0,.4);
+  pointer-events: none;
+}
+
+/* ── Badge (top-left) ── */
+.card.airbnb-card .spot-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+}
+
+/* ── Favorite Button (top-right, Airbnb style) ── */
+.card.airbnb-card .card-fav-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: all .25s cubic-bezier(.23,1,.32,1);
+  background: none;
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,.3));
+  opacity: 0;
+  transform: scale(.8);
+  padding: 0;
+  line-height: 1;
+}
+.card.airbnb-card:hover .card-fav-btn,
+.card.airbnb-card .card-fav-btn.faved {
+  opacity: 1;
+  transform: scale(1);
+}
+@media(hover:none){
+  .card.airbnb-card .card-fav-btn{opacity:1;transform:scale(1)}
+}
+.card.airbnb-card .card-fav-btn:hover {
+  transform: scale(1.2);
+}
+.card.airbnb-card .card-fav-btn .heart {
+  font-size: 1.25rem;
+  transition: all .25s;
+}
+.card.airbnb-card .card-fav-btn .heart-outline {
+  color: #fff;
+  text-shadow: 0 1px 6px rgba(0,0,0,.4);
+}
+.card.airbnb-card .card-fav-btn .heart-filled {
+  color: #ff385c;
+  filter: drop-shadow(0 1px 4px rgba(255,56,92,.4));
+}
+
+/* ── Heart Beat Animation ── */
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  15% { transform: scale(1.35); }
+  30% { transform: scale(.9); }
+  45% { transform: scale(1.2); }
+  60% { transform: scale(.95); }
+  100% { transform: scale(1); }
+}
+.card.airbnb-card .card-fav-btn.heart-anim .heart {
+  animation: heartBeat .6s cubic-bezier(.23,1,.32,1);
+}
+
+/* ── Card Body ── */
+.card.airbnb-card .card-body {
+  padding: 14px 16px 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── Name + Category Tag ── */
+.card.airbnb-card .card-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.card.airbnb-card .card-name {
+  font: 700 .95rem/1.3 var(--serif);
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+.card.airbnb-card .card-cat-tag {
+  font-size: .65rem;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: rgba(42,157,143,.08);
+  color: var(--teal);
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Rating + Reviews + Duration ── */
+.card.airbnb-card .card-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .78rem;
+  color: var(--text2);
+  flex-wrap: wrap;
+}
+.card.airbnb-card .card-rating-row .rating-star {
+  color: #f59e0b;
+  font-weight: 700;
+}
+.card.airbnb-card .card-rating-row .rating-num {
+  font-weight: 700;
+  color: var(--text);
+}
+.card.airbnb-card .card-rating-row .rating-reviews {
+  color: var(--text3);
+}
+.card.airbnb-card .card-rating-row .rating-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--text3);
+  opacity: .5;
+}
+
+/* ── Price ── */
+.card.airbnb-card .card-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-top: 2px;
+}
+.card.airbnb-card .price-current {
+  font: 700 .9rem/1 var(--serif);
+}
+.card.airbnb-card .price-free {
+  color: #22c55e;
+}
+.card.airbnb-card .price-paid {
+  color: var(--text);
+}
+.card.airbnb-card .price-old {
+  font-size: .75rem;
+  color: var(--text3);
+  text-decoration: line-through;
+  font-weight: 400;
+}
+.card.airbnb-card .price-unit {
+  font-size: .72rem;
+  color: var(--text3);
+}
+
+/* ── Description (2 lines) ── */
+.card.airbnb-card .card-desc {
+  font-size: .82rem;
+  color: var(--text2);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+/* ── Bottom: Transport + Detail Button ── */
+.card.airbnb-card .card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.card.airbnb-card .card-transport {
+  font-size: .7rem;
+  color: var(--text3);
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card.airbnb-card .card-detail-btn {
+  font-size: .72rem;
+  font-weight: 600;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  background: none;
+  padding: 4px 12px;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all .25s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.card.airbnb-card .card-detail-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* ── Sort Header (Airbnb style) ── */
+.sort-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.sort-header .sort-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sort-header .spot-count-label {
+  font-size: .82rem;
+  color: var(--text2);
+}
+.sort-header .spot-count-label strong {
+  color: var(--text);
+  font-weight: 700;
+  font-size: .9rem;
+}
+.sort-header .sort-pills {
+  display: flex;
+  gap: 4px;
+  background: var(--bg2);
+  padding: 4px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+}
+.sort-header .sort-pill {
+  padding: 6px 14px;
+  border: none;
+  background: none;
+  border-radius: 100px;
+  font-size: .75rem;
+  font-weight: 500;
+  color: var(--text3);
+  cursor: pointer;
+  transition: all .25s;
+  white-space: nowrap;
+}
+.sort-header .sort-pill:hover {
+  color: var(--text);
+  background: var(--bg);
+}
+.sort-header .sort-pill.active {
+  color: #fff;
+  background: var(--accent);
+  box-shadow: 0 2px 8px rgba(201,169,110,.25);
+}
+
+/* ── Skeleton Cards (Airbnb style) ── */
+.skeleton-spot-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+}
+.skeleton-spot-card .skel-img {
+  aspect-ratio: 4/3;
+  background: var(--bg3);
+  animation: skeletonPulse 1.8s ease-in-out infinite;
+}
+.skeleton-spot-card .skel-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.skeleton-spot-card .skel-line {
+  height: 14px;
+  border-radius: 6px;
+  background: var(--bg3);
+  animation: skeletonPulse 1.8s ease-in-out infinite;
+}
+.skeleton-spot-card .skel-line.w60 { width: 60%; }
+.skeleton-spot-card .skel-line.w40 { width: 40%; }
+.skeleton-spot-card .skel-line.w80 { width: 80%; }
+.skeleton-spot-card .skel-line.w100 { width: 100%; }
+.skeleton-spot-card .skel-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.skeleton-spot-card .skel-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg3);
+  animation: skeletonPulse 1.8s ease-in-out infinite;
+}
+.skeleton-spot-card .skel-pill {
+  height: 22px;
+  width: 48px;
+  border-radius: 100px;
+  background: var(--bg3);
+  animation: skeletonPulse 1.8s ease-in-out infinite;
+}
+
+/* ── Filter container spacing fix ── */
+.filter-container { margin-bottom: 16px; }
+
+/* ── Dark mode adjustments ── */
+html.dark .card.airbnb-card:hover {
+  box-shadow: 0 12px 28px rgba(0,0,0,.25), 0 4px 10px rgba(0,0,0,.15);
+  border-color: rgba(212,168,83,.15);
+}
+html.dark .card.airbnb-card .card-fav-btn .heart-outline {
+  text-shadow: 0 1px 6px rgba(0,0,0,.6);
+}
   </style>
 </head>
 <body>
@@ -284,6 +840,13 @@
             </select>
           </div>
         </div>
+        <div class="filter-core-row" style="margin-top:8px">
+          <button class="more-filters-btn" id="moreFiltersBtn" aria-expanded="false" aria-controls="collapsibleFilters">
+            🔍 更多筛选 <span class="arrow">▼</span>
+            <span class="filter-active-badge" id="filterActiveBadge" style="display:none">0</span>
+          </button>
+        </div>
+        <div class="filter-collapsible" id="collapsibleFilters">
         <div class="audience-bar" id="audienceFilters" role="group" aria-label="人群筛选">
           <span class="filter-group-label">👥 人群</span>
           <button class="audience-btn active" data-aud="all">全部</button>
@@ -317,6 +880,7 @@
           <button class="duration-btn" data-dur="half">半天</button>
           <button class="duration-btn" data-dur="full">全天</button>
         </div>
+        </div><!-- end filter-collapsible -->
         <div class="filter-bottom-row">
           <div style="display:flex;align-items:center;gap:12px">
             <span class="count-badge" id="spotCount"></span>
@@ -352,6 +916,17 @@
         <div class="eyebrow">全部景点</div>
         <h2>探索泉城</h2>
         <p>精选80+景点，发现济南之美</p>
+      </div>
+      <div class="sort-header" id="sortHeader">
+        <div class="sort-left">
+          <span class="spot-count-label" id="spotCountLabel">共 <strong>0</strong> 个景点</span>
+        </div>
+        <div class="sort-pills" id="sortPills">
+          <button class="sort-pill active" data-sort="recommend">综合推荐</button>
+          <button class="sort-pill" data-sort="rating">评分最高</button>
+          <button class="sort-pill" data-sort="price">价格最低</button>
+          <button class="sort-pill" data-sort="reviews">评价最多</button>
+        </div>
       </div>
       <div class="card-grid" id="spotGrid"></div>
       <div class="empty-state" id="emptyState" style="display:none">
@@ -515,17 +1090,34 @@
       setTimeout(() => t.classList.remove('show'), 2000);
     }
 
+    function showSkeletonCards() {
+      const grid = document.getElementById("spotGrid");
+      let html = "";
+      for (let i = 0; i < 8; i++) {
+        html += `<div class="skeleton-spot-card">
+          <div class="skel-img"></div>
+          <div class="skel-body">
+            <div class="skel-row"><div class="skel-line w60"></div><div class="skel-pill"></div></div>
+            <div class="skel-row"><div class="skel-circle"></div><div class="skel-line w40"></div><div class="skel-circle"></div><div class="skel-line w40"></div></div>
+            <div class="skel-line w80"></div>
+            <div class="skel-line w100"></div>
+          </div>
+        </div>`;
+      }
+      grid.innerHTML = html;
+    }
+
     async function loadSpots() {
+      showSkeletonCards();
       try {
-        const res = await fetch('/jinan-travel-guide/data/spots.json');
+        const res = await fetch("/jinan-travel-guide/data/spots.json");
         allSpots = await res.json();
         render();
       } catch (e) {
-        console.error('加载景点数据失败:', e);
-        document.getElementById('spotGrid').innerHTML = '<div class="empty-state"><div class="emoji">😢</div><p>数据加载失败</p></div>';
+        console.error("加载景点数据失败:", e);
+        document.getElementById("spotGrid").innerHTML = '<div class="empty-state"><div class="emoji">😢</div><p>数据加载失败</p></div>';
       }
     }
-
     function getFiltered() {
       let list = [...allSpots];
       if (activeCat !== 'all') list = list.filter(s => s.cat === activeCat);
@@ -830,7 +1422,17 @@
       document.querySelectorAll('#audienceFilters .audience-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active'); activeAud = btn.dataset.aud; render();
     });
-    document.getElementById('sortSelect').addEventListener('change', e => { sortBy = e.target.value; render(); });
+    document.getElementById("sortSelect").addEventListener("change", e => { sortBy = e.target.value; document.querySelectorAll("#sortPills .sort-pill").forEach(p => p.classList.toggle("active", p.dataset.sort === sortBy)); render(); });
+    // Sort pills (Airbnb-style)
+    document.getElementById("sortPills")?.addEventListener("click", e => {
+      const pill = e.target.closest(".sort-pill");
+      if (!pill) return;
+      document.querySelectorAll("#sortPills .sort-pill").forEach(p => p.classList.remove("active"));
+      pill.classList.add("active");
+      sortBy = pill.dataset.sort;
+      document.getElementById("sortSelect").value = sortBy;
+      render();
+    });
     document.getElementById('areaFilters').addEventListener('click', e => {
       const btn = e.target.closest('.area-btn'); if(!btn) return;
       document.querySelectorAll('#areaFilters .area-btn').forEach(b => b.classList.remove('active'));
@@ -875,6 +1477,10 @@
       // Reset sort
       sortBy = 'recommend';
       document.getElementById('sortSelect').value = 'recommend';
+      document.querySelectorAll('#sortPills .sort-pill').forEach(p => p.classList.toggle('active', p.dataset.sort === 'recommend'));
+      collapsibleFilters?.classList.remove('expanded');
+      moreFiltersBtn?.classList.remove('active');
+      if (typeof updateFilterBadge === 'function') updateFilterBadge();
       render();
       showToast('已重置所有筛选条件');
     });
@@ -1110,6 +1716,8 @@
 
     // ── Patch render() to include fav/compare buttons ──
     const _origRender = render;
+    const catLabels = {spring:'⛲ 泉水',nature:'🌿 自然',history:'🏛️ 历史',food:'🍜 美食街',culture:'🎭 文化',family:'👨👩👧 亲子',landmark:'🏛️ 地标',amusement:'🎡 游乐'};
+
     render = function() {
       const list = getFiltered();
       const favs = getFavs();
@@ -1119,6 +1727,8 @@
 
       const grid = document.getElementById('spotGrid');
       const empty = document.getElementById('emptyState');
+      const countLabel = document.getElementById('spotCountLabel');
+      if (countLabel) countLabel.innerHTML = `共 <strong>${filteredList.length}</strong> 个景点`;
       animateCount('spotCount', filteredList.length);
       const itineraries = JSON.parse(localStorage.getItem('jinan-itinerary') || '[]');
 
@@ -1132,36 +1742,42 @@
       empty.style.display = 'none';
 
       grid.innerHTML = filteredList.map(s => {
-        const inIt = itineraries.includes(s.id);
         const isFav = favs.includes(s.id);
         const isComp = compareList.includes(s.id);
-        const priceHtml = s.price === 0 ? '<span class="free-tag">免费</span>' : `¥${s.price}`;
+        const inIt = itineraries.includes(s.id);
+        const catLabel = catLabels[s.cat] || s.cat;
+        const transportShort = s.transport ? s.transport.slice(0, 24) : '';
+        const priceHtml = s.price === 0
+          ? '<span class="price-current price-free">免费</span>'
+          : `<span class="price-current price-paid">¥${s.price}</span>${s.priceOld ? '<span class="price-old">¥'+s.priceOld+'</span>' : ''}<span class="price-unit">/人</span>`;
         return `
-          <article class="card rv" data-id="${s.id}">
+          <article class="card airbnb-card rv" data-id="${s.id}">
             <div class="card-img">
               <img src="${s.img}" alt="${s.name}" loading="lazy" onload="this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')" onerror="this.onerror=null;this.src=imgFallback(this.alt);this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')">
+              <div class="img-gradient"></div>
+              <div class="img-spot-name">${s.name}</div>
               <span class="spot-badge badge ${s.badge}">${badgeLabels[s.badge] || s.badge}</span>
-              <button class="card-fav-btn ${isFav?'faved':''}" data-id="${s.id}" title="收藏">${isFav?'❤️':'🤍'}</button>
-              <span class="spot-price">${priceHtml}</span>
-              ${isSeasonalRecommended(s) ? '<span class="seasonal-rec-tag">🌟 当季推荐</span>' : ''}
+              <button class="card-fav-btn ${isFav?'faved':''}" data-id="${s.id}" title="${isFav?'取消收藏':'收藏'}">
+                <span class="heart ${isFav?'heart-filled':'heart-outline'}">${isFav?'♥':'♡'}</span>
+              </button>
             </div>
             <div class="card-body">
-              <h3>${s.name} <span class="card-stars">${stars(s.rating)} ${s.rating}</span></h3>
-              <p class="desc">${s.desc}</p>
-              <div class="card-info">
-                <span class="info-item">⏱ ${s.dur}</span>
-                <span class="info-dot"></span>
-                <span class="info-item">💬 ${s.reviews}条</span>
-                <span class="info-dot"></span>
-                <span class="info-item">${s.price === 0 ? '🆓 免费' : '¥' + s.price + '/人'}</span>
-                <span class="info-dot"></span>
-                <span class="info-item">📍 ${getArea(s)}</span>
+              <div class="card-name-row">
+                <span class="card-name">${s.name}</span>
+                <span class="card-cat-tag">${catLabel}</span>
               </div>
-              <div class="card-tags">${s.audience.map(a => `<span class="tag">${audienceLabels[a]||a}</span>`).join('')}</div>
-              <div class="card-actions">
-                <a href="${getCtripLink(s.name)}" target="_blank" rel="noopener" class="btn btn-sm btn-outline" style="color:#2681ff;border-color:#2681ff" onclick="event.stopPropagation()">🐬 订票</a>
-                <button class="btn btn-sm ${inIt?'btn-outline':'btn-primary'} add-trip" data-id="${s.id}" ${inIt?'disabled':''}>${inIt?'✓ 已加入':'＋ 行程'}</button>
-                <button class="card-action-icon compare-trigger ${isComp?'active':''}" data-id="${s.id}" title="对比">${isComp?'✓ 已对比':'⚖️ 对比'}</button>
+              <div class="card-rating-row">
+                <span class="rating-star">★</span>
+                <span class="rating-num">${s.rating}</span>
+                <span class="rating-reviews">(${s.reviews}条)</span>
+                <span class="rating-dot"></span>
+                <span>${s.dur}</span>
+              </div>
+              <div class="card-price-row">${priceHtml}</div>
+              <p class="card-desc">${s.desc}</p>
+              <div class="card-bottom">
+                <span class="card-transport">${transportShort ? '🚌 '+transportShort : ''}</span>
+                <button class="card-detail-btn" data-id="${s.id}">查看详情</button>
               </div>
             </div>
           </article>`;
@@ -1171,25 +1787,16 @@
       initRevealObserver();
 
       // Card click → Quick View
-      document.querySelectorAll('.card').forEach(card => {
+      document.querySelectorAll('.card.airbnb-card').forEach(card => {
         card.addEventListener('click', e => {
-          if (e.target.closest('.add-trip') || e.target.closest('.detail-btn') || e.target.closest('.card-fav-btn') || e.target.closest('.card-action-icon')) return;
+          if (e.target.closest('.card-fav-btn') || e.target.closest('.card-detail-btn') || e.target.closest('.card-action-icon')) return;
           const s = allSpots.find(x => x.id === card.dataset.id);
           if (s) openQuickView(s);
         });
       });
 
-      // Add trip
-      document.querySelectorAll('.add-trip:not([disabled])').forEach(btn => {
-        btn.addEventListener('click', e => {
-          e.stopPropagation();
-          addToTrip(btn.dataset.id);
-          btn.textContent = '✓ 已加入'; btn.classList.remove('btn-primary'); btn.classList.add('btn-outline'); btn.disabled = true;
-        });
-      });
-
-      // Detail
-      document.querySelectorAll('.detail-btn').forEach(btn => {
+      // Detail buttons
+      document.querySelectorAll('.card-detail-btn').forEach(btn => {
         btn.addEventListener('click', e => {
           e.stopPropagation();
           const s = allSpots.find(x => x.id === btn.dataset.id);
@@ -1197,26 +1804,32 @@
         });
       });
 
-      // Fav buttons
+      // Fav buttons with heart animation
       document.querySelectorAll('.card-fav-btn').forEach(btn => {
-        btn.addEventListener('click', e => { e.stopPropagation(); toggleFav(btn.dataset.id); });
+        btn.addEventListener("click", e => {
+          e.stopPropagation();
+          const id = btn.dataset.id;
+          let currentFavs = getFavs();
+          if (currentFavs.includes(id)) {
+            currentFavs = currentFavs.filter(f => f !== id);
+            localStorage.setItem("jinan-favs", JSON.stringify(currentFavs));
+            updateFavCount();
+            showToast("💔 已取消收藏");
+          } else {
+            currentFavs.push(id);
+            localStorage.setItem("jinan-favs", JSON.stringify(currentFavs));
+            updateFavCount();
+            showToast("❤️ 已收藏");
+          }
+          render();
+        });
       });
 
       // Compare buttons
       document.querySelectorAll('.compare-trigger').forEach(btn => {
         btn.addEventListener('click', e => { e.stopPropagation(); toggleCompare(btn.dataset.id); });
       });
-
-      // Quickview buttons
-      document.querySelectorAll('.quickview-trigger').forEach(btn => {
-        btn.addEventListener('click', e => {
-          e.stopPropagation();
-          const s = allSpots.find(x => x.id === btn.dataset.id);
-          if (s) openQuickView(s);
-        });
-      });
     };
-
     // ── Patch openQuickView to add TTS button ──
     const _origOpenQuickView = openQuickView;
     openQuickView = function(s) {
@@ -1409,6 +2022,16 @@
       if (bounds.length) leafletMap.fitBounds(bounds, { padding: [30, 30] });
     }
 
+    function getMapPopupImg(s) {
+      const imgSrc = s.img || '';
+      const name = s.name || '济南';
+      const colors = [['#c9a96e','#e8dcc8'],['#2a9d8f','#d4f1ed'],['#e76f51','#fce4de'],['#8b5cf6','#ede9fe'],['#3b82f6','#dbeafe']];
+      const ci = Math.abs([...name].reduce((a,c)=>a+c.charCodeAt(0),0)) % colors.length;
+      const [bg,fg] = colors[ci];
+      const fb = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="220" height="100"><rect fill="' + bg + '" width="220" height="100"/><text x="110" y="45" text-anchor="middle" font-size="24">🏔️</text><text x="110" y="70" text-anchor="middle" fill="' + fg + '" font-size="11" font-family="sans-serif">' + name + '</text></svg>');
+      return '<img class="map-popup-img" src="' + imgSrc + '" alt="' + name + '" onerror="this.onerror=null;this.src=\'' + fb + '\'" loading="lazy">';
+    }
+
     function renderMapMarkers(filterCat) {
       if (!mapMarkerGroup || !leafletMap) return;
       mapMarkerGroup.clearLayers();
@@ -1418,23 +2041,56 @@
         const color = catColors[s.cat] || '#c9a96e';
         const icon = L.divIcon({
           className: 'leaflet-div-icon custom-marker',
-          html: `<div style="background:${color};color:#fff;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.25);cursor:pointer;border:2px solid #fff">${s.name}</div>`,
+          html: `<div style="background:${color};color:#fff;padding:3px 8px;border-radius:6px;font-size:11px;font-weight:600;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.25);cursor:pointer;border:2px solid #fff;transition:transform .2s">${s.name}</div>`,
           iconSize: [0, 0],
           iconAnchor: [0, 0]
         });
         const marker = L.marker([s.lat, s.lng], { icon });
-        marker.bindPopup(`<b>${s.name}</b><br>${s.desc.slice(0, 60)}…`);
-        marker.on('click', () => openQuickView(s));
+        const ratingStars = '★'.repeat(Math.floor(s.rating)) + '☆'.repeat(5 - Math.floor(s.rating));
+        const priceStr = s.price === 0 ? '<span style="color:#22c55e;font-weight:600">免费</span>' : '¥' + s.price;
+        const popupHtml = '<div class="map-popup-container">' +
+          getMapPopupImg(s) +
+          '<div class="map-popup-body">' +
+            '<div class="map-popup-name">' + s.name + '</div>' +
+            '<div class="map-popup-meta">' +
+              '<span class="map-popup-rating">' + ratingStars + ' ' + s.rating + '</span>' +
+              '<span>·</span>' +
+              '<span>' + priceStr + '</span>' +
+              '<span>·</span>' +
+              '<span>⏱' + s.dur + '</span>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+        marker.bindPopup(popupHtml, { maxWidth: 240, closeButton: true });
+        marker.on('click', () => { highlightCard(s.id); });
         mapMarkerGroup.addLayer(marker);
       });
     }
 
-    // Map legend filter buttons
+    function highlightCard(spotId) {
+      document.querySelectorAll('.card.highlighted').forEach(c => c.classList.remove('highlighted'));
+      const card = document.querySelector('.card[data-id="' + spotId + '"]');
+      if (card) {
+        card.classList.add('highlighted');
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => card.classList.remove('highlighted'), 3000);
+      }
+    }
+
+    // Map legend filter buttons - sync with main filter
     document.querySelectorAll('.map-legend-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.map-legend-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        renderMapMarkers(btn.dataset.mapCat);
+        const cat = btn.dataset.mapCat;
+        renderMapMarkers(cat);
+        if (cat !== 'all') {
+          activeCat = cat;
+          document.querySelectorAll('#catFilters .filter-btn').forEach(b => b.classList.remove('active'));
+          const catBtn = document.querySelector('#catFilters .filter-btn[data-cat="' + cat + '"]');
+          if (catBtn) catBtn.classList.add('active');
+          render();
+        }
       });
     });
 
@@ -1461,6 +2117,46 @@
       }, { enableHighAccuracy: true, timeout: 10000 });
     });
 
+
+    // ── Filter Collapse Toggle ──
+    const moreFiltersBtn = document.getElementById('moreFiltersBtn');
+    const collapsibleFilters = document.getElementById('collapsibleFilters');
+    const filterActiveBadge = document.getElementById('filterActiveBadge');
+
+    function countActiveFilters() {
+      let count = 0;
+      if (activeAud !== 'all') count++;
+      if (activeArea !== 'all') count++;
+      if (activeTicket !== 'all') count++;
+      if (activeDur !== 'all') count++;
+      return count;
+    }
+
+    function updateFilterBadge() {
+      const count = countActiveFilters();
+      if (count > 0) {
+        filterActiveBadge.style.display = 'inline-flex';
+        filterActiveBadge.textContent = count;
+      } else {
+        filterActiveBadge.style.display = 'none';
+      }
+    }
+
+    moreFiltersBtn?.addEventListener('click', () => {
+      const isExpanded = collapsibleFilters.classList.toggle('expanded');
+      moreFiltersBtn.classList.toggle('active', isExpanded);
+      moreFiltersBtn.setAttribute('aria-expanded', isExpanded);
+      const arrow = moreFiltersBtn.querySelector('.arrow');
+      if (arrow) arrow.textContent = isExpanded ? '▲' : '▼';
+    });
+
+    ['audienceFilters','areaFilters','ticketFilters','durationFilters'].forEach(id => {
+      document.getElementById(id)?.addEventListener('click', () => {
+        setTimeout(updateFilterBadge, 10);
+      });
+    });
+
+    
     // Load Leaflet JS
     const leafletScript = document.createElement('script');
     leafletScript.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';

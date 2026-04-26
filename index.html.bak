@@ -311,78 +311,6 @@
       .nav-links.mob-open a.active{background:var(--accent);color:#fff}
       .top-nav .logo .logo-sub{display:none}
     }
-
-    /* ══════════════════════════════════════════
-       🎯 今日推荐 · 轮播卡片
-    ══════════════════════════════════════════ */
-    .recommend-carousel{position:relative;overflow:hidden;border-radius:var(--radius-lg)}
-    .recommend-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1)}
-    .recommend-slide{min-width:100%;position:relative;cursor:pointer}
-    .recommend-slide img{width:100%;height:320px;object-fit:cover;display:block;filter:brightness(.65) saturate(1.2);transition:filter .4s}
-    .recommend-slide:hover img{filter:brightness(.75) saturate(1.3)}
-    .recommend-slide .slide-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:32px;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,rgba(0,0,0,.1) 60%,transparent 100%)}
-    .recommend-slide .slide-badge{position:absolute;top:20px;left:20px;font-size:.7rem;font-weight:700;letter-spacing:.08em;padding:5px 14px;border-radius:100px;background:rgba(201,169,110,.9);color:#fff;backdrop-filter:blur(6px)}
-    .recommend-slide .slide-stars{font-size:.85rem;color:#f59e0b;margin-bottom:6px}
-    .recommend-slide .slide-name{font:800 clamp(1.4rem,3vw,2rem)/1.2 var(--serif);color:#fff;margin-bottom:6px;text-shadow:0 2px 12px rgba(0,0,0,.4)}
-    .recommend-slide .slide-desc{font-size:.9rem;color:rgba(255,255,255,.8);line-height:1.5;max-width:560px;margin-bottom:10px}
-    .recommend-slide .slide-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-    .recommend-slide .slide-meta span{font-size:.78rem;color:rgba(255,255,255,.65);background:rgba(255,255,255,.08);padding:4px 12px;border-radius:100px;backdrop-filter:blur(4px)}
-    .recommend-slide .slide-btn{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:10px 24px;border-radius:100px;background:var(--accent);color:#fff;font-size:.85rem;font-weight:600;border:none;cursor:pointer;transition:all .25s;box-shadow:0 4px 16px rgba(201,169,110,.3)}
-    .recommend-slide .slide-btn:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 6px 24px rgba(201,169,110,.4)}
-    .recommend-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;opacity:0}
-    .recommend-carousel:hover .recommend-arrow{opacity:1}
-    .recommend-arrow:hover{background:rgba(255,255,255,.25);color:#fff;transform:translateY(-50%) scale(1.08)}
-    .recommend-arrow.prev{left:16px}
-    .recommend-arrow.next{right:16px}
-    .recommend-dots{display:flex;gap:8px;justify-content:center;padding:16px 0 4px}
-    .recommend-dot{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:all .3s}
-    .recommend-dot.active{width:24px;border-radius:4px;background:var(--accent)}
-
-    /* ══════════════════════════════════════════
-       🔥🍜 预览区 · 横向滚动卡片
-    ══════════════════════════════════════════ */
-    .preview-scroll-wrap{position:relative}
-    .preview-scroll{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;padding:4px 4px 16px 4px}
-    .preview-scroll::-webkit-scrollbar{display:none}
-    .preview-card{min-width:260px;max-width:300px;flex-shrink:0;scroll-snap-align:start;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s var(--ease);cursor:pointer}
-    .preview-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--accent)}
-    .preview-card .preview-img{position:relative;height:180px;overflow:hidden}
-    .preview-card .preview-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
-    .preview-card:hover .preview-img img{transform:scale(1.06)}
-    .preview-card .preview-img .preview-badge{position:absolute;top:12px;left:12px;font-size:.65rem;font-weight:700;padding:4px 10px;border-radius:100px;color:#fff;z-index:2}
-    .preview-card .preview-img .preview-rating{position:absolute;bottom:12px;right:12px;font-size:.75rem;font-weight:700;color:#fff;background:rgba(0,0,0,.5);padding:3px 10px;border-radius:100px;backdrop-filter:blur(6px);z-index:2}
-    .preview-card .preview-body{padding:16px 18px 18px}
-    .preview-card .preview-body h3{font:700 1rem/1.3 var(--serif);margin-bottom:4px}
-    .preview-card .preview-body .preview-desc{font-size:.8rem;color:var(--text2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-    .preview-card .preview-body .preview-meta{display:flex;align-items:center;justify-content:space-between;margin-top:10px;font-size:.78rem;color:var(--text3)}
-    .preview-card .preview-body .preview-price{font-weight:700;color:var(--accent)}
-    .preview-section .preview-footer{text-align:center;margin-top:28px}
-    .preview-section .preview-footer a{display:inline-flex;align-items:center;gap:6px;font-size:.9rem;font-weight:600;color:var(--accent);text-decoration:none;transition:all .25s;padding:8px 20px;border-radius:100px;border:1px solid var(--accent)}
-    .preview-section .preview-footer a:hover{background:var(--accent);color:#fff}
-    .preview-scroll-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:40px;height:40px;border-radius:50%;background:var(--card-bg);border:1px solid var(--border);color:var(--text);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;box-shadow:var(--shadow)}
-    .preview-scroll-arrow:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
-    .preview-scroll-arrow.left{left:-8px}
-    .preview-scroll-arrow.right{right:-8px}
-    .preview-scroll-wrap .preview-scroll-arrow{opacity:0;transition:opacity .3s}
-    .preview-scroll-wrap:hover .preview-scroll-arrow{opacity:1}
-
-    /* ══════════════════════════════════════════
-       🎯 快速导航增强
-    ══════════════════════════════════════════ */
-    .quick-nav-enhanced{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;position:relative;z-index:1}
-    .quick-nav-enhanced a{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 22px;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);transition:all .3s var(--ease);min-width:90px;text-decoration:none;position:relative;overflow:hidden}
-    .quick-nav-enhanced a::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(201,169,110,.06));opacity:0;transition:opacity .3s}
-    .quick-nav-enhanced a:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--accent)}
-    .quick-nav-enhanced a:hover::before{opacity:1}
-    .quick-nav-enhanced a:hover .qn-icon{animation:qnBounce .5s var(--ease)}
-    .quick-nav-enhanced a .qn-icon{font-size:1.8rem;transition:transform .3s var(--ease);line-height:1}
-    .quick-nav-enhanced a .qn-label{font-size:.78rem;font-weight:600;color:var(--text2);transition:color .25s}
-    .quick-nav-enhanced a:hover .qn-label{color:var(--accent)}
-    .quick-nav-enhanced a .qn-hot{position:absolute;top:8px;right:8px;font-size:.55rem;font-weight:700;padding:2px 6px;border-radius:100px;background:var(--coral,#e76f51);color:#fff;line-height:1.2;animation:qnPulse 2s ease-in-out infinite}
-    @keyframes qnBounce{0%{transform:translateY(0)}40%{transform:translateY(-8px)}60%{transform:translateY(-4px)}80%{transform:translateY(-6px)}100%{transform:translateY(0)}}
-    @keyframes qnPulse{0%,100%{opacity:1}50%{opacity:.7}}
-    @media(max-width:640px){.quick-nav-enhanced a{min-width:72px;padding:14px 12px}.quick-nav-enhanced a .qn-icon{font-size:1.5rem}.quick-nav-enhanced a .qn-label{font-size:.7rem}}
-
   </style>
 </head>
 <body>
@@ -493,54 +421,10 @@
     </div>
   </section>
 
-  <!-- ═══ 🎯 今日推荐（轮播卡片）═══ -->
+  <!-- ═══ 🎯 今日推荐 ═══ -->
   <section class="section" aria-label="今日推荐" style="padding:40px 0">
     <div class="section-inner">
-      <div class="section-header reveal">
-        <div class="eyebrow">TODAY'S PICK</div>
-        <h2>🎯 今日推荐</h2>
-        <p>精选济南最值得体验的景点与美食</p>
-      </div>
-      <div class="recommend-carousel" id="recommendCarousel">
-        <div class="recommend-track" id="recommendTrack"></div>
-        <button class="recommend-arrow prev" id="recPrev" aria-label="上一张">‹</button>
-        <button class="recommend-arrow next" id="recNext" aria-label="下一张">›</button>
-      </div>
-      <div class="recommend-dots" id="recDots"></div>
-    </div>
-  </section>
-
-  <!-- ═══ 🔥 热门景点 · 游客最爱 ═══ -->
-  <section class="section preview-section" aria-label="热门景点">
-    <div class="section-inner">
-      <div class="section-header reveal">
-        <div class="eyebrow">POPULAR SPOTS</div>
-        <h2>🔥 热门景点 · 游客最爱</h2>
-        <p>评分最高的济南必去之地</p>
-      </div>
-      <div class="preview-scroll-wrap">
-        <button class="preview-scroll-arrow left" onclick="document.getElementById('hotSpotsScroll').scrollBy({left:-300,behavior:'smooth'})" aria-label="向左滚动">‹</button>
-        <div class="preview-scroll" id="hotSpotsScroll"></div>
-        <button class="preview-scroll-arrow right" onclick="document.getElementById('hotSpotsScroll').scrollBy({left:300,behavior:'smooth'})" aria-label="向右滚动">›</button>
-      </div>
-      <div class="preview-footer rv"><a href="spots.html">查看全部景点 →</a></div>
-    </div>
-  </section>
-
-  <!-- ═══ 🍜 济南味道 · 必吃清单 ═══ -->
-  <section class="section section-alt preview-section" aria-label="济南味道">
-    <div class="section-inner">
-      <div class="section-header reveal">
-        <div class="eyebrow">MUST-EAT</div>
-        <h2>🍜 济南味道 · 必吃清单</h2>
-        <p>不可错过的地道泉城美食</p>
-      </div>
-      <div class="preview-scroll-wrap">
-        <button class="preview-scroll-arrow left" onclick="document.getElementById('foodPreviewScroll').scrollBy({left:-300,behavior:'smooth'})" aria-label="向左滚动">‹</button>
-        <div class="preview-scroll" id="foodPreviewScroll"></div>
-        <button class="preview-scroll-arrow right" onclick="document.getElementById('foodPreviewScroll').scrollBy({left:300,behavior:'smooth'})" aria-label="向右滚动">›</button>
-      </div>
-      <div class="preview-footer rv"><a href="food.html">查看全部美食 →</a></div>
+      <div id="dailyRecommend"></div>
     </div>
   </section>
 
@@ -1522,166 +1406,39 @@
     loadFood();
     loadWeather();
 
-    // ═══════════════════════════════════════
-    // 🎯 今日推荐 · 轮播卡片（动态数据）
-    // ═══════════════════════════════════════
-    (async function initRecommendCarousel() {
-      const track = document.getElementById('recommendTrack');
-      const dotsEl = document.getElementById('recDots');
-      const prevBtn = document.getElementById('recPrev');
-      const nextBtn = document.getElementById('recNext');
-      if (!track) return;
-
-      let spots = [];
-      try {
-        const res = await fetch('/jinan-travel-guide/data/spots.json');
-        spots = await res.json();
-      } catch(e) { console.error('推荐数据加载失败:', e); return; }
-
-      const top5 = spots.sort((a, b) => b.rating - a.rating).slice(0, 5);
-      if (!top5.length) return;
-
-      const badgeLabels = ['今日必去', '人气最高', '编辑推荐', '口碑之选', '游客最爱'];
-      const badgeColors = ['#c9a96e', '#e76f51', '#2a9d8f', '#8b5cf6', '#3b82f6'];
-
-      track.innerHTML = top5.map((s, i) => {
-        const priceText = s.price === 0 ? '免费' : '¥' + s.price;
-        return `
-          <div class="recommend-slide" onclick="location.href='spots.html?id=${s.id}'">
-            <img src="${s.img}" alt="${s.name}" loading="${i === 0 ? 'eager' : 'lazy'}">
-            <div class="slide-overlay">
-              <span class="slide-badge" style="background:${badgeColors[i] || badgeColors[0]}">${badgeLabels[i] || '推荐'}</span>
-              <div class="slide-stars">${'★'.repeat(Math.floor(s.rating))}${s.rating % 1 >= 0.3 ? '★' : ''} ${s.rating}</div>
-              <div class="slide-name">${s.name}</div>
-              <div class="slide-desc">${s.desc}</div>
-              <div class="slide-meta">
-                <span>🎫 ${priceText}</span>
-                <span>⏱ ${s.dur}</span>
-                <span>💬 ${s.reviews} 条评价</span>
-              </div>
-              <button class="slide-btn" onclick="event.stopPropagation();location.href='spots.html?id=${s.id}'">查看详情 →</button>
+    // ── 今日推荐（每天根据日期轮换）──
+    function renderDailyRecommend() {
+      const allItems = [
+        { type: 'spot', name: '趵突泉', desc: '天下第一泉，三窟并发水涌若轮。冬日雾气氤氲如仙境。', img: 'https://images.unsplash.com/photo-1509803874385-db7c23652552?w=600&h=400&fit=crop', link: 'spots.html?id=baotu', meta: '🎫 ¥40 · ⏱ 2-3h', badge: '今日必去' },
+        { type: 'food', name: '糖醋黄河鲤鱼', desc: '鲁菜经典，先炸后浇糖醋汁，头尾翘起形似龙门。', img: 'https://images.unsplash.com/photo-1580476262798-bddd9f4b7369?w=600&h=400&fit=crop', link: 'food.html?id=tangcu', meta: '🍲 鲁菜 · 人均¥85', badge: '今日必吃' },
+        { type: 'spot', name: '大明湖', desc: '四面荷花三面柳，一城山色半城湖。超然楼亮灯绝美。', img: 'https://images.unsplash.com/photo-1646896315397-4d6f5bd49e0e?w=600&h=400&fit=crop', link: 'spots.html?id=daminghu', meta: '🎫 免费 · ⏱ 半天', badge: '今日推荐' },
+        { type: 'food', name: '把子肉', desc: '济南灵魂快餐，肥瘦相间浇汤汁配米饭，一口满足。', img: 'https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=600&h=400&fit=crop', link: 'food.html?id=bazirou', meta: '🍢 市井小吃 · 人均¥15', badge: '本地最爱' },
+      ];
+      const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0)) / 86400000);
+      const item = allItems[dayOfYear % allItems.length];
+      const el = document.getElementById('dailyRecommend');
+      if (!el) return;
+      el.innerHTML = `
+        <div class="recommend-card rv" style="background:linear-gradient(135deg,rgba(201,169,110,.15),rgba(42,157,143,.1));border:1px solid var(--accent);border-radius:var(--radius-lg);overflow:hidden;cursor:pointer" onclick="location.href='${item.link}'">
+          <div style="position:relative">
+            <img src="${item.img}" alt="${item.name}" style="width:100%;height:200px;object-fit:cover;display:block">
+            <div style="position:absolute;bottom:0;left:0;right:0;padding:20px 24px 16px;background:linear-gradient(to top,rgba(0,0,0,.6),transparent)">
+              <div style="font-size:.65rem;font-weight:700;letter-spacing:.1em;color:rgba(255,255,255,.7);margin-bottom:6px">🎯 ${item.badge}</div>
+              <h3 style="font:800 1.5rem/1.2 var(--serif);color:#fff;margin:0">${item.name}</h3>
             </div>
-          </div>`;
-      }).join('');
-
-      dotsEl.innerHTML = top5.map((_, i) =>
-        `<span class="recommend-dot${i === 0 ? ' active' : ''}" data-idx="${i}"></span>`
-      ).join('');
-
-      let current = 0;
-      const total = top5.length;
-      let autoTimer = null;
-
-      function goTo(idx) {
-        current = ((idx % total) + total) % total;
-        track.style.transform = `translateX(-${current * 100}%)`;
-        dotsEl.querySelectorAll('.recommend-dot').forEach((d, i) => {
-          d.classList.toggle('active', i === current);
-        });
-      }
-
-      function startAuto() { stopAuto(); autoTimer = setInterval(() => goTo(current + 1), 5000); }
-      function stopAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
-
-      prevBtn.addEventListener('click', () => { goTo(current - 1); startAuto(); });
-      nextBtn.addEventListener('click', () => { goTo(current + 1); startAuto(); });
-      dotsEl.addEventListener('click', e => {
-        const dot = e.target.closest('.recommend-dot');
-        if (dot) { goTo(+dot.dataset.idx); startAuto(); }
-      });
-
-      let touchStartX = 0;
-      track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; stopAuto(); }, {passive:true});
-      track.addEventListener('touchend', e => {
-        const diff = touchStartX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) goTo(diff > 0 ? current + 1 : current - 1);
-        startAuto();
-      }, {passive:true});
-
-      const carousel = document.getElementById('recommendCarousel');
-      carousel.addEventListener('mouseenter', stopAuto);
-      carousel.addEventListener('mouseleave', startAuto);
-
-      startAuto();
-      observeNewRv(track.parentElement);
-    })();
-
-    // ═══════════════════════════════════════
-    // 🔥 热门景点预览（动态数据）
-    // ═══════════════════════════════════════
-    (async function loadHotSpots() {
-      const container = document.getElementById('hotSpotsScroll');
-      if (!container) return;
-      try {
-        const res = await fetch('/jinan-travel-guide/data/spots.json');
-        const spots = await res.json();
-        const top6 = spots.sort((a, b) => b.rating - a.rating).slice(0, 6);
-
-        container.innerHTML = top6.map(s => {
-          const priceText = s.price === 0 ? '免费' : '¥' + s.price;
-          const badgeMap = { must: '必去', hot: '🔥 热门', free: '免费', hidden: '小众', kid: '亲子' };
-          const badgeColor = { must: '#c9a96e', hot: '#e76f51', free: '#2a9d8f', hidden: '#8b5cf6', kid: '#f59e0b' };
-          return `
-            <div class="preview-card rv" onclick="location.href='spots.html?id=${s.id}'">
-              <div class="preview-img">
-                <img src="${s.img}" alt="${s.name}" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt)">
-                <span class="preview-badge" style="background:${badgeColor[s.badge] || '#c9a96e'}">${badgeMap[s.badge] || '推荐'}</span>
-                <span class="preview-rating">★ ${s.rating}</span>
-              </div>
-              <div class="preview-body">
-                <h3>${s.name}</h3>
-                <p class="preview-desc">${s.desc}</p>
-                <div class="preview-meta">
-                  <span>⏱ ${s.dur}</span>
-                  <span class="preview-price">${priceText}</span>
-                </div>
-              </div>
-            </div>`;
-        }).join('');
-        observeNewRv(container);
-      } catch(e) { console.error('热门景点加载失败:', e); }
-    })();
-
-    // ═══════════════════════════════════════
-    // 🍜 济南味道预览（动态数据）
-    // ═══════════════════════════════════════
-    (async function loadFoodPreview() {
-      const container = document.getElementById('foodPreviewScroll');
-      if (!container) return;
-      try {
-        const res = await fetch('/jinan-travel-guide/data/food.json');
-        const data = await res.json();
-        const foods = data.foods || data;
-        const mustEat = foods.filter(f => f.must).slice(0, 6);
-        if (mustEat.length < 6) {
-          const rest = foods.filter(f => !mustEat.includes(f)).slice(0, 6 - mustEat.length);
-          mustEat.push(...rest);
-        }
-
-        container.innerHTML = mustEat.map(f => {
-          const shop = f.shops?.[0];
-          const shopName = shop ? shop.name : '';
-          const avgPrice = shop ? shop.avg : f.price || '';
-          return `
-            <div class="preview-card rv" onclick="location.href='food.html?id=${f.id}'">
-              <div class="preview-img">
-                <img src="${f.img}" alt="${f.name}" loading="lazy" onerror="this.onerror=null;this.src=imgFallback(this.alt)">
-                ${f.must ? '<span class="preview-badge" style="background:#e76f51">🔥 必吃</span>' : ''}
-                <span class="preview-rating">★ 4.5</span>
-              </div>
-              <div class="preview-body">
-                <h3>${f.name}</h3>
-                <p class="preview-desc">${f.desc}</p>
-                <div class="preview-meta">
-                  <span>${shopName}</span>
-                  <span class="preview-price">${avgPrice}</span>
-                </div>
-              </div>
-            </div>`;
-        }).join('');
-        observeNewRv(container);
-      } catch(e) { console.error('美食预览加载失败:', e); }
-    })();
+          </div>
+          <div style="padding:20px 24px 24px">
+            <p style="font-size:.9rem;color:var(--text2);line-height:1.7;margin-bottom:12px">${item.desc}</p>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+              <span style="font-size:.8rem;color:var(--text3)">${item.meta}</span>
+              <span class="btn btn-primary btn-sm" style="white-space:nowrap">去看看 →</span>
+            </div>
+          </div>
+        </div>
+      `;
+      observeNewRv(el);
+    }
+    renderDailyRecommend();
 
     // ── 季节限定内容 ──
     function renderSeasonalContent() {

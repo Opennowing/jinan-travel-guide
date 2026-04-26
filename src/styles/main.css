@@ -99,11 +99,11 @@ body{animation:pageFadeIn .5s var(--ease) both}
 .section-header p{color:var(--text2);margin-top:14px;max-width:500px;margin-left:auto;margin-right:auto;font-size:.95rem}
 
 /* ─── CARDS ─── */
-.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .card{background:var(--card-bg);border-radius:var(--radius-lg);overflow:hidden;transition:transform .45s cubic-bezier(.23,1,.32,1),box-shadow .45s cubic-bezier(.23,1,.32,1),border-color .3s;cursor:pointer;border:1px solid var(--border);position:relative;will-change:transform;box-shadow:0 1px 3px rgba(0,0,0,.04),0 4px 12px rgba(0,0,0,.03);display:flex;flex-direction:column;backface-visibility:hidden;-webkit-backface-visibility:hidden;inset:0 0 0 1px rgba(255,255,255,.05)}
 .card:hover{transform:perspective(1000px) rotateX(2deg) rotateY(-2deg) translateY(-10px) scale(1.015);box-shadow:0 8px 24px rgba(0,0,0,.08),0 20px 48px rgba(0,0,0,.06);border-color:rgba(201,169,110,.2)}
 .card:active{transform:translateY(-4px) scale(1.005);transition-duration:.15s}
-.card-img{position:relative;overflow:hidden;aspect-ratio:16/10;background:var(--bg2)}
+.card-img{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--bg2);border-radius:var(--radius-lg) var(--radius-lg) 0 0}
 .card-img::before{content:'';position:absolute;inset:0;background:var(--bg2);z-index:1;opacity:1;transition:opacity .4s}
 .card-img.img-loaded::before{opacity:0;pointer-events:none}
 .card-img.img-loading::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,var(--bg2) 25%,var(--bg3) 37%,rgba(201,169,110,.06) 50%,var(--bg3) 63%,var(--bg2) 75%);background-size:400% 100%;animation:shimmer 1.8s ease-in-out infinite;z-index:2}
@@ -241,7 +241,7 @@ body{animation:pageFadeIn .5s var(--ease) both}
   .nav-links.mob-open a.active{background:var(--accent);color:#fff}
   .top-nav .logo .logo-sub{display:none}
   .mob-nav{display:flex}
-  .card-grid{grid-template-columns:1fr}
+  .card-grid{grid-template-columns:repeat(2,1fr);gap:16px}
   .page-hero{padding:100px var(--gutter) 50px}
   body{padding-bottom:72px}
   .hero-carousel-arrow{display:none}

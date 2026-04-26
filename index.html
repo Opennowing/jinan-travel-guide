@@ -793,14 +793,28 @@
     // ── Live Search ──
     let searchData = { spots: [], foods: [] };
     function escH(s) { return s ? s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : ''; }
+
+    // ── Shared Data Cache (避免重复 fetch) ──
+    const _dataCache = { spots: null, foods: null };
+    async function getSpotsData() {
+      if (_dataCache.spots) return _dataCache.spots;
+      const res = await fetch('/jinan-travel-guide/data/spots.json');
+      _dataCache.spots = await res.json();
+      return _dataCache.spots;
+    }
+    async function getFoodsData() {
+      if (_dataCache.foods) return _dataCache.foods;
+      const res = await fetch('/jinan-travel-guide/data/food.json');
+      const data = await res.json();
+      _dataCache.foods = data.foods || data;
+      return _dataCache.foods;
+    }
+
     async function loadSearchData() {
       try {
-        const [spotsRes, foodsRes] = await Promise.all([
-          fetch('/jinan-travel-guide/data/spots.json'), fetch('/jinan-travel-guide/data/food.json')
-        ]);
-        searchData.spots = await spotsRes.json();
-        const foodJson = await foodsRes.json();
-        searchData.foods = foodJson.foods || foodJson;
+        const [spots, foods] = await Promise.all([getSpotsData(), getFoodsData()]);
+        searchData.spots = spots;
+        searchData.foods = foods;
       } catch(e) { console.error('搜索数据加载失败:', e); }
     }
     loadSearchData();
@@ -1021,8 +1035,7 @@
     // ── Load Spots ──
     async function loadSpots() {
       try {
-        const res = await fetch('/jinan-travel-guide/data/spots.json');
-        const data = await res.json();
+        const data = await getSpotsData();
         const featured = data.filter(s => ['must','hot'].includes(s.badge)).slice(0, 4);
         if (featured.length < 4) { const rest = data.filter(s => !featured.includes(s)).slice(0, 4-featured.length); featured.push(...rest); }
         const grid = document.getElementById('spots-grid');
@@ -1049,9 +1062,7 @@
     // ── Load Food ──
     async function loadFood() {
       try {
-        const res = await fetch('/jinan-travel-guide/data/food.json');
-        const data = await res.json();
-        const foods = data.foods || data;
+        const foods = await getFoodsData();
         const topFoods = foods.filter(f => f.must).slice(0, 4);
         if (topFoods.length < 4) { const rest = foods.filter(f => !topFoods.includes(f)).slice(0, 4-topFoods.length); topFoods.push(...rest); }
         const grid = document.getElementById('food-grid');
@@ -1518,8 +1529,7 @@
 
       let spots = [];
       try {
-        const res = await fetch('/jinan-travel-guide/data/spots.json');
-        spots = await res.json();
+        spots = await getSpotsData();
       } catch(e) { console.error('推荐数据加载失败:', e); return; }
 
       const top5 = spots.sort((a, b) => b.rating - a.rating).slice(0, 5);
@@ -1597,8 +1607,7 @@
       const container = document.getElementById('hotSpotsScroll');
       if (!container) return;
       try {
-        const res = await fetch('/jinan-travel-guide/data/spots.json');
-        const spots = await res.json();
+        const spots = await getSpotsData();
         const top6 = spots.sort((a, b) => b.rating - a.rating).slice(0, 6);
 
         container.innerHTML = top6.map(s => {
@@ -1633,9 +1642,7 @@
       const container = document.getElementById('foodPreviewScroll');
       if (!container) return;
       try {
-        const res = await fetch('/jinan-travel-guide/data/food.json');
-        const data = await res.json();
-        const foods = data.foods || data;
+        const foods = await getFoodsData();
         const mustEat = foods.filter(f => f.must).slice(0, 6);
         if (mustEat.length < 6) {
           const rest = foods.filter(f => !mustEat.includes(f)).slice(0, 6 - mustEat.length);

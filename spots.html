@@ -1498,7 +1498,7 @@ html.dark .card.meituan-card:hover {
       return `
         <div class="modal-gallery" data-count="${imgs.length}">
           <div class="gallery-track">${imgs.map((img,i) => `<div class="gallery-slide"><img src="${img}" alt="${s.name}" loading="lazy"></div>`).join('')}</div>
-          ${imgs.length > 1 ? `<button class="gallery-btn prev" aria-label="上一张">‹</button><button class="gallery-btn next" aria-label="下一张">›</button><div class="gallery-dots">${imgs.map((_,i) => `<button class="gallery-dot ${i===0?'active':''}" data-index="${i}"></button>`).join('')}</div><span class="gallery-counter">1 / ${imgs.length}</span>` : ''}
+          ${imgs.length > 1 ? `<button class="gallery-btn prev" aria-label="上一张">‹</button><button class="gallery-btn next" aria-label="下一张">›</button><div class="gallery-dots">${imgs.map((_,i) => `<button class="gallery-dot ${i===0?'active':''}" data-index="${i}" aria-label="图片 ${i+1}"></button>`).join('')}</div><span class="gallery-counter">1 / ${imgs.length}</span>` : ''}
         </div>`;
     }
 
@@ -2276,7 +2276,7 @@ html.dark .card.meituan-card:hover {
       if (counter) counter.textContent = `${lightboxIndex + 1} / ${lightboxPhotos.length}`;
       if (dots) {
         dots.innerHTML = lightboxPhotos.map((_, i) => 
-          `<button class="lightbox-dot ${i === lightboxIndex ? 'active' : ''}" onclick="event.stopPropagation();lightboxIndex=${i};updateLightbox()"></button>`
+          `<button class="lightbox-dot ${i === lightboxIndex ? 'active' : ''}" onclick="event.stopPropagation();lightboxIndex=${i};updateLightbox()" aria-label="图片 ${i+1}"></button>`
         ).join('');
       }
     }

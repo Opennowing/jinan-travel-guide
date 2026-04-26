@@ -58,7 +58,7 @@
     .sort-select{padding:6px 14px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.75rem;color:var(--text2);cursor:pointer;outline:none;transition:all .3s}
     .sort-select:hover{border-color:var(--accent)}
     .spot-badge{position:absolute;top:12px;left:12px;z-index:2}
-    .spot-price{position:absolute;top:12px;right:12px;z-index:2;background:rgba(0,0,0,.6);color:#fff;padding:3px 10px;border-radius:100px;font-size:.7rem;font-weight:600;backdrop-filter:blur(4px)}
+    .spot-price{position:absolute;top:12px;left:12px;z-index:2;background:rgba(0,0,0,.6);color:#fff;padding:3px 10px;border-radius:100px;font-size:.7rem;font-weight:600;backdrop-filter:blur(4px)}
     .spot-price .free-tag{color:#5eead4}
     .card-body .card-stars{color:#f59e0b;font-size:.75rem;letter-spacing:1px}
     .card-body .desc{-webkit-line-clamp:3;line-clamp:3}
@@ -328,6 +328,24 @@
     </div>
   </section>
 
+  <!-- 景点地图（移到顶部） -->
+  <section class="section" style="padding-top:8px" aria-label="景点地图">
+    <div class="section-inner">
+      <div id="map-container" class="reveal-scale" style="height:320px"></div>
+      <div class="map-controls">
+        <button class="map-legend-btn active" data-map-cat="all" aria-label="显示全部景点">全部</button>
+        <button class="map-legend-btn" data-map-cat="spring" aria-label="筛选泉水景点"><span class="legend-dot" style="background:#3b82f6"></span> 泉水</button>
+        <button class="map-legend-btn" data-map-cat="nature" aria-label="筛选自然景点"><span class="legend-dot" style="background:#22c55e"></span> 自然</button>
+        <button class="map-legend-btn" data-map-cat="history" aria-label="筛选历史景点"><span class="legend-dot" style="background:#a855f7"></span> 历史</button>
+        <button class="map-legend-btn" data-map-cat="culture" aria-label="筛选文化景点"><span class="legend-dot" style="background:#8b5cf6"></span> 文化</button>
+        <button class="map-legend-btn" data-map-cat="food" aria-label="筛选美食街"><span class="legend-dot" style="background:#f59e0b"></span> 美食街</button>
+        <button class="map-legend-btn" data-map-cat="family" aria-label="筛选亲子景点"><span class="legend-dot" style="background:#14b8a6"></span> 亲子</button>
+        <button class="locate-btn" id="locateMeBtn">📍 定位到我</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider reveal" aria-hidden="true">◈</div>
   <section class="section" style="padding-top:0" aria-label="景点列表">
     <div class="section-inner">
       <div class="section-header reveal" style="margin-bottom:24px">
@@ -339,28 +357,6 @@
       <div class="empty-state" id="emptyState" style="display:none">
         <div class="emoji">🔍</div>
         <p>没有找到符合条件的景点，试试调整筛选条件</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="section-divider reveal" aria-hidden="true">◈</div>
-  <section class="section" aria-label="景点地图">
-    <div class="section-inner">
-      <div class="section-header reveal">
-        <div class="eyebrow">互动地图</div>
-        <h2>景点分布</h2>
-        <p>点击景点卡片查看详情，探索泉城济南</p>
-      </div>
-      <div id="map-container" class="reveal-scale"></div>
-      <div class="map-controls">
-        <button class="map-legend-btn active" data-map-cat="all" aria-label="显示全部景点">全部</button>
-        <button class="map-legend-btn" data-map-cat="spring" aria-label="筛选泉水景点"><span class="legend-dot" style="background:#3b82f6"></span> 泉水</button>
-        <button class="map-legend-btn" data-map-cat="nature" aria-label="筛选自然景点"><span class="legend-dot" style="background:#22c55e"></span> 自然</button>
-        <button class="map-legend-btn" data-map-cat="history" aria-label="筛选历史景点"><span class="legend-dot" style="background:#a855f7"></span> 历史</button>
-        <button class="map-legend-btn" data-map-cat="culture" aria-label="筛选文化景点"><span class="legend-dot" style="background:#8b5cf6"></span> 文化</button>
-        <button class="map-legend-btn" data-map-cat="food" aria-label="筛选美食街"><span class="legend-dot" style="background:#f59e0b"></span> 美食街</button>
-        <button class="map-legend-btn" data-map-cat="family" aria-label="筛选亲子景点"><span class="legend-dot" style="background:#14b8a6"></span> 亲子</button>
-        <button class="locate-btn" id="locateMeBtn">📍 定位到我</button>
       </div>
     </div>
   </section>

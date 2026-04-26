@@ -953,6 +953,305 @@ html.dark .card.airbnb-card .price-free {
 .card.airbnb-card:hover::before {
   transform: scaleX(1);
 }
+
+/* ═══ MODAL ENHANCEMENT - P0 IMPROVEMENTS ═══ */
+
+/* ── Anchor Navigation Bar ── */
+.modal-anchor-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  gap: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  margin: 0 -32px;
+  padding: 0 32px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.modal-anchor-nav::-webkit-scrollbar { display: none; }
+.modal-anchor-nav a {
+  flex-shrink: 0;
+  padding: 12px 16px;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--text3);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: all .25s;
+  white-space: nowrap;
+}
+.modal-anchor-nav a:hover { color: var(--text); }
+.modal-anchor-nav a.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ── History Story Module ── */
+.modal-history {
+  background: linear-gradient(135deg, rgba(139,92,246,.06), rgba(201,169,110,.04));
+  border: 1px solid rgba(139,92,246,.12);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin: 20px 0;
+  position: relative;
+  overflow: hidden;
+}
+.modal-history::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #8b5cf6, var(--accent));
+  border-radius: 4px 0 0 4px;
+}
+.modal-history h4 {
+  font-size: .95rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+}
+.modal-history .history-text {
+  font-size: .88rem;
+  line-height: 1.8;
+  color: var(--text2);
+  font-family: var(--serif);
+  position: relative;
+  padding-left: 4px;
+}
+.modal-history .history-quote {
+  position: absolute;
+  top: -8px;
+  left: -4px;
+  font-size: 3rem;
+  color: var(--accent);
+  opacity: .08;
+  font-family: Georgia, serif;
+  line-height: 1;
+  pointer-events: none;
+}
+
+/* ── Season Recommendation Module ── */
+.modal-season {
+  background: linear-gradient(135deg, rgba(42,157,143,.06), rgba(201,169,110,.04));
+  border: 1px solid rgba(42,157,143,.12);
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin: 20px 0;
+  position: relative;
+}
+.modal-season::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--teal), #f59e0b);
+  border-radius: 4px 0 0 4px;
+}
+.modal-season h4 {
+  font-size: .95rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.modal-season .season-text {
+  font-size: .88rem;
+  line-height: 1.7;
+  color: var(--text2);
+}
+.modal-season .season-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.modal-season .season-tag {
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: .75rem;
+  font-weight: 600;
+  border: 1px solid;
+  transition: all .25s;
+}
+.modal-season .season-tag.spring {
+  background: rgba(236,72,153,.08);
+  color: #ec4899;
+  border-color: rgba(236,72,153,.2);
+}
+.modal-season .season-tag.summer {
+  background: rgba(34,197,94,.08);
+  color: #22c55e;
+  border-color: rgba(34,197,94,.2);
+}
+.modal-season .season-tag.autumn {
+  background: rgba(245,158,11,.08);
+  color: #f59e0b;
+  border-color: rgba(245,158,11,.2);
+}
+.modal-season .season-tag.winter {
+  background: rgba(59,130,246,.08);
+  color: #3b82f6;
+  border-color: rgba(59,130,246,.2);
+}
+.modal-season .season-tag.current {
+  box-shadow: 0 0 0 2px var(--accent);
+  font-weight: 700;
+}
+
+/* ── Collapsible Sections ── */
+.modal-section {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin: 16px 0;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+.modal-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  cursor: pointer;
+  transition: background .2s;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.modal-section-header:hover {
+  background: var(--accent2);
+}
+.modal-section-header h4 {
+  font-size: .9rem;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.modal-section-header .section-toggle {
+  font-size: .8rem;
+  color: var(--text3);
+  transition: transform .3s;
+  flex-shrink: 0;
+}
+.modal-section-header.open .section-toggle {
+  transform: rotate(180deg);
+}
+.modal-section-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .4s cubic-bezier(.23,1,.32,1);
+}
+.modal-section-body.open {
+  max-height: 2000px;
+}
+.modal-section-body-inner {
+  padding: 0 18px 18px;
+}
+
+/* ── Info Grid Compact ── */
+.modal-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.modal-info-item {
+  padding: 12px 14px;
+  background: var(--bg2);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.modal-info-item .label {
+  font-size: .68rem;
+  font-weight: 700;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  margin-bottom: 4px;
+}
+.modal-info-item .value {
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* ── Floating Action Bar ── */
+.modal-floating-actions {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  padding: 12px 18px;
+  margin: 20px -32px -32px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.modal-floating-actions .btn {
+  flex: 1;
+  justify-content: center;
+  font-size: .82rem;
+  padding: 10px 12px;
+}
+.modal-floating-actions .fav-action {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all .25s;
+  flex-shrink: 0;
+}
+.modal-floating-actions .fav-action:hover {
+  border-color: #ef4444;
+  background: rgba(239,68,68,.08);
+}
+.modal-floating-actions .fav-action.faved {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #fff;
+}
+
+/* ── Mobile Responsive ── */
+@media(max-width:768px){
+  .modal-anchor-nav {
+    margin: 0 -20px;
+    padding: 0 20px;
+  }
+  .modal-floating-actions {
+    margin: 20px -20px -20px;
+    padding: 10px 16px;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+  }
+  .modal-history, .modal-season {
+    padding: 16px 18px;
+    margin: 14px 0;
+  }
+  .modal-section-header {
+    padding: 12px 14px;
+  }
+  .modal-section-body-inner {
+    padding: 0 14px 14px;
+  }
+}
 /* ── Dark mode adjustments ── */
 html.dark .card.airbnb-card:hover {
   box-shadow: 0 12px 28px rgba(0,0,0,.25), 0 4px 10px rgba(0,0,0,.15);
@@ -2025,7 +2324,7 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
         : `<span style="font-weight:700">¥${s.price}</span>${s.priceOld ? `<span style="text-decoration:line-through;color:var(--text3);margin-left:6px">¥${s.priceOld}</span>` : ''}/人`;
       const photosHtml = (s.photos||[]).map(p => `<span class="photo-tag">📷 ${p}</span>`).join('');
       const comboHtml = s.combo ? `<div class="modal-combo"><h4>${s.combo.title}</h4><p>${s.combo.desc}</p></div>` : '';
-      const mapHtml = s.lat && s.lng ? `<div class="modal-map"><iframe src="https://www.openstreetmap.org/export/embed.html?bbox=${s.lng-0.01}%2C${s.lat-0.005}%2C${s.lng+0.01}%2C${s.lat+0.005}&layer=mapnik&marker=${s.lat}%2C${s.lng}" loading="lazy"></iframe></div>` : '';
+      const mapHtml = s.lat && s.lng ? `<div class="modal-map" id="modal-map"><iframe src="https://www.openstreetmap.org/export/embed.html?bbox=${s.lng-0.01}%2C${s.lat-0.005}%2C${s.lng+0.01}%2C${s.lat+0.005}&layer=mapnik&marker=${s.lat}%2C${s.lng}" loading="lazy"></iframe></div>` : '';
       const defaultReviews = [
         {name:'旅行达人',avatar:'旅',date:'2026-04-15',stars:5,text:'非常值得一去！泉水清澈见底，环境优美。'},
         {name:'小鱼儿',avatar:'鱼',date:'2026-04-10',stars:4,text:'景色不错，就是节假日人太多了，建议工作日去。'},
@@ -2090,7 +2389,13 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
       const html = `
         ${galleryHtml(s)}
         <div class="modal-body">
-          <h2>${s.name}</h2>
+          <nav class="modal-anchor-nav" id="modalAnchorNav">
+            <a href="#modal-overview" class="active">概览</a>
+            <a href="#modal-guide">攻略</a>
+            <a href="#modal-map">地图</a>
+            <a href="#modal-reviews">评价</a>
+          </nav>
+          <h2 id="modal-overview">${s.name}</h2>
           <div class="modal-rating"><span class="stars">${stars(s.rating)}</span><span class="score">${s.rating}</span><span class="count">${s.reviews} 条评价</span></div>
           <p class="modal-desc">${s.desc}</p>
           ${photosHtml ? `<div class="modal-photos">${photosHtml}</div>` : ''}
@@ -2104,21 +2409,42 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
             <div class="modal-info-item"><div class="label">🎫 预约方式</div><div class="value">${s.book||'无需预约'}</div></div>
             <div class="modal-info-item"><div class="label">🚌 交通</div><div class="value">${s.transport||'—'}</div></div>
             <div class="modal-info-item"><div class="label">💰 优惠政策</div><div class="value">${s.discount||'无'}</div></div>
+          <!-- History Story Module -->
+          ${s.history ? `
+          <div class="modal-history" id="modal-guide">
+            <h4>📜 时光故事</h4>
+            <div class="history-text">
+              <span class="history-quote">"</span>
+              ${escapeHtml(s.history)}
+            </div>
+          </div>` : ''}
+
+          <!-- Season Recommendation Module -->
+          ${s.season ? `
+          <div class="modal-season">
+            <h4>🗓️ 最佳到访</h4>
+            <div class="season-text">${escapeHtml(s.season)}</div>
+            <div class="season-tags">
+              <span class="season-tag spring ${[3,4,5].includes(new Date().getMonth()+1)?'current':''}">🌸 春季</span>
+              <span class="season-tag summer ${[6,7,8].includes(new Date().getMonth()+1)?'current':''}">☀️ 夏季</span>
+              <span class="season-tag autumn ${[9,10,11].includes(new Date().getMonth()+1)?'current':''}">🍂 秋季</span>
+              <span class="season-tag winter ${[12,1,2].includes(new Date().getMonth()+1)?'current':''}">❄️ 冬季</span>
+            </div>
+          </div>` : ''}
           </div>
           ${comboHtml}
           ${mapHtml}
           ${photoGuideHtml}
           ${tipsHtml}
           ${nearbyHtml}
-          <div class="modal-actions" style="flex-wrap:wrap">
+          <div class="modal-floating-actions">
+            <button class="fav-action modal-fav-btn" data-id="${s.id}" title="收藏">${getFavs().includes(s.id)?"♥":"♡"}</button>
             <button class="btn btn-primary modal-add-trip" data-id="${s.id}">＋ 加入行程</button>
-            <a href="${getCtripLink(s.name)}" target="_blank" rel="noopener" class="btn btn-outline" style="background:linear-gradient(135deg,#2681ff 0%,#1a6dff 100%);color:#fff;border:none">🐬 携程订票</a>
-            <a href="${getMeituanLink(s.name)}" target="_blank" rel="noopener" class="btn btn-outline" style="background:linear-gradient(135deg,#ffc107 0%,#ff9800 100%);color:#fff;border:none">🟡 美团预订</a>
-            <button class="btn btn-outline modal-share" data-name="${s.name}">📤 分享</button>
-            <button class="tts-btn" data-id="${s.id}">🎧 语音导览</button>
+            <a href="${getCtripLink(s.name)}" target="_blank" rel="noopener" class="btn btn-outline" style="background:linear-gradient(135deg,#2681ff 0%,#1a6dff 100%);color:#fff;border:none">🐬 携程</a>
+            <a href="${getMeituanLink(s.name)}" target="_blank" rel="noopener" class="btn btn-outline" style="background:linear-gradient(135deg,#ffc107 0%,#ff9800 100%);color:#fff;border:none">🟡 美团</a>
           </div>
+          <p style="font-size:.65rem;color:var(--text3);text-align:center;margin-top:6px">通过以上链接预订，本站可获得少量佣金 ❤️</p>
           <p style="font-size:.7rem;color:var(--text3);text-align:center;margin-top:8px">通过以上链接预订，本站可获得少量佣金，不影响你的价格 ❤️</p>
-          <div class="modal-reviews">
             <h4>💬 游客评价 <span style="font-weight:400;font-size:.8rem;color:var(--text3)">(${totalReviews}条)</span></h4>
             <div class="review-form">
               <h5>✍️ 写评价</h5>
@@ -2132,6 +2458,70 @@ html.dark .card.airbnb-card .card-fav-btn .heart-outline {
       openModal(html);
       requestAnimationFrame(() => {
         initGallery();
+        // Anchor navigation scroll tracking
+        const anchorNav = document.getElementById('modalAnchorNav');
+        if (anchorNav) {
+          const modalContent = document.querySelector('.modal');
+          const anchors = anchorNav.querySelectorAll('a');
+          const sections = ['modal-overview','modal-guide','modal-map','modal-reviews'].map(id => document.getElementById(id)).filter(Boolean);
+          
+          anchors.forEach(a => {
+            a.addEventListener('click', e => {
+              e.preventDefault();
+              const target = document.querySelector(a.getAttribute('href'));
+              if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+          });
+          
+          if (modalContent) {
+            modalContent.addEventListener('scroll', () => {
+              let current = '';
+              sections.forEach(sec => {
+                if (sec.getBoundingClientRect().top < 200) current = sec.id;
+              });
+              anchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+            }, { passive: true });
+          }
+        }
+        
+        // Floating action bar favorite button
+        document.querySelector('.modal-fav-btn')?.addEventListener('click', function() {
+          const id = this.dataset.id;
+          let currentFavs = getFavs();
+          if (currentFavs.includes(id)) {
+            currentFavs = currentFavs.filter(f => f !== id);
+            localStorage.setItem('jinan-favs', JSON.stringify(currentFavs));
+            this.textContent = '♡';
+            this.classList.remove('faved');
+            showToast('💔 已取消收藏');
+          } else {
+            currentFavs.push(id);
+            localStorage.setItem('jinan-favs', JSON.stringify(currentFavs));
+            this.textContent = '♥';
+            this.classList.add('faved');
+            showToast('❤️ 已收藏');
+          }
+          updateFavCount();
+        });
+        
+        // Lazy load map - only load iframe when scrolled into view
+        const mapContainer = document.querySelector('.modal-map');
+        if (mapContainer) {
+          const mapIframe = mapContainer.querySelector('iframe');
+          if (mapIframe) {
+            const mapSrc = mapIframe.src;
+            mapIframe.src = '';
+            const mapObserver = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  mapIframe.src = mapSrc;
+                  mapObserver.disconnect();
+                }
+              });
+            }, { rootMargin: '200px' });
+            mapObserver.observe(mapContainer);
+          }
+        }
         document.querySelector('.modal-add-trip')?.addEventListener('click', function() {
           addToTrip(this.dataset.id);
           this.textContent='✓ 已加入'; this.classList.remove('btn-primary'); this.classList.add('btn-outline'); this.disabled=true;

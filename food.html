@@ -1238,10 +1238,12 @@
 
       if (foodCompareList.length === 0) {
         panel.classList.remove('open');
+        updateCompareUI();
         return;
       }
 
       panel.classList.add('open');
+      updateCompareUI();
       const foods = foodCompareList.map(id => allFoods.find(f => f.id === id)).filter(Boolean);
 
       panel.innerHTML = `
@@ -1577,70 +1579,41 @@
       }
     ];
 
-    // ── Compare State ──
-    let compareList = JSON.parse(localStorage.getItem('jinan-food-compare') || '[]');
-    const MAX_COMPARE = 3;
-
-    function saveCompare() {
-      localStorage.setItem('jinan-food-compare', JSON.stringify(compareList));
-      updateCompareUI();
-    }
-
-    function toggleCompare(shopName, foodName) {
-      const idx = compareList.findIndex(c => c.shop === shopName);
-      if (idx >= 0) {
-        compareList.splice(idx, 1);
-      } else {
-        if (compareList.length >= MAX_COMPARE) {
-          alert('最多对比 ' + MAX_COMPARE + ' 家餐厅，请先移除一个');
-          return;
-        }
-        const food = allFoods.find(f => f.name === foodName);
-        const shop = food?.shops.find(s => s.name === shopName);
-        if (shop) {
-          compareList.push({
-            shop: shop.name, food: foodName, avg: shop.avg,
-            rating: shop.rating, bestDish: shop.bestDish || '',
-            wait: shop.wait || '未知', addr: shop.addr || ''
-          });
-        }
-      }
-      saveCompare();
-      renderFoods();
-    }
-
+    // ── Compare UI sync (uses foodCompareList from above) ──
     function updateCompareUI() {
       const fab = document.getElementById('compareFab');
       const count = document.getElementById('compareCount');
-      count.textContent = compareList.length;
-      fab.classList.toggle('visible', compareList.length > 0);
+      if (fab && count) {
+        count.textContent = foodCompareList.length;
+        fab.classList.toggle('visible', foodCompareList.length > 0);
+      }
     }
 
     function renderComparePanel() {
       const content = document.getElementById('compareContent');
-      if (compareList.length === 0) {
-        content.innerHTML = '<div class="compare-empty">还没有添加对比餐厅<br><small style="color:var(--text3)">在美食卡片上点击「对比」按钮添加</small></div>';
+      const foods = foodCompareList.map(id => allFoods.find(f => f.id === id)).filter(Boolean);
+      if (foods.length === 0) {
+        content.innerHTML = '<div class="compare-empty">还没有添加对比美食<br><small style="color:var(--text3)">在美食卡片上点击「加入对比」按钮添加</small></div>';
         return;
       }
       const rows = [
-        { label: '餐厅', key: 'shop' },
-        { label: '菜品', key: 'food' },
-        { label: '人均', key: 'avg' },
-        { label: '评分', key: 'rating', format: v => stars(v) + ' ' + v },
-        { label: '推荐菜', key: 'bestDish' },
-        { label: '等待时间', key: 'wait' },
-        { label: '地址', key: 'addr' }
+        { label: '分类', render: f => f.tag },
+        { label: '人均', render: f => f.shops?.[0]?.avg || '—' },
+        { label: '推荐餐厅', render: f => f.shops?.[0]?.name || '—' },
+        { label: '季节', render: f => f.season || '四季' },
+        { label: '必吃', render: f => f.must ? '🔥 是' : '—' },
+        { label: '餐厅数', render: f => (f.shops?.length || 0) + '家' },
+        { label: '描述', render: f => (f.desc || '—').slice(0, 40) }
       ];
       let html = '<table class="compare-table"><thead><tr><th></th>';
-      compareList.forEach(c => {
-        html += '<th>' + (c.shop.length > 8 ? c.shop.substring(0, 8) + '…' : c.shop) + '</th>';
+      foods.forEach(f => {
+        html += '<th><img src="' + f.img + '" style="width:48px;height:48px;border-radius:8px;object-fit:cover;margin-bottom:4px;display:block"><div style="font-weight:600">' + f.name + '</div><button class="compare-remove" onclick="removeFromFoodCompare(\'' + f.id + '\')" style="font-size:.65rem;color:var(--text3);background:none;border:none;cursor:pointer;margin-top:2px">✕ 移除</button></th>';
       });
       html += '</tr></thead><tbody>';
       rows.forEach(r => {
-        html += '<tr><td>' + r.label + '</td>';
-        compareList.forEach(c => {
-          const val = r.format ? r.format(c[r.key]) : (c[r.key] || '-');
-          html += '<td>' + val + '</td>';
+        html += '<tr><td style="font-weight:600;white-space:nowrap">' + r.label + '</td>';
+        foods.forEach(f => {
+          html += '<td>' + r.render(f) + '</td>';
         });
         html += '</tr>';
       });
@@ -2098,9 +2071,7 @@
       if (e.target === e.currentTarget) e.currentTarget.classList.remove('visible');
     });
     document.getElementById('compareClear').addEventListener('click', () => {
-      compareList = [];
-      saveCompare();
-      renderFoods();
+      clearFoodCompare();
       renderComparePanel();
     });
 

@@ -992,6 +992,50 @@ html.dark .card.meituan-card:hover {
     <div class="section-inner" id="recommendArea"></div>
   </section>
 
+
+  <section class="section" style="padding-top:0" aria-label="探索泉城">
+    <div class="section-inner">
+    <div class="section-inner">
+      <div class="section-header reveal" style="margin-bottom:16px">
+        <div class="eyebrow">全部景点</div>
+        <h2>探索泉城</h2>
+        <p>精选80+景点，发现济南之美</p>
+      </div>
+
+      <div class="map-preview-section reveal" id="mapPreviewSection">
+        <div class="map-preview-card">
+          <div class="map-preview-header">
+            <div class="map-preview-title">
+              <span class="map-icon">🗺️</span>
+              <span>景点地图</span>
+              <span class="map-spot-count" id="mapSpotCount">0 个景点</span>
+            </div>
+            <div class="map-view-toggle" id="mapViewToggle">
+              <button class="map-toggle-btn active" data-view="list" title="列表视图">📋 列表</button>
+              <button class="map-toggle-btn" data-view="map" title="地图视图">🗺️ 地图</button>
+            </div>
+          </div>
+          <div class="map-preview-body" id="mapPreviewBody">
+            <div class="map-preview-svg" id="mapPreviewSvg"></div>
+            <button class="map-expand-btn" id="mapExpandBtn" title="展开全屏地图">
+              <span>⛶</span> 全屏查看
+            </button>
+          </div>
+          <div class="map-top-spots-scroll" id="mapTopSpotsScroll"></div>
+          <div class="map-preview-footer">
+            <div class="map-legend-mini">
+              <span class="legend-dot-mini" style="background:#3b82f6" title="泉水"></span>
+              <span class="legend-dot-mini" style="background:#22c55e" title="自然"></span>
+              <span class="legend-dot-mini" style="background:#a855f7" title="历史"></span>
+              <span class="legend-dot-mini" style="background:#f59e0b" title="美食"></span>
+              <span class="legend-dot-mini" style="background:#14b8a6" title="亲子"></span>
+            </div>
+            <button class="map-view-all-btn" id="mapViewAllBtn">查看全部 <span id="mapViewAllCount">0</span> 个景点 →</button>
+          </div>
+        </div>
+    </div>
+  </section>
+
   <section class="section" style="padding-top:0;padding-bottom:0" aria-label="景点筛选">
     <div class="section-inner">
       <div class="filter-container">
@@ -1070,47 +1114,8 @@ html.dark .card.meituan-card:hover {
     </div>
   </section>
 
-
   <section class="section" style="padding-top:0" aria-label="景点列表">
     <div class="section-inner">
-      <div class="section-header reveal" style="margin-bottom:16px">
-        <div class="eyebrow">全部景点</div>
-        <h2>探索泉城</h2>
-        <p>精选80+景点，发现济南之美</p>
-      </div>
-
-      <!-- ═══ 紧凑型地图模块（美团/大众点评风格） ═══ -->
-      <div class="map-preview-section reveal" id="mapPreviewSection">
-        <div class="map-preview-card">
-          <div class="map-preview-header">
-            <div class="map-preview-title">
-              <span class="map-icon">🗺️</span>
-              <span>景点地图</span>
-              <span class="map-spot-count" id="mapSpotCount">0 个景点</span>
-            </div>
-            <div class="map-view-toggle" id="mapViewToggle">
-              <button class="map-toggle-btn active" data-view="list" title="列表视图">📋 列表</button>
-              <button class="map-toggle-btn" data-view="map" title="地图视图">🗺️ 地图</button>
-            </div>
-          </div>
-          <div class="map-preview-body" id="mapPreviewBody">
-            <div class="map-preview-svg" id="mapPreviewSvg"></div>
-            <button class="map-expand-btn" id="mapExpandBtn" title="展开全屏地图">
-              <span>⛶</span> 全屏查看
-            </button>
-          </div>
-          <div class="map-top-spots-scroll" id="mapTopSpotsScroll"></div>
-          <div class="map-preview-footer">
-            <div class="map-legend-mini">
-              <span class="legend-dot-mini" style="background:#3b82f6" title="泉水"></span>
-              <span class="legend-dot-mini" style="background:#22c55e" title="自然"></span>
-              <span class="legend-dot-mini" style="background:#a855f7" title="历史"></span>
-              <span class="legend-dot-mini" style="background:#f59e0b" title="美食"></span>
-              <span class="legend-dot-mini" style="background:#14b8a6" title="亲子"></span>
-            </div>
-            <button class="map-view-all-btn" id="mapViewAllBtn">查看全部 <span id="mapViewAllCount">0</span> 个景点 →</button>
-          </div>
-        </div>
       </div>
       <div class="sort-header" id="sortHeader">
         <div class="sort-left">

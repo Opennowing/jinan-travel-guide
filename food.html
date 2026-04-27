@@ -731,7 +731,7 @@
         <div class="food-count-bar">
           <span class="food-count-badge" id="foodCountBadge"></span>
           <button class="reset-filter-btn" id="resetFilterBtn" title="重置所有筛选条件" aria-label="重置所有筛选条件">🔄 重置筛选</button>
-          <button class="fav-filter-btn" id="foodFavFilterBtn">❤️ 我的收藏 <span class="fav-count" id="foodFavCountBadge">0</span></button>
+          <button aria-label="我的收藏筛选" class="fav-filter-btn" id="foodFavFilterBtn">❤️ 我的收藏 <span class="fav-count" id="foodFavCountBadge">0</span></button>
         </div>
 
         <!-- 定位提示 -->
@@ -1032,7 +1032,7 @@
         <h3>📊 餐厅对比</h3>
         <div style="display:flex;gap:8px;align-items:center">
           <button class="compare-clear" id="compareClear" aria-label="清空对比">清空对比</button>
-          <button class="compare-close" id="compareClose">✕</button>
+          <button aria-label="关闭对比面板" class="compare-close" id="compareClose">✕</button>
         </div>
       </div>
       <div id="compareContent"></div>
@@ -1167,7 +1167,7 @@
 
             <div class="modal-actions" style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
               <a href="food.html?id=${food.id}" class="btn btn-primary" style="flex:1;justify-content:center">查看详情页 →</a>
-              <button class="btn btn-outline" onclick="window._toggleFoodFav('${food.id}',this);this.textContent=this.classList.contains('active')?'♥ 已收藏':'♡ 收藏'">${isFav ? '♥ 已收藏' : '♡ 收藏'}</button>
+              <button aria-label="收藏美食" class="btn btn-outline" onclick="window._toggleFoodFav('${food.id}',this);this.textContent=this.classList.contains('active')?'♥ 已收藏':'♡ 收藏'">${isFav ? '♥ 已收藏' : '♡ 收藏'}</button>
               <button class="btn btn-outline" onclick="addToFoodCompare('${food.id}')" style="white-space:nowrap" aria-label="📊 加入对比">📊 加入对比</button>
             </div>
           </div>
@@ -1238,7 +1238,7 @@
           <h4>🍜 美食对比 (${foods.length}/${MAX_FOOD_COMPARE})</h4>
           <div class="food-compare-header-actions">
             <button onclick="clearFoodCompare()" style="background:none;border:1px solid var(--border2);padding:4px 12px;border-radius:100px;font-size:.75rem;cursor:pointer;color:var(--text2)" aria-label="清空">清空</button>
-            <button onclick="document.getElementById('foodComparePanel').classList.remove('open')" style="background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text2);padding:4px">✕</button>
+            <button aria-label="关闭" onclick="document.getElementById('foodComparePanel').classList.remove('open')" style="background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text2);padding:4px">✕</button>
           </div>
         </div>
         <div class="food-compare-body">
@@ -1594,7 +1594,7 @@
       ];
       let html = '<table class="compare-table"><thead><tr><th></th>';
       foods.forEach(f => {
-        html += '<th><img src="' + f.img + '" style="width:48px;height:48px;border-radius:8px;object-fit:cover;margin-bottom:4px;display:block"><div style="font-weight:600">' + f.name + '</div><button class="compare-remove" onclick="removeFromFoodCompare(\'' + f.id + '\')" style="font-size:.65rem;color:var(--text3);background:none;border:none;cursor:pointer;margin-top:2px">✕ 移除</button></th>';
+        html += '<th><img src="' + f.img + '" alt="' + f.name + '" style="width:48px;height:48px;border-radius:8px;object-fit:cover;margin-bottom:4px;display:block"><div style="font-weight:600">' + f.name + '</div><button aria-label="从对比中移除" class="compare-remove" onclick="removeFromFoodCompare(\'' + f.id + '\')" style="font-size:.65rem;color:var(--text3);background:none;border:none;cursor:pointer;margin-top:2px">✕ 移除</button></th>';
       });
       html += '</tr></thead><tbody>';
       rows.forEach(r => {
@@ -2360,7 +2360,7 @@
             '<div class="detail-shop-info">' +
               '<span>💰 人均 ' + sh.avg + '</span>' +
               '<span>📍 ' + (sh.addr || '') + '</span>' +
-              '<button class="shop-nav-btn" data-lat="' + (sh.lat||'') + '" data-lng="' + (sh.lng||'') + '" data-name="' + sh.name.replace(/"/g,'&quot;') + '" style="display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border:1px solid var(--border2);border-radius:100px;background:var(--bg1);font-size:.7rem;color:var(--accent);cursor:pointer">🧭 导航</button>' +
+              '<button aria-label="导航到餐厅" class="shop-nav-btn" data-lat="' + (sh.lat||'') + '" data-lng="' + (sh.lng||'') + '" data-name="' + sh.name.replace(/"/g,'&quot;') + '" style="display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border:1px solid var(--border2);border-radius:100px;background:var(--bg1);font-size:.7rem;color:var(--accent);cursor:pointer">🧭 导航</button>' +
               (sh.hours ? '<span>🕐 ' + sh.hours + '</span>' : '') +
             '</div>' +
             (extras ? '<div class="detail-shop-extras">' + extras + '</div>' : '') +
@@ -2415,7 +2415,10 @@
       // 从 food.json 的 categories 动态生成
       const cats = [{ id: '全部', name: '全部', icon: '🍽️' }, ...allCategories];
       container.innerHTML = cats.map(cat =>
-        '<button class="category-capsule' + (cat.id === '全部' && currentCat === '全部' ? ' active' : (currentCat === cat.id ? ' active' : '')) + '" data-cat="' + cat.id + '" role="tab" aria-selected="true">' +
+        '<button aria-label="分类: ' +
+          '' + cat.icon + '' +
+          '' + cat.name + '' +
+        '" class="category-capsule' + (cat.id === '全部' && currentCat === '全部' ? ' active' : (currentCat === cat.id ? ' active' : '')) + '" data-cat="' + cat.id + '" role="tab" aria-selected="true">' +
           '<span class="capsule-icon">' + cat.icon + '</span>' +
           '<span>' + cat.name + '</span>' +
         '</button>'

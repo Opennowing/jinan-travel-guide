@@ -121,7 +121,6 @@ export async function loadSpots(onLoading, onError) {
   // 1. 尝试缓存
   const cached = getCache('spots');
   if (cached && validateSpots(cached)) {
-    console.log('[DataLoader] 使用缓存的景点数据');
     onLoading?.(false);
     return cached;
   }
@@ -153,7 +152,6 @@ export async function loadFoods(onLoading, onError) {
   // 1. 尝试缓存
   const cached = getCache('foods');
   if (cached && validateFoods(cached)) {
-    console.log('[DataLoader] 使用缓存的美食数据');
     onLoading?.(false);
     return cached;
   }

@@ -671,8 +671,8 @@ export function logPerformance() {
   if (!window.performance) return;
   const nav = performance.getEntriesByType('navigation')[0];
   if (nav) {
-    console.log(`[Perf] DOMContentLoaded: ${Math.round(nav.domContentLoadedEventEnd)}ms`);
-    console.log(`[Perf] Load: ${Math.round(nav.loadEventEnd)}ms`);
+    if (location.hostname === "localhost") console.log(`[Perf] DOMContentLoaded: ${Math.round(nav.domContentLoadedEventEnd)}ms`);
+    if (location.hostname === "localhost") console.log(`[Perf] Load: ${Math.round(nav.loadEventEnd)}ms`);
   }
 }
 

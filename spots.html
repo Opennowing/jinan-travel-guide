@@ -1168,7 +1168,7 @@ html.dark .card.meituan-card:hover {
             </div>
           </div>
           <div class="map-preview-body" id="mapPreviewBody">
-            <div class="imap-container" id="imapContainer"><canvas id="imapCanvas"></canvas><div class="imap-zoom-ctrl"><button class="imap-zoom-btn" id="imapZoomIn" title="放大">+</button><button class="imap-zoom-btn" id="imapZoomOut" title="缩小">−</button></div><button class="imap-locate-btn" id="imapLocateBtn" title="我的位置">📍</button><div class="imap-legend" id="imapLegend"></div><div class="imap-tooltip" id="imapTooltip"></div></div>
+            <div class="imap-container" id="imapContainer"><canvas id="imapCanvas"></canvas><div class="imap-zoom-ctrl"><button aria-label="放大地图" class="imap-zoom-btn" id="imapZoomIn" title="放大">+</button><button aria-label="缩小地图" class="imap-zoom-btn" id="imapZoomOut" title="缩小">−</button></div><button aria-label="定位我的位置" class="imap-locate-btn" id="imapLocateBtn" title="我的位置">📍</button><div class="imap-legend" id="imapLegend"></div><div class="imap-tooltip" id="imapTooltip"></div></div>
             <button class="map-expand-btn" id="mapExpandBtn" title="展开全屏地图" aria-label="展开全屏地图">
               <span>⛶</span> 全屏查看
             </button>
@@ -1182,7 +1182,7 @@ html.dark .card.meituan-card:hover {
               <span class="legend-dot-mini" style="background:#f59e0b" title="美食"></span>
               <span class="legend-dot-mini" style="background:#14b8a6" title="亲子"></span>
             </div>
-            <button class="map-view-all-btn" id="mapViewAllBtn">查看全部 <span id="mapViewAllCount">0</span> 个景点 →</button>
+            <button aria-label="查看全部 0 个景点 →" class="map-view-all-btn" id="mapViewAllBtn">查看全部 <span id="mapViewAllCount">0</span> 个景点 →</button>
           </div>
         </div>
       </div>
@@ -1216,7 +1216,7 @@ html.dark .card.meituan-card:hover {
           </div>
         </div>
         <div class="filter-core-row" style="margin-top:8px">
-          <button class="more-filters-btn" id="moreFiltersBtn" aria-expanded="false" aria-controls="collapsibleFilters">
+          <button aria-label="更多筛选" class="more-filters-btn" id="moreFiltersBtn" aria-expanded="false" aria-controls="collapsibleFilters">
             🔍 更多筛选 <span class="arrow">▼</span>
             <span class="filter-active-badge" id="filterActiveBadge" style="display:none">0</span>
           </button>
@@ -1259,7 +1259,7 @@ html.dark .card.meituan-card:hover {
         <div class="filter-bottom-row">
           <div style="display:flex;align-items:center;gap:12px">
             <span class="count-badge" id="spotCount"></span>
-            <button class="fav-filter-btn" id="favFilterBtn">❤️ 我的收藏 <span class="fav-count" id="favCountBadge">0</span></button>
+            <button aria-label="我的收藏筛选" class="fav-filter-btn" id="favFilterBtn">❤️ 我的收藏 <span class="fav-count" id="favCountBadge">0</span></button>
           </div>
           <button class="reset-filters-btn" id="resetFiltersBtn" title="重置所有筛选条件" aria-label="重置所有筛选条件">🔄 重置筛选</button>
         </div>
@@ -1319,7 +1319,7 @@ html.dark .card.meituan-card:hover {
         </div>
       </div>
       <!-- Search this area button -->
-      <button class="map-search-area" id="mapSearchArea">🔍 搜索此区域</button>
+      <button aria-label="搜索此区域" class="map-search-area" id="mapSearchArea">🔍 搜索此区域</button>
       <!-- Leaflet map -->
       <div id="leafletMap" style="height:480px;width:100%;background:var(--bg2,#f0ede8)"></div>
       <!-- Fallback: offline SVG map -->
@@ -1334,11 +1334,11 @@ html.dark .card.meituan-card:hover {
   </main>
 
   <!-- 对比面板 -->
-  <button class="compare-open-btn" id="compareOpenBtn">⚖️ 对比 <span id="compareCountBtn">0</span>/3</button>
+  <button aria-label="打开对比面板" class="compare-open-btn" id="compareOpenBtn">⚖️ 对比 <span id="compareCountBtn">0</span>/3</button>
   <div class="compare-bar" id="compareBar">
     <div class="compare-header">
       <h4>⚖️ 景点对比</h4>
-      <button class="compare-close" id="compareCloseBtn">✕</button>
+      <button aria-label="关闭对比面板" class="compare-close" id="compareCloseBtn">✕</button>
     </div>
     <div id="compareContent"></div>
   </div>
@@ -1728,12 +1728,12 @@ html.dark .card.meituan-card:hover {
         overlay.innerHTML = `
           <div class="map-fullscreen-header">
             <h3>🗺️ 济南景点地图</h3>
-            <button class="map-fullscreen-close" id="mapFullscreenClose">✕</button>
+            <button aria-label="关闭全屏地图" class="map-fullscreen-close" id="mapFullscreenClose">✕</button>
           </div>
           <div class="map-fullscreen-body">
-            <div class="imap-container" id="imapFullscreenContainer" style="height:60vh"><canvas id="imapFullscreenCanvas"></canvas><div class="imap-zoom-ctrl"><button class="imap-zoom-btn" onclick="window._imapFs&&window._imapFs._setZoom(window._imapFs.zoom*1.3,window._imapFs.cw/2,window._imapFs.ch/2)">+</button><button class="imap-zoom-btn" onclick="window._imapFs&&window._imapFs._setZoom(window._imapFs.zoom/1.3,window._imapFs.cw/2,window._imapFs.ch/2)">−</button></div><button class="imap-locate-btn" onclick="window._imapFs&&window._imapFs._locateUser()">📍</button><div class="imap-legend" id="imapFsLegend"></div></div>
+            <div class="imap-container" id="imapFullscreenContainer" style="height:60vh"><canvas id="imapFullscreenCanvas"></canvas><div class="imap-zoom-ctrl"><button aria-label="放大地图" class="imap-zoom-btn" onclick="window._imapFs&&window._imapFs._setZoom(window._imapFs.zoom*1.3,window._imapFs.cw/2,window._imapFs.ch/2)">+</button><button aria-label="缩小地图" class="imap-zoom-btn" onclick="window._imapFs&&window._imapFs._setZoom(window._imapFs.zoom/1.3,window._imapFs.cw/2,window._imapFs.ch/2)">−</button></div><button aria-label="定位我的位置" class="imap-locate-btn" onclick="window._imapFs&&window._imapFs._locateUser()">📍</button><div class="imap-legend" id="imapFsLegend"></div></div>
             <div class="map-fullscreen-spots">
-              ${topSpots.map(s => `<button class="map-fullscreen-spot-chip" onclick="scrollToSpot('${s.id}');closeMapFullscreen()">📍 ${s.name}</button>`).join('')}
+              ${topSpots.map(s => `<button aria-label="${s.name}" class="map-fullscreen-spot-chip" onclick="scrollToSpot('${s.id}');closeMapFullscreen()">📍 ${s.name}</button>`).join('')}
             </div>
           </div>`;
         document.body.appendChild(overlay);
@@ -2145,10 +2145,10 @@ html.dark .card.meituan-card:hover {
         overlay.id = 'lightboxOverlay';
         overlay.className = 'lightbox-overlay';
         overlay.innerHTML = `
-          <button class="lightbox-close" id="lbClose">✕</button>
-          <button class="lightbox-nav prev" id="lbPrev">‹</button>
+          <button aria-label="关闭灯箱" class="lightbox-close" id="lbClose">✕</button>
+          <button aria-label="上一张图片" class="lightbox-nav prev" id="lbPrev">‹</button>
           <img id="lbImg" src="" alt="">
-          <button class="lightbox-nav next" id="lbNext">›</button>
+          <button aria-label="下一张图片" class="lightbox-nav next" id="lbNext">›</button>
           <div class="lightbox-dots" id="lbDots"></div>
           <div class="lightbox-counter" id="lbCounter"></div>
         `;
@@ -2327,14 +2327,14 @@ html.dark .card.meituan-card:hover {
               <div class="review-card-text">${escapeHtml(r.text)}</div>
               ${imgsHtml}
               <div class="review-card-actions">
-                <button class="review-helpful-btn" data-type="helpful" data-review-id="${r.name}-${r.time||r.date}" onclick="voteReview(this,'helpful')">👍 有用 <span>${r.helpful||''}</span></button>
-                <button class="review-helpful-btn" data-type="unhelpful" data-review-id="${r.name}-${r.time||r.date}" onclick="voteReview(this,'unhelpful')">👎 没用 <span>${r.unhelpful||''}</span></button>
+                <button aria-label="标记为有用" class="review-helpful-btn" data-type="helpful" data-review-id="${r.name}-${r.time||r.date}" onclick="voteReview(this,'helpful')">👍 有用 <span>${r.helpful||''}</span></button>
+                <button aria-label="标记为无用" class="review-helpful-btn" data-type="unhelpful" data-review-id="${r.name}-${r.time||r.date}" onclick="voteReview(this,'unhelpful')">👎 没用 <span>${r.unhelpful||''}</span></button>
               </div>
             </div>`;
         }).join('');
       }
 
-      const reviewsSortHtml = `<div class="review-sort-bar"><button class="review-sort-btn active" data-sort="latest" onclick="switchReviewSort(this,'latest')">最新</button><button class="review-sort-btn" data-sort="helpful" onclick="switchReviewSort(this,'helpful')">最有用</button></div>`;
+      const reviewsSortHtml = `<div class="review-sort-bar"><button aria-label="按最新排序" class="review-sort-btn active" data-sort="latest" onclick="switchReviewSort(this,'latest')">最新</button><button aria-label="按最有用排序" class="review-sort-btn" data-sort="helpful" onclick="switchReviewSort(this,'helpful')">最有用</button></div>`;
       const reviewsHtml = reviewsStatsHtml + reviewsSortHtml + `<div id="reviewListContainer">${renderReviewList('latest')}</div>`;
 
       // ── 拍照攻略模块 ──
@@ -2402,7 +2402,7 @@ html.dark .card.meituan-card:hover {
             <div class="modal-info-item info-extra"><div class="label">💰 优惠政策</div><div class="value">${s.discount||'无'}</div></div>
           <!-- History Story Module -->
           </div>
-          <button class="modal-info-toggle" onclick="this.previousElementSibling.classList.toggle('expanded');this.classList.toggle('expanded');this.querySelector('.toggle-text').textContent=this.classList.contains('expanded')?'收起':'查看更多'"><span class="toggle-text">查看更多</span> <span class="toggle-arrow">▼</span></button>
+          <button aria-label="查看更多信息" class="modal-info-toggle" onclick="this.previousElementSibling.classList.toggle('expanded');this.classList.toggle('expanded');this.querySelector('.toggle-text').textContent=this.classList.contains('expanded')?'收起':'查看更多'"><span class="toggle-text">查看更多</span> <span class="toggle-arrow">▼</span></button>
           ${s.history ? `
           <div class="modal-history" id="modal-guide">
             <h4>📜 时光故事</h4>
@@ -2441,7 +2441,7 @@ html.dark .card.meituan-card:hover {
               <h5>✍️ 写评价</h5>
               <div class="star-input" id="starInput">${[1,2,3,4,5].map(i => `<span data-val="${i}">☆</span>`).join('')}</div>
               <div class="review-tags-quick" id="reviewTagsQuick">
-                ${['值得去','性价比高','人少景美','需要排队','适合拍照','适合亲子','环境优美','交通方便'].map(t => `<button type="button" class="review-tag-btn" data-tag="${t}">${t}</button>`).join('')}
+                ${['值得去','性价比高','人少景美','需要排队','适合拍照','适合亲子','环境优美','交通方便'].map(t => `<button aria-label="评价标签: ${t}" type="button" class="review-tag-btn" data-tag="${t}">${t}</button>`).join('')}
               </div>
               <textarea class="review-input" id="reviewText" placeholder="分享你的游玩体验…" maxlength="500"></textarea>
               <div class="review-img-upload" id="reviewImgUpload">
@@ -2588,7 +2588,7 @@ html.dark .card.meituan-card:hover {
           uploadedImages.forEach((src, idx) => {
             const wrap = document.createElement('div');
             wrap.className = 'review-img-preview-wrap';
-            wrap.innerHTML = `<img class="review-img-preview" src="${src}" alt="预览"><button class="img-remove" data-idx="${idx}" onclick="removeReviewImg(${idx})">✕</button>`;
+            wrap.innerHTML = `<img class="review-img-preview" src="${src}" alt="预览"><button aria-label="移除图片" class="img-remove" data-idx="${idx}" onclick="removeReviewImg(${idx})">✕</button>`;
             container.insertBefore(wrap, label);
           });
           label.style.display = uploadedImages.length >= 3 ? 'none' : '';
@@ -2889,7 +2889,7 @@ html.dark .card.meituan-card:hover {
         const el = document.createElement('div');
         el.className = 'imap-popup';
         el.innerHTML = `
-          <button class="imap-popup-close" onclick="window._imap && window._imap._hidePopup()">✕</button>
+          <button aria-label="关闭弹窗" class="imap-popup-close" onclick="window._imap && window._imap._hidePopup()">✕</button>
           <img class="imap-popup-img" src="${spot.img}" alt="${spot.name}" onerror="this.src=imgFallback('${spot.name}')">
           <div class="imap-popup-body">
             <div class="imap-popup-name">
@@ -2902,8 +2902,8 @@ html.dark .card.meituan-card:hover {
               <span>${spot.dur||''}</span>
             </div>
             <div class="imap-popup-actions">
-              <button class="imap-popup-btn primary" onclick="window._imap._showRoute(${spot.lat},${spot.lng},'${spot.name.replace(/'/g,"\\'")}')">🧭 到这去</button>
-              <button class="imap-popup-btn secondary" onclick="scrollToSpot('${spot.id}');window._imap._hidePopup()">📋 详情</button>
+              <button aria-label="🧭 到这去" class="imap-popup-btn primary" onclick="window._imap._showRoute(${spot.lat},${spot.lng},'${spot.name.replace(/'/g,"\\'")}')">🧭 到这去</button>
+              <button aria-label="查看详情" class="imap-popup-btn secondary" onclick="scrollToSpot('${spot.id}');window._imap._hidePopup()">📋 详情</button>
             </div>
           </div>`;
         let left = sx - rect.left - 130;
@@ -2943,7 +2943,7 @@ html.dark .card.meituan-card:hover {
         const el = document.createElement('div');
         el.className = 'imap-route-info';
         el.innerHTML = `
-          <button class="imap-route-close" onclick="window._imap._hideRoute()">✕</button>
+          <button aria-label="关闭路线" class="imap-route-close" onclick="window._imap._hideRoute()">✕</button>
           <div class="route-title">📍 ${this.routeTarget.name}</div>
           <div class="route-detail">
             <span>📏 直线 ${d.toFixed(1)}km</span>
@@ -2951,8 +2951,8 @@ html.dark .card.meituan-card:hover {
             <span>🚗 驾车约${driveMin}分钟</span>
           </div>
           <div class="route-actions">
-            <button class="imap-popup-btn primary" style="flex:1" onclick="window.open('https://uri.amap.com/navigation?to=${this.routeTarget.lng},${this.routeTarget.lat},${encodeURIComponent(this.routeTarget.name)}&mode=walk&coordinate=gaode','_blank')">🗺️ 高德导航</button>
-            <button class="imap-popup-btn secondary" style="flex:1" onclick="window.open('https://api.map.baidu.com/direction?destination=${this.routeTarget.lat},${this.routeTarget.lng}&mode=walking&coord_type=gcj02','_blank')">🅱️ 百度导航</button>
+            <button aria-label="导航到这里" class="imap-popup-btn primary" style="flex:1" onclick="window.open('https://uri.amap.com/navigation?to=${this.routeTarget.lng},${this.routeTarget.lat},${encodeURIComponent(this.routeTarget.name)}&mode=walk&coordinate=gaode','_blank')">🗺️ 高德导航</button>
+            <button aria-label="百度地图导航" class="imap-popup-btn secondary" style="flex:1" onclick="window.open('https://api.map.baidu.com/direction?destination=${this.routeTarget.lat},${this.routeTarget.lng}&mode=walking&coord_type=gcj02','_blank')">🅱️ 百度导航</button>
           </div>`;
         this.container.appendChild(el);
         this.routeInfoEl = el;

@@ -1,0 +1,1522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="icon" href="/jinan-travel-guide/icons/icon-192.png" type="image/png">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>景点 · 玩乐 — 济南旅游攻略</title>
+  <meta name="description" content="济南景点大全：趵突泉、大明湖、千佛山、五龙潭、黑虎泉等30+精选景点，附地图、门票、交通、评价。泉城济南必游景点攻略。">
+  <meta name="keywords" content="济南景点,趵突泉,大明湖,千佛山,五龙潭,黑虎泉,济南旅游景点">
+  <meta property="og:title" content="景点 · 玩乐 — 济南旅游攻略">
+  <meta property="og:description" content="济南30+精选景点，趵突泉、大明湖、千佛山，附地图与攻略">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://opennowing.github.io/jinan-travel-guide/spots.html">
+  <meta property="og:image" content="https://opennowing.github.io/jinan-travel-guide/public/banner.jpg">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="景点 · 玩乐 — 济南旅游攻略">
+  <meta name="twitter:description" content="济南30+精选景点，附地图与攻略">
+  <meta name="twitter:image" content="https://opennowing.github.io/jinan-travel-guide/public/banner.jpg">
+  <link rel="canonical" href="https://opennowing.github.io/jinan-travel-guide/spots.html">
+  <meta name="author" content="泉城攻略">
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://opennowing.github.io/jinan-travel-guide/" },
+      { "@type": "ListItem", "position": 2, "name": "景点", "item": "https://opennowing.github.io/jinan-travel-guide/spots.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "济南旅游景点",
+    "description": "济南精选景点列表，包含趵突泉、大明湖、千佛山等著名景点",
+    "numberOfItems": 15,
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "item": { "@type": "TouristAttraction", "name": "趵突泉", "description": "天下第一泉，三窟并发，水涌若轮", "address": { "@type": "PostalAddress", "addressLocality": "济南市", "addressRegion": "山东省" }, "geo": { "@type": "GeoCoordinates", "latitude": 36.6636, "longitude": 116.9986 } } },
+      { "@type": "ListItem", "position": 2, "item": { "@type": "TouristAttraction", "name": "大明湖", "description": "四面荷花三面柳，一城山色半城湖", "address": { "@type": "PostalAddress", "addressLocality": "济南市", "addressRegion": "山东省" }, "geo": { "@type": "GeoCoordinates", "latitude": 36.6778, "longitude": 117.0228 } } },
+      { "@type": "ListItem", "position": 3, "item": { "@type": "TouristAttraction", "name": "千佛山", "description": "登顶俯瞰全城，佛像石刻", "address": { "@type": "PostalAddress", "addressLocality": "济南市", "addressRegion": "山东省" }, "geo": { "@type": "GeoCoordinates", "latitude": 36.6511, "longitude": 117.0386 } } },
+      { "@type": "ListItem", "position": 4, "item": { "@type": "TouristAttraction", "name": "五龙潭", "description": "小众秘境，秦琼故宅旧址", "address": { "@type": "PostalAddress", "addressLocality": "济南市", "addressRegion": "山东省" } } },
+      { "@type": "ListItem", "position": 5, "item": { "@type": "TouristAttraction", "name": "黑虎泉", "description": "泉水从三个石雕虎头喷涌而出", "address": { "@type": "PostalAddress", "addressLocality": "济南市", "addressRegion": "山东省" } } }
+    ]
+  }
+  </script>
+  <link rel="manifest" href="/jinan-travel-guide/manifest.json">
+  <meta name="theme-color" content="#c9a96e">
+  <style>
+    .filter-section{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;margin-bottom:20px}
+    .filter-group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+    .filter-group-label{font-size:.8rem;font-weight:700;color:var(--text);letter-spacing:.06em;margin-right:8px;white-space:nowrap;display:flex;align-items:center;gap:4px}
+    .sort-wrap{display:flex;align-items:center;gap:6px;margin-left:auto}
+    .sort-wrap label{font-size:.75rem;color:var(--text3);white-space:nowrap}
+    .sort-select{padding:6px 14px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.75rem;color:var(--text2);cursor:pointer;outline:none;transition:all .3s}
+    .sort-select:hover{border-color:var(--accent)}
+    .spot-badge{position:absolute;top:12px;left:12px;z-index:2}
+    .spot-price{position:absolute;top:12px;left:12px;z-index:2;background:rgba(0,0,0,.6);color:#fff;padding:3px 10px;border-radius:100px;font-size:.7rem;font-weight:600;backdrop-filter:blur(4px)}
+    .spot-price .free-tag{color:#5eead4}
+    .card-body .card-stars{color:#f59e0b;font-size:.75rem;letter-spacing:1px}
+    .card-body .desc{-webkit-line-clamp:3;line-clamp:3}
+    .card-info{display:flex;flex-wrap:wrap;gap:4px 10px;margin-top:8px;font-size:.75rem;color:var(--text3);align-items:center}
+    .card-info .info-item{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+    .card-info .info-dot{width:3px;height:3px;border-radius:50%;background:var(--text3);opacity:.4}
+    .card-tags{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+    .card-actions{display:flex;gap:6px;margin-top:auto;padding-top:10px}
+    .card-actions .btn{flex:1;justify-content:center;font-size:.78rem;padding:6px 8px}
+    .count-badge{font-size:.75rem;color:var(--text3);font-weight:500}
+    .count-badge strong{color:var(--text);font-weight:700;font-size:.85rem}
+    .empty-state{text-align:center;padding:80px 20px;color:var(--text3)}
+    .empty-state .emoji{font-size:3rem;margin-bottom:12px}
+    #map-container{width:100%;height:400px;border-radius:var(--radius-lg);overflow:hidden}
+    .custom-marker{background:none!important;border:none!important}
+    .map-legend{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:12px;font-size:.75rem;color:var(--text2)}
+    .map-legend span{display:flex;align-items:center;gap:4px}
+    .audience-bar{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+    .audience-btn{padding:4px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.7rem;cursor:pointer;transition:all .3s;color:var(--text3)}
+    .audience-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.1)}
+    .audience-btn.active{border-color:var(--accent);background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(201,169,110,.25)}
+    .modal-gallery{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:#000}
+    .gallery-track{display:flex;transition:transform .4s cubic-bezier(.25,.46,.45,.94);height:100%}
+    .gallery-slide{flex:0 0 100%;height:100%}
+    .gallery-slide img{width:100%;height:100%;object-fit:cover}
+    .gallery-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;border:none;cursor:pointer;font-size:1.2rem;display:flex;align-items:center;justify-content:center;z-index:3;transition:all .2s;backdrop-filter:blur(4px)}
+    .gallery-btn:hover{background:rgba(0,0,0,.8)}
+    .gallery-btn.prev{left:12px}
+    .gallery-btn.next{right:12px}
+    .gallery-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:3}
+    .gallery-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);border:none;cursor:pointer;transition:all .3s}
+    .gallery-dot.active{background:#fff;width:20px;border-radius:4px}
+    .gallery-counter{position:absolute;top:16px;right:16px;background:rgba(0,0,0,.6);color:#fff;padding:4px 10px;border-radius:100px;font-size:.7rem;font-weight:600;z-index:3;backdrop-filter:blur(4px)}
+    .modal-map{width:100%;height:140px;border-radius:10px;overflow:hidden;margin-bottom:16px;position:relative;background:var(--bg3)}
+    .modal-map iframe{width:100%;height:100%;border:none}
+    .static-map{margin:16px 0;box-shadow:var(--shadow);transition:box-shadow .3s}
+    .static-map:hover{box-shadow:var(--shadow-lg)}
+    .static-map svg{background:linear-gradient(135deg,var(--bg2),var(--bg3))}
+    /* ── 今日推荐 ── */
+    .recommend-card{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:var(--radius-lg);padding:24px 28px;color:#fff;position:relative;overflow:hidden;margin-bottom:24px}
+    .recommend-card::before{content:'';position:absolute;top:-30%;right:-10%;width:200px;height:200px;background:rgba(255,255,255,.08);border-radius:50%}
+    .recommend-card .rec-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;opacity:.8;margin-bottom:8px}
+    .recommend-card h3{font-size:1.25rem;margin-bottom:6px}
+    .recommend-card p{font-size:.85rem;opacity:.9;line-height:1.5}
+    .recommend-card .rec-meta{display:flex;gap:16px;margin-top:12px;font-size:.8rem;opacity:.85;flex-wrap:wrap}
+    .recommend-card .rec-btn{display:inline-flex;align-items:center;gap:6px;margin-top:14px;padding:8px 20px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);border-radius:100px;color:#fff;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .3s;backdrop-filter:blur(4px)}
+    .recommend-card .rec-btn:hover{background:rgba(255,255,255,.35)}
+    .rec-season-tag{position:absolute;top:16px;right:20px;background:rgba(255,255,255,.18);padding:4px 12px;border-radius:100px;font-size:.7rem;font-weight:600;backdrop-filter:blur(4px)}
+    /* ── 收藏筛选 ── */
+    .fav-filter-btn{padding:6px 14px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.75rem;cursor:pointer;transition:all .3s;color:var(--text3);display:flex;align-items:center;gap:4px}
+    .fav-filter-btn:hover,.fav-filter-btn.active{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.08)}
+    .fav-filter-btn .fav-count{background:var(--accent);color:#fff;font-size:.65rem;padding:1px 6px;border-radius:100px;font-weight:700}
+    /* ── 卡片按钮 ── */
+    .card-fav-btn{position:absolute;top:12px;right:12px;z-index:3;width:34px;height:34px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .25s;backdrop-filter:blur(6px);background:rgba(0,0,0,.35);color:#fff;opacity:1;transform:none}
+    .card-fav-btn:hover{background:rgba(239,68,68,.85);transform:scale(1.1)}
+    .card-fav-btn.faved{background:rgba(239,68,68,.9)}
+    .card-action-icon{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border:1px solid var(--border2);background:var(--bg);border-radius:8px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text3);font-weight:500}
+    .card-action-icon:hover{border-color:var(--accent);color:var(--accent);background:var(--accent2)}
+    .card-action-icon.active{border-color:var(--teal);color:var(--teal);background:rgba(42,157,143,.08)}
+    /* ── 时长筛选 ── */
+    .duration-filter-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:12px}
+    .duration-btn{padding:4px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.7rem;cursor:pointer;transition:all .3s;color:var(--text3)}
+    .duration-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.1)}
+    .duration-btn.active{border-color:var(--accent);background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(201,169,110,.25)}
+    /* ── 对比面板 ── */
+    .compare-bar{position:fixed;bottom:0;left:0;right:0;z-index:400;background:var(--bg);border-top:2px solid var(--accent);box-shadow:0 -4px 24px rgba(0,0,0,.15);transform:translateY(100%);transition:transform .35s var(--ease-out);padding:16px 24px;max-height:50vh;overflow-y:auto}
+    .compare-bar.open{transform:translateY(0)}
+    .compare-bar .compare-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+    .compare-bar .compare-header h4{font-size:1rem;font-weight:700;margin:0}
+    .compare-bar .compare-close{background:none;border:none;font-size:1.2rem;cursor:pointer;color:var(--text3);padding:4px}
+    .compare-table{width:100%;border-collapse:collapse;font-size:.8rem}
+    .compare-table th{text-align:left;padding:8px 12px;background:var(--bg2);color:var(--text3);font-weight:600;white-space:nowrap;width:100px;vertical-align:top}
+    .compare-table td{padding:8px 12px;border-bottom:1px solid var(--border2);vertical-align:top}
+    .compare-table .compare-name{font-weight:700;font-size:.9rem;color:var(--text)}
+    .compare-table .compare-remove{color:#ef4444;cursor:pointer;font-size:.75rem;margin-left:4px}
+    .compare-open-btn{position:fixed;bottom:20px;right:20px;z-index:350;padding:10px 20px;border-radius:100px;border:none;cursor:pointer;font-size:.85rem;font-weight:600;background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;box-shadow:0 4px 16px rgba(59,130,246,.35);transition:all .3s;display:none;align-items:center;gap:6px}
+    .compare-open-btn.show{display:flex}
+    .compare-open-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(59,130,246,.45)}
+    /* ── 地图增强 ── */
+    .map-controls{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+    .map-legend-btn{padding:4px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.7rem;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:4px;color:var(--text3)}
+    .map-legend-btn:hover,.map-legend-btn.active{border-color:var(--accent);color:var(--accent)}
+    .map-legend-btn .legend-dot{width:8px;height:8px;border-radius:50%}
+    .locate-btn{padding:6px 14px;border:1px solid var(--teal);background:rgba(42,157,143,.08);border-radius:100px;font-size:.75rem;cursor:pointer;color:var(--teal);font-weight:600;transition:all .3s;display:flex;align-items:center;gap:4px}
+    .locate-btn:hover{background:var(--teal);color:#fff}
+    /* ═══ Interactive Canvas Map ═══ */
+    .imap-container{position:relative;width:100%;height:420px;border-radius:16px;overflow:hidden;background:var(--bg2);touch-action:none;user-select:none}
+    .imap-container canvas{display:block;width:100%;height:100%;cursor:grab}
+    .imap-container canvas:active{cursor:grabbing}
+    .imap-zoom-ctrl{position:absolute;top:12px;right:12px;display:flex;flex-direction:column;gap:4px;z-index:10}
+    .imap-zoom-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .imap-zoom-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .imap-locate-btn{position:absolute;top:12px;left:12px;width:36px;height:36px;border-radius:10px;border:1px solid var(--teal);background:rgba(42,157,143,.1);color:var(--teal);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .imap-locate-btn:hover{background:var(--teal);color:#fff}
+    .imap-locate-btn.active{background:var(--teal);color:#fff;animation:imap-pulse-btn 2s infinite}
+    @keyframes imap-pulse-btn{0%,100%{box-shadow:0 0 0 0 rgba(42,157,143,.4)}50%{box-shadow:0 0 0 8px rgba(42,157,143,0)}}
+    .imap-legend{position:absolute;bottom:12px;right:12px;background:var(--bg);border:1px solid var(--border2);border-radius:12px;padding:8px 12px;z-index:10;display:flex;flex-direction:column;gap:4px;font-size:.7rem;color:var(--text2);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+    .imap-legend-item{display:flex;align-items:center;gap:6px;white-space:nowrap}
+    .imap-legend-dot{width:10px;height:10px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5);flex-shrink:0}
+    .imap-popup{position:absolute;z-index:20;background:var(--bg);border:1px solid var(--border2);border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,.15);width:260px;overflow:hidden;pointer-events:auto;transform-origin:bottom center;opacity:0;transform:scale(.6) translateY(10px);transition:all .35s cubic-bezier(.34,1.56,.64,1)}
+    .imap-popup.show{opacity:1;transform:scale(1) translateY(0)}
+    .imap-popup-img{width:100%;height:120px;object-fit:cover;display:block}
+    .imap-popup-body{padding:10px 14px}
+    .imap-popup-name{font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:4px;display:flex;align-items:center;gap:6px}
+    .imap-popup-cat{font-size:.65rem;padding:2px 8px;border-radius:100px;font-weight:600}
+    .imap-popup-meta{display:flex;align-items:center;gap:10px;font-size:.75rem;color:var(--text3);margin-bottom:8px}
+    .imap-popup-rating{color:#f59e0b;font-weight:600}
+    .imap-popup-price{color:var(--accent);font-weight:600}
+    .imap-popup-actions{display:flex;gap:6px}
+    .imap-popup-btn{flex:1;padding:7px 0;border-radius:8px;border:none;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s}
+    .imap-popup-btn.primary{background:var(--accent);color:#fff}
+    .imap-popup-btn.primary:hover{background:var(--accent-hover)}
+    .imap-popup-btn.secondary{background:var(--bg2);color:var(--text2);border:1px solid var(--border2)}
+    .imap-popup-btn.secondary:hover{border-color:var(--accent);color:var(--accent)}
+    .imap-popup-close{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;border:none;background:rgba(0,0,0,.5);color:#fff;font-size:.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+    .imap-popup-close:hover{background:rgba(0,0,0,.8)}
+    .imap-cluster{position:absolute;z-index:5;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;border:2.5px solid var(--bg);box-shadow:0 2px 8px rgba(0,0,0,.2);cursor:pointer;transition:transform .2s;pointer-events:auto}
+    .imap-cluster:hover{transform:scale(1.15)}
+    .imap-route-info{position:absolute;bottom:12px;left:12px;background:var(--bg);border:1px solid var(--border2);border-radius:12px;padding:10px 14px;z-index:15;font-size:.8rem;color:var(--text);box-shadow:0 4px 16px rgba(0,0,0,.1);max-width:280px}
+    .imap-route-info .route-title{font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+    .imap-route-info .route-detail{display:flex;gap:12px;font-size:.75rem;color:var(--text3);margin-bottom:8px}
+    .imap-route-info .route-actions{display:flex;gap:6px}
+    .imap-route-close{position:absolute;top:6px;right:8px;background:none;border:none;font-size:.9rem;cursor:pointer;color:var(--text3)}
+    .imap-tooltip{position:absolute;z-index:25;background:var(--text);color:var(--bg);padding:4px 10px;border-radius:6px;font-size:.72rem;font-weight:500;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s;transform:translateX(-50%)}
+    .imap-tooltip.show{opacity:1}
+    @media(max-width:640px){
+      .imap-container{height:350px;border-radius:12px}
+      .imap-popup{width:220px}
+      .imap-popup-img{height:90px}
+      .imap-legend{padding:6px 8px;font-size:.65rem}
+    }
+    /* ── 语音导览 ── */
+    .tts-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border:1px solid var(--accent);background:rgba(42,157,143,.06);border-radius:100px;font-size:.85rem;cursor:pointer;color:var(--accent);font-weight:600;transition:all .3s}
+    .tts-btn:hover{background:var(--accent);color:#fff}
+    .tts-btn.playing{background:var(--accent);color:#fff;animation:pulse-tts 1.5s infinite}
+    @keyframes pulse-tts{0%,100%{box-shadow:0 0 0 0 rgba(42,157,143,.4)}50%{box-shadow:0 0 0 8px rgba(42,157,143,0)}}
+    .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--text);color:var(--bg);padding:10px 24px;border-radius:100px;font-size:.85rem;font-weight:500;z-index:500;opacity:0;transition:all .3s var(--ease-out);pointer-events:none}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    /* ══ Review System Enhanced ══ */
+    .review-stats{background:var(--bg2);border-radius:12px;padding:16px;margin-bottom:16px;display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+    .review-stats-score{text-align:center;min-width:80px}
+    .review-stats-score .big-score{font-size:2rem;font-weight:800;color:var(--accent);line-height:1}
+    .review-stats-score .big-stars{color:#f59e0b;font-size:.85rem;margin-top:2px}
+    .review-stats-score .total-count{font-size:.75rem;color:var(--text3);margin-top:4px}
+    .review-stats-dist{flex:1;min-width:140px}
+    .review-dist-row{display:flex;align-items:center;gap:6px;margin-bottom:3px;font-size:.75rem}
+    .review-dist-row .dist-label{width:32px;text-align:right;color:var(--text3);flex-shrink:0}
+    .review-dist-bar{flex:1;height:8px;background:var(--bg);border-radius:4px;overflow:hidden;min-width:60px}
+    .review-dist-bar .dist-fill{height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:4px;transition:width .5s var(--ease-out)}
+    .review-dist-row .dist-count{width:24px;font-size:.7rem;color:var(--text3);flex-shrink:0}
+    .review-sort-bar{display:flex;gap:8px;margin-bottom:14px}
+    .review-sort-btn{padding:5px 14px;border-radius:16px;border:1px solid var(--border2);background:var(--bg);font-size:.78rem;cursor:pointer;transition:all .2s;color:var(--text2)}
+    .review-sort-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .review-form{background:var(--bg2);border-radius:12px;padding:16px;margin-bottom:16px}
+    .review-form h5{font-size:.85rem;font-weight:700;margin-bottom:12px}
+    .star-input{display:flex;gap:4px;margin-bottom:10px}
+    .star-input span{font-size:1.4rem;cursor:pointer;color:var(--text3);transition:color .2s}
+    .star-input span.active,.star-input span:hover{color:#f59e0b}
+    .review-tags-quick{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+    .review-tag-btn{padding:4px 10px;border-radius:14px;border:1px solid var(--border2);background:var(--bg);font-size:.75rem;cursor:pointer;transition:all .2s;color:var(--text2)}
+    .review-tag-btn:hover,.review-tag-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .review-img-upload{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;align-items:center}
+    .review-img-upload .img-upload-btn{width:64px;height:64px;border-radius:10px;border:2px dashed var(--border2);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.5rem;color:var(--text3);transition:all .2s;position:relative;overflow:hidden}
+    .review-img-upload .img-upload-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .review-img-upload .img-upload-btn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+    .review-img-preview{width:64px;height:64px;border-radius:10px;object-fit:cover;border:1px solid var(--border2);position:relative}
+    .review-img-preview-wrap{position:relative;display:inline-block}
+    .review-img-preview-wrap .img-remove{position:absolute;top:-6px;right:-6px;width:18px;height:18px;border-radius:50%;background:#ef4444;color:#fff;font-size:.65rem;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
+    .review-input{width:100%;padding:10px 14px;border:1px solid var(--border2);background:var(--bg);border-radius:10px;font-size:.85rem;font-family:var(--sans);resize:vertical;min-height:60px;outline:none;transition:border-color .3s}
+    .review-input:focus{border-color:var(--accent)}
+    .review-submit{margin-top:10px}
+    .user-review{border-left:3px solid var(--accent);padding-left:12px}
+    .review-card{background:var(--bg);border:1px solid var(--border2);border-radius:12px;padding:14px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.06);transition:box-shadow .2s}
+    .review-card:hover{box-shadow:0 2px 8px rgba(0,0,0,.1)}
+    .review-card-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .review-card-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:#fff;flex-shrink:0}
+    .review-card-meta{flex:1;min-width:0}
+    .review-card-name{font-size:.85rem;font-weight:600;color:var(--text)}
+    .review-card-time{font-size:.72rem;color:var(--text3)}
+    .review-card-stars{color:#f59e0b;font-size:.8rem;margin-bottom:6px}
+    .review-card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+    .review-card-tags .r-tag{padding:2px 8px;border-radius:10px;background:rgba(42,157,143,.1);color:var(--teal,#2a9d8f);font-size:.7rem}
+    .review-card-text{font-size:.84rem;line-height:1.55;color:var(--text2);margin-bottom:8px}
+    .review-card-images{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+    .review-card-images img{width:72px;height:72px;border-radius:8px;object-fit:cover;cursor:pointer;border:1px solid var(--border2);transition:transform .2s}
+    .review-card-images img:hover{transform:scale(1.05)}
+    .review-card-actions{display:flex;gap:12px;align-items:center}
+    .review-helpful-btn{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:14px;border:1px solid var(--border2);background:var(--bg);font-size:.75rem;cursor:pointer;transition:all .2s;color:var(--text3)}
+    .review-helpful-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .review-helpful-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .review-img-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:600;display:flex;align-items:center;justify-content:center;cursor:pointer}
+    .review-img-lightbox img{max-width:90vw;max-height:85vh;border-radius:8px;object-fit:contain}
+    @media(prefers-reduced-motion:reduce){.review-card,.review-helpful-btn,.review-sort-btn,.review-tag-btn,.review-img-upload .img-upload-btn{transition:none}.review-card:hover{box-shadow:0 1px 3px rgba(0,0,0,.06)}}
+    @media(max-width:768px){
+      .filter-container{padding:16px}
+      .filter-section{flex-direction:column;gap:12px}
+      .sort-wrap{margin-left:0}
+      .audience-bar{padding-left:0}
+      .modal{max-height:92vh;border-radius:var(--radius) var(--radius) 0 0}
+      .modal-gallery{aspect-ratio:4/3}
+      .area-filter-row,.ticket-filter-row{flex-wrap:wrap}
+    }
+    /* ── 筛选容器 ── */
+    .filter-container{background:var(--bg2);border-radius:var(--radius-lg);padding:20px 24px;margin-bottom:20px;border:1px solid var(--border2)}
+    .filter-container .filter-section{margin-bottom:12px}
+    .filter-container .audience-bar,
+    .filter-container .area-filter-row,
+    .filter-container .ticket-filter-row{margin-bottom:10px}
+    .reset-filters-btn{padding:6px 14px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.75rem;cursor:pointer;transition:all .3s;color:var(--text3);display:flex;align-items:center;gap:4px;white-space:nowrap}
+    .reset-filters-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.08)}
+    .filter-bottom-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    /* ── 区域筛选 ── */
+    .area-filter-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:12px}
+    .area-btn{padding:4px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.7rem;cursor:pointer;transition:all .3s;color:var(--text3)}
+    .area-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.1)}
+    .area-btn.active{border-color:var(--accent);background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(201,169,110,.25)}
+    /* ── 门票筛选 ── */
+    .ticket-filter-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:12px}
+    .ticket-btn{padding:4px 12px;border:1px solid var(--border2);background:var(--bg);border-radius:100px;font-size:.7rem;cursor:pointer;transition:all .3s;color:var(--text3)}
+    .ticket-btn:hover{border-color:var(--accent);color:var(--accent);background:rgba(201,169,110,.1)}
+    .ticket-btn.active{border-color:var(--accent);background:var(--accent);color:#fff;box-shadow:0 2px 8px rgba(201,169,110,.25)}
+
+    /* ── 筛选区折叠 ── */
+    .filter-collapsible {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, padding 0.3s ease;
+      opacity: 0;
+      padding: 0 0;
+    }
+    .filter-collapsible.expanded {
+      max-height: 500px;
+      opacity: 1;
+      padding: 8px 0 0 0;
+    }
+    .more-filters-btn {
+      padding: 6px 16px;
+      border: 1px solid var(--border2);
+      background: var(--bg);
+      border-radius: 100px;
+      font-size: .75rem;
+      cursor: pointer;
+      transition: all .3s;
+      color: var(--text3);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+    }
+    .more-filters-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(201,169,110,.08);
+    }
+    .more-filters-btn.active {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(201,169,110,.1);
+    }
+    .more-filters-btn .arrow {
+      display: inline-block;
+      transition: transform .3s;
+      font-size: .6rem;
+    }
+    .more-filters-btn.active .arrow {
+      transform: rotate(180deg);
+    }
+    .filter-active-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      background: var(--accent);
+      color: #fff;
+      border-radius: 100px;
+      font-size: .6rem;
+      font-weight: 700;
+      transition: all .3s;
+    }
+    .audience-btn, .area-btn, .ticket-btn, .duration-btn, .filter-btn {
+      transition: all .25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .audience-btn:active, .area-btn:active, .ticket-btn:active, .duration-btn:active, .filter-btn:active {
+      transform: scale(0.92);
+    }
+    .audience-btn.active, .area-btn.active, .ticket-btn.active, .duration-btn.active {
+      transform: scale(1);
+    }
+    .filter-core-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    /* ── 场景快捷标签 ── */
+    .scene-tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border2);
+    }
+    .scene-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 14px;
+      border: 1px solid var(--border2);
+      background: var(--bg);
+      border-radius: 100px;
+      font-size: .78rem;
+      cursor: pointer;
+      transition: all .3s;
+      color: var(--text3);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .scene-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(201,169,110,.08);
+      transform: translateY(-1px);
+    }
+    .scene-tag.active {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, var(--accent), #b8956a);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(201,169,110,.3);
+    }
+    .scene-tag .scene-emoji { font-size: .9rem; }
+    /* ── 筛选结果计数 ── */
+    .filter-count {
+      display: inline-block;
+      font-size: .62rem;
+      color: var(--text3);
+      opacity: .7;
+      margin-left: 2px;
+      font-weight: 400;
+      transition: opacity .2s;
+    }
+    .filter-btn.active .filter-count,
+    .audience-btn.active .filter-count,
+    .area-btn.active .filter-count,
+    .ticket-btn.active .filter-count,
+    .duration-btn.active .filter-count {
+      color: rgba(255,255,255,.85);
+      opacity: 1;
+    }
+    /* ── 上次筛选按钮 ── */
+    .last-filter-btn {
+      display: none;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 12px;
+      border: 1px dashed var(--accent);
+      background: rgba(201,169,110,.06);
+      border-radius: 100px;
+      font-size: .72rem;
+      cursor: pointer;
+      transition: all .3s;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .last-filter-btn:hover {
+      background: rgba(201,169,110,.15);
+    }
+    .last-filter-btn.visible {
+      display: inline-flex;
+    }
+    /* ── 重置按钮角标 + 隐藏 ── */
+    .reset-filters-btn {
+      position: relative;
+      transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .reset-filters-btn .reset-count {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      min-width: 16px;
+      height: 16px;
+      padding: 0 4px;
+      background: #ef4444;
+      color: #fff;
+      border-radius: 100px;
+      font-size: .58rem;
+      font-weight: 700;
+      margin-left: 4px;
+    }
+    .reset-filters-btn .reset-count.visible {
+      display: inline-flex;
+    }
+    .reset-filters-btn.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(.8);
+    }
+    /* ── 场景标签激活指示条 ── */
+    .active-scene-bar {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      background: rgba(201,169,110,.08);
+      border-radius: 10px;
+      font-size: .78rem;
+    }
+    .active-scene-bar.visible { display: flex; }
+    .active-scene-bar .scene-label { color: var(--accent); font-weight: 600; }
+    .active-scene-bar .clear-scene {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: var(--text3);
+      cursor: pointer;
+      font-size: .75rem;
+      padding: 2px 8px;
+      border-radius: 100px;
+      transition: all .2s;
+    }
+    .active-scene-bar .clear-scene:hover {
+      background: rgba(0,0,0,.06);
+      color: var(--text);
+    }
+    /* ── 地图 Marker 弹出窗口增强 ── */
+    .map-popup-img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px 8px 0 0;
+      display: block;
+    }
+    .map-popup-body {
+      padding: 8px 10px;
+    }
+    .map-popup-name {
+      font-weight: 700;
+      font-size: 13px;
+      color: #1a1a1a;
+      margin-bottom: 2px;
+    }
+    .map-popup-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #666;
+    }
+    .map-popup-rating {
+      color: #f59e0b;
+      font-weight: 600;
+    }
+    .map-popup-container {
+      width: 220px;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    /* ── 景点卡片高亮 ── */
+    .card.highlighted {
+      box-shadow: 0 0 0 3px var(--accent), 0 8px 32px rgba(201,169,110,.3) !important;
+      transform: translateY(-4px);
+      transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .card.highlighted .card-img::after {
+      content: '\1F4CD';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      z-index: 10;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,.3));
+      animation: bounce-marker 0.6s ease;
+    }
+    @keyframes bounce-marker {
+      0% { transform: translate(-50%, -50%) scale(0); }
+      50% { transform: translate(-50%, -50%) scale(1.3); }
+      100% { transform: translate(-50%, -50%) scale(1); }
+    }
+    .filter-bottom-row {
+      border-top: 1px solid var(--border2);
+      padding-top: 12px;
+      margin-top: 4px;
+    }
+    @media(max-width:768px){
+      .filter-core-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .filter-collapsible.expanded {
+        max-height: 600px;
+      }
+      .map-popup-container {
+        width: 180px;
+      }
+      .map-popup-img {
+        height: 80px;
+      }
+    }
+
+    /* ── 当季推荐标签 ── */
+    .seasonal-rec-tag{position:absolute;bottom:12px;left:12px;z-index:2;background:linear-gradient(135deg,#f59e0b,#f97316);color:#fff;padding:3px 10px;border-radius:100px;font-size:.65rem;font-weight:600;backdrop-filter:blur(4px);pointer-events:none}
+    /* ── 拥挤度指示器 ── */
+    .crowd-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:3px;vertical-align:middle}
+    .crowd-low{background:#22c55e}
+    .crowd-medium{background:#f59e0b}
+    .crowd-high{background:#ef4444}
+    /* ── 区域标签 ── */
+    .area-label{font-size:.65rem;padding:2px 8px;background:rgba(42,157,143,.08);color:var(--teal);border-radius:100px;display:inline-flex;align-items:center;gap:3px}
+    /* ── 拍照攻略 ── */
+    .modal-photo-guide { background: var(--bg2); border-radius: 12px; padding: 16px; margin: 16px 0; }
+    .modal-photo-guide h4 { font-size: .9rem; margin-bottom: 8px; }
+    .modal-photo-guide .best-photo { font-size: .85rem; color: var(--text2); line-height: 1.6; }
+    .modal-photo-guide .photo-list { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+    .modal-photo-guide .photo-tag-sm { padding: 4px 10px; background: var(--bg); border: 1px solid var(--border); border-radius: 100px; font-size: .75rem; color: var(--text2); }
+    /* ── 周边联游 ── */
+    .modal-nearby { background: var(--bg2); border-radius: 12px; padding: 16px; margin: 16px 0; }
+    .modal-nearby h4 { font-size: .9rem; margin-bottom: 8px; }
+    .modal-nearby-list { display: flex; gap: 8px; flex-wrap: wrap; }
+    .modal-nearby-item { padding: 6px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 100px; font-size: .8rem; cursor: pointer; transition: all .3s; }
+    .modal-nearby-item:hover { border-color: var(--accent); color: var(--accent); }
+    /* ── 实用贴士 ── */
+    .modal-tips { background: linear-gradient(135deg, rgba(42,157,143,.08), rgba(201,169,110,.08)); border-radius: 12px; padding: 16px; margin: 16px 0; border-left: 3px solid var(--teal); }
+    .modal-tips h4 { font-size: .9rem; margin-bottom: 8px; }
+    .modal-tips p { font-size: .85rem; color: var(--text2); line-height: 1.6; }
+    /* ── 景点标签 ── */
+    .modal-tags-section { background: var(--bg2); border-radius: 12px; padding: 16px; margin: 16px 0; }
+    .modal-tags-section h4 { font-size: .9rem; margin-bottom: 10px; }
+    .modal-tags-list { display: flex; gap: 6px; flex-wrap: wrap; }
+    .modal-tag-item { padding: 5px 12px; border-radius: 100px; font-size: .78rem; border: 1px solid var(--border); background: var(--bg); color: var(--text2); transition: all .3s; }
+    .modal-tag-item.cat-tag { background: rgba(42,157,143,.08); color: var(--teal); border-color: rgba(42,157,143,.2); }
+    .modal-tag-item.aud-tag { background: rgba(201,169,110,.08); color: var(--accent); border-color: rgba(201,169,110,.2); }
+    .modal-tag-item.badge-tag { background: rgba(233,69,96,.08); color: #e94560; border-color: rgba(233,69,96,.2); }
+
+/* ══════════════════════════════════════
+   MEITUAN/DIANPING-STYLE SPOT CARD
+   ══════════════════════════════════════ */
+
+/* ── Card Grid Responsive ── */
+.card-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  align-items:start;
+}
+@media(min-width:1200px){
+  .card-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:900px){
+  .card-grid{grid-template-columns:repeat(2,1fr);gap:14px}
+}
+@media(max-width:520px){
+  .card-grid{grid-template-columns:1fr!important;gap:12px}
+}
+
+/* ── Card Base ── */
+.card.meituan-card {
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  overflow: hidden;
+  transition: transform .3s cubic-bezier(.23,1,.32,1), box-shadow .3s cubic-bezier(.23,1,.32,1);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+.card.meituan-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.12), 0 4px 12px rgba(0,0,0,.06);
+  border-color: rgba(201,169,110,.2);
+}
+html.dark .card.meituan-card {
+  background: var(--card-bg);
+  border-color: rgba(255,255,255,.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+html.dark .card.meituan-card:hover {
+  border-color: rgba(212,168,83,.15);
+  box-shadow: 0 16px 40px rgba(0,0,0,.3), 0 4px 12px rgba(0,0,0,.15);
+}
+
+/* ── Card Bottom Accent ── */
+.card.meituan-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ff6b35, #ffc107, #22c55e);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .4s cubic-bezier(.23,1,.32,1);
+  z-index: 5;
+  border-radius: 0 0 14px 14px;
+}
+.card.meituan-card:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Image Area (16:10, more cinematic) ── */
+.card.meituan-card .card-img {
+  aspect-ratio: 16/10;
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0;
+  background: var(--bg3);
+}
+.card.meituan-card .card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .6s cubic-bezier(.23,1,.32,1);
+  opacity: 0;
+}
+.card.meituan-card .card-img img.img-loaded {
+  opacity: 1;
+}
+.card.meituan-card:hover .card-img img {
+  transform: scale(1.08);
+}
+
+/* ── Image Gradient Overlay ── */
+.card.meituan-card .card-img .img-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0,0,0,.7) 0%, rgba(0,0,0,.3) 40%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── Spot Name on Image ── */
+.card.meituan-card .card-img .img-spot-name {
+  position: absolute;
+  bottom: 10px;
+  left: 12px;
+  right: 70px;
+  z-index: 2;
+  color: #fff;
+  font: 700 .95rem/1.3 var(--serif);
+  text-shadow: 0 1px 6px rgba(0,0,0,.5);
+  pointer-events: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Badge (top-left) ── */
+.card.meituan-card .card-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 3;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.card.meituan-card .card-badge .badge-tag {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: .6rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.15);
+  white-space: nowrap;
+}
+.badge-tag.badge-must { background: linear-gradient(135deg, #ef4444, #dc2626); color: #fff; }
+.badge-tag.badge-hot { background: linear-gradient(135deg, #f97316, #ea580c); color: #fff; }
+.badge-tag.badge-free { background: linear-gradient(135deg, #22c55e, #16a34a); color: #fff; }
+.badge-tag.badge-hidden { background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: #fff; }
+.badge-tag.badge-kid { background: linear-gradient(135deg, #3b82f6, #2563eb); color: #fff; }
+.badge-tag.badge-night { background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff; }
+.badge-tag.badge-new { background: linear-gradient(135deg, #ec4899, #db2777); color: #fff; }
+
+/* ── Price Tag (top-right) ── */
+.card.meituan-card .card-price-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: .72rem;
+  font-weight: 800;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.card-price-tag.price-free {
+  background: rgba(34,197,94,.9);
+  color: #fff;
+  border: 1px solid rgba(34,197,94,.3);
+}
+.card-price-tag.price-paid {
+  background: rgba(0,0,0,.6);
+  color: #ffc107;
+  border: 1px solid rgba(255,255,255,.1);
+}
+.card-price-tag .price-old-tag {
+  color: rgba(255,255,255,.5);
+  text-decoration: line-through;
+  font-weight: 400;
+  font-size: .6rem;
+  margin-left: 3px;
+}
+
+/* ── Favorite Button ── */
+.card.meituan-card .card-fav-btn {
+  position: absolute;
+  top: 40px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all .25s cubic-bezier(.23,1,.32,1);
+  background: rgba(0,0,0,.35);
+  color: #fff;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: scale(.8);
+  padding: 0;
+  line-height: 1;
+}
+.card.meituan-card:hover .card-fav-btn,
+.card.meituan-card .card-fav-btn.faved {
+  opacity: 1;
+  transform: scale(1);
+}
+@media(hover:none){
+  .card.meituan-card .card-fav-btn{opacity:1;transform:scale(1)}
+}
+.card.meituan-card .card-fav-btn:hover {
+  transform: scale(1.15);
+  background: rgba(239,68,68,.85);
+}
+.card.meituan-card .card-fav-btn.faved {
+  background: rgba(239,68,68,.9);
+  opacity: 1;
+  transform: scale(1);
+}
+.card.meituan-card .card-fav-btn .heart {
+  font-size: 1.1rem;
+  transition: all .25s;
+}
+.card.meituan-card .card-fav-btn .heart-outline { color: #fff; }
+.card.meituan-card .card-fav-btn .heart-filled { color: #ff385c; }
+
+/* ── Heart Beat Animation ── */
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  15% { transform: scale(1.35); }
+  30% { transform: scale(.9); }
+  45% { transform: scale(1.2); }
+  60% { transform: scale(.95); }
+  100% { transform: scale(1); }
+}
+.card.meituan-card .card-fav-btn.heart-anim .heart {
+  animation: heartBeat .6s cubic-bezier(.23,1,.32,1);
+}
+
+/* ── Card Body ── */
+.card.meituan-card .card-body {
+  padding: 12px 14px 14px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── Name Row ── */
+.card.meituan-card .card-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.card.meituan-card .card-name {
+  font: 700 .92rem/1.3 var(--serif);
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+  letter-spacing: -.01em;
+}
+
+/* ── Rating Row (Meituan style: yellow badge) ── */
+.card.meituan-card .card-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.card.meituan-card .rating-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  color: #fff;
+  font-size: .7rem;
+  font-weight: 800;
+  line-height: 1.6;
+}
+.card.meituan-card .rating-badge .star-icon { font-size: .6rem; }
+.card.meituan-card .rating-reviews {
+  font-size: .7rem;
+  color: var(--text3);
+}
+.card.meituan-card .rating-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--text3);
+  opacity: .4;
+}
+.card.meituan-card .card-duration {
+  font-size: .7rem;
+  color: var(--text3);
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* ── Price Row ── */
+.card.meituan-card .card-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-top: 1px;
+}
+.card.meituan-card .price-current {
+  font: 800 .95rem/1 var(--serif);
+}
+.card.meituan-card .price-free {
+  color: #059669;
+}
+.card.meituan-card .price-paid {
+  color: #ef4444;
+}
+.card.meituan-card .price-old {
+  font-size: .7rem;
+  color: var(--text3);
+  text-decoration: line-through;
+  font-weight: 400;
+}
+.card.meituan-card .price-unit {
+  font-size: .68rem;
+  color: var(--text3);
+  font-weight: 400;
+}
+
+/* ── Description (1-2 lines) ── */
+.card.meituan-card .card-desc {
+  font-size: .78rem;
+  color: var(--text3);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Tags Row (Meituan colored tags) ── */
+.card.meituan-card .card-tags-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 2px;
+}
+.card.meituan-card .card-tags-row .ctag {
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: .6rem;
+  font-weight: 600;
+  border: 1px solid;
+  white-space: nowrap;
+}
+.ctag.ctag-must { background: rgba(239,68,68,.08); color: #ef4444; border-color: rgba(239,68,68,.2); }
+.ctag.ctag-hot { background: rgba(249,115,22,.08); color: #f97316; border-color: rgba(249,115,22,.2); }
+.ctag.ctag-free { background: rgba(34,197,94,.08); color: #22c55e; border-color: rgba(34,197,94,.2); }
+.ctag.ctag-hidden { background: rgba(139,92,246,.08); color: #8b5cf6; border-color: rgba(139,92,246,.2); }
+.ctag.ctag-cat { background: rgba(42,157,143,.08); color: var(--teal); border-color: rgba(42,157,143,.2); }
+.ctag.ctag-aud { background: rgba(201,169,110,.08); color: var(--accent); border-color: rgba(201,169,110,.2); }
+
+/* ── Transport Row ── */
+.card.meituan-card .card-transport-row {
+  font-size: .68rem;
+  color: var(--text3);
+  opacity: .85;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* ── Bottom Action Bar ── */
+.card.meituan-card .card-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.card.meituan-card .card-action-bar .action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: .68rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .25s;
+  border: 1px solid var(--border2);
+  background: var(--bg);
+  color: var(--text3);
+  white-space: nowrap;
+}
+.card.meituan-card .card-action-bar .action-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent2);
+}
+.card.meituan-card .card-action-bar .action-btn.btn-go {
+  flex: 1;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover, #b8956a));
+  color: #fff;
+  border: none;
+  font-weight: 700;
+}
+.card.meituan-card .card-action-bar .action-btn.btn-go:hover {
+  opacity: .9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(201,169,110,.3);
+}
+.card.meituan-card .card-action-bar .action-btn.btn-share {
+  width: 32px;
+  padding: 5px;
+  flex-shrink: 0;
+}
+
+/* ── Sort Header ── */
+.sort-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.sort-header .sort-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sort-header .spot-count-label {
+  font-size: .82rem;
+  color: var(--text2);
+}
+.sort-header .spot-count-label strong {
+  color: var(--text);
+  font-weight: 700;
+  font-size: .9rem;
+}
+.sort-header .sort-pills {
+  display: flex;
+  gap: 4px;
+  background: var(--bg2);
+  padding: 4px;
+  border-radius: 100px;
+  border: 1px solid var(--border);
+}
+.sort-header .sort-pill {
+  padding: 6px 14px;
+  border: none;
+  background: none;
+  border-radius: 100px;
+  font-size: .75rem;
+  font-weight: 500;
+  color: var(--text3);
+  cursor: pointer;
+  transition: all .25s;
+  white-space: nowrap;
+}
+.sort-header .sort-pill:hover {
+  color: var(--text);
+  background: var(--bg);
+}
+.sort-header .sort-pill.active {
+  color: #fff;
+  background: var(--accent);
+  box-shadow: 0 2px 8px rgba(201,169,110,.25);
+}
+
+/* ── Skeleton Cards ── */
+.skeleton-spot-card {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+}
+.skeleton-spot-card .skel-img {
+  aspect-ratio: 16/10;
+  background: var(--bg3);
+  animation: skeletonPulse 1.8s ease-in-out infinite;
+}
+.skeleton-spot-card .skel-body {
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.skeleton-spot-card .skel-line {
+  height: 14px;
+  border-radius: 6px;
+  background: var(--bg3);
+  animation: skeletonPulse 1.8s ease-in-out infinite;
+}
+.skeleton-spot-card .skel-line.w60 { width: 60%; }
+.skeleton-spot-card .skel-line.w40 { width: 40%; }
+.skeleton-spot-card .skel-line.w80 { width: 80%; }
+.skeleton-spot-card .skel-line.w100 { width: 100%; }
+.skeleton-spot-card .skel-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.skeleton-spot-card .skel-circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--bg3);
+  animation: skeletonPulse 1.8s ease-in-out infinite;
+}
+.skeleton-spot-card .skel-pill {
+  height: 22px;
+  width: 48px;
+  border-radius: 100px;
+  background: var(--bg3);
+  animation: skeletonPulse 1.8s ease-in-out infinite;
+}
+
+/* ── Filter container spacing fix ── */
+.filter-container { margin-bottom: 16px; }
+
+/* ── Sort header mobile ── */
+@media(max-width:768px){
+  .sort-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .sort-header .sort-pills {
+    width: 100%;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sort-header .sort-pill {
+    flex-shrink: 0;
+  }
+}
+
+/* ── Card grid gap consistency ── */
+.card-grid {
+  gap: 18px;
+}
+
+/* ── Touch target size ── */
+.card.meituan-card .card-fav-btn {
+  min-width: 36px;
+  min-height: 36px;
+}
+
+/* ── Mobile responsive ── */
+@media(max-width:520px){
+  .card.meituan-card .card-body {
+    padding: 10px 12px 12px;
+  }
+  .card.meituan-card .card-name {
+    font-size: .88rem;
+  }
+  .card.meituan-card .card-action-bar .action-btn.btn-go {
+    padding: 6px 12px;
+    font-size: .72rem;
+  }
+}
+  
+    /* ── prefers-reduced-motion: disable all inline animations ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  
+    /* Scroll reveal fallback: ensure cards visible without IntersectionObserver */
+    .card-grid .rv, .must-eat-grid .rv, .route-card.rv,
+    .timeline-item.rv, .guide-card.rv, .culture-card.rv {
+      opacity: 1; transform: none;
+    }
+  
+    @media(max-width:768px){
+      .compare-open-btn{bottom:80px!important;right:16px!important;padding:8px 16px!important;font-size:.8rem!important}
+    }
+  
+    /* ── Enhanced Map Popup ── */
+    .map-popup{min-width:260px;max-width:320px;font-family:system-ui,-apple-system,sans-serif;border-radius:12px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.15)}
+    .map-popup-img{width:100%;height:140px;object-fit:cover;display:block}
+    .map-popup-body{padding:12px 14px}
+    .map-popup-name{font-weight:700;font-size:1rem;margin-bottom:6px;color:#111;display:flex;align-items:center;gap:6px}
+    .map-popup-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
+    .map-popup-cat{padding:2px 8px;border-radius:100px;font-size:.68rem;font-weight:600;color:#fff}
+    .map-popup-rating{font-size:.78rem;color:#f59e0b;font-weight:600}
+    .map-popup-price{font-size:.78rem;font-weight:600;color:var(--accent,#c9a96e)}
+    .map-popup-distance{font-size:.72rem;color:#3b82f6;font-weight:500}
+    .map-popup-desc{font-size:.78rem;color:#666;line-height:1.5;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .map-popup-actions{display:flex;gap:6px}
+    .map-popup-btn{flex:1;padding:7px 0;border:none;border-radius:8px;font-size:.75rem;font-weight:600;cursor:pointer;transition:all .2s;text-align:center;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:4px}
+    .map-popup-btn-primary{background:linear-gradient(135deg,var(--accent,#c9a96e),#b8956a);color:#fff}
+    .map-popup-btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(201,169,110,.3)}
+    .map-popup-btn-outline{background:transparent;color:var(--accent,#c9a96e);border:1px solid var(--accent,#c9a96e)}
+    .map-popup-btn-outline:hover{background:rgba(201,169,110,.08)}
+    .map-popup-btn-nav{background:#3b82f6;color:#fff}
+    .map-popup-btn-nav:hover{background:#2563eb}
+    /* ── Search This Area ── */
+    .map-search-area{position:absolute;top:12px;left:50%;transform:translateX(-50%);z-index:500;padding:8px 20px;background:#fff;border-radius:100px;font-size:.8rem;font-weight:600;color:#111;box-shadow:0 4px 20px rgba(0,0,0,.15);cursor:pointer;border:1px solid var(--border);transition:all .25s;display:none;align-items:center;gap:6px}
+    .map-search-area:hover{transform:translateX(-50%) translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.2)}
+    .map-search-area.visible{display:flex}
+    /* ── Map Stats Bar ── */
+    .map-stats{display:flex;gap:16px;justify-content:center;padding:10px 0;font-size:.78rem;color:var(--text2)}
+    .map-stats span{display:inline-flex;align-items:center;gap:4px}
+    /* ── Spot Bottom Cards ── */
+    .map-spot-cards{display:flex;gap:10px;overflow-x:auto;padding:12px 0;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+    .map-spot-cards::-webkit-scrollbar{display:none}
+    .map-spot-card{flex:0 0 200px;scroll-snap-align:start;background:var(--card-bg,#fff);border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);cursor:pointer;transition:all .25s;border:1px solid var(--border,#e5e2dc)}
+    .map-spot-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+    .map-spot-card-img{width:100%;height:100px;object-fit:cover}
+    .map-spot-card-body{padding:8px 10px}
+    .map-spot-card-name{font-weight:700;font-size:.82rem;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .map-spot-card-meta{font-size:.72rem;color:var(--text3);display:flex;gap:6px;align-items:center}
+    .map-spot-card-dist{color:#3b82f6;font-weight:500}
+
+  </style>
+  <!-- Leaflet Map CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1600&q=80">
+    <script type="module" crossorigin src="/jinan-travel-guide/assets/spots-BxPMXbni.js"></script>
+    <link rel="modulepreload" crossorigin href="/jinan-travel-guide/assets/social-BtvQIZg-.js">
+    <link rel="modulepreload" crossorigin href="/jinan-travel-guide/assets/interactive-Nl2I4oKJ.js">
+    <link rel="modulepreload" crossorigin href="/jinan-travel-guide/assets/shopify-animations-C_FKrdXc.js">
+    <link rel="stylesheet" crossorigin href="/jinan-travel-guide/assets/social-IJRaxWbQ.css">
+  </head>
+<body>
+  <a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:16px;z-index:999;background:var(--accent);color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-100%'">跳到主要内容</a>
+  <div class="scroll-progress"></div>
+    <nav class="top-nav" aria-label="主导航">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">⛲</span>
+      <span class="logo-text">泉城攻略</span>
+      <span class="logo-sub">JINAN TRAVEL</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html"><span class="nav-icon">🏠</span>首页</a>
+      <a href="spots.html" class="active"><span class="nav-icon">🏛️</span>景点</a>
+      <a href="food.html"><span class="nav-icon">🍜</span>美食</a>
+      <a href="itinerary.html"><span class="nav-icon">📋</span>行程</a>
+      <a href="guide.html"><span class="nav-icon">📖</span>指南</a>
+      <a href="culture.html"><span class="nav-icon">📚</span>文化</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="nav-search-btn" id="navSearchBtn" aria-label="搜索">🔍</button>
+      <button class="dark-toggle" aria-label="切换深色模式">🌙</button>
+      <button class="burger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <main role="main" id="main-content">
+  <section class="page-hero" style="position:relative;min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(to bottom,rgba(0,0,0,.5),rgba(0,0,0,.7)),url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1600&q=80') center/cover no-repeat" aria-label="页面标题">
+    <button class="btn btn-outline btn-sm" style="position:absolute;top:20px;right:20px;z-index:2;color:#fff;border-color:rgba(255,255,255,.4)" aria-label="分享页面" data-share='{"title":"济南景点攻略","subtitle":"30+精选景点","items":[{"name":"趵突泉","info":"天下第一泉 · ¥40"},{"name":"大明湖","info":"免费开放"},{"name":"千佛山","info":"¥30 · 登高望远"},{"name":"五龙潭","info":"¥0 · 小众秘境"},{"name":"黑虎泉","info":"免费 · 泉水直饮"}],"page":"spots"}'>📤 分享景点</button>
+    <div class="eyebrow" style="font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:12px;display:inline-flex;align-items:center;gap:12px;position:relative;z-index:1"><span style="width:24px;height:1px;background:rgba(255,255,255,.5)"></span>JINAN SPOTS<span style="width:24px;height:1px;background:rgba(255,255,255,.5)"></span></div>
+    <h1 style="color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.5)">🏛️ 景点 · 玩乐</h1>
+    <p style="color:rgba(255,255,255,.85);text-shadow:0 1px 10px rgba(0,0,0,.4)">泉城济南，处处有惊喜</p>
+    <div style="margin-top:16px;font-size:.85rem;color:rgba(255,255,255,.7);position:relative;z-index:1">80+ 精选景点 · 72 名泉 · 5 大景区</div>
+  </section>
+
+  <section class="section" style="padding-top:32px;padding-bottom:0" aria-label="今日推荐">
+    <div class="section-inner" id="recommendArea"></div>
+  </section>
+
+
+  <section class="section" style="padding-top:0" aria-label="探索泉城">
+    <div class="section-inner">
+      <div class="section-header reveal" style="margin-bottom:16px">
+        <div class="eyebrow">全部景点</div>
+        <h2>探索泉城</h2>
+        <p>精选80+景点，发现济南之美</p>
+      </div>
+
+      <div class="map-preview-section reveal" id="mapPreviewSection">
+        <div class="map-preview-card">
+          <div class="map-preview-header">
+            <div class="map-preview-title">
+              <span class="map-icon">🗺️</span>
+              <span>景点地图</span>
+              <span class="map-spot-count" id="mapSpotCount">0 个景点</span>
+            </div>
+            <div class="map-view-toggle" id="mapViewToggle">
+              <button class="map-toggle-btn active" data-view="list" title="列表视图" aria-label="列表视图" role="tab" aria-selected="true">📋 列表</button>
+              <button class="map-toggle-btn" data-view="map" title="地图视图" aria-label="地图视图" role="tab" aria-selected="false">🗺️ 地图</button>
+            </div>
+          </div>
+          <div class="map-preview-body" id="mapPreviewBody">
+            <div class="imap-container" id="imapContainer"><canvas id="imapCanvas"></canvas><div class="imap-zoom-ctrl"><button aria-label="放大地图" class="imap-zoom-btn" id="imapZoomIn" title="放大">+</button><button aria-label="缩小地图" class="imap-zoom-btn" id="imapZoomOut" title="缩小">−</button></div><button aria-label="定位我的位置" class="imap-locate-btn" id="imapLocateBtn" title="我的位置">📍</button><div class="imap-legend" id="imapLegend"></div><div class="imap-tooltip" id="imapTooltip"></div></div>
+            <button class="map-expand-btn" id="mapExpandBtn" title="展开全屏地图" aria-label="展开全屏地图">
+              <span>⛶</span> 全屏查看
+            </button>
+          </div>
+          <div class="map-top-spots-scroll" id="mapTopSpotsScroll"></div>
+          <div class="map-preview-footer">
+            <div class="map-legend-mini">
+              <span class="legend-dot-mini" style="background:#3b82f6" title="泉水"></span>
+              <span class="legend-dot-mini" style="background:#22c55e" title="自然"></span>
+              <span class="legend-dot-mini" style="background:#a855f7" title="历史"></span>
+              <span class="legend-dot-mini" style="background:#f59e0b" title="美食"></span>
+              <span class="legend-dot-mini" style="background:#14b8a6" title="亲子"></span>
+            </div>
+            <button aria-label="查看全部 0 个景点 →" class="map-view-all-btn" id="mapViewAllBtn">查看全部 <span id="mapViewAllCount">0</span> 个景点 →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0;padding-bottom:0" aria-label="景点筛选">
+    <div class="section-inner">
+      <div class="filter-container">
+        <div class="scene-tags-row" id="sceneTags">
+          <button class="scene-tag" data-scene="family" aria-label="亲子出游"><span class="scene-emoji">👨‍👩‍👧</span> 亲子出游</button>
+          <button class="scene-tag" data-scene="couple" aria-label="情侣约会"><span class="scene-emoji">💑</span> 情侣约会</button>
+          <button class="scene-tag" data-scene="friends" aria-label="朋友聚会"><span class="scene-emoji">🍻</span> 朋友聚会</button>
+          <button class="scene-tag" data-scene="solo" aria-label="独自散心"><span class="scene-emoji">🧘</span> 独自散心</button>
+          <button class="scene-tag" data-scene="team" aria-label="团建活动"><span class="scene-emoji">🏢</span> 团建活动</button>
+        </div>
+        <div class="active-scene-bar" id="activeSceneBar">
+          <span>🎬</span>
+          <span class="scene-label" id="activeSceneLabel"></span>
+          <button class="clear-scene" id="clearSceneBtn">✕ 清除</button>
+        </div>
+        <div class="filter-section reveal">
+          <div class="filter-group">
+            <span class="filter-group-label">📌 分类</span>
+            <div class="tabs" id="catFilters" role="group" aria-label="景点分类筛选" role="group" aria-label="景点分类筛选">
+              <button class="filter-btn active reveal" data-cat="all" aria-label="全部" role="tab" aria-selected="true">全部<span class="filter-count" data-count-cat="all"></span></button>
+              <button class="filter-btn reveal" data-cat="spring" aria-label="⛲ 泉水" role="tab" aria-selected="false">⛲ 泉水<span class="filter-count" data-count-cat="spring"></span></button>
+              <button class="filter-btn reveal" data-cat="nature" aria-label="🌿 自然" role="tab" aria-selected="false">🌿 自然<span class="filter-count" data-count-cat="nature"></span></button>
+              <button class="filter-btn reveal" data-cat="history" aria-label="🏛️ 历史" role="tab" aria-selected="false">🏛️ 历史<span class="filter-count" data-count-cat="history"></span></button>
+              <button class="filter-btn reveal" data-cat="culture" aria-label="📚 文化" role="tab" aria-selected="false">📚 文化<span class="filter-count" data-count-cat="culture"></span></button>
+              <button class="filter-btn reveal" data-cat="food" aria-label="🍜 美食街" role="tab" aria-selected="false">🍜 美食街<span class="filter-count" data-count-cat="food"></span></button>
+              <button class="filter-btn reveal" data-cat="family" aria-label="👨👩👧 亲子" role="tab" aria-selected="false">👨👩👧 亲子<span class="filter-count" data-count-cat="family"></span></button>
+            </div>
+          </div>
+          <div class="sort-wrap">
+            <label for="sortSelect">排序</label>
+            <select class="sort-select" id="sortSelect">
+              <option value="recommend">综合推荐</option>
+              <option value="rating">评分最高</option>
+              <option value="price">价格最低</option>
+              <option value="reviews">评价最多</option>
+            </select>
+          </div>
+        </div>
+        <div class="filter-core-row" style="margin-top:8px">
+          <button aria-label="更多筛选" class="more-filters-btn" id="moreFiltersBtn" aria-expanded="false" aria-controls="collapsibleFilters">
+            🔍 更多筛选 <span class="arrow">▼</span>
+            <span class="filter-active-badge" id="filterActiveBadge" style="display:none">0</span>
+          </button>
+          <button class="last-filter-btn" id="lastFilterBtn" aria-label="恢复上次筛选">🕐 上次筛选</button>
+        </div>
+        <div class="filter-collapsible" id="collapsibleFilters">
+        <div class="audience-bar" id="audienceFilters" role="group" aria-label="人群筛选" role="group" aria-label="人群筛选">
+          <span class="filter-group-label">👥 人群</span>
+          <button class="audience-btn active" data-aud="all" aria-label="全部" role="tab" aria-selected="true">全部<span class="filter-count" data-count-aud="all"></span></button>
+          <button class="audience-btn" data-aud="family" aria-label="👨👩👧 亲子" role="tab" aria-selected="false">👨👩👧 亲子<span class="filter-count" data-count-aud="family"></span></button>
+          <button class="audience-btn" data-aud="couple" aria-label="💑 情侣" role="tab" aria-selected="false">💑 情侣<span class="filter-count" data-count-aud="couple"></span></button>
+          <button class="audience-btn" data-aud="elder" aria-label="👴 老人" role="tab" aria-selected="false">👴 老人<span class="filter-count" data-count-aud="elder"></span></button>
+          <button class="audience-btn" data-aud="solo" aria-label="🎒 独行" role="tab" aria-selected="false">🎒 独行<span class="filter-count" data-count-aud="solo"></span></button>
+        </div>
+        <div class="area-filter-row" id="areaFilters" role="group" aria-label="区域筛选" role="group" aria-label="区域筛选">
+          <span class="filter-group-label">📍 区域</span>
+          <button class="area-btn active" data-area="all" aria-label="全部" role="tab" aria-selected="true">全部<span class="filter-count" data-count-area="all"></span></button>
+          <button class="area-btn" data-area="历下区" aria-label="历下区" role="tab" aria-selected="false">历下区<span class="filter-count" data-count-area="历下区"></span></button>
+          <button class="area-btn" data-area="市中区" aria-label="市中区" role="tab" aria-selected="false">市中区<span class="filter-count" data-count-area="市中区"></span></button>
+          <button class="area-btn" data-area="天桥区" aria-label="天桥区" role="tab" aria-selected="false">天桥区<span class="filter-count" data-count-area="天桥区"></span></button>
+          <button class="area-btn" data-area="槐荫区" aria-label="槐荫区" role="tab" aria-selected="false">槐荫区<span class="filter-count" data-count-area="槐荫区"></span></button>
+          <button class="area-btn" data-area="历城区" aria-label="历城区" role="tab" aria-selected="false">历城区<span class="filter-count" data-count-area="历城区"></span></button>
+        </div>
+        <div class="ticket-filter-row" id="ticketFilters" role="group" aria-label="门票筛选" role="group" aria-label="门票筛选">
+          <span class="filter-group-label">🎫 门票</span>
+          <button class="ticket-btn active" data-ticket="all" aria-label="全部" role="tab" aria-selected="true">全部<span class="filter-count" data-count-ticket="all"></span></button>
+          <button class="ticket-btn" data-ticket="free" aria-label="🆓 免费" role="tab" aria-selected="false">🆓 免费<span class="filter-count" data-count-ticket="free"></span></button>
+          <button class="ticket-btn" data-ticket="under50" aria-label="¥50以下" role="tab" aria-selected="false">¥50以下<span class="filter-count" data-count-ticket="under50"></span></button>
+          <button class="ticket-btn" data-ticket="50to100" aria-label="¥50-100" role="tab" aria-selected="false">¥50-100<span class="filter-count" data-count-ticket="50to100"></span></button>
+          <button class="ticket-btn" data-ticket="over100" aria-label="¥100以上" role="tab" aria-selected="false">¥100以上<span class="filter-count" data-count-ticket="over100"></span></button>
+        </div>
+        <div class="duration-filter-row" id="durationFilters" role="group" aria-label="时长筛选" role="group" aria-label="时长筛选">
+          <span class="filter-group-label">⏱ 时长</span>
+          <button class="duration-btn active" data-dur="all" aria-label="全部" role="tab" aria-selected="true">全部<span class="filter-count" data-count-dur="all"></span></button>
+          <button class="duration-btn" data-dur="1h" aria-label="1小时内" role="tab" aria-selected="false">1小时内<span class="filter-count" data-count-dur="1h"></span></button>
+          <button class="duration-btn" data-dur="1to3" aria-label="1-3小时" role="tab" aria-selected="false">1-3小时<span class="filter-count" data-count-dur="1to3"></span></button>
+          <button class="duration-btn" data-dur="half" aria-label="半天" role="tab" aria-selected="false">半天<span class="filter-count" data-count-dur="half"></span></button>
+          <button class="duration-btn" data-dur="full" aria-label="全天" role="tab" aria-selected="false">全天<span class="filter-count" data-count-dur="full"></span></button>
+        </div>
+        </div><!-- end filter-collapsible -->
+        <div class="filter-bottom-row">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span class="count-badge" id="spotCount"></span>
+            <button aria-label="我的收藏筛选" class="fav-filter-btn" id="favFilterBtn">❤️ 我的收藏 <span class="fav-count" id="favCountBadge">0</span></button>
+          </div>
+          <button class="reset-filters-btn hidden" id="resetFiltersBtn" title="重置所有筛选条件" aria-label="重置所有筛选条件">🔄 重置筛选<span class="reset-count" id="resetCount">0</span></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:0" aria-label="景点列表">
+    <div class="section-inner">
+      <div class="sort-header" id="sortHeader">
+        <div class="sort-left">
+          <span class="spot-count-label" id="spotCountLabel">共 <strong>0</strong> 个景点</span>
+        </div>
+        <div class="sort-pills" id="sortPills" role="group" aria-label="排序方式">
+          <button class="sort-pill active" data-sort="recommend" aria-label="综合推荐" role="tab" aria-selected="true">综合推荐</button>
+          <button class="sort-pill" data-sort="rating" aria-label="评分最高" role="tab" aria-selected="false">评分最高</button>
+          <button class="sort-pill" data-sort="price" aria-label="价格最低" role="tab" aria-selected="false">价格最低</button>
+          <button class="sort-pill" data-sort="reviews" aria-label="评价最多" role="tab" aria-selected="false">评价最多</button>
+        </div>
+      </div>
+      <div class="card-grid" id="spotGrid"></div>
+      <div class="empty-state" id="emptyState" style="display:none">
+        <div class="emoji">🔍</div>
+        <p>没有找到符合条件的景点，试试调整筛选条件</p>
+      </div>
+    </div>
+  </section>
+
+<!-- ═══ 打卡地图 ═══ -->
+  <section class="section section-alt reveal" id="checkin-map-section" aria-label="打卡地图">
+    <div class="section-header" style="text-align:center;margin-bottom:20px">
+      <div class="eyebrow">互动地图</div>
+      <h2>📍 打卡地图</h2>
+      <p>点击标记查看景点详情，支持定位和筛选</p>
+    </div>
+    <div class="leaflet-map-container" id="leafletMapContainer" style="position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border,#e5e2dc);box-shadow:0 4px 24px rgba(0,0,0,.08)">
+      <!-- Map controls bar -->
+      <div class="leaflet-controls-bar" id="leafletControlsBar" style="display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--card-bg,#fff);border-bottom:1px solid var(--border,#e5e2dc);flex-wrap:wrap">
+        <button id="leafletLocateBtn" class="leaflet-ctrl-btn" title="定位我的位置" aria-label="定位我的位置" style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:8px;font-size:.78rem;cursor:pointer;color:var(--text2,#555);transition:all .2s">
+          📌 定位
+        </button>
+        <button id="leafletFullscreenBtn" class="leaflet-ctrl-btn" title="全屏" aria-label="全屏" style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:8px;font-size:.78rem;cursor:pointer;color:var(--text2,#555);transition:all .2s">
+          ⛶ 全屏
+        </button>
+        <button id="leafletResetBtn" class="leaflet-ctrl-btn" title="重置视图" aria-label="重置视图" style="display:inline-flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:8px;font-size:.78rem;cursor:pointer;color:var(--text2,#555);transition:all .2s">
+          🔄 重置
+        </button>
+        <div style="flex:1"></div>
+        <div id="leafletCatFilter" style="display:flex;gap:4px;flex-wrap:wrap">
+          <button class="leaflet-cat-btn active" data-cat="all" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--accent2,rgba(201,169,110,.1));border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)" aria-label="全部" role="tab" aria-selected="true">全部</button>
+          <button class="leaflet-cat-btn" data-cat="spring" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)" aria-label="⛲ 泉水" role="tab" aria-selected="false">⛲ 泉水</button>
+          <button class="leaflet-cat-btn" data-cat="nature" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)" aria-label="🌿 自然" role="tab" aria-selected="false">🌿 自然</button>
+          <button class="leaflet-cat-btn" data-cat="history" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)" aria-label="🏛️ 历史" role="tab" aria-selected="false">🏛️ 历史</button>
+          <button class="leaflet-cat-btn" data-cat="culture" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)" aria-label="📚 文化" role="tab" aria-selected="false">📚 文化</button>
+          <button class="leaflet-cat-btn" data-cat="food" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)" aria-label="🍜 美食" role="tab" aria-selected="false">🍜 美食</button>
+          <button class="leaflet-cat-btn" data-cat="landmark" style="padding:4px 10px;border:1px solid var(--border2,#d4d0c8);background:var(--bg,#f8f6f3);border-radius:100px;font-size:.72rem;cursor:pointer;transition:all .2s;color:var(--text2,#555)" aria-label="🏛️ 地标" role="tab" aria-selected="false">🏛️ 地标</button>
+        </div>
+      </div>
+      <!-- Search this area button -->
+      <button aria-label="搜索此区域" class="map-search-area" id="mapSearchArea">🔍 搜索此区域</button>
+      <!-- Leaflet map -->
+      <div id="leafletMap" style="height:480px;width:100%;background:var(--bg2,#f0ede8)"></div>
+      <!-- Fallback: offline SVG map -->
+      <div id="leafletFallback" style="display:none;padding:20px;text-align:center">
+        <p style="color:var(--text3,#888);font-size:.85rem;margin-bottom:12px">⚠️ 在线地图加载失败，显示离线地图</p>
+        <div id="fallbackMapSvg" style="border-radius:12px;overflow:hidden;border:1px solid var(--border,#e5e2dc)"></div>
+      </div>
+    </div>
+  </section>
+
+
+  </main>
+
+  <!-- 对比面板 -->
+  <button aria-label="打开对比面板" class="compare-open-btn" id="compareOpenBtn">⚖️ 对比 <span id="compareCountBtn">0</span>/3</button>
+  <div class="compare-bar" id="compareBar">
+    <div class="compare-header">
+      <h4>⚖️ 景点对比</h4>
+      <button aria-label="关闭对比面板" class="compare-close" id="compareCloseBtn">✕</button>
+    </div>
+    <div id="compareContent"></div>
+  </div>
+
+  <footer class="footer" role="contentinfo">
+    <nav class="footer-links" aria-label="页脚导航">
+      <a href="index.html">首页</a>
+      <a href="spots.html">景点</a>
+      <a href="food.html">美食</a>
+      <a href="itinerary.html">行程</a>
+      <a href="guide.html">指南</a>
+      <a href="culture.html">文化</a>
+    </nav>
+    <div class="footer-stats"><span>📍 80+ 景点</span><span>🍜 68 美食</span><span>📋 5 路线</span></div>
+    <p class="footer-tagline">72 泉涌，千年文脉 — 80+ 精选景点 · 72 名泉 · 5 大景区</p>
+    <p>© 2026 泉城攻略 · 济南旅游指南</p>
+  </footer>
+
+  <button class="btt" aria-label="回到顶部">↑</button>
+  <nav class="mob-nav" aria-label="移动端导航">
+    <a href="index.html"><span class="icon" aria-hidden="true">🏠</span>首页</a>
+    <a href="spots.html" class="active"><span class="icon">🏛️</span>景点</a>
+    <a href="food.html"><span class="icon">🍜</span>美食</a>
+    <a href="itinerary.html"><span class="icon">📋</span>行程</a>
+    <a href="guide.html"><span class="icon">📖</span>指南</a>
+    <a href="culture.html"><span class="icon">📚</span>文化</a>
+  </nav>
+  <div class="toast" id="toast"></div>
+  <div id="comparePanel"></div>
+
+
+</body>
+</html>

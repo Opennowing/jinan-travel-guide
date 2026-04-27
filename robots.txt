@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://opennowing.github.io/jinan-travel-guide/sitemap.xml

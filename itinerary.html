@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="icon" href="/jinan-travel-guide/icons/icon-192.png" type="image/png">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>行程攻略 — 济南旅游指南</title>
+  <meta name="description" content="济南行程攻略：1日精华游、2日深度游、3日全览游、亲子专线、文艺专线。精心规划的路线，让每一分钟都值得。">
+  <meta name="keywords" content="济南行程,济南旅游路线,济南1日游,济南2日游,济南3日游,济南亲子游">
+  <meta property="og:title" content="行程攻略 — 济南旅游指南">
+  <meta property="og:description" content="1-5天行程模板，亲子、情侣、文艺、穷游，总有一款适合你">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://opennowing.github.io/jinan-travel-guide/itinerary.html">
+  <meta property="og:image" content="https://opennowing.github.io/jinan-travel-guide/public/banner.jpg">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="行程攻略 — 济南旅游指南">
+  <meta name="twitter:description" content="1-5天行程模板，亲子、情侣、文艺、穷游，总有一款适合你">
+  <meta name="twitter:image" content="https://opennowing.github.io/jinan-travel-guide/public/banner.jpg">
+  <link rel="canonical" href="https://opennowing.github.io/jinan-travel-guide/itinerary.html">
+  <meta name="author" content="泉城攻略">
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://opennowing.github.io/jinan-travel-guide/" },
+      { "@type": "ListItem", "position": 2, "name": "行程", "item": "https://opennowing.github.io/jinan-travel-guide/itinerary.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "济南旅游行程方案",
+    "description": "精心规划的济南旅游行程，包含1日到3日多种方案",
+    "itemListElement": [
+      {
+        "@type": "ListItem", "position": 1,
+        "item": {
+          "@type": "Trip",
+          "name": "1日精华游",
+          "description": "一天打卡济南三大名胜：趵突泉→五龙潭→大明湖→芙蓉街→黑虎泉",
+          "touristType": "首次游客",
+          "estimatedCost": { "@type": "MonetaryAmount", "currency": "CNY", "value": "150-250" }
+        }
+      },
+      {
+        "@type": "ListItem", "position": 2,
+        "item": {
+          "@type": "Trip",
+          "name": "2日深度游",
+          "description": "Day1泉水线+Day2文化线，覆盖主要景点和美食",
+          "touristType": "深度游",
+          "estimatedCost": { "@type": "MonetaryAmount", "currency": "CNY", "value": "400-600" }
+        }
+      },
+      {
+        "@type": "ListItem", "position": 3,
+        "item": {
+          "@type": "Trip",
+          "name": "3日全览游",
+          "description": "市区精华+灵岩寺/红叶谷周边，深度探索泉城",
+          "touristType": "时间充裕",
+          "estimatedCost": { "@type": "MonetaryAmount", "currency": "CNY", "value": "800-1200" }
+        }
+      }
+    ]
+  }
+  </script>
+  <link rel="manifest" href="/jinan-travel-guide/manifest.json">
+  <meta name="theme-color" content="#c9a96e">
+  <style>
+    .timeline{position:relative;padding-left:32px}
+    .timeline::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:2px;background:var(--border2)}
+    .timeline-day{margin-bottom:40px}
+    .timeline-day-header{position:relative;font:700 1.2rem/1 var(--serif);color:var(--accent);margin-bottom:20px;padding:8px 0}
+    .timeline-day-header::before{content:'';position:absolute;left:-26px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--bg);box-shadow:0 0 0 2px var(--accent)}
+    .timeline-item{position:relative;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;margin-bottom:12px;transition:all .3s var(--ease)}
+    .timeline-item:hover{transform:translateX(4px);box-shadow:var(--shadow)}
+    .timeline-item::before{content:'';position:absolute;left:-26px;top:22px;width:8px;height:8px;border-radius:50%;background:var(--bg3);border:2px solid var(--accent)}
+    .ti-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+    .ti-time{font:600 .8rem/1 var(--sans);color:var(--accent);background:var(--accent2);padding:3px 10px;border-radius:100px}
+    .ti-name{font:700 .95rem/1.3 var(--serif)}
+    .ti-details{display:flex;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--text2)}
+    .ti-details span{display:inline-flex;align-items:center;gap:4px}
+    .ti-cost{font-weight:600;color:var(--teal)}
+    .ti-transport{color:var(--text3)}
+    .day-total{text-align:right;font-size:.85rem;color:var(--text2);padding:8px 0;border-top:1px dashed var(--border);margin-top:8px}
+    .day-total strong{color:var(--accent);font-size:1rem}
+
+    .cost-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:32px}
+    .cost-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center}
+    .cost-card .label{font-size:.8rem;color:var(--text2);margin-bottom:4px}
+    .cost-card .amount{font:900 1.6rem/1 var(--serif);color:var(--accent)}
+    .cost-card .note{font-size:.7rem;color:var(--text3);margin-top:4px}
+
+    .route-tabs{display:flex;gap:4px;background:var(--bg2);padding:4px;border-radius:12px;margin-bottom:32px;overflow-x:auto;justify-content:center;flex-wrap:wrap}
+    .route-tab{padding:8px 16px;border:none;background:none;font-size:.85rem;font-weight:500;color:var(--text2);cursor:pointer;border-radius:8px;transition:all .3s;white-space:nowrap}
+    .route-tab.active{background:var(--bg);color:var(--text);box-shadow:var(--shadow)}
+
+    .route-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px}
+    .route-header h2{font:900 1.5rem/1.2 var(--serif)}
+    .route-meta{display:flex;gap:16px;font-size:.8rem;color:var(--text2);flex-wrap:wrap}
+    .route-meta span{display:flex;align-items:center;gap:4px}
+    .route-badge{display:inline-flex;align-items:center;gap:4px;font-size:.7rem;padding:4px 12px;border-radius:100px;font-weight:600}
+    .route-badge.easy{background:rgba(42,157,143,.1);color:var(--teal)}
+    .route-badge.medium{background:rgba(201,169,110,.15);color:var(--accent)}
+    .route-badge.hard{background:rgba(231,111,81,.1);color:var(--coral)}
+
+    .season-tabs{display:flex;gap:4px;background:var(--bg2);padding:4px;border-radius:12px;margin-bottom:24px;overflow-x:auto}
+    .season-tab{padding:8px 16px;border:none;background:none;font-size:.85rem;font-weight:500;color:var(--text2);cursor:pointer;border-radius:8px;transition:all .3s;white-space:nowrap}
+    .season-tab.active{background:var(--bg);color:var(--text);box-shadow:var(--shadow)}
+    .season-panel{display:none}
+    .season-panel.active{display:block}
+
+    .my-trip{margin-top:48px}
+    .my-trip-item{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:8px;cursor:grab;transition:all .2s;user-select:none}
+    .my-trip-item:active{cursor:grabbing}
+    .my-trip-item.dragging{opacity:.5;border-color:var(--accent);transform:scale(.98)}
+    .my-trip-item.drag-over{border-color:var(--accent);box-shadow:0 0 0 2px rgba(201,169,110,.3)}
+    .my-trip-item .drag-handle{color:var(--text3);font-size:1.1rem;cursor:grab;flex-shrink:0}
+    .my-trip-item .trip-info{flex:1;min-width:0}
+    .my-trip-item .trip-name{font-weight:600;font-size:.9rem}
+    .my-trip-item .trip-meta{font-size:.75rem;color:var(--text2)}
+    .my-trip-item .remove-btn{background:none;border:none;color:var(--coral);cursor:pointer;font-size:.85rem;padding:4px 8px;border-radius:6px;transition:background .2s;flex-shrink:0}
+    .my-trip-item .remove-btn:hover{background:rgba(231,111,81,.1)}
+    .my-trip-empty{text-align:center;padding:40px 20px;color:var(--text3);font-size:.9rem}
+    .my-trip-timeline{position:relative;padding-left:28px;margin-top:16px}
+    .my-trip-timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:var(--accent);opacity:.3}
+    .my-trip-timeline-item{position:relative;padding:8px 0 8px 16px;font-size:.85rem;color:var(--text2)}
+    .my-trip-timeline-item::before{content:'';position:absolute;left:-24px;top:14px;width:10px;height:10px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)}
+    .my-trip-timeline-item .tl-time{font-weight:600;color:var(--accent);font-size:.8rem}
+    .my-trip-timeline-item .tl-name{font-weight:600;color:var(--text)}
+    .export-panel{margin-top:16px;padding:16px;background:var(--bg2);border-radius:var(--radius);display:none}
+    .export-panel.show{display:block}
+    .export-panel textarea{width:100%;min-height:120px;padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-family:var(--sans);font-size:.85rem;resize:vertical;outline:none;color:var(--text)}
+    .export-panel textarea:focus{border-color:var(--accent)}
+
+    .share-bar{display:flex;gap:8px;margin-top:16px;justify-content:center;flex-wrap:wrap}
+    .panel{display:none}
+    .panel.active{display:block}
+
+    @media(max-width:768px){
+      .route-header{flex-direction:column;align-items:flex-start}
+      .route-tabs,.season-tabs{justify-content:flex-start;flex-wrap:nowrap}
+    }
+
+    /* ═══ SHOPIFY-STYLE ANIMATIONS ═══ */
+
+    /* 时间轴节点入场 */
+    @keyframes timelineNodeIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* 路线卡片悬停 */
+    .timeline-item {
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .timeline-item:hover {
+      transform: translateX(4px) translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    }
+
+    /* 费用手风琴 */
+    .cost-accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      opacity: 0;
+    }
+    .cost-accordion-content.open {
+      max-height: 500px;
+      opacity: 1;
+    }
+
+    /* 按钮点击缩放 */
+    .btn:active,
+    .route-tab:active,
+    .season-tab:active,
+    button:active {
+      transform: scale(0.97);
+      transition: transform 0.1s ease;
+    }
+
+    /* 滚动渐显增强 */
+    .rv {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .rv.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 标签切换动效 */
+    .route-tab {
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .season-tab {
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* 费用数字动画 */
+    @keyframes priceCount {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .price-tag {
+      animation: priceCount 0.4s ease-out;
+    }
+    .cost-card .amount {
+      animation: priceCount 0.4s ease-out;
+    }
+
+    /* 时间轴节点交错入场 */
+    .timeline-item {
+      opacity: 0;
+      animation: timelineNodeIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    /* 成本卡片入场 */
+    @keyframes costCardIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .cost-card {
+      animation: costCardIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      animation-delay: var(--delay, 0s);
+    }
+
+    /* 日标题入场 */
+    @keyframes dayHeaderIn {
+      from { opacity: 0; transform: translateX(-12px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    .timeline-day-header {
+      animation: dayHeaderIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      opacity: 0;
+    }
+
+    /* 智能规划结果入场 */
+    @keyframes planResultIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 路线头部入场 */
+    @keyframes routeHeaderIn {
+      from { opacity: 0; transform: translateY(-12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .route-header {
+      animation: routeHeaderIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    /* 天气卡片入场 */
+    .weather-card-animate {
+      animation: costCardIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+      animation-delay: var(--delay, 0s);
+      opacity: 0;
+    }
+
+    /* 滚动渐显容器 */
+    .section .section-inner > *:not(.section-header) {
+      transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* 智能行程推荐 Quiz */
+    .itinerary-quiz{max-width:600px;margin:0 auto;text-align:center}
+    .quiz-step{display:none}
+    .quiz-step.active{display:block;animation:fadeIn .3s var(--ease)}
+    .quiz-step h3{font:700 1.2rem/1.4 var(--serif);margin-bottom:24px}
+    .quiz-options{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+    .quiz-opt{padding:14px 28px;border:2px solid var(--border);background:var(--card-bg);border-radius:var(--radius);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .3s;min-width:120px}
+    .quiz-opt:hover{border-color:var(--accent);background:var(--accent2);transform:translateY(-2px)}
+    .quiz-opt.selected{border-color:var(--accent);background:var(--accent);color:#fff;box-shadow:0 4px 16px rgba(201,169,110,.3)}
+
+    /* ═══ MODAL OVERLAY ═══ */
+    .modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px}
+    .modal-overlay.open{display:flex}
+    .modal-overlay .modal{position:relative;background:var(--card-bg);border-radius:20px;max-width:720px;width:100%;max-height:85vh;overflow-y:auto;animation:modalSlideUp .35s var(--ease);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+    .modal-overlay .modal-content{padding:0}
+    .modal-overlay .modal-close{position:sticky;top:12px;float:right;margin-right:12px;width:36px;height:36px;border-radius:50%;background:rgba(0,0,0,.4);color:#fff;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;z-index:10;transition:background .2s}
+    .modal-overlay .modal-close:hover{background:rgba(0,0,0,.7)}
+    @keyframes modalSlideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+    /* Timeline item click cursor */
+    .timeline-item{cursor:pointer}
+    .quiz-result-card{background:linear-gradient(135deg,var(--accent2),var(--bg2));border:1px solid var(--accent);border-radius:var(--radius-lg);padding:32px;text-align:left;animation:fadeIn .5s var(--ease)}
+    .quiz-result-card h3{font:700 1.3rem/1.3 var(--serif);margin-bottom:12px}
+    .quiz-result-card .route{margin:16px 0}
+    .quiz-result-card .route-step{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px dashed var(--border)}
+    .quiz-result-card .route-step:last-child{border-bottom:none}
+    .quiz-result-card .step-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .quiz-result-card .step-name{font-weight:600;font-size:.9rem}
+    .quiz-result-card .step-detail{font-size:.75rem;color:var(--text2)}
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+  
+    /* ── prefers-reduced-motion: disable all inline animations ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  
+    /* Scroll reveal fallback: ensure cards visible without IntersectionObserver */
+    .card-grid .rv, .must-eat-grid .rv, .route-card.rv,
+    .timeline-item.rv, .guide-card.rv, .culture-card.rv {
+      opacity: 1; transform: none;
+    }
+  </style>
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1600&q=80">
+    <script type="module" crossorigin src="/jinan-travel-guide/assets/itinerary-Cx5Nf_Lk.js"></script>
+    <link rel="modulepreload" crossorigin href="/jinan-travel-guide/assets/social-BtvQIZg-.js">
+    <link rel="modulepreload" crossorigin href="/jinan-travel-guide/assets/interactive-Nl2I4oKJ.js">
+    <link rel="modulepreload" crossorigin href="/jinan-travel-guide/assets/shopify-animations-C_FKrdXc.js">
+    <link rel="stylesheet" crossorigin href="/jinan-travel-guide/assets/social-IJRaxWbQ.css">
+  </head>
+<body>
+  <a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:16px;z-index:999;background:var(--accent);color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-100%'">跳到主要内容</a>
+  <div class="scroll-progress"></div>
+    <nav class="top-nav" aria-label="主导航">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">⛲</span>
+      <span class="logo-text">泉城攻略</span>
+      <span class="logo-sub">JINAN TRAVEL</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html"><span class="nav-icon">🏠</span>首页</a>
+      <a href="spots.html"><span class="nav-icon">🏛️</span>景点</a>
+      <a href="food.html"><span class="nav-icon">🍜</span>美食</a>
+      <a href="itinerary.html" class="active"><span class="nav-icon">📋</span>行程</a>
+      <a href="guide.html"><span class="nav-icon">📖</span>指南</a>
+      <a href="culture.html"><span class="nav-icon">📚</span>文化</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="nav-search-btn" id="navSearchBtn" aria-label="搜索">🔍</button>
+      <button class="dark-toggle" aria-label="切换深色模式">🌙</button>
+      <button class="burger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <main role="main" id="main-content">
+  <section class="page-hero" style="position:relative;min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(to bottom,rgba(0,0,0,.5),rgba(0,0,0,.7)),url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1600&q=80') center/cover no-repeat" aria-label="页面标题">
+    <div class="eyebrow" style="font-size:.8rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:12px;display:inline-flex;align-items:center;gap:12px;position:relative;z-index:1"><span style="width:24px;height:1px;background:rgba(255,255,255,.5)"></span>JINAN ITINERARY<span style="width:24px;height:1px;background:rgba(255,255,255,.5)"></span></div>
+    <h1 style="color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.5)">📋 行程攻略</h1>
+    <p style="color:rgba(255,255,255,.85);text-shadow:0 1px 10px rgba(0,0,0,.4)">精心规划的路线，让每一分钟都值得</p>
+    <p style="font-size:.9rem;color:rgba(255,255,255,.7);margin-top:12px;font-weight:500">5 条精选路线 · 1-3 天行程 · 智能规划</p>
+    <button class="btn btn-outline btn-sm" style="margin-top:16px;color:#fff;border-color:rgba(255,255,255,.4)" aria-label="分享页面" data-share='{"title":"济南行程攻略","subtitle":"1-3天精选路线","items":[{"name":"1日精华游","info":"趵突泉→五龙潭→大明湖→芙蓉街"},{"name":"2日深度游","info":"泉水线+文化线，覆盖主要景点"},{"name":"3日全览游","info":"市区精华+灵岩寺/红叶谷"},{"name":"亲子专线","info":"动物园+科技馆+泉水体验"},{"name":"文艺专线","info":"曲水亭街+省博+老城巷弄"}],"page":"itinerary"}'>📤 分享行程</button>
+  </section>
+
+  <!-- Smart Itinerary Quiz -->
+  <section class="section" aria-label="智能推荐">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">AI RECOMMEND</div>
+        <h2>🤖 智能行程推荐</h2>
+        <p>告诉我你的情况，我帮你规划</p>
+      </div>
+      <div class="itinerary-quiz" id="itineraryQuiz">
+        <div class="quiz-step active" data-step="1">
+          <h3>你有几天时间？</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-val="1" aria-label="1天" role="tab" aria-selected="false">1天</button>
+            <button class="quiz-opt" data-val="2" aria-label="2天" role="tab" aria-selected="false">2天</button>
+            <button class="quiz-opt" data-val="3" aria-label="3天+" role="tab" aria-selected="false">3天+</button>
+          </div>
+        </div>
+        <div class="quiz-step" data-step="2">
+          <h3>和谁一起来？</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-val="solo" aria-label="独自一人" role="tab" aria-selected="false">独自一人</button>
+            <button class="quiz-opt" data-val="couple" aria-label="情侣" role="tab" aria-selected="false">情侣</button>
+            <button class="quiz-opt" data-val="family" aria-label="家庭亲子" role="tab" aria-selected="false">家庭亲子</button>
+            <button class="quiz-opt" data-val="friends" aria-label="朋友" role="tab" aria-selected="false">朋友</button>
+          </div>
+        </div>
+        <div class="quiz-step" data-step="3">
+          <h3>偏好什么类型？</h3>
+          <div class="quiz-options">
+            <button class="quiz-opt" data-val="nature" aria-label="自然风光" role="tab" aria-selected="false">自然风光</button>
+            <button class="quiz-opt" data-val="culture" aria-label="历史文化" role="tab" aria-selected="false">历史文化</button>
+            <button class="quiz-opt" data-val="food" aria-label="美食探店" role="tab" aria-selected="false">美食探店</button>
+            <button class="quiz-opt" data-val="relax" aria-label="休闲放松" role="tab" aria-selected="false">休闲放松</button>
+          </div>
+        </div>
+      </div>
+      <div id="quizResult" style="display:none"></div>
+    </div>
+  </section>
+
+  <!-- Smart Itinerary Planner -->
+  <section class="section section-alt" id="smartPlanner" aria-label="智能行程规划">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">AI PLANNER</div>
+        <h2>🤖 智能行程规划</h2>
+        <p>告诉我你的需求，为你量身定制济南之旅</p>
+      </div>
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:20px">
+          <div>
+            <label style="font-size:.8rem;font-weight:600;color:var(--text2);display:block;margin-bottom:6px">📅 游玩天数</label>
+            <input type="number" id="planDays" min="1" max="5" value="2" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:.9rem;color:var(--text);outline:none">
+          </div>
+          <div>
+            <label style="font-size:.8rem;font-weight:600;color:var(--text2);display:block;margin-bottom:6px">👥 出行人数</label>
+            <input type="number" id="planPeople" min="1" max="10" value="2" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:.9rem;color:var(--text);outline:none">
+          </div>
+          <div>
+            <label style="font-size:.8rem;font-weight:600;color:var(--text2);display:block;margin-bottom:6px">💰 预算等级</label>
+            <select id="planBudget" style="width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:8px;background:var(--bg);font-size:.9rem;color:var(--text);outline:none">
+              <option value="economy">经济型 (¥150/天以内)</option>
+              <option value="comfort" selected>舒适型 (¥300/天以内)</option>
+              <option value="quality">品质型 (¥500+/天)</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-bottom:20px">
+          <label style="font-size:.8rem;font-weight:600;color:var(--text2);display:block;margin-bottom:8px">❤️ 旅行偏好 (可多选)</label>
+          <div style="display:flex;gap:10px;flex-wrap:wrap" id="planPrefs">
+            <label style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid var(--border);border-radius:100px;cursor:pointer;font-size:.85rem;transition:all .2s;user-select:none">
+              <input type="checkbox" value="culture" checked style="accent-color:var(--accent)"> 🏛️ 文化古迹
+            </label>
+            <label style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid var(--border);border-radius:100px;cursor:pointer;font-size:.85rem;transition:all .2s;user-select:none">
+              <input type="checkbox" value="food" checked style="accent-color:var(--accent)"> 🍜 美食探店
+            </label>
+            <label style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid var(--border);border-radius:100px;cursor:pointer;font-size:.85rem;transition:all .2s;user-select:none">
+              <input type="checkbox" value="nature" style="accent-color:var(--accent)"> 🌿 自然风光
+            </label>
+            <label style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border:1px solid var(--border);border-radius:100px;cursor:pointer;font-size:.85rem;transition:all .2s;user-select:none">
+              <input type="checkbox" value="family" style="accent-color:var(--accent)"> 👨‍👩‍👧 亲子互动
+            </label>
+          </div>
+        </div>
+        <button id="generatePlan" style="display:inline-flex;align-items:center;gap:8px;padding:12px 32px;background:var(--accent);color:#fff;border:none;border-radius:100px;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .3s" aria-label="🚀 生成行程">🚀 生成行程</button>
+      </div>
+      <div id="planResult" style="margin-top:24px"></div>
+    </div>
+  </section>
+
+  <!-- Route Tabs -->
+  <div class="section-divider reveal" aria-hidden="true">◈</div>
+  <section class="section" aria-label="行程路线">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">ROUTES</div>
+        <h2>🗺️ 精选路线</h2>
+        <p>从 1 日打卡到 3 日深度，总有一款适合你</p>
+      </div>
+      <div class="route-tabs reveal" id="routeTabs" role="tablist" aria-label="行程路线选择">
+        <button class="route-tab active" data-route="1day" aria-label="⏰ 1日精华游" role="tab" aria-selected="true">⏰ 1日精华游</button>
+        <button class="route-tab" data-route="2day" aria-label="📅 2日深度游" role="tab" aria-selected="false">📅 2日深度游</button>
+        <button class="route-tab" data-route="3day" aria-label="🗓️ 3日全览游" role="tab" aria-selected="false">🗓️ 3日全览游</button>
+        <button class="route-tab" data-route="family" aria-label="👨‍👩‍👧 亲子专线" role="tab" aria-selected="false">👨‍👩‍👧 亲子专线</button>
+        <button class="route-tab" data-route="art" aria-label="🎨 文艺专线" role="tab" aria-selected="false">🎨 文艺专线</button>
+      </div>
+
+      <div id="routeContent"></div>
+    </div>
+  </section>
+
+  <!-- Seasonal Recommendations -->
+  <div class="section-divider reveal" aria-hidden="true">◈</div>
+  <section class="section section-alt" aria-label="当季推荐">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">SEASONAL</div>
+        <h2>🗓️ 当季推荐</h2>
+        <p>不同季节来济南，有不同玩法</p>
+      </div>
+      <div class="season-tabs reveal" id="seasonTabs" role="tablist" aria-label="季节选择">
+        <button class="season-tab active reveal" data-season="spring" aria-label="🌸 春季" role="tab" aria-selected="true">🌸 春季</button>
+        <button class="season-tab reveal" data-season="summer" aria-label="☀️ 夏季" role="tab" aria-selected="false">☀️ 夏季</button>
+        <button class="season-tab reveal" data-season="autumn" aria-label="🍂 秋季" role="tab" aria-selected="false">🍂 秋季</button>
+        <button class="season-tab reveal" data-season="winter" aria-label="❄️ 冬季" role="tab" aria-selected="false">❄️ 冬季</button>
+      </div>
+      <div id="seasonContent"></div>
+    </div>
+  </section>
+
+  <!-- My Trip -->
+  <div class="section-divider reveal" aria-hidden="true">◈</div>
+  <section class="section" aria-label="我的行程">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">MY TRIP</div>
+        <h2>📌 我的行程</h2>
+        <p>从景点页面添加心仪的目的地</p>
+      </div>
+      <div id="myTripList"></div>
+      <div class="my-trip-timeline" id="myTripTimeline" style="display:none"></div>
+      <div class="share-bar">
+        <button class="btn btn-sm btn-outline" id="copyTrip" aria-label="📋 复制行程">📋 复制行程</button>
+        <button class="btn btn-sm btn-outline" id="exportTrip" aria-label="📤 导出行程">📤 导出行程</button>
+        <button class="btn btn-sm btn-outline" id="clearTrip" aria-label="🗑️ 清空">🗑️ 清空</button>
+      </div>
+      <div class="export-panel" id="exportPanel">
+        <textarea id="exportText" readonly></textarea>
+        <div style="display:flex;gap:8px;margin-top:8px;justify-content:center">
+          <button class="btn btn-sm btn-primary" id="copyExport" aria-label="📋 复制文本">📋 复制文本</button>
+          <button class="btn btn-sm btn-outline" id="downloadExport" aria-label="💾 下载文件">💾 下载文件</button>
+          <button class="btn btn-sm btn-outline" id="closeExport" aria-label="✕ 关闭">✕ 关闭</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Expense Tracker -->
+  <div class="section-divider reveal" aria-hidden="true">◈</div>
+  <section class="section section-alt" id="expenseTracker" aria-label="花费追踪">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">EXPENSE</div>
+        <h2>💰 花费追踪</h2>
+        <p>记录每笔开销，掌控旅行预算</p>
+      </div>
+      <div id="expenseList"></div>
+      <div id="expenseSummary" style="margin-top:16px"></div>
+    </div>
+  </section>
+
+  <!-- Weather Forecast -->
+  <div class="section-divider reveal" aria-hidden="true">◈</div>
+  <section class="section" id="weatherSection" aria-label="行程天气">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">WEATHER</div>
+        <h2>🌤️ 行程天气</h2>
+        <p>提前了解天气，做好出行准备</p>
+      </div>
+      <div id="weatherCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px"></div>
+    </div>
+  </section>
+
+  <!-- ═══ 我的游记 ═══ -->
+  <section class="section section-alt" id="journal-section" aria-label="我的游记">
+  </section>
+
+  <!-- ═══ 我的收藏 ═══ -->
+  <section class="section" aria-label="我的收藏">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">FAVORITES</div>
+        <h2>♥ 我的收藏</h2>
+        <p>收藏的景点和美食</p>
+      </div>
+      <div id="myFavList"></div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <nav class="footer-links" aria-label="页脚导航">
+      <a href="index.html">首页</a>
+      <a href="spots.html">景点</a>
+      <a href="food.html">美食</a>
+      <a href="itinerary.html">行程</a>
+      <a href="guide.html">指南</a>
+      <a href="culture.html">文化</a>
+    </nav>
+    <div class="footer-stats"><span>📍 80+ 景点</span><span>🍜 68 美食</span><span>📋 5 路线</span></div>
+    <p class="footer-tagline">72 泉涌，千年文脉 — 5 条精选路线 · 1-3 天行程 · 智能规划</p>
+    <p>© 2026 泉城攻略 · 济南旅游指南</p>
+  </footer>
+  <button class="btt" aria-label="回到顶部">↑</button>
+  <nav class="mob-nav" aria-label="移动端导航">
+    <a href="index.html"><span class="icon" aria-hidden="true">🏠</span>首页</a>
+    <a href="spots.html"><span class="icon">🏛️</span>景点</a>
+    <a href="food.html"><span class="icon">🍜</span>美食</a>
+    <a href="itinerary.html" class="active"><span class="icon">📋</span>行程</a>
+    <a href="guide.html"><span class="icon">📖</span>指南</a>
+    <a href="culture.html"><span class="icon">📚</span>文化</a>
+  </nav>
+
+
+  <script>
+    // ═══ SHOPIFY-STYLE SCROLL REVEAL ═══
+    (function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      // Observe sections for scroll reveal
+      function setupScrollReveal() {
+        document.querySelectorAll('.section .section-inner').forEach(el => {
+          if (!el.classList.contains('rv')) {
+            el.classList.add('rv');
+            observer.observe(el);
+          }
+        });
+      }
+
+      // Timeline stagger: set animation-delay on timeline items
+      function setupTimelineStagger() {
+        document.querySelectorAll('.timeline-day').forEach(day => {
+          const header = day.querySelector('.timeline-day-header');
+          if (header) {
+            header.style.animation = 'dayHeaderIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards';
+            header.style.opacity = '0';
+            header.style.animationDelay = '0s';
+          }
+          const items = day.querySelectorAll('.timeline-item');
+          items.forEach((item, i) => {
+            item.style.animationDelay = (0.1 + i * 0.08) + 's';
+          });
+        });
+
+        // Cost cards stagger
+        document.querySelectorAll('.cost-card').forEach((card, i) => {
+          card.style.setProperty('--delay', (0.1 + i * 0.1) + 's');
+        });
+      }
+
+      // Weather cards stagger
+      function setupWeatherStagger() {
+        const container = document.getElementById('weatherCards');
+        if (!container) return;
+        const observer2 = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const cards = entry.target.children;
+              Array.from(cards).forEach((card, i) => {
+                card.classList.add('weather-card-animate');
+                card.style.setProperty('--delay', (i * 0.12) + 's');
+              });
+              observer2.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        observer2.observe(container);
+      }
+
+      // Run on load and after dynamic content renders
+      setupScrollReveal();
+      setupTimelineStagger();
+      setupWeatherStagger();
+
+      // Re-run after route changes (since content is dynamically rendered)
+      const routeContent = document.getElementById('routeContent');
+      if (routeContent) {
+        const routeObserver = new MutationObserver(() => {
+          setTimeout(setupTimelineStagger, 50);
+        });
+        routeObserver.observe(routeContent, { childList: true });
+      }
+
+      // Re-run after season/plan renders
+      const planResult = document.getElementById('planResult');
+      if (planResult) {
+        const planObserver = new MutationObserver(() => {
+          setTimeout(setupTimelineStagger, 50);
+        });
+        planObserver.observe(planResult, { childList: true });
+      }
+
+      // Expose for manual calls
+    })();
+  </script>
+
+</body>
+</html>

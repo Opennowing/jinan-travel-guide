@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <link rel="icon" href="/jinan-travel-guide/icons/icon-192.png" type="image/png">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>出行指南 — 济南旅游攻略</title>
+  <meta name="description" content="济南出行指南：交通、住宿、预算、避坑、FAQ。地铁公交攻略、住宿推荐、行李清单、天气查询，出发前你需要知道的一切。">
+  <meta name="keywords" content="济南出行指南,济南交通,济南住宿,济南旅游攻略,济南FAQ">
+  <meta property="og:title" content="出行指南 — 济南旅游攻略">
+  <meta property="og:description" content="交通、住宿、天气、预算……出行前你需要知道的一切">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://opennowing.github.io/jinan-travel-guide/guide.html">
+  <meta property="og:image" content="https://opennowing.github.io/jinan-travel-guide/public/banner.jpg">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="出行指南 — 济南旅游攻略">
+  <meta name="twitter:description" content="交通、住宿、天气、预算……出行前你需要知道的一切">
+  <meta name="twitter:image" content="https://opennowing.github.io/jinan-travel-guide/public/banner.jpg">
+  <link rel="canonical" href="https://opennowing.github.io/jinan-travel-guide/guide.html">
+  <meta name="author" content="泉城攻略">
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "首页", "item": "https://opennowing.github.io/jinan-travel-guide/" },
+      { "@type": "ListItem", "position": 2, "name": "指南", "item": "https://opennowing.github.io/jinan-travel-guide/guide.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "济南玩几天合适？", "acceptedAnswer": { "@type": "Answer", "text": "2-3天最佳。1天太赶只能走马观花，3天可以覆盖市区+周边（灵岩寺/红叶谷）。" } },
+      { "@type": "Question", "name": "什么季节来最好？", "acceptedAnswer": { "@type": "Answer", "text": "4-6月（春季）和9-11月（秋季）最佳。春天泉水最旺、百花盛开；秋天天高气爽、红叶漫山。" } },
+      { "@type": "Question", "name": "趵突泉值得去吗？", "acceptedAnswer": { "@type": "Answer", "text": "值得。虽然¥40门票不便宜，但作为天下第一泉，三窟并发的景象确实壮观。建议早上8点前入园避开人流。" } },
+      { "@type": "Question", "name": "大明湖收费吗？", "acceptedAnswer": { "@type": "Answer", "text": "免费区全天免费开放，足够逛半天。超然楼¥40需单独购票。" } },
+      { "@type": "Question", "name": "济南交通方便吗？", "acceptedAnswer": { "@type": "Answer", "text": "很方便。地铁1/2/3号线覆盖主要景点，公交线路密集，打车也不贵。" } },
+      { "@type": "Question", "name": "有什么必吃的？", "acceptedAnswer": { "@type": "Answer", "text": "必吃TOP5：糖醋黄河鲤鱼、把子肉、油旋、甜沫、草包包子。" } },
+      { "@type": "Question", "name": "住哪里最方便？", "acceptedAnswer": { "@type": "Answer", "text": "泉城路商圈最方便，步行可达趵突泉/芙蓉街/大明湖/宽厚里。" } },
+      { "@type": "Question", "name": "需要预约吗？", "acceptedAnswer": { "@type": "Answer", "text": "趵突泉建议微信小程序提前预约。省博物馆必须预约。其他景点一般现场购票即可。" } },
+      { "@type": "Question", "name": "带孩子适合吗？", "acceptedAnswer": { "@type": "Answer", "text": "很适合。趵突泉喂锦鲤、大明湖坐船、千佛山坐索道，孩子都很喜欢。" } },
+      { "@type": "Question", "name": "手机支付方便吗？", "acceptedAnswer": { "@type": "Answer", "text": "非常方便。支付宝/微信支付全覆盖，连路边摊都能扫码。" } }
+    ]
+  }
+  </script>
+  <link rel="manifest" href="/jinan-travel-guide/manifest.json">
+  <meta name="theme-color" content="#c9a96e">
+  <style>
+    .guide-tabs{display:flex;gap:4px;background:var(--bg2);padding:4px;border-radius:12px;margin-bottom:40px;justify-content:center;max-width:600px;margin-left:auto;margin-right:auto;flex-wrap:wrap}
+    .guide-tab{flex:1;padding:10px 14px;border:none;background:none;font-size:.8rem;font-weight:500;color:var(--text2);cursor:pointer;border-radius:8px;transition:all .3s;white-space:nowrap;text-align:center;min-width:80px}
+    .guide-tab.active{background:var(--bg);color:var(--text);box-shadow:var(--shadow)}
+    .tab-panel{display:none}
+    .tab-panel.active{display:block}
+    .guide-section{margin-bottom:40px}
+    .guide-section h3{font:700 1.2rem/1.4 var(--serif);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+    .guide-section h4{font:600 .95rem/1.4 var(--sans);margin:20px 0 10px;color:var(--accent)}
+    .guide-section p,.guide-section li{font-size:.9rem;color:var(--text2);line-height:1.8}
+    .guide-section ul{list-style:none;padding:0}
+    .guide-section ul li{padding:6px 0 6px 20px;position:relative}
+    .guide-section ul li::before{content:'•';position:absolute;left:0;color:var(--accent);font-weight:700}
+    .info-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:16px}
+    .info-card h4{font:600 .9rem/1.4 var(--sans);color:var(--accent);margin:0 0 8px}
+    .info-card p{font-size:.85rem;color:var(--text2);margin:0}
+    .guide-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.85rem}
+    .guide-table th{background:var(--bg2);padding:10px 14px;text-align:left;font-weight:600;font-size:.8rem;color:var(--text3);border-bottom:2px solid var(--border)}
+    .guide-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2)}
+    .guide-table tr:hover td{background:var(--bg2)}
+
+    /* Calculator */
+    .calc-box{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;max-width:500px}
+    .calc-row{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+    .calc-row label{font-size:.85rem;font-weight:600;min-width:80px;color:var(--text)}
+    .calc-row input,.calc-row select{padding:8px 14px;border:1px solid var(--border2);background:var(--bg);border-radius:8px;font-size:.85rem;outline:none;transition:border-color .3s}
+    .calc-row input:focus,.calc-row select:focus{border-color:var(--accent)}
+    .calc-result{background:linear-gradient(135deg,var(--accent2),var(--bg2));border-radius:12px;padding:20px;margin-top:16px;text-align:center}
+    .calc-result .total{font:900 2rem/1 var(--serif);color:var(--accent)}
+    .calc-result .breakdown{font-size:.8rem;color:var(--text2);margin-top:8px}
+
+    /* Checklist */
+    .checklist{columns:2;column-gap:24px}
+    .check-item{break-inside:avoid;padding:8px 0;display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--text2)}
+    .check-item input[type="checkbox"]{width:18px;height:18px;accent-color:var(--accent);cursor:pointer}
+    .check-item.checked{text-decoration:line-through;color:var(--text3)}
+
+    /* Weather widget */
+    .weather-box{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;text-align:center}
+    .weather-box .temp{font:900 3rem/1 var(--serif);color:var(--accent)}
+    .weather-box .desc{font-size:.9rem;color:var(--text2);margin-top:4px}
+    .weather-box .detail{font-size:.8rem;color:var(--text3);margin-top:12px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+    /* Emergency */
+    .emergency-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+    .emergency-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px}
+    .emergency-card .icon{font-size:1.4rem;margin-bottom:8px}
+    .emergency-card h4{font-size:.85rem;font-weight:700;margin-bottom:4px}
+    .emergency-card .number{font:700 1.2rem/1 var(--serif);color:var(--coral)}
+    .emergency-card .note{font-size:.75rem;color:var(--text3);margin-top:4px}
+
+    /* FAQ */
+    .faq-item{border-bottom:1px solid var(--border);padding:16px 0}
+    .faq-q{font-weight:700;font-size:.9rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px}
+    .faq-q::after{content:'+';font-size:1.2rem;color:var(--accent);transition:transform .3s}
+    .faq-q.open::after{transform:rotate(45deg)}
+    .faq-a{font-size:.85rem;color:var(--text2);line-height:1.7;max-height:0;overflow:hidden;transition:max-height .3s;padding-top:0}
+    .faq-a.open{max-height:300px;padding-top:10px}
+
+    /* Weather 7-day cards */
+    .weather-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin-top:16px}
+    .weather-day-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px 10px;text-align:center;transition:transform .2s}
+    .weather-day-card:hover{transform:translateY(-2px)}
+    .weather-day-card .day-date{font-size:.75rem;font-weight:600;color:var(--text3);margin-bottom:6px}
+    .weather-day-card .day-icon{font-size:1.8rem;line-height:1.2}
+    .weather-day-card .day-temp{font-size:.8rem;color:var(--text);font-weight:600;margin:6px 0 2px}
+    .weather-day-card .day-desc{font-size:.7rem;color:var(--text3)}
+    .weather-tip{background:var(--accent2);border-radius:var(--radius);padding:14px 18px;margin-top:16px;font-size:.85rem;color:var(--text);display:flex;align-items:center;gap:8px}
+
+    /* Checklist enhanced */
+    .checklist-toolbar{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+    .checklist-toolbar button{padding:6px 14px;border:1px solid var(--border2);background:var(--bg);border-radius:8px;font-size:.8rem;cursor:pointer;color:var(--text);transition:all .2s}
+    .checklist-toolbar button:hover{border-color:var(--accent);color:var(--accent)}
+    .custom-item-input{display:flex;gap:8px;margin-bottom:12px}
+    .custom-item-input input{flex:1;padding:8px 14px;border:1px solid var(--border2);background:var(--bg);border-radius:8px;font-size:.85rem;outline:none}
+    .custom-item-input input:focus{border-color:var(--accent)}
+
+    /* Budget enhanced */
+    .budget-bar-chart{display:flex;align-items:flex-end;gap:16px;height:180px;margin:20px 0;padding:0 10px}
+    .budget-bar{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}
+    .budget-bar .bar{width:100%;border-radius:6px 6px 0 0;transition:height .5s;min-height:4px;position:relative}
+    .budget-bar .bar-label{font-size:.7rem;color:var(--text3);text-align:center}
+    .budget-bar .bar-value{font-size:.75rem;font-weight:700;color:var(--accent);white-space:nowrap}
+
+    /* Dialect & Photo tabs */
+    .dialect-table{width:100%;border-collapse:collapse;font-size:.85rem}
+    .dialect-table th{background:var(--bg2);padding:10px 14px;text-align:left;font-weight:600;font-size:.8rem;color:var(--text3);border-bottom:2px solid var(--border)}
+    .dialect-table td{padding:10px 14px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+    .dialect-table .dialect-word{font-weight:700;color:var(--accent);font-size:.9rem}
+    .dialect-table .dialect-pinyin{font-size:.75rem;color:var(--text3);display:block;margin-top:2px}
+    .dialect-table tr:hover td{background:var(--bg2)}
+
+    .photo-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;margin-bottom:16px}
+    .photo-card h4{font:600 .95rem/1.4 var(--sans);color:var(--accent);margin:0 0 6px;display:flex;align-items:center;gap:8px}
+    .photo-card .photo-meta{display:flex;gap:16px;font-size:.8rem;color:var(--text3);margin-bottom:10px;flex-wrap:wrap}
+    .photo-card p{font-size:.85rem;color:var(--text2);line-height:1.7;margin:4px 0}
+    .photo-card .tip-tag{display:inline-block;background:var(--accent2);color:var(--accent);font-size:.75rem;padding:2px 8px;border-radius:4px;margin-right:6px;font-weight:600}
+
+    @media(max-width:768px){
+      .checklist{columns:1}
+      .guide-tabs{max-width:100%;flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start}
+      .calc-row{flex-direction:column;align-items:flex-start}
+      .weather-cards{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}
+      .budget-bar-chart{height:140px}
+    }
+
+    /* ═══ Shopify-style Animations ═══ */
+
+    /* 1. Tool cards / info cards hover: float up + subtle scale */
+    .info-card,
+    .emergency-card,
+    .photo-card {
+      transition: transform .35s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease, border-color .35s ease;
+      will-change: transform;
+    }
+    .info-card:hover,
+    .emergency-card:hover,
+    .photo-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 12px 32px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.04);
+      border-color: var(--accent, #c9a96e);
+    }
+
+    /* Icon scale on card hover */
+    .info-card h4,
+    .emergency-card .icon,
+    .photo-card h4 {
+      transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+      display: inline-block;
+    }
+    .info-card:hover h4,
+    .photo-card:hover h4 {
+      transform: scale(1.05);
+    }
+    .emergency-card:hover .icon {
+      transform: scale(1.2);
+    }
+
+    /* 2. FAQ accordion smooth animation */
+    .faq-a {
+      font-size:.85rem;
+      color:var(--text2);
+      line-height:1.7;
+      max-height:0;
+      overflow:hidden;
+      transition: max-height .45s cubic-bezier(.4,0,.2,1), padding-top .35s ease, opacity .35s ease;
+      padding-top:0;
+      opacity:0;
+    }
+    .faq-a.open {
+      max-height:500px;
+      padding-top:12px;
+      opacity:1;
+    }
+    .faq-q {
+      transition: color .25s ease;
+    }
+    .faq-q:hover {
+      color: var(--accent, #c9a96e);
+    }
+    .faq-q::after {
+      transition: transform .35s cubic-bezier(.34,1.56,.64,1), color .25s ease;
+    }
+    .faq-q.open::after {
+      transform: rotate(45deg);
+      color: var(--accent, #c9a96e);
+    }
+
+    /* 3. Calculator input focus glow */
+    .calc-row input:focus,
+    .calc-row select:focus,
+    .custom-item-input input:focus {
+      border-color: var(--accent, #c9a96e);
+      box-shadow: 0 0 0 4px rgba(201,169,110,.18), 0 0 16px rgba(201,169,110,.1);
+      outline: none;
+    }
+    .calc-row input,
+    .calc-row select,
+    .custom-item-input input {
+      transition: border-color .3s ease, box-shadow .35s cubic-bezier(.4,0,.2,1), transform .25s ease;
+    }
+    .calc-row input:focus,
+    .calc-row select:focus,
+    .custom-item-input input:focus {
+      transform: scale(1.02);
+    }
+
+    /* 4. Checklist checkbox bounce animation */
+    .check-item input[type="checkbox"] {
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1), accent-color .3s ease;
+      position: relative;
+    }
+    .check-item input[type="checkbox"]:checked {
+      animation: checkBounce .5s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes checkBounce {
+      0% { transform: scale(1); }
+      30% { transform: scale(1.35); }
+      50% { transform: scale(.85); }
+      70% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+    .check-item {
+      transition: opacity .3s ease, transform .3s ease;
+    }
+    .check-item.checked {
+      opacity: .55;
+      transform: translateX(4px);
+    }
+
+    /* 5. Scroll reveal (fade in from bottom) */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .65s cubic-bezier(.4,0,.2,1), transform .65s cubic-bezier(.4,0,.2,1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Stagger children */
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .5s cubic-bezier(.4,0,.2,1), transform .5s cubic-bezier(.4,0,.2,1);
+    }
+    .reveal-stagger.visible > *:nth-child(1) { transition-delay: .05s; }
+    .reveal-stagger.visible > *:nth-child(2) { transition-delay: .1s; }
+    .reveal-stagger.visible > *:nth-child(3) { transition-delay: .15s; }
+    .reveal-stagger.visible > *:nth-child(4) { transition-delay: .2s; }
+    .reveal-stagger.visible > *:nth-child(5) { transition-delay: .25s; }
+    .reveal-stagger.visible > *:nth-child(6) { transition-delay: .3s; }
+    .reveal-stagger.visible > *:nth-child(n+7) { transition-delay: .35s; }
+    .reveal-stagger.visible > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* 6. Button micro-interaction */
+    .btn {
+      transition: transform .2s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease, background .25s ease;
+    }
+    .btn:active {
+      transform: scale(.96);
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(201,169,110,.3);
+    }
+
+    /* 7. Guide tab switch animation */
+    .tab-panel.active {
+      animation: fadeSlideIn .4s cubic-bezier(.4,0,.2,1);
+    }
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 8. Budget bar chart animate in */
+    .budget-bar .bar {
+      transition: height .6s cubic-bezier(.34,1.56,.64,1);
+    }
+
+    /* ═══ Tool Cards ═══ */
+    .tool-card{
+      background:var(--card-bg);
+      border:1px solid var(--border);
+      border-radius:var(--radius-lg);
+      padding:28px 24px;
+      text-align:center;
+      cursor:pointer;
+      transition:all .35s cubic-bezier(0.34,1.56,0.64,1);
+      position:relative;
+    }
+    .tool-card:hover{
+      transform:translateY(-6px) scale(1.02);
+      box-shadow:0 16px 32px rgba(0,0,0,.08);
+      border-color:var(--accent);
+    }
+    .tool-card:active{transform:scale(.97)}
+    .tool-card .icon{font-size:2.4rem;margin-bottom:12px;display:block;transition:transform .35s cubic-bezier(0.34,1.56,0.64,1)}
+    .tool-card:hover .icon{transform:scale(1.15) rotate(-3deg)}
+    .tool-card h4{font:700 1rem/1.3 var(--serif);margin-bottom:6px}
+    .tool-card p{font-size:.82rem;color:var(--text2)}
+
+    /* ═══ Toast Notification ═══ */
+
+    /* ═══ Tool Card Favorite Button ═══ */
+    .tool-card:hover
+
+    /* ═══ Modal ═══ */
+    .modal-overlay{
+      position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;
+      display:flex;align-items:center;justify-content:center;
+      opacity:0;pointer-events:none;transition:opacity .3s;
+      padding:20px;
+    }
+    .modal-overlay.active{opacity:1;pointer-events:auto}
+    .modal-content{
+      background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);
+      max-width:500px;width:100%;max-height:85vh;overflow-y:auto;
+      transform:translateY(20px) scale(.95);transition:transform .35s cubic-bezier(0.34,1.56,0.64,1);
+      position:relative;
+    }
+    .modal-overlay.active .modal-content{transform:translateY(0) scale(1)}
+    .modal-close{
+      position:absolute;top:12px;right:12px;width:32px;height:32px;
+      border:1px solid var(--border);border-radius:50%;background:var(--bg);
+      cursor:pointer;display:flex;align-items:center;justify-content:center;
+      font-size:1rem;color:var(--text2);transition:all .2s;z-index:1;
+    }
+    .modal-close:hover{border-color:var(--coral);color:var(--coral)}
+    .calc-row{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+    .calc-row label{font-size:.85rem;font-weight:600;min-width:80px;color:var(--text)}
+    .calc-row input,.calc-row select{padding:8px 14px;border:1px solid var(--border2);background:var(--bg);border-radius:8px;font-size:.85rem;outline:none;transition:border-color .3s,box-shadow .3s}
+    .calc-row input:focus,.calc-row select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(201,169,110,.15)}
+    .calc-result{background:linear-gradient(135deg,var(--accent2),var(--bg2));border-radius:12px;padding:20px;margin-top:16px;text-align:center}
+    .calc-result .total{font:900 2rem/1 var(--serif);color:var(--accent)}
+    .calc-result .breakdown{font-size:.8rem;color:var(--text2);margin-top:8px}
+
+    @media(max-width:768px){
+      .tools-grid{grid-template-columns:repeat(2,1fr)!important}
+      .modal-content{max-width:100%;margin:0 10px}
+    }
+  
+    /* ═══ Enhanced Interactive Checklist ═══ */
+    .prep-checklist-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      margin-bottom: 24px;
+    }
+    .prep-checklist-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .prep-checklist-header h3 {
+      font: 700 1.15rem/1.4 var(--serif);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prep-progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    .prep-progress-bar {
+      flex: 1;
+      height: 8px;
+      background: var(--bg2);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+    .prep-progress-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--accent, #c9a96e), #4ecdc4);
+      transition: width 0.5s cubic-bezier(.34,1.56,.64,1);
+      width: 0%;
+    }
+    .prep-progress-text {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--accent, #c9a96e);
+      white-space: nowrap;
+      min-width: 70px;
+      text-align: right;
+    }
+    .prep-toolbar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+    .prep-toolbar button {
+      padding: 6px 14px;
+      border: 1px solid var(--border2);
+      background: var(--bg);
+      border-radius: 8px;
+      font-size: .8rem;
+      cursor: pointer;
+      color: var(--text);
+      transition: all .2s;
+    }
+    .prep-toolbar button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .prep-category {
+      margin-bottom: 20px;
+    }
+    .prep-category:last-child {
+      margin-bottom: 0;
+    }
+    .prep-category-title {
+      font: 600 .9rem/1.4 var(--sans);
+      color: var(--accent, #c9a96e);
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .prep-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 4px;
+      cursor: pointer;
+      transition: opacity .3s ease, transform .3s ease;
+      border-radius: 6px;
+      position: relative;
+    }
+    .prep-item:hover {
+      background: var(--bg2);
+    }
+    .prep-item.checked {
+      opacity: .5;
+    }
+    .prep-item.checked .prep-item-text {
+      text-decoration: line-through;
+      color: var(--text3);
+    }
+    .prep-item input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent, #c9a96e);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .prep-item input[type="checkbox"]:checked {
+      animation: checkPop .4s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes checkPop {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.3); }
+      70% { transform: scale(.9); }
+      100% { transform: scale(1); }
+    }
+    .prep-item-text {
+      font-size: .88rem;
+      color: var(--text2);
+      transition: all .3s ease;
+    }
+    .prep-item .prep-check-icon {
+      position: absolute;
+      left: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: .75rem;
+      opacity: 0;
+      transition: opacity .3s ease;
+      pointer-events: none;
+    }
+    .prep-item.checked .prep-check-icon {
+      opacity: 1;
+      animation: checkSlideIn .3s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes checkSlideIn {
+      from { opacity: 0; transform: translateY(-50%) scale(0.5); }
+      to { opacity: 1; transform: translateY(-50%) scale(1); }
+    }
+    .prep-season-tag {
+      display: inline-block;
+      background: var(--accent2);
+      color: var(--accent);
+      font-size: .7rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-left: 6px;
+      font-weight: 600;
+    }
+    .prep-complete-msg {
+      text-align: center;
+      padding: 16px;
+      font-size: .9rem;
+      color: var(--accent);
+      font-weight: 600;
+      display: none;
+    }
+    .prep-complete-msg.show {
+      display: block;
+      animation: fadeSlideIn .4s cubic-bezier(.4,0,.2,1);
+    }
+
+    /* ═══ Enhanced Weather Tips ═══ */
+    .weather-enhanced {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .weather-enhanced-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      text-align: center;
+      transition: transform .2s ease;
+    }
+    .weather-enhanced-card:hover {
+      transform: translateY(-2px);
+    }
+    .weather-enhanced-card .we-icon {
+      font-size: 1.4rem;
+      margin-bottom: 6px;
+    }
+    .weather-enhanced-card .we-label {
+      font-size: .7rem;
+      color: var(--text3);
+      margin-bottom: 4px;
+    }
+    .weather-enhanced-card .we-value {
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .travel-index {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: .75rem;
+      font-weight: 700;
+    }
+    .travel-index.excellent {
+      background: #d4edda;
+      color: #155724;
+    }
+    .travel-index.good {
+      background: #fff3cd;
+      color: #856404;
+    }
+    .travel-index.fair {
+      background: #f8d7da;
+      color: #721c24;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .travel-index.excellent { background: #1a472a; color: #a3d9a5; }
+      .travel-index.good { background: #4a3f1a; color: #f0d78e; }
+      .travel-index.fair { background: #4a1a1a; color: #f0a3a3; }
+    }
+
+    @media(max-width:768px){
+      .prep-checklist-section { padding: 20px 16px; }
+      .prep-checklist-header { flex-direction: column; align-items: flex-start; }
+      .prep-toolbar { width: 100%; }
+      .prep-toolbar button { flex: 1; min-width: 0; font-size: .75rem; padding: 6px 8px; }
+      .weather-enhanced { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── prefers-reduced-motion: disable all inline animations ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1600&q=80">
+    <script type="module" crossorigin src="/jinan-travel-guide/assets/guide-J0jWLNa1.js"></script>
+    <link rel="modulepreload" crossorigin href="/jinan-travel-guide/assets/social-BtvQIZg-.js">
+    <link rel="modulepreload" crossorigin href="/jinan-travel-guide/assets/interactive-Nl2I4oKJ.js">
+    <link rel="modulepreload" crossorigin href="/jinan-travel-guide/assets/shopify-animations-C_FKrdXc.js">
+    <link rel="stylesheet" crossorigin href="/jinan-travel-guide/assets/social-IJRaxWbQ.css">
+  </head>
+<body>
+  <a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:16px;z-index:999;background:var(--accent);color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-100%'">跳到主要内容</a>
+  <div class="scroll-progress"></div>
+    <nav class="top-nav" aria-label="主导航">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">⛲</span>
+      <span class="logo-text">泉城攻略</span>
+      <span class="logo-sub">JINAN TRAVEL</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html"><span class="nav-icon">🏠</span>首页</a>
+      <a href="spots.html"><span class="nav-icon">🏛️</span>景点</a>
+      <a href="food.html"><span class="nav-icon">🍜</span>美食</a>
+      <a href="itinerary.html"><span class="nav-icon">📋</span>行程</a>
+      <a href="guide.html" class="active"><span class="nav-icon">📖</span>指南</a>
+      <a href="culture.html"><span class="nav-icon">📚</span>文化</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="nav-search-btn" id="navSearchBtn" aria-label="搜索">🔍</button>
+      <button class="dark-toggle" aria-label="切换深色模式">🌙</button>
+      <button class="burger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <main role="main" id="main-content">
+  <section class="page-hero" style="position:relative;min-height:50vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(to bottom,rgba(0,0,0,.5),rgba(0,0,0,.7)),url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1600&q=80') center/cover no-repeat" aria-label="页面标题">
+    <div class="eyebrow" style="font-size:.8rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:12px;display:inline-flex;align-items:center;gap:12px;position:relative;z-index:1"><span style="width:24px;height:1px;background:rgba(255,255,255,.5)"></span>JINAN GUIDE<span style="width:24px;height:1px;background:rgba(255,255,255,.5)"></span></div>
+    <h1 style="color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.5)">📖 出行指南</h1>
+    <p style="color:rgba(255,255,255,.85);text-shadow:0 1px 10px rgba(0,0,0,.4)">出发前你需要知道的一切</p>
+    <p style="font-size:.9rem;color:rgba(255,255,255,.7);margin-top:12px;font-weight:500">交通 · 住宿 · 天气 · 预算 · 一站式指南</p>
+    <button class="btn btn-outline btn-sm" style="margin-top:16px;color:#fff;border-color:rgba(255,255,255,.4)" aria-label="分享页面" data-share='{"title":"济南出行指南","subtitle":"交通·住宿·预算·天气","items":[{"name":"交通攻略","info":"高铁/飞机/地铁全覆盖"},{"name":"住宿推荐","info":"泉城路/大明湖周边"},{"name":"预算参考","info":"人均¥200-500/天"},{"name":"天气穿搭","info":"四季分明，春秋最宜"},{"name":"必备清单","info":"充电宝·舒适鞋·防晒"}],"page":"guide"}'>📤 分享指南</button>
+  </section>
+
+  <section class="section" aria-label="实用工具">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">TOOLS</div>
+        <h2>🧰 实用工具</h2>
+      </div>
+      <div class="tools-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px">
+        <div class="tool-card" onclick="showBudgetCalc()">
+          <span class="icon">💰</span>
+          <h4>预算计算器</h4>
+          <p>快速估算旅行费用</p>
+        </div>
+        <div class="tool-card" onclick="showPackingList()">
+          <span class="icon">🎒</span>
+          <h4>行李清单</h4>
+          <p>一键生成打包列表</p>
+        </div>
+        <div class="tool-card" onclick="showWeather()">
+          <span class="icon">🌤️</span>
+          <h4>天气查询</h4>
+          <p>实时济南天气</p>
+        </div>
+        <div class="tool-card" onclick="showEmergency()">
+          <span class="icon">🆘</span>
+          <h4>紧急联系</h4>
+          <p>一键拨打急救电话</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="出行指南内容">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">GUIDE</div>
+        <h2>📖 出行指南</h2>
+        <p>交通、住宿、天气、避坑……你想知道的都在这里</p>
+      </div>
+      <div class="guide-tabs reveal" id="guideTabs" role="tablist" aria-label="指南分类">
+        <button class="guide-tab active" data-tab="transport" aria-label="🚗 交通" role="tab" aria-selected="true">🚗 交通</button>
+        <button class="guide-tab" data-tab="hotel" aria-label="🏨 住宿" role="tab" aria-selected="false">🏨 住宿</button>
+        <button class="guide-tab" data-tab="tools" aria-label="🛠️ 工具" role="tab" aria-selected="false">🛠️ 工具</button>
+        <button class="guide-tab" data-tab="tips" aria-label="⚠️ 避坑" role="tab" aria-selected="false">⚠️ 避坑</button>
+        <button class="guide-tab" data-tab="dialect" aria-label="🗣️ 方言" role="tab" aria-selected="false">🗣️ 方言</button>
+        <button class="guide-tab" data-tab="photo" aria-label="📸 拍照" role="tab" aria-selected="false">📸 拍照</button>
+        <button class="guide-tab" data-tab="faq" aria-label="❓ FAQ" role="tab" aria-selected="false">❓ FAQ</button>
+      </div>
+
+      <!-- ═══ TAB: 交通 ═══ -->
+      <div class="tab-panel active" id="panel-transport">
+        <div class="section-divider reveal" aria-hidden="true">◈</div>
+        <div class="guide-section">
+          <h3>🛂 签证与入境</h3>
+          <div class="info-card reveal">
+            <h4>144小时过境免签</h4>
+            <p>自2019年起，济南遥墙机场口岸实施144小时过境免签政策。持有效国际旅行证件和144小时内确定日期及座位的联程客票，可免签停留6天。适用54个国家（含美/英/日/韩/澳等）。需从济南遥墙机场入境和出境。</p>
+          </div>
+          <div class="info-card reveal">
+            <h4>泉城通交通卡</h4>
+            <p>济南公共交通IC卡"泉城通"，可在地铁、公交、出租车使用。在地铁站自助机购买，押金10元，支持支付宝/微信充值。也可直接用支付宝/微信乘车码扫码乘车，无需实体卡。</p>
+          </div>
+          <div class="info-card reveal">
+            <h4>旅游年卡</h4>
+            <p>济南公园年卡¥200/年，包含趵突泉、千佛山、大明湖超然楼等主要收费景点。在景区窗口或微信小程序办理。如果计划去3个以上收费景点，年卡更划算。</p>
+          </div>
+
+          <h3>🚄 到达济南</h3>
+          <table class="guide-table">
+            <thead><tr><th>方式</th><th>站点</th><th>到市区</th><th>费用</th><th>用时</th></tr></thead>
+            <tbody>
+              <tr><td>高铁</td><td>济南站</td><td>市中心，步行可达</td><td>—</td><td>—</td></tr>
+              <tr><td>高铁</td><td>济南西站</td><td>地铁1号线 30min</td><td>¥4</td><td>30min</td></tr>
+              <tr><td>高铁</td><td>济南东站</td><td>地铁3号线 40min</td><td>¥5</td><td>40min</td></tr>
+              <tr><td>飞机</td><td>遥墙机场</td><td>机场大巴/打车</td><td>大巴¥30/打车¥100</td><td>1h</td></tr>
+              <tr><td>自驾</td><td>—</td><td>高速直达</td><td>过路费视距离</td><td>—</td></tr>
+            </tbody>
+          </table>
+
+          <h3>🚇 市内交通</h3>
+          <div class="info-card reveal">
+            <h4>地铁（推荐）</h4>
+            <p>目前开通 1/2/3 号线，覆盖主要景点。票价 ¥2-7，运营时间 06:00-22:00。<br>
+            <strong>1号线</strong>：济南西站→大明湖→泉城路<br>
+            <strong>2号线</strong>：趵突泉→黑虎泉→芙蓉街<br>
+            <strong>3号线</strong>：济南东站→奥体中心</p>
+          </div>
+          <div class="info-card reveal">
+            <h4>公交</h4>
+            <p>线路密集，票价 ¥1-2（空调车 ¥2）。推荐线路：<br>
+            <strong>K51路</strong>：趵突泉→千佛山→省博物馆<br>
+            <strong>K55路</strong>：泉城路→洪家楼<br>
+            支持支付宝/微信乘车码</p>
+          </div>
+          <div class="info-card reveal">
+            <h4>打车</h4>
+            <p>起步价 ¥12（3km），超出 ¥2/km。市区内大部分景点打车 ¥15-30。<br>
+            高峰期/雨天建议提前叫车。滴滴、高德打车均可。</p>
+          </div>
+          <div class="info-card">
+            <h4>共享单车</h4>
+            <p>美团/哈啰/青桔单车遍布。适合短途接驳（1-3km）。<br>
+            泉城路→大明湖骑行约 10 分钟，沿途风景好。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ TAB: 住宿 ═══ -->
+      <div class="tab-panel" id="panel-hotel">
+        <div class="guide-section">
+          <h3>🏨 住宿区域对比</h3>
+          <table class="guide-table">
+            <thead><tr><th>区域</th><th>优势</th><th>适合人群</th><th>价格区间</th></tr></thead>
+            <tbody>
+              <tr><td><strong>泉城路商圈</strong></td><td>市中心，步行可达趵突泉/芙蓉街/宽厚里</td><td>首次游客</td><td>¥200-800</td></tr>
+              <tr><td><strong>大明湖周边</strong></td><td>环境好，湖景房，靠近老城区</td><td>情侣/家庭</td><td>¥180-600</td></tr>
+              <tr><td><strong>火车站附近</strong></td><td>交通方便，早到晚走首选</td><td>背包客/短途</td><td>¥100-300</td></tr>
+              <tr><td><strong>高新区/奥体</strong></td><td>酒店新，性价比高，地铁3号线</td><td>商务/自驾</td><td>¥150-500</td></tr>
+              <tr><td><strong>千佛山周边</strong></td><td>安静，靠近山景和省博物馆</td><td>喜欢安静的游客</td><td>¥200-600</td></tr>
+            </tbody>
+          </table>
+
+          <h3>💰 按预算推荐</h3>
+          <div class="info-card">
+            <h4>🎒 青旅/经济型 ¥50-100/晚</h4>
+            <p>推荐：泉城路国际青旅、大明湖青旅。适合独行背包客，公共区域可交友。</p>
+          </div>
+          <div class="info-card">
+            <h4>🏨 快捷酒店 ¥150-300/晚</h4>
+            <p>推荐：如家/汉庭/7天（泉城路店）。干净方便，性价比之选。</p>
+          </div>
+          <div class="info-card">
+            <h4>✨ 精品酒店 ¥400-800/晚</h4>
+            <p>推荐：泉城大酒店、舜耕山庄。泉水主题房，服务好。</p>
+          </div>
+          <div class="info-card">
+            <h4>👑 高端酒店 ¥800+/晚</h4>
+            <p>推荐：济南香格里拉、索菲特银座大饭店。设施一流，湖景/城景房。</p>
+          </div>
+          <p style="font-size:.8rem;color:var(--text3);margin-top:16px">💡 旺季（4-6月/9-10月/国庆/春节）价格上浮 30-100%，建议提前 2 周预订。</p>
+        </div>
+      </div>
+
+      <!-- ═══ TAB: 工具 ═══ -->
+      <div class="tab-panel" id="panel-tools">
+        <div class="guide-section">
+          <h3>💰 预算计算器</h3>
+          <div class="calc-box">
+            <div class="calc-row">
+              <label>游玩天数</label>
+              <input type="number" id="calcDays" value="2" min="1" max="10" aria-label="游玩天数">
+            </div>
+            <div class="calc-row">
+              <label>出行人数</label>
+              <input type="number" id="calcPeople" value="2" min="1" max="10" aria-label="出行人数">
+            </div>
+            <div class="calc-row">
+              <label>交通方式</label>
+              <select id="calcTransport">
+                <option value="subway" selected>🚇 地铁</option>
+                <option value="taxi">🚕 打车</option>
+                <option value="car">🚗 自驾</option>
+              </select>
+            </div>
+            <div class="calc-row">
+              <label>餐饮档次</label>
+              <select id="calcFood">
+                <option value="street">🍢 路边摊</option>
+                <option value="fast">🍔 快餐</option>
+                <option value="restaurant" selected>🍽️ 正餐</option>
+                <option value="premium">👑 高端</option>
+              </select>
+            </div>
+            <div class="calc-row">
+              <label>住宿档次</label>
+              <select id="calcHotel">
+                <option value="hostel">🎒 青旅</option>
+                <option value="budget">🏨 经济型</option>
+                <option value="comfort" selected>✨ 舒适型</option>
+                <option value="premium">👑 高端</option>
+              </select>
+            </div>
+            <button class="btn btn-primary" id="calcBtn" style="width:100%" aria-label="计算预算">计算预算</button>
+            <div class="calc-result" id="calcResult" style="display:none">
+              <div class="total" id="calcTotal"></div>
+              <div class="breakdown" id="calcBreakdown"></div>
+            </div>
+            <div class="budget-bar-chart" id="budgetChart" style="display:none"></div>
+            <div style="display:flex;gap:8px;margin-top:12px">
+              <button class="btn btn-sm btn-outline" id="saveBudgetBtn" style="flex:1" aria-label="💾 保存预算">💾 保存预算</button>
+              <button class="btn btn-sm btn-outline" id="loadBudgetBtn" style="flex:1" aria-label="📂 读取保存">📂 读取保存</button>
+            </div>
+          </div>
+
+          <h3>📋 行李清单</h3>
+          <div style="margin-bottom:12px;display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-sm btn-outline season-pick active" data-season="spring" aria-label="🌸 春" role="tab" aria-selected="true">🌸 春</button>
+            <button class="btn btn-sm btn-outline season-pick" data-season="summer" aria-label="☀️ 夏" role="tab" aria-selected="false">☀️ 夏</button>
+            <button class="btn btn-sm btn-outline season-pick" data-season="autumn" aria-label="🍂 秋" role="tab" aria-selected="false">🍂 秋</button>
+            <button class="btn btn-sm btn-outline season-pick" data-season="winter" aria-label="❄️ 冬" role="tab" aria-selected="false">❄️ 冬</button>
+          </div>
+          <div class="custom-item-input">
+            <input type="text" id="customItemInput" placeholder="添加自定义物品…">
+            <button class="btn btn-sm btn-primary" id="addCustomItemBtn" aria-label="＋ 添加">＋ 添加</button>
+          </div>
+          <div class="checklist-toolbar">
+            <button id="checkAllBtn" aria-label="全选清单项目">✅ 全选</button>
+            <button id="uncheckAllBtn" aria-label="取消全选清单项目">⬜ 取消全选</button>
+            <button id="exportChecklistBtn" aria-label="导出清单为文本">📋 导出清单</button>
+          </div>
+          <div class="checklist" id="checklist"></div>
+
+          <h3>🌡️ 济南天气</h3>
+          <div class="weather-box" id="weatherBox">
+            <div class="temp" id="wTemp">--°C</div>
+            <div class="desc" id="wDesc">加载中…</div>
+            <div class="detail" id="wDetail"></div>
+          </div>
+          <div class="weather-cards reveal" id="weatherCards"></div>
+          <div class="weather-tip" id="weatherTip" style="display:none"></div>
+
+          <!-- Enhanced Weather Tips Cards -->
+          <div class="weather-enhanced" id="weatherEnhanced">
+            <div class="weather-enhanced-card">
+              <div class="we-icon">👔</div>
+              <div class="we-label">穿衣建议</div>
+              <div class="we-value" id="weClothing">加载中…</div>
+            </div>
+            <div class="weather-enhanced-card">
+              <div class="we-icon">☀️</div>
+              <div class="we-label">紫外线指数</div>
+              <div class="we-value" id="weUV">加载中…</div>
+            </div>
+            <div class="weather-enhanced-card">
+              <div class="we-icon">🎯</div>
+              <div class="we-label">出行指数</div>
+              <div class="we-value" id="weIndex">加载中…</div>
+            </div>
+          </div>
+
+          <!-- ═══ Interactive Pre-trip Checklist ═══ -->
+          <div class="prep-checklist-section reveal" id="prepChecklistSection">
+            <div class="prep-checklist-header">
+              <h3>✅ 行前准备清单</h3>
+              <span class="prep-progress-text" id="prepProgressText">已准备 0/0</span>
+            </div>
+            <div class="prep-progress">
+              <div class="prep-progress-bar">
+                <div class="prep-progress-fill" id="prepProgressFill"></div>
+              </div>
+            </div>
+            <div class="prep-toolbar">
+              <button id="prepCheckAll" aria-label="一键全选">✅ 一键全选</button>
+              <button id="prepReset" aria-label="全部重置">🔄 全部重置</button>
+            </div>
+            <div id="prepChecklistBody"></div>
+            <div class="prep-complete-msg" id="prepCompleteMsg">🎉 太棒了！所有物品已准备就绪，出发吧！</div>
+          </div>
+
+          <h3>👕 季节穿搭指南</h3>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:24px">
+            <div class="info-card">
+              <h4>🌸 春季 (3-5月) · 10-25°C</h4>
+              <p>早晚温差大，建议穿薄外套/风衣。4月五龙潭樱花季，穿浅色衣服拍照更好看。带把折叠伞以防春雨。</p>
+            </div>
+            <div class="info-card">
+              <h4>☀️ 夏季 (6-8月) · 25-38°C</h4>
+              <p>酷热多雨，穿轻薄透气衣物。必备防晒霜SPF50+/遮阳帽/墨镜。7-8月多暴雨，随身带伞。中午建议室内避暑。</p>
+            </div>
+            <div class="info-card">
+              <h4>🍂 秋季 (9-11月) · 10-25°C</h4>
+              <p>秋高气爽，穿长袖+薄外套。登山带冲锋衣。10月红叶谷赏红叶，穿暖色系拍照更出片。早晚偏凉注意加衣。</p>
+            </div>
+            <div class="info-card">
+              <h4>❄️ 冬季 (12-2月) · -5~8°C</h4>
+              <p>干冷天气，穿厚羽绒服+保暖内衣+帽子手套围巾。趵突泉冬季雾气如仙境，注意保暖。暖宝宝必备。</p>
+            </div>
+          </div>
+
+          <h3>📞 紧急联系</h3>
+          <div class="emergency-grid reveal">
+            <div class="emergency-card"><div class="icon">🚨</div><h4>报警</h4><div class="number">110</div><div class="note">公安报警电话</div></div>
+            <div class="emergency-card"><div class="icon">🚑</div><h4>急救</h4><div class="number">120</div><div class="note">医疗急救电话</div></div>
+            <div class="emergency-card"><div class="icon">🔥</div><h4>火警</h4><div class="number">119</div><div class="note">消防报警电话</div></div>
+            <div class="emergency-card"><div class="icon">📞</div><h4>旅游投诉</h4><div class="number">12345</div><div class="note">市民服务热线</div></div>
+            <div class="emergency-card"><div class="icon">🏥</div><h4>山东省立医院</h4><div class="number">0531-87938911</div><div class="note">经五纬七路 · 三甲</div></div>
+            <div class="emergency-card"><div class="icon">🏥</div><h4>齐鲁医院</h4><div class="number">0531-82169114</div><div class="note">文化西路107号 · 三甲</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ TAB: 避坑 ═══ -->
+      <div class="tab-panel" id="panel-tips">
+        <div class="guide-section">
+          <h3>⚠️ 常见旅游陷阱</h3>
+          <div class="info-card">
+            <h4>🚕 出租车绕路</h4>
+            <p>从火车站/机场出来，部分出租车会绕路。建议用导航软件看路线，或直接叫网约车。<br>
+            <strong>避坑</strong>：上车前说好走哪条路，或用滴滴/高德打车。</p>
+          </div>
+          <div class="info-card">
+            <h4>🎫 野导拉客</h4>
+            <p>趵突泉/大明湖门口有人拉客说"带你走后门便宜"。都是骗局。<br>
+            <strong>避坑</strong>：认准官方售票窗口或微信小程序预约。</p>
+          </div>
+          <div class="info-card">
+            <h4>🛍️ 景区购物</h4>
+            <p>景区内的"特产"价格虚高，质量参差不齐。<br>
+            <strong>避坑</strong>：去大型超市（银座/华联）买特产，价格透明。</p>
+          </div>
+
+          <h3>🍽️ 餐饮避坑</h3>
+          <ul>
+            <li>芙蓉街小吃偏贵，尝鲜即可，别当正餐</li>
+            <li>景区旁边的餐厅性价比低，多走两条街</li>
+            <li>泉水宴认准正规酒店，路边摊不靠谱</li>
+            <li>甜沫是咸的！别被名字骗了以为是甜的</li>
+            <li>外卖平台的鲁菜不如堂食好吃，尤其炸类菜</li>
+          </ul>
+
+          <h3>🚇 交通避坑</h3>
+          <ul>
+            <li>高峰期（7:30-9:00 / 17:00-19:00）地铁拥挤</li>
+            <li>共享单车不能进景区，停在外面</li>
+            <li>千佛山建议索道上山步行下山，反过来很累</li>
+            <li>灵岩寺末班车约 16:30，别错过</li>
+          </ul>
+
+          <h3>🌤️ 天气应对</h3>
+          <ul>
+            <li>济南夏天（7-8月）酷热 35°C+，注意防暑</li>
+            <li>冬天（12-2月）干冷 -5~5°C，但泉水区雾气很美</li>
+            <li>春秋温差大，早晚带外套</li>
+            <li>7-8月多暴雨，随身带伞</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═══ TAB: 方言 ═══ -->
+      <div class="tab-panel" id="panel-dialect">
+        <div class="guide-section">
+          <h3>🗣️ 济南方言小课堂</h3>
+          <p>济南话属于冀鲁官话，和普通话很接近，但有些词特别有意思。学几句，跟本地人聊天瞬间拉近距离！</p>
+          <table class="dialect-table">
+            <thead><tr><th>济南话</th><th>普通话</th><th>例句 / 用法</th></tr></thead>
+            <tbody>
+              <tr><td><span class="dialect-word">杠赛来</span><span class="dialect-pinyin">gàng sài lái</span></td><td>好厉害、真棒</td><td>这碗把子肉杠赛来！</td></tr>
+              <tr><td><span class="dialect-word">么</span><span class="dialect-pinyin">mè</span></td><td>什么</td><td>你说么？我没听清。</td></tr>
+              <tr><td><span class="dialect-word">知不道</span><span class="dialect-pinyin">zhī bù dào</span></td><td>不知道</td><td>知不道趵突泉几点开门。</td></tr>
+              <tr><td><span class="dialect-word">滋拉</span><span class="dialect-pinyin">zī la</span></td><td>舒服、爽</td><td>泡个温泉真滋拉！</td></tr>
+              <tr><td><span class="dialect-word">得劲</span><span class="dialect-pinyin">dé jìn</span></td><td>舒服、合适</td><td>这椅子坐着真得劲。</td></tr>
+              <tr><td><span class="dialect-word">毁拉</span><span class="dialect-pinyin">huǐ la</span></td><td>完了、糟了</td><td>毁拉！忘带身份证了。</td></tr>
+              <tr><td><span class="dialect-word">木乱</span><span class="dialect-pinyin">mù luàn</span></td><td>心烦、烦躁</td><td>排队排得我木乱。</td></tr>
+              <tr><td><span class="dialect-word">拉呱</span><span class="dialect-pinyin">lā guǎ</span></td><td>聊天</td><td>坐下来拉呱拉呱。</td></tr>
+              <tr><td><span class="dialect-word">膈应</span><span class="dialect-pinyin">gé yìng</span></td><td>讨厌、别扭</td><td>这人真膈应人。</td></tr>
+              <tr><td><span class="dialect-word">扑拉</span><span class="dialect-pinyin">pū la</span></td><td>拍打、弄掉</td><td>扑拉扑拉身上的土。</td></tr>
+              <tr><td><span class="dialect-word">熊</span><span class="dialect-pinyin">xióng</span></td><td>骗、忽悠</td><td>你别熊我，这价格不对。</td></tr>
+              <tr><td><span class="dialect-word">夜来</span><span class="dialect-pinyin">yè lái</span></td><td>昨天</td><td>夜来我去大明湖了。</td></tr>
+              <tr><td><span class="dialect-word">后晌</span><span class="dialect-pinyin">hòu shang</span></td><td>下午</td><td>后晌去趵突泉吧。</td></tr>
+              <tr><td><span class="dialect-word">晌午</span><span class="dialect-pinyin">shǎng wu</span></td><td>中午</td><td>晌午吃把子肉。</td></tr>
+              <tr><td><span class="dialect-word">自来</span><span class="dialect-pinyin">zì lái</span></td><td>一直、向来</td><td>泉水自来就没断过。</td></tr>
+              <tr><td><span class="dialect-word">刺挠</span><span class="dialect-pinyin">cì nao</span></td><td>痒</td><td>蚊子咬得我刺挠。</td></tr>
+              <tr><td><span class="dialect-word">一霎</span><span class="dialect-pinyin">yī shà</span></td><td>一会儿</td><td>你等我一霎，马上来。</td></tr>
+              <tr><td><span class="dialect-word">不离儿</span><span class="dialect-pinyin">bù lír</span></td><td>不错、挺好</td><td>这家店的油旋不离儿。</td></tr>
+            </tbody>
+          </table>
+          <div class="info-card" style="margin-top:20px">
+            <h4>💡 学习小贴士</h4>
+            <p>济南话声调和普通话有差异，最明显的是四声变三声。济南人说话语速较快，但发音清晰。年轻人普通话标准，但老济南人说的方言特别有味道。在老城区（芙蓉街、曲水亭街一带）最能听到地道济南话。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ TAB: 拍照 ═══ -->
+      <div class="tab-panel" id="panel-photo">
+        <div class="guide-section">
+          <h3>📸 济南最佳拍照攻略</h3>
+          <p>精选 10 个拍照圣地，附最佳时间、拍摄技巧和参考角度。拿好你的相机/手机，出发！</p>
+
+          <div class="photo-card">
+            <h4>🏛️ 超然楼亮灯</h4>
+            <div class="photo-meta"><span>📍 大明湖南岸</span><span>⏰ 傍晚 17:30-18:30</span></div>
+            <p><span class="tip-tag">角度</span>站在南岸拍超然楼倒影，利用湖面形成对称构图。黄昏时分天空从蓝变橙，配合楼体亮灯瞬间最震撼。</p>
+            <p><span class="tip-tag">技巧</span>用三脚架长曝光 2-4 秒，水面会更平滑。手机用户开启夜景模式，用倒影滤镜效果更好。</p>
+          </div>
+
+          <div class="photo-card">
+            <h4>💨 趵突泉雾气</h4>
+            <div class="photo-meta"><span>📍 趵突泉景区</span><span>⏰ 冬日清晨 7:00-9:00</span></div>
+            <p><span class="tip-tag">角度</span>站在观澜亭正面，拍三股水涌出时的水雾升腾。冬天温差大，水面上方会形成明显的雾气层。</p>
+            <p><span class="tip-tag">技巧</span>逆光拍摄雾气效果最佳，清晨阳光穿过雾气会产生丁达尔效应。ISO 调低，光圈 F8-F11。</p>
+          </div>
+
+          <div class="photo-card">
+            <h4>🌙 曲水亭街夜景</h4>
+            <div class="photo-meta"><span>📍 曲水亭街</span><span>⏰ 夜晚 19:00-21:00</span></div>
+            <p><span class="tip-tag">角度</span>沿小溪两岸拍摄，红灯笼倒映在水面上。找弯曲的溪流段，利用曲线构图引导视线。</p>
+            <p><span class="tip-tag">技巧</span>白平衡调暖色温（约 3500K），让灯笼光线更浓郁。长焦压缩空间感，广角拍全景。</p>
+          </div>
+
+          <div class="photo-card">
+            <h4>🌸 大明湖荷花</h4>
+            <div class="photo-meta"><span>📍 大明湖西岸</span><span>⏰ 7-8月 上午 7:00-9:00</span></div>
+            <p><span class="tip-tag">角度</span>用荷叶做前景虚化，对焦远处的荷花。蹲低角度让荷花与超然楼同框。</p>
+            <p><span class="tip-tag">技巧</span>微距镜头拍露珠特写。手机人像模式虚化荷叶背景。阴天光线柔和，花色更饱和。</p>
+          </div>
+
+          <div class="photo-card">
+            <h4>⛰️ 千佛山日落</h4>
+            <div class="photo-meta"><span>📍 千佛山山顶</span><span>⏰ 日落前 1 小时</span></div>
+            <p><span class="tip-tag">角度</span>面朝西拍城市天际线与落日。利用山顶的佛像剪影做前景，增加画面层次。</p>
+            <p><span class="tip-tag">技巧</span>HDR 模式拍大光比场景。延时摄影拍太阳落入地平线的全过程（约 20 分钟素材）。</p>
+          </div>
+
+          <div class="photo-card">
+            <h4>🏠 芙蓉街烟火气</h4>
+            <div class="photo-meta"><span>📍 芙蓉街</span><span>⏰ 上午 10:00-11:00</span></div>
+            <p><span class="tip-tag">角度</span>站在街中心拍纵深，两侧店铺招牌形成框架。抓拍蒸汽升腾的小吃摊。</p>
+            <p><span class="tip-tag">技巧</span>连拍模式抓瞬间表情。快门速度 1/250s 以上冻结动作。别忘了拍建筑细节——门头、牌匾、老砖墙。</p>
+          </div>
+
+          <div class="photo-card">
+            <h4>🌉 护城河游船</h4>
+            <div class="photo-meta"><span>📍 护城河沿岸</span><span>⏰ 傍晚 17:00-18:00</span></div>
+            <p><span class="tip-tag">角度</span>在黑虎泉段码头拍游船穿过拱桥的经典画面。对岸拍船+桥+垂柳的组合。</p>
+            <p><span class="tip-tag">技巧</span>1/60s 慢门拍出水面丝绸质感。黄金时段的暖光让石桥和水面都泛金色。</p>
+          </div>
+
+          <div class="photo-card">
+            <h4>🍂 红叶谷秋色</h4>
+            <div class="photo-meta"><span>📍 红叶谷（南部山区）</span><span>⏰ 10月中旬-11月上旬</span></div>
+            <p><span class="tip-tag">角度</span>高处俯拍整片红叶山谷，色彩冲击力最强。近景用红叶做框架拍远处的小亭子。</p>
+            <p><span class="tip-tag">技巧</span>偏振镜消除叶片反光，色彩更鲜艳。阴天拍红叶颜色更正，晴天容易过曝。</p>
+          </div>
+
+          <div class="photo-card">
+            <h4>⛲ 五龙潭冬韵</h4>
+            <div class="photo-meta"><span>📍 五龙潭公园</span><span>⏰ 冬日 上午 8:00-10:00</span></div>
+            <p><span class="tip-tag">角度</span>拍潭水碧绿与枯枝倒影的对比。找水面平静处拍完美倒影，像镜子一样。</p>
+            <p><span class="tip-tag">技巧</span>偏振镜可以调节倒影强弱。低饱和度后期调色，营造清冷水墨风。</p>
+          </div>
+
+          <div class="photo-card">
+            <h4>🕌 洪家楼教堂</h4>
+            <div class="photo-meta"><span>📍 洪家楼天主教堂</span><span>⏰ 上午 9:00-11:00</span></div>
+            <p><span class="tip-tag">角度</span>正面仰拍哥特式尖顶与天空。侧面 45° 拍建筑立体感。利用对称构图强调庄严肃穆。</p>
+            <p><span class="tip-tag">技巧</span>广角镜头（16-24mm）拍建筑全景。蓝天白云时拍摄效果最佳。进入教堂内部注意禁用闪光灯。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══ TAB: FAQ ═══ -->
+      <div class="tab-panel" id="panel-faq">
+        <div class="guide-section">
+          <h3>❓ 常见问题</h3>
+
+          <div class="faq-item"><div class="faq-q">济南玩几天合适？</div><div class="faq-a">2-3 天最佳。1天太赶只能走马观花，3天可以覆盖市区+周边（灵岩寺/红叶谷）。时间充裕可以安排4天慢慢逛。</div></div>
+          <div class="faq-item"><div class="faq-q">什么季节来最好？</div><div class="faq-a">4-6月（春季）和9-11月（秋季）最佳。春天泉水最旺、百花盛开；秋天天高气爽、红叶漫山。夏天酷热但荷花很美，冬天人少但泉水雾气如仙境。</div></div>
+          <div class="faq-item"><div class="faq-q">趵突泉值得去吗？</div><div class="faq-a">值得。虽然 ¥40 门票不便宜，但作为"天下第一泉"，三窟并发的景象确实壮观。建议早上8点前入园避开人流。学生/老人半价。</div></div>
+          <div class="faq-item"><div class="faq-q">大明湖收费吗？</div><div class="faq-a">免费区全天免费开放，足够逛半天。超然楼 ¥40 需单独购票。超然楼每天傍晚亮灯（约18:00-18:30）非常壮观。</div></div>
+          <div class="faq-item"><div class="faq-q">济南交通方便吗？</div><div class="faq-a">很方便。地铁1/2/3号线覆盖主要景点，公交线路密集，打车也不贵（市区内大部分 ¥15-30）。推荐地铁+步行组合。</div></div>
+          <div class="faq-item"><div class="faq-q">有什么必吃的？</div><div class="faq-a">必吃 TOP 5：糖醋黄河鲤鱼、把子肉、油旋、甜沫、草包包子。详细美食攻略见 <a href="food.html" style="color:var(--accent)">美食页面</a>。</div></div>
+          <div class="faq-item"><div class="faq-q">住哪里最方便？</div><div class="faq-a">泉城路商圈最方便，步行可达趵突泉/芙蓉街/大明湖/宽厚里。预算有限可选火车站附近快捷酒店。</div></div>
+          <div class="faq-item"><div class="faq-q">需要预约吗？</div><div class="faq-a">趵突泉建议微信小程序「天下第一泉」提前预约。省博物馆必须预约（微信搜「山东博物馆」）。其他景点一般现场购票即可。</div></div>
+          <div class="faq-item"><div class="faq-q">带孩子适合吗？</div><div class="faq-a">很适合。趵突泉喂锦鲤、大明湖坐船、千佛山坐索道，孩子都很喜欢。省博物馆有儿童导览。详见 <a href="itinerary.html" style="color:var(--accent)">亲子专线</a>。</div></div>
+          <div class="faq-item"><div class="faq-q">济南方言难懂吗？</div><div class="faq-a">不难。济南话属于北方官话，和普通话很接近。年轻人普通话都很标准，老年人可能带点口音但基本能听懂。</div></div>
+          <div class="faq-item"><div class="faq-q">有什么特产可以买？</div><div class="faq-a">推荐：阿胶（东阿阿胶最正宗）、章丘大葱、济南油旋（可带走）、鲁绣、黑陶工艺品。去银座/华联超市买比景区便宜。</div></div>
+          <div class="faq-item"><div class="faq-q">手机支付方便吗？</div><div class="faq-a">非常方便。支付宝/微信支付全覆盖，连路边摊都能扫码。公交也支持扫码乘车。现金基本用不到。外国人可绑定Visa/Mastercard外卡使用支付宝。</div></div>
+          <div class="faq-item"><div class="faq-q">济南停车方便吗？</div><div class="faq-a">市区景点周边停车位紧张，建议地铁+步行。趵突泉/大明湖附近有停车场（¥10-15/小时），旺季常满位。自驾游客建议住高新区，地铁进城更方便。</div></div>
+          <div class="faq-item"><div class="faq-q">外国人来济南方便吗？</div><div class="faq-a">很方便。济南遥墙机场有144小时过境免签政策。市区主要景点有英文标识，支付宝/微信支持绑定外卡。省博物馆有英文讲解器。建议下载翻译App备用。</div></div>
+          <div class="faq-item"><div class="faq-q">有什么免费景点推荐？</div><div class="faq-a">大明湖免费区、黑虎泉、护城河步道、曲水亭街、百花洲、山东省博物馆（需预约）、洪家楼教堂、老商埠区——济南免费景点很多，穷游也能玩得很充实。</div></div>
+          <div class="faq-item"><div class="faq-q">济南适合什么季节拍婚纱照？</div><div class="faq-a">4-5月（春花烂漫）和10-11月（秋叶金黄）最佳。推荐地点：大明湖超然楼倒影、曲水亭街泉水人家、洪家楼教堂哥特风、趵突泉万竹园古风。</div></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <nav class="footer-links" aria-label="页脚导航">
+      <a href="index.html">首页</a>
+      <a href="spots.html">景点</a>
+      <a href="food.html">美食</a>
+      <a href="itinerary.html">行程</a>
+      <a href="guide.html">指南</a>
+      <a href="culture.html">文化</a>
+    </nav>
+    <div class="footer-stats"><span>📍 80+ 景点</span><span>🍜 68 美食</span><span>📋 5 路线</span></div>
+    <p class="footer-tagline">72 泉涌，千年文脉 — 交通 · 住宿 · 天气 · 预算 · 一站式指南</p>
+    <p>© 2026 泉城攻略 · 济南旅游指南</p>
+  </footer>
+  <button class="btt" aria-label="回到顶部">↑</button>
+  <nav class="mob-nav" aria-label="移动端导航">
+    <a href="index.html"><span class="icon" aria-hidden="true">🏠</span>首页</a>
+    <a href="spots.html"><span class="icon">🏛️</span>景点</a>
+    <a href="food.html"><span class="icon">🍜</span>美食</a>
+    <a href="itinerary.html"><span class="icon">📋</span>行程</a>
+    <a href="guide.html" class="active"><span class="icon">📖</span>指南</a>
+    <a href="culture.html"><span class="icon">📚</span>文化</a>
+  </nav>
+
+</body>
+</html>

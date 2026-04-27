@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>济南旅游攻略 · 泉城 — 72泉涌，千年文脉</title>
+  <meta name="description" content="济南旅游攻略：趵突泉、大明湖、千佛山，鲁菜美食，泉水人家。72泉涌，千年文脉，一座让你慢下来的城市。">
+  <meta name="keywords" content="济南旅游,济南攻略,趵突泉,大明湖,千佛山,鲁菜,泉城,济南美食,济南行程">
+  <meta property="og:title" content="济南旅游攻略 · 泉城">
+  <meta property="og:description" content="72泉涌，千年文脉 — 济南旅游一站式攻略">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://opennowing.github.io/jinan-travel-guide/">
+  <meta property="og:image" content="https://opennowing.github.io/jinan-travel-guide/public/banner.jpg">
+  <meta property="og:locale" content="zh_CN">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="济南旅游攻略 · 泉城">
+  <meta name="twitter:description" content="72泉涌，千年文脉 — 济南旅游一站式攻略">
+  <meta name="twitter:image" content="https://opennowing.github.io/jinan-travel-guide/public/banner.jpg">
+  <link rel="canonical" href="https://opennowing.github.io/jinan-travel-guide/">
+  <meta name="author" content="泉城攻略">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⛲</text></svg>">
+  <link rel="manifest" href="/jinan-travel-guide/manifest.json">
+  <meta name="theme-color" content="#c9a96e">
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristDestination",
+    "name": "济南",
+    "description": "72泉涌，千年文脉 — 天下第一泉所在地",
+    "touristType": ["泉城文化", "鲁菜美食", "历史古迹"],
+    "geo": { "@type": "GeoCoordinates", "latitude": 36.65, "longitude": 117.00 },
+    "includesAttraction": [
+      { "@type": "TouristAttraction", "name": "趵突泉" },
+      { "@type": "TouristAttraction", "name": "大明湖" },
+      { "@type": "TouristAttraction", "name": "千佛山" }
+    ]
+  }
+  </script>
+  <style>
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px var(--gutter) 80px;position:relative;overflow:hidden;background:#0a1628}
+
+    /* ── Hero Slides (Photo Carousel) ── */
+    .hero-slides{position:absolute;inset:0;z-index:0;overflow:hidden}
+    .hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
+    .hero-slide.active{opacity:1}
+    .hero-slide img{width:100%;height:100%;object-fit:cover;filter:brightness(.3) saturate(1.3)}
+    .hero-arrow{position:absolute;top:60%;transform:translateY(-50%);z-index:3;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);width:48px;height:48px;border-radius:50%;cursor:pointer;font-size:1.3rem;display:flex;align-items:center;justify-content:center;transition:all .3s;opacity:0}
+    .hero:hover .hero-arrow{opacity:1}
+    .hero-arrow:hover{background:rgba(255,255,255,.25);color:#fff;transform:translateY(-50%) scale(1.08)}
+    .hero-arrow.prev{left:24px}
+    .hero-arrow.next{right:24px}
+    .hero::before{content:'';position:absolute;top:-40%;right:-20%;width:700px;height:700px;background:radial-gradient(circle,rgba(42,157,143,.18) 0%,transparent 70%);pointer-events:none;animation:heroGlow1 8s ease-in-out infinite alternate}
+    .hero::after{content:'';position:absolute;bottom:-30%;left:-15%;width:500px;height:500px;background:radial-gradient(circle,rgba(201,169,110,.12) 0%,transparent 70%);pointer-events:none;animation:heroGlow2 10s ease-in-out infinite alternate}
+    @keyframes heroGlow1{0%{opacity:.5;transform:translate(0,0)}100%{opacity:1;transform:translate(-30px,20px)}}
+    @keyframes heroGlow2{0%{opacity:.4;transform:translate(0,0)}100%{opacity:.9;transform:translate(20px,-15px)}}
+
+    /* ── Fountain Canvas: Full-bleed immersive layer ── */
+    .fountain-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;opacity:0;transition:opacity 1.2s ease}
+    .fountain-canvas.ready{opacity:1}
+    .fountain-canvas.hidden{opacity:0}
+
+    /* ── Water Ripples: Subtle concentric rings ── */
+    .water-ripple{position:absolute;border-radius:50%;border:1px solid rgba(42,157,143,.15);pointer-events:none;animation:rippleExpand 8s cubic-bezier(.25,.46,.45,.94) infinite;opacity:.12;will-change:transform,opacity}
+    @keyframes rippleExpand{0%{transform:scale(0);opacity:.4}100%{transform:scale(4);opacity:0}}
+
+    /* ── Water Columns: Elegant vertical streams ── */
+    .water-column{position:absolute;bottom:0;width:2px;background:linear-gradient(to top,rgba(42,157,143,.25),rgba(42,157,143,.08),transparent);border-radius:2px;transform-origin:bottom center;animation:columnRise 4s cubic-bezier(.23,1,.32,1) infinite;pointer-events:none;will-change:height,opacity}
+    @keyframes columnRise{0%{height:0;opacity:.5}35%{opacity:.7}100%{height:var(--col-h,25vh);opacity:0}}
+
+    /* ── Water Particles: Glowing droplets ── */
+    .water-particle{position:absolute;width:var(--p-size,3px);height:var(--p-size,3px);border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.7),rgba(42,157,143,.4));pointer-events:none;animation:particleFly var(--p-dur,2.5s) cubic-bezier(.23,1,.32,1) forwards;will-change:transform,opacity}
+    @keyframes particleFly{0%{transform:translate(0,0) scale(1);opacity:.7}100%{transform:translate(var(--p-dx,20px),var(--p-dy,-100px)) scale(0);opacity:0}}
+
+    /* ── Mist: Soft ambient glow ── */
+    .fountain-mist{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:clamp(300px,60vw,700px);height:120px;background:radial-gradient(ellipse,rgba(42,157,143,.08) 0%,transparent 70%);filter:blur(30px);animation:mistDrift 15s ease-in-out infinite alternate;pointer-events:none;opacity:.15;will-change:transform}
+    @keyframes mistDrift{0%{transform:translateX(-50%) scaleX(1)}100%{transform:translateX(-50%) scaleX(1.15)}}
+
+    .hero h1{font:900 clamp(3rem,8vw,5.5rem)/1.1 var(--serif);margin-bottom:12px;position:relative;z-index:2}
+    .hero h1 .accent{color:var(--accent)}
+    .hero .subtitle{font-size:clamp(1rem,2.5vw,1.25rem);color:var(--text2);max-width:560px;margin:0 auto 40px;line-height:1.6;position:relative;z-index:2}
+
+    /* Search */
+    .hero-search{position:relative;max-width:500px;width:100%;margin:0 auto 32px;z-index:10}
+    .hero-search input{width:100%;padding:14px 50px 14px 20px;border:2px solid var(--accent);background:var(--bg);border-radius:100px;font-size:1rem;font-family:var(--sans);outline:none;transition:all .3s;box-shadow:0 4px 20px rgba(201,169,110,.15)}
+    .hero-search input:focus{box-shadow:0 4px 30px rgba(201,169,110,.3)}
+    .hero-search input::placeholder{color:var(--text3)}
+    .hero-search button{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+    .hero-search button:hover{background:var(--accent-hover)}
+    .nav-search-btn{background:none;border:1px solid var(--border2);width:36px;height:36px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;border-radius:50%;transition:all .3s}
+    .nav-search-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .search-overlay{position:fixed;top:0;left:0;right:0;bottom:0;z-index:200;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;padding-top:120px}
+    .search-overlay.open{display:flex}
+    .search-overlay-inner{background:var(--bg);border-radius:var(--radius-lg);width:90%;max-width:600px;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden}
+    .search-overlay-header{display:flex;align-items:center;gap:8px;padding:16px 20px;border-bottom:1px solid var(--border)}
+    .search-overlay-header input{flex:1;padding:12px 16px;border:2px solid var(--border);background:var(--bg2);border-radius:100px;font-size:1rem;font-family:var(--sans);outline:none;transition:border-color .3s}
+    .search-overlay-header input:focus{border-color:var(--accent)}
+    .search-overlay-header button{width:40px;height:40px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+    .search-overlay-header button:hover{background:var(--accent-hover)}
+    .search-close{background:none!important;color:var(--text2)!important;font-size:1.2rem!important}
+    .search-close:hover{color:var(--text)!important}
+    .search-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);max-height:360px;overflow-y:auto;z-index:100;display:none}
+    .search-dropdown.show{display:block}
+    .search-dropdown-section{padding:8px 0}
+    .search-dropdown-label{padding:4px 16px;font-size:.7rem;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em}
+    .search-dropdown-item{display:flex;align-items:center;gap:10px;padding:10px 16px;cursor:pointer;transition:background .15s;text-decoration:none;color:var(--text)}
+    .search-dropdown-item:hover{background:var(--bg2)}
+    .search-dropdown-item .item-icon{font-size:1.2rem;flex-shrink:0}
+    .search-dropdown-item .item-name{font-weight:600;font-size:.88rem}
+    .search-dropdown-item .item-desc{font-size:.75rem;color:var(--text2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:320px}
+    .search-dropdown-item .item-type{margin-left:auto;font-size:.65rem;padding:2px 8px;border-radius:100px;background:var(--accent2);color:var(--accent);font-weight:500;flex-shrink:0}
+    .search-empty{padding:16px;text-align:center;color:var(--text3);font-size:.85rem}
+    @media(max-width:480px){.search-dropdown-item .item-desc{display:none}}
+
+    /* Quick nav */
+    .quick-nav{display:flex;gap:16px;justify-content:center;margin-bottom:40px;position:relative;z-index:1;flex-wrap:wrap}
+    .quick-nav a{display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 20px;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);transition:all .3s;min-width:80px}
+    .quick-nav a:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--accent)}
+    .quick-nav a .icon{font-size:1.6rem}
+    .quick-nav a span:last-child{font-size:.75rem;font-weight:500;color:var(--text2)}
+
+    /* Hero Search V2 */
+    .hero-search-v2{position:relative;max-width:560px;width:100%;margin:0 auto 40px;z-index:10}
+    .hero-search-v2 input{width:100%;padding:16px 56px 16px 52px;border:2px solid rgba(201,169,110,.35);background:rgba(255,255,255,.08);border-radius:100px;font-size:1.05rem;font-family:var(--sans);outline:none;transition:all .3s;box-shadow:0 4px 30px rgba(42,157,143,.1),0 0 0 0 rgba(201,169,110,0);color:#fff;backdrop-filter:blur(12px)}
+    .hero-search-v2 input:focus{border-color:var(--accent);box-shadow:0 4px 40px rgba(201,169,110,.2),0 0 0 4px rgba(201,169,110,.08);background:rgba(255,255,255,.12)}
+    .hero-search-v2 input::placeholder{color:rgba(255,255,255,.45)}
+    .hero-search-v2 .search-icon-left{position:absolute;left:18px;top:50%;transform:translateY(-50%);font-size:1.15rem;pointer-events:none;opacity:.6}
+    .hero-search-v2 button{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:all .25s;box-shadow:0 2px 12px rgba(201,169,110,.3)}
+    .hero-search-v2 button:hover{background:var(--accent-hover);transform:translateY(-50%) scale(1.06)}
+
+    /* Hero Icons */
+    .hero-weather-hint{position:relative;z-index:2;font-size:.82rem;color:rgba(255,255,255,.5);margin-top:8px}
+    .hero-search-v2 .search-dropdown{position:absolute;top:calc(100% + 8px);left:0;right:0;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);max-height:360px;overflow-y:auto;z-index:100;display:none;color:var(--text)}
+    .hero-search-v2 .search-dropdown.show{display:block}
+
+    /* Highlights */
+    .highlight-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+    .highlight-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:32px 24px;text-align:center;transition:all .3s var(--ease);cursor:default}
+    .highlight-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+    .highlight-card .icon{font-size:2.2rem;margin-bottom:14px;display:block}
+    .highlight-card h3{font:700 .95rem/1.4 var(--serif);margin-bottom:8px}
+    .highlight-card p{font-size:.8rem;color:var(--text2);line-height:1.6}
+
+    /* Season section */
+    .season-banner{background:linear-gradient(135deg,var(--accent2),var(--bg2));border:1px solid var(--accent);border-radius:var(--radius-lg);padding:32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+    .season-banner .icon{font-size:3rem}
+    .season-banner h3{font:700 1.2rem/1.3 var(--serif);margin-bottom:4px}
+    .season-banner p{font-size:.85rem;color:var(--text2);line-height:1.6}
+    .season-banner .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+    .season-banner .tag{font-size:.7rem;padding:3px 10px;border-radius:100px;background:var(--accent);color:#fff;font-weight:500}
+
+    /* Route cards */
+    .route-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .route-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;transition:all .3s;text-decoration:none;display:block}
+    .route-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+    .route-card .duration{font-size:.7rem;font-weight:600;color:var(--accent);background:var(--accent2);padding:3px 10px;border-radius:100px;display:inline-block;margin-bottom:10px}
+    .route-card h3{font:700 1rem/1.3 var(--serif);margin-bottom:6px}
+    .route-card p{font-size:.8rem;color:var(--text2);line-height:1.6}
+    .route-card .meta{display:flex;gap:12px;margin-top:10px;font-size:.75rem;color:var(--text3)}
+
+    /* Reviews */
+    .review-summary{display:flex;align-items:center;gap:24px;margin-bottom:24px;flex-wrap:wrap}
+    .review-score{text-align:center}
+    .review-score .big{font:900 3rem/1 var(--serif);color:var(--accent)}
+    .review-score .stars{color:#f59e0b;font-size:1.2rem}
+    .review-score .count{font-size:.75rem;color:var(--text3)}
+    .review-bars{flex:1;min-width:200px}
+    .review-bar{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:.8rem}
+    .review-bar .label{min-width:40px;color:var(--text3)}
+    .review-bar .bar{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+    .review-bar .fill{height:100%;background:var(--accent);border-radius:3px}
+    .review-bar .pct{min-width:30px;text-align:right;color:var(--text3);font-size:.75rem}
+    .review-list{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .review-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:16px}
+    .review-card .head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+    .review-card .avatar{width:32px;height:32px;border-radius:50%;background:var(--accent2);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:600;color:var(--accent)}
+    .review-card .name{font-weight:600;font-size:.8rem}
+    .review-card .date{font-size:.7rem;color:var(--text3);margin-left:auto}
+    .review-card .stars{color:#f59e0b;font-size:.75rem;margin-bottom:4px}
+    .review-card .text{font-size:.82rem;color:var(--text2);line-height:1.5}
+
+    /* Quick tools */
+    .tools-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+    .tool-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center;transition:all .3s;text-decoration:none;display:block}
+    .tool-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+    .tool-card .icon{font-size:1.8rem;margin-bottom:8px;display:block}
+    .tool-card h4{font-size:.85rem;font-weight:700;margin-bottom:4px}
+    .tool-card p{font-size:.7rem;color:var(--text3)}
+
+    .section-alt{background:var(--bg2)}
+
+    /* ── Trending Tags ── */
+    .trending-tag{
+      display:flex;align-items:center;gap:6px;
+      padding:10px 20px;
+      background:var(--card-bg);
+      border:1px solid var(--border);
+      border-radius:100px;
+      font-size:.85rem;
+      color:var(--text);
+      text-decoration:none;
+      transition:all .25s;
+      position:relative;
+      overflow:hidden;
+    }
+    .trending-tag::before{
+      content:'';
+      position:absolute;inset:0;
+      background:linear-gradient(135deg,transparent,rgba(201,169,110,.05));
+      opacity:0;
+      transition:opacity .3s;
+    }
+    .trending-tag:hover{
+      border-color:var(--accent);
+      transform:translateY(-2px);
+      box-shadow:var(--shadow);
+    }
+    .trending-tag:hover::before{opacity:1}
+    .trending-tag.hot{
+      border-color:rgba(231,111,81,.3);
+      background:rgba(231,111,81,.05);
+    }
+    .trending-tag.hot:hover{
+      border-color:var(--coral);
+      background:rgba(231,111,81,.1);
+    }
+    .trending-tag.warn{
+      border-color:rgba(245,158,11,.3);
+      background:rgba(245,158,11,.05);
+    }
+
+    /* ── Stats Bar ── */
+    .stats-bar{background:linear-gradient(135deg,var(--accent2),var(--bg2));border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:40px 0}
+    .stats-grid{display:flex;justify-content:center;gap:60px;flex-wrap:wrap}
+    .stat-item{text-align:center}
+    .stat-num{display:block;font:900 2.5rem/1 var(--serif);color:var(--accent)}
+    .stat-label{font-size:.85rem;color:var(--text2);margin-top:6px;display:block}
+
+    /* ── Review Cards (Home) ── */
+    .review-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+    .review-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:all .3s}
+    .review-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+    .review-card .head{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+    .review-card .avatar{width:40px;height:40px;border-radius:50%;background:var(--accent2);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:700;color:var(--accent)}
+    .review-card .name{font-weight:700;font-size:.9rem}
+    .review-card .date{font-size:.75rem;color:var(--text3)}
+    .review-card .stars{color:#f59e0b;font-size:.85rem;margin-bottom:8px}
+    .review-card .text{font-size:.88rem;color:var(--text2);line-height:1.7}
+
+    /* ── Season + Spots Combo Layout ── */
+    .season-spots-combo{display:flex;flex-direction:column;gap:40px}
+    .season-spots-combo .card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+
+
+    /* ═══ HOMEPAGE UPGRADE: Smart Search + Dashboard + Recommendations ═══ */
+
+    /* ── Search: Hot Tags ── */
+    .search-hot-tags{display:flex;flex-wrap:wrap;gap:8px;padding:12px 20px}
+    .search-hot-tag{font-size:.78rem;padding:5px 14px;border-radius:100px;background:var(--bg2);border:1px solid var(--border);cursor:pointer;transition:all .2s;text-decoration:none;color:var(--text)}
+    .search-hot-tag:hover{border-color:var(--accent);background:var(--accent2);color:var(--accent)}
+    .search-hot-tag.hot{background:rgba(231,111,81,.08);border-color:rgba(231,111,81,.2);color:#e76f51}
+
+    /* ── Search: History ── */
+    .search-section-title{display:flex;align-items:center;justify-content:space-between;padding:8px 20px 4px}
+    .search-section-title span{font-size:.72rem;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em}
+    .search-section-title button{font-size:.68rem;color:var(--text3);background:none;border:none;cursor:pointer;transition:color .2s}
+    .search-section-title button:hover{color:var(--accent)}
+
+    /* ── Search: Voice Button ── */
+    .voice-btn{width:36px;height:36px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);cursor:pointer;font-size:.95rem;display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0}
+    .voice-btn:hover{border-color:var(--accent);background:var(--accent2)}
+    .voice-btn.listening{background:#e76f51;border-color:#e76f51;color:#fff;animation:voicePulse 1.5s ease-in-out infinite}
+    @keyframes voicePulse{0%,100%{box-shadow:0 0 0 0 rgba(231,111,81,.4)}50%{box-shadow:0 0 0 12px rgba(231,111,81,0)}}
+
+    /* ── Search: Result Page ── */
+    .search-results-section{padding:80px 0;display:none}
+    .search-results-section.active{display:block}
+    .search-results-header{display:flex;align-items:center;gap:12px;margin-bottom:32px}
+    .search-results-header h2{font:700 1.5rem/1.3 var(--serif)}
+    .search-results-header .count{font-size:.82rem;color:var(--text3)}
+    .search-results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+    .search-result-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all .3s}
+    .search-result-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+    .search-result-card img{width:100%;height:180px;object-fit:cover}
+    .search-result-card .sr-body{padding:16px}
+    .search-result-card .sr-type{font-size:.65rem;padding:2px 8px;border-radius:100px;font-weight:600;display:inline-block;margin-bottom:8px}
+    .search-result-card .sr-type.spot{background:var(--accent2);color:var(--accent)}
+    .search-result-card .sr-type.food{background:rgba(231,111,81,.1);color:#e76f51}
+    .search-result-card h3{font:700 .95rem/1.3 var(--serif);margin-bottom:6px}
+    .search-result-card p{font-size:.8rem;color:var(--text2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .search-result-card .sr-meta{display:flex;gap:12px;margin-top:10px;font-size:.72rem;color:var(--text3)}
+
+    /* ── Hero Search V2: Enhanced ── */
+    .hero-search-v2 .search-input-wrap{display:flex;align-items:center;gap:8px;position:relative}
+    .hero-search-v2 .voice-btn{position:absolute;right:54px;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.7)}
+    .hero-search-v2 .voice-btn:hover{background:rgba(255,255,255,.2);border-color:var(--accent);color:#fff}
+    .hero-search-v2 .voice-btn.listening{background:#e76f51;border-color:#e76f51;color:#fff}
+
+    /* ── Search Overlay: Enhanced ── */
+    .search-overlay .voice-btn-overlay{width:40px;height:40px;border-radius:50%;background:var(--bg2);border:1px solid var(--border);cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0}
+    .search-overlay .voice-btn-overlay:hover{border-color:var(--accent);background:var(--accent2)}
+    .search-overlay .voice-btn-overlay.listening{background:#e76f51;border-color:#e76f51;color:#fff;animation:voicePulse 1.5s ease-in-out infinite}
+
+    /* ═══ 今日精选 ═══ */
+    .daily-pick{position:relative;border-radius:var(--radius-lg);overflow:hidden;min-height:320px;display:flex;align-items:flex-end;cursor:pointer;transition:transform .3s}
+    .daily-pick:hover{transform:scale(1.01)}
+    .daily-pick .dp-bg{position:absolute;inset:0;z-index:0}
+    .daily-pick .dp-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.45) saturate(1.2)}
+    .daily-pick .dp-gradient{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,rgba(0,0,0,.2) 50%,rgba(0,0,0,.1) 100%);z-index:1}
+    .daily-pick .dp-content{position:relative;z-index:2;padding:32px;width:100%}
+    .daily-pick .dp-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;background:rgba(201,169,110,.9);color:#fff;border-radius:100px;font-size:.78rem;font-weight:600;margin-bottom:16px;backdrop-filter:blur(8px)}
+    .daily-pick h3{font:800 clamp(1.5rem,4vw,2.2rem)/1.2 var(--serif);color:#fff;margin-bottom:8px;text-shadow:0 2px 12px rgba(0,0,0,.4)}
+    .daily-pick .dp-desc{font-size:.92rem;color:rgba(255,255,255,.8);line-height:1.6;max-width:600px;margin-bottom:16px}
+    .daily-pick .dp-meta{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+    .daily-pick .dp-meta span{font-size:.82rem;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:4px}
+    .daily-pick .dp-btn{margin-left:auto;padding:10px 24px;background:var(--accent);color:#fff;border:none;border-radius:100px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .25s}
+    .daily-pick .dp-btn:hover{background:var(--accent-hover);transform:translateY(-2px)}
+    @media(prefers-reduced-motion:no-preference){.daily-pick{animation:breathe 4s ease-in-out infinite}}
+    @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.015)}}
+    @media(max-width:768px){.daily-pick{min-height:240px}.daily-pick .dp-content{padding:20px}.daily-pick .dp-btn{margin-left:0;margin-top:8px}}
+
+    /* ═══ 济南速览 Dashboard ═══ */
+    .dashboard-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+    .dash-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;transition:all .3s;position:relative;overflow:hidden}
+    .dash-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+    .dash-card .dc-icon{font-size:2rem;margin-bottom:12px;display:block}
+    .dash-card .dc-label{font-size:.78rem;color:var(--text3);margin-bottom:4px;font-weight:500}
+    .dash-card .dc-value{font:900 1.8rem/1.2 var(--serif);color:var(--text);margin-bottom:4px}
+    .dash-card .dc-sub{font-size:.75rem;color:var(--text2);line-height:1.5}
+    .dash-card .dc-bar{height:4px;background:var(--bg3);border-radius:2px;margin-top:10px;overflow:hidden}
+    .dash-card .dc-bar-fill{height:100%;border-radius:2px;transition:width 1s ease}
+    .dash-card.weather-card .dc-value{font-size:1.4rem}
+    .dash-card.crowd-card .dc-bar-fill{background:linear-gradient(90deg,#2a9d8f,#f59e0b,#e76f51)}
+    .dash-card.free-card .dc-bar-fill{background:var(--accent)}
+    .dash-card.food-card{grid-column:span 1}
+    .dash-card .dc-list{list-style:none;padding:0;margin:8px 0 0}
+    .dash-card .dc-list li{font-size:.8rem;color:var(--text2);padding:3px 0;display:flex;align-items:center;gap:6px}
+    .dash-card .dc-list li .rank{font-weight:700;color:var(--accent);min-width:18px}
+    @media(max-width:1024px){.dashboard-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:480px){.dashboard-grid{grid-template-columns:1fr}}
+
+    /* ═══ 猜你喜欢 ═══ */
+    .guess-section{position:relative}
+    .guess-scroll-wrap{position:relative}
+    .guess-scroll{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px 0}
+    .guess-scroll::-webkit-scrollbar{display:none}
+    .guess-card{min-width:240px;max-width:260px;flex-shrink:0;scroll-snap-align:start;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all .3s}
+    .guess-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+    .guess-card .gc-img{height:150px;overflow:hidden;position:relative}
+    .guess-card .gc-img img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+    .guess-card:hover .gc-img img{transform:scale(1.05)}
+    .guess-card .gc-type{position:absolute;top:10px;left:10px;font-size:.65rem;padding:3px 10px;border-radius:100px;font-weight:600;backdrop-filter:blur(6px)}
+    .guess-card .gc-type.spot{background:rgba(42,157,143,.85);color:#fff}
+    .guess-card .gc-type.food{background:rgba(231,111,81,.85);color:#fff}
+    .guess-card .gc-body{padding:14px}
+    .guess-card h4{font:700 .9rem/1.3 var(--serif);margin-bottom:4px}
+    .guess-card .gc-desc{font-size:.75rem;color:var(--text2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:8px}
+    .guess-card .gc-meta{display:flex;justify-content:space-between;align-items:center;font-size:.75rem;color:var(--text3)}
+    .guess-card .gc-meta .gc-rating{color:#f59e0b}
+    .guess-refresh-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;background:var(--card-bg);border:1px solid var(--border);border-radius:100px;font-size:.82rem;font-weight:500;color:var(--text);cursor:pointer;transition:all .25s}
+    .guess-refresh-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent2)}
+    .guess-refresh-btn .refresh-icon{display:inline-block;transition:transform .3s}
+    .guess-refresh-btn:hover .refresh-icon{transform:rotate(180deg)}
+
+    /* ═══ Counter Animation ═══ */
+    .counter-animate{display:inline-block}
+
+    /* ═══ Reduced Motion ═══ */
+    @media(prefers-reduced-motion:reduce){
+      .daily-pick{animation:none!important}
+      .daily-pick:hover{transform:none}
+      .dash-card:hover,.guess-card:hover,.search-result-card:hover{transform:none!important}
+      .guess-card .gc-img img{transition:none}
+      .voice-btn.listening{animation:none}
+    }
+
+    /* ── Section spacing ── */
+    .section{padding:80px 0}
+
+    @media(max-width:768px){
+      .season-spots-combo .card-grid{grid-template-columns:repeat(2,1fr)}
+      .route-cards{grid-template-columns:1fr}
+      .hero h1{font-size:2.5rem}
+      .hero-icons{gap:12px}
+      .hero-icons a{padding:16px 18px 12px;min-width:80px}
+      .hero-icons a .hi-icon{font-size:1.7rem}
+      .hero-search-v2{max-width:90%}
+      .section{padding:60px 0}
+      .review-grid{grid-template-columns:repeat(2,1fr)}
+      .stats-grid{gap:32px}
+      .guides-grid{grid-template-columns:repeat(2,1fr)!important}
+    }
+    @media(max-width:480px){
+      .season-spots-combo .card-grid{grid-template-columns:1fr}
+      .hero-icons{gap:8px}
+      .hero-icons a{padding:14px 12px 10px;min-width:68px;border-radius:14px}
+      .hero-icons a .hi-icon{font-size:1.4rem}
+      .hero-icons a .hi-label{font-size:.7rem}
+      .section{padding:48px 0}
+      .review-grid{grid-template-columns:1fr}
+      .guides-grid{grid-template-columns:1fr!important}
+      .recommend-card{border-radius:var(--radius-lg)!important}
+    }
+
+    /* ═══ PREMIUM NAV ═══ */
+    .top-nav{height:72px;padding:0 clamp(16px,3vw,32px)}
+    .top-nav .logo{display:flex;align-items:center;gap:8px;font:800 1.15rem/1 var(--serif);color:var(--accent);letter-spacing:.06em;text-decoration:none;position:relative}
+    .top-nav .logo .logo-icon{font-size:1.5rem;line-height:1;filter:drop-shadow(0 2px 6px rgba(201,169,110,.3))}
+    .top-nav .logo .logo-text{background:linear-gradient(135deg,#c9a96e 0%,#e8dcc8 40%,#c9a96e 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .top-nav .logo .logo-sub{font-size:.55rem;font-weight:500;color:var(--text3);letter-spacing:.18em;text-transform:uppercase;-webkit-text-fill-color:var(--text3);margin-left:2px;position:absolute;bottom:-14px;left:30px;white-space:nowrap}
+    .top-nav .logo span:not(.logo-icon):not(.logo-text):not(.logo-sub){color:var(--text);-webkit-text-fill-color:var(--text)}
+
+    .nav-links{display:flex;gap:4px;align-items:center;background:var(--bg2);padding:4px;border-radius:100px;border:1px solid var(--border)}
+    .nav-links a{display:flex;align-items:center;gap:5px;font-size:.82rem;font-weight:500;letter-spacing:.02em;color:var(--nav-text2);transition:all .25s var(--ease);padding:8px 16px;border-radius:100px;position:relative;white-space:nowrap}
+    .nav-links a .nav-icon{font-size:.9rem;transition:transform .25s var(--ease)}
+    .nav-links a:hover{color:var(--accent);background:var(--accent2)}
+    .nav-links a:hover .nav-icon{transform:scale(1.15)}
+    .nav-links a.active{color:#fff;background:var(--accent);box-shadow:0 2px 8px rgba(201,169,110,.3)}
+    .nav-links a.active .nav-icon{transform:scale(1.1)}
+    .nav-links a.active::after{display:none}
+    .nav-search-btn{background:none;border:1px solid var(--border2);width:40px;height:40px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.05rem;border-radius:50%;transition:all .3s}
+    .nav-search-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:scale(1.08)}
+    .dark-toggle{width:40px;height:40px;font-size:1.05rem}
+    .dark-toggle:hover{transform:scale(1.08)}
+
+    /* ═══ HERO QUICK NAV (replaced by .hero-icons) ═══ */
+
+    @media(max-width:768px){
+      .nav-links{display:none}
+      .burger{display:block}
+      .nav-links.mob-open{display:flex;position:fixed;top:72px;left:0;right:0;bottom:0;background:var(--bg);flex-direction:column;padding:32px var(--gutter);gap:8px;z-index:99;animation:pageFadeIn .3s var(--ease);border-radius:0;border:none}
+      .nav-links.mob-open a{font-size:1rem;color:var(--text);padding:14px 20px;min-height:48px;border-radius:12px}
+      .nav-links.mob-open a.active{background:var(--accent);color:#fff}
+      .top-nav .logo .logo-sub{display:none}
+    }
+
+    /* ══════════════════════════════════════════
+       🎯 今日推荐 · 轮播卡片
+    ══════════════════════════════════════════ */
+    .recommend-carousel{position:relative;overflow:hidden;border-radius:var(--radius-lg)}
+    .recommend-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+    .recommend-slide{min-width:100%;position:relative;cursor:pointer}
+    .recommend-slide img{width:100%;height:320px;object-fit:cover;display:block;filter:brightness(.65) saturate(1.2);transition:filter .4s}
+    .recommend-slide:hover img{filter:brightness(.75) saturate(1.3)}
+    .recommend-slide .slide-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:32px;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,rgba(0,0,0,.1) 60%,transparent 100%)}
+    .recommend-slide .slide-badge{position:absolute;top:20px;left:20px;font-size:.7rem;font-weight:700;letter-spacing:.08em;padding:5px 14px;border-radius:100px;background:rgba(201,169,110,.9);color:#fff;backdrop-filter:blur(6px)}
+    .recommend-slide .slide-stars{font-size:.85rem;color:#f59e0b;margin-bottom:6px}
+    .recommend-slide .slide-name{font:800 clamp(1.4rem,3vw,2rem)/1.2 var(--serif);color:#fff;margin-bottom:6px;text-shadow:0 2px 12px rgba(0,0,0,.4)}
+    .recommend-slide .slide-desc{font-size:.9rem;color:rgba(255,255,255,.8);line-height:1.5;max-width:560px;margin-bottom:10px}
+    .recommend-slide .slide-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .recommend-slide .slide-meta span{font-size:.78rem;color:rgba(255,255,255,.65);background:rgba(255,255,255,.08);padding:4px 12px;border-radius:100px;backdrop-filter:blur(4px)}
+    .recommend-slide .slide-btn{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:10px 24px;border-radius:100px;background:var(--accent);color:#fff;font-size:.85rem;font-weight:600;border:none;cursor:pointer;transition:all .25s;box-shadow:0 4px 16px rgba(201,169,110,.3)}
+    .recommend-slide .slide-btn:hover{background:var(--accent-hover);transform:translateY(-2px);box-shadow:0 6px 24px rgba(201,169,110,.4)}
+    .recommend-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.8);font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;opacity:0}
+    .recommend-carousel:hover .recommend-arrow{opacity:1}
+    .recommend-arrow:hover{background:rgba(255,255,255,.25);color:#fff;transform:translateY(-50%) scale(1.08)}
+    .recommend-arrow.prev{left:16px}
+    .recommend-arrow.next{right:16px}
+    .recommend-dots{display:flex;gap:8px;justify-content:center;padding:16px 0 4px}
+    .recommend-dot{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:all .3s}
+    .recommend-dot.active{width:24px;border-radius:4px;background:var(--accent)}
+
+    /* ══════════════════════════════════════════
+       🔥🍜 预览区 · 横向滚动卡片
+    ══════════════════════════════════════════ */
+    .preview-scroll-wrap{position:relative}
+    .preview-scroll{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;padding:4px 4px 16px 4px}
+    .preview-scroll::-webkit-scrollbar{display:none}
+    .preview-card{min-width:260px;max-width:300px;flex-shrink:0;scroll-snap-align:start;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s var(--ease);cursor:pointer}
+    .preview-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--accent)}
+    .preview-card .preview-img{position:relative;height:180px;overflow:hidden}
+    .preview-card .preview-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+    .preview-card:hover .preview-img img{transform:scale(1.06)}
+    .preview-card .preview-img .preview-badge{position:absolute;top:12px;left:12px;font-size:.65rem;font-weight:700;padding:4px 10px;border-radius:100px;color:#fff;z-index:2}
+    .preview-card .preview-img .preview-rating{position:absolute;bottom:12px;right:12px;font-size:.75rem;font-weight:700;color:#fff;background:rgba(0,0,0,.5);padding:3px 10px;border-radius:100px;backdrop-filter:blur(6px);z-index:2}
+    .preview-card .preview-body{padding:16px 18px 18px}
+    .preview-card .preview-body h3{font:700 1rem/1.3 var(--serif);margin-bottom:4px}
+    .preview-card .preview-body .preview-desc{font-size:.8rem;color:var(--text2);line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+    .preview-card .preview-body .preview-meta{display:flex;align-items:center;justify-content:space-between;margin-top:10px;font-size:.78rem;color:var(--text3)}
+    .preview-card .preview-body .preview-price{font-weight:700;color:var(--accent)}
+    .preview-section .preview-footer{text-align:center;margin-top:28px}
+    .preview-section .preview-footer a{display:inline-flex;align-items:center;gap:6px;font-size:.9rem;font-weight:600;color:var(--accent);text-decoration:none;transition:all .25s;padding:8px 20px;border-radius:100px;border:1px solid var(--accent)}
+    .preview-section .preview-footer a:hover{background:var(--accent);color:#fff}
+    .preview-scroll-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:40px;height:40px;border-radius:50%;background:var(--card-bg);border:1px solid var(--border);color:var(--text);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s;box-shadow:var(--shadow)}
+    .preview-scroll-arrow:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+    .preview-scroll-arrow.left{left:-8px}
+    .preview-scroll-arrow.right{right:-8px}
+    .preview-scroll-wrap .preview-scroll-arrow{opacity:0;transition:opacity .3s}
+    .preview-scroll-wrap:hover .preview-scroll-arrow{opacity:1}
+
+    /* ══════════════════════════════════════════
+       🎯 快速导航增强
+    ══════════════════════════════════════════ */
+    .quick-nav-enhanced{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;position:relative;z-index:1}
+    .quick-nav-enhanced a{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 22px;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);transition:all .3s var(--ease);min-width:90px;text-decoration:none;position:relative;overflow:hidden}
+    .quick-nav-enhanced a::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(201,169,110,.06));opacity:0;transition:opacity .3s}
+    .quick-nav-enhanced a:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:var(--accent)}
+    .quick-nav-enhanced a:hover::before{opacity:1}
+    .quick-nav-enhanced a:hover .qn-icon{animation:qnBounce .5s var(--ease)}
+    .quick-nav-enhanced a .qn-icon{font-size:1.8rem;transition:transform .3s var(--ease);line-height:1}
+    .quick-nav-enhanced a .qn-label{font-size:.78rem;font-weight:600;color:var(--text2);transition:color .25s}
+    .quick-nav-enhanced a:hover .qn-label{color:var(--accent)}
+    .quick-nav-enhanced a .qn-hot{position:absolute;top:8px;right:8px;font-size:.55rem;font-weight:700;padding:2px 6px;border-radius:100px;background:var(--coral,#e76f51);color:#fff;line-height:1.2;animation:qnPulse 2s ease-in-out infinite}
+    @keyframes qnBounce{0%{transform:translateY(0)}40%{transform:translateY(-8px)}60%{transform:translateY(-4px)}80%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+    @keyframes qnPulse{0%,100%{opacity:1}50%{opacity:.7}}
+    @media(max-width:640px){.quick-nav-enhanced a{min-width:72px;padding:14px 12px}.quick-nav-enhanced a .qn-icon{font-size:1.5rem}.quick-nav-enhanced a .qn-label{font-size:.7rem}}
+
+  
+    /* ── prefers-reduced-motion: disable all inline animations ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  
+    /* Scroll reveal fallback: ensure cards visible without IntersectionObserver */
+    .card-grid .rv, .must-eat-grid .rv, .route-card.rv,
+    .timeline-item.rv, .guide-card.rv, .culture-card.rv {
+      opacity: 1; transform: none;
+    }
+  
+    /* ── Hot Search Tags (replaces inline styles) ── */
+    .hot-tags{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px;position:relative;z-index:2}
+    .hot-tag{font-size:.78rem;padding:5px 14px;border-radius:100px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.65);text-decoration:none;transition:all .25s;backdrop-filter:blur(6px)}
+    .hot-tag:hover{background:rgba(201,169,110,.2);border-color:rgba(201,169,110,.4);color:#fff}
+    .hot-tag .tag-icon{margin-right:2px}
+  </style>
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1517587662384-26d954922c19?w=1600&q=80">
+    <script type="module" crossorigin src="/jinan-travel-guide/assets/main-q8GKLWxe.js"></script>
+    <link rel="modulepreload" crossorigin href="/jinan-travel-guide/assets/social-BtvQIZg-.js">
+    <link rel="modulepreload" crossorigin href="/jinan-travel-guide/assets/interactive-Nl2I4oKJ.js">
+    <link rel="modulepreload" crossorigin href="/jinan-travel-guide/assets/shopify-animations-C_FKrdXc.js">
+    <link rel="stylesheet" crossorigin href="/jinan-travel-guide/assets/social-IJRaxWbQ.css">
+  </head>
+<body>
+  <a href="#main-content" class="skip-link" style="position:absolute;top:-100%;left:16px;z-index:999;background:var(--accent);color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;transition:top .2s" onfocus="this.style.top='8px'" onblur="this.style.top='-100%'">跳到主要内容</a>
+  <div class="scroll-progress"></div>
+
+  <nav class="top-nav" aria-label="主导航">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">⛲</span>
+      <span class="logo-text">泉城攻略</span>
+      <span class="logo-sub">JINAN TRAVEL</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html" class="active"><span class="nav-icon">🏠</span>首页</a>
+      <a href="spots.html"><span class="nav-icon">🏛️</span>景点</a>
+      <a href="food.html"><span class="nav-icon">🍜</span>美食</a>
+      <a href="itinerary.html"><span class="nav-icon">📋</span>行程</a>
+      <a href="guide.html"><span class="nav-icon">📖</span>指南</a>
+      <a href="culture.html"><span class="nav-icon">📚</span>文化</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="nav-search-btn" id="navSearchBtn" aria-label="搜索">🔍</button>
+      <button class="dark-toggle" aria-label="切换深色模式">🌙</button>
+      <button class="burger" aria-label="菜单"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-overlay-inner">
+      <div class="search-overlay-header">
+        <input type="text" id="heroSearch" placeholder="搜索景点、美食…" autocomplete="off" autofocus>
+        <button class="voice-btn-overlay" id="voiceSearchBtn" aria-label="语音搜索" title="语音搜索">🎤</button>
+        <button id="searchBtn" aria-label="搜索">🔍</button>
+        <button class="search-close" id="searchClose" aria-label="关闭搜索">✕</button>
+      </div>
+      <div class="search-dropdown" id="searchDropdown"></div>
+    </div>
+  </div>
+
+  <!-- ═══ HERO ═══ -->
+  <main role="main" id="main-content">
+  <section class="hero" aria-label="济南欢迎页">
+    <!-- Photo Carousel Background -->
+    <div class="hero-slides">
+      <div class="hero-slide active">
+        <img src="https://images.unsplash.com/photo-1517587662384-26d954922c19?w=1600&q=80" alt="趵突泉">
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1646896315397-4d6f5bd49e0e?w=1600&q=80" alt="大明湖">
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1709964677263-f4f17b706322?w=1600&q=80" alt="千佛山">
+      </div>
+      <div class="hero-slide">
+        <img src="https://images.unsplash.com/photo-1755742319537-449f661a3190?w=1600&q=80" alt="鲁菜美食">
+      </div>
+    </div>
+    <button class="hero-arrow prev" id="heroPrev" aria-label="上一张">‹</button>
+    <button class="hero-arrow next" id="heroNext" aria-label="下一张">›</button>
+
+    <!-- Fountain Animation Layer (full-bleed, Shopify-inspired) -->
+    <canvas class="fountain-canvas ready" id="fountainCanvas"></canvas>
+
+    <!-- Water Ripples (generated by JS, positioned near springs) -->
+    <div id="rippleContainer" style="position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden"></div>
+
+    <!-- Mist (ambient, bottom-weighted) -->
+    <div class="fountain-mist"></div>
+
+    <!-- Content -->
+    <h1 style="position:relative;z-index:2;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.4)">济南 · <span class="accent" style="color:#c9a96e">泉城</span></h1>
+    <p class="subtitle" style="position:relative;z-index:2;color:rgba(255,255,255,.65)">72 泉涌，千年文脉</p>
+
+    <!-- Search (Enhanced) -->
+    <div class="hero-search-v2" style="position:relative">
+      <div class="search-input-wrap" style="position:relative;width:100%">
+        <span class="search-icon-left">🔍</span>
+        <input type="text" id="heroInlineSearch" placeholder="搜索景点、美食、路线…" autocomplete="off" style="padding-right:100px">
+        <button class="voice-btn" id="heroVoiceBtn" aria-label="语音搜索" title="语音搜索">🎤</button>
+        <button id="heroInlineSearchBtn" aria-label="搜索">→</button>
+      </div>
+      <div class="search-dropdown" id="heroInlineDropdown"></div>
+    </div>
+
+    <!-- Hot Search Tags -->
+    <div class="hot-tags">
+      <a href="spots.html?q=趵突泉" class="hot-tag">🔥 趵突泉</a>
+      <a href="spots.html?q=大明湖" class="hot-tag">大明湖</a>
+      <a href="spots.html?q=千佛山" class="hot-tag">千佛山</a>
+      <a href="food.html?q=把子肉" class="hot-tag">把子肉</a>
+      <a href="spots.html?q=五龙潭" class="hot-tag">五龙潭</a>
+      <a href="food.html?q=糖醋鲤鱼" class="hot-tag">糖醋鲤鱼</a>
+      <a href="spots.html?q=黑虎泉" class="hot-tag">黑虎泉</a>
+    </div>
+
+    <!-- Weather hint -->
+    <div class="hero-weather-hint" id="heroWeather">🌤️ 加载天气…</div>
+  </section>
+
+  </main>
+
+
+  <!-- ═══ ⭐ 今日精选 ═══ -->
+  <section class="section" aria-label="今日精选" style="padding:40px 0 20px">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">DAILY PICK</div>
+        <h2>⭐ 今日精选</h2>
+        <p>每天推荐一个济南必去景点</p>
+      </div>
+      <div id="dailyPick" class="rv"></div>
+    </div>
+  </section>
+
+  <!-- ═══ 📊 济南速览 · 实时数据 ═══ -->
+  <section class="section section-alt" aria-label="济南速览">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">LIVE DASHBOARD</div>
+        <h2>📊 济南速览</h2>
+        <p>实时数据，助你决策</p>
+      </div>
+      <div class="dashboard-grid" id="dashboardGrid">
+        <div class="dash-card weather-card rv">
+          <span class="dc-icon">🌡️</span>
+          <div class="dc-label">实时天气</div>
+          <div class="dc-value" id="dashWeather">加载中…</div>
+          <div class="dc-sub" id="dashWeatherSub">济南 · 今日</div>
+        </div>
+        <div class="dash-card crowd-card rv">
+          <span class="dc-icon">👥</span>
+          <div class="dc-label">今日热门景点拥挤度</div>
+          <div class="dc-value" id="dashCrowd">--</div>
+          <div class="dc-sub" id="dashCrowdSub">基于时间预测</div>
+          <div class="dc-bar"><div class="dc-bar-fill" id="dashCrowdBar" style="width:0%"></div></div>
+        </div>
+        <div class="dash-card free-card rv">
+          <span class="dc-icon">🎫</span>
+          <div class="dc-label">免费景点</div>
+          <div class="dc-value" id="dashFree">--</div>
+          <div class="dc-sub" id="dashFreeSub">无需门票即可游玩</div>
+          <div class="dc-bar"><div class="dc-bar-fill" id="dashFreeBar" style="width:0%"></div></div>
+        </div>
+        <div class="dash-card food-card rv">
+          <span class="dc-icon">🍜</span>
+          <div class="dc-label">必吃美食 TOP5</div>
+          <ul class="dc-list" id="dashFoodList">
+            <li><span class="rank">1</span>加载中…</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 💡 猜你喜欢 ═══ -->
+  <section class="section guess-section" aria-label="猜你喜欢">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">FOR YOU</div>
+        <h2>💡 猜你喜欢</h2>
+        <p>基于你的浏览偏好，为你推荐</p>
+      </div>
+      <div class="guess-scroll-wrap">
+        <div class="guess-scroll" id="guessScroll"></div>
+      </div>
+      <div style="text-align:center;margin-top:20px">
+        <button aria-label="换一批推荐" class="guess-refresh-btn" id="guessRefreshBtn"><span class="refresh-icon">🔄</span> 换一批</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 🔍 搜索结果（隐藏，按需显示）═══ -->
+  <section class="search-results-section" id="searchResultsSection">
+    <div class="section-inner">
+      <div class="search-results-header">
+        <button onclick="hideSearchResults()" style="background:none;border:1px solid var(--border);border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1rem;color:var(--text2);transition:all .2s" aria-label="返回">←</button>
+        <h2 id="searchResultsTitle">搜索结果</h2>
+        <span class="count" id="searchResultsCount"></span>
+      </div>
+      <div class="search-results-grid" id="searchResultsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ═══ 📊 数据统计条 ═══ -->
+  <section class="stats-bar" aria-label="数据统计">
+    <div class="section-inner">
+      <div class="stats-grid">
+        <div class="stat-item rv"><span class="stat-num">80+</span><span class="stat-label">精选景点</span></div>
+        <div class="stat-item rv"><span class="stat-num">72</span><span class="stat-label">名泉</span></div>
+        <div class="stat-item rv"><span class="stat-num">5</span><span class="stat-label">大景区</span></div>
+        <div class="stat-item rv"><span class="stat-num">10万+</span><span class="stat-label">游客验证</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 🎯 今日推荐（轮播卡片）═══ -->
+  <section class="section" aria-label="今日推荐" style="padding:40px 0">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">TODAY'S PICK</div>
+        <h2>🎯 今日推荐</h2>
+        <p>精选济南最值得体验的景点与美食</p>
+      </div>
+      <div class="recommend-carousel" id="recommendCarousel">
+        <div class="recommend-track" id="recommendTrack"></div>
+        <button class="recommend-arrow prev" id="recPrev" aria-label="上一张">‹</button>
+        <button class="recommend-arrow next" id="recNext" aria-label="下一张">›</button>
+      </div>
+      <div class="recommend-dots" id="recDots"></div>
+    </div>
+  </section>
+
+  <!-- ═══ 🔥 热门景点 · 游客最爱 ═══ -->
+  <section class="section preview-section" aria-label="热门景点">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">POPULAR SPOTS</div>
+        <h2>🔥 热门景点 · 游客最爱</h2>
+        <p>评分最高的济南必去之地</p>
+      </div>
+      <div class="preview-scroll-wrap">
+        <button class="preview-scroll-arrow left" onclick="document.getElementById('hotSpotsScroll').scrollBy({left:-300,behavior:'smooth'})" aria-label="向左滚动">‹</button>
+        <div class="preview-scroll" id="hotSpotsScroll"></div>
+        <button class="preview-scroll-arrow right" onclick="document.getElementById('hotSpotsScroll').scrollBy({left:300,behavior:'smooth'})" aria-label="向右滚动">›</button>
+      </div>
+      <div class="preview-footer rv"><a href="spots.html">查看全部景点 →</a></div>
+    </div>
+  </section>
+
+  <!-- ═══ 🍜 济南味道 · 必吃清单 ═══ -->
+  <section class="section section-alt preview-section" aria-label="济南味道">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">MUST-EAT</div>
+        <h2>🍜 济南味道 · 必吃清单</h2>
+        <p>不可错过的地道泉城美食</p>
+      </div>
+      <div class="preview-scroll-wrap">
+        <button class="preview-scroll-arrow left" onclick="document.getElementById('foodPreviewScroll').scrollBy({left:-300,behavior:'smooth'})" aria-label="向左滚动">‹</button>
+        <div class="preview-scroll" id="foodPreviewScroll"></div>
+        <button class="preview-scroll-arrow right" onclick="document.getElementById('foodPreviewScroll').scrollBy({left:300,behavior:'smooth'})" aria-label="向右滚动">›</button>
+      </div>
+      <div class="preview-footer rv"><a href="food.html">查看全部美食 →</a></div>
+    </div>
+  </section>
+
+  <!-- ═══ 🔥 当季必玩（合并：当季推荐 + 精选景点）═══ -->
+  <section class="section" aria-label="当季必玩">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">THIS SEASON</div>
+        <h2>🔥 当季必玩</h2>
+        <p>精选当季最值得去的济南体验</p>
+      </div>
+      <div class="season-spots-combo">
+        <div id="seasonBanner"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 🌸 季节限定 ═══ -->
+  <section class="section section-alt" aria-label="季节限定">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">SEASONAL</div>
+        <h2>🌸 当季限定体验</h2>
+        <p>错过等一年的济南限定</p>
+      </div>
+      <div id="seasonalContent"></div>
+    </div>
+  </section>
+
+  <!-- ═══ 🔍 大家都在搜 ═══ -->
+  <section class="section" aria-label="大家都在搜">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">TRENDING</div>
+        <h2>🔍 大家都在搜</h2>
+        <p>近期游客最关注的济南关键词</p>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center" class="rv">
+        <a href="spots.html?q=趵突泉" class="trending-tag hot">🔥 趵突泉攻略</a>
+        <a href="spots.html?q=大明湖" class="trending-tag">📸 大明湖拍照点</a>
+        <a href="food.html?q=把子肉" class="trending-tag hot">🍜 把子肉哪家好</a>
+        <a href="itinerary.html" class="trending-tag">🗺️ 两日游路线</a>
+        <a href="spots.html?q=千佛山" class="trending-tag">⛰️ 千佛山日出</a>
+        <a href="guide.html" class="trending-tag">🏨 住哪里方便</a>
+        <a href="spots.html?q=灵岩寺" class="trending-tag">🏛️ 灵岩寺值不值得去</a>
+        <a href="food.html?q=油旋" class="trending-tag">🫓 油旋推荐</a>
+        <a href="spots.html?q=芙蓉街" class="trending-tag warn">🛍️ 芙蓉街避坑</a>
+        <a href="culture.html" class="trending-tag">📚 济南历史故事</a>
+        <a href="guide.html" class="trending-tag">💰 省钱攻略</a>
+        <a href="food.html?q=甜沫" class="trending-tag">🥣 甜沫是什么</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 🗺️ 说走就走（精选路线）═══ -->
+  <div class="section-divider reveal" aria-hidden="true">◈</div>
+  <section class="section" aria-label="说走就走">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">ROUTES</div>
+        <h2>🗺️ 说走就走</h2>
+        <p>精选路线，拿来即用</p>
+      </div>
+      <div class="route-cards">
+        <a href="itinerary.html" class="route-card rv">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <span class="duration">⏰ 1日游</span>
+            <span style="font-size:.65rem;padding:2px 8px;border-radius:100px;background:#d1fae5;color:#065f46;font-weight:600">简单</span>
+          </div>
+          <h3>泉水精华线</h3>
+          <p>趵突泉→五龙潭→大明湖→芙蓉街→黑虎泉</p>
+          <div style="margin-top:10px;padding:10px 12px;background:var(--bg2);border-radius:8px;font-size:.75rem;color:var(--text2);line-height:1.8">
+            <div style="font-weight:600;color:var(--text);margin-bottom:2px">💰 费用明细</div>
+            <div>门票 ¥40 + 餐饮 ¥80-120 + 交通 ¥30</div>
+          </div>
+          <div class="meta"><span>👥 首次游客</span><span>📍 5个景点</span></div>
+        </a>
+        <a href="itinerary.html" class="route-card rv">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <span class="duration">📅 2日游</span>
+            <span style="font-size:.65rem;padding:2px 8px;border-radius:100px;background:#fef3c7;color:#92400e;font-weight:600">适中</span>
+          </div>
+          <h3>深度体验线</h3>
+          <p>泉水线+文化线，覆盖景点和美食</p>
+          <div style="margin-top:10px;padding:10px 12px;background:var(--bg2);border-radius:8px;font-size:.75rem;color:var(--text2);line-height:1.8">
+            <div style="font-weight:600;color:var(--text);margin-bottom:2px">💰 费用明细</div>
+            <div>门票 ¥100 + 餐饮 ¥200 + 住宿 ¥150 + 交通 ¥60</div>
+          </div>
+          <div class="meta"><span>👥 深度游</span><span>📍 10+景点</span></div>
+        </a>
+        <a href="itinerary.html" class="route-card rv">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <span class="duration">🗓️ 3日游</span>
+            <span style="font-size:.65rem;padding:2px 8px;border-radius:100px;background:#fce4de;color:#9a3412;font-weight:600">挑战</span>
+          </div>
+          <h3>全览探索线</h3>
+          <p>市区精华+灵岩寺/红叶谷周边</p>
+          <div style="margin-top:10px;padding:10px 12px;background:var(--bg2);border-radius:8px;font-size:.75rem;color:var(--text2);line-height:1.8">
+            <div style="font-weight:600;color:var(--text);margin-bottom:2px">💰 费用明细</div>
+            <div>门票 ¥200 + 餐饮 ¥350 + 住宿 ¥300 + 交通 ¥150</div>
+          </div>
+          <div class="meta"><span>👥 时间充裕</span><span>📍 15+景点</span></div>
+        </a>
+      </div>
+      <div style="text-align:center;margin-top:40px"><a href="itinerary.html" class="btn btn-outline">自定义行程 →</a></div>
+    </div>
+  </section>
+
+  <!-- ═══ 💬 游客评价 ═══ -->
+  <section class="section section-alt" aria-label="游客评价">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">REVIEWS</div>
+        <h2>💬 游客怎么说</h2>
+        <p>真实游客的济南体验分享</p>
+      </div>
+      <!-- Rating Distribution -->
+      <div style="display:flex;align-items:center;gap:32px;margin-bottom:32px;flex-wrap:wrap" class="rv">
+        <div style="text-align:center;min-width:120px">
+          <div style="font:900 3.5rem/1 var(--serif);color:var(--accent)">4.8</div>
+          <div style="color:#f59e0b;font-size:1.3rem;margin:6px 0">★★★★★</div>
+          <div style="font-size:.78rem;color:var(--text3)">基于 2,847 条评价</div>
+        </div>
+        <div style="flex:1;min-width:240px">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:.82rem">
+            <span style="min-width:32px;color:var(--text3)">5星</span>
+            <div style="flex:1;height:10px;background:var(--bg3);border-radius:5px;overflow:hidden"><div style="height:100%;width:72%;background:linear-gradient(90deg,var(--accent),#e8dcc8);border-radius:5px;transition:width 1s ease"></div></div>
+            <span style="min-width:36px;text-align:right;color:var(--text3);font-size:.78rem">72%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:.82rem">
+            <span style="min-width:32px;color:var(--text3)">4星</span>
+            <div style="flex:1;height:10px;background:var(--bg3);border-radius:5px;overflow:hidden"><div style="height:100%;width:18%;background:linear-gradient(90deg,var(--accent),#e8dcc8);border-radius:5px;transition:width 1s ease"></div></div>
+            <span style="min-width:36px;text-align:right;color:var(--text3);font-size:.78rem">18%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:.82rem">
+            <span style="min-width:32px;color:var(--text3)">3星</span>
+            <div style="flex:1;height:10px;background:var(--bg3);border-radius:5px;overflow:hidden"><div style="height:100%;width:6%;background:linear-gradient(90deg,var(--accent),#e8dcc8);border-radius:5px;transition:width 1s ease"></div></div>
+            <span style="min-width:36px;text-align:right;color:var(--text3);font-size:.78rem">6%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:.82rem">
+            <span style="min-width:32px;color:var(--text3)">2星</span>
+            <div style="flex:1;height:10px;background:var(--bg3);border-radius:5px;overflow:hidden"><div style="height:100%;width:3%;background:linear-gradient(90deg,var(--accent),#e8dcc8);border-radius:5px;transition:width 1s ease"></div></div>
+            <span style="min-width:36px;text-align:right;color:var(--text3);font-size:.78rem">3%</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:.82rem">
+            <span style="min-width:32px;color:var(--text3)">1星</span>
+            <div style="flex:1;height:10px;background:var(--bg3);border-radius:5px;overflow:hidden"><div style="height:100%;width:1%;background:linear-gradient(90deg,var(--accent),#e8dcc8);border-radius:5px;transition:width 1s ease"></div></div>
+            <span style="min-width:36px;text-align:right;color:var(--text3);font-size:.78rem">1%</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-grid" id="homeReviews"></div>
+    </div>
+  </section>
+
+  <!-- ═══ 📖 热门攻略 ═══ -->
+  <section class="section" aria-label="热门攻略">
+    <div class="section-inner">
+      <div class="section-header reveal">
+        <div class="eyebrow">GUIDES</div>
+        <h2>📖 热门攻略</h2>
+        <p>精选实用攻略，助你玩转济南</p>
+      </div>
+      <div class="guides-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px">
+        <a href="guide.html" class="card rv" style="text-decoration:none">
+          <div class="card-img" style="aspect-ratio:16/9">
+            <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&q=75" alt="济南交通" loading="lazy" onload="this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')">
+          </div>
+          <div class="card-body">
+            <h3>🚇 济南交通全攻略</h3>
+            <p class="desc">地铁、公交、打车全覆盖，附线路图</p>
+            <div style="margin-top:12px;font-size:.75rem;color:var(--accent)">阅读攻略 →</div>
+          </div>
+        </a>
+        <a href="itinerary.html" class="card rv" style="text-decoration:none">
+          <div class="card-img" style="aspect-ratio:16/9">
+            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&q=75" alt="行程规划" loading="lazy" onload="this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')">
+          </div>
+          <div class="card-body">
+            <h3>📋 2日游完美行程</h3>
+            <p class="desc">精心规划的路线，拿来即用</p>
+            <div style="margin-top:12px;font-size:.75rem;color:var(--accent)">查看行程 →</div>
+          </div>
+        </a>
+        <a href="food.html" class="card rv" style="text-decoration:none">
+          <div class="card-img" style="aspect-ratio:16/9">
+            <img src="https://images.unsplash.com/photo-1755742319537-449f661a3190?w=600&q=75" alt="济南美食" loading="lazy" onload="this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')">
+          </div>
+          <div class="card-body">
+            <h3>🍜 济南必吃清单</h3>
+            <p class="desc">10道必吃美食+推荐餐厅</p>
+            <div style="margin-top:12px;font-size:.75rem;color:var(--accent)">查看清单 →</div>
+          </div>
+        </a>
+        <a href="culture.html" class="card rv" style="text-decoration:none">
+          <div class="card-img" style="aspect-ratio:16/9">
+            <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=75" alt="济南文化" loading="lazy" onload="this.classList.add('img-loaded');this.parentElement.classList.add('img-loaded')">
+          </div>
+          <div class="card-body">
+            <h3>📚 济南文化简史</h3>
+            <p class="desc">从龙山文化到近代开埠</p>
+            <div style="margin-top:12px;font-size:.75rem;color:var(--accent)">了解历史 →</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer" role="contentinfo">
+    <nav class="footer-links" aria-label="页脚导航">
+      <a href="index.html">首页</a>
+      <a href="spots.html">景点</a>
+      <a href="food.html">美食</a>
+      <a href="itinerary.html">行程</a>
+      <a href="guide.html">指南</a>
+      <a href="culture.html">文化</a>
+    </nav>
+    <p class="footer-tagline">72 泉涌，千年文脉 — 你的泉城深度游指南</p>
+    <div class="footer-stats" style="display:flex;justify-content:center;gap:24px;margin:12px 0;font-size:.75rem;color:var(--text3)">
+      <span>📍 80+ 精选景点</span>
+      <span>🍜 68 道必吃美食</span>
+      <span>📋 5 条精选路线</span>
+    </div>
+    <p>© 2026 济南旅游攻略 · 泉城 · 数据来源于公开信息，仅供参考</p>
+  </footer>
+
+  <button class="btt" aria-label="返回顶部">↑</button>
+  <nav class="mob-nav" aria-label="移动端导航">
+    <a href="index.html" class="active" aria-current="page"><span class="icon" aria-hidden="true">🏠</span>首页</a>
+    <a href="spots.html"><span class="icon">🏛️</span>景点</a>
+    <a href="food.html"><span class="icon">🍜</span>美食</a>
+    <a href="itinerary.html"><span class="icon">📋</span>行程</a>
+    <a href="guide.html"><span class="icon">📖</span>指南</a>
+    <a href="culture.html"><span class="icon">📚</span>文化</a>
+  </nav>
+
+
+  <script>
+  // ═══════════════════════════════════════
+  // HOMEPAGE UPGRADE MODULES
+  // ═══════════════════════════════════════
+
+  // ── Utility ──
+  function escH(s){return s?s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'):'';}
+  function animateCounter(el, target, duration) {
+    if (typeof target !== 'number' || isNaN(target)) { el.textContent = target; return; }
+    const start = performance.now();
+    const isFloat = target % 1 !== 0;
+    function tick(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const current = eased * target;
+      el.textContent = isFloat ? current.toFixed(1) : Math.round(current);
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // ═══════════════════════════════════════
+  // 1. ENHANCED SEARCH
+  // ═══════════════════════════════════════
+  const SearchHistory = {
+    KEY: 'jinan_search_history',
+    MAX: 10,
+    getAll() { try { return JSON.parse(localStorage.getItem(this.KEY)) || []; } catch { return []; } },
+    add(q) {
+      q = q.trim(); if (!q) return;
+      let list = this.getAll().filter(h => h !== q);
+      list.unshift(q);
+      if (list.length > this.MAX) list = list.slice(0, this.MAX);
+      localStorage.setItem(this.KEY, JSON.stringify(list));
+    },
+    clear() { localStorage.removeItem(this.KEY); }
+  };
+
+  const BrowsingHistory = {
+    KEY: 'jinan_browsing_history',
+    MAX: 50,
+    getAll() { try { return JSON.parse(localStorage.getItem(this.KEY)) || []; } catch { return []; } },
+    add(item) {
+      let list = this.getAll().filter(h => h.id !== item.id);
+      list.unshift({ id: item.id, type: item.type, cat: item.cat, area: item.area, name: item.name, ts: Date.now() });
+      if (list.length > this.MAX) list = list.slice(0, this.MAX);
+      localStorage.setItem(this.KEY, JSON.stringify(list));
+    }
+  };
+
+  // Voice Search
+  const VoiceSearch = {
+    recognition: null,
+    supported: !!(window.SpeechRecognition || window.webkitSpeechRecognition),
+    init() {
+      if (!this.supported) return;
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      this.recognition = new SR();
+      this.recognition.lang = 'zh-CN';
+      this.recognition.interimResults = false;
+      this.recognition.maxAlternatives = 1;
+    },
+    start(onResult, onEnd) {
+      if (!this.recognition) this.init();
+      if (!this.recognition) return;
+      this.recognition.onresult = (e) => { const text = e.results[0][0].transcript; onResult(text); };
+      this.recognition.onend = () => { if (onEnd) onEnd(); };
+      this.recognition.onerror = () => { if (onEnd) onEnd(); };
+      try { this.recognition.start(); } catch {}
+    },
+    stop() { if (this.recognition) { try { this.recognition.stop(); } catch {} } }
+  };
+
+  // Enhanced search dropdown with history + hot tags
+  function renderSearchDropdown(dropdownEl, query) {
+    const history = SearchHistory.getAll();
+    const hotTags = ['趵突泉','大明湖','千佛山','把子肉','油旋','糖醋鲤鱼','五龙潭','黑虎泉','甜沫','芙蓉街'];
+    let html = '';
+
+    if (!query || query.length === 0) {
+      // Show history
+      if (history.length > 0) {
+        html += `<div class="search-section-title"><span>🕐 最近搜索</span><button aria-label="清空搜索历史" onclick="event.stopPropagation();SearchHistory.clear();renderSearchDropdown(document.getElementById('${dropdownEl.id}'),'')">清空</button></div>`;
+        html += `<div class="search-hot-tags" style="padding-bottom:8px">`;
+        history.forEach(h => { html += `<span class="search-hot-tag" onclick="event.stopPropagation();doSearch('${escH(h)}')">${escH(h)}</span>`; });
+        html += `</div>`;
+      }
+      // Show hot tags
+      html += `<div class="search-section-title"><span>🔥 热门搜索</span></div>`;
+      html += `<div class="search-hot-tags">`;
+      hotTags.forEach((t, i) => { html += `<span class="search-hot-tag${i < 3 ? ' hot' : ''}" onclick="event.stopPropagation();doSearch('${escH(t)}')">${escH(t)}</span>`; });
+      html += `</div>`;
+      dropdownEl.innerHTML = html;
+      dropdownEl.classList.add('show');
+      return;
+    }
+
+    // Live suggestions
+    const q = query.toLowerCase();
+    const spotResults = (window._searchCache?.spots || []).filter(s => s.name.toLowerCase().includes(q) || (s.desc||'').toLowerCase().includes(q)).slice(0, 5);
+    const foodResults = (window._searchCache?.foods || []).filter(f => f.name.toLowerCase().includes(q) || (f.desc||'').toLowerCase().includes(q)).slice(0, 5);
+
+    if (!spotResults.length && !foodResults.length) {
+      html += `<div class="search-empty">没有找到"${escH(query)}"相关结果</div>`;
+    } else {
+      if (spotResults.length) {
+        html += `<div class="search-dropdown-section"><div class="search-dropdown-label">🏛️ 景点</div>`;
+        spotResults.forEach(s => {
+          html += `<a href="spots.html?id=${encodeURIComponent(s.id)}" class="search-dropdown-item" data-type="spot" onclick="SearchHistory.add('${escH(query)}')">
+            <span class="item-icon">🏛️</span>
+            <div><div class="item-name">${escH(s.name)}</div><div class="item-desc">${escH((s.desc||'').slice(0,40))}</div></div>
+            <span class="item-type">景点</span></a>`;
+        });
+        html += `</div>`;
+      }
+      if (foodResults.length) {
+        html += `<div class="search-dropdown-section"><div class="search-dropdown-label">🍜 美食</div>`;
+        foodResults.forEach(f => {
+          html += `<a href="food.html?id=${encodeURIComponent(f.id)}" class="search-dropdown-item" data-type="food" onclick="SearchHistory.add('${escH(query)}')">
+            <span class="item-icon">🍜</span>
+            <div><div class="item-name">${escH(f.name)}</div><div class="item-desc">${escH((f.desc||'').slice(0,40))}</div></div>
+            <span class="item-type">美食</span></a>`;
+        });
+        html += `</div>`;
+      }
+    }
+    html += `<div class="search-section-title" style="border-top:1px solid var(--border);margin-top:4px;padding-top:8px"><span>🔍 搜索"${escH(query)}"</span></div>`;
+    dropdownEl.innerHTML = html;
+    dropdownEl.classList.add('show');
+  }
+
+  function doSearch(query) {
+    SearchHistory.add(query);
+    showSearchResults(query);
+    // Close overlays/dropdowns
+    document.getElementById('searchOverlay')?.classList.remove('open');
+    document.querySelectorAll('.search-dropdown').forEach(d => d.classList.remove('show'));
+  }
+
+  function showSearchResults(query) {
+    const section = document.getElementById('searchResultsSection');
+    const grid = document.getElementById('searchResultsGrid');
+    const titleEl = document.getElementById('searchResultsTitle');
+    const countEl = document.getElementById('searchResultsCount');
+    if (!section || !grid) return;
+
+    const q = query.toLowerCase();
+    const spots = (window._searchCache?.spots || []).filter(s => s.name.toLowerCase().includes(q) || (s.desc||'').toLowerCase().includes(q) || (s.cat||'').toLowerCase().includes(q));
+    const foods = (window._searchCache?.foods || []).filter(f => f.name.toLowerCase().includes(q) || (f.desc||'').toLowerCase().includes(q));
+
+    titleEl.textContent = `"${query}" 的搜索结果`;
+    countEl.textContent = `共 ${spots.length + foods.length} 个结果`;
+
+    let html = '';
+    spots.forEach(s => {
+      html += `<div class="search-result-card" onclick="location.href='spots.html?id=${s.id}'">
+        <img src="${s.img}" alt="${escH(s.name)}" loading="lazy">
+        <div class="sr-body"><span class="sr-type spot">景点</span>
+          <h3>${escH(s.name)}</h3>
+          <p>${escH((s.desc||'').slice(0,80))}</p>
+          <div class="sr-meta"><span>★ ${s.rating||'--'}</span><span>${s.price===0?'免费':'¥'+s.price}</span><span>${s.dur||''}</span></div>
+        </div></div>`;
+    });
+    foods.forEach(f => {
+      html += `<div class="search-result-card" onclick="location.href='food.html?id=${f.id}'">
+        <img src="${f.img}" alt="${escH(f.name)}" loading="lazy">
+        <div class="sr-body"><span class="sr-type food">美食</span>
+          <h3>${escH(f.name)}</h3>
+          <p>${escH((f.desc||'').slice(0,80))}</p>
+          <div class="sr-meta"><span>${f.must?'🔥 必吃':''}</span><span>${f.shops?.[0]?.avg||''}</span></div>
+        </div></div>`;
+    });
+
+    if (!html) html = `<div style="text-align:center;padding:60px 0;color:var(--text3);font-size:1rem">没有找到"${escH(query)}"相关结果，换个关键词试试？</div>`;
+
+    grid.innerHTML = html;
+    section.classList.add('active');
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  window.hideSearchResults = function() {
+    document.getElementById('searchResultsSection')?.classList.remove('active');
+  };
+
+  // Init enhanced search on hero inline input
+  (function initEnhancedSearch() {
+    const inlineInput = document.getElementById('heroInlineSearch');
+    const inlineDropdown = document.getElementById('heroInlineDropdown');
+    const inlineBtn = document.getElementById('heroInlineSearchBtn');
+    const heroVoiceBtn = document.getElementById('heroVoiceBtn');
+    const overlayInput = document.getElementById('heroSearch');
+    const overlayDropdown = document.getElementById('searchDropdown');
+    const voiceBtn = document.getElementById('voiceSearchBtn');
+
+    // Wait for search data
+    async function ensureSearchData() {
+      if (window._searchCache) return;
+      try {
+        const [spots, foods] = await Promise.all([
+          typeof getSpotsData === 'function' ? getSpotsData() : fetch('/jinan-travel-guide/data/spots.json').then(r=>r.json()),
+          typeof getFoodsData === 'function' ? getFoodsData() : fetch('/jinan-travel-guide/data/food.json').then(r=>r.json()).then(d=>d.foods||d)
+        ]);
+        window._searchCache = { spots, foods };
+      } catch {}
+    }
+    ensureSearchData();
+
+    // Inline search
+    if (inlineInput && inlineDropdown) {
+      let debounceTimer;
+      inlineInput.addEventListener('input', () => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          ensureSearchData().then(() => renderSearchDropdown(inlineDropdown, inlineInput.value.trim()));
+        }, 200);
+      });
+      inlineInput.addEventListener('focus', () => {
+        ensureSearchData().then(() => renderSearchDropdown(inlineDropdown, inlineInput.value.trim()));
+      });
+      if (inlineBtn) {
+        inlineBtn.addEventListener('click', () => {
+          const q = inlineInput.value.trim();
+          if (q) doSearch(q);
+        });
+      }
+      inlineInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') { const q = inlineInput.value.trim(); if (q) doSearch(q); }
+      });
+    }
+
+    // Overlay search
+    if (overlayInput && overlayDropdown) {
+      let debounceTimer2;
+      overlayInput.addEventListener('input', () => {
+        clearTimeout(debounceTimer2);
+        debounceTimer2 = setTimeout(() => {
+          ensureSearchData().then(() => renderSearchDropdown(overlayDropdown, overlayInput.value.trim()));
+        }, 200);
+      });
+      overlayInput.addEventListener('focus', () => {
+        ensureSearchData().then(() => renderSearchDropdown(overlayDropdown, overlayInput.value.trim()));
+      });
+    }
+
+    // Voice search
+    function setupVoice(btn, input) {
+      if (!btn || !VoiceSearch.supported) {
+        if (btn) btn.style.display = 'none';
+        return;
+      }
+      VoiceSearch.init();
+      btn.addEventListener('click', () => {
+        if (btn.classList.contains('listening')) {
+          VoiceSearch.stop();
+          btn.classList.remove('listening');
+          return;
+        }
+        btn.classList.add('listening');
+        VoiceSearch.start((text) => {
+          input.value = text;
+          btn.classList.remove('listening');
+          doSearch(text);
+        }, () => { btn.classList.remove('listening'); });
+      });
+    }
+    setupVoice(heroVoiceBtn, inlineInput);
+    setupVoice(voiceBtn, overlayInput);
+  })();
+
+  // ═══════════════════════════════════════
+  // 2. 今日精选
+  // ═══════════════════════════════════════
+  (async function initDailyPick() {
+    const container = document.getElementById('dailyPick');
+    if (!container) return;
+    try {
+      const spots = await getSpotsData();
+      if (!spots.length) return;
+      const today = Math.floor(Date.now() / 86400000);
+      const pick = spots[today % spots.length];
+      const priceText = pick.price === 0 ? '免费' : '¥' + pick.price;
+
+      container.innerHTML = `
+        <div class="daily-pick" onclick="location.href='spots.html?id=${pick.id}'">
+          <div class="dp-bg"><img src="${pick.img}" alt="${escH(pick.name)}"></div>
+          <div class="dp-gradient"></div>
+          <div class="dp-content">
+            <div class="dp-badge">⭐ 今日精选 · ${new Date().toLocaleDateString('zh-CN',{month:'long',day:'numeric'})}</div>
+            <h3>${escH(pick.name)}</h3>
+            <p class="dp-desc">${escH(pick.desc)}</p>
+            <div class="dp-meta">
+              <span>★ ${pick.rating}</span>
+              <span>🎫 ${priceText}</span>
+              <span>⏱ ${pick.dur||''}</span>
+              <span>💬 ${pick.reviews||0} 条评价</span>
+              <button aria-label="查看详情" class="dp-btn" onclick="event.stopPropagation();location.href='spots.html?id=${pick.id}'">查看详情 →</button>
+            </div>
+          </div>
+        </div>`;
+    } catch(e) { console.error('今日精选加载失败:', e); }
+  })();
+
+  // ═══════════════════════════════════════
+  // 3. 济南速览 Dashboard
+  // ═══════════════════════════════════════
+  (async function initDashboard() {
+    // Weather
+    (async function loadWeather() {
+      const el = document.getElementById('dashWeather');
+      const subEl = document.getElementById('dashWeatherSub');
+      try {
+        const res = await fetch('https://wttr.in/Jinan?format=j1');
+        const data = await res.json();
+        const cur = data.current_condition?.[0];
+        if (cur) {
+          const temp = cur.temp_C;
+          const desc = cur.lang_zh?.[0]?.value || cur.weatherDesc?.[0]?.value || '';
+          const humidity = cur.humidity;
+          el.textContent = `${temp}°C`;
+          subEl.textContent = `济南 · ${desc} · 湿度${humidity}%`;
+          animateCounter(el, parseFloat(temp), 1000);
+          el.textContent = `${temp}°C`;
+        }
+      } catch {
+        el.textContent = '暂无数据';
+        subEl.textContent = '天气服务暂时不可用';
+      }
+    })();
+
+    // Crowd simulation
+    (async function loadCrowd() {
+      const valEl = document.getElementById('dashCrowd');
+      const subEl = document.getElementById('dashCrowdSub');
+      const barEl = document.getElementById('dashCrowdBar');
+      try {
+        const spots = await getSpotsData();
+        const top = spots.sort((a,b)=>b.rating-a.rating)[0];
+        const now = new Date();
+        const day = now.getDay();
+        const hour = now.getHours();
+        let base = 40;
+        if (day === 0 || day === 6) base += 25;
+        if (hour >= 10 && hour <= 14) base += 20;
+        if (hour >= 15 && hour <= 17) base += 15;
+        const crowd = Math.min(95, base + Math.floor(Math.random() * 15));
+        const label = crowd < 50 ? '较为空闲' : crowd < 75 ? '适度拥挤' : '非常拥挤';
+        const color = crowd < 50 ? '#2a9d8f' : crowd < 75 ? '#f59e0b' : '#e76f51';
+        valEl.textContent = label;
+        valEl.style.color = color;
+        subEl.textContent = `${top?.name || '趵突泉'} · 预测拥挤度 ${crowd}%`;
+        barEl.style.width = crowd + '%';
+        barEl.style.background = `linear-gradient(90deg,#2a9d8f,${color})`;
+        animateCounter({textContent:''}, crowd, 1000);
+        setTimeout(() => { valEl.textContent = label; }, 1100);
+      } catch {}
+    })();
+
+    // Free spots
+    (async function loadFreeSpots() {
+      const valEl = document.getElementById('dashFree');
+      const subEl = document.getElementById('dashFreeSub');
+      const barEl = document.getElementById('dashFreeBar');
+      try {
+        const spots = await getSpotsData();
+        const free = spots.filter(s => s.price === 0).length;
+        const total = spots.length;
+        valEl.textContent = free;
+        subEl.textContent = `共 ${total} 个景点中，${free} 个免费`;
+        animateCounter(valEl, free, 1000);
+        barEl.style.width = Math.round(free/total*100) + '%';
+      } catch {}
+    })();
+
+    // Top 5 foods
+    (async function loadTopFoods() {
+      const listEl = document.getElementById('dashFoodList');
+      try {
+        const foods = await getFoodsData();
+        const top5 = foods.filter(f => f.must).slice(0, 5);
+        if (!top5.length) return;
+        listEl.innerHTML = top5.map((f, i) => `<li><span class="rank">${i+1}</span>${escH(f.name)}</li>`).join('');
+      } catch {}
+    })();
+  })();
+
+  // ═══════════════════════════════════════
+  // 4. 猜你喜欢
+  // ═══════════════════════════════════════
+  const GuessYouLike = {
+    pool: [],
+    async loadData() {
+      if (this.pool.length) return;
+      try {
+        const [spots, foods] = await Promise.all([getSpotsData(), getFoodsData()]);
+        spots.forEach(s => this.pool.push({ ...s, _type: 'spot' }));
+        foods.forEach(f => this.pool.push({ ...f, _type: 'food' }));
+      } catch {}
+    },
+    getRecommendations(count = 6) {
+      const history = BrowsingHistory.getAll();
+      const favs = JSON.parse(localStorage.getItem('jinan_favorites') || '[]');
+
+      // Score items based on browsing history and favorites
+      const scored = this.pool.map(item => {
+        let score = Math.random() * 3; // base random score
+        history.forEach(h => {
+          if (h.id === item.id) score -= 10; // already viewed
+          if (h.cat && h.cat === item.cat) score += 2;
+          if (h.area && h.area === item.area) score += 1.5;
+          if (h.type === item._type) score += 0.5;
+        });
+        favs.forEach(fid => {
+          const favItem = this.pool.find(p => p.id === fid);
+          if (favItem) {
+            if (favItem.cat === item.cat) score += 3;
+            if (favItem.area === item.area) score += 2;
+          }
+        });
+        return { item, score };
+      });
+
+      scored.sort((a, b) => b.score - a.score);
+      // Pick top items but add some randomness
+      const top = scored.slice(0, count * 3);
+      const shuffled = top.sort(() => Math.random() - 0.5);
+      return shuffled.slice(0, count).map(s => s.item);
+    },
+    render() {
+      const container = document.getElementById('guessScroll');
+      if (!container || !this.pool.length) return;
+      const picks = this.getRecommendations(8);
+
+      container.innerHTML = picks.map(item => {
+        const isSpot = item._type === 'spot';
+        const link = isSpot ? `spots.html?id=${item.id}` : `food.html?id=${item.id}`;
+        const priceText = isSpot ? (item.price === 0 ? '免费' : '¥' + item.price) : (item.shops?.[0]?.avg || '');
+        return `<div class="guess-card" onclick="location.href='${link}';BrowsingHistory.add({id:'${item.id}',type:'${item._type}',cat:'${item.cat||''}',area:'${item.area||''}',name:'${escH(item.name)}'})">
+          <div class="gc-img">
+            <img src="${item.img}" alt="${escH(item.name)}" loading="lazy">
+            <span class="gc-type ${isSpot?'spot':'food'}">${isSpot?'景点':'美食'}</span>
+          </div>
+          <div class="gc-body">
+            <h4>${escH(item.name)}</h4>
+            <p class="gc-desc">${escH((item.desc||'').slice(0,60))}</p>
+            <div class="gc-meta">
+              <span class="gc-rating">★ ${item.rating||'4.5'}</span>
+              <span>${priceText}</span>
+            </div>
+          </div></div>`;
+      }).join('');
+    },
+    async init() {
+      await this.loadData();
+      this.render();
+      document.getElementById('guessRefreshBtn')?.addEventListener('click', () => this.render());
+    }
+  };
+  GuessYouLike.init();
+
+  // Track spot/food card clicks for browsing history
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('[data-href*="spots.html?id="], [data-href*="food.html?id="]');
+    if (!card) return;
+    const href = card.dataset.href || '';
+    const type = href.includes('spots.html') ? 'spot' : 'food';
+    const idMatch = href.match(/id=([^&]+)/);
+    if (idMatch) {
+      BrowsingHistory.add({ id: idMatch[1], type, cat: '', area: '', name: card.querySelector('h3')?.textContent || '' });
+    }
+  });
+  </script>
+
+</body>
+</html>

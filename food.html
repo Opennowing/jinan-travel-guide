@@ -490,18 +490,28 @@
       .card-actions .btn{font-size:.72rem;padding:5px 10px}
     }
 
-    /* ─── Food page spacing adjustments (no !important) ─── */
-    .page-hero{min-height:45vh;padding:100px var(--gutter) 48px}
-    .food-masonry{gap:16px}
-    .food-card-pro-body{padding:16px 18px 18px}
-    .must-eat-hero{margin-bottom:0}
-    .must-eat-hero-grid{gap:14px}
-    .season-grid{gap:18px}
-    .tips-grid{gap:18px}
-    .routes-grid{gap:18px}
-    .food-map-prompt{margin-top:24px}
-    .smart-recommend{margin-bottom:20px}
-    .must-banner{margin-bottom:20px;padding:18px 22px}
+    /* ─── 紧凑布局：减少空白 ─── */
+    .page-hero{min-height:40vh;padding:100px var(--gutter) 48px}
+    .section{padding:28px var(--gutter)}
+    .section-header{margin-bottom:14px}
+    .section-header h2{font-size:clamp(1.4rem,3vw,1.8rem)}
+    .section-header p{margin-top:4px;font-size:.85rem}
+    .section-divider{margin:16px auto}
+    .food-masonry{gap:12px}
+    .food-card-pro-body{padding:14px 16px 16px}
+    .must-eat-hero{margin-bottom:0;padding:20px}
+    .must-eat-hero-grid{gap:12px}
+    .season-grid{gap:16px}
+    .season-card{padding:20px}
+    .tip-card{padding:20px}
+    .tips-grid{gap:16px}
+    .routes-grid{gap:16px}
+    .food-map-prompt{padding:16px 20px;margin-top:20px}
+    .food-tabs{margin-bottom:12px}
+    .enhanced-filters{margin-bottom:12px}
+    .food-count-bar{margin-bottom:12px}
+    .smart-recommend{margin-bottom:16px}
+    .must-banner{margin-bottom:16px;padding:16px 20px}
     .section-inner{max-width:1200px}
 
     /* ─── DARK MODE 补充 ─── */
@@ -642,8 +652,6 @@
   <main role="main" id="main-content">
 
 
-    <!-- ── 搜索与列表（必吃榜已合并到卡片徽章中） ── -->
-
     <!-- ── 必吃榜 Hero ── -->
     <section class="section" aria-label="济南必吃榜">
       <div class="section-inner">
@@ -661,6 +669,8 @@
         </div>
       </div>
     </section>
+
+    <!-- ── 搜索 ── -->
     <section class="section" aria-label="美食搜索与列表">
       <div class="section-inner">
 
@@ -755,16 +765,6 @@
         <!-- 美食卡片列表 -->
         <div class="food-masonry" id="foodGrid">
           <div class="food-loading"><div class="spinner"></div></div>
-    <!-- guess-you-like -->
-    <div id="guessYouLike" style="display:none;margin:24px 0">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px">
-        <span style="font-size:1.2rem">💡</span>
-        <h3 style="font:700 1.1rem/1.2 var(--serif);margin:0">猜你喜欢</h3>
-        <span style="font-size:.75rem;color:var(--text3);margin-left:auto" id="guessHint"></span>
-      </div>
-      <div id="guessCards" style="display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch"></div>
-    </div>
-
         </div>
       </div>
     </section>
@@ -1049,8 +1049,6 @@
       <a href="guide.html">指南</a>
       <a href="culture.html">文化</a>
     </nav>
-    <div class="footer-stats"><span>📍 80+ 景点</span><span>🍜 68 美食</span><span>📋 5 路线</span></div>
-    <p class="footer-tagline">72 泉涌，千年文脉 — 68 道精选美食 · 济南味道一网打尽</p>
     <p>© 2026 济南旅游攻略 · 愿你在泉城吃好喝好</p>
   </footer>
 

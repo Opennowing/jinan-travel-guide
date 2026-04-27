@@ -512,25 +512,6 @@ export function initTouchSwipe(container, { onSwipeLeft, onSwipeRight, threshold
     }
   }, { passive: true });
 }
-
-// ═══ PAGE TRANSITION ═══
-export function initPageTransition() {
-  document.querySelectorAll('a[href]').forEach(a => {
-    const href = a.getAttribute('href');
-    if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:')) return;
-    if (href.endsWith('.html') || href.endsWith('.html#')) {
-      a.addEventListener('click', e => {
-        if (e.metaKey || e.ctrlKey || e.shiftKey) return;
-        e.preventDefault();
-        const overlay = document.createElement('div');
-        overlay.className = 'page-transition active';
-        document.body.appendChild(overlay);
-        setTimeout(() => { window.location.href = href; }, 250);
-      });
-    }
-  });
-}
-
 // ═══ SKELETON CARD GENERATOR ═══
 export function createSkeletonCard() {
   return '<div class="skeleton-card">' +
@@ -546,24 +527,6 @@ export function showSkeletons(container, count = 4) {
   if (!container) return;
   container.innerHTML = Array(count).fill(createSkeletonCard()).join('');
 }
-
-// ═══ INTERSECTION OBSERVER STAGGER ═══
-export function initStaggerReveal() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('revealed');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.reveal, .rv').forEach((el, i) => {
-    el.style.setProperty('--stagger-i', i % 8);
-    observer.observe(el);
-  });
-}
-
 // ═══ SMOOTH SCROLL TO ELEMENT ═══
 export function smoothScrollTo(selector, offset = 80) {
   const el = document.querySelector(selector);
@@ -750,24 +713,6 @@ export function initBreadcrumb() {
   const current = pageNames[page] || '首页';
   bc.innerHTML = `<a href="index.html">首页</a><span class="sep">›</span><span class="current">${current}</span>`;
 }
-
-// ═══ LAZY IMAGE OBSERVER ═══
-export function initLazyImages() {
-  const imgs = document.querySelectorAll('img[loading="lazy"]');
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          if (img.dataset.src) img.src = img.dataset.src;
-          observer.unobserve(img);
-        }
-      });
-    }, { rootMargin: '200px' });
-    imgs.forEach(img => observer.observe(img));
-  }
-}
-
 // ═══ KEYBOARD NAVIGATION ═══
 export function initKeyboardNav() {
   document.addEventListener('keydown', e => {

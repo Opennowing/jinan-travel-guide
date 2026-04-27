@@ -217,8 +217,6 @@ body{animation:pageFadeIn .5s var(--ease) both}
 .review-stars{color:#f59e0b;font-size:.82rem;margin-bottom:6px;letter-spacing:2px}
 .review-text{font-size:.85rem;color:var(--text2);line-height:1.7}
 
-/* ─── SCROLL REVEAL — merged into base ─── */
-
 /* ─── PERFORMANCE OPTIMIZATIONS ─── */
 /* content-visibility removed — caused IntersectionObserver issues */
 .btn{will-change:transform}

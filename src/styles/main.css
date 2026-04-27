@@ -3416,3 +3416,212 @@ html.dark .bottom-sheet-close { background: var(--bg3); border-color: rgba(255,2
   .floating-actions { bottom: 80px; right: 12px; }
   .floating-actions .fab { width: 40px; height: 40px; font-size: 1rem; }
 }
+
+/* ============================================================
+   卡片升级组件样式 — 新增 by motion
+   ============================================================ */
+
+/* 1. 排名角标 */
+.rank-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  z-index: 10;
+  will-change: transform;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+  pointer-events: none;
+}
+.rank-badge--1 {
+  background: linear-gradient(135deg, #ffd700 0%, #f0a500 100%);
+}
+.rank-badge--2 {
+  background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%);
+}
+.rank-badge--3 {
+  background: linear-gradient(135deg, #cd7f32 0%, #a0522d 100%);
+}
+.rank-badge--low {
+  background: rgba(120,120,120,.6);
+  backdrop-filter: blur(4px);
+}
+
+/* 2. 社会认同行 */
+.social-proof {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.75rem;
+  color: var(--text3);
+  transition: color .2s var(--ease);
+}
+.social-proof .icon-heart {
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+.social-proof:hover {
+  color: var(--text2);
+}
+
+/* 3. 价格标签增强 */
+.price-free {
+  color: #22c55e;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.price-paid {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.price-old {
+  color: var(--text3);
+  text-decoration: line-through;
+  font-size: 0.8rem;
+  margin-left: 6px;
+}
+
+/* 4. 距离标签 */
+.distance-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  color: var(--accent);
+  font-size: 0.75rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* 5. 场景按钮 */
+.scene-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border2);
+  background: transparent;
+  color: var(--text2);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all .2s var(--ease);
+  will-change: border-color, background-color, color;
+}
+.scene-btn:hover,
+.scene-btn:active {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  color: var(--accent);
+}
+.scene-btn--active,
+.scene-btn[aria-pressed="true"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.scene-btn--active:hover,
+.scene-btn[aria-pressed="true"]:hover {
+  background: var(--accent);
+  filter: brightness(1.1);
+}
+
+/* 6. 筛选计数 */
+.filter-count {
+  font-size: 0.7rem;
+  color: var(--text3);
+  margin-left: 2px;
+  font-weight: 400;
+}
+
+/* 7. 折叠面板动画 */
+.filter-collapsible {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .35s var(--ease-out);
+  will-change: max-height;
+}
+.filter-collapsible.expanded {
+  max-height: 500px;
+}
+
+/* 8. 卡片 hover 浮层 */
+.card-quick-actions {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(6px);
+  border-radius: 0 0 var(--radius-lg, 12px) var(--radius-lg, 12px);
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform .3s var(--ease-out), opacity .3s var(--ease-out);
+  will-change: transform, opacity;
+  z-index: 5;
+}
+.card-quick-actions button,
+.card-quick-actions a {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: none;
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background .2s;
+}
+.card-quick-actions button:hover,
+.card-quick-actions a:hover {
+  background: rgba(255,255,255,.28);
+}
+
+/* 卡片容器需要 relative + overflow:hidden 才能触发浮层 */
+.card:hover .card-quick-actions,
+.spot-card:hover .card-quick-actions {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ============================================================
+   prefers-reduced-motion — 禁用所有过渡/动画
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .rank-badge,
+  .social-proof,
+  .scene-btn,
+  .filter-collapsible,
+  .card-quick-actions,
+  .card-quick-actions button,
+  .card-quick-actions a {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* 社会认同子元素 */
+.proof-want, .proof-visited {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.proof-want { color: #ef4444; }
+.proof-visited { color: var(--text3); }
+.social-proof:hover .proof-want { color: #dc2626; }
+.social-proof:hover .proof-visited { color: var(--text2); }
+@media(prefers-reduced-motion:reduce){.rank-badge,.social-proof,.distance-tag{transition:none}}

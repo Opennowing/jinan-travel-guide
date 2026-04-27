@@ -356,6 +356,137 @@
       gap: 12px;
       flex-wrap: wrap;
     }
+    /* ── 场景快捷标签 ── */
+    .scene-tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border2);
+    }
+    .scene-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 14px;
+      border: 1px solid var(--border2);
+      background: var(--bg);
+      border-radius: 100px;
+      font-size: .78rem;
+      cursor: pointer;
+      transition: all .3s;
+      color: var(--text3);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .scene-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: rgba(201,169,110,.08);
+      transform: translateY(-1px);
+    }
+    .scene-tag.active {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, var(--accent), #b8956a);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(201,169,110,.3);
+    }
+    .scene-tag .scene-emoji { font-size: .9rem; }
+    /* ── 筛选结果计数 ── */
+    .filter-count {
+      display: inline-block;
+      font-size: .62rem;
+      color: var(--text3);
+      opacity: .7;
+      margin-left: 2px;
+      font-weight: 400;
+      transition: opacity .2s;
+    }
+    .filter-btn.active .filter-count,
+    .audience-btn.active .filter-count,
+    .area-btn.active .filter-count,
+    .ticket-btn.active .filter-count,
+    .duration-btn.active .filter-count {
+      color: rgba(255,255,255,.85);
+      opacity: 1;
+    }
+    /* ── 上次筛选按钮 ── */
+    .last-filter-btn {
+      display: none;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 12px;
+      border: 1px dashed var(--accent);
+      background: rgba(201,169,110,.06);
+      border-radius: 100px;
+      font-size: .72rem;
+      cursor: pointer;
+      transition: all .3s;
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .last-filter-btn:hover {
+      background: rgba(201,169,110,.15);
+    }
+    .last-filter-btn.visible {
+      display: inline-flex;
+    }
+    /* ── 重置按钮角标 + 隐藏 ── */
+    .reset-filters-btn {
+      position: relative;
+      transition: all .3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .reset-filters-btn .reset-count {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      min-width: 16px;
+      height: 16px;
+      padding: 0 4px;
+      background: #ef4444;
+      color: #fff;
+      border-radius: 100px;
+      font-size: .58rem;
+      font-weight: 700;
+      margin-left: 4px;
+    }
+    .reset-filters-btn .reset-count.visible {
+      display: inline-flex;
+    }
+    .reset-filters-btn.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(.8);
+    }
+    /* ── 场景标签激活指示条 ── */
+    .active-scene-bar {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      background: rgba(201,169,110,.08);
+      border-radius: 10px;
+      font-size: .78rem;
+    }
+    .active-scene-bar.visible { display: flex; }
+    .active-scene-bar .scene-label { color: var(--accent); font-weight: 600; }
+    .active-scene-bar .clear-scene {
+      margin-left: auto;
+      background: none;
+      border: none;
+      color: var(--text3);
+      cursor: pointer;
+      font-size: .75rem;
+      padding: 2px 8px;
+      border-radius: 100px;
+      transition: all .2s;
+    }
+    .active-scene-bar .clear-scene:hover {
+      background: rgba(0,0,0,.06);
+      color: var(--text);
+    }
     /* ── 地图 Marker 弹出窗口增强 ── */
     .map-popup-img {
       width: 100%;
@@ -1192,17 +1323,29 @@ html.dark .card.meituan-card:hover {
   <section class="section" style="padding-top:0;padding-bottom:0" aria-label="景点筛选">
     <div class="section-inner">
       <div class="filter-container">
+        <div class="scene-tags-row" id="sceneTags">
+          <button class="scene-tag" data-scene="family" aria-label="亲子出游"><span class="scene-emoji">👨‍👩‍👧</span> 亲子出游</button>
+          <button class="scene-tag" data-scene="couple" aria-label="情侣约会"><span class="scene-emoji">💑</span> 情侣约会</button>
+          <button class="scene-tag" data-scene="friends" aria-label="朋友聚会"><span class="scene-emoji">🍻</span> 朋友聚会</button>
+          <button class="scene-tag" data-scene="solo" aria-label="独自散心"><span class="scene-emoji">🧘</span> 独自散心</button>
+          <button class="scene-tag" data-scene="team" aria-label="团建活动"><span class="scene-emoji">🏢</span> 团建活动</button>
+        </div>
+        <div class="active-scene-bar" id="activeSceneBar">
+          <span>🎬</span>
+          <span class="scene-label" id="activeSceneLabel"></span>
+          <button class="clear-scene" id="clearSceneBtn">✕ 清除</button>
+        </div>
         <div class="filter-section reveal">
           <div class="filter-group">
             <span class="filter-group-label">📌 分类</span>
             <div class="tabs" id="catFilters" role="group" aria-label="景点分类筛选" role="group" aria-label="景点分类筛选">
-              <button class="filter-btn active reveal" data-cat="all" aria-label="全部" role="tab" aria-selected="true">全部</button>
-              <button class="filter-btn reveal" data-cat="spring" aria-label="⛲ 泉水" role="tab" aria-selected="false">⛲ 泉水</button>
-              <button class="filter-btn reveal" data-cat="nature" aria-label="🌿 自然" role="tab" aria-selected="false">🌿 自然</button>
-              <button class="filter-btn reveal" data-cat="history" aria-label="🏛️ 历史" role="tab" aria-selected="false">🏛️ 历史</button>
-              <button class="filter-btn reveal" data-cat="culture" aria-label="📚 文化" role="tab" aria-selected="false">📚 文化</button>
-              <button class="filter-btn reveal" data-cat="food" aria-label="🍜 美食街" role="tab" aria-selected="false">🍜 美食街</button>
-              <button class="filter-btn reveal" data-cat="family" aria-label="👨👩👧 亲子" role="tab" aria-selected="false">👨👩👧 亲子</button>
+              <button class="filter-btn active reveal" data-cat="all" aria-label="全部" role="tab" aria-selected="true">全部<span class="filter-count" data-count-cat="all"></span></button>
+              <button class="filter-btn reveal" data-cat="spring" aria-label="⛲ 泉水" role="tab" aria-selected="false">⛲ 泉水<span class="filter-count" data-count-cat="spring"></span></button>
+              <button class="filter-btn reveal" data-cat="nature" aria-label="🌿 自然" role="tab" aria-selected="false">🌿 自然<span class="filter-count" data-count-cat="nature"></span></button>
+              <button class="filter-btn reveal" data-cat="history" aria-label="🏛️ 历史" role="tab" aria-selected="false">🏛️ 历史<span class="filter-count" data-count-cat="history"></span></button>
+              <button class="filter-btn reveal" data-cat="culture" aria-label="📚 文化" role="tab" aria-selected="false">📚 文化<span class="filter-count" data-count-cat="culture"></span></button>
+              <button class="filter-btn reveal" data-cat="food" aria-label="🍜 美食街" role="tab" aria-selected="false">🍜 美食街<span class="filter-count" data-count-cat="food"></span></button>
+              <button class="filter-btn reveal" data-cat="family" aria-label="👨👩👧 亲子" role="tab" aria-selected="false">👨👩👧 亲子<span class="filter-count" data-count-cat="family"></span></button>
             </div>
           </div>
           <div class="sort-wrap">
@@ -1220,40 +1363,41 @@ html.dark .card.meituan-card:hover {
             🔍 更多筛选 <span class="arrow">▼</span>
             <span class="filter-active-badge" id="filterActiveBadge" style="display:none">0</span>
           </button>
+          <button class="last-filter-btn" id="lastFilterBtn" aria-label="恢复上次筛选">🕐 上次筛选</button>
         </div>
         <div class="filter-collapsible" id="collapsibleFilters">
         <div class="audience-bar" id="audienceFilters" role="group" aria-label="人群筛选" role="group" aria-label="人群筛选">
           <span class="filter-group-label">👥 人群</span>
-          <button class="audience-btn active" data-aud="all" aria-label="全部" role="tab" aria-selected="true">全部</button>
-          <button class="audience-btn" data-aud="family" aria-label="👨👩👧 亲子" role="tab" aria-selected="false">👨👩👧 亲子</button>
-          <button class="audience-btn" data-aud="couple" aria-label="💑 情侣" role="tab" aria-selected="false">💑 情侣</button>
-          <button class="audience-btn" data-aud="elder" aria-label="👴 老人" role="tab" aria-selected="false">👴 老人</button>
-          <button class="audience-btn" data-aud="solo" aria-label="🎒 独行" role="tab" aria-selected="false">🎒 独行</button>
+          <button class="audience-btn active" data-aud="all" aria-label="全部" role="tab" aria-selected="true">全部<span class="filter-count" data-count-aud="all"></span></button>
+          <button class="audience-btn" data-aud="family" aria-label="👨👩👧 亲子" role="tab" aria-selected="false">👨👩👧 亲子<span class="filter-count" data-count-aud="family"></span></button>
+          <button class="audience-btn" data-aud="couple" aria-label="💑 情侣" role="tab" aria-selected="false">💑 情侣<span class="filter-count" data-count-aud="couple"></span></button>
+          <button class="audience-btn" data-aud="elder" aria-label="👴 老人" role="tab" aria-selected="false">👴 老人<span class="filter-count" data-count-aud="elder"></span></button>
+          <button class="audience-btn" data-aud="solo" aria-label="🎒 独行" role="tab" aria-selected="false">🎒 独行<span class="filter-count" data-count-aud="solo"></span></button>
         </div>
         <div class="area-filter-row" id="areaFilters" role="group" aria-label="区域筛选" role="group" aria-label="区域筛选">
           <span class="filter-group-label">📍 区域</span>
-          <button class="area-btn active" data-area="all" aria-label="全部" role="tab" aria-selected="true">全部</button>
-          <button class="area-btn" data-area="历下区" aria-label="历下区" role="tab" aria-selected="false">历下区</button>
-          <button class="area-btn" data-area="市中区" aria-label="市中区" role="tab" aria-selected="false">市中区</button>
-          <button class="area-btn" data-area="天桥区" aria-label="天桥区" role="tab" aria-selected="false">天桥区</button>
-          <button class="area-btn" data-area="槐荫区" aria-label="槐荫区" role="tab" aria-selected="false">槐荫区</button>
-          <button class="area-btn" data-area="历城区" aria-label="历城区" role="tab" aria-selected="false">历城区</button>
+          <button class="area-btn active" data-area="all" aria-label="全部" role="tab" aria-selected="true">全部<span class="filter-count" data-count-area="all"></span></button>
+          <button class="area-btn" data-area="历下区" aria-label="历下区" role="tab" aria-selected="false">历下区<span class="filter-count" data-count-area="历下区"></span></button>
+          <button class="area-btn" data-area="市中区" aria-label="市中区" role="tab" aria-selected="false">市中区<span class="filter-count" data-count-area="市中区"></span></button>
+          <button class="area-btn" data-area="天桥区" aria-label="天桥区" role="tab" aria-selected="false">天桥区<span class="filter-count" data-count-area="天桥区"></span></button>
+          <button class="area-btn" data-area="槐荫区" aria-label="槐荫区" role="tab" aria-selected="false">槐荫区<span class="filter-count" data-count-area="槐荫区"></span></button>
+          <button class="area-btn" data-area="历城区" aria-label="历城区" role="tab" aria-selected="false">历城区<span class="filter-count" data-count-area="历城区"></span></button>
         </div>
         <div class="ticket-filter-row" id="ticketFilters" role="group" aria-label="门票筛选" role="group" aria-label="门票筛选">
           <span class="filter-group-label">🎫 门票</span>
-          <button class="ticket-btn active" data-ticket="all" aria-label="全部" role="tab" aria-selected="true">全部</button>
-          <button class="ticket-btn" data-ticket="free" aria-label="🆓 免费" role="tab" aria-selected="false">🆓 免费</button>
-          <button class="ticket-btn" data-ticket="under50" aria-label="¥50以下" role="tab" aria-selected="false">¥50以下</button>
-          <button class="ticket-btn" data-ticket="50to100" aria-label="¥50-100" role="tab" aria-selected="false">¥50-100</button>
-          <button class="ticket-btn" data-ticket="over100" aria-label="¥100以上" role="tab" aria-selected="false">¥100以上</button>
+          <button class="ticket-btn active" data-ticket="all" aria-label="全部" role="tab" aria-selected="true">全部<span class="filter-count" data-count-ticket="all"></span></button>
+          <button class="ticket-btn" data-ticket="free" aria-label="🆓 免费" role="tab" aria-selected="false">🆓 免费<span class="filter-count" data-count-ticket="free"></span></button>
+          <button class="ticket-btn" data-ticket="under50" aria-label="¥50以下" role="tab" aria-selected="false">¥50以下<span class="filter-count" data-count-ticket="under50"></span></button>
+          <button class="ticket-btn" data-ticket="50to100" aria-label="¥50-100" role="tab" aria-selected="false">¥50-100<span class="filter-count" data-count-ticket="50to100"></span></button>
+          <button class="ticket-btn" data-ticket="over100" aria-label="¥100以上" role="tab" aria-selected="false">¥100以上<span class="filter-count" data-count-ticket="over100"></span></button>
         </div>
         <div class="duration-filter-row" id="durationFilters" role="group" aria-label="时长筛选" role="group" aria-label="时长筛选">
           <span class="filter-group-label">⏱ 时长</span>
-          <button class="duration-btn active" data-dur="all" aria-label="全部" role="tab" aria-selected="true">全部</button>
-          <button class="duration-btn" data-dur="1h" aria-label="1小时内" role="tab" aria-selected="false">1小时内</button>
-          <button class="duration-btn" data-dur="1to3" aria-label="1-3小时" role="tab" aria-selected="false">1-3小时</button>
-          <button class="duration-btn" data-dur="half" aria-label="半天" role="tab" aria-selected="false">半天</button>
-          <button class="duration-btn" data-dur="full" aria-label="全天" role="tab" aria-selected="false">全天</button>
+          <button class="duration-btn active" data-dur="all" aria-label="全部" role="tab" aria-selected="true">全部<span class="filter-count" data-count-dur="all"></span></button>
+          <button class="duration-btn" data-dur="1h" aria-label="1小时内" role="tab" aria-selected="false">1小时内<span class="filter-count" data-count-dur="1h"></span></button>
+          <button class="duration-btn" data-dur="1to3" aria-label="1-3小时" role="tab" aria-selected="false">1-3小时<span class="filter-count" data-count-dur="1to3"></span></button>
+          <button class="duration-btn" data-dur="half" aria-label="半天" role="tab" aria-selected="false">半天<span class="filter-count" data-count-dur="half"></span></button>
+          <button class="duration-btn" data-dur="full" aria-label="全天" role="tab" aria-selected="false">全天<span class="filter-count" data-count-dur="full"></span></button>
         </div>
         </div><!-- end filter-collapsible -->
         <div class="filter-bottom-row">
@@ -1261,7 +1405,7 @@ html.dark .card.meituan-card:hover {
             <span class="count-badge" id="spotCount"></span>
             <button class="fav-filter-btn" id="favFilterBtn">❤️ 我的收藏 <span class="fav-count" id="favCountBadge">0</span></button>
           </div>
-          <button class="reset-filters-btn" id="resetFiltersBtn" title="重置所有筛选条件" aria-label="重置所有筛选条件">🔄 重置筛选</button>
+          <button class="reset-filters-btn hidden" id="resetFiltersBtn" title="重置所有筛选条件" aria-label="重置所有筛选条件">🔄 重置筛选<span class="reset-count" id="resetCount">0</span></button>
         </div>
       </div>
     </div>
@@ -1422,7 +1566,7 @@ html.dark .card.meituan-card:hover {
     function getMeituanLink(spotName) {
       return `${CPS.meituan.baseUrl}${encodeURIComponent(spotName)}?ci=111&f=${CPS.meituan.affId}`;
     }
-    let allSpots = [], activeCat = 'all', activeAud = 'all', activeArea = 'all', activeTicket = 'all', activeDur = 'all', sortBy = 'recommend', currentGalleryIndex = 0, render = null, openQuickView = null;
+    let allSpots = [], activeCat = 'all', activeAud = 'all', activeArea = 'all', activeTicket = 'all', activeDur = 'all', activeScene = '', sortBy = 'recommend', currentGalleryIndex = 0, render = null, openQuickView = null;
 
     // ── 解析时长字符串为分钟 ──
     function parseDurMinutes(dur) {
@@ -1507,10 +1651,232 @@ html.dark .card.meituan-card:hover {
         document.getElementById("spotGrid").innerHTML = '<div class="empty-state"><div class="emoji">😢</div><p>数据加载失败</p></div>';
       }
     }
-    function getFiltered() {
+
+    // ── 场景定义 ──
+    const sceneMap = {
+      family:  { aud: 'family', cat: '', area: '', ticket: '', dur: '' },
+      couple:  { aud: 'couple', cat: '', area: '', ticket: '', dur: '' },
+      friends: { aud: 'all',    cat: '', area: '', ticket: '', dur: '' },
+      solo:    { aud: 'solo',   cat: '', area: '', ticket: '', dur: '' },
+      team:    { aud: 'all',    cat: '', area: '', ticket: '', dur: '' }
+    };
+
+    // ── 更新筛选结果计数 ──
+    function updateFilterCounts() {
+      if (!allSpots.length) return;
+      const base = [...allSpots];
+      // Helper: count spots matching a filter value while keeping other filters active
+      function countForFilter(filterType, filterVal) {
+        let list = [...allSpots];
+        // Apply all OTHER active filters except this one
+        if (filterType !== 'cat' && activeCat !== 'all') list = list.filter(s => s.cat === activeCat);
+        if (filterType !== 'aud' && activeAud !== 'all') list = list.filter(s => s.audience.includes(activeAud));
+        if (filterType !== 'area' && activeArea !== 'all') list = list.filter(s => getArea(s) === activeArea);
+        if (filterType !== 'ticket') {
+          if (activeTicket === 'free') list = list.filter(s => s.price === 0);
+          else if (activeTicket === 'under50') list = list.filter(s => s.price > 0 && s.price < 50);
+          else if (activeTicket === '50to100') list = list.filter(s => s.price >= 50 && s.price <= 100);
+          else if (activeTicket === 'over100') list = list.filter(s => s.price > 100);
+        }
+        if (filterType !== 'dur' && activeDur !== 'all') {
+          list = list.filter(s => {
+            const mins = parseDurMinutes(s.dur || '');
+            if (activeDur === '1h') return mins <= 60;
+            if (activeDur === '1to3') return mins > 60 && mins <= 180;
+            if (activeDur === 'half') return mins > 120 && mins <= 300;
+            if (activeDur === 'full') return mins > 300;
+            return true;
+          });
+        }
+        // Now apply THIS filter for counting
+        if (filterType === 'cat') {
+          if (filterVal === 'all') return list.length;
+          return list.filter(s => s.cat === filterVal).length;
+        }
+        if (filterType === 'aud') {
+          if (filterVal === 'all') return list.length;
+          return list.filter(s => s.audience.includes(filterVal)).length;
+        }
+        if (filterType === 'area') {
+          if (filterVal === 'all') return list.length;
+          return list.filter(s => getArea(s) === filterVal).length;
+        }
+        if (filterType === 'ticket') {
+          if (filterVal === 'all') return list.length;
+          if (filterVal === 'free') return list.filter(s => s.price === 0).length;
+          if (filterVal === 'under50') return list.filter(s => s.price > 0 && s.price < 50).length;
+          if (filterVal === '50to100') return list.filter(s => s.price >= 50 && s.price <= 100).length;
+          if (filterVal === 'over100') return list.filter(s => s.price > 100).length;
+        }
+        if (filterType === 'dur') {
+          if (filterVal === 'all') return list.length;
+          return list.filter(s => {
+            const mins = parseDurMinutes(s.dur || '');
+            if (filterVal === '1h') return mins <= 60;
+            if (filterVal === '1to3') return mins > 60 && mins <= 180;
+            if (filterVal === 'half') return mins > 120 && mins <= 300;
+            if (filterVal === 'full') return mins > 300;
+            return true;
+          }).length;
+        }
+        return 0;
+      }
+      // Update category counts
+      document.querySelectorAll('[data-count-cat]').forEach(el => {
+        const val = el.dataset.countCat;
+        el.textContent = '(' + countForFilter('cat', val) + ')';
+      });
+      // Update audience counts
+      document.querySelectorAll('[data-count-aud]').forEach(el => {
+        const val = el.dataset.countAud;
+        el.textContent = '(' + countForFilter('aud', val) + ')';
+      });
+      // Update area counts
+      document.querySelectorAll('[data-count-area]').forEach(el => {
+        const val = el.dataset.countArea;
+        el.textContent = '(' + countForFilter('area', val) + ')';
+      });
+      // Update ticket counts
+      document.querySelectorAll('[data-count-ticket]').forEach(el => {
+        const val = el.dataset.countTicket;
+        el.textContent = '(' + countForFilter('ticket', val) + ')';
+      });
+      // Update duration counts
+      document.querySelectorAll('[data-count-dur]').forEach(el => {
+        const val = el.dataset.countDur;
+        el.textContent = '(' + countForFilter('dur', val) + ')';
+      });
+    }
+
+    // ── 保存/恢复筛选历史 ──
+    const FILTER_STORAGE_KEY = 'jinan-spot-filters';
+    function saveFilterState() {
+      const state = { cat: activeCat, aud: activeAud, area: activeArea, ticket: activeTicket, dur: activeDur, scene: activeScene, sort: sortBy };
+      try { localStorage.setItem(FILTER_STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+    }
+    function loadFilterState() {
+      try {
+        const raw = localStorage.getItem(FILTER_STORAGE_KEY);
+        if (!raw) return null;
+        return JSON.parse(raw);
+      } catch(e) { return null; }
+    }
+    function applyFilterState(state) {
+      if (!state) return;
+      // Category
+      if (state.cat) {
+        activeCat = state.cat;
+        document.querySelectorAll('#catFilters .filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('#catFilters .filter-btn[data-cat="'+activeCat+'"]')?.classList.add('active');
+      }
+      // Audience
+      if (state.aud) {
+        activeAud = state.aud;
+        document.querySelectorAll('#audienceFilters .audience-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('#audienceFilters .audience-btn[data-aud="'+activeAud+'"]')?.classList.add('active');
+      }
+      // Area
+      if (state.area) {
+        activeArea = state.area;
+        document.querySelectorAll('#areaFilters .area-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('#areaFilters .area-btn[data-area="'+activeArea+'"]')?.classList.add('active');
+      }
+      // Ticket
+      if (state.ticket) {
+        activeTicket = state.ticket;
+        document.querySelectorAll('#ticketFilters .ticket-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('#ticketFilters .ticket-btn[data-ticket="'+activeTicket+'"]')?.classList.add('active');
+      }
+      // Duration
+      if (state.dur) {
+        activeDur = state.dur;
+        document.querySelectorAll('#durationFilters .duration-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('#durationFilters .duration-btn[data-dur="'+activeDur+'"]')?.classList.add('active');
+      }
+      // Sort
+      if (state.sort) {
+        sortBy = state.sort;
+        document.getElementById('sortSelect').value = sortBy;
+        document.querySelectorAll('#sortPills .sort-pill').forEach(p => p.classList.toggle('active', p.dataset.sort === sortBy));
+      }
+      // Scene
+      if (state.scene && sceneMap[state.scene]) {
+        activateScene(state.scene);
+      }
+      // Open collapsible if any sub-filter is active
+      if (activeAud !== 'all' || activeArea !== 'all' || activeTicket !== 'all' || activeDur !== 'all') {
+        document.getElementById('collapsibleFilters')?.classList.add('expanded');
+        document.getElementById('moreFiltersBtn')?.classList.add('active');
+        document.getElementById('moreFiltersBtn')?.setAttribute('aria-expanded', 'true');
+        const arrow = document.querySelector('#moreFiltersBtn .arrow');
+        if (arrow) arrow.textContent = '▲';
+      }
+      updateFilterBadge();
+      updateResetBtn();
+    }
+
+    // ── 更新重置按钮状态 ──
+    function updateResetBtn() {
+      const count = countActiveFilters();
+      const btn = document.getElementById('resetFiltersBtn');
+      const badge = document.getElementById('resetCount');
+      if (!btn) return;
+      if (count > 0) {
+        btn.classList.remove('hidden');
+        if (badge) { badge.textContent = count; badge.classList.add('visible'); }
+      } else {
+        btn.classList.add('hidden');
+        if (badge) { badge.classList.remove('visible'); }
+      }
+    }
+
+    // ── 场景激活/清除 ──
+    function activateScene(sceneKey) {
+      const scene = sceneMap[sceneKey];
+      if (!scene) return;
+      activeScene = sceneKey;
+      // Set audience from scene
+      if (scene.aud) {
+        activeAud = scene.aud;
+        document.querySelectorAll('#audienceFilters .audience-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('#audienceFilters .audience-btn[data-aud="'+activeAud+'"]')?.classList.add('active');
+      }
+      // Highlight scene tag
+      document.querySelectorAll('.scene-tag').forEach(t => t.classList.toggle('active', t.dataset.scene === sceneKey));
+      // Show active scene bar
+      const sceneLabels = { family: '👨‍👩‍👧 亲子出游', couple: '💑 情侣约会', friends: '🍻 朋友聚会', solo: '🧘 独自散心', team: '🏢 团建活动' };
+      const bar = document.getElementById('activeSceneBar');
+      const label = document.getElementById('activeSceneLabel');
+      if (bar && label) { label.textContent = sceneLabels[sceneKey] || sceneKey; bar.classList.add('visible'); }
+      // Open collapsible if needed
+      if (activeAud !== 'all') {
+        document.getElementById('collapsibleFilters')?.classList.add('expanded');
+        document.getElementById('moreFiltersBtn')?.classList.add('active');
+        document.getElementById('moreFiltersBtn')?.setAttribute('aria-expanded', 'true');
+        const arrow = document.querySelector('#moreFiltersBtn .arrow');
+        if (arrow) arrow.textContent = '▲';
+      }
+      updateFilterBadge();
+      updateResetBtn();
+    }
+    function clearScene() {
+      activeScene = '';
+      document.querySelectorAll('.scene-tag').forEach(t => t.classList.remove('active'));
+      document.getElementById('activeSceneBar')?.classList.remove('visible');
+    }
+
+        function getFiltered() {
       let list = [...allSpots];
       if (activeCat !== 'all') list = list.filter(s => s.cat === activeCat);
       if (activeAud !== 'all') list = list.filter(s => s.audience.includes(activeAud));
+      // Scene-based extra filtering
+      if (activeScene === 'friends') {
+        // Friends: prefer spots with higher reviews or social atmosphere
+        list = list.filter(s => s.reviews >= 20 || s.badge === 'hot' || s.badge === 'must');
+      } else if (activeScene === 'team') {
+        // Team building: prefer outdoor, nature, activities
+        list = list.filter(s => s.cat === 'nature' || s.cat === 'spring' || (s.audience && s.audience.length >= 2) || s.price >= 0);
+      }
       if (activeArea !== 'all') list = list.filter(s => getArea(s) === activeArea);
       if (activeTicket === 'free') list = list.filter(s => s.price === 0);
       else if (activeTicket === 'paid') list = list.filter(s => s.price > 0);
@@ -1617,6 +1983,51 @@ html.dark .card.meituan-card:hover {
       btn.classList.add('active'); activeDur = btn.dataset.dur; render();
     });
 
+    // ── 场景标签点击 ──
+    document.getElementById('sceneTags')?.addEventListener('click', e => {
+      const tag = e.target.closest('.scene-tag'); if (!tag) return;
+      const scene = tag.dataset.scene;
+      if (activeScene === scene) {
+        // Toggle off
+        clearScene();
+        // Reset audience back to all
+        activeAud = 'all';
+        document.querySelectorAll('#audienceFilters .audience-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('#audienceFilters .audience-btn[data-aud="all"]')?.classList.add('active');
+        updateFilterBadge();
+        updateResetBtn();
+        render();
+      } else {
+        activateScene(scene);
+        render();
+      }
+    });
+    document.getElementById('clearSceneBtn')?.addEventListener('click', () => {
+      clearScene();
+      activeAud = 'all';
+      document.querySelectorAll('#audienceFilters .audience-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('#audienceFilters .audience-btn[data-aud="all"]')?.classList.add('active');
+      updateFilterBadge();
+      updateResetBtn();
+      render();
+    });
+
+    // ── 上次筛选按钮 ──
+    const lastFilterBtn = document.getElementById('lastFilterBtn');
+    const savedFilter = loadFilterState();
+    if (savedFilter && (savedFilter.cat !== 'all' || savedFilter.aud !== 'all' || savedFilter.area !== 'all' || savedFilter.ticket !== 'all' || savedFilter.dur !== 'all' || savedFilter.scene)) {
+      lastFilterBtn?.classList.add('visible');
+    }
+    lastFilterBtn?.addEventListener('click', () => {
+      const state = loadFilterState();
+      if (state) {
+        applyFilterState(state);
+        render();
+        lastFilterBtn.classList.remove('visible');
+        showToast('已恢复上次筛选条件');
+      }
+    });
+
     // ── 重置筛选 ──
     document.getElementById('resetFiltersBtn')?.addEventListener('click', () => {
       // Reset category
@@ -1639,6 +2050,8 @@ html.dark .card.meituan-card:hover {
       activeDur = 'all';
       document.querySelectorAll('#durationFilters .duration-btn').forEach(b => b.classList.remove('active'));
       document.querySelector('#durationFilters .duration-btn[data-dur="all"]')?.classList.add('active');
+      // Reset scene
+      clearScene();
       // Reset favorites filter
       showFavOnly = false;
       document.getElementById('favFilterBtn')?.classList.remove('active');
@@ -1648,7 +2061,12 @@ html.dark .card.meituan-card:hover {
       document.querySelectorAll('#sortPills .sort-pill').forEach(p => p.classList.toggle('active', p.dataset.sort === 'recommend'));
       document.getElementById('collapsibleFilters')?.classList.remove('expanded');
       document.getElementById('moreFiltersBtn')?.classList.remove('active');
+      // Clear saved filter state
+      try { localStorage.removeItem(FILTER_STORAGE_KEY); } catch(e) {}
       if (typeof updateFilterBadge === 'function') updateFilterBadge();
+      updateResetBtn();
+      // Hide last-filter button since we just reset
+      document.getElementById('lastFilterBtn')?.classList.remove('visible');
       render();
       showToast('已重置所有筛选条件');
     });
@@ -1968,6 +2386,9 @@ html.dark .card.meituan-card:hover {
 
     render = function() {
       const list = getFiltered();
+      updateFilterCounts();
+      saveFilterState();
+      updateResetBtn();
       const favs = getFavs();
       const compareList = getCompareList();
       let filteredList = list;
@@ -1988,6 +2409,18 @@ html.dark .card.meituan-card:hover {
         return;
       }
       empty.style.display = 'none';
+
+      // Compute ranks by sortScore (descending)
+      var ranked = filteredList.slice().sort(function(a, b) { return (b.sortScore || 0) - (a.sortScore || 0); });
+      var rankMap = {};
+      ranked.forEach(function(s, i) { rankMap[s.id] = i + 1; });
+
+      // Seeded pseudo-random for consistent social proof numbers
+      function seededRand(seed, min, max) {
+        var h = 0;
+        for (var i = 0; i < seed.length; i++) { h = ((h << 5) - h + seed.charCodeAt(i)) | 0; }
+        return min + (Math.abs(h) % (max - min + 1));
+      }
 
       grid.innerHTML = filteredList.map(function(s) {
         var isFav = favs.includes(s.id);
@@ -2044,6 +2477,7 @@ html.dark .card.meituan-card:hover {
             '<div class="img-gradient"></div>' +
             '<div class="img-spot-name">' + s.name + '</div>' +
             '<div class="card-badge">' + badgeHtml + '</div>' +
+            (rankMap[s.id] <= 10 ? '<div class="rank-badge rank-badge--' + (rankMap[s.id] <= 3 ? rankMap[s.id] : 'low') + '" aria-label="排名第' + rankMap[s.id] + '">' + rankMap[s.id] + '</div>' : '') +
             priceTagHtml +
             '<button class="card-fav-btn ' + (isFav ? 'faved' : '') + '" data-id="' + s.id + '" title="' + (isFav ? '取消收藏' : '收藏') + '" aria-label="' + (isFav ? '取消收藏' : '收藏') + '" aria-pressed="true">' +
               '<span class="heart ' + (isFav ? 'heart-filled' : 'heart-outline') + '">' + (isFav ? '♥' : '♡') + '</span>' +
@@ -2060,6 +2494,11 @@ html.dark .card.meituan-card:hover {
             '<div class="card-price-row">' + priceHtml + '</div>' +
             '<p class="card-desc">' + s.desc + '</p>' +
             tagsHtml +
+            '<div class="social-proof">' +
+              '<span class="proof-want">❤️ ' + seededRand(s.id + '_want', 200, 3000) + '人想去</span>' +
+              '<span class="proof-visited">👁️ ' + seededRand(s.id + '_visit', 500, 8000) + '人去过</span>' +
+              (s.distanceFromCenter ? '<span class="distance-tag">📍 距市中心' + s.distanceFromCenter + 'km</span>' : '') +
+            '</div>' +
             (transportShort ? '<div class="card-transport-row">🚌 ' + transportShort + '</div>' : '') +
             '<div class="card-action-bar">' +
               '<button class="action-btn btn-go" data-id="' + s.id + '" aria-label="🗺️ 去这里">🗺️ 去这里</button>' +
@@ -3299,10 +3738,12 @@ html.dark .card.meituan-card:hover {
 
     function countActiveFilters() {
       let count = 0;
+      if (activeCat !== 'all') count++;
       if (activeAud !== 'all') count++;
       if (activeArea !== 'all') count++;
       if (activeTicket !== 'all') count++;
       if (activeDur !== 'all') count++;
+      if (activeScene) count++;
       return count;
     }
 
@@ -3327,7 +3768,12 @@ html.dark .card.meituan-card:hover {
     ['audienceFilters','areaFilters','ticketFilters','durationFilters'].forEach(id => {
       document.getElementById(id)?.addEventListener('click', () => {
         setTimeout(updateFilterBadge, 10);
+        setTimeout(updateResetBtn, 10);
       });
+    });
+    document.getElementById('catFilters')?.addEventListener('click', () => {
+      setTimeout(updateFilterBadge, 10);
+      setTimeout(updateResetBtn, 10);
     });
 
     

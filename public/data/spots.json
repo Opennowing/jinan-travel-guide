@@ -44,7 +44,14 @@
     ],
     "meta": "⏱ 2-3h · 🎫 ¥40 · 地铁2号线趵突泉站B口步行5分",
     "history": "趵突泉有文字记载的历史可上溯至春秋时期，距今已有2700多年。曾巩、苏轼、蒲松龄等文人墨客均在此留下诗文，被誉为'天下第一泉'。",
-    "season": "四季皆宜，冬日看雾气最仙，夏日最清凉"
+    "season": "四季皆宜，冬日看雾气最仙，夏日最清凉",
+    "distanceFromCenter": 11.0,
+    "popularity": 73,
+    "sceneTags": [
+      "亲子出游",
+      "长辈同行"
+    ],
+    "sortScore": 126.0
   },
   {
     "id": "heihu",
@@ -88,7 +95,16 @@
     ],
     "meta": "⏱ 40min · 🎫 免费 · 地铁2号线黑虎泉站步行8分钟",
     "history": "黑虎泉始见于金代《名泉碑》，因泉水从石虎口中喷涌、声如虎啸而得名。自古便是济南市民取水泡茶的首选之地。",
-    "season": "四季皆宜，清晨最有生活气息"
+    "season": "四季皆宜，清晨最有生活气息",
+    "distanceFromCenter": 7.7,
+    "popularity": 60,
+    "sceneTags": [
+      "亲子出游",
+      "独自散心",
+      "长辈同行",
+      "免费游玩"
+    ],
+    "sortScore": 110.93
   },
   {
     "id": "wulongtan",
@@ -131,7 +147,15 @@
     ],
     "meta": "⏱ 1h · 🎫 ¥5 · 步行可达，趵突泉北侧",
     "history": "五龙潭相传为唐代名将秦琼故宅遗址。潭水由五处泉眼汇聚而成，水深莫测，传说下有龙宫。",
-    "season": "四季皆宜，4月樱花季最佳"
+    "season": "四季皆宜，4月樱花季最佳",
+    "distanceFromCenter": 11.7,
+    "popularity": 46,
+    "sceneTags": [
+      "亲子出游",
+      "情侣约会",
+      "独自散心"
+    ],
+    "sortScore": 96.76
   },
   {
     "id": "zhenzhu",
@@ -172,7 +196,15 @@
     ],
     "meta": "⏱ 30min · 🎫 免费 · 步行可达，泉城路北侧",
     "history": "珍珠泉在明清时期为山东巡抚衙门所在地，清代乾隆皇帝曾在此驻跸。泉底涌出串串水泡如珍珠，故得名。",
-    "season": "四季皆宜，工作日可能不开放需注意"
+    "season": "四季皆宜，工作日可能不开放需注意",
+    "distanceFromCenter": 9.0,
+    "popularity": 41,
+    "sceneTags": [
+      "独自散心",
+      "长辈同行",
+      "免费游玩"
+    ],
+    "sortScore": 91.67
   },
   {
     "id": "pipa",
@@ -212,7 +244,14 @@
     ],
     "meta": "⏱ 20min · 🎫 免费 · 步行可达，护城河畔",
     "history": "琵琶泉因泉水涌出时发出琵琶般的叮咚声而得名，泉池呈琵琶形，是济南72名泉之一。",
-    "season": "四季皆宜"
+    "season": "四季皆宜",
+    "distanceFromCenter": 7.9,
+    "popularity": 38,
+    "sceneTags": [
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 87.45
   },
   {
     "id": "wangfu",
@@ -253,7 +292,15 @@
     ],
     "meta": "⏱ 20min · 🎫 免费 · 步行可达，芙蓉街东侧",
     "history": "王府池子古称'濯缨泉'，取《孟子》'沧浪之水清兮，可以濯吾缨'之意。曾为明代德王府花园的一部分。",
-    "season": "四季皆宜，上午光线最好"
+    "season": "四季皆宜，上午光线最好",
+    "distanceFromCenter": 9.1,
+    "popularity": 43,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 94.78
   },
   {
     "id": "quanquaren",
@@ -294,7 +341,15 @@
     ],
     "meta": "⏱ 30min · 🎫 免费 · 地铁2号线泉城广场站",
     "history": "泉城广场于2001年建成，是济南的城市客厅。中心的泉标雕塑高38米，以篆书'泉'字为造型，是泉城的象征。",
-    "season": "四季皆宜，夏季周末有音乐喷泉"
+    "season": "四季皆宜，夏季周末有音乐喷泉",
+    "distanceFromCenter": 9.1,
+    "popularity": 60,
+    "sceneTags": [
+      "亲子出游",
+      "情侣约会",
+      "免费游玩"
+    ],
+    "sortScore": 100
   },
   {
     "id": "daminghu",
@@ -339,7 +394,16 @@
     ],
     "meta": "⏱ 2-3h · 🎫 免费 · 地铁1号线大明湖站A口步行10",
     "history": "大明湖由泉水汇成，自唐代即为游览胜地。'四面荷花三面柳，一城山色半城湖'便是对其最经典的描写。超然楼始建于元代。",
-    "season": "四季皆宜，夏季荷花最美，傍晚超然楼亮灯必看"
+    "season": "四季皆宜，夏季荷花最美，傍晚超然楼亮灯必看",
+    "distanceFromCenter": 9.2,
+    "popularity": 80,
+    "sceneTags": [
+      "亲子出游",
+      "情侣约会",
+      "长辈同行",
+      "免费游玩"
+    ],
+    "sortScore": 119.0
   },
   {
     "id": "chaoranlou",
@@ -381,7 +445,14 @@
     ],
     "meta": "⏱ 1h · 🎫 ¥40 · 大明湖景区内步行",
     "history": "超然楼始建于元代，2007年在原址重建。楼高51.7米，共7层，是大明湖的标志性建筑，登楼可俯瞰整个大明湖。",
-    "season": "四季皆宜，傍晚亮灯最震撼"
+    "season": "四季皆宜，傍晚亮灯最震撼",
+    "distanceFromCenter": 9.1,
+    "popularity": 59,
+    "sceneTags": [
+      "亲子出游",
+      "情侣约会"
+    ],
+    "sortScore": 115.76
   },
   {
     "id": "qianfo",
@@ -427,7 +498,14 @@
     ],
     "meta": "⏱ 3h · 🎫 ¥30 · 公交K51路千佛山站",
     "history": "千佛山古称历山，相传舜帝曾在此耕作。隋开皇年间在山崖镌刻佛像千余尊，始称千佛山。海拔285米，是济南三大名胜之一。",
-    "season": "秋季(10-11月)红叶最美，春季踏青也不错"
+    "season": "秋季(10-11月)红叶最美，春季踏青也不错",
+    "distanceFromCenter": 6.5,
+    "popularity": 56,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心"
+    ],
+    "sortScore": 117.67
   },
   {
     "id": "hongye",
@@ -469,7 +547,14 @@
     ],
     "meta": "⏱ 4-5h · 🎫 ¥80 · 自驾约40分钟，或乘坐南部山区",
     "history": "红叶谷位于济南南部山区，占地4000余亩，以黄栌树为主。每年10月中旬至11月中旬漫山红叶如火，是北方赏红叶的最佳地之一。",
-    "season": "秋季(10月中旬-11月中旬)红叶最盛"
+    "season": "秋季(10月中旬-11月中旬)红叶最盛",
+    "distanceFromCenter": 15.2,
+    "popularity": 45,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心"
+    ],
+    "sortScore": 97.34
   },
   {
     "id": "jiuru",
@@ -511,7 +596,14 @@
     ],
     "meta": "⏱ 4h · 🎫 ¥80 · 自驾约50分钟",
     "history": "九如山瀑布群位于济南南部山区，因九条瀑布飞流直下而得名。景区内峡谷幽深，森林覆盖率达98%，是天然的避暑胜地。",
-    "season": "夏季(6-8月)瀑布水量最大，秋季红叶也很美"
+    "season": "夏季(6-8月)瀑布水量最大，秋季红叶也很美",
+    "distanceFromCenter": 19.2,
+    "popularity": 42,
+    "sceneTags": [
+      "亲子出游",
+      "情侣约会"
+    ],
+    "sortScore": 93.67
   },
   {
     "id": "shuilianxia",
@@ -551,7 +643,14 @@
     ],
     "meta": "⏱ 3-4h · 🎫 ¥60 · 自驾约45分钟",
     "history": "水帘峡是济南南部山区的峡谷景区，以瀑布、溪流、奇石著称。相比九如山更为小众，适合喜欢清静的游客。",
-    "season": "夏秋最佳，夏季可溯溪"
+    "season": "夏秋最佳，夏季可溯溪",
+    "distanceFromCenter": 17.2,
+    "popularity": 39,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心"
+    ],
+    "sortScore": 90.23
   },
   {
     "id": "museum",
@@ -594,7 +693,16 @@
     ],
     "meta": "⏱ 2.5h · 🎫 免费 · 公交K51路省博物馆站",
     "history": "山东博物馆成立于1954年，是国家一级博物馆。馆藏文物21万余件，镇馆之宝包括蛋壳黑陶杯、红陶兽形壶、鲁国大玉璧等国宝级文物。",
-    "season": "四季皆宜，工作日人少"
+    "season": "四季皆宜，工作日人少",
+    "distanceFromCenter": 12.6,
+    "popularity": 63,
+    "sceneTags": [
+      "亲子出游",
+      "独自散心",
+      "长辈同行",
+      "免费游玩"
+    ],
+    "sortScore": 114.0
   },
   {
     "id": "jiefangge",
@@ -635,7 +743,15 @@
     ],
     "meta": "⏱ 30min · 🎫 免费 · 步行可达，黑虎泉东侧",
     "history": "解放阁建于1948年济南战役的城墙遗址之上，是为纪念济南解放而建。阁内有济南战役纪念馆，是重要的红色教育基地。",
-    "season": "四季皆宜，傍晚/夜间看护城河灯光最美"
+    "season": "四季皆宜，傍晚/夜间看护城河灯光最美",
+    "distanceFromCenter": 7.5,
+    "popularity": 51,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 102.45
   },
   {
     "id": "lingyan",
@@ -677,7 +793,14 @@
     ],
     "meta": "⏱ 3-4h · 🎫 ¥40 · 长途汽车站乘坐济南-灵岩寺班车",
     "history": "灵岩寺始建于东晋，距今1600余年，与南京栖霞寺、天台国清寺、湖北当阳玉泉寺并称'天下四大名刹'。寺内40尊宋代彩塑罗汉像被誉为'海内第一名塑'。",
-    "season": "秋季银杏金黄最美，四季皆可"
+    "season": "秋季银杏金黄最美，四季皆可",
+    "distanceFromCenter": 34.4,
+    "popularity": 50,
+    "sceneTags": [
+      "独自散心",
+      "长辈同行"
+    ],
+    "sortScore": 113.02
   },
   {
     "id": "hongjialou",
@@ -718,7 +841,15 @@
     ],
     "meta": "⏱ 30min · 🎫 免费 · 公交K55路洪家楼站",
     "history": "洪家楼教堂始建于1901年，由德国传教士主持修建，是华北地区最大的天主教堂。哥特式建筑风格，双塔尖顶气势恢宏。",
-    "season": "四季皆宜，周日弥撒氛围最佳"
+    "season": "四季皆宜，周日弥撒氛围最佳",
+    "distanceFromCenter": 6.3,
+    "popularity": 46,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 96.9
   },
   {
     "id": "shangbu",
@@ -760,7 +891,15 @@
     ],
     "meta": "⏱ 1.5h · 🎫 免费 · 公交K51路经三路站",
     "history": "1904年济南开埠后，经三路一带成为商埠区核心。百年来留下了大量德式、日式建筑，是济南近代史的活化石。",
-    "season": "四季皆宜，午后光线最适合拍照"
+    "season": "四季皆宜，午后光线最适合拍照",
+    "distanceFromCenter": 12.1,
+    "popularity": 55,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 105.67
   },
   {
     "id": "fuxuewenmiao",
@@ -801,7 +940,15 @@
     ],
     "meta": "⏱ 40min · 🎫 免费 · 步行可达，大明湖路",
     "history": "府学文庙始建于北宋熙宁年间(1068年)，是济南古代最高学府所在地。现存大成殿、泮池、棂星门等建筑，古柏参天。",
-    "season": "春秋季节最佳"
+    "season": "春秋季节最佳",
+    "distanceFromCenter": 8.8,
+    "popularity": 40,
+    "sceneTags": [
+      "独自散心",
+      "长辈同行",
+      "免费游玩"
+    ],
+    "sortScore": 90.56
   },
   {
     "id": "daguan",
@@ -842,7 +989,15 @@
     ],
     "meta": "⏱ 1h · 🎫 免费 · 公交多路可达",
     "history": "大观园始建于1931年，曾是济南最繁华的商业中心。百年来见证了济南商业变迁，如今是小吃街与商业综合体的结合。",
-    "season": "四季皆宜"
+    "season": "四季皆宜",
+    "distanceFromCenter": 9.5,
+    "popularity": 48,
+    "sceneTags": [
+      "亲子出游",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 94.34
   },
   {
     "id": "furong",
@@ -885,7 +1040,15 @@
     ],
     "meta": "⏱ 1.5h · 🎫 免费 · 地铁2号线芙蓉街站步行3分钟",
     "history": "芙蓉街因街上有芙蓉泉而得名，是济南最古老的商业街之一。曲水亭街因'家家泉水、户户垂杨'的泉城风貌而闻名。",
-    "season": "四季皆宜，工作日体验更好"
+    "season": "四季皆宜，工作日体验更好",
+    "distanceFromCenter": 8.9,
+    "popularity": 87,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 115.0
   },
   {
     "id": "kuanhouli",
@@ -926,7 +1089,15 @@
     ],
     "meta": "⏱ 2h · 🎫 免费 · 步行可达，解放阁西侧",
     "history": "宽厚里始建于明代，原名'宽厚所街'。2015年改造为商业街区，融合了传统建筑风格与现代商业业态，与解放阁隔河相望。",
-    "season": "四季皆宜，傍晚到夜间最热闹"
+    "season": "四季皆宜，傍晚到夜间最热闹",
+    "distanceFromCenter": 7.4,
+    "popularity": 73,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 111.0
   },
   {
     "id": "yinxiang",
@@ -967,7 +1138,15 @@
     ],
     "meta": "⏱ 2h · 🎫 免费 · 地铁1号线济南西站步行15分钟",
     "history": "印象济南·泉世界是济南西部新兴的文旅综合体，以泉文化为主题，集餐饮、文创、娱乐于一体，2019年开业。",
-    "season": "四季皆宜，傍晚亮灯后最美"
+    "season": "四季皆宜，傍晚亮灯后最美",
+    "distanceFromCenter": 19.8,
+    "popularity": 62,
+    "sceneTags": [
+      "亲子出游",
+      "情侣约会",
+      "免费游玩"
+    ],
+    "sortScore": 104.0
   },
   {
     "id": "minzu",
@@ -1006,7 +1185,14 @@
     ],
     "meta": "⏱ 1.5h · 🎫 免费 · 步行可达",
     "history": "民族大街市场位于济南回民区，是济南最地道的菜市场。回民在此经营牛羊肉已有百年历史，是体验老济南烟火气的最佳去处。",
-    "season": "四季皆宜，早上7-9点最有烟火气"
+    "season": "四季皆宜，早上7-9点最有烟火气",
+    "distanceFromCenter": 9.5,
+    "popularity": 46,
+    "sceneTags": [
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 96.76
   },
   {
     "id": "fangte",
@@ -1046,7 +1232,14 @@
     ],
     "meta": "⏱ 6-8h · 🎫 ¥280 · 地铁1号线济南西站转公交",
     "history": "济南方特东方神画于2015年开业，以东方神话为主题，有《女娲补天》《牛郎织女》等大型主题项目，是华强方特在山东的重要布局。",
-    "season": "四季皆宜，工作日人少体验更好"
+    "season": "四季皆宜，工作日人少体验更好",
+    "distanceFromCenter": 23.8,
+    "popularity": 77,
+    "sceneTags": [
+      "亲子出游",
+      "情侣约会"
+    ],
+    "sortScore": 115.0
   },
   {
     "id": "dongwuyuan",
@@ -1085,7 +1278,13 @@
     ],
     "meta": "⏱ 3h · 🎫 ¥25 · 公交K51路动物园站",
     "history": "济南动物园始建于1960年，是济南最早的动物园。园内有大熊猫、金丝猴、东北虎等珍稀动物，是几代济南人的童年记忆。",
-    "season": "四季皆宜，上午动物最活跃"
+    "season": "四季皆宜，上午动物最活跃",
+    "distanceFromCenter": 12.4,
+    "popularity": 62,
+    "sceneTags": [
+      "亲子出游"
+    ],
+    "sortScore": 104.0
   },
   {
     "id": "baihuazhou",
@@ -1126,7 +1325,15 @@
     ],
     "meta": "⏱ 1h · 🎫 免费 · 步行可达，大明湖南门对面",
     "history": "百花洲历史街区位于大明湖南岸，是济南保存最完整的传统街区之一。泉水人家、青石板路，承载着老济南的市井记忆。",
-    "season": "春秋季节最佳"
+    "season": "春秋季节最佳",
+    "distanceFromCenter": 8.8,
+    "popularity": 43,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 92.78
   },
   {
     "id": "baishi-spring",
@@ -1166,7 +1373,14 @@
       "护城河游船"
     ],
     "history": "白石泉因泉水从白色砂岩中涌出而得名，是济南护城河畔的无名泉眼。虽不在72名泉之列，但水质清冽，深受本地人喜爱。",
-    "season": "四季皆宜"
+    "season": "四季皆宜",
+    "distanceFromCenter": 7.7,
+    "popularity": 38,
+    "sceneTags": [
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 89.12
   },
   {
     "id": "man-spring",
@@ -1205,7 +1419,14 @@
       "曲水亭街"
     ],
     "history": "满井泉因泉水水量极大、雨后会溢出井口而得名。位于老城区巷子深处，是最原始、最生活化的济南泉水。",
-    "season": "四季皆宜，雨后水量最大"
+    "season": "四季皆宜，雨后水量最大",
+    "distanceFromCenter": 9.1,
+    "popularity": 36,
+    "sceneTags": [
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 85.89
   },
   {
     "id": "palm-spring",
@@ -1246,7 +1467,15 @@
       "宽厚里"
     ],
     "history": "琵琶泉是济南护城河畔的名泉，因泉水涌出时发出琵琶般的声响而得名。夜间灯光映照下格外迷人。",
-    "season": "四季皆宜，傍晚护城河灯光亮起时最美"
+    "season": "四季皆宜，傍晚护城河灯光亮起时最美",
+    "distanceFromCenter": 7.6,
+    "popularity": 38,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 90.67
   },
   {
     "id": "yushi-spring",
@@ -1287,7 +1516,15 @@
       "万竹园"
     ],
     "history": "漱玉泉位于趵突泉公园内，传为宋代女词人李清照梳妆处。李清照的词集《漱玉词》即以此泉命名。",
-    "season": "春夏泉水最旺时最佳"
+    "season": "春夏泉水最旺时最佳",
+    "distanceFromCenter": 11.0,
+    "popularity": 41,
+    "sceneTags": [
+      "独自散心",
+      "长辈同行",
+      "免费游玩"
+    ],
+    "sortScore": 94.45
   },
   {
     "id": "wufeng-mountain",
@@ -1328,7 +1565,14 @@
       "长清"
     ],
     "history": "五峰山是济南长清区的道教名山，因五座山峰并列如莲花而得名。山上有多座道教宫观，历史悠久。",
-    "season": "秋季红叶、春季踏青最佳"
+    "season": "秋季红叶、春季踏青最佳",
+    "distanceFromCenter": 22.9,
+    "popularity": 40,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心"
+    ],
+    "sortScore": 90.56
   },
   {
     "id": "lotus-mountain",
@@ -1367,7 +1611,13 @@
       "五峰山"
     ],
     "history": "莲台山因山形如莲花盛开而得名，山上有唐代石窟造像，是济南小众的登山探古好去处。",
-    "season": "春夏山花烂漫时最美"
+    "season": "春夏山花烂漫时最美",
+    "distanceFromCenter": 30.6,
+    "popularity": 36,
+    "sceneTags": [
+      "独自散心"
+    ],
+    "sortScore": 86.34
   },
   {
     "id": "baihuazhou-park",
@@ -1407,7 +1657,15 @@
       "山东大学"
     ],
     "history": "百花公园是济南东部的城市公园，建于上世纪80年代。园内有湖泊、花园、儿童乐园，是周边居民休闲的好去处。",
-    "season": "春季百花盛开时最美"
+    "season": "春季百花盛开时最美",
+    "distanceFromCenter": 5.5,
+    "popularity": 40,
+    "sceneTags": [
+      "亲子出游",
+      "长辈同行",
+      "免费游玩"
+    ],
+    "sortScore": 87.67
   },
   {
     "id": "shandong-art",
@@ -1447,7 +1705,15 @@
       "千佛山"
     ],
     "history": "山东美术馆新馆于2013年开馆，建筑面积5.2万平方米，是山东省规模最大的美术馆。常年有高质量的国内外艺术展览。",
-    "season": "四季皆宜，工作日人少"
+    "season": "四季皆宜，工作日人少",
+    "distanceFromCenter": 12.6,
+    "popularity": 46,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 96.76
   },
   {
     "id": "licheng-museum",
@@ -1487,7 +1753,15 @@
       "千佛山"
     ],
     "history": "济南考古博物馆展示济南地下出土文物，从龙山文化到明清，完整呈现济南的城市发展史。",
-    "season": "四季皆宜"
+    "season": "四季皆宜",
+    "distanceFromCenter": 8.6,
+    "popularity": 39,
+    "sceneTags": [
+      "独自散心",
+      "长辈同行",
+      "免费游玩"
+    ],
+    "sortScore": 89.45
   },
   {
     "id": "xiaoqinghe",
@@ -1526,7 +1800,15 @@
       "济南动物园"
     ],
     "history": "小清河是济南的母亲河之一，全长237公里。湿地公园沿河而建，是济南北部重要的生态廊道。",
-    "season": "四季皆宜，傍晚日落最美"
+    "season": "四季皆宜，傍晚日落最美",
+    "distanceFromCenter": 11.8,
+    "popularity": 35,
+    "sceneTags": [
+      "亲子出游",
+      "长辈同行",
+      "免费游玩"
+    ],
+    "sortScore": 82.34
   },
   {
     "id": "fuxue-wenmiao",
@@ -1567,7 +1849,15 @@
       "曲水亭街"
     ],
     "history": "济南府学文庙始建于宋代，是古代济南府的最高学府。大成殿气势恢宏，古树参天，比曲阜孔庙人少很多。",
-    "season": "四季皆宜，上午光线好"
+    "season": "四季皆宜，上午光线好",
+    "distanceFromCenter": 8.7,
+    "popularity": 42,
+    "sceneTags": [
+      "独自散心",
+      "长辈同行",
+      "免费游玩"
+    ],
+    "sortScore": 93.67
   },
   {
     "id": "jinan-scitech",
@@ -1606,7 +1896,13 @@
       "千佛山"
     ],
     "history": "济南科技馆新馆于2018年开馆，是山东省最大的科技馆。有球幕影院、4D影院和丰富的互动体验展品。",
-    "season": "四季皆宜，工作日人少"
+    "season": "四季皆宜，工作日人少",
+    "distanceFromCenter": 12.5,
+    "popularity": 49,
+    "sceneTags": [
+      "亲子出游"
+    ],
+    "sortScore": 98.34
   },
   {
     "id": "quancheng-park",
@@ -1646,7 +1942,15 @@
       "山东省博物馆"
     ],
     "history": "泉城公园原名济南植物园，是济南最大的城市公园。园内有湖泊、草坪、花卉展区，是市民休闲的好去处。",
-    "season": "春秋季节最美"
+    "season": "春秋季节最美",
+    "distanceFromCenter": 9.9,
+    "popularity": 52,
+    "sceneTags": [
+      "亲子出游",
+      "长辈同行",
+      "免费游玩"
+    ],
+    "sortScore": 99.67
   },
   {
     "id": "minghu-wetland",
@@ -1686,7 +1990,15 @@
       "济南动物园"
     ],
     "history": "明湖湿地公园位于大明湖北岸，是大明湖景区的延伸。园内有栈道、观鸟台，是观鸟和赏荷的好地方。",
-    "season": "夏季荷花盛开最美"
+    "season": "夏季荷花盛开最美",
+    "distanceFromCenter": 9.3,
+    "popularity": 43,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 92.78
   },
   {
     "id": "huashan",
@@ -1725,7 +2037,15 @@
       "黄河"
     ],
     "history": "华山古称'华不注'，是济南东北部的名山。李白曾有诗云'兹山何峻秀，绿翠如芙蓉'，形容其秀美。",
-    "season": "四季皆宜，傍晚看日落最美"
+    "season": "四季皆宜，傍晚看日落最美",
+    "distanceFromCenter": 8.4,
+    "popularity": 43,
+    "sceneTags": [
+      "亲子出游",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 90.9
   },
   {
     "id": "quancheng-bookstore",
@@ -1766,7 +2086,15 @@
       "芙蓉街"
     ],
     "history": "泉城路新华书店是济南最大的书店，有泉水主题阅读区，是济南的文化地标之一。",
-    "season": "四季皆宜"
+    "season": "四季皆宜",
+    "distanceFromCenter": 8.7,
+    "popularity": 39,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 88.56
   },
   {
     "id": "huimin-xiaoqu",
@@ -1807,7 +2135,15 @@
       "老商埠区"
     ],
     "history": "回民小区美食街是济南回民聚居区的美食一条街。回民在此经营牛羊肉和烧烤已有百年历史，是济南最有烟火气的地方。",
-    "season": "四季皆宜，夏天傍晚最热闹"
+    "season": "四季皆宜，夏天傍晚最热闹",
+    "distanceFromCenter": 9.2,
+    "popularity": 63,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 113.0
   },
   {
     "id": "yingxiongshan-market",
@@ -1847,7 +2183,15 @@
       "泉城公园"
     ],
     "history": "英雄山文化市场是济南最大的旧货和文化市场，始于上世纪80年代。古玩、字画、旧书、老物件应有尽有，是淘货者的天堂。",
-    "season": "周末上午最佳"
+    "season": "周末上午最佳",
+    "distanceFromCenter": 10.1,
+    "popularity": 39,
+    "sceneTags": [
+      "独自散心",
+      "长辈同行",
+      "免费游玩"
+    ],
+    "sortScore": 85.67
   },
   {
     "id": "wenzhao-memorial",
@@ -1888,7 +2232,15 @@
       "超然楼"
     ],
     "history": "辛弃疾纪念祠位于大明湖南岸，纪念南宋豪放派词人辛弃疾。辛弃疾(1140-1207)是济南历城人，与苏轼并称'苏辛'。",
-    "season": "四季皆宜"
+    "season": "四季皆宜",
+    "distanceFromCenter": 9.1,
+    "popularity": 37,
+    "sceneTags": [
+      "独自散心",
+      "长辈同行",
+      "免费游玩"
+    ],
+    "sortScore": 88.34
   },
   {
     "id": "jiu-ru-shan-viewpoint",
@@ -1928,7 +2280,15 @@
       "红叶谷"
     ],
     "history": "九如山观景台位于九如山景区外围，是免费开放的观景点。可以远眺整个济南南部山区的壮丽景色。",
-    "season": "四季皆宜，日出或日落时分最佳"
+    "season": "四季皆宜，日出或日落时分最佳",
+    "distanceFromCenter": 18.1,
+    "popularity": 40,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 93.45
   },
   {
     "id": "baiguoyuan",
@@ -1967,7 +2327,14 @@
     ],
     "meta": "⏱ 1h · 🎫 免费 · 公交K51路",
     "history": "百果园位于千佛山脚下，是济南的城市果园公园。园内有各种果树，春天赏花、秋天采摘，是亲子活动的好去处。",
-    "season": "秋季果实成熟时最佳"
+    "season": "秋季果实成熟时最佳",
+    "distanceFromCenter": 6.9,
+    "popularity": 36,
+    "sceneTags": [
+      "亲子出游",
+      "免费游玩"
+    ],
+    "sortScore": 84.34
   },
   {
     "id": "mingshui",
@@ -2008,7 +2375,15 @@
     ],
     "meta": "⏱ 2h · 🎫 免费 · 济南东站高铁15分钟到章丘",
     "history": "明水古城是章丘老城区，泉水穿城而过。百脉泉群就在附近，古城风貌保存完好，是济南东部的泉水文化代表。",
-    "season": "春夏泉水最旺时最佳"
+    "season": "春夏泉水最旺时最佳",
+    "distanceFromCenter": 37.2,
+    "popularity": 41,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 91.67
   },
   {
     "id": "zhujiazhai",
@@ -2048,7 +2423,14 @@
     ],
     "meta": "⏱ 2h · 🎫 ¥30 · 章丘打车30分钟",
     "history": "朱家峪古村始建于明代，距今600余年。石头房子、古桥流水，是山东保存最完整的明清古村之一，电视剧《闯关东》曾在此取景。",
-    "season": "春秋季节最佳"
+    "season": "春秋季节最佳",
+    "distanceFromCenter": 39.4,
+    "popularity": 38,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心"
+    ],
+    "sortScore": 87.45
   },
   {
     "id": "wufengshan",
@@ -2087,7 +2469,13 @@
     ],
     "meta": "⏱ 3h · 🎫 ¥40 · 自驾约40分钟",
     "history": "五峰山是长清区的道教名山，五座山峰环绕。山上有多座道教宫观，比千佛山人少，适合喜欢清静的人。",
-    "season": "秋季最美"
+    "season": "秋季最美",
+    "distanceFromCenter": 34.0,
+    "popularity": 37,
+    "sceneTags": [
+      "独自散心"
+    ],
+    "sortScore": 88.34
   },
   {
     "id": "liantai",
@@ -2126,7 +2514,13 @@
     ],
     "meta": "⏱ 2h · 🎫 ¥30 · 自驾约45分钟",
     "history": "莲台山是长清区的小众山景，有天然溶洞和唐代石窟造像。山形如莲花盛开，是探险爱好者的好去处。",
-    "season": "春夏最佳"
+    "season": "春夏最佳",
+    "distanceFromCenter": 33.4,
+    "popularity": 34,
+    "sceneTags": [
+      "独自散心"
+    ],
+    "sortScore": 83.23
   },
   {
     "id": "yingxiongshan",
@@ -2166,7 +2560,15 @@
     ],
     "meta": "⏱ 1.5h · 🎫 免费 · 公交多路可达",
     "history": "英雄山因济南战役而得名，山上有济南战役纪念馆。山顶可俯瞰城区，是市民晨练的好去处。",
-    "season": "四季皆宜"
+    "season": "四季皆宜",
+    "distanceFromCenter": 10.0,
+    "popularity": 40,
+    "sceneTags": [
+      "独自散心",
+      "长辈同行",
+      "免费游玩"
+    ],
+    "sortScore": 89.67
   },
   {
     "id": "dashming",
@@ -2206,7 +2608,15 @@
     ],
     "meta": "⏱ 2h · 🎫 免费 · 步行可达",
     "history": "大明湖新区是大明湖的扩建区域，比老区人少很多。有荷花池、湿地公园，是散步休闲的好去处。",
-    "season": "四季皆宜，夏季荷花最美"
+    "season": "四季皆宜，夏季荷花最美",
+    "distanceFromCenter": 8.8,
+    "popularity": 50,
+    "sceneTags": [
+      "亲子出游",
+      "长辈同行",
+      "免费游玩"
+    ],
+    "sortScore": 100.34
   },
   {
     "id": "jishilu",
@@ -2245,7 +2655,14 @@
     ],
     "meta": "⏱ 20min · 🎫 免费 · 步行可达",
     "history": "济南老火车站原站房建于1912年，是典型的德式建筑。1992年被拆除后重建仿制品，但仍是济南近代史的重要见证。",
-    "season": "四季皆宜"
+    "season": "四季皆宜",
+    "distanceFromCenter": 11.7,
+    "popularity": 37,
+    "sceneTags": [
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 84.56
   },
   {
     "id": "quanbo",
@@ -2284,7 +2701,14 @@
     ],
     "meta": "⏱ 1h · 🎫 免费 · 公交多路可达",
     "history": "泉城公园原名济南植物园，是济南市区内的大型公园。有湖泊、草坪、花卉，是市民休闲散步的好去处。",
-    "season": "春秋季节最美"
+    "season": "春秋季节最美",
+    "distanceFromCenter": 8.2,
+    "popularity": 42,
+    "sceneTags": [
+      "亲子出游",
+      "免费游玩"
+    ],
+    "sortScore": 89.89
   },
   {
     "id": "jiuxian",
@@ -2323,7 +2747,13 @@
     ],
     "meta": "⏱ 4h · 🎫 ¥50 · 自驾约50分钟",
     "history": "九仙山是济南南部山区的道教名山，有九座山峰。山上有多座道教宫观，是小众的登山探古好去处。",
-    "season": "秋季最美"
+    "season": "秋季最美",
+    "distanceFromCenter": 21.9,
+    "popularity": 36,
+    "sceneTags": [
+      "独自散心"
+    ],
+    "sortScore": 85.78
   },
   {
     "id": "meiyuan",
@@ -2361,7 +2791,13 @@
     ],
     "meta": "⏱ 1h · 🎫 ¥20 · 公交可达",
     "history": "济南梅园是济南赏梅胜地，有各种品种的梅花。每年2-3月梅花盛开，是济南最早的春花。",
-    "season": "2-3月梅花盛开时最佳"
+    "season": "2-3月梅花盛开时最佳",
+    "distanceFromCenter": 7.7,
+    "popularity": 33,
+    "sceneTags": [
+      "情侣约会"
+    ],
+    "sortScore": 81.23
   },
   {
     "id": "yaowang",
@@ -2400,7 +2836,13 @@
     ],
     "meta": "⏱ 4h · 🎫 ¥40 · 自驾约1小时",
     "history": "药乡国家森林公园位于济南南部山区，是济南唯一的国家森林公园。森林覆盖率达98%，空气负氧离子极高。",
-    "season": "夏秋最佳"
+    "season": "夏秋最佳",
+    "distanceFromCenter": 23.7,
+    "popularity": 36,
+    "sceneTags": [
+      "独自散心"
+    ],
+    "sortScore": 85.78
   },
   {
     "id": "jinxiuxun",
@@ -2439,7 +2881,14 @@
     ],
     "meta": "⏱ 2h · 🎫 免费 · 自驾约40分钟",
     "history": "锦绣川水库是济南南部山区的重要水库，水面开阔，周围群山环抱。是济南市民周末自驾游的热门目的地。",
-    "season": "春秋最佳"
+    "season": "春秋最佳",
+    "distanceFromCenter": 18.9,
+    "popularity": 33,
+    "sceneTags": [
+      "亲子出游",
+      "免费游玩"
+    ],
+    "sortScore": 81.23
   },
   {
     "id": "chengziya",
@@ -2479,7 +2928,14 @@
     ],
     "meta": "⏱ 1.5h · 🎫 ¥30 · 章丘打车20分钟",
     "history": "城子崖遗址是龙山文化的发现地，1928年由考古学家吴金鼎首次发现。是中国考古学的圣地，出土了大量精美的黑陶文物。",
-    "season": "四季皆宜"
+    "season": "四季皆宜",
+    "distanceFromCenter": 33.4,
+    "popularity": 34,
+    "sceneTags": [
+      "独自散心",
+      "长辈同行"
+    ],
+    "sortScore": 82.89
   },
   {
     "id": "sisheng",
@@ -2518,7 +2974,13 @@
     ],
     "meta": "⏱ 2h · 🎫 ¥30 · 自驾约50分钟",
     "history": "四门塔建于隋代大业七年(611年)，是中国现存最古老的石塔。塔身四面各有一门，故名四门塔，是全国重点文物保护单位。",
-    "season": "四季皆宜，秋季最美"
+    "season": "四季皆宜，秋季最美",
+    "distanceFromCenter": 29.6,
+    "popularity": 36,
+    "sceneTags": [
+      "独自散心"
+    ],
+    "sortScore": 87.67
   },
   {
     "id": "579",
@@ -2558,7 +3020,15 @@
     ],
     "meta": "⏱ 2h · 🎫 免费 · 地铁3号线",
     "history": "579百工集由旧厂房改造而成，是济南东部的文创园区。有独立书店、咖啡馆、艺术工作室，是文艺青年的打卡地。",
-    "season": "四季皆宜，周末有市集和演出"
+    "season": "四季皆宜，周末有市集和演出",
+    "distanceFromCenter": 4.2,
+    "popularity": 40,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 90.56
   },
   {
     "id": "rongchuang",
@@ -2598,7 +3068,14 @@
     ],
     "meta": "⏱ 6h · 🎫 ¥200 · 地铁1号线转公交",
     "history": "融创文旅城是济南西部的大型文旅综合体，有水世界、海世界、体育世界等多个主题乐园，是亲子和年轻人的热门去处。",
-    "season": "四季皆宜，水世界夏季开放"
+    "season": "四季皆宜，水世界夏季开放",
+    "distanceFromCenter": 21.6,
+    "popularity": 63,
+    "sceneTags": [
+      "亲子出游",
+      "情侣约会"
+    ],
+    "sortScore": 113.0
   },
   {
     "id": "yuhuquan",
@@ -2636,7 +3113,14 @@
     ],
     "meta": "⏱ 15min · 🎫 免费 · 步行",
     "history": "玉函泉是济南72名泉之一，位于居民区内，泉水清澈。是济南最生活化的泉水之一。",
-    "season": "四季皆宜"
+    "season": "四季皆宜",
+    "distanceFromCenter": 9.5,
+    "popularity": 33,
+    "sceneTags": [
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 80.67
   },
   {
     "id": "liuqingquan",
@@ -2674,7 +3158,14 @@
     ],
     "meta": "⏱ 15min · 🎫 免费 · 步行",
     "history": "柳絮泉是济南72名泉之一，春天柳絮飘飞时泉水与柳絮共舞，极富诗意。",
-    "season": "春季柳絮飘飞时最美"
+    "season": "春季柳絮飘飞时最美",
+    "distanceFromCenter": 8.7,
+    "popularity": 33,
+    "sceneTags": [
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 82.45
   },
   {
     "id": "henglong",
@@ -2713,7 +3204,15 @@
     ],
     "meta": "⏱ 2h · 🎫 免费 · 步行可达",
     "history": "恒隆广场是泉城路核心商圈的大型购物中心，集购物、餐饮、娱乐于一体。",
-    "season": "四季皆宜"
+    "season": "四季皆宜",
+    "distanceFromCenter": 8.7,
+    "popularity": 48,
+    "sceneTags": [
+      "亲子出游",
+      "情侣约会",
+      "免费游玩"
+    ],
+    "sortScore": 96.34
   },
   {
     "id": "wanda",
@@ -2751,7 +3250,14 @@
     ],
     "meta": "⏱ 2h · 🎫 免费 · 公交可达",
     "history": "万达广场是经四路的大型商业综合体，有万达影城和各种餐饮，是周边居民的休闲去处。",
-    "season": "四季皆宜"
+    "season": "四季皆宜",
+    "distanceFromCenter": 10.0,
+    "popularity": 45,
+    "sceneTags": [
+      "亲子出游",
+      "免费游玩"
+    ],
+    "sortScore": 91.87
   },
   {
     "id": "jixia",
@@ -2790,7 +3296,13 @@
     ],
     "meta": "⏱ 5h · 🎫 ¥160 · 自驾或高铁到章丘",
     "history": "济南野生动物世界位于章丘区，是济南最大的野生动物园。有自驾区和步行区，可以近距离观看猛兽。",
-    "season": "四季皆宜，工作日人少"
+    "season": "四季皆宜，工作日人少",
+    "distanceFromCenter": 34.4,
+    "popularity": 77,
+    "sceneTags": [
+      "亲子出游"
+    ],
+    "sortScore": 115.0
   },
   {
     "id": "huoshan",
@@ -2830,7 +3342,14 @@
     ],
     "meta": "⏱ 6h · 🎫 ¥260 · 地铁1号线转公交",
     "history": "济南方特欢乐世界是方特旗下的游乐园，有过山车、4D影院等刺激项目，适合喜欢刺激的年轻人。",
-    "season": "四季皆宜"
+    "season": "四季皆宜",
+    "distanceFromCenter": 22.7,
+    "popularity": 69,
+    "sceneTags": [
+      "亲子出游",
+      "情侣约会"
+    ],
+    "sortScore": 113.0
   },
   {
     "id": "shunyu",
@@ -2860,7 +3379,14 @@
     "season": "四季皆宜",
     "photos": [
       "https://images.unsplash.com/photo-1414609245224-afa02bfb3fda?w=600&h=400&fit=crop"
-    ]
+    ],
+    "distanceFromCenter": 7.1,
+    "popularity": 32,
+    "sceneTags": [
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 78.89
   },
   {
     "id": "ligong",
@@ -2890,7 +3416,14 @@
     "season": "四季皆宜",
     "photos": [
       "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop"
-    ]
+    ],
+    "distanceFromCenter": 12.0,
+    "popularity": 36,
+    "sceneTags": [
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 86.34
   },
   {
     "id": "shansheng",
@@ -2921,7 +3454,14 @@
     "photos": [
       "https://images.unsplash.com/photo-1553444836-bc6c8d340ba7?w=600&h=400&fit=crop",
       "https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=600&h=400&fit=crop"
-    ]
+    ],
+    "distanceFromCenter": 11.7,
+    "popularity": 41,
+    "sceneTags": [
+      "亲子出游",
+      "免费游玩"
+    ],
+    "sortScore": 91.67
   },
   {
     "id": "minghu",
@@ -2954,7 +3494,15 @@
     "photos": [
       "https://images.unsplash.com/photo-1491002052546-bf38f186af56?w=600&h=400&fit=crop",
       "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=600&h=400&fit=crop"
-    ]
+    ],
+    "distanceFromCenter": 9.2,
+    "popularity": 51,
+    "sceneTags": [
+      "亲子出游",
+      "情侣约会",
+      "免费游玩"
+    ],
+    "sortScore": 107.34
   },
   {
     "id": "quanshui-bath",
@@ -2985,7 +3533,14 @@
     "season": "夏季开放",
     "photos": [
       "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=600&h=400&fit=crop"
-    ]
+    ],
+    "distanceFromCenter": 11.7,
+    "popularity": 37,
+    "sceneTags": [
+      "亲子出游",
+      "免费游玩"
+    ],
+    "sortScore": 85.45
   },
   {
     "id": "baoteng-night",
@@ -3016,7 +3571,13 @@
     "photos": [
       "https://images.unsplash.com/photo-1502082553048-f009c37129b9?w=600&h=400&fit=crop",
       "https://images.unsplash.com/photo-1509803874385-db7c23652552?w=600&h=400&fit=crop"
-    ]
+    ],
+    "distanceFromCenter": 11.0,
+    "popularity": 46,
+    "sceneTags": [
+      "情侣约会"
+    ],
+    "sortScore": 104.89
   },
   {
     "id": "huchenghe",
@@ -3049,7 +3610,14 @@
     "photos": [
       "https://images.unsplash.com/photo-1470058869958-2a77ade41c02?w=600&h=400&fit=crop",
       "https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=600&h=400&fit=crop"
-    ]
+    ],
+    "distanceFromCenter": 7.7,
+    "popularity": 55,
+    "sceneTags": [
+      "亲子出游",
+      "情侣约会"
+    ],
+    "sortScore": 110.67
   },
   {
     "id": "quanshui-gu",
@@ -3080,7 +3648,14 @@
     "photos": [
       "https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&h=400&fit=crop",
       "https://images.unsplash.com/photo-1509803874385-db7c23652552?w=600&h=400&fit=crop"
-    ]
+    ],
+    "distanceFromCenter": 11.0,
+    "popularity": 37,
+    "sceneTags": [
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 88.34
   },
   {
     "id": "minghu-south",
@@ -3113,7 +3688,15 @@
     "photos": [
       "https://images.unsplash.com/photo-1490578474895-699cd4e2cf59?w=600&h=400&fit=crop",
       "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=600&h=400&fit=crop"
-    ]
+    ],
+    "distanceFromCenter": 9.2,
+    "popularity": 41,
+    "sceneTags": [
+      "情侣约会",
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 92.56
   },
   {
     "id": "jinan-university",
@@ -3143,6 +3726,13 @@
     "season": "四季皆宜",
     "photos": [
       "https://images.unsplash.com/photo-1554797589-7241bb691973?w=600&h=400&fit=crop"
-    ]
+    ],
+    "distanceFromCenter": 6.3,
+    "popularity": 33,
+    "sceneTags": [
+      "独自散心",
+      "免费游玩"
+    ],
+    "sortScore": 81.23
   }
 ]

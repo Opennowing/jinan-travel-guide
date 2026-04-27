@@ -116,7 +116,7 @@ export function initA2HS() {
       deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
       if (outcome === 'accepted') {
-        console.log('A2HS: User accepted install');
+        if (location.hostname === 'localhost') console.log('A2HS: User accepted install');
       }
       deferredPrompt = null;
       card.remove();
@@ -129,7 +129,7 @@ export function initA2HS() {
   });
 
   window.addEventListener('appinstalled', () => {
-    console.log('A2HS: App installed');
+    if (location.hostname === 'localhost') console.log('A2HS: App installed');
     localStorage.removeItem(DISMISS_KEY);
     const card = document.getElementById('a2hs-card');
     if (card) card.remove();
@@ -178,11 +178,11 @@ export function initSW() {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/jinan-travel-guide/sw.js')
         .then(reg => {
-          console.log('SW registered:', reg.scope);
+          if (location.hostname === 'localhost') console.log('SW registered:', reg.scope);
           // Check for updates periodically
           setInterval(() => reg.update(), 60 * 60 * 1000);
         })
-        .catch(err => console.log('SW registration failed:', err));
+        .catch(err => { if (location.hostname === 'localhost') console.log('SW registration failed:', err); });
     });
   }
 }

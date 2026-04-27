@@ -698,7 +698,7 @@
         <div class="guess-scroll" id="guessScroll"></div>
       </div>
       <div style="text-align:center;margin-top:20px">
-        <button class="guess-refresh-btn" id="guessRefreshBtn"><span class="refresh-icon">🔄</span> 换一批</button>
+        <button aria-label="换一批推荐" class="guess-refresh-btn" id="guessRefreshBtn"><span class="refresh-icon">🔄</span> 换一批</button>
       </div>
     </div>
   </section>
@@ -2003,7 +2003,7 @@
           </div>
           <div class="stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
           <div class="text">${r.text}</div>
-          <button class="helpful-btn" data-count="${r.helpful}">👍 有用 (${r.helpful})</button>
+          <button aria-label="标记为有用" class="helpful-btn" data-count="${r.helpful}">👍 有用 (${r.helpful})</button>
         </div>
       `).join('');
 
@@ -2111,7 +2111,7 @@
     if (!query || query.length === 0) {
       // Show history
       if (history.length > 0) {
-        html += `<div class="search-section-title"><span>🕐 最近搜索</span><button onclick="event.stopPropagation();SearchHistory.clear();renderSearchDropdown(document.getElementById('${dropdownEl.id}'),'')">清空</button></div>`;
+        html += `<div class="search-section-title"><span>🕐 最近搜索</span><button aria-label="清空搜索历史" onclick="event.stopPropagation();SearchHistory.clear();renderSearchDropdown(document.getElementById('${dropdownEl.id}'),'')">清空</button></div>`;
         html += `<div class="search-hot-tags" style="padding-bottom:8px">`;
         history.forEach(h => { html += `<span class="search-hot-tag" onclick="event.stopPropagation();doSearch('${escH(h)}')">${escH(h)}</span>`; });
         html += `</div>`;
@@ -2324,7 +2324,7 @@
               <span>🎫 ${priceText}</span>
               <span>⏱ ${pick.dur||''}</span>
               <span>💬 ${pick.reviews||0} 条评价</span>
-              <button class="dp-btn" onclick="event.stopPropagation();location.href='spots.html?id=${pick.id}'">查看详情 →</button>
+              <button aria-label="查看详情" class="dp-btn" onclick="event.stopPropagation();location.href='spots.html?id=${pick.id}'">查看详情 →</button>
             </div>
           </div>
         </div>`;

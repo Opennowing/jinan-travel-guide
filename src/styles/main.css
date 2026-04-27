@@ -219,9 +219,6 @@ body{animation:pageFadeIn .5s var(--ease) both}
 .review-stars{color:#f59e0b;font-size:.82rem;margin-bottom:6px;letter-spacing:2px}
 .review-text{font-size:.85rem;color:var(--text2);line-height:1.7}
 
-/* ─── SCROLL REVEAL ─── */
-.rv{opacity:0;transform:translateY(24px);transition:opacity .5s var(--ease),transform .5s var(--ease);will-change:opacity,transform}
-.rv.revealed{opacity:1;transform:translateY(0);will-change:auto}
 
 /* ─── PERFORMANCE OPTIMIZATIONS ─── */
 /* content-visibility removed — caused IntersectionObserver issues */
@@ -1154,18 +1151,6 @@ html.dark .review-card .avatar {
   .tools-grid { grid-template-columns: repeat(2, 1fr); }
   .highlight-grid { grid-template-columns: 1fr; }
 }
-
-/* ─── SCROLL REVEAL ENHANCED ─── */
-.rv {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity .6s cubic-bezier(.23,1,.32,1), transform .6s cubic-bezier(.23,1,.32,1);
-  will-change: opacity, transform;
-}
-.rv.revealed {
-  opacity: 1;
-  transform: translateY(0);
-  will-change: auto;
 }
 
 /* ══════════════════════════════════════

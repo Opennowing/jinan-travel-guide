@@ -1283,7 +1283,7 @@ html.dark .card.meituan-card:hover {
     function getMeituanLink(spotName) {
       return `${CPS.meituan.baseUrl}${encodeURIComponent(spotName)}?ci=111&f=${CPS.meituan.affId}`;
     }
-    let allSpots = [], activeCat = 'all', activeAud = 'all', activeArea = 'all', activeTicket = 'all', activeDur = 'all', sortBy = 'recommend', currentGalleryIndex = 0;
+    let allSpots = [], activeCat = 'all', activeAud = 'all', activeArea = 'all', activeTicket = 'all', activeDur = 'all', sortBy = 'recommend', currentGalleryIndex = 0, render = null, openQuickView = null;
 
     // ── 解析时长字符串为分钟 ──
     function parseDurMinutes(dur) {
@@ -1512,8 +1512,8 @@ html.dark .card.meituan-card:hover {
       sortBy = 'recommend';
       document.getElementById('sortSelect').value = 'recommend';
       document.querySelectorAll('#sortPills .sort-pill').forEach(p => p.classList.toggle('active', p.dataset.sort === 'recommend'));
-      collapsibleFilters?.classList.remove('expanded');
-      moreFiltersBtn?.classList.remove('active');
+      document.getElementById('collapsibleFilters')?.classList.remove('expanded');
+      document.getElementById('moreFiltersBtn')?.classList.remove('active');
       if (typeof updateFilterBadge === 'function') updateFilterBadge();
       render();
       showToast('已重置所有筛选条件');
